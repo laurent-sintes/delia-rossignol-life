@@ -193,6 +193,87 @@ def render_json_document(document: dict[str, Any], spec: dict[str, Any]) -> str:
     return "".join(blocks)
 
 
+def render_cv_template_preview(document: dict[str, Any]) -> str:
+    rendering = document.get("rendering")
+    if not isinstance(rendering, dict):
+        return ""
+    engine = rendering.get("engine")
+    if engine != "standard-single-column-v1":
+        raise ValueError(f"Unsupported CV preview engine: {engine}")
+
+    section_order = rendering.get("sections", [])
+    if len(section_order) != len(set(section_order)):
+        raise ValueError("CV preview sections must be unique")
+
+    sections = {
+        "profile": (
+            "Profil",
+            '<p class="cv-preview-summary">Accroche ciblée en quelques lignes : proposition de valeur, '
+            "expérience pertinente et objectif professionnel.</p>",
+        ),
+        "key-skills": (
+            "Compétences clés",
+            '<ul class="cv-preview-skills"><li>Compétence métier</li><li>Relation client</li>'
+            "<li>Gestion de projet</li><li>Management</li><li>Outil maîtrisé</li><li>Langue</li></ul>",
+        ),
+        "professional-experience": (
+            "Expérience professionnelle",
+            '<div class="cv-preview-experience"><p class="cv-preview-date">MM/AAAA — MM/AAAA</p>'
+            '<div><h4>Intitulé du poste · Organisation</h4><p>Ville · Type de contrat</p>'
+            "<ul><li>Responsabilité directement liée au poste ciblé.</li>"
+            "<li>Action personnelle appuyée par un fait validé.</li>"
+            "<li>Résultat mesurable lorsque la source le permet.</li></ul></div></div>"
+            '<div class="cv-preview-experience"><p class="cv-preview-date">MM/AAAA — MM/AAAA</p>'
+            '<div><h4>Expérience précédente · Organisation</h4>'
+            "<ul><li>Deux à quatre points courts, concrets et vérifiables.</li>"
+            "<li>Les expériences anciennes sont condensées selon leur pertinence.</li></ul></div></div>",
+        ),
+        "education": (
+            "Formation",
+            '<div class="cv-preview-line"><strong>AAAA · Diplôme ou formation</strong>'
+            "<span>Établissement · Ville</span></div>",
+        ),
+        "languages": (
+            "Langues",
+            '<p class="cv-preview-inline"><strong>Langue</strong> · niveau oral · niveau écrit · cadre éventuel</p>',
+        ),
+        "engagements-and-interests": (
+            "Engagements et centres d’intérêt",
+            '<p class="cv-preview-inline">Éléments pertinents et explicitement autorisés à la publication.</p>',
+        ),
+    }
+
+    rendered_sections: list[str] = []
+    for section_id in section_order:
+        if section_id not in sections:
+            raise ValueError(f"Unsupported CV preview section: {section_id}")
+        label, content = sections[section_id]
+        rendered_sections.append(
+            f'<section class="cv-preview-section" data-section="{html.escape(section_id, quote=True)}">'
+            f"<h3>{html.escape(label)}</h3>{content}</section>"
+        )
+
+    maximum_pages = html.escape(str(rendering.get("maximum_pages", "?")))
+    photo_policy = rendering.get("photo_policy")
+    photo_note = (
+        "Photo optionnelle, désactivée par défaut"
+        if photo_policy == "optional-disabled-by-default"
+        else "Sans photo" if photo_policy == "disabled" else "Photo prévue"
+    )
+    return (
+        '<div class="cv-preview-shell">'
+        '<div class="cv-preview-caption"><strong>Aperçu structurel</strong>'
+        f"<span>Contenu fictif · {maximum_pages} pages maximum · {html.escape(photo_note)}</span></div>"
+        '<article class="cv-preview" aria-label="Aperçu fictif du template de CV">'
+        '<header class="cv-preview-header"><p class="cv-preview-name">PRÉNOM NOM</p>'
+        '<p class="cv-preview-headline">INTITULÉ DU POSTE CIBLÉ</p>'
+        '<p class="cv-preview-contact">Ville · téléphone · prenom.nom@example.fr · profil professionnel</p>'
+        "</header>"
+        + "".join(rendered_sections)
+        + "</article></div>"
+    )
+
+
 def parse_skill_metadata(path: Path) -> dict[str, str]:
     text = path.read_text(encoding="utf-8-sig")
     lines = text.splitlines()
@@ -397,7 +478,11 @@ def build_site(root: Path, output: Path, config_path: Path | None = None) -> dic
                 safe_source(root, source.relative_to(root).as_posix())
                 document = load_json(source)
                 name = html.escape(str(document.get("name", source.parent.name)))
-                cards.append(f'<article class="template-card"><h2>{name}</h2>{render_json_document(document, page)}</article>')
+                preview = render_cv_template_preview(document)
+                cards.append(
+                    f'<article class="template-card"><h2>{name}</h2>'
+                    f"{render_json_document(document, page)}{preview}</article>"
+                )
             body = '<div class="card-grid">' + "".join(cards) + "</div>"
         elif kind == "mental-model":
             source = safe_source(root, page["source"])

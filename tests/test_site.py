@@ -10,7 +10,13 @@ sys.path.insert(0, str(ROOT / "src"))
 TEST_TMP = ROOT / ".test-tmp"
 TEST_TMP.mkdir(exist_ok=True)
 
-from delia_life.site_builder import build_site, markdown_to_html, render_json_document, safe_source
+from delia_life.site_builder import (
+    build_site,
+    markdown_to_html,
+    render_cv_template_preview,
+    render_json_document,
+    safe_source,
+)
 
 
 class SiteTests(unittest.TestCase):
@@ -45,6 +51,24 @@ class SiteTests(unittest.TestCase):
         self.assertNotIn("href=\"javascript:", rendered)
         self.assertIn('href="profil.html"', rendered)
 
+    def test_cv_template_preview_is_fictitious_and_rejects_unknown_engines(self) -> None:
+        template = {
+            "rendering": {
+                "engine": "standard-single-column-v1",
+                "preferred_pages": 2,
+                "photo_policy": "optional-disabled-by-default",
+                "sections": ["profile", "professional-experience"],
+            }
+        }
+        rendered = render_cv_template_preview(template)
+        self.assertIn("Contenu fictif", rendered)
+        self.assertIn("PRÉNOM NOM", rendered)
+        self.assertIn("Photo optionnelle", rendered)
+        self.assertNotIn("Délia", rendered)
+        template["rendering"]["engine"] = "unsafe-engine"
+        with self.assertRaises(ValueError):
+            render_cv_template_preview(template)
+
     def test_build_site_is_repeatable_and_includes_skill_advice(self) -> None:
         output = ROOT / "_site"
         first = build_site(ROOT, output)
@@ -66,6 +90,12 @@ class SiteTests(unittest.TestCase):
         self.assertTrue((output / "assets" / "style.css").exists())
         self.assertTrue((output / "assets" / "delia-rossignol.avif").exists())
         self.assertTrue((output / "assets" / "delia-rossignol-logo.svg").exists())
+        templates = (output / "templates.html").read_text(encoding="utf-8")
+        self.assertIn("Standard sobre — ATS", templates)
+        self.assertIn('class="cv-preview"', templates)
+        self.assertIn("Contenu fictif", templates)
+        self.assertNotIn("tel:", templates)
+        self.assertNotIn("@gmail.com", templates)
         homepage = (output / "index.html").read_text(encoding="utf-8")
         self.assertIn('class="hero"', homepage)
         self.assertIn('alt="Portrait de Délia Rossignol"', homepage)

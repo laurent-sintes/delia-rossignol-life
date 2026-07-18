@@ -1,16 +1,66 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
-  "required": ["id", "name", "version", "ats_compatible", "formats", "sectors", "roles", "seniority", "countries"],
+  "required": [
+    "id", "name", "description", "version", "ats_compatible", "formats",
+    "sectors", "roles", "seniority", "countries", "rendering", "content_rules"
+  ],
   "properties": {
     "id": {"type": "string", "minLength": 1},
     "name": {"type": "string", "minLength": 1},
+    "description": {"type": "string", "minLength": 1},
     "version": {"type": "string", "minLength": 1},
     "ats_compatible": {"type": "boolean"},
-    "formats": {"type": "array", "items": {"type": "string"}},
+    "formats": {"type": "array", "items": {"type": "string", "enum": ["docx", "pdf"]}},
     "sectors": {"type": "array", "items": {"type": "string"}},
     "roles": {"type": "array", "items": {"type": "string"}},
     "seniority": {"type": "array", "items": {"type": "string"}},
-    "countries": {"type": "array", "items": {"type": "string"}}
+    "countries": {"type": "array", "items": {"type": "string"}},
+    "rendering": {
+      "type": "object",
+      "required": [
+        "engine", "page_size", "preferred_pages", "maximum_pages",
+        "photo_policy", "palette", "sections"
+      ],
+      "properties": {
+        "engine": {"type": "string", "enum": ["standard-single-column-v1"]},
+        "page_size": {"type": "string", "enum": ["A4"]},
+        "preferred_pages": {"type": "integer", "minimum": 1},
+        "maximum_pages": {"type": "integer", "minimum": 1},
+        "photo_policy": {
+          "type": "string",
+          "enum": ["disabled", "optional-disabled-by-default", "required"]
+        },
+        "palette": {"type": "string", "enum": ["delia-champagne-navy"]},
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "profile", "key-skills", "professional-experience", "education",
+              "languages", "engagements-and-interests"
+            ]
+          }
+        }
+      }
+    },
+    "content_rules": {
+      "type": "object",
+      "required": [
+        "profile_max_words", "key_skills_max", "experience_bullets_max",
+        "bullet_max_words", "date_format", "prioritize_relevance_over_completeness",
+        "require_validated_facts", "forbidden_fields"
+      ],
+      "properties": {
+        "profile_max_words": {"type": "integer", "minimum": 1},
+        "key_skills_max": {"type": "integer", "minimum": 1},
+        "experience_bullets_max": {"type": "integer", "minimum": 1},
+        "bullet_max_words": {"type": "integer", "minimum": 1},
+        "date_format": {"type": "string", "enum": ["MM/YYYY"]},
+        "prioritize_relevance_over_completeness": {"type": "boolean"},
+        "require_validated_facts": {"type": "boolean"},
+        "forbidden_fields": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    }
   }
 }

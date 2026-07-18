@@ -53,11 +53,12 @@
       "title": "Profil public"
     },
     {
-      "fields": ["id", "version", "ats_compatible", "formats", "sectors", "roles", "seniority", "countries"],
+      "fields": ["description", "id", "version", "ats_compatible", "formats", "sectors", "roles", "seniority", "countries"],
       "kind": "collection",
       "labels": {
         "ats_compatible": "Compatible ATS",
         "countries": "Pays",
+        "description": "Intention",
         "formats": "Formats",
         "id": "Identifiant",
         "roles": "Fonctions",

@@ -115,6 +115,17 @@ class CoreTests(unittest.TestCase):
         project["criteria"][0]["priority"] = 0
         self.assertIn("$.criteria[0].priority: value is below minimum", validate(project, schema))
 
+    def test_standard_cv_template_has_validated_rendering_rules(self) -> None:
+        schema = json.loads((ROOT / "schemas" / "template.schema.json").read_text(encoding="utf-8"))
+        template = json.loads(
+            (ROOT / "templates" / "cv" / "ats-classic" / "template.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(validate(template, schema), [])
+        self.assertTrue(template["ats_compatible"])
+        self.assertEqual(template["rendering"]["engine"], "standard-single-column-v1")
+        self.assertTrue(template["content_rules"]["require_validated_facts"])
+        self.assertIn("date_of_birth", template["content_rules"]["forbidden_fields"])
+
     def test_website_url_rules_and_asset_discovery(self) -> None:
         self.assertEqual(normalize_url("HTTPS://Example.com?a=1&utm_source=x#top"), "https://example.com/?a=1")
         self.assertEqual(

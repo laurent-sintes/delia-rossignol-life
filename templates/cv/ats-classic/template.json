@@ -1,11 +1,43 @@
 {
   "ats_compatible": true,
   "countries": ["france"],
+  "description": "CV polyvalent, sobre et chronologique, conçu pour une lecture humaine rapide et une extraction ATS fiable.",
   "formats": ["docx", "pdf"],
   "id": "ats-classic",
-  "name": "ATS classique",
+  "name": "Standard sobre — ATS",
   "roles": [],
   "sectors": [],
-  "seniority": [],
-  "version": "0.1.0"
+  "seniority": ["confirmé", "management"],
+  "version": "0.2.0",
+  "rendering": {
+    "engine": "standard-single-column-v1",
+    "page_size": "A4",
+    "preferred_pages": 2,
+    "maximum_pages": 2,
+    "photo_policy": "optional-disabled-by-default",
+    "palette": "delia-champagne-navy",
+    "sections": [
+      "profile",
+      "key-skills",
+      "professional-experience",
+      "education",
+      "languages",
+      "engagements-and-interests"
+    ]
+  },
+  "content_rules": {
+    "profile_max_words": 60,
+    "key_skills_max": 8,
+    "experience_bullets_max": 4,
+    "bullet_max_words": 24,
+    "date_format": "MM/YYYY",
+    "prioritize_relevance_over_completeness": true,
+    "require_validated_facts": true,
+    "forbidden_fields": [
+      "age",
+      "date_of_birth",
+      "family_status",
+      "full_street_address"
+    ]
+  }
 }
