@@ -95,6 +95,14 @@ class CoreTests(unittest.TestCase):
 
     def test_website_url_rules_and_asset_discovery(self) -> None:
         self.assertEqual(normalize_url("HTTPS://Example.com?a=1&utm_source=x#top"), "https://example.com/?a=1")
+        self.assertEqual(
+            normalize_url("https://example.com/mes-réalisations"),
+            "https://example.com/mes-r%C3%A9alisations",
+        )
+        self.assertEqual(
+            normalize_url("https://example.com/mes-r%C3%A9alisations"),
+            "https://example.com/mes-r%C3%A9alisations",
+        )
         self.assertTrue(same_origin("https://example.com/image.png", "https://example.com/"))
         self.assertFalse(same_origin("https://cdn.example.com/image.png", "https://example.com/"))
         parser = LinkParser()

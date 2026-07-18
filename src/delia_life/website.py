@@ -36,7 +36,13 @@ def normalize_url(url: str) -> str:
         for key, value in urllib.parse.parse_qsl(parsed.query, keep_blank_values=True)
         if not key.casefold().startswith("utm_")
     ]
-    path = parsed.path or "/"
+    # ``urllib.request`` expects an ASCII request target. Decode an already
+    # escaped path first so normalization is idempotent, then percent-encode
+    # Unicode characters while preserving valid URL path separators.
+    path = urllib.parse.quote(
+        urllib.parse.unquote(parsed.path or "/"),
+        safe="/:@!$&'()*+,;=-._~",
+    )
     return urllib.parse.urlunsplit(
         (parsed.scheme.casefold(), parsed.netloc.casefold(), path, urllib.parse.urlencode(sorted(filtered_query)), "")
     )

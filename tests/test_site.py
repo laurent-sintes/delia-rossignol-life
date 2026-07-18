@@ -62,6 +62,16 @@ class SiteTests(unittest.TestCase):
         self.assertIn("person-has-experience", mental_model)
         self.assertTrue((output / ".nojekyll").exists())
         self.assertTrue((output / "assets" / "style.css").exists())
+        self.assertTrue((output / "assets" / "delia-rossignol.avif").exists())
+        self.assertTrue((output / "assets" / "delia-rossignol-logo.svg").exists())
+        homepage = (output / "index.html").read_text(encoding="utf-8")
+        self.assertIn('class="hero"', homepage)
+        self.assertIn('alt="Portrait de Délia Rossignol"', homepage)
+        self.assertIn("delia-rossignol-logo.svg", homepage)
+        self.assertNotIn("tel:", homepage)
+        logo = (output / "assets" / "delia-rossignol-logo.svg").read_text(encoding="utf-8")
+        self.assertIn("Délia Rossignol", logo)
+        self.assertNotIn("Agenceur", logo)
 
 
 if __name__ == "__main__":

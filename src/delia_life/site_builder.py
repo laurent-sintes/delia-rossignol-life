@@ -277,6 +277,39 @@ def _page_template(site: dict[str, Any], page: dict[str, Any], navigation: list[
     title = html.escape(page["title"])
     site_title = html.escape(site["title"])
     description = html.escape(site.get("description", ""), quote=True)
+    if page["slug"] == "index":
+        page_content = f"""
+  <main class="page page-home">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Dossier professionnel structuré</p>
+        <h1 id="hero-title">Le parcours de Délia,<br><em>pensé sur mesure.</em></h1>
+        <p class="hero-lead">Une base vivante pour documenter ses compétences, préparer ses candidatures et faire évoluer son projet professionnel avec méthode.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="profil.html">Découvrir le profil</a>
+          <a class="button button-secondary" href="administration.html">Administrer la base</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img class="portrait-logo" src="assets/delia-rossignol-logo.svg" alt="" width="365" height="254">
+        <div class="portrait-frame">
+          <img src="assets/delia-rossignol.avif" alt="Portrait de Délia Rossignol" width="656" height="998">
+        </div>
+      </div>
+    </section>
+    <section class="home-content" aria-label="Présentation du dossier">
+      {body}
+    </section>
+  </main>"""
+    else:
+        page_content = f"""
+  <main class="page page-{html.escape(page['slug'], quote=True)}">
+    <div class="page-shell">
+      <p class="eyebrow">Dossier professionnel structuré</p>
+      <h1>{title}</h1>
+      {body}
+    </div>
+  </main>"""
     return f"""<!doctype html>
 <html lang="fr">
 <head>
@@ -288,15 +321,16 @@ def _page_template(site: dict[str, Any], page: dict[str, Any], navigation: list[
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="index.html">{site_title}</a>
+    <a class="brand" href="index.html" aria-label="{site_title} — accueil">
+      <img src="assets/delia-rossignol-logo.svg" alt="" width="365" height="254">
+    </a>
     <nav aria-label="Navigation principale">{nav}</nav>
   </header>
-  <main>
-    <p class="eyebrow">Dossier professionnel structuré</p>
-    <h1>{title}</h1>
-    {body}
-  </main>
-  <footer>Informations publiées depuis une base de connaissances validée.</footer>
+{page_content}
+  <footer>
+    <span>Délia Rossignol</span>
+    <span>Informations publiées depuis une base de connaissances validée.</span>
+  </footer>
 </body>
 </html>
 """
