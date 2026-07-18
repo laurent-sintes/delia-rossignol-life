@@ -215,3 +215,171 @@ relations:
     label: peut produire
     cardinality: one_to_many
     required: false
+
+  - id: person-has-contact-point
+    from: person
+    to: contact-point
+    label: peut être contactée par
+    cardinality: one_to_many
+    required: false
+
+  - id: person-has-career-project
+    from: person
+    to: career-project
+    label: formule
+    cardinality: one_to_many
+    required: false
+
+  - id: person-has-language-proficiency
+    from: person
+    to: language-proficiency
+    label: maîtrise une langue selon
+    cardinality: one_to_many
+    required: false
+
+  - id: person-has-interest
+    from: person
+    to: interest
+    label: s'intéresse à
+    cardinality: many_to_many
+    required: false
+
+  - id: career-project-targets-sector
+    from: career-project
+    to: industry-sector
+    label: cible
+    cardinality: many_to_many
+    required: false
+
+  - id: career-project-targets-job-role
+    from: career-project
+    to: job-role
+    label: vise
+    cardinality: many_to_many
+    required: false
+
+  - id: career-project-targets-location
+    from: career-project
+    to: location
+    label: privilégie
+    cardinality: many_to_many
+    required: false
+
+  - id: career-project-has-search-criterion
+    from: career-project
+    to: search-criterion
+    label: contient
+    cardinality: one_to_many
+    required: false
+
+  - id: organization-operates-in-sector
+    from: organization
+    to: industry-sector
+    label: opère dans
+    cardinality: many_to_many
+    required: false
+
+  - id: organization-located-in
+    from: organization
+    to: location
+    label: est implantée dans
+    cardinality: many_to_many
+    required: false
+
+  - id: organization-part-of-organization
+    from: organization
+    to: organization
+    label: fait partie de
+    cardinality: many_to_one
+    required: false
+
+  - id: organization-renamed-to
+    from: organization
+    to: organization
+    label: a été renommée en
+    cardinality: one_to_one
+    required: false
+
+  - id: experience-matches-job-role
+    from: experience
+    to: job-role
+    label: correspond à
+    cardinality: many_to_many
+    required: false
+
+  - id: experience-at-location
+    from: experience
+    to: location
+    label: se déroule à
+    cardinality: many_to_one
+    required: false
+
+  - id: experience-has-achievement
+    from: experience
+    to: achievement
+    label: produit
+    cardinality: one_to_many
+    required: false
+
+  - id: experience-follows-experience
+    from: experience
+    to: experience
+    label: succède à
+    cardinality: many_to_one
+    required: false
+
+  - id: education-at-location
+    from: education
+    to: location
+    label: est suivie à
+    cardinality: many_to_one
+    required: false
+
+  - id: offer-in-sector
+    from: job-offer
+    to: industry-sector
+    label: concerne
+    cardinality: many_to_many
+    required: false
+
+  - id: offer-for-job-role
+    from: job-offer
+    to: job-role
+    label: propose
+    cardinality: many_to_many
+    required: false
+
+  - id: offer-at-location
+    from: job-offer
+    to: location
+    label: est localisée à
+    cardinality: many_to_many
+    required: false
+
+  - id: assessment-evaluates-career-project
+    from: match-assessment
+    to: career-project
+    label: évalue au regard de
+    cardinality: many_to_one
+    required: false
+
+  - id: assessment-checks-search-criterion
+    from: match-assessment
+    to: search-criterion
+    label: vérifie
+    cardinality: many_to_many
+    required: false
+
+  - id: template-suits-industry-sector
+    from: document-template
+    to: industry-sector
+    label: convient à
+    cardinality: many_to_many
+    required: false
+
+  - id: template-suits-job-role
+    from: document-template
+    to: job-role
+    label: convient à
+    cardinality: many_to_many
+    required: false

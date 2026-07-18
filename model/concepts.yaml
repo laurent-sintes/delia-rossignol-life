@@ -5,7 +5,79 @@ concepts:
     description: Sujet du dossier professionnel; actuellement Délia Rossignol.
     privacy: mixed
     storage: data/knowledge/profile.json
-    key_attributes: [identity, headline, preferences]
+    key_attributes: [identity, headline, preferences, privacy_defaults]
+
+  - id: contact-point
+    label: Coordonnée
+    kind: value_object
+    description: Moyen de contact personnel ou professionnel, daté, qualifié par son usage et privé par défaut.
+    privacy: mixed
+    storage: private/knowledge/contact-points
+    key_attributes: [kind, value, label, usage, valid_from, valid_to, visibility]
+
+  - id: career-project
+    label: Projet professionnel
+    kind: entity
+    description: Expression versionnée de ce que Délia recherche, accepte, préfère ou exclut dans sa prochaine activité.
+    privacy: private
+    storage: private/career-project
+    key_attributes: [name, status, valid_from, valid_to, availability, notes]
+
+  - id: industry-sector
+    label: Secteur d'activité
+    kind: entity
+    description: Secteur économique normalisé utilisé pour qualifier organisations, expériences, offres et cibles professionnelles.
+    privacy: public
+    storage: data/knowledge/reference/industry-sector
+    key_attributes: [name, code, classification, parent_id, aliases, source_label]
+
+  - id: job-role
+    label: Type de poste
+    kind: entity
+    description: Fonction ou famille de métiers normalisée, indépendante du titre exact employé dans une source ou une offre.
+    privacy: public
+    storage: data/knowledge/reference/job-role
+    key_attributes: [name, job_family, seniority, aliases, description, source_label]
+
+  - id: location
+    label: Lieu
+    kind: entity
+    description: Zone géographique normalisée utilisable pour une activité, une offre, un établissement ou un critère de mobilité.
+    privacy: public
+    storage: data/knowledge/reference/location
+    key_attributes: [name, kind, country, postal_code, latitude, longitude, source_label]
+
+  - id: search-criterion
+    label: Critère de recherche
+    kind: value_object
+    description: Préférence ou contrainte comparable à une offre, portant notamment sur le secteur, le poste, le contrat, le lieu, le rythme, la rémunération ou l'environnement.
+    privacy: private
+    storage: embedded:career-project.criteria
+    key_attributes: [dimension, operator, value, priority, hard_constraint, rationale, valid_from, valid_to]
+
+  - id: achievement
+    label: Réalisation
+    kind: entity
+    description: Résultat ou accomplissement rattaché à une expérience, éventuellement mesuré et distingué entre fait et déclaration.
+    privacy: mixed
+    storage: data/knowledge/entities/achievement
+    key_attributes: [statement, metric_name, metric_value, metric_unit, context, classification]
+
+  - id: language-proficiency
+    label: Maîtrise linguistique
+    kind: value_object
+    description: Niveau de langue structuré par dimension afin de ne pas réduire l'oral, l'écrit et la lecture à une note unique.
+    privacy: public
+    storage: data/knowledge/language-proficiencies
+    key_attributes: [language, speaking_level, writing_level, reading_level, framework, self_assessed]
+
+  - id: interest
+    label: Centre d'intérêt
+    kind: entity
+    description: Activité ou sujet d'intérêt personnel publiable uniquement après validation de sa pertinence professionnelle.
+    privacy: mixed
+    storage: data/knowledge/interests
+    key_attributes: [name, category, description, visibility]
 
   - id: organization
     label: Organisation
@@ -13,7 +85,7 @@ concepts:
     description: Entreprise employeuse, cliente, créée par Délia ou émettrice d'une offre.
     privacy: public
     storage: data/knowledge/entities/organization
-    key_attributes: [name, activity, location]
+    key_attributes: [name, organization_type, activity, location, former_names]
 
   - id: source
     label: Source
@@ -21,7 +93,7 @@ concepts:
     description: Document, page, note ou retour à l'origine d'une information proposée.
     privacy: private
     storage: private/originals et data/sources/manifests
-    key_attributes: [kind, original_uri, sha256, ingested_at]
+    key_attributes: [kind, original_uri, sha256, source_date, effective_date, ingested_at]
 
   - id: website-archive
     label: Archive de site
@@ -69,7 +141,7 @@ concepts:
     description: Valeur appliquée à une entité de connaissance avec son historique de provenance.
     privacy: mixed
     storage: data/knowledge/entities
-    key_attributes: [entity_type, entity_id, field, value, provenance]
+    key_attributes: [entity_type, entity_id, field, value, classification, sensitivity, visibility, valid_from, valid_to, provenance]
 
   - id: skill
     label: Compétence
@@ -77,7 +149,7 @@ concepts:
     description: Capacité démontrée ou connaissance détenue par la personne, avec preuves et niveau qualifié.
     privacy: public
     storage: data/knowledge/skills.json
-    key_attributes: [name, category, level, summary]
+    key_attributes: [name, category, level, proficiency_dimensions, summary]
 
   - id: experience
     label: Expérience
@@ -85,7 +157,7 @@ concepts:
     description: Période d'activité professionnelle, entrepreneuriale, associative ou de mission.
     privacy: public
     storage: data/knowledge/entities/experience
-    key_attributes: [title, organization, start_date, end_date, responsibilities, outcomes]
+    key_attributes: [title, engagement_type, organization, location, start_date, start_precision, end_date, end_precision, ongoing, responsibilities, outcomes]
 
   - id: education
     label: Formation
@@ -93,7 +165,7 @@ concepts:
     description: Parcours d'apprentissage formel ou qualifiant suivi par la personne.
     privacy: public
     storage: data/knowledge/entities/education
-    key_attributes: [institution, program, start_date, end_date]
+    key_attributes: [institution, program, completion_status, location, start_date, end_date]
 
   - id: credential
     label: Diplôme ou certification
@@ -117,7 +189,7 @@ concepts:
     description: Opportunité structurée avec contexte, exigences obligatoires et préférences employeur.
     privacy: private
     storage: data/offers
-    key_attributes: [employer, role, required_skills, preferred_skills, source_url]
+    key_attributes: [employer, role, sectors, location, contract_type, work_mode, schedule, compensation, required_skills, preferred_skills, source_url]
 
   - id: match-assessment
     label: Évaluation de rapprochement
@@ -125,7 +197,7 @@ concepts:
     description: Comparaison explicable entre une offre et les connaissances validées de la personne.
     privacy: private
     storage: embedded:job-offer.assessment
-    key_attributes: [method, score, matches, gaps]
+    key_attributes: [method, score, matches, gaps, criterion_results, hard_constraint_failures]
 
   - id: document-template
     label: Template documentaire

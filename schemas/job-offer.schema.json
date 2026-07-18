@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "title", "employer", "required_skills", "preferred_skills"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "employer": {"type": "string", "minLength": 1},
+    "source_url": {"type": "string", "minLength": 1},
+    "industry_sector_ids": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "job_role_ids": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "location_ids": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "contract_type": {"type": "string", "minLength": 1},
+    "work_mode": {"type": "string", "enum": ["onsite", "hybrid", "remote", "mobile", "unknown"]},
+    "schedule": {"type": "object"},
+    "compensation": {
+      "type": "object",
+      "properties": {
+        "minimum": {"type": "number"},
+        "maximum": {"type": "number"},
+        "currency": {"type": "string", "minLength": 3},
+        "period": {"type": "string", "enum": ["hour", "month", "year"]}
+      }
+    },
+    "required_skills": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "preferred_skills": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "conditions": {"type": "object"}
+  }
+}

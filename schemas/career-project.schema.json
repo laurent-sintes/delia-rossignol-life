@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "person_id", "status", "targets", "criteria"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "person_id": {"type": "string", "minLength": 1},
+    "status": {"type": "string", "enum": ["draft", "active", "paused", "archived"]},
+    "valid_from": {"type": "string", "minLength": 1},
+    "valid_to": {"type": "string", "minLength": 1},
+    "availability": {"type": "string", "minLength": 1},
+    "targets": {
+      "type": "object",
+      "required": ["industry_sector_ids", "job_role_ids", "location_ids"],
+      "properties": {
+        "industry_sector_ids": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "job_role_ids": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "location_ids": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "criteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "dimension", "operator", "value", "priority", "hard_constraint"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "dimension": {
+            "type": "string",
+            "enum": [
+              "industry_sector", "job_role", "location", "commute", "contract_type",
+              "work_mode", "schedule", "compensation", "travel", "availability",
+              "organization_size", "organization_culture", "work_environment", "other"
+            ]
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["eq", "neq", "in", "not_in", "gte", "lte", "contains", "max_distance", "custom"]
+          },
+          "value": {},
+          "priority": {"type": "integer", "minimum": 1, "maximum": 5},
+          "hard_constraint": {"type": "boolean"},
+          "rationale": {"type": "string"},
+          "valid_from": {"type": "string", "minLength": 1},
+          "valid_to": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "notes": {"type": "string"}
+  }
+}

@@ -1,8 +1,9 @@
-model_version: "1.0.0"
+model_version: "1.1.0"
 namespace: delia-career
 description: >-
   Modèle conceptuel du dossier professionnel, de l'ingestion des preuves,
-  de la préparation des candidatures et de leur boucle de feedback.
+  du projet professionnel recherché, de la préparation des candidatures et
+  de leur boucle de feedback.
 
 concept_files:
   - concepts.yaml
@@ -25,6 +26,16 @@ invariants:
     rule: Un feedback produit une proposition d'amélioration et ne modifie jamais directement la connaissance.
   - id: public-projection-only
     rule: Le dépôt public et GitHub Pages ne contiennent qu'une projection explicitement publiable.
+  - id: sensitive-private-by-default
+    rule: Une coordonnée ou donnée personnelle sensible reste privée tant qu'une décision humaine explicite n'autorise pas sa publication.
+  - id: age-is-derived
+    rule: Un âge est calculé à une date donnée depuis une date de naissance validée; il n'est jamais stocké comme fait permanent.
+  - id: temporal-precision-preserved
+    rule: Une date partielle ou une période en cours conserve sa précision d'origine; aucun jour ou mois n'est inventé.
+  - id: hard-constraint-is-explicit
+    rule: Un critère bloquant du projet professionnel est évalué séparément du score et tout échec est expliqué.
+  - id: normalized-label-retains-source
+    rule: Toute normalisation vers un secteur, un type de poste ou un lieu conserve le libellé source et sa preuve.
 
 refactor_policy:
   compatibility: Conserver un identifiant ou déclarer explicitement son remplacement.

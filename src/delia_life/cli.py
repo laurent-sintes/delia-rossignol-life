@@ -34,6 +34,8 @@ def command_check(args: argparse.Namespace) -> int:
     schema_by_name = {path.stem.replace(".schema", ""): load_json(path) for path in schema_dir.glob("*.schema.json")}
     checks = [
         (root / "data" / "review" / "queue", "proposal"),
+        (root / "data" / "offers", "job-offer"),
+        (root / "private" / "career-project", "career-project"),
         (root / "templates" / "cv", "template"),
     ]
     checked = 0

@@ -93,6 +93,28 @@ class CoreTests(unittest.TestCase):
         errors = validate({}, {"type": "object", "required": ["id"]})
         self.assertEqual(errors, ["$.id: required property is missing"])
 
+    def test_career_project_schema_structures_hard_constraints(self) -> None:
+        schema = json.loads((ROOT / "schemas" / "career-project.schema.json").read_text(encoding="utf-8"))
+        project = {
+            "id": "career-project-1",
+            "person_id": "delia-rossignol",
+            "status": "draft",
+            "targets": {"industry_sector_ids": [], "job_role_ids": [], "location_ids": []},
+            "criteria": [
+                {
+                    "id": "criterion-1",
+                    "dimension": "work_mode",
+                    "operator": "in",
+                    "value": ["onsite", "hybrid"],
+                    "priority": 5,
+                    "hard_constraint": True,
+                }
+            ],
+        }
+        self.assertEqual(validate(project, schema), [])
+        project["criteria"][0]["priority"] = 0
+        self.assertIn("$.criteria[0].priority: value is below minimum", validate(project, schema))
+
     def test_website_url_rules_and_asset_discovery(self) -> None:
         self.assertEqual(normalize_url("HTTPS://Example.com?a=1&utm_source=x#top"), "https://example.com/?a=1")
         self.assertEqual(
