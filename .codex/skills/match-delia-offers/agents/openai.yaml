@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "Rapprochement d’offres"
+  short_description: "Évalue les offres face au profil validé"
+  default_prompt: "Use $match-delia-offers to score an offer against Délia's validated knowledge."

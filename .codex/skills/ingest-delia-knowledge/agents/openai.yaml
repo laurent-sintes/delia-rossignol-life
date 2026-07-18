@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "Ingestion des connaissances"
+  short_description: "Importe et prépare les sources de Délia"
+  default_prompt: "Use $ingest-delia-knowledge to import a document or website into Délia's review queue."

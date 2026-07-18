@@ -1,0 +1,11 @@
+{
+  "ats_compatible": true,
+  "countries": ["france"],
+  "formats": ["docx", "pdf"],
+  "id": "ats-classic",
+  "name": "ATS classique",
+  "roles": [],
+  "sectors": [],
+  "seniority": [],
+  "version": "0.1.0"
+}

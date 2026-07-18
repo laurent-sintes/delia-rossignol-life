@@ -1,0 +1,85 @@
+{
+  "site": {
+    "description": "Dossier professionnel structuré, administré avec validation humaine.",
+    "title": "Délia Rossignol"
+  },
+  "pages": [
+    {
+      "kind": "markdown",
+      "slug": "index",
+      "source": "site/content/index.md",
+      "title": "Accueil"
+    },
+    {
+      "kind": "json",
+      "sections": [
+        {
+          "fields": ["id", "status"],
+          "labels": {
+            "id": "Identité",
+            "status": "État du dossier"
+          },
+          "source": "data/knowledge/profile.json",
+          "title": "Profil"
+        },
+        {
+          "fields": ["skills"],
+          "item_fields": {
+            "skills": ["name", "category", "level", "summary"]
+          },
+          "labels": {
+            "category": "Catégorie",
+            "level": "Niveau",
+            "name": "Compétence",
+            "skills": "Compétences",
+            "summary": "Présentation"
+          },
+          "source": "data/knowledge/skills.json",
+          "title": "Compétences validées"
+        },
+        {
+          "fields": ["status", "tone", "colors", "preferred_elements"],
+          "labels": {
+            "colors": "Couleurs",
+            "preferred_elements": "Éléments privilégiés",
+            "status": "État",
+            "tone": "Ton"
+          },
+          "source": "data/style/delia.json",
+          "title": "Style professionnel"
+        }
+      ],
+      "slug": "profil",
+      "title": "Profil public"
+    },
+    {
+      "fields": ["id", "version", "ats_compatible", "formats", "sectors", "roles", "seniority", "countries"],
+      "kind": "collection",
+      "labels": {
+        "ats_compatible": "Compatible ATS",
+        "countries": "Pays",
+        "formats": "Formats",
+        "id": "Identifiant",
+        "roles": "Fonctions",
+        "sectors": "Secteurs",
+        "seniority": "Séniorité",
+        "version": "Version"
+      },
+      "slug": "templates",
+      "source_glob": "templates/cv/*/template.json",
+      "title": "Templates de CV"
+    },
+    {
+      "kind": "mental-model",
+      "slug": "modele",
+      "source": "model/model.yaml",
+      "title": "Modèle mental"
+    },
+    {
+      "kind": "administration",
+      "slug": "administration",
+      "source": "site/content/administration.md",
+      "title": "Administrer la base"
+    }
+  ]
+}

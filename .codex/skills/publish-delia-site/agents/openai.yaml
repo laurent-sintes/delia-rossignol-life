@@ -1,0 +1,4 @@
+interface:
+  display_name: "Publication du site de Délia"
+  short_description: "Génère et contrôle le site GitHub Pages"
+  default_prompt: "Use $publish-delia-site to build and review Délia's public GitHub Pages site."

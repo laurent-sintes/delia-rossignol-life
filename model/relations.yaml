@@ -1,0 +1,217 @@
+relations:
+  - id: person-has-experience
+    from: person
+    to: experience
+    label: possède une expérience
+    cardinality: one_to_many
+    required: false
+
+  - id: experience-at-organization
+    from: experience
+    to: organization
+    label: se déroule dans
+    cardinality: many_to_one
+    required: true
+
+  - id: experience-demonstrates-skill
+    from: experience
+    to: skill
+    label: démontre
+    cardinality: many_to_many
+    required: false
+
+  - id: person-has-education
+    from: person
+    to: education
+    label: a suivi
+    cardinality: one_to_many
+    required: false
+
+  - id: education-awards-credential
+    from: education
+    to: credential
+    label: aboutit à
+    cardinality: one_to_many
+    required: false
+
+  - id: person-has-skill
+    from: person
+    to: skill
+    label: possède
+    cardinality: many_to_many
+    required: false
+
+  - id: person-has-style-profile
+    from: person
+    to: style-profile
+    label: est présenté par
+    cardinality: one_to_one
+    required: false
+
+  - id: website-archive-captures-organization
+    from: website-archive
+    to: organization
+    label: documente
+    cardinality: many_to_one
+    required: true
+
+  - id: source-yields-evidence
+    from: source
+    to: evidence
+    label: fournit
+    cardinality: one_to_many
+    required: false
+
+  - id: website-archive-yields-evidence
+    from: website-archive
+    to: evidence
+    label: fournit
+    cardinality: one_to_many
+    required: false
+
+  - id: ingestion-consumes-source
+    from: ingestion
+    to: source
+    label: consomme
+    cardinality: many_to_many
+    required: true
+
+  - id: ingestion-produces-proposal
+    from: ingestion
+    to: knowledge-proposal
+    label: produit
+    cardinality: one_to_many
+    required: false
+
+  - id: proposal-supported-by-evidence
+    from: knowledge-proposal
+    to: evidence
+    label: est justifiée par
+    cardinality: many_to_many
+    required: true
+
+  - id: decision-reviews-proposal
+    from: validation-decision
+    to: knowledge-proposal
+    label: examine
+    cardinality: many_to_one
+    required: true
+
+  - id: decision-authorizes-fact
+    from: validation-decision
+    to: knowledge-fact
+    label: autorise
+    cardinality: one_to_one
+    required: false
+
+  - id: fact-derived-from-evidence
+    from: knowledge-fact
+    to: evidence
+    label: est dérivé de
+    cardinality: many_to_many
+    required: true
+
+  - id: fact-describes-person
+    from: knowledge-fact
+    to: person
+    label: décrit
+    cardinality: many_to_one
+    required: false
+
+  - id: organization-publishes-offer
+    from: organization
+    to: job-offer
+    label: publie
+    cardinality: one_to_many
+    required: true
+
+  - id: offer-requires-skill
+    from: job-offer
+    to: skill
+    label: requiert
+    cardinality: many_to_many
+    required: false
+
+  - id: assessment-compares-person
+    from: match-assessment
+    to: person
+    label: évalue
+    cardinality: many_to_one
+    required: true
+
+  - id: assessment-compares-offer
+    from: match-assessment
+    to: job-offer
+    label: porte sur
+    cardinality: many_to_one
+    required: true
+
+  - id: person-submits-application
+    from: person
+    to: application
+    label: soumet
+    cardinality: one_to_many
+    required: false
+
+  - id: application-responds-to-offer
+    from: application
+    to: job-offer
+    label: répond à
+    cardinality: many_to_one
+    required: true
+
+  - id: application-uses-template
+    from: application
+    to: document-template
+    label: utilise
+    cardinality: many_to_one
+    required: true
+
+  - id: application-generates-document
+    from: application
+    to: application-document
+    label: génère
+    cardinality: one_to_many
+    required: true
+
+  - id: document-rendered-with-template
+    from: application-document
+    to: document-template
+    label: est rendu avec
+    cardinality: many_to_one
+    required: true
+
+  - id: document-uses-fact
+    from: application-document
+    to: knowledge-fact
+    label: utilise
+    cardinality: many_to_many
+    required: true
+
+  - id: style-influences-document
+    from: style-profile
+    to: application-document
+    label: influence
+    cardinality: one_to_many
+    required: false
+
+  - id: application-has-event
+    from: application
+    to: application-event
+    label: possède
+    cardinality: one_to_many
+    required: false
+
+  - id: feedback-concerns-application
+    from: feedback
+    to: application
+    label: concerne
+    cardinality: many_to_one
+    required: true
+
+  - id: feedback-originates-proposal
+    from: feedback
+    to: knowledge-proposal
+    label: peut produire
+    cardinality: one_to_many
+    required: false

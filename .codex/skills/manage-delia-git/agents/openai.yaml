@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git du projet Délia"
+  short_description: "Teste, prévisualise et publie sur GitHub"
+  default_prompt: "Use $manage-delia-git to review content locally, prepare a commit, or publish Délia's site."

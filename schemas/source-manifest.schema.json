@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "kind", "sha256", "size_bytes", "ingested_at"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "kind": {"type": "string", "enum": ["cv", "diploma", "document", "website", "offer", "feedback"]},
+    "sha256": {"type": "string", "minLength": 64},
+    "size_bytes": {"type": "integer", "minimum": 0},
+    "ingested_at": {"type": "string", "minLength": 1}
+  }
+}

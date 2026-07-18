@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "name", "version", "ats_compatible", "formats", "sectors", "roles", "seniority", "countries"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "name": {"type": "string", "minLength": 1},
+    "version": {"type": "string", "minLength": 1},
+    "ats_compatible": {"type": "boolean"},
+    "formats": {"type": "array", "items": {"type": "string"}},
+    "sectors": {"type": "array", "items": {"type": "string"}},
+    "roles": {"type": "array", "items": {"type": "string"}},
+    "seniority": {"type": "array", "items": {"type": "string"}},
+    "countries": {"type": "array", "items": {"type": "string"}}
+  }
+}

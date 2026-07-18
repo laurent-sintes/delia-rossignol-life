@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "Suivi des candidatures"
+  short_description: "Suit les réponses et leurs retours"
+  default_prompt: "Use $track-delia-applications to record a candidacy event or employer feedback."

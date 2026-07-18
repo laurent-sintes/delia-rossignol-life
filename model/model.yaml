@@ -1,0 +1,33 @@
+model_version: "1.0.0"
+namespace: delia-career
+description: >-
+  Modèle conceptuel du dossier professionnel, de l'ingestion des preuves,
+  de la préparation des candidatures et de leur boucle de feedback.
+
+concept_files:
+  - concepts.yaml
+
+relation_files:
+  - relations.yaml
+
+invariants:
+  - id: no-fabrication
+    rule: Une connaissance ou un document de candidature ne peut pas introduire un fait sans preuve validée.
+  - id: provenance-required
+    rule: Toute proposition et tout fait validé conservent une provenance localisable.
+  - id: human-validation-gate
+    rule: Une ingestion produit des propositions; seule une décision humaine acceptée ou éditée autorise leur application.
+  - id: fact-claim-inference-separation
+    rule: Un fait, une déclaration commerciale et une inférence restent explicitement distingués.
+  - id: content-presentation-separation
+    rule: Les connaissances, la stratégie éditoriale et les templates de rendu sont indépendants.
+  - id: feedback-is-observation
+    rule: Un feedback produit une proposition d'amélioration et ne modifie jamais directement la connaissance.
+  - id: public-projection-only
+    rule: Le dépôt public et GitHub Pages ne contiennent qu'une projection explicitement publiable.
+
+refactor_policy:
+  compatibility: Conserver un identifiant ou déclarer explicitement son remplacement.
+  migration: Toute suppression ou modification de cardinalité nécessite une migration déterministe.
+  impact_check: Exécuter model-impact avant de modifier ou supprimer un concept.
+  validation: Exécuter model-check, les tests et le build du site avant commit.

@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "Génération de candidature"
+  short_description: "Produit un CV et une lettre traçables"
+  default_prompt: "Use $generate-delia-application to prepare Délia's CV and cover letter for an offer."

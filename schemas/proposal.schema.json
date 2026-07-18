@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "source", "target", "classification", "confidence", "proposed_value", "status", "history"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "source": {
+      "type": "object",
+      "required": ["id", "locator", "evidence"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "locator": {"type": "string", "minLength": 1},
+        "evidence": {"type": "string", "minLength": 1}
+      }
+    },
+    "target": {
+      "type": "object",
+      "required": ["entity_type", "entity_id", "field"],
+      "properties": {
+        "entity_type": {"type": "string", "minLength": 1},
+        "entity_id": {"type": "string", "minLength": 1},
+        "field": {"type": "string", "minLength": 1}
+      }
+    },
+    "classification": {"type": "string", "enum": ["fact", "claim", "inference"]},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "status": {"type": "string", "enum": ["pending", "accepted", "edited", "rejected"]},
+    "history": {"type": "array", "items": {"type": "object"}}
+  }
+}

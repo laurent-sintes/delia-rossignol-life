@@ -1,0 +1,168 @@
+concepts:
+  - id: person
+    label: Personne
+    kind: entity
+    description: Sujet du dossier professionnel; actuellement Délia Rossignol.
+    privacy: mixed
+    storage: data/knowledge/profile.json
+    key_attributes: [identity, headline, preferences]
+
+  - id: organization
+    label: Organisation
+    kind: entity
+    description: Entreprise employeuse, cliente, créée par Délia ou émettrice d'une offre.
+    privacy: public
+    storage: data/knowledge/entities/organization
+    key_attributes: [name, activity, location]
+
+  - id: source
+    label: Source
+    kind: artifact
+    description: Document, page, note ou retour à l'origine d'une information proposée.
+    privacy: private
+    storage: private/originals et data/sources/manifests
+    key_attributes: [kind, original_uri, sha256, ingested_at]
+
+  - id: website-archive
+    label: Archive de site
+    kind: artifact
+    description: Capture bornée et datée d'un site, de ses pages et de ses ressources visuelles utiles.
+    privacy: private
+    storage: private/website-archives
+    key_attributes: [start_url, captured_at, records, truncated]
+
+  - id: evidence
+    label: Preuve
+    kind: value_object
+    description: Extrait ou élément visuel localisable qui justifie une proposition.
+    privacy: mixed
+    storage: embedded:knowledge-proposal.source
+    key_attributes: [source_id, locator, excerpt]
+
+  - id: ingestion
+    label: Ingestion
+    kind: process
+    description: Traitement d'une ou plusieurs sources pour produire des propositions sans modifier la connaissance.
+    privacy: private
+    storage: runtime
+    key_attributes: [started_at, adapter, source_ids]
+
+  - id: knowledge-proposal
+    label: Proposition de connaissance
+    kind: entity
+    description: Valeur atomique proposée, qualifiée et en attente d'une décision humaine.
+    privacy: private
+    storage: data/review/queue
+    key_attributes: [target, proposed_value, classification, confidence, status]
+
+  - id: validation-decision
+    label: Décision de validation
+    kind: event
+    description: Acceptation, édition, rejet ou réouverture d'une proposition par un humain identifié.
+    privacy: private
+    storage: embedded:knowledge-proposal.history
+    key_attributes: [reviewer, from, to, note, at]
+
+  - id: knowledge-fact
+    label: Fait validé
+    kind: entity
+    description: Valeur appliquée à une entité de connaissance avec son historique de provenance.
+    privacy: mixed
+    storage: data/knowledge/entities
+    key_attributes: [entity_type, entity_id, field, value, provenance]
+
+  - id: skill
+    label: Compétence
+    kind: entity
+    description: Capacité démontrée ou connaissance détenue par la personne, avec preuves et niveau qualifié.
+    privacy: public
+    storage: data/knowledge/skills.json
+    key_attributes: [name, category, level, summary]
+
+  - id: experience
+    label: Expérience
+    kind: entity
+    description: Période d'activité professionnelle, entrepreneuriale, associative ou de mission.
+    privacy: public
+    storage: data/knowledge/entities/experience
+    key_attributes: [title, organization, start_date, end_date, responsibilities, outcomes]
+
+  - id: education
+    label: Formation
+    kind: entity
+    description: Parcours d'apprentissage formel ou qualifiant suivi par la personne.
+    privacy: public
+    storage: data/knowledge/entities/education
+    key_attributes: [institution, program, start_date, end_date]
+
+  - id: credential
+    label: Diplôme ou certification
+    kind: entity
+    description: Titre, diplôme, certification ou attestation obtenu et vérifiable.
+    privacy: mixed
+    storage: data/knowledge/entities/credential
+    key_attributes: [name, issuer, awarded_at, identifier]
+
+  - id: style-profile
+    label: Profil stylistique
+    kind: entity
+    description: Ton, préférences visuelles et posture professionnelle validés pour Délia.
+    privacy: public
+    storage: data/style/delia.json
+    key_attributes: [tone, colors, preferred_elements, forbidden_elements]
+
+  - id: job-offer
+    label: Offre d'emploi
+    kind: entity
+    description: Opportunité structurée avec contexte, exigences obligatoires et préférences employeur.
+    privacy: private
+    storage: data/offers
+    key_attributes: [employer, role, required_skills, preferred_skills, source_url]
+
+  - id: match-assessment
+    label: Évaluation de rapprochement
+    kind: assessment
+    description: Comparaison explicable entre une offre et les connaissances validées de la personne.
+    privacy: private
+    storage: embedded:job-offer.assessment
+    key_attributes: [method, score, matches, gaps]
+
+  - id: document-template
+    label: Template documentaire
+    kind: artifact
+    description: Modèle sans donnée personnelle décrivant rendu, usages, contraintes ATS et formats.
+    privacy: public
+    storage: templates
+    key_attributes: [id, version, ats_compatible, sectors, roles, formats]
+
+  - id: application-document
+    label: Document de candidature
+    kind: artifact
+    description: CV, lettre ou pièce générée pour une offre à partir de faits validés et d'un template.
+    privacy: private
+    storage: generated
+    key_attributes: [kind, version, template_id, traceability]
+
+  - id: application
+    label: Candidature
+    kind: entity
+    description: Réponse de la personne à une offre, avec documents, état et chronologie.
+    privacy: private
+    storage: data/applications
+    key_attributes: [offer_id, submitted_at, status, document_versions]
+
+  - id: application-event
+    label: Événement de candidature
+    kind: event
+    description: Changement chronologique tel qu'envoi, entretien, refus, offre ou retrait.
+    privacy: private
+    storage: embedded:application.events
+    key_attributes: [type, occurred_at, details]
+
+  - id: feedback
+    label: Feedback
+    kind: event
+    description: Retour explicite ou observation collectée après une candidature.
+    privacy: private
+    storage: embedded:application.events
+    key_attributes: [content, source, occurred_at, interpretation]

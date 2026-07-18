@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "Templates de candidature"
+  short_description: "Gère les modèles de CV et de lettres"
+  default_prompt: "Use $manage-delia-templates to add or select a CV template for Délia."

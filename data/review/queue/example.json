@@ -1,0 +1,18 @@
+{
+  "classification": "fact",
+  "confidence": 0.95,
+  "history": [],
+  "id": "proposal-example",
+  "proposed_value": "Valeur d'exemple non personnelle",
+  "source": {
+    "evidence": "Extrait exact à contrôler",
+    "id": "source-example",
+    "locator": "document.pdf#page=1"
+  },
+  "status": "pending",
+  "target": {
+    "entity_id": "example",
+    "entity_type": "experience",
+    "field": "title"
+  }
+}
