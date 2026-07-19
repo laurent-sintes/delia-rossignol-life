@@ -1,0 +1,41 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T19:37:33+00:00",
+    "knowledge_path": "data/knowledge/entities/contact-point/delia-personal-phone.json"
+  },
+  "classification": "fact",
+  "confidence": 0.99,
+  "history": [
+    {
+      "at": "2026-07-19T19:37:32+00:00",
+      "from": "pending",
+      "note": "Ajout explicite du numéro demandé pour le CV standard public le 19 juillet 2026",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-cv-classique-phone",
+  "proposed_value": {
+    "kind": "phone",
+    "usage": "job_applications",
+    "value": "06 20 67 40 52",
+    "visibility": "application_only"
+  },
+  "source": {
+    "evidence": "06 20 67 40 52",
+    "id": "cv-delia-rossignol-classique",
+    "locator": "cv-delia-rossignol-classique.pdf#page=1"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-personal-phone",
+    "entity_type": "contact-point",
+    "field": "details"
+  },
+  "validated_value": {
+    "kind": "phone",
+    "usage": "job_applications",
+    "value": "06 20 67 40 52",
+    "visibility": "application_only"
+  }
+}

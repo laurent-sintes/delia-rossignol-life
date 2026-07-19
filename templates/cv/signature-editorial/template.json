@@ -1,0 +1,43 @@
+{
+  "ats_compatible": false,
+  "countries": ["france"],
+  "description": "CV de présentation à forte lisibilité, associant une hiérarchie éditoriale, la palette bleu profond et champagne de Délia, et un parcours chronologique condensé.",
+  "formats": ["pdf"],
+  "id": "signature-editorial",
+  "name": "Signature éditoriale",
+  "roles": ["conseil", "commerce", "gestion-de-projet", "management"],
+  "sectors": ["agencement", "commerce", "luxe", "hospitality"],
+  "seniority": ["confirmé", "management", "entrepreneuriat"],
+  "version": "1.2.0",
+  "rendering": {
+    "engine": "signature-editorial-pdf-v1",
+    "page_size": "A4",
+    "preferred_pages": 2,
+    "maximum_pages": 2,
+    "photo_policy": "required",
+    "palette": "delia-champagne-navy",
+    "sections": [
+      "profile",
+      "key-skills",
+      "professional-experience",
+      "education",
+      "languages",
+      "engagements-and-interests"
+    ]
+  },
+  "content_rules": {
+    "profile_max_words": 60,
+    "key_skills_max": 8,
+    "experience_bullets_max": 3,
+    "bullet_max_words": 28,
+    "date_format": "MM/YYYY",
+    "prioritize_relevance_over_completeness": true,
+    "require_validated_facts": true,
+    "forbidden_fields": [
+      "age",
+      "date_of_birth",
+      "family_status",
+      "full_street_address"
+    ]
+  }
+}

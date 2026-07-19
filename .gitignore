@@ -8,6 +8,8 @@ __pycache__/
 .tools/
 .runtime/
 _site/
+output/
+tmp/
 dist/
 build/
 *.egg-info/

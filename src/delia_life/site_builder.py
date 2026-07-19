@@ -349,7 +349,7 @@ def render_cv_template_preview(document: dict[str, Any]) -> str:
     if not isinstance(rendering, dict):
         return ""
     engine = rendering.get("engine")
-    if engine != "standard-single-column-v1":
+    if engine not in {"standard-single-column-v1", "signature-editorial-pdf-v1"}:
         raise ValueError(f"Unsupported CV preview engine: {engine}")
 
     section_order = rendering.get("sections", [])
@@ -524,7 +524,8 @@ def _page_template(
         <h1 id="hero-title">Le parcours de Délia,<br><em>pensé sur mesure.</em></h1>
         <p class="hero-lead">Un parcours façonné par le conseil, le commerce, la gestion de projets et l’entrepreneuriat.</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="profil.html">Découvrir le profil</a>
+          <a class="button button-primary" href="assets/downloads/cv-delia-rossignol-signature.pdf" download>Télécharger le CV (PDF)</a>
+          <a class="button button-secondary" href="profil.html">Découvrir le profil</a>
           <a class="button button-secondary" href="administration.html">Conseils et outils</a>
         </div>
       </div>

@@ -96,7 +96,7 @@ Pour `publish`, vérifier `config/repository.json`, exécuter `python scripts/re
 
 Après toute demande utilisateur qui modifie un contenu visible ou publiable — notamment `data/knowledge/`, `model/`, `templates/`, `site/content/`, `site/assets/` ou les descriptions de skills affichées sur le site — exécuter `python scripts/repo_flow.py review-content`.
 
-Cette commande doit terminer les tests, la validation du modèle et de la base, le build du site et le déploiement local. Communiquer l'URL produite et laisser le serveur actif pour permettre la vérification utilisateur. Lors d'une correction suivante, reconstruire sur le même serveur. Ne l'arrêter qu'à la demande de l'utilisateur, lors d'un commit finalisé ou avant de quitter définitivement le projet.
+Cette commande doit terminer les tests, la validation du modèle et de la base, le build du site et le déploiement local. Communiquer l'URL produite et laisser le serveur actif pour permettre la vérification utilisateur. Lors d'une correction suivante, reconstruire sur le même serveur. Ne l'arrêter qu'à la demande explicite de l'utilisateur. Un commit, une publication ou la fin d'un échange ne sont pas des motifs d'arrêt.
 
 Ne pas créer de commit et ne pas publier sur GitHub au titre de cette règle. `commit` et `publish` restent des autorisations explicites séparées.
 

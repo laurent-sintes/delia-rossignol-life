@@ -1,0 +1,23 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T19:37:33+00:00",
+          "locator": "cv-delia-rossignol-classique.pdf#page=1",
+          "proposal_id": "proposal-delia-cv-classique-phone",
+          "source_id": "cv-delia-rossignol-classique"
+        }
+      ],
+      "value": {
+        "kind": "phone",
+        "usage": "job_applications",
+        "value": "06 20 67 40 52",
+        "visibility": "application_only"
+      }
+    }
+  },
+  "id": "delia-personal-phone",
+  "type": "contact-point",
+  "updated_at": "2026-07-19T19:37:33+00:00"
+}

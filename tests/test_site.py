@@ -162,7 +162,7 @@ class SiteTests(unittest.TestCase):
         self.assertEqual(first["pages"], second["pages"])
         self.assertEqual(
             set(first["pages"]),
-            {"index.html", "profil.html", "parcours.html", "templates.html", "administration.html"},
+            {"index.html", "profil.html", "parcours.html", "administration.html"},
         )
         administration = (output / "administration.html").read_text(encoding="utf-8")
         self.assertIn("$ingest-delia-knowledge", administration)
@@ -172,12 +172,6 @@ class SiteTests(unittest.TestCase):
         self.assertTrue((output / "assets" / "style.css").exists())
         self.assertTrue((output / "assets" / "delia-rossignol.avif").exists())
         self.assertTrue((output / "assets" / "delia-rossignol-logo.svg").exists())
-        templates = (output / "templates.html").read_text(encoding="utf-8")
-        self.assertIn("Standard sobre — ATS", templates)
-        self.assertIn('class="cv-preview"', templates)
-        self.assertIn("Contenu fictif", templates)
-        self.assertNotIn("tel:", templates)
-        self.assertNotIn("@gmail.com", templates)
         homepage = (output / "index.html").read_text(encoding="utf-8")
         parcours = (output / "parcours.html").read_text(encoding="utf-8")
         self.assertIn('class="hero"', homepage)
@@ -185,6 +179,8 @@ class SiteTests(unittest.TestCase):
         self.assertRegex(homepage, r'assets/style\.css\?v=[0-9a-f]{12}')
         self.assertIn('alt="Portrait de Délia Rossignol"', homepage)
         self.assertIn("delia-rossignol-logo.svg", homepage)
+        self.assertIn("assets/downloads/cv-delia-rossignol-signature.pdf", homepage)
+        self.assertTrue((output / "assets" / "downloads" / "cv-delia-rossignol-signature.pdf").exists())
         self.assertIn("knowledge-section--editorial", parcours)
         self.assertIn("knowledge-card--editorial", parcours)
         self.assertNotIn("tel:", homepage)

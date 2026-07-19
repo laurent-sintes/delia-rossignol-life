@@ -20,7 +20,7 @@ description: Tester, prévisualiser, committer et publier les changements du dé
 4. Attendre la validation visuelle de l'utilisateur avant le commit. Ne pas confondre la demande initiale de préparation avec l'approbation du rendu.
 5. Après validation, sélectionner explicitement les fichiers concernés avec `git add`; vérifier que les données métier nécessaires à un clone autonome sont présentes et qu'aucun secret technique n'est inclus.
 6. Inspecter `git diff --cached`, proposer un message concis si aucun n'est fourni, puis exécuter `git commit`.
-7. Exécuter `python scripts/repo_flow.py preview-stop` après le commit, sauf si l'utilisateur souhaite garder l'aperçu ouvert.
+7. Conserver l'aperçu local actif après le commit. Ne jamais exécuter `python scripts/repo_flow.py preview-stop` sans une demande explicite de l'utilisateur.
 
 Si un test ou le build échoue, ne pas committer. Corriger uniquement si la demande inclut la correction; sinon expliquer le blocage.
 

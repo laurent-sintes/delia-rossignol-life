@@ -2,6 +2,15 @@
   "colors": [],
   "forbidden_elements": [],
   "preferred_elements": [],
+  "profile_signatures": [
+    {
+      "id": "cv-standard-end-to-end",
+      "status": "validated",
+      "text": "Écouter, comprendre, concevoir - et accompagner chaque projet jusqu’au bout.",
+      "uses": ["cv-standard"],
+      "validated_at": "2026-07-19"
+    }
+  ],
   "status": "to-be-defined",
   "tone": []
 }

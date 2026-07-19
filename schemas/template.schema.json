@@ -23,7 +23,7 @@
         "photo_policy", "palette", "sections"
       ],
       "properties": {
-        "engine": {"type": "string", "enum": ["standard-single-column-v1"]},
+        "engine": {"type": "string", "enum": ["standard-single-column-v1", "signature-editorial-pdf-v1"]},
         "page_size": {"type": "string", "enum": ["A4"]},
         "preferred_pages": {"type": "integer", "minimum": 1},
         "maximum_pages": {"type": "integer", "minimum": 1},
