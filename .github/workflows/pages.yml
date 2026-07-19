@@ -37,6 +37,9 @@ jobs:
       - name: Type check
         run: python -m mypy
 
+      - name: Build deterministic documents
+        run: python scripts/delia_life.py build-documents
+
       - name: Test with branch coverage
         run: |
           python -m coverage run -m unittest discover -s tests -v
@@ -44,9 +47,6 @@ jobs:
 
       - name: Validate all project contracts
         run: python scripts/delia_life.py check
-
-      - name: Build deterministic documents
-        run: python scripts/delia_life.py build-documents
 
       - name: Validate generated documents
         run: python scripts/delia_life.py check-documents
