@@ -10,7 +10,6 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from delia_life.site_builder import build_site  # noqa: E402
 
-
 parser = argparse.ArgumentParser(description="Build the allowlisted GitHub Pages site")
 parser.add_argument("--output", type=Path, default=ROOT / "_site")
 args = parser.parse_args()

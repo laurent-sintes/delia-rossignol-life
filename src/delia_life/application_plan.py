@@ -7,7 +7,6 @@ from typing import Any
 
 from .core import load_json, write_json
 
-
 TOKEN_PATTERN = re.compile(r"[a-z0-9]{3,}")
 STOP_WORDS = {"avec", "dans", "pour", "une", "des", "les", "par", "sur", "ses", "est", "the", "and", "from", "this", "that", "your"}
 

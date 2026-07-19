@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 from typing import Any
 
-from .core import load_json, utc_now, write_json
-from .ingestion import apply_proposal, find_duplicate_keys, transition_proposal
+from .core import load_json, sha256_json, utc_now, write_json
+from .errors import ConflictError
+from .ingestion import find_duplicate_keys, prepare_proposal_application, transition_proposal
+from .storage import atomic_write_json_group, exclusive_directory_lock
 
 
 def _proposal_path(queue_root: Path, proposal_id: str) -> Path:
@@ -40,12 +43,15 @@ def create_review_batch(specification: dict[str, Any], queue_root: Path, batch_p
         rendered = ", ".join("/".join(item) for item in duplicates)
         raise ValueError(f"Batch contains duplicate proposal targets: {rendered}")
 
+    proposal_hashes = {str(proposal["id"]): sha256_json(proposal) for proposal in proposals}
+    timestamp = utc_now()
     batch = {
         "id": batch_id,
         "proposal_ids": proposal_ids,
         "status": "pending",
-        "created_at": utc_now(),
-        "history": [{"at": utc_now(), "from": None, "to": "pending", "reviewer": specification.get("created_by", "system")}],
+        "created_at": timestamp,
+        "proposal_hashes": proposal_hashes,
+        "history": [{"at": timestamp, "from": None, "to": "pending", "reviewer": specification.get("created_by", "system")}],
     }
     write_json(batch_path, batch)
     return batch
@@ -65,43 +71,63 @@ def review_batch(
         raise ValueError("Batch review action must be accept or reject")
     if apply and action != "accept":
         raise ValueError("Only an accepted batch can be applied")
-    batch = load_json(batch_path)
-    if batch.get("status") != "pending":
-        raise ValueError(f"Only pending batches can be reviewed; current status is {batch.get('status')}")
-    proposal_ids = list(batch.get("proposal_ids", []))
-    if not proposal_ids:
-        raise ValueError("Review batch has no proposals")
-    paths = [_proposal_path(queue_root, proposal_id) for proposal_id in proposal_ids]
-    proposals = [load_json(path) for path in paths]
-    not_pending = [proposal.get("id", "?") for proposal in proposals if proposal.get("status") != "pending"]
-    if not_pending:
-        raise ValueError(f"All proposals must still be pending: {', '.join(not_pending)}")
+    common_root = Path(os.path.commonpath([batch_path.resolve(), queue_root.resolve(), knowledge_root.resolve()]))
+    lock_path = common_root / ".delia-locks" / "review-batch.lock"
+    with exclusive_directory_lock(lock_path):
+        batch = load_json(batch_path)
+        if batch.get("status") != "pending":
+            raise ValueError(f"Only pending batches can be reviewed; current status is {batch.get('status')}")
+        proposal_ids = list(batch.get("proposal_ids", []))
+        if not proposal_ids:
+            raise ValueError("Review batch has no proposals")
+        paths = [_proposal_path(queue_root, proposal_id) for proposal_id in proposal_ids]
+        proposals = [load_json(path) for path in paths]
+        expected_hashes = dict(batch.get("proposal_hashes", {}))
+        changed = [
+            str(proposal.get("id", "?"))
+            for proposal in proposals
+            if expected_hashes.get(str(proposal.get("id", ""))) != sha256_json(proposal)
+        ]
+        if changed:
+            raise ConflictError(f"Proposals changed after batch creation: {', '.join(changed)}")
+        not_pending = [proposal.get("id", "?") for proposal in proposals if proposal.get("status") != "pending"]
+        if not_pending:
+            raise ValueError(f"All proposals must still be pending: {', '.join(not_pending)}")
 
-    updated_proposals = [transition_proposal(proposal, action, reviewer, note=note) for proposal in proposals]
-    # All transitions have succeeded before any file is changed.
-    for path, proposal in zip(paths, updated_proposals):
-        write_json(path, proposal)
+        updated_proposals = [transition_proposal(proposal, action, reviewer, note=note) for proposal in proposals]
+        changes: dict[Path, Any] = {}
+        applied_ids: list[str] = []
+        staged_entities: dict[Path, dict[str, Any]] = {}
+        if apply:
+            for path, proposal in zip(paths, updated_proposals, strict=True):
+                target = proposal["target"]
+                entity_path = knowledge_root / str(target["entity_type"]) / f'{target["entity_id"]}.json'
+                applied, entity, entity_path = prepare_proposal_application(
+                    proposal,
+                    knowledge_root,
+                    staged_entities.get(entity_path),
+                )
+                staged_entities[entity_path] = entity
+                changes[path] = applied
+                applied_ids.append(str(applied["id"]))
+            changes.update(staged_entities)
+        else:
+            changes.update(zip(paths, updated_proposals, strict=True))
 
-    applied_ids: list[str] = []
-    if apply:
-        for path, proposal in zip(paths, updated_proposals):
-            applied, _ = apply_proposal(proposal, knowledge_root)
-            write_json(path, applied)
-            applied_ids.append(str(applied["id"]))
-
-    updated_batch = dict(batch)
-    updated_batch["status"] = "accepted" if action == "accept" else "rejected"
-    history = list(updated_batch.get("history", []))
-    history.append(
-        {
-            "at": utc_now(),
-            "from": "pending",
-            "to": updated_batch["status"],
-            "reviewer": reviewer,
-            "note": note,
-            "applied_proposal_ids": applied_ids,
-        }
-    )
-    updated_batch["history"] = history
-    write_json(batch_path, updated_batch)
-    return {"batch": updated_batch, "proposal_ids": proposal_ids, "applied_proposal_ids": applied_ids}
+        updated_batch = dict(batch)
+        updated_batch["status"] = "accepted" if action == "accept" else "rejected"
+        history = list(updated_batch.get("history", []))
+        history.append(
+            {
+                "at": utc_now(),
+                "from": "pending",
+                "to": updated_batch["status"],
+                "reviewer": reviewer,
+                "note": note,
+                "applied_proposal_ids": applied_ids,
+            }
+        )
+        updated_batch["history"] = history
+        changes[batch_path] = updated_batch
+        atomic_write_json_group(changes)
+        return {"batch": updated_batch, "proposal_ids": proposal_ids, "applied_proposal_ids": applied_ids}

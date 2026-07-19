@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import os
 import signal
 import socket
@@ -9,12 +8,14 @@ import sys
 import time
 import urllib.error
 import urllib.request
+from contextlib import suppress
 from pathlib import Path
 from typing import Any
 
 from .core import load_json, utc_now, write_json
-from .site_builder import build_site
+from .document_builder import build_documents, check_documents
 from .site_audit import audit_site
+from .site_builder import build_site
 
 
 def _run_git(root: Path, *arguments: str, required: bool = True) -> str | None:
@@ -56,7 +57,7 @@ def git_snapshot(root: Path, expected_remote: str | None = None, publish_branch:
             ahead, behind = int(ahead_text), int(behind_text)
     remote_matches = None
     if expected_remote:
-        remote_matches = bool(remote) and _normalized_remote(remote) == _normalized_remote(expected_remote)
+        remote_matches = remote is not None and _normalized_remote(remote) == _normalized_remote(expected_remote)
     return {
         "branch": branch,
         "publish_branch": publish_branch,
@@ -182,10 +183,8 @@ def stop_preview(root: Path) -> dict[str, Any]:
         return {"stopped": False, "reason": "no preview state"}
     pid = int(state.get("pid", 0))
     if state.get("running") and pid > 0:
-        try:
+        with suppress(ProcessLookupError):
             os.kill(pid, signal.SIGTERM)
-        except ProcessLookupError:
-            pass
         deadline = time.monotonic() + 3
         while time.monotonic() < deadline and _preview_responds(state["host"], int(state["port"])):
             time.sleep(0.1)
@@ -193,21 +192,38 @@ def stop_preview(root: Path) -> dict[str, Any]:
     return {"stopped": True, "pid": pid, "url": state.get("url")}
 
 
+def _run_quality_gate(root: Path, command: list[str], failure_message: str) -> None:
+    result = subprocess.run(command, cwd=root, check=False)
+    if result.returncode != 0:
+        raise ValueError(failure_message)
+
+
 def review_content(root: Path, output: Path, host: str, port: int) -> dict[str, Any]:
-    test = subprocess.run(
-        [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"],
-        cwd=root,
-        check=False,
+    documents = build_documents(root)
+    _run_quality_gate(
+        root,
+        [sys.executable, "-m", "ruff", "check", "src", "scripts", "tests"],
+        "lint failed",
     )
-    if test.returncode != 0:
-        raise ValueError("tests failed")
-    validation = subprocess.run(
+    _run_quality_gate(root, [sys.executable, "-m", "mypy"], "static typing failed")
+    _run_quality_gate(
+        root,
+        [sys.executable, "-m", "coverage", "run", "-m", "unittest", "discover", "-s", "tests", "-v"],
+        "tests failed",
+    )
+    _run_quality_gate(
+        root,
+        [sys.executable, "-m", "coverage", "report"],
+        "coverage threshold failed",
+    )
+    _run_quality_gate(
+        root,
         [sys.executable, str(root / "scripts" / "delia_life.py"), "check"],
-        cwd=root,
-        check=False,
+        "project validation failed",
     )
-    if validation.returncode != 0:
-        raise ValueError("project validation failed")
+    document_check = check_documents(root)
+    if not document_check["ok"]:
+        raise ValueError("document validation failed: " + "; ".join(document_check["errors"]))
     audit = audit_site(root)
     if not audit["ok"]:
         raise ValueError("site audit failed")
@@ -215,7 +231,19 @@ def review_content(root: Path, output: Path, host: str, port: int) -> dict[str, 
     preview = start_preview(root, output.resolve(), host, port)
     config = load_repository_config(root)
     snapshot = git_snapshot(root, config["expected_remote"], config["publish_branch"])
-    return {"tests": "passed", "validation": "passed", "audit": audit, "build": build, "preview": preview, "git": snapshot}
+    return {
+        "lint": "passed",
+        "typing": "passed",
+        "tests": "passed",
+        "coverage": "passed",
+        "validation": "passed",
+        "documents": documents,
+        "document_check": document_check,
+        "audit": audit,
+        "build": build,
+        "preview": preview,
+        "git": snapshot,
+    }
 
 
 def prepare_commit(root: Path, output: Path, host: str, port: int) -> dict[str, Any]:

@@ -5,13 +5,15 @@ import json
 import re
 import shutil
 import urllib.parse
+import uuid
 from datetime import date
 from pathlib import Path
 from typing import Any
 
 from .core import load_json, sha256_file
+from .document_builder import STANDARD_CV_FILENAME, build_standard_cv
 from .mental_model import load_mental_model, model_summary
-
+from .storage import atomic_write_bytes_group, exclusive_directory_lock, remove_tree
 
 ALLOWED_SOURCE_PREFIXES = {
     ("site", "content"),
@@ -128,6 +130,7 @@ def markdown_to_html(markdown: str) -> str:
                 output.append(f"<{wanted}>")
                 list_kind = wanted
             match = bullet or numbered
+            assert match is not None
             output.append(f"<li>{render_inline(match.group(1))}</li>")
             continue
         paragraph.append(line.strip())
@@ -507,11 +510,12 @@ def _page_template(
     body: str,
     asset_version: str,
 ) -> str:
-    nav = "".join(
-        f'<a href="{"index.html" if item["slug"] == "index" else item["slug"] + ".html"}"'
-        f'{" aria-current=\"page\"" if item["slug"] == page["slug"] else ""}>{html.escape(item["title"])}</a>'
-        for item in navigation
-    )
+    nav_items: list[str] = []
+    for item in navigation:
+        href = "index.html" if item["slug"] == "index" else item["slug"] + ".html"
+        current = ' aria-current="page"' if item["slug"] == page["slug"] else ""
+        nav_items.append(f'<a href="{href}"{current}>{html.escape(item["title"])}</a>')
+    nav = "".join(nav_items)
     title = html.escape(page["title"])
     site_title = html.escape(site["title"])
     description = html.escape(site.get("description", ""), quote=True)
@@ -588,7 +592,7 @@ def _prepare_output(root: Path, output: Path) -> Path:
     return output
 
 
-def build_site(root: Path, output: Path, config_path: Path | None = None) -> dict[str, Any]:
+def _build_site_in_place(root: Path, output: Path, config_path: Path | None = None) -> dict[str, Any]:
     root = root.resolve()
     config_path = config_path or root / "site" / "publication.json"
     config = load_json(config_path)
@@ -608,6 +612,7 @@ def build_site(root: Path, output: Path, config_path: Path | None = None) -> dic
     previous_manifest_path = output / ".delia-site-manifest.json"
     previous_files = set(load_json(previous_manifest_path).get("files", [])) if previous_manifest_path.exists() else set()
     shutil.copytree(assets_source, output / "assets", dirs_exist_ok=True)
+    document = build_standard_cv(root, output / "assets" / "downloads" / STANDARD_CV_FILENAME)
     asset_version = sha256_file(output / "assets" / "style.css")[:12]
     (output / ".nojekyll").write_text("", encoding="utf-8")
 
@@ -671,4 +676,51 @@ def build_site(root: Path, output: Path, config_path: Path | None = None) -> dic
         encoding="utf-8",
     )
 
-    return {"output": str(output), "pages": built, "published_sources_are_allowlisted": True}
+    return {
+        "output": str(output),
+        "pages": built,
+        "documents": [document],
+        "published_sources_are_allowlisted": True,
+    }
+
+
+def build_site(root: Path, output: Path, config_path: Path | None = None) -> dict[str, Any]:
+    """Build completely in staging, then publish files with rollback protection."""
+    root = root.resolve()
+    output = output.resolve()
+    if output == root:
+        raise ValueError("Site output cannot be the project root")
+    if output.exists() and any(output.iterdir()) and not (output / ".delia-site-output").exists():
+        raise ValueError(f"Refusing to replace unmarked output directory: {output}")
+    transaction_id = uuid.uuid4().hex
+    staging_root = root / ".runtime" / "site-builds"
+    staging_root.mkdir(parents=True, exist_ok=True)
+    for stale_staging in staging_root.glob(f"{output.name}.staging-*"):
+        remove_tree(stale_staging, ignore_errors=True)
+    staging = staging_root / f"{output.name}.staging-{transaction_id}"
+    try:
+        result = _build_site_in_place(root, staging, config_path)
+        output.mkdir(parents=True, exist_ok=True)
+        lock_path = root / ".runtime" / "site-publish.lock"
+        with exclusive_directory_lock(lock_path):
+            previous_manifest = output / ".delia-site-manifest.json"
+            previous_files = set(load_json(previous_manifest).get("files", [])) if previous_manifest.exists() else set()
+            staged_files = [path for path in staging.rglob("*") if path.is_file()]
+            changes = {output / path.relative_to(staging): path.read_bytes() for path in staged_files}
+            atomic_write_bytes_group(changes)
+            current_files = {path.relative_to(staging).as_posix() for path in staged_files}
+            for stale in sorted(previous_files - current_files):
+                stale_path = (output / stale).resolve()
+                try:
+                    stale_path.relative_to(output)
+                except ValueError as error:
+                    raise ValueError(f"Unsafe stale output path: {stale}") from error
+                stale_path.unlink(missing_ok=True)
+        result["output"] = str(output)
+        for document in result.get("documents", []):
+            document_path = Path(document["output"])
+            document["output"] = str(output / document_path.relative_to(staging))
+        return result
+    finally:
+        if staging.exists():
+            remove_tree(staging, ignore_errors=True)

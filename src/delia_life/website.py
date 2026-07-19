@@ -1,18 +1,24 @@
 from __future__ import annotations
 
 import hashlib
+import ipaddress
 import mimetypes
+import socket
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
 import urllib.robotparser
 from collections import deque
+from collections.abc import Callable
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
 
 from .core import load_json, sha256_file, stable_id, utc_now, write_json
+from .errors import ValidationError
+
+DEFAULT_MAX_RESPONSE_BYTES = 20 * 1024 * 1024
 
 
 class LinkParser(HTMLParser):
@@ -54,32 +60,98 @@ def same_origin(candidate: str, start: str) -> bool:
     return left.scheme in {"http", "https"} and left.netloc.casefold() == right.netloc.casefold()
 
 
-def _robot_parser(start_url: str, user_agent: str) -> urllib.robotparser.RobotFileParser:
+def validate_network_url(url: str, allow_private_networks: bool = False) -> None:
+    parsed = urllib.parse.urlsplit(url)
+    if parsed.scheme not in {"http", "https"} or not parsed.hostname:
+        raise ValidationError(f"Unsupported network URL: {url}")
+    if allow_private_networks:
+        return
+    try:
+        addresses = {str(item[4][0]) for item in socket.getaddrinfo(parsed.hostname, parsed.port, type=socket.SOCK_STREAM)}
+    except socket.gaierror as error:
+        raise ValidationError(f"Cannot resolve website host {parsed.hostname}: {error}") from error
+    if not addresses:
+        raise ValidationError(f"Website host resolves to no address: {parsed.hostname}")
+    unsafe = sorted(address for address in addresses if not ipaddress.ip_address(address).is_global)
+    if unsafe:
+        raise ValidationError(f"Website host resolves to a private or non-global address: {', '.join(unsafe)}")
+
+
+class SameOriginRedirectHandler(urllib.request.HTTPRedirectHandler):
+    def __init__(self, start_url: str, allow_private_networks: bool) -> None:
+        super().__init__()
+        self.start_url = start_url
+        self.allow_private_networks = allow_private_networks
+
+    def redirect_request(
+        self,
+        req: urllib.request.Request,
+        fp: Any,
+        code: int,
+        msg: str,
+        headers: Any,
+        newurl: str,
+    ) -> urllib.request.Request | None:
+        candidate = normalize_url(urllib.parse.urljoin(req.full_url, newurl))
+        if not same_origin(candidate, self.start_url):
+            raise urllib.error.HTTPError(candidate, code, "Cross-origin redirect refused", headers, fp)
+        validate_network_url(candidate, self.allow_private_networks)
+        return super().redirect_request(req, fp, code, msg, headers, candidate)
+
+
+def _robot_parser(
+    start_url: str,
+    user_agent: str,
+    open_url: Callable[..., Any] | None = None,
+) -> urllib.robotparser.RobotFileParser:
     parsed = urllib.parse.urlsplit(start_url)
     robots_url = urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, "/robots.txt", "", ""))
     parser = urllib.robotparser.RobotFileParser(robots_url)
     request = urllib.request.Request(robots_url, headers={"User-Agent": user_agent})
+    opener = open_url or urllib.request.urlopen
     try:
-        with urllib.request.urlopen(request, timeout=15) as response:
+        with opener(request, timeout=15) as response:
             parser.parse(response.read().decode("utf-8", errors="replace").splitlines())
     except urllib.error.HTTPError as error:
         if error.code not in {401, 403, 404}:
             raise
         parser.parse(["User-agent: *", "Disallow: /" if error.code in {401, 403} else "Disallow:"])
+    except (urllib.error.URLError, TimeoutError):
+        parser.parse(["User-agent: *", "Disallow: /"])
     return parser
 
 
-def _fetch_url(url: str, user_agent: str, timeout_seconds: float, retries: int, retry_delay_seconds: float) -> dict[str, Any]:
+def _fetch_url(
+    url: str,
+    user_agent: str,
+    timeout_seconds: float,
+    retries: int,
+    retry_delay_seconds: float,
+    max_response_bytes: int = DEFAULT_MAX_RESPONSE_BYTES,
+    start_origin: str | None = None,
+    open_url: Callable[..., Any] | None = None,
+    sleep: Callable[[float], None] = time.sleep,
+) -> dict[str, Any]:
     """Fetch a URL with bounded retries; callers keep the resulting error in the manifest."""
     for attempt in range(retries + 1):
         request = urllib.request.Request(url, headers={"User-Agent": user_agent})
+        opener = open_url or urllib.request.urlopen
         try:
-            with urllib.request.urlopen(request, timeout=timeout_seconds) as response:
+            with opener(request, timeout=timeout_seconds) as response:
+                content_length = response.headers.get("Content-Length")
+                if content_length and int(content_length) > max_response_bytes:
+                    return {"error": "response exceeds maximum size", "error_type": "response-too-large", "attempts": attempt + 1}
+                body = response.read(max_response_bytes + 1)
+                if len(body) > max_response_bytes:
+                    return {"error": "response exceeds maximum size", "error_type": "response-too-large", "attempts": attempt + 1}
+                final_url = normalize_url(response.geturl())
+                if start_origin and not same_origin(final_url, start_origin):
+                    return {"error": "cross-origin redirect refused", "error_type": "cross-origin-redirect", "attempts": attempt + 1}
                 return {
                     "media_type": response.headers.get_content_type(),
                     "charset": response.headers.get_content_charset() or "utf-8",
-                    "body": response.read(),
-                    "final_url": normalize_url(response.geturl()),
+                    "body": body,
+                    "final_url": final_url,
                     "status": response.status,
                     "attempts": attempt + 1,
                 }
@@ -87,7 +159,7 @@ def _fetch_url(url: str, user_agent: str, timeout_seconds: float, retries: int, 
             if attempt == retries:
                 return {"error": str(error), "attempts": attempt + 1}
             if retry_delay_seconds:
-                time.sleep(retry_delay_seconds * (attempt + 1))
+                sleep(retry_delay_seconds * (attempt + 1))
     raise AssertionError("unreachable")
 
 
@@ -104,6 +176,9 @@ def slurp_site(
     timeout_seconds: float = 30,
     retries: int = 1,
     resume: bool = True,
+    max_response_bytes: int = DEFAULT_MAX_RESPONSE_BYTES,
+    allow_private_networks: bool = False,
+    sleep: Callable[[float], None] = time.sleep,
 ) -> dict[str, Any]:
     start_url = normalize_url(start_url)
     if urllib.parse.urlsplit(start_url).scheme not in {"http", "https"}:
@@ -116,11 +191,15 @@ def slurp_site(
         raise ValueError("timeout_seconds must be positive")
     if retries < 0 or retries > 5:
         raise ValueError("retries must be between 0 and 5")
+    if max_response_bytes < 1024 or max_response_bytes > 100 * 1024 * 1024:
+        raise ValueError("max_response_bytes must be between 1024 and 104857600")
+    validate_network_url(start_url, allow_private_networks)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     pages_dir = output_dir / "pages"
     pages_dir.mkdir(exist_ok=True)
-    robots = _robot_parser(start_url, user_agent)
+    opener = urllib.request.build_opener(SameOriginRedirectHandler(start_url, allow_private_networks))
+    robots = _robot_parser(start_url, user_agent, opener.open)
     progress_path = output_dir / "progress.json"
     if resume and progress_path.exists():
         progress = load_json(progress_path)
@@ -146,9 +225,19 @@ def slurp_site(
             _write_progress(output_dir, start_url, pending, queued, visited, records)
             continue
 
-        fetched = _fetch_url(url, user_agent, timeout_seconds, retries, delay_seconds)
+        fetched = _fetch_url(
+            url,
+            user_agent,
+            timeout_seconds,
+            retries,
+            delay_seconds,
+            max_response_bytes=max_response_bytes,
+            start_origin=start_url,
+            open_url=opener.open,
+            sleep=sleep,
+        )
         if "error" in fetched:
-            records.append({"url": url, "status": "error", "error": fetched["error"], "attempts": fetched["attempts"]})
+            records.append({"url": url, "status": "error", "error": fetched["error"], "error_type": fetched.get("error_type", "network"), "attempts": fetched["attempts"]})
             _write_progress(output_dir, start_url, pending, queued, visited, records)
             continue
         media_type = str(fetched["media_type"])
@@ -185,7 +274,7 @@ def slurp_site(
                     pending.append(candidate)
         _write_progress(output_dir, start_url, pending, queued, visited, records)
         if delay_seconds:
-            time.sleep(delay_seconds)
+            sleep(delay_seconds)
 
     manifest = {
         "id": stable_id("web", start_url, utc_now()),
@@ -196,6 +285,8 @@ def slurp_site(
         "delay_seconds": delay_seconds,
         "timeout_seconds": timeout_seconds,
         "retries": retries,
+        "max_response_bytes": max_response_bytes,
+        "allow_private_networks": allow_private_networks,
         "user_agent": user_agent,
         "records": records,
         "truncated": bool(pending),

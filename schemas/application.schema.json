@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "events"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "occurred_at", "details"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "type": {"type": "string", "enum": ["drafted", "submitted", "acknowledged", "interview", "rejected", "offer_received", "withdrawn", "feedback"]},
+          "occurred_at": {"type": "string", "format": "date-time"},
+          "details": {"type": "object"}
+        }
+      }
+    },
+    "updated_at": {"type": "string", "format": "date-time"}
+  }
+}

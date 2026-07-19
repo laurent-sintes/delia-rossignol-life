@@ -8,6 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from delia_life.document_builder import build_documents  # noqa: E402
 from delia_life.repo_workflow import (  # noqa: E402
     assert_publish_ready,
     git_snapshot,
@@ -56,6 +57,7 @@ def main() -> int:
         elif args.command == "review-content":
             emit(review_content(ROOT, args.output, args.host, args.port))
         elif args.command == "preview-start":
+            build_documents(ROOT)
             build_site(ROOT, args.output)
             emit(start_preview(ROOT, args.output.resolve(), args.host, args.port))
         elif args.command == "preview-status":

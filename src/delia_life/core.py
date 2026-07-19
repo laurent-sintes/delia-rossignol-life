@@ -2,14 +2,16 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
-from datetime import datetime, timezone
+import uuid
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 
 def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+    return datetime.now(UTC).replace(microsecond=0).isoformat()
 
 
 def sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str:
@@ -34,11 +36,21 @@ def load_json(path: Path) -> Any:
 
 def write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary = path.with_name(f".{path.name}.{os.getpid()}.{uuid.uuid4().hex}.tmp")
     with temporary.open("w", encoding="utf-8", newline="\n") as handle:
         json.dump(value, handle, ensure_ascii=False, indent=2, sort_keys=True)
         handle.write("\n")
-    temporary.replace(path)
+        handle.flush()
+        os.fsync(handle.fileno())
+    os.replace(temporary, path)
+
+
+def canonical_json_bytes(value: Any) -> bytes:
+    return (json.dumps(value, ensure_ascii=False, separators=(",", ":"), sort_keys=True) + "\n").encode("utf-8")
+
+
+def sha256_json(value: Any) -> str:
+    return hashlib.sha256(canonical_json_bytes(value)).hexdigest()
 
 
 def normalize_terms(values: list[str]) -> set[str]:

@@ -6,21 +6,19 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from .application_plan import write_personal_response_plan
 from .core import load_json, sha256_file, write_json
-from .experience import missing_experience_missions, missing_experience_responsibilities
+from .document_builder import build_documents, check_documents
 from .ingestion import (
-    apply_proposal,
+    apply_proposal_file,
     create_file_manifest,
-    find_duplicate_keys,
-    find_unresolved_duplicate_keys,
     migrate_career_project_entity,
     transition_proposal,
 )
-from .application_plan import write_personal_response_plan
 from .mental_model import load_mental_model, model_impact, model_summary
+from .project_validation import validate_project
 from .recommendation import match_offer, rank_templates
 from .review_batch import create_review_batch, review_batch
-from .schema import validate
 from .site_audit import audit_site
 from .site_builder import build_site
 from .tracking import append_event
@@ -39,48 +37,9 @@ def _print(value: Any) -> None:
 
 
 def command_check(args: argparse.Namespace) -> int:
-    root = args.root.resolve()
-    errors: list[str] = []
-    schema_dir = root / "schemas"
-    schema_by_name = {path.stem.replace(".schema", ""): load_json(path) for path in schema_dir.glob("*.schema.json")}
-    checks = [
-        (root / "data" / "review" / "queue", "proposal"),
-        (root / "data" / "offers", "job-offer"),
-        (root / "private" / "career-project", "career-project"),
-        (root / "templates" / "cv", "template"),
-    ]
-    checked = 0
-    for directory, schema_name in checks:
-        schema = schema_by_name.get(schema_name)
-        if schema is None:
-            errors.append(f"missing schema: {schema_name}")
-            continue
-        for path in directory.rglob("*.json"):
-            checked += 1
-            for message in validate(load_json(path), schema):
-                errors.append(f"{path.relative_to(root)}: {message}")
-
-    queue = [load_json(path) for path in (root / "data" / "review" / "queue").glob("*.json")]
-    for key in find_unresolved_duplicate_keys(queue):
-        errors.append(f"duplicate proposal target: {'/'.join(key)}")
-    experience_root = root / "data" / "knowledge" / "entities"
-    for path, experience_id in missing_experience_missions(experience_root):
-        checked += 1
-        errors.append(f"{path.relative_to(root)}: experience mission is required ({experience_id})")
-    for path, experience_id in missing_experience_responsibilities(experience_root):
-        checked += 1
-        errors.append(f"{path.relative_to(root)}: experience responsibilities are required ({experience_id})")
-    model_manifest = root / "model" / "model.yaml"
-    if model_manifest.exists():
-        try:
-            summary = model_summary(load_mental_model(model_manifest))
-            checked += len(summary["loaded_files"])
-            errors.extend(f"mental model: {message}" for message in summary["errors"])
-        except ValueError as error:
-            errors.append(f"mental model: {error}")
-    result = {"checked_files": checked, "errors": errors, "ok": not errors}
+    result = validate_project(args.root)
     _print(result)
-    return 0 if not errors else 1
+    return 0 if result["ok"] else 1
 
 
 def command_manifest(args: argparse.Namespace) -> int:
@@ -100,9 +59,7 @@ def command_review(args: argparse.Namespace) -> int:
 
 
 def command_apply(args: argparse.Namespace) -> int:
-    proposal = load_json(args.path)
-    updated, entity = apply_proposal(proposal, args.knowledge_root)
-    write_json(args.path, updated)
+    _, entity = apply_proposal_file(args.path, args.knowledge_root)
     _print(entity)
     return 0
 
@@ -162,7 +119,17 @@ def command_track(args: argparse.Namespace) -> int:
 
 
 def command_slurp(args: argparse.Namespace) -> int:
-    manifest = slurp_site(args.url, args.output, args.max_pages, args.delay, timeout_seconds=args.timeout, retries=args.retries, resume=not args.no_resume)
+    manifest = slurp_site(
+        args.url,
+        args.output,
+        args.max_pages,
+        args.delay,
+        timeout_seconds=args.timeout,
+        retries=args.retries,
+        resume=not args.no_resume,
+        max_response_bytes=args.max_bytes,
+        allow_private_networks=args.allow_private_networks,
+    )
     _print({"id": manifest["id"], "records": len(manifest["records"]), "truncated": manifest["truncated"]})
     return 0
 
@@ -170,6 +137,17 @@ def command_slurp(args: argparse.Namespace) -> int:
 def command_build_site(args: argparse.Namespace) -> int:
     _print(build_site(args.root, args.output, args.config))
     return 0
+
+
+def command_build_documents(args: argparse.Namespace) -> int:
+    _print(build_documents(args.root, args.output_dir, args.public_dir))
+    return 0
+
+
+def command_check_documents(args: argparse.Namespace) -> int:
+    result = check_documents(args.root, args.public_dir)
+    _print(result)
+    return 0 if result["ok"] else 1
 
 
 def command_site_audit(args: argparse.Namespace) -> int:
@@ -279,6 +257,8 @@ def build_parser() -> argparse.ArgumentParser:
     slurp.add_argument("--delay", type=float, default=0.5)
     slurp.add_argument("--timeout", type=float, default=30)
     slurp.add_argument("--retries", type=int, default=1)
+    slurp.add_argument("--max-bytes", type=int, default=20 * 1024 * 1024)
+    slurp.add_argument("--allow-private-networks", action="store_true")
     slurp.add_argument("--no-resume", action="store_true")
     slurp.set_defaults(func=command_slurp)
 
@@ -287,6 +267,20 @@ def build_parser() -> argparse.ArgumentParser:
     site.add_argument("--output", type=Path, default=Path("_site"))
     site.add_argument("--config", type=Path)
     site.set_defaults(func=command_build_site)
+
+    documents = subparsers.add_parser("build-documents", help="build deterministic public application documents")
+    documents.add_argument("--root", type=Path, default=Path.cwd())
+    documents.add_argument("--output-dir", type=Path)
+    documents.add_argument("--public-dir", type=Path)
+    documents.set_defaults(func=command_build_documents)
+
+    document_check = subparsers.add_parser(
+        "check-documents",
+        help="verify document reproducibility, content and published freshness",
+    )
+    document_check.add_argument("--root", type=Path, default=Path.cwd())
+    document_check.add_argument("--public-dir", type=Path)
+    document_check.set_defaults(func=command_check_documents)
 
     audit = subparsers.add_parser("site-audit", help="audit the allowlisted public projection")
     audit.add_argument("--root", type=Path, default=Path.cwd())

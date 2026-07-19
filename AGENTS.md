@@ -82,7 +82,7 @@ Un retour employeur est une observation rattachée à une candidature, pas une v
 
 Le fichier `site/publication.json` est la liste blanche de publication. N'ajouter une source ou une clé qu'après validation explicite de son caractère public. Ne jamais publier depuis `private/`, `generated/`, `data/applications/`, `data/offers/`, `data/review/` ou `data/sources/`.
 
-Construire le site avec `python scripts/delia_life.py build-site --output _site`. Inspecter `_site/` avant tout push sur `main`. Le workflow `.github/workflows/pages.yml` teste, valide, construit puis déploie l'artefact par GitHub Actions.
+Générer et contrôler les documents avec `python scripts/delia_life.py build-documents` puis `python scripts/delia_life.py check-documents`. Construire le site avec `python scripts/delia_life.py build-site --output _site`. Inspecter `_site/` avant tout push sur `main`. Le workflow `.github/workflows/pages.yml` régénère les documents, teste, valide, construit puis déploie l'artefact par GitHub Actions.
 
 ## Git, commit et publication
 
@@ -96,7 +96,7 @@ Pour `publish`, vérifier `config/repository.json`, exécuter `python scripts/re
 
 Après toute demande utilisateur qui modifie un contenu visible ou publiable — notamment `data/knowledge/`, `model/`, `templates/`, `site/content/`, `site/assets/` ou les descriptions de skills affichées sur le site — exécuter `python scripts/repo_flow.py review-content`.
 
-Cette commande doit terminer les tests, la validation du modèle et de la base, le build du site et le déploiement local. Communiquer l'URL produite et laisser le serveur actif pour permettre la vérification utilisateur. Lors d'une correction suivante, reconstruire sur le même serveur. Ne l'arrêter qu'à la demande explicite de l'utilisateur. Un commit, une publication ou la fin d'un échange ne sont pas des motifs d'arrêt.
+Cette commande doit régénérer les documents déterministes, terminer les tests, contrôler leur reproductibilité et leur fraîcheur, valider le modèle et la base, construire le site puis assurer le déploiement local. Communiquer l'URL produite et laisser le serveur actif pour permettre la vérification utilisateur. Lors d'une correction suivante, reconstruire sur le même serveur. Ne l'arrêter qu'à la demande explicite de l'utilisateur. Un commit, une publication ou la fin d'un échange ne sont pas des motifs d'arrêt.
 
 Ne pas créer de commit et ne pas publier sur GitHub au titre de cette règle. `commit` et `publish` restent des autorisations explicites séparées.
 
@@ -114,9 +114,12 @@ Ne pas créer de commit et ne pas publier sur GitHub au titre de cette règle. `
 
 Avant de terminer une modification :
 
-1. exécuter `python -m unittest discover -s tests -v`;
-2. exécuter `python scripts/delia_life.py model-check`;
-3. exécuter `python scripts/delia_life.py check`;
-4. pour une modification publiable, exécuter `python scripts/delia_life.py build-site --output _site`;
-5. valider toute skill modifiée avec `quick_validate.py`;
-6. inspecter `git diff`, vérifier que les sources et données métier attendues sont incluses et qu'aucun secret technique ne l'est.
+1. exécuter `python -m ruff check src scripts tests`;
+2. exécuter `python -m mypy`;
+3. exécuter `python -m coverage run -m unittest discover -s tests -v` puis `python -m coverage report`;
+4. exécuter `python scripts/delia_life.py model-check`;
+5. exécuter `python scripts/delia_life.py check`;
+6. exécuter `python scripts/delia_life.py build-documents` puis `python scripts/delia_life.py check-documents`;
+7. pour une modification publiable, exécuter `python scripts/delia_life.py build-site --output _site`;
+8. valider toute skill modifiée avec `quick_validate.py`;
+9. inspecter `git diff`, vérifier que les sources et données métier attendues sont incluses et qu'aucun secret technique ne l'est.

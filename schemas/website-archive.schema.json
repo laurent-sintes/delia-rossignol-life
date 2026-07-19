@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "kind", "start_url", "captured_at", "max_pages", "delay_seconds", "user_agent", "records", "truncated"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "kind": {"const": "website"},
+    "start_url": {"type": "string", "format": "uri"},
+    "captured_at": {"type": "string", "format": "date-time"},
+    "max_pages": {"type": "integer", "minimum": 1, "maximum": 500},
+    "delay_seconds": {"type": "number", "minimum": 0},
+    "timeout_seconds": {"type": "number", "exclusiveMinimum": 0},
+    "retries": {"type": "integer", "minimum": 0, "maximum": 5},
+    "max_response_bytes": {"type": "integer", "minimum": 1024, "maximum": 104857600},
+    "allow_private_networks": {"type": "boolean"},
+    "user_agent": {"type": "string", "minLength": 1},
+    "records": {"type": "array", "items": {"type": "object"}},
+    "truncated": {"type": "boolean"}
+  }
+}

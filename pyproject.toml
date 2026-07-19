@@ -7,7 +7,20 @@ name = "delia-rossignol-life"
 version = "0.1.0"
 description = "Deterministic career knowledge and application tooling"
 requires-python = ">=3.11"
-dependencies = ["PyYAML>=6.0,<7"]
+dependencies = [
+  "jsonschema[format]>=4.23,<5",
+  "Pillow>=11.3,<13",
+  "PyYAML>=6.0,<7",
+  "pypdf>=5,<7",
+  "reportlab>=4.2,<5"
+]
+
+[project.optional-dependencies]
+dev = [
+  "coverage[toml]>=7.6,<8",
+  "mypy>=1.14,<2",
+  "ruff>=0.9,<1"
+]
 
 [project.scripts]
 delia-life = "delia_life.cli:main"
@@ -17,3 +30,40 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 140
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/*.py" = ["E402"]
+"tests/*.py" = ["E402"]
+
+[tool.mypy]
+python_version = "3.11"
+files = ["src/delia_life"]
+check_untyped_defs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+no_implicit_optional = true
+show_error_codes = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unused_configs = true
+
+[tool.coverage.run]
+branch = true
+source = ["src/delia_life"]
+
+[tool.coverage.report]
+fail_under = 75
+show_missing = true
+skip_covered = true
+exclude_also = [
+  "if TYPE_CHECKING:",
+  "raise AssertionError"
+]

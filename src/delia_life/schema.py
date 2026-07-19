@@ -1,44 +1,40 @@
 from __future__ import annotations
 
+import re
 from typing import Any
 
+from jsonschema import Draft202012Validator, FormatChecker
+from jsonschema.exceptions import ValidationError as JsonSchemaValidationError
 
-TYPE_MAP = {
-    "object": dict,
-    "array": list,
-    "string": str,
-    "number": (int, float),
-    "integer": int,
-    "boolean": bool,
-    "null": type(None),
-}
+
+def _path(error: JsonSchemaValidationError, root: str) -> str:
+    result = root
+    for part in error.absolute_path:
+        result += f"[{part}]" if isinstance(part, int) else f".{part}"
+    return result
+
+
+def _message(error: JsonSchemaValidationError, path: str) -> str:
+    if error.validator == "required":
+        match = re.match(r"'(.+)' is a required property", error.message)
+        missing = match.group(1) if match else "?"
+        return f"{path}.{missing}: required property is missing"
+    if error.validator == "type":
+        return f"{path}: expected {error.validator_value}"
+    if error.validator == "enum":
+        return f"{path}: value is not in enum"
+    if error.validator == "minLength":
+        return f"{path}: string is too short"
+    if error.validator == "minimum":
+        return f"{path}: value is below minimum"
+    if error.validator == "maximum":
+        return f"{path}: value is above maximum"
+    return f"{path}: {error.message}"
 
 
 def validate(instance: Any, schema: dict[str, Any], path: str = "$") -> list[str]:
-    errors: list[str] = []
-    expected = schema.get("type")
-    if expected:
-        python_type = TYPE_MAP[expected]
-        if not isinstance(instance, python_type) or expected in {"number", "integer"} and isinstance(instance, bool):
-            return [f"{path}: expected {expected}"]
-    if "enum" in schema and instance not in schema["enum"]:
-        errors.append(f"{path}: value is not in enum")
-    if isinstance(instance, dict):
-        for required in schema.get("required", []):
-            if required not in instance:
-                errors.append(f"{path}.{required}: required property is missing")
-        properties = schema.get("properties", {})
-        for key, value in instance.items():
-            if key in properties:
-                errors.extend(validate(value, properties[key], f"{path}.{key}"))
-    if isinstance(instance, list) and "items" in schema:
-        for index, value in enumerate(instance):
-            errors.extend(validate(value, schema["items"], f"{path}[{index}]"))
-    if isinstance(instance, str) and len(instance) < schema.get("minLength", 0):
-        errors.append(f"{path}: string is too short")
-    if isinstance(instance, (int, float)) and not isinstance(instance, bool):
-        if "minimum" in schema and instance < schema["minimum"]:
-            errors.append(f"{path}: value is below minimum")
-        if "maximum" in schema and instance > schema["maximum"]:
-            errors.append(f"{path}: value is above maximum")
-    return errors
+    """Validate with the declared JSON Schema 2020-12 contract."""
+    Draft202012Validator.check_schema(schema)
+    validator = Draft202012Validator(schema, format_checker=FormatChecker())
+    errors = sorted(validator.iter_errors(instance), key=lambda error: (list(error.absolute_path), error.message))
+    return [_message(error, _path(error, path)) for error in errors]

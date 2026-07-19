@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import hashlib
 import json
-import shutil
 import sys
 import unittest
+import uuid
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -12,8 +12,9 @@ sys.path.insert(0, str(ROOT / "src"))
 TEST_TMP = ROOT / ".test-tmp"
 TEST_TMP.mkdir(exist_ok=True)
 
-from delia_life.core import sha256_file, stable_id
 from delia_life.application_plan import plan_personal_response
+from delia_life.core import load_json, sha256_file, stable_id, write_json
+from delia_life.experience import missing_experience_missions, missing_experience_responsibilities
 from delia_life.ingestion import (
     apply_proposal,
     create_file_manifest,
@@ -21,24 +22,22 @@ from delia_life.ingestion import (
     migrate_career_project_entity,
     transition_proposal,
 )
-from delia_life.review_batch import create_review_batch, review_batch
-from delia_life.experience import missing_experience_missions, missing_experience_responsibilities
 from delia_life.recommendation import match_offer, rank_templates
+from delia_life.review_batch import create_review_batch, review_batch
 from delia_life.schema import validate
+from delia_life.storage import remove_tree
 from delia_life.tracking import append_event
-from delia_life.website import LinkParser, _fetch_url, normalize_url, same_origin
+from delia_life.website import LinkParser, _fetch_url, _robot_parser, normalize_url, same_origin, slurp_site, validate_network_url
 
 
 class CoreTests(unittest.TestCase):
     def setUp(self) -> None:
-        self.work = TEST_TMP / self._testMethodName
-        if self.work.exists():
-            shutil.rmtree(self.work)
+        self.work = TEST_TMP / f"{self._testMethodName}-{uuid.uuid4().hex}"
         self.work.mkdir(parents=True)
 
     def tearDown(self) -> None:
         if self.work.exists():
-            shutil.rmtree(self.work)
+            remove_tree(self.work, ignore_errors=True)
 
     def test_hash_and_manifest_are_stable(self) -> None:
         path = ROOT / "README.md"
@@ -97,6 +96,37 @@ class CoreTests(unittest.TestCase):
         unrelated = {**base, "id": "proposal-unrelated"}
         self.assertEqual(find_unresolved_duplicate_keys([base, unrelated]), [("experience", "example", "chronology")])
 
+    def test_replacement_graph_rejects_branches_and_disconnected_cycles(self) -> None:
+        def proposal(identifier: str, replaces: str | None = None) -> dict[str, object]:
+            result: dict[str, object] = {
+                "id": identifier,
+                "target": {"entity_type": "experience", "entity_id": "same", "field": "mission"},
+            }
+            if replaces:
+                result["replaces_proposal_id"] = replaces
+            return result
+
+        key = [("experience", "same", "mission")]
+        self.assertEqual(
+            find_unresolved_duplicate_keys([proposal("root"), proposal("left", "root"), proposal("right", "root")]),
+            key,
+        )
+        self.assertEqual(
+            find_unresolved_duplicate_keys([proposal("root"), proposal("cycle-a", "cycle-b"), proposal("cycle-b", "cycle-a")]),
+            key,
+        )
+
+    def test_applied_proposal_cannot_be_reopened(self) -> None:
+        proposal = {
+            "id": "proposal-applied",
+            "status": "accepted",
+            "proposed_value": "value",
+            "validated_value": "value",
+            "application": {"applied_at": "2026-07-19T00:00:00+00:00"},
+        }
+        with self.assertRaisesRegex(ValueError, "cannot be reopened"):
+            transition_proposal(proposal, "reopen", "reviewer")
+
     def test_unreviewed_proposal_cannot_be_applied(self) -> None:
         with self.assertRaises(ValueError):
             apply_proposal({"status": "pending"}, self.work)
@@ -113,8 +143,6 @@ class CoreTests(unittest.TestCase):
             "status": "pending",
             "history": [],
         }
-        from delia_life.core import write_json
-
         write_json(queue / "proposal-batch-1.json", proposal)
         batch_path = self.work / "batches" / "lot-1.json"
         batch = create_review_batch({"id": "lot-1", "proposal_ids": ["proposal-batch-1"]}, queue, batch_path)
@@ -125,6 +153,74 @@ class CoreTests(unittest.TestCase):
         saved = json.loads((queue / "proposal-batch-1.json").read_text(encoding="utf-8"))
         self.assertEqual(saved["status"], "accepted")
         self.assertIn("application", saved)
+
+    def test_review_batch_detects_proposal_changes_after_creation(self) -> None:
+        queue = self.work / "queue"
+        proposal = {
+            "id": "proposal-one",
+            "source": {"id": "source-1", "locator": "source#line=1", "evidence": "preuve"},
+            "target": {"entity_type": "experience", "entity_id": "one", "field": "mission"},
+            "classification": "fact",
+            "confidence": 1.0,
+            "proposed_value": "Initial",
+            "status": "pending",
+            "history": [],
+        }
+        proposal_path = queue / "proposal-one.json"
+        write_json(proposal_path, proposal)
+        batch_path = self.work / "batch.json"
+        create_review_batch({"id": "batch-one", "proposal_ids": ["proposal-one"]}, queue, batch_path)
+        changed = load_json(proposal_path)
+        changed["proposed_value"] = "Changed silently"
+        write_json(proposal_path, changed)
+        with self.assertRaisesRegex(ValueError, "changed after batch creation"):
+            review_batch(batch_path, queue, self.work / "knowledge", "accept", "tester", apply=True)
+        self.assertEqual(load_json(batch_path)["status"], "pending")
+        self.assertEqual(load_json(proposal_path)["status"], "pending")
+
+    def test_review_batch_preflights_all_applications_before_writing(self) -> None:
+        queue = self.work / "queue"
+        knowledge = self.work / "knowledge"
+
+        def proposal(identifier: str, entity_id: str, value: str) -> dict[str, object]:
+            return {
+                "id": identifier,
+                "source": {"id": "source-1", "locator": "source#line=1", "evidence": "preuve"},
+                "target": {"entity_type": "experience", "entity_id": entity_id, "field": "mission"},
+                "classification": "fact",
+                "confidence": 1.0,
+                "proposed_value": value,
+                "status": "pending",
+                "history": [],
+            }
+
+        write_json(queue / "proposal-first.json", proposal("proposal-first", "first", "First"))
+        write_json(queue / "proposal-second.json", proposal("proposal-second", "second", "Conflicting"))
+        write_json(
+            knowledge / "experience" / "second.json",
+            {
+                "id": "second",
+                "type": "experience",
+                "fields": {
+                    "mission": {
+                        "value": "Existing validated value",
+                        "provenance": [{"proposal_id": "older"}],
+                    }
+                },
+            },
+        )
+        batch_path = self.work / "batch.json"
+        create_review_batch(
+            {"id": "batch-two", "proposal_ids": ["proposal-first", "proposal-second"]},
+            queue,
+            batch_path,
+        )
+        with self.assertRaisesRegex(ValueError, "Conflicting validated value"):
+            review_batch(batch_path, queue, knowledge, "accept", "tester", apply=True)
+        self.assertFalse((knowledge / "experience" / "first.json").exists())
+        self.assertEqual(load_json(queue / "proposal-first.json")["status"], "pending")
+        self.assertEqual(load_json(queue / "proposal-second.json")["status"], "pending")
+        self.assertEqual(load_json(batch_path)["status"], "pending")
 
     def test_missing_experience_missions_are_reported_deterministically(self) -> None:
         experience_root = self.work / "experience"
@@ -295,13 +391,118 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(parser.links, ["/about", "/logo.png"])
 
     def test_website_fetch_retries_once_then_returns_traceable_error(self) -> None:
-        from unittest.mock import patch
         import urllib.error
+        from unittest.mock import patch
 
         with patch("delia_life.website.urllib.request.urlopen", side_effect=urllib.error.URLError("offline")):
             result = _fetch_url("https://example.com/", "test", 1, 1, 0)
         self.assertEqual(result["attempts"], 2)
         self.assertEqual(result["error"], "<urlopen error offline>")
+
+    def test_website_fetch_rejects_large_responses_and_cross_origin_redirects(self) -> None:
+        from email.message import Message
+        from io import BytesIO
+
+        class Response:
+            def __init__(self, body: bytes, final_url: str, content_length: int | None = None) -> None:
+                self.body = BytesIO(body)
+                self.final_url = final_url
+                self.status = 200
+                self.headers = Message()
+                self.headers["Content-Type"] = "text/html; charset=utf-8"
+                if content_length is not None:
+                    self.headers["Content-Length"] = str(content_length)
+
+            def __enter__(self) -> Response:
+                return self
+
+            def __exit__(self, *args: object) -> None:
+                return None
+
+            def read(self, size: int = -1) -> bytes:
+                return self.body.read(size)
+
+            def geturl(self) -> str:
+                return self.final_url
+
+        oversized = _fetch_url(
+            "https://example.com/",
+            "test",
+            1,
+            0,
+            0,
+            max_response_bytes=1024,
+            open_url=lambda *args, **kwargs: Response(b"", "https://example.com/", 2048),
+        )
+        self.assertEqual(oversized["error_type"], "response-too-large")
+        redirected = _fetch_url(
+            "https://example.com/",
+            "test",
+            1,
+            0,
+            0,
+            start_origin="https://example.com/",
+            open_url=lambda *args, **kwargs: Response(b"page", "https://external.example/page"),
+        )
+        self.assertEqual(redirected["error_type"], "cross-origin-redirect")
+
+    def test_website_network_policy_and_robots_fail_closed(self) -> None:
+        import urllib.error
+        from unittest.mock import patch
+
+        with self.assertRaisesRegex(ValueError, "private or non-global"):
+            validate_network_url("http://127.0.0.1/")
+        with patch("delia_life.website.urllib.request.urlopen", side_effect=urllib.error.URLError("offline")):
+            robots = _robot_parser("https://example.com/", "test")
+        self.assertFalse(robots.can_fetch("test", "https://example.com/page"))
+
+    def test_website_slurp_captures_a_bounded_resumable_archive(self) -> None:
+        from unittest.mock import patch
+
+        class Robots:
+            def can_fetch(self, user_agent: str, url: str) -> bool:
+                return True
+
+        class Opener:
+            def open(self, *args: object, **kwargs: object) -> None:
+                raise AssertionError("fetch is mocked")
+
+        def fetched(url: str, *args: object, **kwargs: object) -> dict[str, object]:
+            if url.endswith("/logo.png"):
+                body, media_type = b"PNG", "image/png"
+            elif url.endswith("/about"):
+                body, media_type = b"<p>About</p>", "text/html"
+            else:
+                body = b'<a href="/about">About</a><img src="/logo.png">'
+                media_type = "text/html"
+            return {
+                "media_type": media_type,
+                "charset": "utf-8",
+                "body": body,
+                "final_url": url,
+                "status": 200,
+                "attempts": 1,
+            }
+
+        output = self.work / "archive"
+        with (
+            patch("delia_life.website.urllib.request.build_opener", return_value=Opener()),
+            patch("delia_life.website._robot_parser", return_value=Robots()),
+            patch("delia_life.website._fetch_url", side_effect=fetched),
+        ):
+            manifest = slurp_site(
+                "http://127.0.0.1/",
+                output,
+                max_pages=3,
+                delay_seconds=0,
+                allow_private_networks=True,
+                sleep=lambda seconds: None,
+            )
+        self.assertEqual(len(manifest["records"]), 3)
+        self.assertFalse(manifest["truncated"])
+        self.assertFalse((output / "progress.json").exists())
+        self.assertTrue((output / "manifest.json").exists())
+        self.assertEqual(len(list((output / "pages").iterdir())), 3)
 
 
 if __name__ == "__main__":

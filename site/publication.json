@@ -306,7 +306,7 @@
               "eyebrow": "2015 — 2018",
               "fields": [
                 {"path": "fields.mission.value", "label": "Mission"},
-                {"path": "fields.responsibilities.value", "label": "Responsabilités"},
+                {"path": "fields.details.value.responsibilities", "label": "Responsabilités"},
                 {"path": "fields.details.value.title", "label": "Fonction"},
                 {"path": "fields.details.value.engagement_type", "label": "Engagement"},
                 {"path": "fields.details.value.capacity_cribs", "label": "Berceaux"},

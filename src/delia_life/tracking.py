@@ -4,7 +4,6 @@ from typing import Any
 
 from .core import stable_id, utc_now
 
-
 EVENT_TYPES = {
     "drafted",
     "submitted",

@@ -15,13 +15,18 @@ Le projet sépare quatre couches : les sources originales, les propositions à v
 
 ## Démarrage
 
-Le cœur déterministe utilise Python 3.11 ou plus récent et PyYAML pour le référentiel conceptuel.
+Le cœur déterministe utilise Python 3.11 ou plus récent. Il gère le référentiel conceptuel, la génération PDF et le site public.
 
 ```powershell
-python -m pip install -e .
-python -m unittest discover -s tests -v
+python -m pip install -e ".[dev]" -c requirements/constraints.txt
+python -m ruff check src scripts tests
+python -m mypy
+python -m coverage run -m unittest discover -s tests -v
+python -m coverage report
 python scripts/delia_life.py model-check
 python scripts/delia_life.py check
+python scripts/delia_life.py build-documents
+python scripts/delia_life.py check-documents
 python scripts/delia_life.py --help
 ```
 
@@ -32,8 +37,12 @@ Les originaux sont déposés dans `private/originals/` et versionnés avec les m
 Le site statique est construit sans dépendance externe depuis `site/publication.json`. Cette liste blanche choisit les fichiers et les clés JSON publiés.
 
 ```powershell
+python scripts/delia_life.py build-documents
+python scripts/delia_life.py check-documents
 python scripts/delia_life.py build-site --output _site
 ```
+
+`build-documents` régénère le CV standard dans `output/pdf/` et dans les téléchargements publics. `check-documents` vérifie sa reproductibilité, son format A4, son contenu obligatoire, l'absence de champs interdits et la fraîcheur du PDF publié. Le build du site régénère également le PDF dans l'artefact Pages.
 
 Le dépôt versionne l'ensemble du dossier métier : sources, archives, offres, candidatures, preuves, manifestes, files de revue, connaissances et documents générés. Ces fichiers sont donc lisibles dans le dépôt public. GitHub Pages n'en publie qu'une projection choisie par `site/publication.json`; `_site/` est régénéré et n'est pas versionné. Un push sur `main` déclenche `.github/workflows/pages.yml`, puisque la source Pages du dépôt est configurée sur GitHub Actions.
 
@@ -52,6 +61,8 @@ python scripts/repo_flow.py publish-check
 ## Principes
 
 Les règles opérationnelles destinées aux agents sont dans `AGENTS.md`. Les workflows Codex sont versionnés sous `.codex/skills/`. Les calculs répétables sont implémentés dans `src/delia_life/` afin d'éviter les décisions implicites et les dépenses de tokens inutiles.
+
+L'architecture Python, ses frontières et ses invariants sont décrits dans `docs/python-architecture.md`.
 
 ## Modèle mental
 

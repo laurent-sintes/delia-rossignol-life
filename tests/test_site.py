@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-import shutil
 import json
 import sys
 import unittest
+import uuid
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT / "src"))
 TEST_TMP = ROOT / ".test-tmp"
 TEST_TMP.mkdir(exist_ok=True)
 
+from delia_life.site_audit import audit_site
 from delia_life.site_builder import (
     build_site,
     markdown_to_html,
@@ -19,19 +20,17 @@ from delia_life.site_builder import (
     render_knowledge_card,
     safe_source,
 )
-from delia_life.site_audit import audit_site
+from delia_life.storage import remove_tree
 
 
 class SiteTests(unittest.TestCase):
     def setUp(self) -> None:
-        self.work = TEST_TMP / self._testMethodName
-        if self.work.exists():
-            shutil.rmtree(self.work)
+        self.work = TEST_TMP / f"{self._testMethodName}-{uuid.uuid4().hex}"
         self.work.mkdir(parents=True)
 
     def tearDown(self) -> None:
         if self.work.exists():
-            shutil.rmtree(self.work)
+            remove_tree(self.work, ignore_errors=True)
 
     def test_publication_rejects_private_and_operational_sources(self) -> None:
         for source in ("private/cv.pdf", "data/applications/a.json", "data/review/queue/a.json"):
@@ -157,8 +156,12 @@ class SiteTests(unittest.TestCase):
 
     def test_build_site_is_repeatable_and_includes_advice(self) -> None:
         output = ROOT / "_site"
+        stale_staging = ROOT / ".runtime" / "site-builds" / f"_site.staging-stale{uuid.uuid4().hex}"
+        stale_staging.mkdir(parents=True)
         first = build_site(ROOT, output)
         second = build_site(ROOT, output)
+        self.assertFalse(stale_staging.exists())
+        self.assertEqual(list(ROOT.glob("._site.staging-*")), [])
         self.assertEqual(first["pages"], second["pages"])
         self.assertEqual(
             set(first["pages"]),
@@ -187,6 +190,19 @@ class SiteTests(unittest.TestCase):
         logo = (output / "assets" / "delia-rossignol-logo.svg").read_text(encoding="utf-8")
         self.assertIn("Délia Rossignol", logo)
         self.assertNotIn("Agenceur", logo)
+
+    def test_failed_site_build_preserves_the_previous_output(self) -> None:
+        output = self.work / "site"
+        build_site(ROOT, output)
+        previous = (output / "index.html").read_bytes()
+        config = json.loads((ROOT / "site" / "publication.json").read_text(encoding="utf-8"))
+        config["pages"][1]["kind"] = "unsupported"
+        config_path = self.work / "invalid-publication.json"
+        config_path.write_text(json.dumps(config), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "Unsupported page kind"):
+            build_site(ROOT, output, config_path)
+        self.assertEqual((output / "index.html").read_bytes(), previous)
+        self.assertTrue((output / ".delia-site-output").exists())
 
 
 if __name__ == "__main__":

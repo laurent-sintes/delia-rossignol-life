@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "id", "status", "template_id", "person_id", "email_contact_id", "phone_contact_id",
+    "profile_signature_id", "tagline", "profile_summary", "photo", "key_skills",
+    "include_signature_strengths", "tools", "experiences", "education", "language_id"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "entityField": {
+      "type": "object",
+      "required": ["entity_type", "entity_id", "field"],
+      "additionalProperties": false,
+      "properties": {
+        "entity_type": {"type": "string", "minLength": 1},
+        "entity_id": {"type": "string", "minLength": 1},
+        "field": {"type": "string", "minLength": 1}
+      }
+    }
+  },
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "status": {"type": "string", "enum": ["draft", "validated", "retired"]},
+    "template_id": {"type": "string", "minLength": 1},
+    "person_id": {"type": "string", "minLength": 1},
+    "email_contact_id": {"type": "string", "minLength": 1},
+    "phone_contact_id": {"type": "string", "minLength": 1},
+    "profile_signature_id": {"type": "string", "minLength": 1},
+    "tagline": {"type": "string", "minLength": 1},
+    "profile_summary": {"type": "string", "minLength": 1},
+    "photo": {"type": "string", "minLength": 1},
+    "key_skills": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["label", "evidence"],
+        "additionalProperties": false,
+        "properties": {
+          "label": {"type": "string", "minLength": 1},
+          "evidence": {"$ref": "#/$defs/entityField"}
+        }
+      }
+    },
+    "include_signature_strengths": {"type": "boolean"},
+    "tools": {"$ref": "#/$defs/entityField"},
+    "experiences": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["entity_id", "group", "heading", "heading_evidence_fields", "bullet_limit"],
+        "additionalProperties": false,
+        "properties": {
+          "entity_id": {"type": "string", "minLength": 1},
+          "group": {"type": "string", "enum": ["recent", "complementary"]},
+          "heading": {"type": "string", "minLength": 1},
+          "heading_evidence_fields": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "bullet_limit": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "education": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["entity_type", "entity_id"],
+        "additionalProperties": false,
+        "properties": {
+          "entity_type": {"type": "string", "enum": ["credential", "education"]},
+          "entity_id": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "language_id": {"type": "string", "minLength": 1}
+  }
+}

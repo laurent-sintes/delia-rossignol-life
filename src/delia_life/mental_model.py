@@ -6,7 +6,6 @@ import sys
 from pathlib import Path
 from typing import Any
 
-
 ID_PATTERN = re.compile(r"^[a-z][a-z0-9-]*$")
 CONCEPT_KINDS = {"entity", "process", "artifact", "event", "assessment", "value_object"}
 PRIVACY_LEVELS = {"public", "private", "mixed"}

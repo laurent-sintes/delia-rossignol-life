@@ -1,0 +1,42 @@
+{
+  "id": "delia-standard-cv-content-v1",
+  "status": "validated",
+  "template_id": "signature-editorial",
+  "person_id": "delia-rossignol",
+  "email_contact_id": "delia-application-email",
+  "phone_contact_id": "delia-personal-phone",
+  "profile_signature_id": "cv-standard-end-to-end",
+  "tagline": "Conseil · Commerce · Gestion de projet",
+  "profile_summary": "Expérience en conseil, commerce, gestion d'activité et conduite de projets sur mesure. Parcours associant entrepreneuriat, management d'équipe et relation client.",
+  "photo": "site/assets/delia-rossignol.avif",
+  "key_skills": [
+    {"label": "Conseil client", "evidence": {"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "mission"}},
+    {"label": "Vente & négociation", "evidence": {"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "responsibilities"}},
+    {"label": "Agencement sur mesure", "evidence": {"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "mission"}},
+    {"label": "Gestion de projet", "evidence": {"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "responsibilities"}},
+    {"label": "Management d'équipe", "evidence": {"entity_type": "experience", "entity_id": "promod-bordeaux", "field": "responsibilities"}},
+    {"label": "Gestion d'activité", "evidence": {"entity_type": "experience", "entity_id": "restaurant-la-maison", "field": "mission"}},
+    {"label": "Conception 3D", "evidence": {"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "responsibilities"}},
+    {"label": "Anglais courant", "evidence": {"entity_type": "language-proficiency", "entity_id": "delia-english", "field": "details"}}
+  ],
+  "include_signature_strengths": true,
+  "tools": {"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "software_proficiency"},
+  "experiences": [
+    {"entity_id": "bleu-rossignol-founder", "group": "recent", "heading": "Fondatrice & conceptrice-agenceuse · BLEU ROSSIGNOL", "heading_evidence_fields": ["titles"], "bullet_limit": 2},
+    {"entity_id": "raison-home-franchisee", "group": "recent", "heading": "Franchisée · Raison Home", "heading_evidence_fields": ["details"], "bullet_limit": 0},
+    {"entity_id": "cuisinella-sainte-eulalie", "group": "recent", "heading": "Concepteur-vendeur · Cuisinella Sainte-Eulalie", "heading_evidence_fields": ["details"], "bullet_limit": 1},
+    {"entity_id": "promod-bordeaux", "group": "recent", "heading": "Responsable adjointe de magasin · Promod, Bordeaux", "heading_evidence_fields": ["details"], "bullet_limit": 1},
+    {"entity_id": "era-entre-deux-mers", "group": "recent", "heading": "Agent immobilier · ERA Entre Deux Mers", "heading_evidence_fields": ["details"], "bullet_limit": 1},
+    {"entity_id": "restaurant-la-maison", "group": "complementary", "heading": "Associée-propriétaire · La Maison, Bordeaux", "heading_evidence_fields": ["details"], "bullet_limit": 1},
+    {"entity_id": "restaurant-le-manoir", "group": "complementary", "heading": "Location-gérance · Le Manoir, Paris", "heading_evidence_fields": ["details"], "bullet_limit": 1},
+    {"entity_id": "sergio-rossi-paris", "group": "complementary", "heading": "Première vendeuse puis responsable de corner · SERGIO ROSSI", "heading_evidence_fields": ["details"], "bullet_limit": 0},
+    {"entity_id": "loreal-luxury-products", "group": "complementary", "heading": "Assistante décor · L'Oréal", "heading_evidence_fields": ["details"], "bullet_limit": 1},
+    {"entity_id": "prada-paris", "group": "complementary", "heading": "Vente au détail · Prada, Paris", "heading_evidence_fields": ["details"], "bullet_limit": 0}
+  ],
+  "education": [
+    {"entity_type": "credential", "entity_id": "esgci-marketing-commerce-2003"},
+    {"entity_type": "education", "entity_id": "raison-home-design-2020"},
+    {"entity_type": "education", "entity_id": "birkbeck-semester-2002"}
+  ],
+  "language_id": "delia-english"
+}
