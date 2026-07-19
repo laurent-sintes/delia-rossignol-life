@@ -1,0 +1,45 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:07:30+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/tresor-des-pirates-treasurer.json"
+  },
+  "classification": "fact",
+  "confidence": 0.98,
+  "history": [
+    {
+      "at": "2026-07-19T17:07:26+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite du lot 5 dans Codex le 19 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q53-parents-association",
+  "proposed_value": {
+    "end_year": 2019,
+    "engagement_type": "bénévole",
+    "focus": "gestion",
+    "organization": "Trésor des pirates",
+    "start_year": 2018,
+    "title": "trésorière"
+  },
+  "source": {
+    "evidence": "Association « Trésor des pirates », année scolaire 2018-2019 [...] bénévole",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q53-Q54"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "tresor-des-pirates-treasurer",
+    "entity_type": "experience",
+    "field": "details"
+  },
+  "validated_value": {
+    "end_year": 2019,
+    "engagement_type": "bénévole",
+    "focus": "gestion",
+    "organization": "Trésor des pirates",
+    "start_year": 2018,
+    "title": "trésorière"
+  }
+}

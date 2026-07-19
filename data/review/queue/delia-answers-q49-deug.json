@@ -1,0 +1,41 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:07:28+00:00",
+    "knowledge_path": "data/knowledge/entities/education/deug-economics-tolbiac.json"
+  },
+  "classification": "fact",
+  "confidence": 0.98,
+  "history": [
+    {
+      "at": "2026-07-19T17:07:24+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite du lot 5 dans Codex le 19 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q49-deug",
+  "proposed_value": {
+    "completion_status": "not_obtained",
+    "institution_label": "Sorbonne - Tolbiac",
+    "program": "DEUG de sciences économiques",
+    "year": 2000
+  },
+  "source": {
+    "evidence": "DEUG suivi non obtenu à 2 point près. Sorbonne : Tolbiac",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q49"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "deug-economics-tolbiac",
+    "entity_type": "education",
+    "field": "details"
+  },
+  "validated_value": {
+    "completion_status": "not_obtained",
+    "institution_label": "Sorbonne - Tolbiac",
+    "program": "DEUG de sciences économiques",
+    "year": 2000
+  }
+}

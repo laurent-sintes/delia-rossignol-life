@@ -1,0 +1,49 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:13:23+00:00",
+    "knowledge_path": "private/career-project/delia-next-role-2026.json"
+  },
+  "classification": "fact",
+  "confidence": 0.98,
+  "history": [
+    {
+      "at": "2026-07-19T17:13:18+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite du lot 6 dans Codex le 19 juillet 2026 ; donnée réservée à l’espace privé.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q74-q76-environment",
+  "proposed_value": {
+    "organization_size": "indifferent",
+    "people_management": "optional",
+    "priorities": [
+      "stabilité",
+      "responsabilité",
+      "autonomie",
+      "travail d’équipe"
+    ]
+  },
+  "source": {
+    "evidence": "Pas forcément envie de manager [...] Tout me va [...] Stabilité, Responsabilité, autonomie, travail d’équipe",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q74-Q76"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-next-role-2026",
+    "entity_type": "career-project",
+    "field": "work_environment"
+  },
+  "validated_value": {
+    "organization_size": "indifferent",
+    "people_management": "optional",
+    "priorities": [
+      "stabilité",
+      "responsabilité",
+      "autonomie",
+      "travail d’équipe"
+    ]
+  }
+}

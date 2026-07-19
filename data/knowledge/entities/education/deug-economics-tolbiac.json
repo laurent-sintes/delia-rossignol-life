@@ -1,0 +1,23 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:07:28+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q49",
+          "proposal_id": "proposal-delia-q49-deug",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "completion_status": "not_obtained",
+        "institution_label": "Sorbonne - Tolbiac",
+        "program": "DEUG de sciences économiques",
+        "year": 2000
+      }
+    }
+  },
+  "id": "deug-economics-tolbiac",
+  "type": "education",
+  "updated_at": "2026-07-19T17:07:28+00:00"
+}

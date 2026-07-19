@@ -1,0 +1,31 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T18:23:43+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/prada-paris.json"
+  },
+  "classification": "inference",
+  "confidence": 0.95,
+  "history": [
+    {
+      "at": "2026-07-19T18:23:08+00:00",
+      "from": "pending",
+      "note": "Validation des missions dans Codex le 19 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-mission-prada-retail",
+  "proposed_value": "Assurer une mission de vente au détail auprès d'une clientèle nationale et internationale chez Prada.",
+  "source": {
+    "evidence": "Chez Prada et Sergio Rossi, Délia intervenait auprès d'une clientèle nationale et internationale.",
+    "id": "src-9c71ac18ce41e561",
+    "locator": "precision-clientele-nationale-internationale-prada-sergio-2026-07-19.txt#P01"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "prada-paris",
+    "entity_type": "experience",
+    "field": "mission"
+  },
+  "validated_value": "Assurer une mission de vente au détail auprès d'une clientèle nationale et internationale chez Prada."
+}

@@ -14,11 +14,11 @@ description: Tester, prévisualiser, committer et publier les changements du dé
 
 ## Action `commit`
 
-1. Lire `AGENTS.md` puis inspecter `git status --short` et les diffs. Exclure tout original, secret ou fichier privé.
+1. Lire `AGENTS.md` puis inspecter `git status --short` et les diffs. Inclure les originaux, archives, données de travail et productions métier concernés; exclure uniquement les secrets techniques, caches, temporaires et `_site/`.
 2. Si la revue locale n'est pas déjà à jour, exécuter `python scripts/repo_flow.py prepare-commit`. Ne pas reproduire manuellement les tests, le build ou le démarrage du serveur.
 3. Communiquer l'URL locale produite et, si le navigateur intégré est disponible, l'ouvrir pour inspection.
 4. Attendre la validation visuelle de l'utilisateur avant le commit. Ne pas confondre la demande initiale de préparation avec l'approbation du rendu.
-5. Après validation, sélectionner explicitement les fichiers concernés avec `git add`; ne jamais utiliser une sélection aveugle si des changements hors périmètre existent.
+5. Après validation, sélectionner explicitement les fichiers concernés avec `git add`; vérifier que les données métier nécessaires à un clone autonome sont présentes et qu'aucun secret technique n'est inclus.
 6. Inspecter `git diff --cached`, proposer un message concis si aucun n'est fourni, puis exécuter `git commit`.
 7. Exécuter `python scripts/repo_flow.py preview-stop` après le commit, sauf si l'utilisateur souhaite garder l'aperçu ouvert.
 

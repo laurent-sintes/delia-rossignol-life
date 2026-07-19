@@ -14,9 +14,11 @@ Construire un dossier de carrière fiable et traçable pour Délia Rossignol, pu
 6. Préserver l'historique des décisions de validation. Ne pas réécrire silencieusement un événement passé.
 7. Signaler les doublons et contradictions au lieu de choisir arbitrairement.
 8. Séparer le contenu validé, la stratégie éditoriale et le rendu graphique.
-9. Garder les originaux sensibles, secrets et productions temporaires hors de Git.
+9. Versionner dans Git les originaux, données de travail, productions documentaires et historiques métier. Garder uniquement les secrets techniques, caches et fichiers temporaires hors de Git.
 10. Favoriser le français pour les contenus destinés à Délia; conserver les identifiants et interfaces techniques en anglais.
-11. Considérer que tout fichier non ignoré est public. `data/knowledge/` ne doit contenir qu'une projection assumée comme publiable.
+11. Considérer que tout fichier committé est lisible dans le dépôt GitHub public. La visibilité sur GitHub Pages reste une décision distincte, contrôlée par `site/publication.json`.
+12. Toute expérience validée doit comporter une `mission` explicite, courte et sourcée. Si elle manque, la signaler; ne jamais la déduire des responsabilités ou de l'intitulé.
+13. Toute expérience validée doit comporter des `responsibilities` explicites, sourcées et non vides. Si elles manquent, les signaler; ne jamais les déduire de la mission, du titre ou des résultats.
 
 ## Répartition IA / Python
 
@@ -56,7 +58,7 @@ Ne jamais modifier une cardinalité ou un identifiant silencieusement. Conserver
 
 Pour un site, rester sur le même domaine, respecter `robots.txt`, limiter le débit et le nombre de pages, dater la capture et exclure les scripts de suivi. Archiver le brut dans `private/website-archives/`.
 
-Le dépôt GitHub étant public, conserver les offres, candidatures, feedbacks détaillés, manifestes réels et propositions de revue uniquement dans les emplacements ignorés par Git. Ne jamais supposer que l'absence d'une donnée dans GitHub Pages la rend privée : un fichier committé reste lisible dans le dépôt.
+Versionner les originaux, archives, offres, candidatures, feedbacks, manifestes, propositions et décisions de revue afin qu'un clone du dépôt suffise à poursuivre le travail. Le nom `private/` signifie « exclu de GitHub Pages et des documents publics par défaut », pas « exclu de Git ». Ne jamais y stocker de mot de passe, jeton, clé privée, cookie d'authentification ou fichier `.env`.
 
 ## Workflow de candidature
 
@@ -86,7 +88,7 @@ Construire le site avec `python scripts/delia_life.py build-site --output _site`
 
 Utiliser `$manage-delia-git` pour les commandes utilisateur `commit` et `publish`.
 
-Pour `commit`, exécuter `python scripts/repo_flow.py prepare-commit`, communiquer l'URL de prévisualisation et attendre la validation visuelle avant de mettre en index et committer. Inspecter le diff indexé et ne jamais inclure de donnée privée.
+Pour `commit`, exécuter `python scripts/repo_flow.py prepare-commit`, communiquer l'URL de prévisualisation et attendre la validation visuelle avant de mettre en index et committer. Inspecter le diff indexé, inclure les données métier utiles à la reproductibilité et exclure tout secret technique ou fichier temporaire.
 
 Pour `publish`, vérifier `config/repository.json`, exécuter `python scripts/repo_flow.py publish-check`, puis pousser uniquement vers le remote et la branche configurés. Ne jamais forcer un push, fusionner ou réécrire l'historique implicitement.
 
@@ -117,4 +119,4 @@ Avant de terminer une modification :
 3. exécuter `python scripts/delia_life.py check`;
 4. pour une modification publiable, exécuter `python scripts/delia_life.py build-site --output _site`;
 5. valider toute skill modifiée avec `quick_validate.py`;
-6. inspecter `git diff` et ne pas inclure d'original sensible.
+6. inspecter `git diff`, vérifier que les sources et données métier attendues sont incluses et qu'aucun secret technique ne l'est.

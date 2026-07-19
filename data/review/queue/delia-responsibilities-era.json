@@ -1,0 +1,37 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T18:38:53+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/era-entre-deux-mers.json"
+  },
+  "classification": "fact",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-19T18:38:53+00:00",
+      "from": "pending",
+      "note": "Validation des responsabilités dans Codex le 19 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-responsibilities-era",
+  "proposed_value": [
+    "Réaliser environ 20 estimations immobilières par mois.",
+    "Gérer 3 mandats immobiliers."
+  ],
+  "source": {
+    "evidence": "Laurent valide les responsabilités proposées pour les six expériences restantes. ERA : réaliser environ 20 estimations immobilières par mois et gérer 3 mandats immobiliers.",
+    "id": "src-a9315033eec20535",
+    "locator": "validation-responsabilites-experiences-restantes-2026-07-19.txt#P02"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "era-entre-deux-mers",
+    "entity_type": "experience",
+    "field": "responsibilities"
+  },
+  "validated_value": [
+    "Réaliser environ 20 estimations immobilières par mois.",
+    "Gérer 3 mandats immobiliers."
+  ]
+}

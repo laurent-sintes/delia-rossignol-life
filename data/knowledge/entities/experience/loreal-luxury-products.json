@@ -1,0 +1,71 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:04:17+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q42-Q43",
+          "proposal_id": "proposal-delia-q42-q43-loreal",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "contract_type": "CDD",
+        "end_year": 2006,
+        "projects": [
+          "repackaging Biotherm",
+          "lancement Flowerbomb de Viktor & Rolf",
+          "lancement Amor Amor",
+          "repackaging Anaïs Anaïs"
+        ],
+        "role_description": "assistante d’un ingénieur développeur pour le repackaging des gammes et les lancements produit",
+        "start_year": 2004,
+        "title": "assistante décor"
+      }
+    },
+    "flowerbomb_context": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T16:44:43+00:00",
+          "locator": "precisions-delia-questionnaire-2026-07-19.txt#P05",
+          "proposal_id": "proposal-delia-clarification-loreal-viktor-rolf-license",
+          "source_id": "src-ac05324b7ceafdce"
+        }
+      ],
+      "value": {
+        "brand": "Viktor & Rolf",
+        "license_holder": "L'Oréal",
+        "project": "Flowerbomb",
+        "within_delia_scope": true
+      }
+    },
+    "mission": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:23:41+00:00",
+          "locator": "validation-missions-experiences-2026-07-19.txt#P08",
+          "proposal_id": "proposal-delia-mission-loreal",
+          "source_id": "src-db65a2ba5207c61f"
+        }
+      ],
+      "value": "Accompagner le développement des packagings et les lancements de produits au sein du service développement."
+    },
+    "responsibilities": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:38:55+00:00",
+          "locator": "validation-responsabilites-experiences-restantes-2026-07-19.txt#P03",
+          "proposal_id": "proposal-delia-responsibilities-loreal",
+          "source_id": "src-a9315033eec20535"
+        }
+      ],
+      "value": [
+        "Assister un ingénieur développeur sur le repackaging des gammes et les lancements de produits.",
+        "Contribuer aux projets de repackaging Biotherm et Anaïs Anaïs ainsi qu’aux lancements Flowerbomb et Amor Amor."
+      ]
+    }
+  },
+  "id": "loreal-luxury-products",
+  "type": "experience",
+  "updated_at": "2026-07-19T18:38:55+00:00"
+}

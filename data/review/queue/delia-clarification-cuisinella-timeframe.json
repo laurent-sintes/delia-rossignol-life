@@ -1,0 +1,41 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T16:44:41+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/cuisinella-sainte-eulalie.json"
+  },
+  "classification": "fact",
+  "confidence": 0.99,
+  "history": [
+    {
+      "at": "2026-07-19T16:44:39+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite dans Codex le 19 juillet 2026 : J’accepte ces 7 corrections",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-clarification-cuisinella-timeframe",
+  "proposed_value": {
+    "end_date": "2020-07",
+    "end_precision": "month",
+    "start_date": "2019-03",
+    "start_precision": "month"
+  },
+  "source": {
+    "evidence": "Conserver les dates du CV : mars 2019 à juillet 2020.",
+    "id": "src-ac05324b7ceafdce",
+    "locator": "precisions-delia-questionnaire-2026-07-19.txt#P02"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "cuisinella-sainte-eulalie",
+    "entity_type": "experience",
+    "field": "timeframe"
+  },
+  "validated_value": {
+    "end_date": "2020-07",
+    "end_precision": "month",
+    "start_date": "2019-03",
+    "start_precision": "month"
+  }
+}

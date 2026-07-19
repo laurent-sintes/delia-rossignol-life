@@ -1,0 +1,31 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T18:23:25+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/bleu-rossignol-founder.json"
+  },
+  "classification": "inference",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-19T18:22:31+00:00",
+      "from": "pending",
+      "note": "Validation des missions dans Codex le 19 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-mission-bleu-rossignol",
+  "proposed_value": "Piloter de bout en bout des projets d’agencement sur mesure, de l’analyse du besoin client à la réception du chantier.",
+  "source": {
+    "evidence": "Piloter de bout en bout des projets d’agencement sur mesure, de l’analyse du besoin client à la réception du chantier.",
+    "id": "src-db65a2ba5207c61f",
+    "locator": "validation-missions-experiences-2026-07-19.txt#P01"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "bleu-rossignol-founder",
+    "entity_type": "experience",
+    "field": "mission"
+  },
+  "validated_value": "Piloter de bout en bout des projets d’agencement sur mesure, de l’analyse du besoin client à la réception du chantier."
+}

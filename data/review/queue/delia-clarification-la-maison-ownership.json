@@ -1,0 +1,43 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T16:44:42+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/restaurant-la-maison.json"
+  },
+  "classification": "fact",
+  "confidence": 0.99,
+  "history": [
+    {
+      "at": "2026-07-19T16:44:40+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite dans Codex le 19 juillet 2026 : J’accepte ces 7 corrections",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-clarification-la-maison-ownership",
+  "proposed_value": {
+    "employee": false,
+    "roles": [
+      "associée",
+      "propriétaire"
+    ]
+  },
+  "source": {
+    "evidence": "Délia était associée/propriétaire de La Maison, et non responsable salariée.",
+    "id": "src-ac05324b7ceafdce",
+    "locator": "precisions-delia-questionnaire-2026-07-19.txt#P03"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "restaurant-la-maison",
+    "entity_type": "experience",
+    "field": "engagement_type"
+  },
+  "validated_value": {
+    "employee": false,
+    "roles": [
+      "associée",
+      "propriétaire"
+    ]
+  }
+}

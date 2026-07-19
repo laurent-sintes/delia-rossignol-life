@@ -1,0 +1,51 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:07:29+00:00",
+    "knowledge_path": "data/knowledge/entities/language-proficiency/delia-english.json"
+  },
+  "classification": "fact",
+  "confidence": 0.97,
+  "history": [
+    {
+      "at": "2026-07-19T17:07:25+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite du lot 5 dans Codex le 19 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q50-english",
+  "proposed_value": {
+    "language": "anglais",
+    "professional_use": [
+      "Prada",
+      "Sergio Rossi"
+    ],
+    "reading_level": "courant",
+    "self_assessed": true,
+    "speaking_level": "courant",
+    "writing_level": "intermédiaire"
+  },
+  "source": {
+    "evidence": "Oral : courant [...] Lecture : courant [...] Ecrit : intermédiaire [...] chez PRADA et SERGIO ROSSI",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q50"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-english",
+    "entity_type": "language-proficiency",
+    "field": "details"
+  },
+  "validated_value": {
+    "language": "anglais",
+    "professional_use": [
+      "Prada",
+      "Sergio Rossi"
+    ],
+    "reading_level": "courant",
+    "self_assessed": true,
+    "speaking_level": "courant",
+    "writing_level": "intermédiaire"
+  }
+}

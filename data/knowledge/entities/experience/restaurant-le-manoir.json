@@ -1,0 +1,50 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:01:28+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q30-Q37",
+          "proposal_id": "proposal-delia-q30-q37-le-manoir",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "activity": "brasserie",
+        "covers_per_day": 100,
+        "end_date": "2012-09",
+        "engagement_type": "location-gérance avec époux",
+        "location": "7 rue des Moines, 75017 Paris",
+        "start_date": "2008-10"
+      }
+    },
+    "mission": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:23:39+00:00",
+          "locator": "validation-missions-experiences-2026-07-19.txt#P07",
+          "proposal_id": "proposal-delia-mission-le-manoir",
+          "source_id": "src-db65a2ba5207c61f"
+        }
+      ],
+      "value": "Exploiter une brasserie en location-gérance."
+    },
+    "responsibilities": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:38:58+00:00",
+          "locator": "validation-responsabilites-experiences-restantes-2026-07-19.txt#P06",
+          "proposal_id": "proposal-delia-responsibilities-le-manoir",
+          "source_id": "src-a9315033eec20535"
+        }
+      ],
+      "value": [
+        "Assurer l’exploitation quotidienne d’une brasserie en location-gérance.",
+        "Participer à l’exploitation d’un établissement accueillant environ 100 couverts par jour."
+      ]
+    }
+  },
+  "id": "restaurant-le-manoir",
+  "type": "experience",
+  "updated_at": "2026-07-19T18:38:58+00:00"
+}

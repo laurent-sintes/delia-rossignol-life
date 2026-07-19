@@ -1,0 +1,65 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T16:56:14+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/bleu-rossignol-founder.json"
+  },
+  "classification": "fact",
+  "confidence": 0.98,
+  "history": [
+    {
+      "at": "2026-07-19T16:56:05+00:00",
+      "from": "pending",
+      "note": "Validation du lot 2 dans Codex le 19 juillet 2026. Publication des points 5 et 10 explicitement autorisée ; niveau logiciel expert précisé par src-1bea0744e58ace98.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q07-responsibilities",
+  "proposed_value": [
+    "analyse du besoin client",
+    "relevé de mesures et prise de cotes",
+    "conception fonctionnelle",
+    "choix esthétique",
+    "rendus 3D",
+    "plans techniques d’exécution",
+    "chiffrage et devis",
+    "négociation commerciale",
+    "commande fabricants",
+    "planification",
+    "coordination des artisans",
+    "suivi de chantier",
+    "contrôle de la pose",
+    "réception du chantier",
+    "gestion des réclamations",
+    "facturation"
+  ],
+  "source": {
+    "evidence": "OUI [...] facturation, comptabilité sous traitée à un cabinet comptable",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q07"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "bleu-rossignol-founder",
+    "entity_type": "experience",
+    "field": "responsibilities"
+  },
+  "validated_value": [
+    "analyse du besoin client",
+    "relevé de mesures et prise de cotes",
+    "conception fonctionnelle",
+    "choix esthétique",
+    "rendus 3D",
+    "plans techniques d’exécution",
+    "chiffrage et devis",
+    "négociation commerciale",
+    "commande fabricants",
+    "planification",
+    "coordination des artisans",
+    "suivi de chantier",
+    "contrôle de la pose",
+    "réception du chantier",
+    "gestion des réclamations",
+    "facturation"
+  ]
+}

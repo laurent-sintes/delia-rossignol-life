@@ -1,0 +1,35 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T18:36:58+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/prada-paris.json"
+  },
+  "classification": "fact",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-19T18:36:58+00:00",
+      "from": "pending",
+      "note": "Validation des responsabilités dans Codex le 19 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-responsibilities-prada",
+  "proposed_value": [
+    "Assurer la vente au détail et le conseil auprès d’une clientèle nationale et internationale dans les boutiques de la rue de Grenelle et de l’avenue Montaigne."
+  ],
+  "source": {
+    "evidence": "La vente au détail auprès d'une clientèle nationale et internationale dans les boutiques de la rue de Grenelle et de l'avenue Montaigne forme une seule responsabilité.",
+    "id": "src-d8fb610cf9ef9843",
+    "locator": "precision-responsabilites-prada-tresor-2026-07-19.txt#P01"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "prada-paris",
+    "entity_type": "experience",
+    "field": "responsibilities"
+  },
+  "validated_value": [
+    "Assurer la vente au détail et le conseil auprès d’une clientèle nationale et internationale dans les boutiques de la rue de Grenelle et de l’avenue Montaigne."
+  ]
+}

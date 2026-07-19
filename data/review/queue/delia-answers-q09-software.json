@@ -1,0 +1,39 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T16:56:15+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/bleu-rossignol-founder.json"
+  },
+  "classification": "claim",
+  "confidence": 0.92,
+  "history": [
+    {
+      "at": "2026-07-19T16:56:06+00:00",
+      "from": "pending",
+      "note": "Validation du lot 2 dans Codex le 19 juillet 2026. Publication des points 5 et 10 explicitement autorisée ; niveau logiciel expert précisé par src-1bea0744e58ace98.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q09-software",
+  "proposed_value": [
+    "Winner",
+    "Gesteos",
+    "InSitu"
+  ],
+  "source": {
+    "evidence": "Winner, Gesteos, In Situ",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q09"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "bleu-rossignol-founder",
+    "entity_type": "experience",
+    "field": "software"
+  },
+  "validated_value": [
+    "Winner",
+    "Gesteos",
+    "InSitu"
+  ]
+}

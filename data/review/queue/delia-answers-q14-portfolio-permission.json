@@ -1,0 +1,31 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T16:56:17+00:00",
+    "knowledge_path": "data/knowledge/entities/style-profile/delia-rossignol.json"
+  },
+  "classification": "fact",
+  "confidence": 0.99,
+  "history": [
+    {
+      "at": "2026-07-19T16:56:08+00:00",
+      "from": "pending",
+      "note": "Validation du lot 2 dans Codex le 19 juillet 2026. Publication des points 5 et 10 explicitement autorisée ; niveau logiciel expert précisé par src-1bea0744e58ace98.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q14-portfolio-permission",
+  "proposed_value": false,
+  "source": {
+    "evidence": "Non je ne le souhaite pas.",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q14"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-rossignol",
+    "entity_type": "style-profile",
+    "field": "portfolio_reuse_allowed"
+  },
+  "validated_value": false
+}

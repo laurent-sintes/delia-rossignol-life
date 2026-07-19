@@ -1,0 +1,222 @@
+{
+  "captured_at": "2026-07-19T18:45:20+00:00",
+  "delay_seconds": 0.5,
+  "id": "web-aee479446e3d5462",
+  "kind": "website",
+  "max_pages": 50,
+  "records": [
+    {
+      "final_url": "https://www.delia-rossignol.fr/",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/6bd99b8c55f4e303ca55.html",
+      "sha256": "aae5798e802ad7a52b7543a9fb5a1b1e3d8758806fcb1a42bff033e0d9be55ea",
+      "size_bytes": 951057,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/blog-feed.xml",
+      "http_status": 200,
+      "media_type": "text/xml",
+      "path": "pages/f446d388aa1198fb57df.xml",
+      "sha256": "0a85afcd08e3a7b4ab5006056411c366f065464075006ae83d5324e48a692765",
+      "size_bytes": 1901,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/blog-feed.xml"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/mes-r%C3%A9alisations",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/5647399c14c1879642dd.html",
+      "sha256": "4f903bf9af3fdd6def786ddbbe0842da5c32f78286287042b9c34aaa7afe2666",
+      "size_bytes": 791943,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/mes-r%C3%A9alisations"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/blog",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/ff78ecf7c941b119826f.html",
+      "sha256": "594f9682ba853edeffa3776149cc4b2498e2f4ec2da8d33b0e938390e41a80ba",
+      "size_bytes": 942085,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/blog"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/faq",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/7525c329b46373981fc3.html",
+      "sha256": "bd485a2090da4b264238ffbfe00784baab6c3e6873ba69bd8cb9f1153365f0a2",
+      "size_bytes": 1120210,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/faq"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/politique-de-cookies",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/410bc6bc19b9800b6b22.html",
+      "sha256": "32dbbcfe6446d2f4a87ee744c8e006025245dd35bf6b1ddc7fdf4c62ccfaf18b",
+      "size_bytes": 725384,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/politique-de-cookies"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/mentions-l%C3%A9gales",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/d2505a84688041eb9959.html",
+      "sha256": "9bbaa30c3e5f71002134d8742c7a379a5739bb56a9d6cee380e500e3877a1eba",
+      "size_bytes": 716153,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/mentions-l%C3%A9gales"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/projets/boutique-bordeaux-centre",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/da1ec3e65feba2ff80bb.html",
+      "sha256": "feb2627ed679ab88b00fdd9fc6f73f617e1e49069cb30b169a162c381dce0e90",
+      "size_bytes": 940046,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/projets/boutique-bordeaux-centre"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/projets/chambre-d'enfant-sous-pente",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/1916ef866c0166b34348.html",
+      "sha256": "bfac83608e74b137d0ca27985b51dc8118c66c1255c101966fad1deae366fc68",
+      "size_bytes": 917701,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/projets/chambre-d'enfant-sous-pente"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/projets/bureau-sur-mesure",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/0eab9c9a20192e95218f.html",
+      "sha256": "b5332dd47c9351af2ad15fdf66681ce6d9375667f7d75c0e97494b8caacf4611",
+      "size_bytes": 917242,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/projets/bureau-sur-mesure"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/projets/biblioth%C3%A8que-de-salon",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/e84502d88eafd2222df1.html",
+      "sha256": "327af4600bbfe124a481c269640d0e2b680c36e4421145783d9a4320e68045e0",
+      "size_bytes": 917697,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/projets/biblioth%C3%A8que-de-salon"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/projets/placard-d'entr%C3%A9e-sur-mesure-avec-niche-%C3%A9clair%C3%A9e",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/0798afec967146f88be5.html",
+      "sha256": "dff3dfdd2fcf056ec1719c36b982148ad8ac7f0b402bd22e9f9fde9f503f998d",
+      "size_bytes": 916775,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/projets/placard-d'entr%C3%A9e-sur-mesure-avec-niche-%C3%A9clair%C3%A9e"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/projets/meuble-tv-sur-mesure",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/86311a9628586f97d3d6.html",
+      "sha256": "7d8acdb10923d9bdcbfafd7c2340ae9957d1e8801fb1a0c6b7afccea0be3d7d9",
+      "size_bytes": 914878,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/projets/meuble-tv-sur-mesure"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/projets/cuisine-ouverte-avec-%C3%AElot-central",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/17450cd9286861532b7c.html",
+      "sha256": "d6adab414b3a01150fe921901a51798c64ba3f92ad3ba2d1e7d7b49443e38dad",
+      "size_bytes": 930571,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/projets/cuisine-ouverte-avec-%C3%AElot-central"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/projets/dressing-suite-parentale",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/df39a77b9042350d9100.html",
+      "sha256": "1eb458efec343d8733d531a374f0bf4d39f282f6179e1dce60ac75a27ae98aab",
+      "size_bytes": 926767,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/projets/dressing-suite-parentale"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/projets/buanderie-sur-mesure",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/756725ac8f2fbea29095.html",
+      "sha256": "0053793d772977217890c1bfde25b867e71e54f252c713f0e8509702e3b837a5",
+      "size_bytes": 917836,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/projets/buanderie-sur-mesure"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/mes-r%C3%A9alisations?comp-koimr3ig_page=2",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/12a4934e85e24f29cc6b.html",
+      "sha256": "d31acc5c03280e73965c2bca341d449f7081015716332449076bfccb6b91f4a7",
+      "size_bytes": 772725,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/mes-r%C3%A9alisations?comp-koimr3ig_page=2"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/projets/cuisine-avec-%C3%AElot",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/d2f4cff1e014a85dffd3.html",
+      "sha256": "29dc16a4d275dfc8921c40a8a39fadbad5694177968b7b141e199fde11c336a6",
+      "size_bytes": 933452,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/projets/cuisine-avec-%C3%AElot"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/post/le-compact-l-alternative-%C3%A0-la-pierre-en-mieux",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/6c64b554ad41b68e7a36.html",
+      "sha256": "a6093ca3bebe2861383e6d464aba9e2e0ce89ec5d61c7a9d1f0e31879bcae8e7",
+      "size_bytes": 1261830,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/post/le-compact-l-alternative-%C3%A0-la-pierre-en-mieux"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/profile/3467212b-32ae-4d68-8ea3-adbb7d78df09/profile",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/929feb35fd4e0deffa76.html",
+      "sha256": "3fda89b2fa9e3bafe0d787b4e3bceb15c2fbcc2028cf397583f94082d45ab735",
+      "size_bytes": 1137830,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/profile/3467212b-32ae-4d68-8ea3-adbb7d78df09/profile"
+    },
+    {
+      "final_url": "https://www.delia-rossignol.fr/post/nouveau-site-nouvelle-approche",
+      "http_status": 200,
+      "media_type": "text/html",
+      "path": "pages/4a8b6af8919b9850e28e.html",
+      "sha256": "2d404b9c87faca3e463cba6e9ee46a79b69b6b3c9cb3762051fade711688df75",
+      "size_bytes": 1163539,
+      "status": "captured",
+      "url": "https://www.delia-rossignol.fr/post/nouveau-site-nouvelle-approche"
+    }
+  ],
+  "start_url": "https://www.delia-rossignol.fr/",
+  "truncated": false,
+  "user_agent": "DeliaCareerArchive/0.1"
+}

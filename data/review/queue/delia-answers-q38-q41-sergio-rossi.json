@@ -1,0 +1,55 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:04:16+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/sergio-rossi-paris.json"
+  },
+  "classification": "fact",
+  "confidence": 0.96,
+  "history": [
+    {
+      "at": "2026-07-19T17:04:14+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite du lot 4 dans Codex le 19 juillet 2026, incluant la publication du résultat déclaré de 150 %.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q38-q41-sergio-rossi",
+  "proposed_value": {
+    "direct_reports": 0,
+    "employer": "Sergio Rossi / Gucci Group",
+    "opening_responsibility": true,
+    "responsibilities": [
+      "stock",
+      "objectif commercial"
+    ],
+    "roles": [
+      "première vendeuse",
+      "responsable de corner"
+    ]
+  },
+  "source": {
+    "evidence": "Sergio Rossi / Gucci Group [...] lancé l’ouverture [...] objectifs dépassés (150% au premier trimestre)",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q38-Q41"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "sergio-rossi-paris",
+    "entity_type": "experience",
+    "field": "details"
+  },
+  "validated_value": {
+    "direct_reports": 0,
+    "employer": "Sergio Rossi / Gucci Group",
+    "opening_responsibility": true,
+    "responsibilities": [
+      "stock",
+      "objectif commercial"
+    ],
+    "roles": [
+      "première vendeuse",
+      "responsable de corner"
+    ]
+  }
+}

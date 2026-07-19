@@ -1,0 +1,43 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T16:49:37+00:00",
+    "knowledge_path": "private/knowledge/contact-point/delia-application-email.json"
+  },
+  "classification": "fact",
+  "confidence": 0.99,
+  "history": [
+    {
+      "at": "2026-07-19T16:49:35+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite du lot 1 dans Codex le 19 juillet 2026",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q57-email",
+  "proposed_value": {
+    "kind": "email",
+    "professional_company_email_retiring": true,
+    "usage": "job_applications",
+    "value": "deliarossignol@gmail.com",
+    "visibility": "application_only"
+  },
+  "source": {
+    "evidence": "Candidatures : deliarossignol@gmail.com. L’adresse professionnelle disparaitra.",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q57"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-application-email",
+    "entity_type": "contact-point",
+    "field": "details"
+  },
+  "validated_value": {
+    "kind": "email",
+    "professional_company_email_retiring": true,
+    "usage": "job_applications",
+    "value": "deliarossignol@gmail.com",
+    "visibility": "application_only"
+  }
+}

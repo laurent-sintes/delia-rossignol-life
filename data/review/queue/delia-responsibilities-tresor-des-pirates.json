@@ -1,0 +1,35 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T18:36:59+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/tresor-des-pirates-treasurer.json"
+  },
+  "classification": "fact",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-19T18:36:58+00:00",
+      "from": "pending",
+      "note": "Validation des responsabilités dans Codex le 19 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-responsibilities-tresor-des-pirates",
+  "proposed_value": [
+    "Conduire les entretiens de fin d’année."
+  ],
+  "source": {
+    "evidence": "Dans le cadre de son engagement auprès de l'association Trésor des pirates, Délia conduisait les entretiens de fin d'année.",
+    "id": "src-f5132d8bdcf8d05a",
+    "locator": "precision-entretiens-tresor-des-pirates-2026-07-19.txt#P01"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "tresor-des-pirates-treasurer",
+    "entity_type": "experience",
+    "field": "responsibilities"
+  },
+  "validated_value": [
+    "Conduire les entretiens de fin d’année."
+  ]
+}

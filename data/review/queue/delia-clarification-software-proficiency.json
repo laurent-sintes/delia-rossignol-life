@@ -1,0 +1,57 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T16:56:19+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/bleu-rossignol-founder.json"
+  },
+  "classification": "claim",
+  "confidence": 0.99,
+  "history": [
+    {
+      "at": "2026-07-19T16:56:11+00:00",
+      "from": "pending",
+      "note": "Validation du lot 2 dans Codex le 19 juillet 2026. Publication des points 5 et 10 explicitement autorisée ; niveau logiciel expert précisé par src-1bea0744e58ace98.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-clarification-software-proficiency",
+  "proposed_value": [
+    {
+      "level": "expert",
+      "name": "Winner"
+    },
+    {
+      "level": "expert",
+      "name": "Gesteos"
+    },
+    {
+      "level": "expert",
+      "name": "InSitu"
+    }
+  ],
+  "source": {
+    "evidence": "Délia maîtrise Winner, Gesteos et InSitu au niveau expert.",
+    "id": "src-1bea0744e58ace98",
+    "locator": "precision-lot-2-2026-07-19.txt#P01"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "bleu-rossignol-founder",
+    "entity_type": "experience",
+    "field": "software_proficiency"
+  },
+  "validated_value": [
+    {
+      "level": "expert",
+      "name": "Winner"
+    },
+    {
+      "level": "expert",
+      "name": "Gesteos"
+    },
+    {
+      "level": "expert",
+      "name": "InSitu"
+    }
+  ]
+}

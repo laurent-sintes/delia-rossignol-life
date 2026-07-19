@@ -1,0 +1,31 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:04:18+00:00",
+    "knowledge_path": "data/knowledge/entities/achievement/sergio-rossi-corner-opening.json"
+  },
+  "classification": "claim",
+  "confidence": 0.95,
+  "history": [
+    {
+      "at": "2026-07-19T17:04:15+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite du lot 4 dans Codex le 19 juillet 2026, incluant la publication du résultat déclaré de 150 %.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q80-sergio-achievement",
+  "proposed_value": "Confiance reçue pour ouvrir le corner Sergio Rossi au Bon Marché et réussite commerciale du lancement.",
+  "source": {
+    "evidence": "Chez Sergio Rossi : on m’a fait confiance pour ouvrir un corner au bon marché + réussite, explosion des chiffres.",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q80"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "sergio-rossi-corner-opening",
+    "entity_type": "achievement",
+    "field": "personal_significance"
+  },
+  "validated_value": "Confiance reçue pour ouvrir le corner Sergio Rossi au Bon Marché et réussite commerciale du lancement."
+}

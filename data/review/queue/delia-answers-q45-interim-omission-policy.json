@@ -1,0 +1,37 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:04:19+00:00",
+    "knowledge_path": "data/knowledge/entities/style-profile/delia-rossignol.json"
+  },
+  "classification": "fact",
+  "confidence": 0.99,
+  "history": [
+    {
+      "at": "2026-07-19T17:04:16+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite du lot 4 dans Codex le 19 juillet 2026, incluant la publication du résultat déclaré de 150 %.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q45-interim-omission-policy",
+  "proposed_value": {
+    "omit_undeveloped_interim_missions_since_2003": true,
+    "reason": "choix éditorial explicite de Délia"
+  },
+  "source": {
+    "evidence": "Missions d’intérim que je ne souhaite pas développer.",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q45"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-rossignol",
+    "entity_type": "style-profile",
+    "field": "experience_omission_policy"
+  },
+  "validated_value": {
+    "omit_undeveloped_interim_missions_since_2003": true,
+    "reason": "choix éditorial explicite de Délia"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:07:30+00:00",
+    "knowledge_path": "data/knowledge/entities/person/delia-rossignol.json"
+  },
+  "classification": "fact",
+  "confidence": 0.95,
+  "history": [
+    {
+      "at": "2026-07-19T17:07:26+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite du lot 5 dans Codex le 19 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q55-interests",
+  "proposed_value": [
+    "chant",
+    "voyages"
+  ],
+  "source": {
+    "evidence": "c’est toujours un centre d’intérêt",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q55"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-rossignol",
+    "entity_type": "person",
+    "field": "interests"
+  },
+  "validated_value": [
+    "chant",
+    "voyages"
+  ]
+}

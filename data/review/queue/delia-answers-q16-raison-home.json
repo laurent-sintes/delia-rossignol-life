@@ -1,0 +1,41 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T16:56:18+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/raison-home-franchisee.json"
+  },
+  "classification": "fact",
+  "confidence": 0.98,
+  "history": [
+    {
+      "at": "2026-07-19T16:56:10+00:00",
+      "from": "pending",
+      "note": "Validation du lot 2 dans Codex le 19 juillet 2026. Publication des points 5 et 10 explicitement autorisée ; niveau logiciel expert précisé par src-1bea0744e58ace98.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q16-raison-home",
+  "proposed_value": {
+    "end_date": "2023-12-31",
+    "organization": "Raison Home",
+    "start_date": "2020-08",
+    "title": "franchisée"
+  },
+  "source": {
+    "evidence": "Franchisée Raison de aout 2020 à 31 décembre 2023",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q16"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "raison-home-franchisee",
+    "entity_type": "experience",
+    "field": "details"
+  },
+  "validated_value": {
+    "end_date": "2023-12-31",
+    "organization": "Raison Home",
+    "start_date": "2020-08",
+    "title": "franchisée"
+  }
+}

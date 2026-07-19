@@ -1,0 +1,31 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T18:23:50+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/tresor-des-pirates-treasurer.json"
+  },
+  "classification": "inference",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-19T18:23:14+00:00",
+      "from": "pending",
+      "note": "Validation des missions dans Codex le 19 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-mission-tresor-des-pirates",
+  "proposed_value": "Assurer la trésorerie et la gestion d’une association de parents d’élèves.",
+  "source": {
+    "evidence": "Assurer la trésorerie et la gestion d’une association de parents d’élèves.",
+    "id": "src-db65a2ba5207c61f",
+    "locator": "validation-missions-experiences-2026-07-19.txt#P10"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "tresor-des-pirates-treasurer",
+    "entity_type": "experience",
+    "field": "mission"
+  },
+  "validated_value": "Assurer la trésorerie et la gestion d’une association de parents d’élèves."
+}

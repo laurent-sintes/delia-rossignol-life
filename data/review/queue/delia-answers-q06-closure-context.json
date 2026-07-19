@@ -1,0 +1,31 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T16:56:14+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/bleu-rossignol-founder.json"
+  },
+  "classification": "claim",
+  "confidence": 0.95,
+  "history": [
+    {
+      "at": "2026-07-19T16:56:02+00:00",
+      "from": "pending",
+      "note": "Validation du lot 2 dans Codex le 19 juillet 2026. Publication des points 5 et 10 explicitement autorisée ; niveau logiciel expert précisé par src-1bea0744e58ace98.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q06-closure-context",
+  "proposed_value": "Fermeture dans un contexte de crise du bâtiment, avec un volume de projets et une rémunération insuffisants, malgré un intérêt confirmé pour le métier.",
+  "source": {
+    "evidence": "secteur d’activité très en tension négative et impacté par la crise du bâtiment [...] Mais le métier me plaisait",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q06"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "bleu-rossignol-founder",
+    "entity_type": "experience",
+    "field": "closure_context"
+  },
+  "validated_value": "Fermeture dans un contexte de crise du bâtiment, avec un volume de projets et une rémunération insuffisants, malgré un intérêt confirmé pour le métier."
+}

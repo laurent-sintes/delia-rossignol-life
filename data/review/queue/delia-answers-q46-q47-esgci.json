@@ -1,0 +1,43 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:07:27+00:00",
+    "knowledge_path": "data/knowledge/entities/credential/esgci-marketing-commerce-2003.json"
+  },
+  "classification": "fact",
+  "confidence": 0.98,
+  "history": [
+    {
+      "at": "2026-07-19T17:07:24+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite du lot 5 dans Codex le 19 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q46-q47-esgci",
+  "proposed_value": {
+    "awarded_year": 2003,
+    "completion_status": "obtained",
+    "issuer": "ESGCI",
+    "level": "bac+4",
+    "name": "Marketing & Commerce"
+  },
+  "source": {
+    "evidence": "Diplôme : Marketing & Commerce [...] OUI, bac+4",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q46-Q47"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "esgci-marketing-commerce-2003",
+    "entity_type": "credential",
+    "field": "details"
+  },
+  "validated_value": {
+    "awarded_year": 2003,
+    "completion_status": "obtained",
+    "issuer": "ESGCI",
+    "level": "bac+4",
+    "name": "Marketing & Commerce"
+  }
+}

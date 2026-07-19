@@ -1,0 +1,68 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:01:26+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q18-Q21",
+          "proposal_id": "proposal-delia-q18-q21-cuisinella",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "contract_type": "CDI",
+        "metrics_available": false,
+        "official_title": "concepteur-vendeur",
+        "organization": "Cuisinella Sainte-Eulalie",
+        "project_mix": {
+          "cuisine_percent": 90,
+          "dressing_percent": 10
+        }
+      }
+    },
+    "mission": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:23:29+00:00",
+          "locator": "validation-missions-experiences-2026-07-19.txt#P03",
+          "proposal_id": "proposal-delia-mission-cuisinella",
+          "source_id": "src-db65a2ba5207c61f"
+        }
+      ],
+      "value": "Concevoir et vendre des projets d’aménagement intérieur, principalement des cuisines et des dressings."
+    },
+    "responsibilities": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:38:52+00:00",
+          "locator": "validation-responsabilites-experiences-restantes-2026-07-19.txt#P01",
+          "proposal_id": "proposal-delia-responsibilities-cuisinella",
+          "source_id": "src-a9315033eec20535"
+        }
+      ],
+      "value": [
+        "Concevoir des projets d’aménagement intérieur, à dominante cuisines (90 %) et dressings (10 %).",
+        "Conseiller les clients et vendre les projets conçus."
+      ]
+    },
+    "timeframe": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T16:44:41+00:00",
+          "locator": "precisions-delia-questionnaire-2026-07-19.txt#P02",
+          "proposal_id": "proposal-delia-clarification-cuisinella-timeframe",
+          "source_id": "src-ac05324b7ceafdce"
+        }
+      ],
+      "value": {
+        "end_date": "2020-07",
+        "end_precision": "month",
+        "start_date": "2019-03",
+        "start_precision": "month"
+      }
+    }
+  },
+  "id": "cuisinella-sainte-eulalie",
+  "type": "experience",
+  "updated_at": "2026-07-19T18:38:52+00:00"
+}

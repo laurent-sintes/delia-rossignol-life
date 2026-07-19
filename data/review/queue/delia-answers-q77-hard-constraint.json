@@ -1,0 +1,45 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:13:24+00:00",
+    "knowledge_path": "private/search-criterion/alternating-week-schedule.json"
+  },
+  "classification": "fact",
+  "confidence": 0.99,
+  "history": [
+    {
+      "at": "2026-07-19T17:13:18+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite du lot 6 dans Codex le 19 juillet 2026 ; donnée réservée à l’espace privé.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q77-hard-constraint",
+  "proposed_value": {
+    "dimension": "schedule",
+    "hard_constraint": true,
+    "operator": "custom",
+    "priority": 5,
+    "sensitivity": "private",
+    "value": "horaires compatibles avec une garde alternée une semaine sur deux"
+  },
+  "source": {
+    "evidence": "Contrainte des enfants une semaine sur deux.",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q77"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "alternating-week-schedule",
+    "entity_type": "search-criterion",
+    "field": "details"
+  },
+  "validated_value": {
+    "dimension": "schedule",
+    "hard_constraint": true,
+    "operator": "custom",
+    "priority": 5,
+    "sensitivity": "private",
+    "value": "horaires compatibles avec une garde alternée une semaine sur deux"
+  }
+}

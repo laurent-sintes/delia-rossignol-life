@@ -1,0 +1,37 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:04:17+00:00",
+    "knowledge_path": "data/knowledge/entities/achievement/sergio-rossi-corner-opening.json"
+  },
+  "classification": "claim",
+  "confidence": 0.93,
+  "history": [
+    {
+      "at": "2026-07-19T17:04:14+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite du lot 4 dans Codex le 19 juillet 2026, incluant la publication du résultat déclaré de 150 %.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q40-sergio-achievement",
+  "proposed_value": {
+    "achievement": "ouverture du corner du Bon Marché",
+    "first_quarter_target_attainment_percent": 150
+  },
+  "source": {
+    "evidence": "Très bon démarrage, objectifs dépassés (150% au premier trimestre).",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q40"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "sergio-rossi-corner-opening",
+    "entity_type": "achievement",
+    "field": "metrics"
+  },
+  "validated_value": {
+    "achievement": "ouverture du corner du Bon Marché",
+    "first_quarter_target_attainment_percent": 150
+  }
+}

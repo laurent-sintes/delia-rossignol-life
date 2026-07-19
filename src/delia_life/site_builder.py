@@ -5,10 +5,11 @@ import json
 import re
 import shutil
 import urllib.parse
+from datetime import date
 from pathlib import Path
 from typing import Any
 
-from .core import load_json
+from .core import load_json, sha256_file
 from .mental_model import load_mental_model, model_summary
 
 
@@ -30,7 +31,7 @@ FORBIDDEN_SOURCE_PREFIXES = {
     ("data", "sources"),
 }
 SLUG_PATTERN = re.compile(r"^[a-z0-9-]+$")
-INLINE_PATTERN = re.compile(r"`([^`]+)`|\[([^\]]+)\]\(([^)]+)\)")
+INLINE_PATTERN = re.compile(r"`([^`]+)`|==([^=]+)==|\[([^\]]+)\]\(([^)]+)\)")
 
 
 def _is_prefix(parts: tuple[str, ...], prefix: tuple[str, ...]) -> bool:
@@ -57,9 +58,11 @@ def render_inline(text: str) -> str:
         chunks.append(html.escape(text[position : match.start()]))
         if match.group(1) is not None:
             chunks.append(f"<code>{html.escape(match.group(1))}</code>")
+        elif match.group(2) is not None:
+            chunks.append(f'<strong class="text-highlight">{html.escape(match.group(2))}</strong>')
         else:
-            label = html.escape(match.group(2) or "")
-            target = match.group(3) or ""
+            label = html.escape(match.group(3) or "")
+            target = match.group(4) or ""
             parsed = urllib.parse.urlsplit(target)
             safe_relative = not parsed.scheme and not parsed.netloc and not target.startswith("//")
             if parsed.scheme in {"https", "http", "mailto"} or safe_relative:
@@ -145,15 +148,49 @@ def _render_scalar(value: Any) -> str:
         return '<span class="empty">À renseigner</span>'
     if isinstance(value, bool):
         return "Oui" if value else "Non"
+    if isinstance(value, str) and re.fullmatch(r"\d{4}(?:-\d{2}){0,2}", value):
+        parts = value.split("-")
+        if len(parts) == 1:
+            return value
+        months = ("janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre")
+        year, month = int(parts[0]), int(parts[1])
+        if not 1 <= month <= 12:
+            return html.escape(value)
+        if len(parts) == 2:
+            return f"{months[month - 1]} {year}"
+        try:
+            return f"{date(year, month, int(parts[2])).day} {months[month - 1]} {year}"
+        except ValueError:
+            return html.escape(value)
     return html.escape(str(value))
 
 
-def _render_value(value: Any, item_fields: list[str] | None, labels: dict[str, str]) -> str:
+def _render_text_with_highlights(value: str, highlights: list[str] | None) -> str:
+    terms = sorted({term for term in (highlights or []) if term}, key=len, reverse=True)
+    if not terms:
+        return html.escape(value)
+    pattern = re.compile("(" + "|".join(re.escape(term) for term in terms) + ")", re.IGNORECASE)
+    return "".join(
+        f'<strong class="text-highlight">{html.escape(part)}</strong>' if pattern.fullmatch(part) else html.escape(part)
+        for part in pattern.split(value)
+        if part
+    )
+
+
+def _render_value(
+    value: Any,
+    item_fields: list[str] | None,
+    labels: dict[str, str],
+    highlights: list[str] | None = None,
+) -> str:
     if isinstance(value, list):
         if not value:
             return '<span class="empty">Aucune information publiée</span>'
         if all(not isinstance(item, (dict, list)) for item in value):
-            return "<ul>" + "".join(f"<li>{_render_scalar(item)}</li>" for item in value) + "</ul>"
+            return "<ul>" + "".join(
+                f"<li>{_render_text_with_highlights(item, highlights) if isinstance(item, str) else _render_scalar(item)}</li>"
+                for item in value
+            ) + "</ul>"
         if not item_fields:
             raise ValueError("item_fields is required to publish structured list items")
         cards: list[str] = []
@@ -161,7 +198,8 @@ def _render_value(value: Any, item_fields: list[str] | None, labels: dict[str, s
             if not isinstance(item, dict):
                 raise ValueError("Mixed structured and scalar list cannot be published")
             rows = "".join(
-                f"<dt>{html.escape(_label(field, labels))}</dt><dd>{_render_scalar(item.get(field))}</dd>"
+                f"<dt>{html.escape(_label(field, labels))}</dt>"
+                f"<dd>{_render_value(item.get(field), None, labels)}</dd>"
                 for field in item_fields
             )
             cards.append(f'<article class="data-card"><dl>{rows}</dl></article>')
@@ -170,10 +208,15 @@ def _render_value(value: Any, item_fields: list[str] | None, labels: dict[str, s
         if not item_fields:
             raise ValueError("item_fields is required to publish object values")
         rows = "".join(
-            f"<dt>{html.escape(_label(field, labels))}</dt><dd>{_render_scalar(value.get(field))}</dd>"
+            f"<dt>{html.escape(_label(field, labels))}</dt>"
+            f"<dd>{_render_value(value.get(field), None, labels)}</dd>"
             for field in item_fields
         )
         return f"<dl>{rows}</dl>"
+    if isinstance(value, str):
+        if re.fullmatch(r"\d{4}(?:-\d{2}){0,2}", value):
+            return _render_scalar(value)
+        return _render_text_with_highlights(value, highlights)
     return _render_scalar(value)
 
 
@@ -191,6 +234,114 @@ def render_json_document(document: dict[str, Any], spec: dict[str, Any]) -> str:
             f'<section class="data-section"><h3>{html.escape(_label(field, labels))}</h3>{content}</section>'
         )
     return "".join(blocks)
+
+
+def _nested_value(document: dict[str, Any], path: str) -> Any:
+    parts = path.split(".")
+    if not parts or any(not re.fullmatch(r"[A-Za-z0-9_-]+", part) for part in parts):
+        raise ValueError(f"Unsafe or empty knowledge path: {path}")
+    value: Any = document
+    for part in parts:
+        if not isinstance(value, dict) or part not in value:
+            return None
+        value = value[part]
+    return value
+
+
+def _render_badges(value: Any) -> str:
+    values = value if isinstance(value, list) else [value]
+    if not values or any(isinstance(item, (dict, list)) for item in values):
+        raise ValueError("Badge presentation requires a scalar value or a list of scalar values")
+    badges = "".join(f'<span class="knowledge-badge">{_render_scalar(item)}</span>' for item in values)
+    return f'<div class="knowledge-badges">{badges}</div>'
+
+
+def render_knowledge_card(document: dict[str, Any], spec: dict[str, Any]) -> str:
+    fields = spec.get("fields")
+    if not fields:
+        raise ValueError("Every knowledge card requires an explicit non-empty fields allowlist")
+    layout = spec.get("layout", "standard")
+    if layout not in {"standard", "editorial"}:
+        raise ValueError(f"Unsupported knowledge card layout: {layout}")
+    rows: list[str] = []
+    summary_items: list[str] = []
+    detail_sections: list[str] = []
+    for field in fields:
+        path = field.get("path")
+        label = field.get("label")
+        if not path or not label:
+            raise ValueError("Knowledge fields require path and label")
+        value = _nested_value(document, path)
+        if value is None or value == "" or value == []:
+            continue
+        presentation = field.get("presentation")
+        content = (
+            _render_badges(value)
+            if presentation == "badge"
+            else _render_value(value, field.get("item_fields"), field.get("labels", {}), field.get("highlights"))
+        )
+        if layout == "editorial" and presentation == "detail":
+            detail_sections.append(
+                '<section class="knowledge-detail">'
+                f"<h4>{html.escape(str(label))}</h4>{content}</section>"
+            )
+        elif layout == "editorial":
+            summary_items.append(
+                '<div class="knowledge-summary-item">'
+                f"<p>{html.escape(str(label))}</p><div>{content}</div></div>"
+            )
+        else:
+            rows.append(f"<dt>{html.escape(str(label))}</dt><dd>{content}</dd>")
+    if not rows and not summary_items and not detail_sections:
+        raise ValueError(f"Knowledge card publishes no values: {spec.get('title', 'untitled')}")
+    eyebrow = spec.get("eyebrow")
+    eyebrow_html = f'<p class="knowledge-card-eyebrow">{html.escape(str(eyebrow))}</p>' if eyebrow else ""
+    if layout == "editorial":
+        summary = '<div class="knowledge-summary">' + "".join(summary_items) + "</div>" if summary_items else ""
+        return (
+            '<article class="knowledge-card knowledge-card--editorial">'
+            + eyebrow_html
+            + f'<h3>{html.escape(str(spec["title"]))}</h3>'
+            + summary
+            + '<div class="knowledge-details">'
+            + "".join(detail_sections)
+            + "</div></article>"
+        )
+    field_list_class = "knowledge-fields knowledge-fields--single" if len(rows) == 1 else "knowledge-fields"
+    return (
+        '<article class="knowledge-card">'
+        + eyebrow_html
+        + f'<h3>{html.escape(str(spec["title"]))}</h3>'
+        + f'<dl class="{field_list_class}">'
+        + "".join(rows)
+        + "</dl></article>"
+    )
+
+
+def render_knowledge_page(root: Path, page: dict[str, Any]) -> str:
+    sections: list[str] = []
+    for section in page.get("sections", []):
+        section_layout = section.get("layout", "standard")
+        if section_layout not in {"standard", "editorial"}:
+            raise ValueError(f"Unsupported knowledge section layout: {section_layout}")
+        cards: list[str] = []
+        for card in section.get("cards", []):
+            source = safe_source(root, card["source"])
+            card_spec = {**card, "layout": card.get("layout", section_layout)}
+            cards.append(render_knowledge_card(load_json(source), card_spec))
+        if not cards:
+            raise ValueError(f"Knowledge section has no cards: {section.get('title', 'untitled')}")
+        description = section.get("description")
+        description_html = f'<p class="knowledge-section-intro">{html.escape(str(description))}</p>' if description else ""
+        sections.append(
+            f'<section class="knowledge-section knowledge-section--{html.escape(section_layout, quote=True)}">'
+            f'<h2>{html.escape(str(section["title"]))}</h2>'
+            + description_html
+            + '<div class="knowledge-grid">'
+            + "".join(cards)
+            + "</div></section>"
+        )
+    return "".join(sections)
 
 
 def render_cv_template_preview(document: dict[str, Any]) -> str:
@@ -221,8 +372,8 @@ def render_cv_template_preview(document: dict[str, Any]) -> str:
             '<div class="cv-preview-experience"><p class="cv-preview-date">MM/AAAA — MM/AAAA</p>'
             '<div><h4>Intitulé du poste · Organisation</h4><p>Ville · Type de contrat</p>'
             "<ul><li>Responsabilité directement liée au poste ciblé.</li>"
-            "<li>Action personnelle appuyée par un fait validé.</li>"
-            "<li>Résultat mesurable lorsque la source le permet.</li></ul></div></div>"
+            "<li>Action concrète directement liée au poste ciblé.</li>"
+            "<li>Résultat mesurable lorsque cela apporte une information utile.</li></ul></div></div>"
             '<div class="cv-preview-experience"><p class="cv-preview-date">MM/AAAA — MM/AAAA</p>'
             '<div><h4>Expérience précédente · Organisation</h4>'
             "<ul><li>Deux à quatre points courts, concrets et vérifiables.</li>"
@@ -239,7 +390,7 @@ def render_cv_template_preview(document: dict[str, Any]) -> str:
         ),
         "engagements-and-interests": (
             "Engagements et centres d’intérêt",
-            '<p class="cv-preview-inline">Éléments pertinents et explicitement autorisés à la publication.</p>',
+            '<p class="cv-preview-inline">Éléments personnels pertinents pour la candidature.</p>',
         ),
     }
 
@@ -349,7 +500,13 @@ def render_mental_model(model: dict[str, Any]) -> str:
     )
 
 
-def _page_template(site: dict[str, Any], page: dict[str, Any], navigation: list[dict[str, Any]], body: str) -> str:
+def _page_template(
+    site: dict[str, Any],
+    page: dict[str, Any],
+    navigation: list[dict[str, Any]],
+    body: str,
+    asset_version: str,
+) -> str:
     nav = "".join(
         f'<a href="{"index.html" if item["slug"] == "index" else item["slug"] + ".html"}"'
         f'{" aria-current=\"page\"" if item["slug"] == page["slug"] else ""}>{html.escape(item["title"])}</a>'
@@ -363,12 +520,12 @@ def _page_template(site: dict[str, Any], page: dict[str, Any], navigation: list[
   <main class="page page-home">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow">Dossier professionnel structuré</p>
+        <p class="eyebrow">Parcours professionnel</p>
         <h1 id="hero-title">Le parcours de Délia,<br><em>pensé sur mesure.</em></h1>
-        <p class="hero-lead">Une base vivante pour documenter ses compétences, préparer ses candidatures et faire évoluer son projet professionnel avec méthode.</p>
+        <p class="hero-lead">Un parcours façonné par le conseil, le commerce, la gestion de projets et l’entrepreneuriat.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="profil.html">Découvrir le profil</a>
-          <a class="button button-secondary" href="administration.html">Administrer la base</a>
+          <a class="button button-secondary" href="administration.html">Conseils et outils</a>
         </div>
       </div>
       <div class="hero-visual">
@@ -386,7 +543,7 @@ def _page_template(site: dict[str, Any], page: dict[str, Any], navigation: list[
         page_content = f"""
   <main class="page page-{html.escape(page['slug'], quote=True)}">
     <div class="page-shell">
-      <p class="eyebrow">Dossier professionnel structuré</p>
+      <p class="eyebrow">Parcours professionnel</p>
       <h1>{title}</h1>
       {body}
     </div>
@@ -398,7 +555,7 @@ def _page_template(site: dict[str, Any], page: dict[str, Any], navigation: list[
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="{description}">
   <title>{title} · {site_title}</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/style.css?v={html.escape(asset_version, quote=True)}">
 </head>
 <body>
   <header class="site-header">
@@ -410,7 +567,7 @@ def _page_template(site: dict[str, Any], page: dict[str, Any], navigation: list[
 {page_content}
   <footer>
     <span>Délia Rossignol</span>
-    <span>Informations publiées depuis une base de connaissances validée.</span>
+    <span>Parcours, expériences et réalisations.</span>
   </footer>
 </body>
 </html>
@@ -450,6 +607,7 @@ def build_site(root: Path, output: Path, config_path: Path | None = None) -> dic
     previous_manifest_path = output / ".delia-site-manifest.json"
     previous_files = set(load_json(previous_manifest_path).get("files", [])) if previous_manifest_path.exists() else set()
     shutil.copytree(assets_source, output / "assets", dirs_exist_ok=True)
+    asset_version = sha256_file(output / "assets" / "style.css")[:12]
     (output / ".nojekyll").write_text("", encoding="utf-8")
 
     built: list[str] = []
@@ -458,8 +616,6 @@ def build_site(root: Path, output: Path, config_path: Path | None = None) -> dic
         if kind in {"markdown", "administration"}:
             source = safe_source(root, page["source"])
             body = markdown_to_html(source.read_text(encoding="utf-8"))
-            if kind == "administration":
-                body += render_skill_catalog(root)
         elif kind == "json":
             sections: list[str] = []
             for section in page["sections"]:
@@ -484,13 +640,19 @@ def build_site(root: Path, output: Path, config_path: Path | None = None) -> dic
                     f"{render_json_document(document, page)}{preview}</article>"
                 )
             body = '<div class="card-grid">' + "".join(cards) + "</div>"
+        elif kind == "knowledge":
+            body = render_knowledge_page(root, page)
         elif kind == "mental-model":
             source = safe_source(root, page["source"])
             body = render_mental_model(load_mental_model(source))
         else:
             raise ValueError(f"Unsupported page kind: {kind}")
         filename = "index.html" if page["slug"] == "index" else f'{page["slug"]}.html'
-        (output / filename).write_text(_page_template(site, page, pages, body), encoding="utf-8", newline="\n")
+        (output / filename).write_text(
+            _page_template(site, page, pages, body, asset_version),
+            encoding="utf-8",
+            newline="\n",
+        )
         built.append(filename)
 
     asset_files = [path.relative_to(output).as_posix() for path in (output / "assets").rglob("*") if path.is_file()]

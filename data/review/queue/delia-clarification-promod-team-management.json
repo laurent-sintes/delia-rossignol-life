@@ -1,0 +1,37 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:01:29+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/promod-bordeaux.json"
+  },
+  "classification": "fact",
+  "confidence": 0.99,
+  "history": [
+    {
+      "at": "2026-07-19T17:01:25+00:00",
+      "from": "pending",
+      "note": "Validation du lot 3 dans Codex le 19 juillet 2026, avec management direct de 8 personnes chez Promod et période ERA de janvier à mai 2018 précisés par src-61b8048b200b285f.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-clarification-promod-team-management",
+  "proposed_value": {
+    "direct_team_size": 8,
+    "scope": "ensemble de l'équipe du magasin"
+  },
+  "source": {
+    "evidence": "Délia manageait les huit membres de l'équipe du magasin Promod de la rue Sainte-Catherine à Bordeaux.",
+    "id": "src-61b8048b200b285f",
+    "locator": "precision-lot-3-2026-07-19.txt#P01"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "promod-bordeaux",
+    "entity_type": "experience",
+    "field": "team_management"
+  },
+  "validated_value": {
+    "direct_team_size": 8,
+    "scope": "ensemble de l'équipe du magasin"
+  }
+}

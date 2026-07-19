@@ -15,25 +15,15 @@ build/
 .env
 .env.*
 !.env.example
-private/
-generated/
 *.tmp
 ~$*
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
 
-# Données de travail privées dans un dépôt public
-data/applications/*
-!data/applications/.gitkeep
-data/offers/*
-!data/offers/.gitkeep
-data/sources/manifests/*
-!data/sources/manifests/.gitkeep
-data/review/queue/*
-!data/review/queue/example.json
-
-# Exports et originaux susceptibles de contenir des données personnelles
-*.pdf
-*.docx
-*.odt
-*.zip
-!templates/**/*.docx
-!templates/**/*.pdf
+# Toutes les données métier et leurs sources sont versionnées, y compris
+# private/, generated/, les offres, candidatures et files de revue.
+# Seuls les secrets techniques, caches, temporaires et le site régénéré
+# restent exclus de Git.

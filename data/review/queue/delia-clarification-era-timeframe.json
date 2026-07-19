@@ -1,0 +1,41 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:01:30+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/era-entre-deux-mers.json"
+  },
+  "classification": "fact",
+  "confidence": 0.99,
+  "history": [
+    {
+      "at": "2026-07-19T17:01:25+00:00",
+      "from": "pending",
+      "note": "Validation du lot 3 dans Codex le 19 juillet 2026, avec management direct de 8 personnes chez Promod et période ERA de janvier à mai 2018 précisés par src-61b8048b200b285f.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-clarification-era-timeframe",
+  "proposed_value": {
+    "end_date": "2018-05",
+    "end_precision": "month",
+    "start_date": "2018-01",
+    "start_precision": "month"
+  },
+  "source": {
+    "evidence": "La période de janvier à mai 2018 est confirmée pour l'expérience chez ERA Entre Deux Mers.",
+    "id": "src-61b8048b200b285f",
+    "locator": "precision-lot-3-2026-07-19.txt#P02"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "era-entre-deux-mers",
+    "entity_type": "experience",
+    "field": "timeframe"
+  },
+  "validated_value": {
+    "end_date": "2018-05",
+    "end_precision": "month",
+    "start_date": "2018-01",
+    "start_precision": "month"
+  }
+}

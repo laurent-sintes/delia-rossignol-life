@@ -1,0 +1,65 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:01:27+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q22-Q26",
+          "proposal_id": "proposal-delia-q22-q26-promod",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "contract_type": "CDI",
+        "end_date": "2019-02",
+        "location": "rue Sainte-Catherine, Bordeaux",
+        "start_date": "2018-06",
+        "store_headcount": 8,
+        "store_positioning": "flagship Aquitaine",
+        "title": "responsable adjointe de magasin"
+      }
+    },
+    "mission": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:23:32+00:00",
+          "locator": "validation-missions-experiences-2026-07-19.txt#P04",
+          "proposal_id": "proposal-delia-mission-promod",
+          "source_id": "src-db65a2ba5207c61f"
+        }
+      ],
+      "value": "Seconder la direction du magasin, encadrer l’équipe et contribuer au maintien de l’activité commerciale dans un contexte de transformation."
+    },
+    "responsibilities": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:38:56+00:00",
+          "locator": "validation-responsabilites-experiences-restantes-2026-07-19.txt#P04",
+          "proposal_id": "proposal-delia-responsibilities-promod",
+          "source_id": "src-a9315033eec20535"
+        }
+      ],
+      "value": [
+        "Manager les huit membres de l’équipe du magasin.",
+        "Contribuer au maintien du chiffre d’affaires du flagship régional dans un contexte de transformation de la marque et de crise des Gilets jaunes."
+      ]
+    },
+    "team_management": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:01:29+00:00",
+          "locator": "precision-lot-3-2026-07-19.txt#P01",
+          "proposal_id": "proposal-delia-clarification-promod-team-management",
+          "source_id": "src-61b8048b200b285f"
+        }
+      ],
+      "value": {
+        "direct_team_size": 8,
+        "scope": "ensemble de l'équipe du magasin"
+      }
+    }
+  },
+  "id": "promod-bordeaux",
+  "type": "experience",
+  "updated_at": "2026-07-19T18:38:56+00:00"
+}

@@ -1,0 +1,87 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:13:19+00:00",
+    "knowledge_path": "private/career-project/delia-next-role-2026.json"
+  },
+  "classification": "fact",
+  "confidence": 0.97,
+  "history": [
+    {
+      "at": "2026-07-19T17:12:33+00:00",
+      "from": "pending",
+      "note": "Acceptation du lot 6 avec normalisation explicite des secteurs, domaines fonctionnels et du niveau de responsabilité dans Codex le 19 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "edited"
+    }
+  ],
+  "id": "proposal-delia-q62-q64-career-targets",
+  "proposed_value": {
+    "industry_sectors": {
+      "acceptable": [
+        "agencement et aménagement intérieur",
+        "cuisine et mobilier sur mesure",
+        "architecture ou décoration",
+        "commerce et distribution",
+        "relation client",
+        "gestion de projet"
+      ],
+      "excluded": [
+        "immobilier",
+        "restauration"
+      ],
+      "priority": [
+        "luxe",
+        "hôtellerie",
+        "gestion administrative",
+        "cosmétique",
+        "bien-être",
+        "banque et assurance"
+      ]
+    },
+    "job_roles_status": "to_be_defined",
+    "minimum_seniority": "autonome"
+  },
+  "source": {
+    "evidence": "J’en sais rien. J’ai besoin d’aide [...] A partir de Autonome [...] luxe prioritaire [...] immobilier exclu",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q62-Q64"
+  },
+  "status": "edited",
+  "target": {
+    "entity_id": "delia-next-role-2026",
+    "entity_type": "career-project",
+    "field": "targets"
+  },
+  "validated_value": {
+    "functional_domains": {
+      "acceptable": [
+        "relation client",
+        "gestion de projet"
+      ],
+      "priority": [
+        "gestion administrative"
+      ]
+    },
+    "industry_sectors": {
+      "acceptable": [
+        "agencement et aménagement intérieur",
+        "cuisine et mobilier sur mesure",
+        "architecture ou décoration",
+        "commerce et distribution"
+      ],
+      "excluded": [
+        "immobilier",
+        "restauration"
+      ],
+      "priority": [
+        "luxe",
+        "hôtellerie",
+        "cosmétique",
+        "bien-être",
+        "banque et assurance"
+      ]
+    },
+    "job_roles_status": "to_be_defined",
+    "minimum_responsibility_level": "autonome"
+  }
+}

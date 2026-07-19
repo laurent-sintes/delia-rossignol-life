@@ -1,0 +1,41 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T16:56:13+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/bleu-rossignol-founder.json"
+  },
+  "classification": "fact",
+  "confidence": 0.99,
+  "history": [
+    {
+      "at": "2026-07-19T16:56:01+00:00",
+      "from": "pending",
+      "note": "Validation du lot 2 dans Codex le 19 juillet 2026. Publication des points 5 et 10 explicitement autorisée ; niveau logiciel expert précisé par src-1bea0744e58ace98.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q03-q05-timeframe",
+  "proposed_value": {
+    "closure_status": "closing",
+    "end_date": "2026-07-31",
+    "ongoing": true,
+    "start_date": "2024-01-01"
+  },
+  "source": {
+    "evidence": "1er janvier 2024 [...] 31 juillet 2026 [...] En cours de fermeture",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q03-Q05"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "bleu-rossignol-founder",
+    "entity_type": "experience",
+    "field": "timeframe"
+  },
+  "validated_value": {
+    "closure_status": "closing",
+    "end_date": "2026-07-31",
+    "ongoing": true,
+    "start_date": "2024-01-01"
+  }
+}

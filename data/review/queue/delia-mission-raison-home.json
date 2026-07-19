@@ -1,0 +1,31 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T18:23:27+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/raison-home-franchisee.json"
+  },
+  "classification": "inference",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-19T18:22:52+00:00",
+      "from": "pending",
+      "note": "Validation des missions dans Codex le 19 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-mission-raison-home",
+  "proposed_value": "Développer une activité de conception et de vente de projets d’agencement au sein de la franchise Raison Home.",
+  "source": {
+    "evidence": "Développer une activité de conception et de vente de projets d’agencement au sein de la franchise Raison Home.",
+    "id": "src-db65a2ba5207c61f",
+    "locator": "validation-missions-experiences-2026-07-19.txt#P02"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "raison-home-franchisee",
+    "entity_type": "experience",
+    "field": "mission"
+  },
+  "validated_value": "Développer une activité de conception et de vente de projets d’agencement au sein de la franchise Raison Home."
+}

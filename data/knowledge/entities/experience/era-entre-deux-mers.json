@@ -1,0 +1,75 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:01:28+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q27-Q29",
+          "proposal_id": "proposal-delia-q27-q29-era",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "contract_type": "CDD",
+        "employment_status": "salariée",
+        "mandates": 3,
+        "property_estimates_per_month": 20
+      }
+    },
+    "mission": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:23:34+00:00",
+          "locator": "validation-missions-experiences-2026-07-19.txt#P05",
+          "proposal_id": "proposal-delia-mission-era",
+          "source_id": "src-db65a2ba5207c61f"
+        }
+      ],
+      "value": "Réaliser des estimations et développer un portefeuille de mandats immobiliers."
+    },
+    "official_title": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T16:44:42+00:00",
+          "locator": "precisions-delia-questionnaire-2026-07-19.txt#P07",
+          "proposal_id": "proposal-delia-clarification-era-title",
+          "source_id": "src-ac05324b7ceafdce"
+        }
+      ],
+      "value": "Agent immobilier"
+    },
+    "responsibilities": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:38:53+00:00",
+          "locator": "validation-responsabilites-experiences-restantes-2026-07-19.txt#P02",
+          "proposal_id": "proposal-delia-responsibilities-era",
+          "source_id": "src-a9315033eec20535"
+        }
+      ],
+      "value": [
+        "Réaliser environ 20 estimations immobilières par mois.",
+        "Gérer 3 mandats immobiliers."
+      ]
+    },
+    "timeframe": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:01:30+00:00",
+          "locator": "precision-lot-3-2026-07-19.txt#P02",
+          "proposal_id": "proposal-delia-clarification-era-timeframe",
+          "source_id": "src-61b8048b200b285f"
+        }
+      ],
+      "value": {
+        "end_date": "2018-05",
+        "end_precision": "month",
+        "start_date": "2018-01",
+        "start_precision": "month"
+      }
+    }
+  },
+  "id": "era-entre-deux-mers",
+  "type": "experience",
+  "updated_at": "2026-07-19T18:38:53+00:00"
+}

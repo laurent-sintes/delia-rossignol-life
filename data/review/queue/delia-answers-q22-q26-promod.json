@@ -1,0 +1,47 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:01:27+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/promod-bordeaux.json"
+  },
+  "classification": "fact",
+  "confidence": 0.96,
+  "history": [
+    {
+      "at": "2026-07-19T17:01:23+00:00",
+      "from": "pending",
+      "note": "Validation du lot 3 dans Codex le 19 juillet 2026, avec management direct de 8 personnes chez Promod et période ERA de janvier à mai 2018 précisés par src-61b8048b200b285f.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q22-q26-promod",
+  "proposed_value": {
+    "contract_type": "CDI",
+    "end_date": "2019-02",
+    "location": "rue Sainte-Catherine, Bordeaux",
+    "start_date": "2018-06",
+    "store_headcount": 8,
+    "store_positioning": "flagship Aquitaine",
+    "title": "responsable adjointe de magasin"
+  },
+  "source": {
+    "evidence": "OUI [...] responsable adjointe de magasin [...] CDI [...] effectif total [...] Flagship de la marque en Aquitaine",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q22-Q26"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "promod-bordeaux",
+    "entity_type": "experience",
+    "field": "details"
+  },
+  "validated_value": {
+    "contract_type": "CDI",
+    "end_date": "2019-02",
+    "location": "rue Sainte-Catherine, Bordeaux",
+    "start_date": "2018-06",
+    "store_headcount": 8,
+    "store_positioning": "flagship Aquitaine",
+    "title": "responsable adjointe de magasin"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T18:23:41+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/loreal-luxury-products.json"
+  },
+  "classification": "inference",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-19T18:23:05+00:00",
+      "from": "pending",
+      "note": "Validation des missions dans Codex le 19 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-mission-loreal",
+  "proposed_value": "Accompagner le développement des packagings et les lancements de produits au sein du service développement.",
+  "source": {
+    "evidence": "Accompagner le développement des packagings et les lancements de produits au sein du service développement.",
+    "id": "src-db65a2ba5207c61f",
+    "locator": "validation-missions-experiences-2026-07-19.txt#P08"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "loreal-luxury-products",
+    "entity_type": "experience",
+    "field": "mission"
+  },
+  "validated_value": "Accompagner le développement des packagings et les lancements de produits au sein du service développement."
+}

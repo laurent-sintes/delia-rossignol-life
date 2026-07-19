@@ -1,4 +1,4 @@
-model_version: "1.1.0"
+model_version: "1.1.4"
 namespace: delia-career
 description: >-
   Modèle conceptuel du dossier professionnel, de l'ingestion des preuves,
@@ -25,9 +25,17 @@ invariants:
   - id: feedback-is-observation
     rule: Un feedback produit une proposition d'amélioration et ne modifie jamais directement la connaissance.
   - id: public-projection-only
-    rule: Le dépôt public et GitHub Pages ne contiennent qu'une projection explicitement publiable.
+    rule: GitHub Pages ne contient qu'une projection explicitement publiable, même si le dépôt public versionne l'ensemble des données métier.
   - id: sensitive-private-by-default
-    rule: Une coordonnée ou donnée personnelle sensible reste privée tant qu'une décision humaine explicite n'autorise pas sa publication.
+    rule: Une coordonnée ou donnée personnelle sensible reste exclue de GitHub Pages et des documents produits tant qu'une décision humaine explicite n'autorise pas sa publication.
+  - id: repository-is-complete
+    rule: Les sources, archives, propositions, décisions, connaissances, offres, candidatures, feedbacks et productions métier sont versionnés afin qu'un clone du dépôt permette de poursuivre le travail.
+  - id: technical-secrets-never-versioned
+    rule: Les mots de passe, jetons, clés privées, cookies d'authentification et fichiers d'environnement ne sont jamais versionnés.
+  - id: experience-mission-required
+    rule: Toute expérience validée porte une mission explicite, courte et sourcée, qui exprime sa finalité ou sa contribution principale.
+  - id: experience-responsibilities-required
+    rule: Toute expérience validée porte une liste non vide de responsabilités explicites et sourcées; ne pas les déduire de la mission, du titre ou des résultats.
   - id: age-is-derived
     rule: Un âge est calculé à une date donnée depuis une date de naissance validée; il n'est jamais stocké comme fait permanent.
   - id: temporal-precision-preserved

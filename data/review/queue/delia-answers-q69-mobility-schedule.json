@@ -1,0 +1,55 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:13:22+00:00",
+    "knowledge_path": "private/career-project/delia-next-role-2026.json"
+  },
+  "classification": "fact",
+  "confidence": 0.98,
+  "history": [
+    {
+      "at": "2026-07-19T17:13:16+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite du lot 6 dans Codex le 19 juillet 2026 ; donnée réservée à l’espace privé.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q69-mobility-schedule",
+  "proposed_value": {
+    "alternating_week_constraint": true,
+    "earliest_start_local_time_range": [
+      "08:30",
+      "09:00"
+    ],
+    "latest_end_local_time_range": [
+      "18:00",
+      "18:30"
+    ],
+    "relocation": false,
+    "sensitivity": "private"
+  },
+  "source": {
+    "evidence": "Pas de déménagement [...] contrainte horaire une semaine sur deux [...] pas avant 08h30-09h [...] pas après 18h/18h30",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q69"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-next-role-2026",
+    "entity_type": "career-project",
+    "field": "mobility_and_schedule_constraints"
+  },
+  "validated_value": {
+    "alternating_week_constraint": true,
+    "earliest_start_local_time_range": [
+      "08:30",
+      "09:00"
+    ],
+    "latest_end_local_time_range": [
+      "18:00",
+      "18:30"
+    ],
+    "relocation": false,
+    "sensitivity": "private"
+  }
+}

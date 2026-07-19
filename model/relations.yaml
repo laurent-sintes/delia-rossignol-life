@@ -48,6 +48,13 @@ relations:
     cardinality: one_to_one
     required: false
 
+  - id: person-has-professional-posture
+    from: person
+    to: professional-posture
+    label: adopte une approche professionnelle
+    cardinality: one_to_one
+    required: false
+
   - id: website-archive-captures-organization
     from: website-archive
     to: organization

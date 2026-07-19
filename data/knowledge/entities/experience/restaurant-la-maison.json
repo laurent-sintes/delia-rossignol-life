@@ -1,0 +1,60 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:01:28+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q31-Q37",
+          "proposal_id": "proposal-delia-q31-q37-la-maison",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "activity": "brasserie",
+        "covers_per_day": 40,
+        "end_date": "2018-12",
+        "location": "place Stalingrad, Bordeaux",
+        "responsibilities": [
+          "fixation des prix",
+          "contrats",
+          "paie",
+          "comptabilité",
+          "relations bancaires"
+        ],
+        "start_date": "2012-11",
+        "title_kind": "descriptive"
+      }
+    },
+    "engagement_type": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T16:44:42+00:00",
+          "locator": "precisions-delia-questionnaire-2026-07-19.txt#P03",
+          "proposal_id": "proposal-delia-clarification-la-maison-ownership",
+          "source_id": "src-ac05324b7ceafdce"
+        }
+      ],
+      "value": {
+        "employee": false,
+        "roles": [
+          "associée",
+          "propriétaire"
+        ]
+      }
+    },
+    "mission": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:23:37+00:00",
+          "locator": "validation-missions-experiences-2026-07-19.txt#P06",
+          "proposal_id": "proposal-delia-mission-la-maison",
+          "source_id": "src-db65a2ba5207c61f"
+        }
+      ],
+      "value": "Piloter la gestion administrative, financière et opérationnelle d’une brasserie."
+    }
+  },
+  "id": "restaurant-la-maison",
+  "type": "experience",
+  "updated_at": "2026-07-19T18:23:37+00:00"
+}

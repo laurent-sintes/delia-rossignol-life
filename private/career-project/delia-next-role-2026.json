@@ -1,0 +1,452 @@
+{
+  "availability": "2026-09-01",
+  "criteria": [
+    {
+      "dimension": "other",
+      "hard_constraint": true,
+      "id": "criterion-activity-boundaries",
+      "operator": "custom",
+      "priority": 5,
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:20+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q65",
+          "proposal_id": "proposal-delia-q65-activity-boundaries",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "excluded": [
+          "démarchage téléphonique",
+          "prospection physique"
+        ],
+        "required": [
+          "travail en équipe"
+        ]
+      }
+    },
+    {
+      "dimension": "other",
+      "hard_constraint": false,
+      "id": "criterion-functional-preferences",
+      "operator": "custom",
+      "priority": 3,
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:20+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q66",
+          "proposal_id": "proposal-delia-q66-functional-preferences",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "ratings": {
+          "administrer_une_activite": 5,
+          "concevoir": 2,
+          "gerer_une_equipe": 2,
+          "piloter_des_projets": 2,
+          "vendre": 5
+        },
+        "scale_max": 5
+      }
+    },
+    {
+      "dimension": "contract_type",
+      "hard_constraint": true,
+      "id": "criterion-contract-preferences",
+      "operator": "custom",
+      "priority": 5,
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:21+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q67",
+          "proposal_id": "proposal-delia-q67-contracts",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "excluded": [
+          "freelance",
+          "temps partiel"
+        ],
+        "full_time_required": true
+      }
+    },
+    {
+      "dimension": "availability",
+      "hard_constraint": true,
+      "id": "criterion-availability",
+      "operator": "custom",
+      "priority": 5,
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:21+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q68",
+          "proposal_id": "proposal-delia-q68-availability",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": "2026-09-01"
+    },
+    {
+      "dimension": "commute",
+      "hard_constraint": true,
+      "id": "criterion-mobility-and-schedule-constraints",
+      "operator": "custom",
+      "priority": 5,
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:22+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q69",
+          "proposal_id": "proposal-delia-q69-mobility-schedule",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "alternating_week_constraint": true,
+        "earliest_start_local_time_range": [
+          "08:30",
+          "09:00"
+        ],
+        "latest_end_local_time_range": [
+          "18:00",
+          "18:30"
+        ],
+        "relocation": false,
+        "sensitivity": "private"
+      }
+    },
+    {
+      "dimension": "work_mode",
+      "hard_constraint": false,
+      "id": "criterion-work-arrangement",
+      "operator": "custom",
+      "priority": 4,
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:22+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q70-Q72",
+          "proposal_id": "proposal-delia-q70-q72-work-arrangement",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "business_travel": "occasional_with_overnight",
+        "evening_work": false,
+        "remote_work": "indifferent",
+        "saturday_work": "occasional",
+        "schedule": "full_time",
+        "sunday_work": false,
+        "variable_hours": true
+      }
+    },
+    {
+      "dimension": "compensation",
+      "hard_constraint": true,
+      "id": "criterion-compensation",
+      "operator": "custom",
+      "priority": 5,
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:23+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q73",
+          "proposal_id": "proposal-delia-q73-compensation",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "currency": "EUR",
+        "fixed_minimum_gross": 28000,
+        "period": "year",
+        "sensitivity": "private",
+        "target_gross": 42000,
+        "variable": "negotiable"
+      }
+    },
+    {
+      "dimension": "work_environment",
+      "hard_constraint": false,
+      "id": "criterion-work-environment",
+      "operator": "custom",
+      "priority": 4,
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:23+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q74-Q76",
+          "proposal_id": "proposal-delia-q74-q76-environment",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "organization_size": "indifferent",
+        "people_management": "optional",
+        "priorities": [
+          "stabilité",
+          "responsabilité",
+          "autonomie",
+          "travail d’équipe"
+        ]
+      }
+    },
+    {
+      "dimension": "schedule",
+      "hard_constraint": true,
+      "id": "alternating-week-schedule",
+      "operator": "custom",
+      "priority": 5,
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:24+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q77",
+          "proposal_id": "proposal-delia-q77-hard-constraint",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": "horaires compatibles avec une garde alternée une semaine sur deux"
+    }
+  ],
+  "fields": {
+    "activity_boundaries": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:20+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q65",
+          "proposal_id": "proposal-delia-q65-activity-boundaries",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "excluded": [
+          "démarchage téléphonique",
+          "prospection physique"
+        ],
+        "required": [
+          "travail en équipe"
+        ]
+      }
+    },
+    "availability": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:21+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q68",
+          "proposal_id": "proposal-delia-q68-availability",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": "2026-09-01"
+    },
+    "compensation": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:23+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q73",
+          "proposal_id": "proposal-delia-q73-compensation",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "currency": "EUR",
+        "fixed_minimum_gross": 28000,
+        "period": "year",
+        "sensitivity": "private",
+        "target_gross": 42000,
+        "variable": "negotiable"
+      }
+    },
+    "contract_preferences": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:21+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q67",
+          "proposal_id": "proposal-delia-q67-contracts",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "excluded": [
+          "freelance",
+          "temps partiel"
+        ],
+        "full_time_required": true
+      }
+    },
+    "functional_preferences": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:20+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q66",
+          "proposal_id": "proposal-delia-q66-functional-preferences",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "ratings": {
+          "administrer_une_activite": 5,
+          "concevoir": 2,
+          "gerer_une_equipe": 2,
+          "piloter_des_projets": 2,
+          "vendre": 5
+        },
+        "scale_max": 5
+      }
+    },
+    "mobility_and_schedule_constraints": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:22+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q69",
+          "proposal_id": "proposal-delia-q69-mobility-schedule",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "alternating_week_constraint": true,
+        "earliest_start_local_time_range": [
+          "08:30",
+          "09:00"
+        ],
+        "latest_end_local_time_range": [
+          "18:00",
+          "18:30"
+        ],
+        "relocation": false,
+        "sensitivity": "private"
+      }
+    },
+    "targets": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:19+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q62-Q64",
+          "proposal_id": "proposal-delia-q62-q64-career-targets",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "functional_domains": {
+          "acceptable": [
+            "relation client",
+            "gestion de projet"
+          ],
+          "priority": [
+            "gestion administrative"
+          ]
+        },
+        "industry_sectors": {
+          "acceptable": [
+            "agencement et aménagement intérieur",
+            "cuisine et mobilier sur mesure",
+            "architecture ou décoration",
+            "commerce et distribution"
+          ],
+          "excluded": [
+            "immobilier",
+            "restauration"
+          ],
+          "priority": [
+            "luxe",
+            "hôtellerie",
+            "cosmétique",
+            "bien-être",
+            "banque et assurance"
+          ]
+        },
+        "job_roles_status": "to_be_defined",
+        "minimum_responsibility_level": "autonome"
+      }
+    },
+    "work_arrangement": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:22+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q70-Q72",
+          "proposal_id": "proposal-delia-q70-q72-work-arrangement",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "business_travel": "occasional_with_overnight",
+        "evening_work": false,
+        "remote_work": "indifferent",
+        "saturday_work": "occasional",
+        "schedule": "full_time",
+        "sunday_work": false,
+        "variable_hours": true
+      }
+    },
+    "work_environment": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:23+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q74-Q76",
+          "proposal_id": "proposal-delia-q74-q76-environment",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "organization_size": "indifferent",
+        "people_management": "optional",
+        "priorities": [
+          "stabilité",
+          "responsabilité",
+          "autonomie",
+          "travail d’équipe"
+        ]
+      }
+    }
+  },
+  "id": "delia-next-role-2026",
+  "migration": "generic-entity-to-career-project-v1",
+  "person_id": "delia-rossignol",
+  "status": "active",
+  "target_preferences": {
+    "functional_domains": {
+      "acceptable": [
+        "relation client",
+        "gestion de projet"
+      ],
+      "priority": [
+        "gestion administrative"
+      ]
+    },
+    "industry_sectors": {
+      "acceptable": [
+        "agencement et aménagement intérieur",
+        "cuisine et mobilier sur mesure",
+        "architecture ou décoration",
+        "commerce et distribution"
+      ],
+      "excluded": [
+        "immobilier",
+        "restauration"
+      ],
+      "priority": [
+        "luxe",
+        "hôtellerie",
+        "cosmétique",
+        "bien-être",
+        "banque et assurance"
+      ]
+    },
+    "job_roles_status": "to_be_defined",
+    "minimum_responsibility_level": "autonome"
+  },
+  "targets": {
+    "industry_sector_ids": [
+      "luxe",
+      "hotellerie",
+      "cosmetique",
+      "bien-etre",
+      "banque-et-assurance",
+      "agencement-et-amenagement-interieur",
+      "cuisine-et-mobilier-sur-mesure",
+      "architecture-ou-decoration",
+      "commerce-et-distribution"
+    ],
+    "job_role_ids": [],
+    "location_ids": []
+  },
+  "type": "career-project",
+  "updated_at": "2026-07-19T17:13:23+00:00"
+}

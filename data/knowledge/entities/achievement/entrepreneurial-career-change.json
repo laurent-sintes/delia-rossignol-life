@@ -1,0 +1,18 @@
+{
+  "fields": {
+    "statement": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T16:56:19+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q80",
+          "proposal_id": "proposal-delia-q80-entrepreneurial-achievement",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": "Réussite d’une reconversion vers un nouveau métier, création d’entreprise et gestion simultanée de projets de bout en bout, de l’analyse du besoin à la satisfaction client."
+    }
+  },
+  "id": "entrepreneurial-career-change",
+  "type": "achievement",
+  "updated_at": "2026-07-19T16:56:19+00:00"
+}

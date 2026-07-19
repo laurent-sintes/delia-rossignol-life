@@ -7,8 +7,8 @@ description: Construire, contrôler et publier le site GitHub Pages de Délia Ro
 
 ## Procédure
 
-1. Lire `AGENTS.md`, particulièrement les règles de dépôt public et de publication GitHub Pages.
-2. Vérifier que toute information demandée est appropriée pour un dépôt public.
+1. Lire `AGENTS.md`, particulièrement la distinction entre dépôt public complet et projection GitHub Pages.
+2. Vérifier que toute information demandée est appropriée pour la projection GitHub Pages.
 3. Modifier les données validées avant de modifier leur présentation.
 4. Administrer la liste blanche dans `site/publication.json`. Autoriser seulement les clés nécessaires; ne jamais autoriser un objet complet implicitement.
 5. Modifier les contenus éditoriaux dans `site/content/` et le style dans `site/assets/`.
@@ -18,4 +18,4 @@ description: Construire, contrôler et publier le site GitHub Pages de Délia Ro
 9. Inspecter toutes les pages générées et rechercher les coordonnées, feedbacks, offres, preuves ou données inattendues.
 10. Ne pousser sur `main` qu'après validation humaine du contenu public. GitHub Actions effectuera le déploiement Pages.
 
-Ne jamais contourner la liste blanche en copiant un fichier privé dans `site/` ou dans `_site/`.
+Les dossiers `private/`, `generated/`, `data/applications/`, `data/offers/`, `data/review/` et `data/sources/` peuvent être versionnés dans Git, mais restent interdits comme sources de Pages. Ne jamais contourner la liste blanche en copiant leur contenu dans `site/` ou dans `_site/`.

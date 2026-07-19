@@ -1,0 +1,43 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T16:56:18+00:00",
+    "knowledge_path": "data/knowledge/entities/education/raison-home-design-2020.json"
+  },
+  "classification": "fact",
+  "confidence": 0.98,
+  "history": [
+    {
+      "at": "2026-07-19T16:56:09+00:00",
+      "from": "pending",
+      "note": "Validation du lot 2 dans Codex le 19 juillet 2026. Publication des points 5 et 10 explicitement autorisée ; niveau logiciel expert précisé par src-1bea0744e58ace98.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q15-home-design-training",
+  "proposed_value": {
+    "completion_status": "completed",
+    "end_date": "2020-12",
+    "institution": "Raison Home",
+    "program": "Home Design",
+    "start_date": "2020-09"
+  },
+  "source": {
+    "evidence": "Formation en Home Design donnée par Raison Home : Sept 2020-décembre 2020",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q15"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "raison-home-design-2020",
+    "entity_type": "education",
+    "field": "details"
+  },
+  "validated_value": {
+    "completion_status": "completed",
+    "end_date": "2020-12",
+    "institution": "Raison Home",
+    "program": "Home Design",
+    "start_date": "2020-09"
+  }
+}

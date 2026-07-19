@@ -1,0 +1,59 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:01:28+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/restaurant-la-maison.json"
+  },
+  "classification": "fact",
+  "confidence": 0.97,
+  "history": [
+    {
+      "at": "2026-07-19T17:01:24+00:00",
+      "from": "pending",
+      "note": "Validation du lot 3 dans Codex le 19 juillet 2026, avec management direct de 8 personnes chez Promod et période ERA de janvier à mai 2018 précisés par src-61b8048b200b285f.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q31-q37-la-maison",
+  "proposed_value": {
+    "activity": "brasserie",
+    "covers_per_day": 40,
+    "end_date": "2018-12",
+    "location": "place Stalingrad, Bordeaux",
+    "responsibilities": [
+      "fixation des prix",
+      "contrats",
+      "paie",
+      "comptabilité",
+      "relations bancaires"
+    ],
+    "start_date": "2012-11",
+    "title_kind": "descriptive"
+  },
+  "source": {
+    "evidence": "Novembre 2012 [...] Fin : décembre 2018 [...] brasserie, place Stalingrad à Bordeaux [...] 40 couverts jour",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q31-Q37"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "restaurant-la-maison",
+    "entity_type": "experience",
+    "field": "details"
+  },
+  "validated_value": {
+    "activity": "brasserie",
+    "covers_per_day": 40,
+    "end_date": "2018-12",
+    "location": "place Stalingrad, Bordeaux",
+    "responsibilities": [
+      "fixation des prix",
+      "contrats",
+      "paie",
+      "comptabilité",
+      "relations bancaires"
+    ],
+    "start_date": "2012-11",
+    "title_kind": "descriptive"
+  }
+}

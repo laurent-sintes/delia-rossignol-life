@@ -1,0 +1,47 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T16:56:18+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q16",
+          "proposal_id": "proposal-delia-q16-raison-home",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "end_date": "2023-12-31",
+        "organization": "Raison Home",
+        "start_date": "2020-08",
+        "title": "franchisée"
+      }
+    },
+    "mission": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:23:27+00:00",
+          "locator": "validation-missions-experiences-2026-07-19.txt#P02",
+          "proposal_id": "proposal-delia-mission-raison-home",
+          "source_id": "src-db65a2ba5207c61f"
+        }
+      ],
+      "value": "Développer une activité de conception et de vente de projets d’agencement au sein de la franchise Raison Home."
+    },
+    "responsibilities": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:38:57+00:00",
+          "locator": "validation-responsabilites-experiences-restantes-2026-07-19.txt#P05",
+          "proposal_id": "proposal-delia-responsibilities-raison-home",
+          "source_id": "src-a9315033eec20535"
+        }
+      ],
+      "value": [
+        "Concevoir et vendre des projets d’agencement dans le cadre de la franchise Raison Home."
+      ]
+    }
+  },
+  "id": "raison-home-franchisee",
+  "type": "experience",
+  "updated_at": "2026-07-19T18:38:57+00:00"
+}

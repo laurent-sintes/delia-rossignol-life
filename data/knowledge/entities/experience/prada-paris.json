@@ -1,0 +1,62 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:04:18+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q42-Q44",
+          "proposal_id": "proposal-delia-q42-q44-prada",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "contract_type": "intérim",
+        "end_year": 2004,
+        "locations": [
+          {
+            "categories": [
+              "maroquinerie"
+            ],
+            "name": "rue de Grenelle"
+          },
+          {
+            "categories": [
+              "maroquinerie",
+              "souliers",
+              "prêt-à-porter"
+            ],
+            "name": "avenue Montaigne"
+          }
+        ],
+        "start_year": 2003
+      }
+    },
+    "mission": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:23:43+00:00",
+          "locator": "precision-clientele-nationale-internationale-prada-sergio-2026-07-19.txt#P01",
+          "proposal_id": "proposal-delia-mission-prada-retail",
+          "source_id": "src-9c71ac18ce41e561"
+        }
+      ],
+      "value": "Assurer une mission de vente au détail auprès d'une clientèle nationale et internationale chez Prada."
+    },
+    "responsibilities": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:36:58+00:00",
+          "locator": "precision-responsabilites-prada-tresor-2026-07-19.txt#P01",
+          "proposal_id": "proposal-delia-responsibilities-prada",
+          "source_id": "src-d8fb610cf9ef9843"
+        }
+      ],
+      "value": [
+        "Assurer la vente au détail et le conseil auprès d’une clientèle nationale et internationale dans les boutiques de la rue de Grenelle et de l’avenue Montaigne."
+      ]
+    }
+  },
+  "id": "prada-paris",
+  "type": "experience",
+  "updated_at": "2026-07-19T18:36:58+00:00"
+}

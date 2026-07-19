@@ -1,0 +1,43 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T16:56:13+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/bleu-rossignol-founder.json"
+  },
+  "classification": "fact",
+  "confidence": 0.98,
+  "history": [
+    {
+      "at": "2026-07-19T16:56:01+00:00",
+      "from": "pending",
+      "note": "Validation du lot 2 dans Codex le 19 juillet 2026. Publication des points 5 et 10 explicitement autorisée ; niveau logiciel expert précisé par src-1bea0744e58ace98.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q02-role-titles",
+  "proposed_value": {
+    "corporate": [
+      "fondatrice",
+      "dirigeante"
+    ],
+    "operational": "conceptrice-agenceuse"
+  },
+  "source": {
+    "evidence": "fondatrice et dirigeante [...] Le métier que j’exerçais tous les jours : conceptrice-agenceuse",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q02"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "bleu-rossignol-founder",
+    "entity_type": "experience",
+    "field": "titles"
+  },
+  "validated_value": {
+    "corporate": [
+      "fondatrice",
+      "dirigeante"
+    ],
+    "operational": "conceptrice-agenceuse"
+  }
+}

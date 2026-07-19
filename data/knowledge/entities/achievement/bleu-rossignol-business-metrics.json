@@ -1,0 +1,27 @@
+{
+  "fields": {
+    "metrics": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T16:56:16+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q11-Q13",
+          "proposal_id": "proposal-delia-q11-q13-metrics",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "boutique_projects": 1,
+        "budget_average_eur": 8000,
+        "budget_max_eur": 80000,
+        "budget_min_eur": 3000,
+        "kitchen_share_percent": 20,
+        "projects_approx": 100,
+        "quote_conversion_rate_percent": 80,
+        "whole_building_projects": 3
+      }
+    }
+  },
+  "id": "bleu-rossignol-business-metrics",
+  "type": "achievement",
+  "updated_at": "2026-07-19T16:56:16+00:00"
+}

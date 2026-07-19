@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import mimetypes
 import re
+import unicodedata
 from pathlib import Path
 from typing import Any
 
@@ -49,6 +50,20 @@ def find_duplicate_keys(proposals: list[dict[str, Any]]) -> list[tuple[str, str,
             duplicates.add(key)
         seen.add(key)
     return sorted(duplicates)
+
+
+def find_unresolved_duplicate_keys(proposals: list[dict[str, Any]]) -> list[tuple[str, str, str]]:
+    """Return duplicate targets that are not an explicit replacement chain."""
+    unresolved: list[tuple[str, str, str]] = []
+    for key in find_duplicate_keys(proposals):
+        group = [proposal for proposal in proposals if proposal_key(proposal) == key]
+        identifiers = {str(proposal.get("id", "")) for proposal in group}
+        replacements = {str(proposal["id"]): proposal.get("replaces_proposal_id") for proposal in group}
+        roots = [proposal_id for proposal_id, replaces in replacements.items() if not replaces]
+        valid_references = all(replaces is None or replaces in identifiers for replaces in replacements.values())
+        if len(roots) != 1 or not valid_references:
+            unresolved.append(key)
+    return unresolved
 
 
 def transition_proposal(
@@ -122,7 +137,10 @@ def apply_proposal(proposal: dict[str, Any], knowledge_root: Path) -> tuple[dict
     value = proposal.get("validated_value")
     existing = fields.get(field)
     if existing and existing.get("value") != value:
-        raise ValueError(f"Conflicting validated value already exists for {entity_type}/{entity_id}/{field}")
+        replaces = proposal.get("replaces_proposal_id")
+        existing_proposal_ids = {item.get("proposal_id") for item in existing.get("provenance", [])}
+        if not replaces or replaces not in existing_proposal_ids:
+            raise ValueError(f"Conflicting validated value already exists for {entity_type}/{entity_id}/{field}")
     provenance = list(existing.get("provenance", [])) if existing else []
     provenance.append(
         {
@@ -143,3 +161,89 @@ def apply_proposal(proposal: dict[str, Any], knowledge_root: Path) -> tuple[dict
         "knowledge_path": entity_path.as_posix(),
     }
     return updated_proposal, entity
+
+
+def _reference_id(value: str) -> str:
+    normalized = unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode("ascii")
+    return re.sub(r"[^a-z0-9]+", "-", normalized.casefold()).strip("-")
+
+
+def migrate_career_project_entity(
+    entity: dict[str, Any],
+    person_id: str,
+    criterion_entity: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Convert a generic validated-entity envelope into the career-project schema.
+
+    The original field envelopes and their provenance remain embedded so the
+    migration is lossless and can be rerun deterministically.
+    """
+    if entity.get("type") != "career-project":
+        raise ValueError("Expected a generic career-project entity")
+    fields = dict(entity.get("fields", {}))
+    target_preferences = dict(fields.get("targets", {}).get("value", {}))
+    sectors = dict(target_preferences.get("industry_sectors", {}))
+    selected_sectors = list(sectors.get("priority", [])) + list(sectors.get("acceptable", []))
+
+    criterion_rules = {
+        "activity_boundaries": ("other", 5, True),
+        "functional_preferences": ("other", 3, False),
+        "contract_preferences": ("contract_type", 5, True),
+        "availability": ("availability", 5, True),
+        "mobility_and_schedule_constraints": ("commute", 5, True),
+        "work_arrangement": ("work_mode", 4, False),
+        "compensation": ("compensation", 5, True),
+        "work_environment": ("work_environment", 4, False),
+    }
+    criteria: list[dict[str, Any]] = []
+    for field_name, (dimension, priority, hard_constraint) in criterion_rules.items():
+        field = fields.get(field_name)
+        if not field:
+            continue
+        criteria.append(
+            {
+                "id": f"criterion-{field_name.replace('_', '-')}",
+                "dimension": dimension,
+                "operator": "custom",
+                "value": field.get("value"),
+                "priority": priority,
+                "hard_constraint": hard_constraint,
+                "provenance": list(field.get("provenance", [])),
+            }
+        )
+
+    if criterion_entity:
+        detail_field = dict(criterion_entity.get("fields", {}).get("details", {}))
+        details = dict(detail_field.get("value", {}))
+        if details:
+            criteria.append(
+                {
+                    "id": str(criterion_entity.get("id", "criterion-imported")),
+                    "dimension": details.get("dimension", "other"),
+                    "operator": details.get("operator", "custom"),
+                    "value": details.get("value"),
+                    "priority": details.get("priority", 3),
+                    "hard_constraint": bool(details.get("hard_constraint", False)),
+                    "provenance": list(detail_field.get("provenance", [])),
+                }
+            )
+
+    result = dict(entity)
+    result.update(
+        {
+            "person_id": person_id,
+            "status": "active",
+            "targets": {
+                "industry_sector_ids": [_reference_id(str(value)) for value in selected_sectors],
+                "job_role_ids": [],
+                "location_ids": [],
+            },
+            "criteria": criteria,
+            "target_preferences": target_preferences,
+            "migration": "generic-entity-to-career-project-v1",
+        }
+    )
+    availability = fields.get("availability", {}).get("value")
+    if availability:
+        result["availability"] = availability
+    return result

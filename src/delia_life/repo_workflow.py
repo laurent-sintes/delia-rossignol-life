@@ -14,6 +14,7 @@ from typing import Any
 
 from .core import load_json, utc_now, write_json
 from .site_builder import build_site
+from .site_audit import audit_site
 
 
 def _run_git(root: Path, *arguments: str, required: bool = True) -> str | None:
@@ -207,11 +208,14 @@ def review_content(root: Path, output: Path, host: str, port: int) -> dict[str, 
     )
     if validation.returncode != 0:
         raise ValueError("project validation failed")
+    audit = audit_site(root)
+    if not audit["ok"]:
+        raise ValueError("site audit failed")
     build = build_site(root, output)
     preview = start_preview(root, output.resolve(), host, port)
     config = load_repository_config(root)
     snapshot = git_snapshot(root, config["expected_remote"], config["publish_branch"])
-    return {"tests": "passed", "validation": "passed", "build": build, "preview": preview, "git": snapshot}
+    return {"tests": "passed", "validation": "passed", "audit": audit, "build": build, "preview": preview, "git": snapshot}
 
 
 def prepare_commit(root: Path, output: Path, host: str, port: int) -> dict[str, Any]:

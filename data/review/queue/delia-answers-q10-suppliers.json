@@ -1,0 +1,49 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T16:56:16+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/bleu-rossignol-founder.json"
+  },
+  "classification": "claim",
+  "confidence": 0.95,
+  "history": [
+    {
+      "at": "2026-07-19T16:56:07+00:00",
+      "from": "pending",
+      "note": "Validation du lot 2 dans Codex le 19 juillet 2026. Publication des points 5 et 10 explicitement autorisée ; niveau logiciel expert précisé par src-1bea0744e58ace98.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q10-suppliers",
+  "proposed_value": [
+    "Portéa",
+    "Domélia",
+    "Discac",
+    "OBE Cocinas",
+    "Armony",
+    "Integra",
+    "Laisné",
+    "Bradano"
+  ],
+  "source": {
+    "evidence": "Portéa, Domélia, Discac, OBE Cocinas, Armony, Integra, Laisné, Bradano",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q10"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "bleu-rossignol-founder",
+    "entity_type": "experience",
+    "field": "suppliers"
+  },
+  "validated_value": [
+    "Portéa",
+    "Domélia",
+    "Discac",
+    "OBE Cocinas",
+    "Armony",
+    "Integra",
+    "Laisné",
+    "Bradano"
+  ]
+}

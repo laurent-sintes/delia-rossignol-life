@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import shutil
+import json
 import sys
 import unittest
 from pathlib import Path
@@ -15,8 +16,10 @@ from delia_life.site_builder import (
     markdown_to_html,
     render_cv_template_preview,
     render_json_document,
+    render_knowledge_card,
     safe_source,
 )
+from delia_life.site_audit import audit_site
 
 
 class SiteTests(unittest.TestCase):
@@ -44,6 +47,89 @@ class SiteTests(unittest.TestCase):
         self.assertNotIn("forbidden-secret", rendered)
         self.assertNotIn("private_phone", rendered)
 
+    def test_dates_are_rendered_in_french(self) -> None:
+        rendered = render_knowledge_card(
+            {"fields": {"period": {"value": "2026-07-31"}, "month": {"value": "2020-08"}}},
+            {"title": "Carte", "fields": [{"path": "fields.period.value", "label": "Fin"}, {"path": "fields.month.value", "label": "Début"}]},
+        )
+        self.assertIn("31 juillet 2026", rendered)
+        self.assertIn("août 2020", rendered)
+
+    def test_knowledge_text_highlights_are_safe_and_discreet(self) -> None:
+        rendered = render_knowledge_card(
+            {"fields": {"statement": {"value": "Étudier le besoin avant une solution sur mesure."}}},
+            {"title": "Carte", "fields": [{"path": "fields.statement.value", "label": "Principe", "highlights": ["Étudier le besoin", "solution sur mesure"]}]},
+        )
+        self.assertIn('<strong class="text-highlight">Étudier le besoin</strong>', rendered)
+        self.assertIn('<strong class="text-highlight">solution sur mesure</strong>', rendered)
+
+    def test_knowledge_projection_uses_explicit_nested_paths_without_provenance(self) -> None:
+        rendered = render_knowledge_card(
+            {
+                "fields": {
+                    "details": {
+                        "value": {"title": "Visible", "secret": "forbidden-secret"},
+                        "provenance": [{"source_id": "private-source"}],
+                    }
+                }
+            },
+            {
+                "title": "Carte",
+                "fields": [{"path": "fields.details.value.title", "label": "Fonction"}],
+            },
+        )
+        self.assertIn("Visible", rendered)
+        self.assertIn('class="knowledge-fields knowledge-fields--single"', rendered)
+        self.assertNotIn("forbidden-secret", rendered)
+        self.assertNotIn("private-source", rendered)
+
+    def test_badge_presentation_is_limited_to_scalar_values(self) -> None:
+        rendered = render_knowledge_card(
+            {"fields": {"strengths": {"value": ["Autonomie", "Créativité"]}}},
+            {
+                "title": "Carte",
+                "fields": [{"path": "fields.strengths.value", "label": "Forces", "presentation": "badge"}],
+            },
+        )
+        self.assertIn('class="knowledge-badge">Autonomie</span>', rendered)
+        with self.assertRaisesRegex(ValueError, "Badge presentation"):
+            render_knowledge_card(
+                {"fields": {"metrics": {"value": {"count": 8}}}},
+                {"title": "Carte", "fields": [{"path": "fields.metrics.value", "label": "Métrique", "presentation": "badge"}]},
+            )
+
+    def test_editorial_knowledge_card_separates_summary_and_detail(self) -> None:
+        rendered = render_knowledge_card(
+            {"fields": {"details": {"value": {"role": "Direction", "responsibilities": ["Piloter", "Coordonner"]}}}},
+            {
+                "title": "Expérience",
+                "layout": "editorial",
+                "fields": [
+                    {"path": "fields.details.value.role", "label": "Fonction"},
+                    {
+                        "path": "fields.details.value.responsibilities",
+                        "label": "Responsabilités",
+                        "presentation": "detail",
+                    },
+                ],
+            },
+        )
+        self.assertIn('class="knowledge-card knowledge-card--editorial"', rendered)
+        self.assertIn('class="knowledge-summary"', rendered)
+        self.assertIn('class="knowledge-detail"', rendered)
+        self.assertLess(rendered.index("Fonction"), rendered.index("Responsabilités"))
+
+    def test_site_audit_detects_invalid_badge_and_internal_label(self) -> None:
+        source_path = self.work / "site" / "content" / "knowledge.json"
+        source_path.parent.mkdir(parents=True)
+        source_path.write_text(json.dumps({"fields": {"value": {"value": {"not": "scalar"}}}}), encoding="utf-8")
+        config_path = self.work / "publication.json"
+        config_path.write_text(json.dumps({"pages": [{"kind": "knowledge", "slug": "profil", "sections": [{"cards": [{"source": "site/content/knowledge.json", "title": "Carte", "fields": [{"path": "fields.value.value", "label": "Posture validée", "presentation": "badge"}]}]}]}]}), encoding="utf-8")
+        report = audit_site(self.work, config_path)
+        self.assertFalse(report["ok"])
+        self.assertTrue(any("badge" in item["message"] for item in report["errors"]))
+        self.assertTrue(any("internal validation" in item["message"] for item in report["warnings"]))
+
     def test_markdown_escapes_html_and_filters_unsafe_links(self) -> None:
         rendered = markdown_to_html("# Titre\n\n<script>alert(1)</script> [piège](javascript:alert(1)) [page](profil.html)")
         self.assertIn("&lt;script&gt;", rendered)
@@ -69,23 +155,19 @@ class SiteTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             render_cv_template_preview(template)
 
-    def test_build_site_is_repeatable_and_includes_skill_advice(self) -> None:
+    def test_build_site_is_repeatable_and_includes_advice(self) -> None:
         output = ROOT / "_site"
         first = build_site(ROOT, output)
         second = build_site(ROOT, output)
         self.assertEqual(first["pages"], second["pages"])
         self.assertEqual(
             set(first["pages"]),
-            {"index.html", "profil.html", "templates.html", "modele.html", "administration.html"},
+            {"index.html", "profil.html", "parcours.html", "templates.html", "administration.html"},
         )
         administration = (output / "administration.html").read_text(encoding="utf-8")
-        mental_model = (output / "modele.html").read_text(encoding="utf-8")
         self.assertIn("$ingest-delia-knowledge", administration)
-        self.assertIn("$publish-delia-site", administration)
-        self.assertIn("30 concepts", mental_model)
-        self.assertIn("person-has-experience", mental_model)
-        self.assertIn("career-project-targets-sector", mental_model)
-        self.assertIn("Critère de recherche", mental_model)
+        self.assertIn("$manage-delia-templates", administration)
+        self.assertNotIn("Catalogue des skills", administration)
         self.assertTrue((output / ".nojekyll").exists())
         self.assertTrue((output / "assets" / "style.css").exists())
         self.assertTrue((output / "assets" / "delia-rossignol.avif").exists())
@@ -97,9 +179,14 @@ class SiteTests(unittest.TestCase):
         self.assertNotIn("tel:", templates)
         self.assertNotIn("@gmail.com", templates)
         homepage = (output / "index.html").read_text(encoding="utf-8")
+        parcours = (output / "parcours.html").read_text(encoding="utf-8")
         self.assertIn('class="hero"', homepage)
+        self.assertIn('class="text-highlight">préparer des candidatures</strong>', homepage)
+        self.assertRegex(homepage, r'assets/style\.css\?v=[0-9a-f]{12}')
         self.assertIn('alt="Portrait de Délia Rossignol"', homepage)
         self.assertIn("delia-rossignol-logo.svg", homepage)
+        self.assertIn("knowledge-section--editorial", parcours)
+        self.assertIn("knowledge-card--editorial", parcours)
         self.assertNotIn("tel:", homepage)
         logo = (output / "assets" / "delia-rossignol-logo.svg").read_text(encoding="utf-8")
         self.assertIn("Délia Rossignol", logo)

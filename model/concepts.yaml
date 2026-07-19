@@ -10,7 +10,7 @@ concepts:
   - id: contact-point
     label: Coordonnée
     kind: value_object
-    description: Moyen de contact personnel ou professionnel, daté, qualifié par son usage et privé par défaut.
+    description: Moyen de contact personnel ou professionnel, daté et qualifié par son usage; sa visibilité dans Pages et les documents est privée par défaut, même si la donnée est versionnée.
     privacy: mixed
     storage: private/knowledge/contact-points
     key_attributes: [kind, value, label, usage, valid_from, valid_to, visibility]
@@ -18,7 +18,7 @@ concepts:
   - id: career-project
     label: Projet professionnel
     kind: entity
-    description: Expression versionnée de ce que Délia recherche, accepte, préfère ou exclut dans sa prochaine activité.
+    description: Expression versionnée de ce que Délia recherche, accepte, préfère ou exclut dans sa prochaine activité; exclue de Pages par défaut.
     privacy: private
     storage: private/career-project
     key_attributes: [name, status, valid_from, valid_to, availability, notes]
@@ -154,10 +154,10 @@ concepts:
   - id: experience
     label: Expérience
     kind: entity
-    description: Période d'activité professionnelle, entrepreneuriale, associative ou de mission.
+    description: Période d'activité professionnelle, entrepreneuriale, associative ou de mission, décrite par une mission explicite et sourcée.
     privacy: public
     storage: data/knowledge/entities/experience
-    key_attributes: [title, engagement_type, organization, location, start_date, start_precision, end_date, end_precision, ongoing, responsibilities, outcomes]
+    key_attributes: [title, engagement_type, organization, location, start_date, start_precision, end_date, end_precision, ongoing, mission, responsibilities, outcomes]
 
   - id: education
     label: Formation
@@ -181,7 +181,15 @@ concepts:
     description: Ton, préférences visuelles et posture professionnelle validés pour Délia.
     privacy: public
     storage: data/style/delia.json
-    key_attributes: [tone, colors, preferred_elements, forbidden_elements]
+    key_attributes: [tone, colors, preferred_elements, forbidden_elements, visual_positioning]
+
+  - id: professional-posture
+    label: Approche professionnelle
+    kind: entity
+    description: Principes de travail exprimés, posture professionnelle validée et repères réutilisables pour répondre personnellement à une offre.
+    privacy: public
+    storage: data/knowledge/entities/professional-posture
+    key_attributes: [site_claims, validated_inferences]
 
   - id: job-offer
     label: Offre d'emploi

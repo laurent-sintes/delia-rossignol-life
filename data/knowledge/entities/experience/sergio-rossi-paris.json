@@ -1,0 +1,75 @@
+{
+  "fields": {
+    "chronology": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T16:44:43+00:00",
+          "locator": "precisions-delia-questionnaire-2026-07-19.txt#P04",
+          "proposal_id": "proposal-delia-clarification-sergio-rossi-chronology",
+          "source_id": "src-ac05324b7ceafdce"
+        },
+        {
+          "applied_at": "2026-07-19T19:18:38+00:00",
+          "locator": "validation-chronologie-sergio-rossi-2026-07-19.txt#L3-L8",
+          "proposal_id": "proposal-delia-chronology-sergio-rossi-enriched",
+          "source_id": "src-209dd00534de5d26"
+        }
+      ],
+      "value": {
+        "known_through": "2008-09",
+        "phases": [
+          {
+            "end_date": "2007-12",
+            "event": "première vendeuse Sergio Rossi",
+            "location": "Galeries Lafayette",
+            "start_date": "2006-11"
+          },
+          {
+            "end_date": "2008-09",
+            "event": "ouverture du corner Sergio Rossi",
+            "location": "Le Bon Marché Rive Gauche, 24 rue de Sèvres, 75007 Paris",
+            "start_date": "2008-01"
+          }
+        ],
+        "start_date": "2006-11"
+      }
+    },
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:04:16+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q38-Q41",
+          "proposal_id": "proposal-delia-q38-q41-sergio-rossi",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "direct_reports": 0,
+        "employer": "Sergio Rossi / Gucci Group",
+        "opening_responsibility": true,
+        "responsibilities": [
+          "stock",
+          "objectif commercial"
+        ],
+        "roles": [
+          "première vendeuse",
+          "responsable de corner"
+        ]
+      }
+    },
+    "mission": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:23:45+00:00",
+          "locator": "precision-clientele-nationale-internationale-prada-sergio-2026-07-19.txt#P01",
+          "proposal_id": "proposal-delia-mission-sergio-rossi-international",
+          "source_id": "src-9c71ac18ce41e561"
+        }
+      ],
+      "value": "Développer l'activité commerciale du corner Sergio Rossi, notamment lors de son ouverture au Bon Marché, auprès d'une clientèle nationale et internationale."
+    }
+  },
+  "id": "sergio-rossi-paris",
+  "type": "experience",
+  "updated_at": "2026-07-19T19:18:38+00:00"
+}

@@ -1,0 +1,31 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:13:21+00:00",
+    "knowledge_path": "private/career-project/delia-next-role-2026.json"
+  },
+  "classification": "fact",
+  "confidence": 0.99,
+  "history": [
+    {
+      "at": "2026-07-19T17:13:16+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite du lot 6 dans Codex le 19 juillet 2026 ; donnée réservée à l’espace privé.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q68-availability",
+  "proposed_value": "2026-09-01",
+  "source": {
+    "evidence": "1er septembre 2026",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q68"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-next-role-2026",
+    "entity_type": "career-project",
+    "field": "availability"
+  },
+  "validated_value": "2026-09-01"
+}

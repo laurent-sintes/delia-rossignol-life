@@ -1,0 +1,65 @@
+{
+  "fields": {
+    "interests": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:07:30+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q55",
+          "proposal_id": "proposal-delia-q55-interests",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": [
+        "chant",
+        "voyages"
+      ]
+    },
+    "privacy_defaults": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T16:44:41+00:00",
+          "locator": "precisions-delia-questionnaire-2026-07-19.txt#P06",
+          "proposal_id": "proposal-delia-clarification-cv-private-fields",
+          "source_id": "src-ac05324b7ceafdce"
+        }
+      ],
+      "value": {
+        "cv_forbidden_fields": [
+          "age",
+          "date_of_birth",
+          "family_status",
+          "children"
+        ]
+      }
+    },
+    "professional_name": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T16:49:36+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q56",
+          "proposal_id": "proposal-delia-q56-name",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": "Délia Rossignol"
+    },
+    "signature_strengths": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:24+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q79",
+          "proposal_id": "proposal-delia-q79-strengths",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": [
+        "autonomie",
+        "organisation",
+        "créativité"
+      ]
+    }
+  },
+  "id": "delia-rossignol",
+  "type": "person",
+  "updated_at": "2026-07-19T17:13:24+00:00"
+}

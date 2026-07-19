@@ -1,6 +1,6 @@
 {
   "site": {
-    "description": "Dossier professionnel structuré, administré avec validation humaine.",
+    "description": "Parcours professionnel de Délia Rossignol.",
     "title": "Délia Rossignol"
   },
   "pages": [
@@ -11,46 +11,377 @@
       "title": "Accueil"
     },
     {
-      "kind": "json",
+      "kind": "knowledge",
+      "slug": "profil",
+      "title": "Profil professionnel",
       "sections": [
         {
-          "fields": ["id", "status"],
-          "labels": {
-            "id": "Identité",
-            "status": "État du dossier"
-          },
-          "source": "data/knowledge/profile.json",
-          "title": "Profil"
+          "title": "Repères professionnels",
+          "description": "Une approche du conseil, du commerce et de la conduite de projet.",
+          "cards": [
+            {
+              "source": "data/knowledge/entities/person/delia-rossignol.json",
+              "title": "Délia Rossignol",
+              "eyebrow": "Identité professionnelle",
+              "fields": [
+                {"path": "fields.professional_name.value", "label": "Nom professionnel"},
+                {"path": "fields.signature_strengths.value", "label": "Forces", "presentation": "badge"},
+                {"path": "fields.interests.value", "label": "Centres d’intérêt"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/language-proficiency/delia-english.json",
+              "title": "Anglais",
+              "eyebrow": "Niveau autoévalué",
+              "fields": [
+                {"path": "fields.details.value.speaking_level", "label": "Oral"},
+                {"path": "fields.details.value.reading_level", "label": "Lecture"},
+                {"path": "fields.details.value.writing_level", "label": "Écrit"},
+                {"path": "fields.details.value.professional_use", "label": "Pratique professionnelle"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/organization/bleu-rossignol.json",
+              "title": "BLEU ROSSIGNOL",
+              "eyebrow": "Cadre entrepreneurial",
+              "fields": [
+                {"path": "fields.legal_name.value", "label": "Dénomination"},
+                {"path": "fields.legal_form.value", "label": "Forme juridique"},
+                {"path": "fields.legal_continuity.value.independent_activity_start_date", "label": "Activité indépendante depuis"},
+                {"path": "fields.legal_continuity.value.legal_structure_used_during", "label": "Structure antérieure"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/professional-posture/delia-rossignol.json",
+              "title": "Approche professionnelle",
+              "eyebrow": "Une démarche sur mesure",
+              "layout": "editorial",
+              "fields": [
+                {
+                  "path": "fields.site_claims.value",
+                  "label": "Principes exprimés",
+                  "presentation": "detail",
+                  "highlights": ["Étudier le besoin", "solutions qui arbitrent ergonomie, esthétique et budget", "de la première visite à l’installation", "devis précis, des rendus 3D et un planning", "solution sur mesure", "partenaires locaux et de confiance"]
+                },
+                {
+                  "path": "fields.validated_inferences.value",
+                  "label": "Repères de travail",
+                  "presentation": "detail",
+                  "highlights": ["l’écoute", "clarté des engagements", "responsabilité du projet de bout en bout", "solution adaptée et durable"]
+                }
+              ]
+            }
+          ]
         },
         {
-          "fields": ["skills"],
-          "item_fields": {
-            "skills": ["name", "category", "level", "summary"]
-          },
-          "labels": {
-            "category": "Catégorie",
-            "level": "Niveau",
-            "name": "Compétence",
-            "skills": "Compétences",
-            "summary": "Présentation"
-          },
-          "source": "data/knowledge/skills.json",
-          "title": "Compétences validées"
-        },
-        {
-          "fields": ["status", "tone", "colors", "preferred_elements"],
-          "labels": {
-            "colors": "Couleurs",
-            "preferred_elements": "Éléments privilégiés",
-            "status": "État",
-            "tone": "Ton"
-          },
-          "source": "data/style/delia.json",
-          "title": "Style professionnel"
+          "title": "Réalisations et repères",
+          "description": "Quelques réalisations et repères marquants du parcours.",
+          "cards": [
+            {
+              "source": "data/knowledge/entities/achievement/bleu-rossignol-business-metrics.json",
+              "title": "Activité d’agencement",
+              "eyebrow": "Repères d’activité",
+              "layout": "editorial",
+              "fields": [
+                {
+                  "path": "fields.metrics.value",
+                  "label": "Indicateurs",
+                  "presentation": "detail",
+                  "item_fields": ["projects_approx", "kitchen_share_percent", "boutique_projects", "whole_building_projects", "budget_min_eur", "budget_average_eur", "budget_max_eur", "quote_conversion_rate_percent"],
+                  "labels": {
+                    "projects_approx": "Projets environ",
+                    "kitchen_share_percent": "Part cuisines (%)",
+                    "boutique_projects": "Boutique",
+                    "whole_building_projects": "Bâtiments complets",
+                    "budget_min_eur": "Budget minimum (€)",
+                    "budget_average_eur": "Budget moyen (€)",
+                    "budget_max_eur": "Budget maximum (€)",
+                    "quote_conversion_rate_percent": "Transformation des devis (%)"
+                  }
+                }
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/achievement/entrepreneurial-career-change.json",
+              "title": "Reconversion entrepreneuriale",
+              "eyebrow": "Parcours entrepreneurial",
+              "fields": [
+                {"path": "fields.statement.value", "label": "Réalisation", "highlights": ["création d’entreprise", "projets de bout en bout", "satisfaction client"]}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/achievement/sergio-rossi-corner-opening.json",
+              "title": "Ouverture du corner SERGIO ROSSI",
+              "eyebrow": "Ouverture commerciale",
+              "fields": [
+                {"path": "fields.metrics.value.achievement", "label": "Mission"},
+                {"path": "fields.metrics.value.first_quarter_target_attainment_percent", "label": "Objectif atteint au premier trimestre (%)"},
+                {"path": "fields.personal_significance.value", "label": "Portée personnelle"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/achievement/promod-change-context.json",
+              "title": "Promod pendant la crise des Gilets jaunes",
+              "eyebrow": "Contexte d’activité",
+              "fields": [
+                {"path": "fields.statement.value", "label": "Contexte et contribution"}
+              ]
+            }
+          ]
         }
-      ],
-      "slug": "profil",
-      "title": "Profil public"
+      ]
+    },
+    {
+      "kind": "knowledge",
+      "slug": "parcours",
+      "title": "Parcours et formation",
+      "sections": [
+        {
+          "title": "Expériences professionnelles",
+          "layout": "editorial",
+          "description": "Des expériences au croisement du conseil, du commerce, de la gestion et de l’entrepreneuriat.",
+          "cards": [
+            {
+              "source": "data/knowledge/entities/experience/bleu-rossignol-founder.json",
+              "title": "BLEU ROSSIGNOL",
+              "eyebrow": "2024 — 2026",
+              "fields": [
+                {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
+                {"path": "fields.titles.value.corporate", "label": "Fonctions"},
+                {"path": "fields.titles.value.operational", "label": "Métier"},
+                {"path": "fields.timeframe.value.start_date", "label": "Début"},
+                {"path": "fields.timeframe.value.end_date", "label": "Fin prévue"},
+                {"path": "fields.responsibilities.value", "label": "Responsabilités", "presentation": "detail"},
+                {
+                  "path": "fields.software_proficiency.value",
+                  "label": "Logiciels",
+                  "presentation": "detail",
+                  "item_fields": ["name", "level"],
+                  "labels": {"name": "Outil", "level": "Niveau"}
+                },
+                {"path": "fields.closure_context.value", "label": "Contexte de fermeture", "presentation": "detail"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/experience/raison-home-franchisee.json",
+              "title": "Raison Home",
+              "eyebrow": "2020 — 2023",
+              "fields": [
+                {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
+                {"path": "fields.responsibilities.value", "label": "Responsabilités", "presentation": "detail"},
+                {"path": "fields.details.value.title", "label": "Fonction"},
+                {"path": "fields.details.value.start_date", "label": "Début"},
+                {"path": "fields.details.value.end_date", "label": "Fin"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/experience/cuisinella-sainte-eulalie.json",
+              "title": "Cuisinella Sainte-Eulalie",
+              "eyebrow": "2019 — 2020",
+              "fields": [
+                {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
+                {"path": "fields.responsibilities.value", "label": "Responsabilités", "presentation": "detail"},
+                {"path": "fields.details.value.official_title", "label": "Fonction"},
+                {"path": "fields.details.value.contract_type", "label": "Contrat", "presentation": "badge"},
+                {"path": "fields.timeframe.value.start_date", "label": "Début"},
+                {"path": "fields.timeframe.value.end_date", "label": "Fin"},
+                {"path": "fields.details.value.project_mix.cuisine_percent", "label": "Cuisines (%)"},
+                {"path": "fields.details.value.project_mix.dressing_percent", "label": "Dressings (%)"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/experience/promod-bordeaux.json",
+              "title": "Promod — Bordeaux",
+              "eyebrow": "2018 — 2019",
+              "fields": [
+                {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
+                {"path": "fields.responsibilities.value", "label": "Responsabilités", "presentation": "detail"},
+                {"path": "fields.details.value.title", "label": "Fonction"},
+                {"path": "fields.details.value.contract_type", "label": "Contrat", "presentation": "badge"},
+                {"path": "fields.details.value.start_date", "label": "Début"},
+                {"path": "fields.details.value.end_date", "label": "Fin"},
+                {"path": "fields.details.value.store_positioning", "label": "Magasin"},
+                {"path": "fields.team_management.value.direct_team_size", "label": "Équipe managée", "presentation": "badge"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/experience/era-entre-deux-mers.json",
+              "title": "ERA Entre Deux Mers",
+              "eyebrow": "2018",
+              "fields": [
+                {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
+                {"path": "fields.responsibilities.value", "label": "Responsabilités", "presentation": "detail"},
+                {"path": "fields.official_title.value", "label": "Fonction"},
+                {"path": "fields.details.value.contract_type", "label": "Contrat", "presentation": "badge"},
+                {"path": "fields.timeframe.value.start_date", "label": "Début"},
+                {"path": "fields.timeframe.value.end_date", "label": "Fin"},
+                {"path": "fields.details.value.mandates", "label": "Mandats", "presentation": "badge"},
+                {"path": "fields.details.value.property_estimates_per_month", "label": "Estimations mensuelles", "presentation": "badge"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/experience/restaurant-la-maison.json",
+              "title": "La Maison — Bordeaux",
+              "eyebrow": "2012 — 2018",
+              "fields": [
+                {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
+                {"path": "fields.engagement_type.value.roles", "label": "Statut"},
+                {"path": "fields.details.value.activity", "label": "Activité"},
+                {"path": "fields.details.value.start_date", "label": "Début"},
+                {"path": "fields.details.value.end_date", "label": "Fin"},
+                {"path": "fields.details.value.responsibilities", "label": "Responsabilités", "presentation": "detail"},
+                {"path": "fields.details.value.covers_per_day", "label": "Couverts par jour", "presentation": "badge"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/experience/restaurant-le-manoir.json",
+              "title": "Le Manoir — Paris",
+              "eyebrow": "2008 — 2012",
+              "fields": [
+                {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
+                {"path": "fields.responsibilities.value", "label": "Responsabilités", "presentation": "detail"},
+                {"path": "fields.details.value.engagement_type", "label": "Statut"},
+                {"path": "fields.details.value.activity", "label": "Activité"},
+                {"path": "fields.details.value.start_date", "label": "Début"},
+                {"path": "fields.details.value.end_date", "label": "Fin"},
+                {"path": "fields.details.value.covers_per_day", "label": "Couverts par jour", "presentation": "badge"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/experience/sergio-rossi-paris.json",
+              "title": "SERGIO ROSSI / Gucci Group",
+              "eyebrow": "2006 — 2008",
+              "fields": [
+                {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
+                {"path": "fields.details.value.roles", "label": "Fonctions"},
+                {"path": "fields.chronology.value.start_date", "label": "Début"},
+                {
+                  "path": "fields.chronology.value.phases",
+                  "label": "Chronologie",
+                  "presentation": "detail",
+                  "item_fields": ["location", "event", "start_date", "end_date"],
+                  "labels": {"location": "Lieu", "event": "Événement", "start_date": "Début", "end_date": "Fin"}
+                },
+                {"path": "fields.details.value.responsibilities", "label": "Responsabilités", "presentation": "detail"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/experience/loreal-luxury-products.json",
+              "title": "L’Oréal",
+              "eyebrow": "2004 — 2006",
+              "fields": [
+                {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
+                {"path": "fields.responsibilities.value", "label": "Responsabilités", "presentation": "detail"},
+                {"path": "fields.details.value.title", "label": "Fonction"},
+                {"path": "fields.details.value.contract_type", "label": "Contrat", "presentation": "badge"},
+                {"path": "fields.details.value.role_description", "label": "Périmètre d’intervention", "presentation": "detail"},
+                {"path": "fields.details.value.projects", "label": "Projets", "presentation": "detail"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/experience/prada-paris.json",
+              "title": "Prada — Paris",
+              "eyebrow": "2003 — 2004",
+              "fields": [
+                {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
+                {"path": "fields.responsibilities.value", "label": "Responsabilités", "presentation": "detail"},
+                {"path": "fields.details.value.contract_type", "label": "Contrat", "presentation": "badge"},
+                {
+                  "path": "fields.details.value.locations",
+                  "label": "Boutiques et catégories",
+                  "presentation": "detail",
+                  "item_fields": ["name", "categories"],
+                  "labels": {"name": "Boutique", "categories": "Catégories"}
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Engagements associatifs",
+          "cards": [
+            {
+              "source": "data/knowledge/entities/experience/cadet-roussel-president.json",
+              "title": "Crèche associative Cadet-Roussel",
+              "eyebrow": "2015 — 2018",
+              "fields": [
+                {"path": "fields.mission.value", "label": "Mission"},
+                {"path": "fields.responsibilities.value", "label": "Responsabilités"},
+                {"path": "fields.details.value.title", "label": "Fonction"},
+                {"path": "fields.details.value.engagement_type", "label": "Engagement"},
+                {"path": "fields.details.value.capacity_cribs", "label": "Berceaux"},
+                {"path": "fields.details.value.staff_count", "label": "Salariés"},
+                {"path": "fields.details.value.responsibilities", "label": "Responsabilités"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/experience/tresor-des-pirates-treasurer.json",
+              "title": "Trésor des pirates",
+              "eyebrow": "2018 — 2019",
+              "fields": [
+                {"path": "fields.mission.value", "label": "Mission"},
+                {"path": "fields.details.value.title", "label": "Fonction"},
+                {"path": "fields.details.value.engagement_type", "label": "Engagement"},
+                {"path": "fields.details.value.focus", "label": "Domaine"}
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Formation",
+          "cards": [
+            {
+              "source": "data/knowledge/entities/education/raison-home-design-2020.json",
+              "title": "Home Design — Raison Home",
+              "eyebrow": "2020",
+              "fields": [
+                {"path": "fields.details.value.program", "label": "Programme"},
+                {"path": "fields.details.value.start_date", "label": "Début"},
+                {"path": "fields.details.value.end_date", "label": "Fin"},
+                {"path": "fields.details.value.completion_status", "label": "Statut"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/education/raison-home-continuous-training.json",
+              "title": "Formation continue",
+              "eyebrow": "Depuis 2021",
+              "fields": [
+                {"path": "fields.details.value.minimum_sessions_per_year", "label": "Minimum annuel"},
+                {"path": "fields.details.value.subjects", "label": "Domaines"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/credential/esgci-marketing-commerce-2003.json",
+              "title": "ESGCI",
+              "eyebrow": "2003",
+              "fields": [
+                {"path": "fields.details.value.name", "label": "Diplôme"},
+                {"path": "fields.details.value.level", "label": "Niveau"},
+                {"path": "fields.details.value.completion_status", "label": "Statut"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/education/birkbeck-semester-2002.json",
+              "title": "Birkbeck College — University of London",
+              "eyebrow": "2002",
+              "fields": [
+                {"path": "fields.details.value.program_stage", "label": "Étape"},
+                {"path": "fields.details.value.subjects", "label": "Enseignements"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/education/deug-economics-tolbiac.json",
+              "title": "Sciences économiques — Tolbiac",
+              "eyebrow": "2000",
+              "fields": [
+                {"path": "fields.details.value.program", "label": "Parcours"},
+                {"path": "fields.details.value.institution_label", "label": "Établissement"},
+                {"path": "fields.details.value.completion_status", "label": "Statut"}
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "fields": ["description", "id", "version", "ats_compatible", "formats", "sectors", "roles", "seniority", "countries"],
@@ -69,12 +400,6 @@
       "slug": "templates",
       "source_glob": "templates/cv/*/template.json",
       "title": "Templates de CV"
-    },
-    {
-      "kind": "mental-model",
-      "slug": "modele",
-      "source": "model/model.yaml",
-      "title": "Modèle mental"
     },
     {
       "kind": "administration",

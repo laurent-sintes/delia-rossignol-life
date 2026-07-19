@@ -1,0 +1,45 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:01:28+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/restaurant-le-manoir.json"
+  },
+  "classification": "fact",
+  "confidence": 0.97,
+  "history": [
+    {
+      "at": "2026-07-19T17:01:24+00:00",
+      "from": "pending",
+      "note": "Validation du lot 3 dans Codex le 19 juillet 2026, avec management direct de 8 personnes chez Promod et période ERA de janvier à mai 2018 précisés par src-61b8048b200b285f.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q30-q37-le-manoir",
+  "proposed_value": {
+    "activity": "brasserie",
+    "covers_per_day": 100,
+    "end_date": "2012-09",
+    "engagement_type": "location-gérance avec époux",
+    "location": "7 rue des Moines, 75017 Paris",
+    "start_date": "2008-10"
+  },
+  "source": {
+    "evidence": "octobre 2008 à septembre 2012 [...] brasserie, 7 rue des moines 75017 Paris [...] location-gérance avec ton époux [...] 100 couverts jour",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q30-Q37"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "restaurant-le-manoir",
+    "entity_type": "experience",
+    "field": "details"
+  },
+  "validated_value": {
+    "activity": "brasserie",
+    "covers_per_day": 100,
+    "end_date": "2012-09",
+    "engagement_type": "location-gérance avec époux",
+    "location": "7 rue des Moines, 75017 Paris",
+    "start_date": "2008-10"
+  }
+}

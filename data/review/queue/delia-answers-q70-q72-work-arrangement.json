@@ -1,0 +1,47 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:13:22+00:00",
+    "knowledge_path": "private/career-project/delia-next-role-2026.json"
+  },
+  "classification": "fact",
+  "confidence": 0.98,
+  "history": [
+    {
+      "at": "2026-07-19T17:13:17+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite du lot 6 dans Codex le 19 juillet 2026 ; donnée réservée à l’espace privé.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q70-q72-work-arrangement",
+  "proposed_value": {
+    "business_travel": "occasional_with_overnight",
+    "evening_work": false,
+    "remote_work": "indifferent",
+    "saturday_work": "occasional",
+    "schedule": "full_time",
+    "sunday_work": false,
+    "variable_hours": true
+  },
+  "source": {
+    "evidence": "TT : indifférent [...] Temps plein [...] Soirée, dimanche : NON [...] Samedi : si pas trop souvent [...] Ponctuels, avec nuitée",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q70-Q72"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-next-role-2026",
+    "entity_type": "career-project",
+    "field": "work_arrangement"
+  },
+  "validated_value": {
+    "business_travel": "occasional_with_overnight",
+    "evening_work": false,
+    "remote_work": "indifferent",
+    "saturday_work": "occasional",
+    "schedule": "full_time",
+    "sunday_work": false,
+    "variable_hours": true
+  }
+}

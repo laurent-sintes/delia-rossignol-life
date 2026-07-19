@@ -1,0 +1,72 @@
+{
+  "fields": {
+    "experience_omission_policy": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:04:19+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q45",
+          "proposal_id": "proposal-delia-q45-interim-omission-policy",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "omit_undeveloped_interim_missions_since_2003": true,
+        "reason": "choix éditorial explicite de Délia"
+      }
+    },
+    "photo_usage": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T16:49:36+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q61",
+          "proposal_id": "proposal-delia-q61-photo-policy",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "cv": true,
+        "professional_platforms": true,
+        "public_site": true
+      }
+    },
+    "portfolio_reuse_allowed": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T16:56:17+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q14",
+          "proposal_id": "proposal-delia-q14-portfolio-permission",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": false
+    },
+    "visual_positioning": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:49:48+00:00",
+          "locator": "web-aee479446e3d5462:pages/6bd99b8c55f4e303ca55.html#photo-professionnelle",
+          "proposal_id": "proposal-delia-photo-visual-positioning",
+          "source_id": "src-ab11369aa1cb2805"
+        }
+      ],
+      "value": {
+        "asset": "private/website-archives/delia-rossignol-fr-2026-07-19/delia-professional-photo.png",
+        "caution": "Ces éléments décrivent des signaux de communication visuelle et ne constituent pas des traits de personnalité.",
+        "editorial_intent": [
+          "professionnelle",
+          "chaleureuse",
+          "créative",
+          "accessible"
+        ],
+        "observations": [
+          "Portrait en pied sur fond transparent, avec un sourire franc et une posture détendue.",
+          "Veste claire structurée et haut terracotta, cohérents avec l’univers chaleureux du site.",
+          "Image adaptée aux contextes de relation client, conseil, coordination de projet et commerce qualitatif."
+        ]
+      }
+    }
+  },
+  "id": "delia-rossignol",
+  "type": "style-profile",
+  "updated_at": "2026-07-19T18:49:48+00:00"
+}

@@ -1,0 +1,45 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T18:49:46+00:00",
+    "knowledge_path": "data/knowledge/entities/professional-posture/delia-rossignol.json"
+  },
+  "classification": "claim",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-19T18:49:45+00:00",
+      "from": "pending",
+      "note": "Validation dans Codex le 19 juillet 2026 : lot 1 du site professionnel et analyse de la photo.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-professional-posture-site-claims",
+  "proposed_value": [
+    "Étudier le besoin et les exigences avant de proposer une solution.",
+    "Concevoir des solutions qui arbitrent ergonomie, esthétique et budget.",
+    "Accompagner le projet de la première visite à l’installation.",
+    "Clarifier le déroulement du projet par un devis précis, des rendus 3D et un planning.",
+    "Privilégier une solution sur mesure, fonctionnelle et ajustée : « juste ce qu’il vous faut ».",
+    "Piloter la réalisation avec des partenaires locaux et de confiance."
+  ],
+  "source": {
+    "evidence": "Le site présente l’étude du besoin, la conception intégrant ergonomie, esthétique et budget, l’accompagnement de la visite à l’installation, les rendus 3D, le planning, le sur-mesure ajusté et le recours à des partenaires locaux.",
+    "id": "src-ab11369aa1cb2805",
+    "locator": "web-aee479446e3d5462:pages/6bd99b8c55f4e303ca55.html#accueil"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-rossignol",
+    "entity_type": "professional-posture",
+    "field": "site_claims"
+  },
+  "validated_value": [
+    "Étudier le besoin et les exigences avant de proposer une solution.",
+    "Concevoir des solutions qui arbitrent ergonomie, esthétique et budget.",
+    "Accompagner le projet de la première visite à l’installation.",
+    "Clarifier le déroulement du projet par un devis précis, des rendus 3D et un planning.",
+    "Privilégier une solution sur mesure, fonctionnelle et ajustée : « juste ce qu’il vous faut ».",
+    "Piloter la réalisation avec des partenaires locaux et de confiance."
+  ]
+}

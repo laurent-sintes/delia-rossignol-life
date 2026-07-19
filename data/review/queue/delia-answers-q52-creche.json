@@ -1,0 +1,55 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:07:30+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/cadet-roussel-president.json"
+  },
+  "classification": "fact",
+  "confidence": 0.97,
+  "history": [
+    {
+      "at": "2026-07-19T17:07:25+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite du lot 5 dans Codex le 19 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q52-creche",
+  "proposed_value": {
+    "capacity_cribs": 24,
+    "end_year": 2018,
+    "engagement_type": "bénévole",
+    "organization": "crèche associative Cadet-Roussel",
+    "responsibilities": [
+      "gestion",
+      "entretiens de fin d’année"
+    ],
+    "staff_count": 11,
+    "start_year": 2015,
+    "title": "présidente"
+  },
+  "source": {
+    "evidence": "présidente [...] 24 berceaux, 11 salariés [...] bénévole [...] entretiens de fin d’année",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q52-Q54"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "cadet-roussel-president",
+    "entity_type": "experience",
+    "field": "details"
+  },
+  "validated_value": {
+    "capacity_cribs": 24,
+    "end_year": 2018,
+    "engagement_type": "bénévole",
+    "organization": "crèche associative Cadet-Roussel",
+    "responsibilities": [
+      "gestion",
+      "entretiens de fin d’année"
+    ],
+    "staff_count": 11,
+    "start_year": 2015,
+    "title": "présidente"
+  }
+}

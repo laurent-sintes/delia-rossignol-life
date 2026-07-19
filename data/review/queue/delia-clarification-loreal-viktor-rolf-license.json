@@ -1,0 +1,41 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T16:44:43+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/loreal-luxury-products.json"
+  },
+  "classification": "fact",
+  "confidence": 0.99,
+  "history": [
+    {
+      "at": "2026-07-19T16:44:40+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite dans Codex le 19 juillet 2026 : J’accepte ces 7 corrections",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-clarification-loreal-viktor-rolf-license",
+  "proposed_value": {
+    "brand": "Viktor & Rolf",
+    "license_holder": "L'Oréal",
+    "project": "Flowerbomb",
+    "within_delia_scope": true
+  },
+  "source": {
+    "evidence": "Flowerbomb relevait bien du périmètre de Délia : L'Oréal détenait la licence Viktor & Rolf.",
+    "id": "src-ac05324b7ceafdce",
+    "locator": "precisions-delia-questionnaire-2026-07-19.txt#P05"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "loreal-luxury-products",
+    "entity_type": "experience",
+    "field": "flowerbomb_context"
+  },
+  "validated_value": {
+    "brand": "Viktor & Rolf",
+    "license_holder": "L'Oréal",
+    "project": "Flowerbomb",
+    "within_delia_scope": true
+  }
+}

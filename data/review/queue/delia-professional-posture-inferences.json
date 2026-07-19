@@ -1,0 +1,43 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T18:49:47+00:00",
+    "knowledge_path": "data/knowledge/entities/professional-posture/delia-rossignol.json"
+  },
+  "classification": "inference",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-19T18:49:47+00:00",
+      "from": "pending",
+      "note": "Validation dans Codex le 19 juillet 2026 : lot 1 du site professionnel et analyse de la photo.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-professional-posture-inferences",
+  "proposed_value": [
+    "Placer l’écoute et la compréhension concrète du besoin avant la solution.",
+    "Rendre les contraintes productives : espace, budget, usages et esthétique sont traités ensemble.",
+    "Privilégier une relation de proximité, fondée sur la clarté des engagements et le suivi.",
+    "Assumer la responsabilité du projet de bout en bout, de la conception à la réalisation.",
+    "Valoriser le pragmatisme : une solution adaptée et durable plutôt qu’un standard ou une survente."
+  ],
+  "source": {
+    "evidence": "Analyse de la posture exprimée par le site professionnel de Délia, explicitement validée par Laurent Sintes dans Codex le 19 juillet 2026.",
+    "id": "src-ab11369aa1cb2805",
+    "locator": "web-aee479446e3d5462:pages/6bd99b8c55f4e303ca55.html#analyse-posture"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-rossignol",
+    "entity_type": "professional-posture",
+    "field": "validated_inferences"
+  },
+  "validated_value": [
+    "Placer l’écoute et la compréhension concrète du besoin avant la solution.",
+    "Rendre les contraintes productives : espace, budget, usages et esthétique sont traités ensemble.",
+    "Privilégier une relation de proximité, fondée sur la clarté des engagements et le suivi.",
+    "Assumer la responsabilité du projet de bout en bout, de la conception à la réalisation.",
+    "Valoriser le pragmatisme : une solution adaptée et durable plutôt qu’un standard ou une survente."
+  ]
+}

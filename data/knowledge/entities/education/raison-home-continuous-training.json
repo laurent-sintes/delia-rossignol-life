@@ -1,0 +1,27 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:07:29+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q51",
+          "proposal_id": "proposal-delia-q51-continuous-training",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "minimum_sessions_per_year": 2,
+        "start_year": 2021,
+        "subjects": [
+          "CAO",
+          "décoration",
+          "vente",
+          "agencement"
+        ]
+      }
+    }
+  },
+  "id": "raison-home-continuous-training",
+  "type": "education",
+  "updated_at": "2026-07-19T17:07:29+00:00"
+}

@@ -1,0 +1,49 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T16:56:16+00:00",
+    "knowledge_path": "data/knowledge/entities/achievement/bleu-rossignol-business-metrics.json"
+  },
+  "classification": "claim",
+  "confidence": 0.9,
+  "history": [
+    {
+      "at": "2026-07-19T16:56:08+00:00",
+      "from": "pending",
+      "note": "Validation du lot 2 dans Codex le 19 juillet 2026. Publication des points 5 et 10 explicitement autorisée ; niveau logiciel expert précisé par src-1bea0744e58ace98.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q11-q13-metrics",
+  "proposed_value": {
+    "boutique_projects": 1,
+    "budget_average_eur": 8000,
+    "budget_max_eur": 80000,
+    "budget_min_eur": 3000,
+    "kitchen_share_percent": 20,
+    "projects_approx": 100,
+    "quote_conversion_rate_percent": 80,
+    "whole_building_projects": 3
+  },
+  "source": {
+    "evidence": "100 projets environs [...] entre 3000€ et 80000€ [...] Budget moyen : 8000€ [...] Taux de transfo : 80%",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q11-Q13"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "bleu-rossignol-business-metrics",
+    "entity_type": "achievement",
+    "field": "metrics"
+  },
+  "validated_value": {
+    "boutique_projects": 1,
+    "budget_average_eur": 8000,
+    "budget_max_eur": 80000,
+    "budget_min_eur": 3000,
+    "kitchen_share_percent": 20,
+    "projects_approx": 100,
+    "quote_conversion_rate_percent": 80,
+    "whole_building_projects": 3
+  }
+}

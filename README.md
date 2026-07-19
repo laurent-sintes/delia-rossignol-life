@@ -25,7 +25,7 @@ python scripts/delia_life.py check
 python scripts/delia_life.py --help
 ```
 
-Les originaux doivent être déposés dans `private/originals/`, qui n'est pas versionné. Les fichiers JSON d'exemple présents dans `data/` ne contiennent aucune donnée personnelle réelle.
+Les originaux sont déposés dans `private/originals/` et versionnés avec les manifestes, propositions, décisions et connaissances produites. Le nom `private/` indique une exclusion de GitHub Pages et des candidatures par défaut; il ne constitue pas une protection contre la lecture du dépôt public.
 
 ## Site GitHub Pages
 
@@ -35,7 +35,7 @@ Le site statique est construit sans dépendance externe depuis `site/publication
 python scripts/delia_life.py build-site --output _site
 ```
 
-Le dépôt étant public, toute donnée committée est visible même si elle n'apparaît pas dans Pages. Les offres, candidatures, preuves, manifestes réels et files de revue sont donc ignorés par Git. Un push sur `main` déclenche `.github/workflows/pages.yml`, puisque la source Pages du dépôt est configurée sur GitHub Actions.
+Le dépôt versionne l'ensemble du dossier métier : sources, archives, offres, candidatures, preuves, manifestes, files de revue, connaissances et documents générés. Ces fichiers sont donc lisibles dans le dépôt public. GitHub Pages n'en publie qu'une projection choisie par `site/publication.json`; `_site/` est régénéré et n'est pas versionné. Un push sur `main` déclenche `.github/workflows/pages.yml`, puisque la source Pages du dépôt est configurée sur GitHub Actions.
 
 ## Workflow Git assisté
 

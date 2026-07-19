@@ -1,0 +1,42 @@
+{
+  "fields": {
+    "site_claims": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:49:46+00:00",
+          "locator": "web-aee479446e3d5462:pages/6bd99b8c55f4e303ca55.html#accueil",
+          "proposal_id": "proposal-delia-professional-posture-site-claims",
+          "source_id": "src-ab11369aa1cb2805"
+        }
+      ],
+      "value": [
+        "Étudier le besoin et les exigences avant de proposer une solution.",
+        "Concevoir des solutions qui arbitrent ergonomie, esthétique et budget.",
+        "Accompagner le projet de la première visite à l’installation.",
+        "Clarifier le déroulement du projet par un devis précis, des rendus 3D et un planning.",
+        "Privilégier une solution sur mesure, fonctionnelle et ajustée : « juste ce qu’il vous faut ».",
+        "Piloter la réalisation avec des partenaires locaux et de confiance."
+      ]
+    },
+    "validated_inferences": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T18:49:47+00:00",
+          "locator": "web-aee479446e3d5462:pages/6bd99b8c55f4e303ca55.html#analyse-posture",
+          "proposal_id": "proposal-delia-professional-posture-inferences",
+          "source_id": "src-ab11369aa1cb2805"
+        }
+      ],
+      "value": [
+        "Placer l’écoute et la compréhension concrète du besoin avant la solution.",
+        "Rendre les contraintes productives : espace, budget, usages et esthétique sont traités ensemble.",
+        "Privilégier une relation de proximité, fondée sur la clarté des engagements et le suivi.",
+        "Assumer la responsabilité du projet de bout en bout, de la conception à la réalisation.",
+        "Valoriser le pragmatisme : une solution adaptée et durable plutôt qu’un standard ou une survente."
+      ]
+    }
+  },
+  "id": "delia-rossignol",
+  "type": "professional-posture",
+  "updated_at": "2026-07-19T18:49:47+00:00"
+}

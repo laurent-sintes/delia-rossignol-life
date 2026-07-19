@@ -1,0 +1,25 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-19T17:13:24+00:00",
+          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q77",
+          "proposal_id": "proposal-delia-q77-hard-constraint",
+          "source_id": "src-6d29e5e55ff715de"
+        }
+      ],
+      "value": {
+        "dimension": "schedule",
+        "hard_constraint": true,
+        "operator": "custom",
+        "priority": 5,
+        "sensitivity": "private",
+        "value": "horaires compatibles avec une garde alternée une semaine sur deux"
+      }
+    }
+  },
+  "id": "alternating-week-schedule",
+  "type": "search-criterion",
+  "updated_at": "2026-07-19T17:13:24+00:00"
+}

@@ -1,0 +1,57 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T16:44:43+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/sergio-rossi-paris.json"
+  },
+  "classification": "fact",
+  "confidence": 0.99,
+  "history": [
+    {
+      "at": "2026-07-19T16:44:40+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite dans Codex le 19 juillet 2026 : J’accepte ces 7 corrections",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-clarification-sergio-rossi-chronology",
+  "proposed_value": {
+    "known_through": "2008-01",
+    "phases": [
+      {
+        "end_date": "2007-12",
+        "location": "Galeries Lafayette"
+      },
+      {
+        "event": "ouverture du corner du Bon Marché",
+        "start_date": "2008-01"
+      }
+    ],
+    "start_date": "2006-11"
+  },
+  "source": {
+    "evidence": "Délia a été employée par SERGIO ROSSI aux Galeries Lafayette jusqu'en décembre 2007, avant d'ouvrir le corner en janvier 2008.",
+    "id": "src-ac05324b7ceafdce",
+    "locator": "precisions-delia-questionnaire-2026-07-19.txt#P04"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "sergio-rossi-paris",
+    "entity_type": "experience",
+    "field": "chronology"
+  },
+  "validated_value": {
+    "known_through": "2008-01",
+    "phases": [
+      {
+        "end_date": "2007-12",
+        "location": "Galeries Lafayette"
+      },
+      {
+        "event": "ouverture du corner du Bon Marché",
+        "start_date": "2008-01"
+      }
+    ],
+    "start_date": "2006-11"
+  }
+}

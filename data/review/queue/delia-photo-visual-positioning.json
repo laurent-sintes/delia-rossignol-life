@@ -1,0 +1,59 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T18:49:48+00:00",
+    "knowledge_path": "data/knowledge/entities/style-profile/delia-rossignol.json"
+  },
+  "classification": "inference",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-19T18:49:48+00:00",
+      "from": "pending",
+      "note": "Validation dans Codex le 19 juillet 2026 : lot 1 du site professionnel et analyse de la photo.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-photo-visual-positioning",
+  "proposed_value": {
+    "asset": "private/website-archives/delia-rossignol-fr-2026-07-19/delia-professional-photo.png",
+    "caution": "Ces éléments décrivent des signaux de communication visuelle et ne constituent pas des traits de personnalité.",
+    "editorial_intent": [
+      "professionnelle",
+      "chaleureuse",
+      "créative",
+      "accessible"
+    ],
+    "observations": [
+      "Portrait en pied sur fond transparent, avec un sourire franc et une posture détendue.",
+      "Veste claire structurée et haut terracotta, cohérents avec l’univers chaleureux du site.",
+      "Image adaptée aux contextes de relation client, conseil, coordination de projet et commerce qualitatif."
+    ]
+  },
+  "source": {
+    "evidence": "Analyse de la photo professionnelle publique de Délia, explicitement validée par Laurent Sintes dans Codex le 19 juillet 2026.",
+    "id": "src-ab11369aa1cb2805",
+    "locator": "web-aee479446e3d5462:pages/6bd99b8c55f4e303ca55.html#photo-professionnelle"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-rossignol",
+    "entity_type": "style-profile",
+    "field": "visual_positioning"
+  },
+  "validated_value": {
+    "asset": "private/website-archives/delia-rossignol-fr-2026-07-19/delia-professional-photo.png",
+    "caution": "Ces éléments décrivent des signaux de communication visuelle et ne constituent pas des traits de personnalité.",
+    "editorial_intent": [
+      "professionnelle",
+      "chaleureuse",
+      "créative",
+      "accessible"
+    ],
+    "observations": [
+      "Portrait en pied sur fond transparent, avec un sourire franc et une posture détendue.",
+      "Veste claire structurée et haut terracotta, cohérents avec l’univers chaleureux du site.",
+      "Image adaptée aux contextes de relation client, conseil, coordination de projet et commerce qualitatif."
+    ]
+  }
+}

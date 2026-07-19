@@ -1,0 +1,45 @@
+{
+  "application": {
+    "applied_at": "2026-07-19T17:13:23+00:00",
+    "knowledge_path": "private/career-project/delia-next-role-2026.json"
+  },
+  "classification": "fact",
+  "confidence": 0.99,
+  "history": [
+    {
+      "at": "2026-07-19T17:13:17+00:00",
+      "from": "pending",
+      "note": "Acceptation explicite du lot 6 dans Codex le 19 juillet 2026 ; donnée réservée à l’espace privé.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-q73-compensation",
+  "proposed_value": {
+    "currency": "EUR",
+    "fixed_minimum_gross": 28000,
+    "period": "year",
+    "sensitivity": "private",
+    "target_gross": 42000,
+    "variable": "negotiable"
+  },
+  "source": {
+    "evidence": "Fixe mini : 28K€. Objectif : 42K€. Variable possible : à voir",
+    "id": "src-6d29e5e55ff715de",
+    "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q73"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-next-role-2026",
+    "entity_type": "career-project",
+    "field": "compensation"
+  },
+  "validated_value": {
+    "currency": "EUR",
+    "fixed_minimum_gross": 28000,
+    "period": "year",
+    "sensitivity": "private",
+    "target_gross": 42000,
+    "variable": "negotiable"
+  }
+}
