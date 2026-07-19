@@ -5,6 +5,7 @@ import sys
 import unittest
 import uuid
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -13,6 +14,7 @@ TEST_TMP.mkdir(exist_ok=True)
 
 from delia_life.site_audit import audit_site
 from delia_life.site_builder import (
+    _cleanup_stale_site_builds,
     build_site,
     markdown_to_html,
     render_cv_template_preview,
@@ -156,11 +158,8 @@ class SiteTests(unittest.TestCase):
 
     def test_build_site_is_repeatable_and_includes_advice(self) -> None:
         output = ROOT / "_site"
-        stale_staging = ROOT / ".runtime" / "site-builds" / f"_site.staging-stale{uuid.uuid4().hex}"
-        stale_staging.mkdir(parents=True)
         first = build_site(ROOT, output)
         second = build_site(ROOT, output)
-        self.assertFalse(stale_staging.exists())
         self.assertEqual(list(ROOT.glob("._site.staging-*")), [])
         self.assertEqual(first["pages"], second["pages"])
         self.assertEqual(
@@ -190,6 +189,17 @@ class SiteTests(unittest.TestCase):
         logo = (output / "assets" / "delia-rossignol-logo.svg").read_text(encoding="utf-8")
         self.assertIn("Délia Rossignol", logo)
         self.assertNotIn("Agenceur", logo)
+
+    def test_stale_site_build_cleanup_is_requested_deterministically(self) -> None:
+        staging_root = self.work / "site-builds"
+        stale = staging_root / "_site.staging-deadbeef"
+        with (
+            patch.object(Path, "glob", return_value=iter([stale])) as glob,
+            patch("delia_life.site_builder.remove_tree") as remove,
+        ):
+            _cleanup_stale_site_builds(staging_root, "_site")
+        glob.assert_called_once_with("_site.staging-*")
+        remove.assert_called_once_with(stale, ignore_errors=True)
 
     def test_failed_site_build_preserves_the_previous_output(self) -> None:
         output = self.work / "site"

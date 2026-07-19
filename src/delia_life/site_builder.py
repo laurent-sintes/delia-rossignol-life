@@ -684,6 +684,11 @@ def _build_site_in_place(root: Path, output: Path, config_path: Path | None = No
     }
 
 
+def _cleanup_stale_site_builds(staging_root: Path, output_name: str) -> None:
+    for stale_staging in staging_root.glob(f"{output_name}.staging-*"):
+        remove_tree(stale_staging, ignore_errors=True)
+
+
 def build_site(root: Path, output: Path, config_path: Path | None = None) -> dict[str, Any]:
     """Build completely in staging, then publish files with rollback protection."""
     root = root.resolve()
@@ -695,8 +700,7 @@ def build_site(root: Path, output: Path, config_path: Path | None = None) -> dic
     transaction_id = uuid.uuid4().hex
     staging_root = root / ".runtime" / "site-builds"
     staging_root.mkdir(parents=True, exist_ok=True)
-    for stale_staging in staging_root.glob(f"{output.name}.staging-*"):
-        remove_tree(stale_staging, ignore_errors=True)
+    _cleanup_stale_site_builds(staging_root, output.name)
     staging = staging_root / f"{output.name}.staging-{transaction_id}"
     try:
         result = _build_site_in_place(root, staging, config_path)

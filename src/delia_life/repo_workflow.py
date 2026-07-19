@@ -143,7 +143,9 @@ def start_preview(root: Path, site_dir: Path, host: str, port: int) -> dict[str,
     options["stdout"] = log
     options["stderr"] = subprocess.STDOUT
     if os.name == "nt":
-        options["creationflags"] = subprocess.CREATE_NO_WINDOW | subprocess.CREATE_NEW_PROCESS_GROUP
+        options["creationflags"] = getattr(subprocess, "CREATE_NO_WINDOW", 0) | getattr(
+            subprocess, "CREATE_NEW_PROCESS_GROUP", 0
+        )
     else:
         options["start_new_session"] = True
     try:
