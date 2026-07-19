@@ -7,10 +7,11 @@ import uuid
 from email import policy
 from email.parser import BytesParser
 from pathlib import Path
+from tempfile import gettempdir
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-TEST_TMP = ROOT / ".test-tmp"
+TEST_TMP = Path(gettempdir()) / "delia-rossignol-life-tests"
 TEST_TMP.mkdir(exist_ok=True)
 
 from delia_life.offer_feedback_email import prepare_offer_feedback_email
@@ -34,8 +35,11 @@ class OfferFeedbackEmailTests(unittest.TestCase):
                     "employer": "Maison Exemple",
                     "contract_type": "CDI",
                     "location_label": "Bordeaux",
+                    "sector_labels": ["luxe"],
+                    "compensation": {"minimum": 32000, "maximum": 36000, "currency": "EUR", "period": "year"},
+                    "full_time": True,
                     "source_url": "https://jobs.example/offers/1",
-                    "assessment": {"score": 91, "reasons": ["secteur très recherché : luxe"]},
+                    "assessment": {"score": 91, "reasons": ["secteur très recherché : luxe"], "unknowns": ["rémunération non précisée", "temps plein à confirmer"]},
                 }
             ]
         }
@@ -55,10 +59,38 @@ class OfferFeedbackEmailTests(unittest.TestCase):
         self.assertEqual(message["Subject"], "Sélection de 1 offres — ton avis")
         draft_text = (self.work / "draft" / "offer-selection.txt").read_text(encoding="utf-8")
         self.assertIn("laurent-sintes.github.io", draft_text)
-        self.assertNotIn("score", draft_text)
+        self.assertIn("Secteur d’activité : luxe", draft_text)
+        self.assertIn("Mission / poste : Responsable boutique", draft_text)
+        self.assertIn("Salaire proposé : 32\u202f000 – 36\u202f000 € brut/an", draft_text)
+        self.assertIn("Pertinence : 91/100", draft_text)
+        self.assertIn("Point de vigilance : aucun point bloquant identifié", draft_text)
         self.assertEqual([attachment.get_filename() for attachment in message.iter_attachments()], ["cv.pdf"])
         manifest = json.loads((self.work / "draft" / "manifest.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["send_authorization"], "required")
+        html_body = (self.work / "draft" / "offer-selection.html").read_text(encoding="utf-8")
+        self.assertIn('style="color: #b85c20;"', html_body)
+        self.assertIn('<li style="margin: 0 0 18px 0; padding: 0;">', html_body)
+
+    def test_limits_a_default_email_to_fifty_ranked_offers(self) -> None:
+        report = {"offers": [{"id": f"offer-{index}", "title": "Poste", "employer": "Employeur", "source_url": "https://jobs.example/offers", "assessment": {}} for index in range(55)]}
+        cv = self.work / "cv.pdf"
+        cv.write_bytes(b"%PDF-1.4\nexample")
+        result = prepare_offer_feedback_email(report, "delia@example.test", "https://example.test", cv, self.work / "draft")
+        self.assertEqual(result["offer_count"], 50)
+        with self.assertRaises(ValueError):
+            prepare_offer_feedback_email(report, "delia@example.test", "https://example.test", cv, self.work / "too-many", limit=51)
+
+    def test_default_email_orders_offers_by_descending_relevance(self) -> None:
+        report = {
+            "offers": [
+                {"id": "lower", "title": "Poste", "employer": "Employeur", "source_url": "https://jobs.example/lower", "assessment": {"score": 20}},
+                {"id": "higher", "title": "Poste", "employer": "Employeur", "source_url": "https://jobs.example/higher", "assessment": {"score": 90}},
+            ]
+        }
+        cv = self.work / "cv.pdf"
+        cv.write_bytes(b"%PDF-1.4\nexample")
+        result = prepare_offer_feedback_email(report, "delia@example.test", "https://example.test", cv, self.work / "draft")
+        self.assertEqual(result["offer_ids"], ["higher", "lower"])
 
     def test_rejects_invalid_recipient(self) -> None:
         cv = self.work / "cv.pdf"

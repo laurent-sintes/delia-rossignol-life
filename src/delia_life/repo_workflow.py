@@ -200,14 +200,14 @@ def _run_quality_gate(root: Path, command: list[str], failure_message: str) -> N
         raise ValueError(failure_message)
 
 
-def review_content(root: Path, output: Path, host: str, port: int) -> dict[str, Any]:
-    documents = build_documents(root)
+def _run_common_quality_gates(root: Path) -> None:
     _run_quality_gate(
         root,
         [sys.executable, "-m", "ruff", "check", "src", "scripts", "tests"],
         "lint failed",
     )
     _run_quality_gate(root, [sys.executable, "-m", "mypy"], "static typing failed")
+    _run_quality_gate(root, [sys.executable, "-m", "pip", "check"], "dependency validation failed")
     _run_quality_gate(
         root,
         [sys.executable, "-m", "coverage", "run", "-m", "unittest", "discover", "-s", "tests", "-v"],
@@ -223,6 +223,26 @@ def review_content(root: Path, output: Path, host: str, port: int) -> dict[str, 
         [sys.executable, str(root / "scripts" / "delia_life.py"), "check"],
         "project validation failed",
     )
+
+
+def review_operational(root: Path) -> dict[str, Any]:
+    """Validate code and operational data without rebuilding documents or the site."""
+    _run_common_quality_gates(root)
+    config = load_repository_config(root)
+    snapshot = git_snapshot(root, config["expected_remote"], config["publish_branch"])
+    return {
+        "lint": "passed",
+        "typing": "passed",
+        "tests": "passed",
+        "coverage": "passed",
+        "validation": "passed",
+        "git": snapshot,
+    }
+
+
+def review_content(root: Path, output: Path, host: str, port: int) -> dict[str, Any]:
+    documents = build_documents(root)
+    _run_common_quality_gates(root)
     document_check = check_documents(root)
     if not document_check["ok"]:
         raise ValueError("document validation failed: " + "; ".join(document_check["errors"]))

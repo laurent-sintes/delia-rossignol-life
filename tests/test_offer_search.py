@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from delia_life.core import load_json
 from delia_life.offer_search import canonical_offer_url, offer_identity, rank_offers, score_offer
+from delia_life.project_validation import missing_priority_sector_coverage
 
 
 class OfferSearchTests(unittest.TestCase):
@@ -94,6 +95,26 @@ class OfferSearchTests(unittest.TestCase):
         luxury_score = score_offer(luxury, self.project, self.policy, set(), self.today)["score"]
         cosmetics_score = score_offer(cosmetics, self.project, self.policy, set(), self.today)["score"]
         self.assertGreater(luxury_score, cosmetics_score)
+
+    def test_ranked_report_keeps_email_header_fields(self) -> None:
+        offer = {
+            **self.base,
+            "sector_labels": ["luxe"],
+            "compensation": {"minimum": 30000, "currency": "EUR", "period": "year"},
+            "conditions": {"insurance_experience_required": False},
+        }
+        result = rank_offers([offer], self.project, self.policy, set(), today=self.today)
+        ranked = result["offers"][0]
+        self.assertEqual(ranked["sector_labels"], ["luxe"])
+        self.assertEqual(ranked["compensation"]["minimum"], 30000)
+        self.assertTrue(ranked["full_time"])
+        self.assertIn("insurance_experience_required", ranked["conditions"])
+
+    def test_priority_sectors_must_have_declared_source_coverage(self) -> None:
+        self.assertEqual(missing_priority_sector_coverage(self.project, self.policy), [])
+        incomplete_policy = {**self.policy, "priority_sector_coverage": {"luxe": ["careers.lvmh.com"]}}
+        errors = missing_priority_sector_coverage(self.project, incomplete_policy)
+        self.assertTrue(any("banque-et-assurance" in error for error in errors))
 
 
 if __name__ == "__main__":

@@ -5,11 +5,12 @@ import sys
 import unittest
 import uuid
 from pathlib import Path
+from tempfile import gettempdir
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-TEST_TMP = ROOT / ".test-tmp"
+TEST_TMP = Path(gettempdir()) / "delia-rossignol-life-tests"
 TEST_TMP.mkdir(exist_ok=True)
 
 from delia_life.storage import atomic_write_bytes_group, remove_tree
@@ -35,11 +36,11 @@ class StorageTests(unittest.TestCase):
             nonlocal calls
             calls += 1
             if calls == 2:
-                raise PermissionError("injected failure")
+                raise RuntimeError("injected failure")
             real_replace(source, destination)
 
         with (
-            patch("delia_life.storage.os.replace", side_effect=flaky_replace),
+            patch("delia_life.core.os.replace", side_effect=flaky_replace),
             self.assertRaisesRegex(RuntimeError, "File transaction failed"),
         ):
             atomic_write_bytes_group({first: b"new-first", second: b"new-second"})

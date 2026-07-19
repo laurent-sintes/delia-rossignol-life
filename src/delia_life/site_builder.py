@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import hashlib
 import html
 import json
 import re
 import shutil
+import tempfile
 import urllib.parse
 import uuid
 from datetime import date
@@ -689,6 +691,11 @@ def _cleanup_stale_site_builds(staging_root: Path, output_name: str) -> None:
         remove_tree(stale_staging, ignore_errors=True)
 
 
+def _site_runtime_root(root: Path) -> Path:
+    project_key = hashlib.sha256(str(root).encode("utf-8")).hexdigest()[:16]
+    return Path(tempfile.gettempdir()) / "delia-rossignol-life" / "site-builds" / project_key
+
+
 def build_site(root: Path, output: Path, config_path: Path | None = None) -> dict[str, Any]:
     """Build completely in staging, then publish files with rollback protection."""
     root = root.resolve()
@@ -698,14 +705,14 @@ def build_site(root: Path, output: Path, config_path: Path | None = None) -> dic
     if output.exists() and any(output.iterdir()) and not (output / ".delia-site-output").exists():
         raise ValueError(f"Refusing to replace unmarked output directory: {output}")
     transaction_id = uuid.uuid4().hex
-    staging_root = root / ".runtime" / "site-builds"
+    staging_root = _site_runtime_root(root)
     staging_root.mkdir(parents=True, exist_ok=True)
     _cleanup_stale_site_builds(staging_root, output.name)
     staging = staging_root / f"{output.name}.staging-{transaction_id}"
     try:
         result = _build_site_in_place(root, staging, config_path)
         output.mkdir(parents=True, exist_ok=True)
-        lock_path = root / ".runtime" / "site-publish.lock"
+        lock_path = staging_root / "site-publish.lock"
         with exclusive_directory_lock(lock_path):
             previous_manifest = output / ".delia-site-manifest.json"
             previous_files = set(load_json(previous_manifest).get("files", [])) if previous_manifest.exists() else set()

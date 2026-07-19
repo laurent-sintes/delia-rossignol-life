@@ -16,12 +16,13 @@ Le paquet `delia_life` transforme des données validées en connaissances, docum
 - Une proposition appliquée est immuable et sa chaîne de remplacement est linéaire, connexe et sans cycle.
 - Une validation par lot est préparée entièrement avant toute écriture, puis committée sous verrou avec restauration en cas d'échec.
 - Les fichiers JSON sont écrits par remplacement atomique après synchronisation sur disque.
+- Les remplacements atomiques réessaient brièvement les verrous transitoires de Windows et des clients de synchronisation ; les fichiers de test, de vérification documentaire et de staging du site vivent dans le répertoire temporaire système, hors OneDrive.
 - Le build du site préserve la version servie tant que le nouvel artefact n'est pas complet.
 - Le crawl web refuse les réseaux privés, les redirections inter-domaines et les réponses hors limite; une indisponibilité de `robots.txt` bloque l'ingestion.
 - Un PDF publié est reproductible à partir des connaissances, de la stratégie éditoriale et du template versionnés.
 
 ## Qualité automatisée
 
-Ruff contrôle le style et les erreurs statiques, mypy vérifie les interfaces du paquet et Coverage impose un seuil minimal de 75 % de couverture de branches. GitHub Actions exécute ces contrôles sous Python 3.11 et 3.13 avant le build Pages. Les versions testées sont figées dans `requirements/constraints.txt`.
+Ruff contrôle le style et les erreurs statiques, mypy vérifie les interfaces du paquet et Coverage impose un seuil minimal de 75 % de couverture de branches. `pyproject.toml` décrit les plages compatibles ; `requirements/constraints.txt` fige l’ensemble des versions directes et transitives testées. `pip check` est exécuté localement et dans GitHub Actions pour vérifier que l’environnement résolu est cohérent. GitHub Actions exécute ces contrôles sous Python 3.11 et 3.13 avant le build Pages.
 
 La commande `python scripts/repo_flow.py review-content` applique les mêmes contrôles, reconstruit les documents et le site, puis réutilise le serveur local de prévisualisation.

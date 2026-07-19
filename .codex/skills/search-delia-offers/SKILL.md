@@ -7,9 +7,9 @@ description: Rechercher sur internet des offres d’emploi actuelles pour Délia
 
 ## Workflow
 
-1. Charger `private/career-project/delia-next-role-2026.json` et `config/offer-search.json`. Ne jamais exposer dans le rapport les critères marqués sensibles.
-2. Rechercher sur le web des annonces actuelles correspondant aux secteurs et fonctions du projet professionnel, autour de Bordeaux. Couvrir plusieurs domaines de `source_domains`; viser au moins `candidate_pool_minimum` annonces distinctes.
-3. Ouvrir la page exacte de chaque offre. Vérifier qu’elle est encore active et relever titre, employeur, lien canonique, source, lieu, contrat, date, résumé factuel, compétences et conditions explicites. Exclure les pages de résultats génériques du classement final.
+1. Charger `private/career-project/delia-next-role-2026.json` et `config/offer-search.json`, puis exécuter `python scripts/delia_life.py check`. La couverture de chaque secteur prioritaire doit être déclarée dans `priority_sector_coverage`; la compléter avant tout scan. Ne jamais exposer dans le rapport les critères marqués sensibles.
+2. Rechercher sur le web des annonces actuelles correspondant aux secteurs et fonctions du projet professionnel, autour de Bordeaux. Suivre `source_strategy.priority_order` : d’abord les portails directs des grandes enseignes et des maisons, ensuite les sites spécialisés, puis les agrégateurs. Couvrir plusieurs domaines de `source_domains`; viser au moins `candidate_pool_minimum` annonces distinctes.
+3. Ouvrir la page exacte de chaque offre. Vérifier qu’elle est encore active et relever titre, employeur, lien canonique, source, lieu, contrat, date, résumé factuel, compétences et conditions explicites. Pour une annonce repérée par un agrégateur, remonter vers la page employeur lorsqu’elle est disponible, conformément à `require_direct_offer_verification`. Exclure les pages de résultats génériques du classement final.
 4. Respecter les conditions d’utilisation, `robots.txt` et les limites d’accès. Ne contourner ni connexion, ni CAPTCHA, ni dispositif anti-robot. Ne pas recopier l’annonce intégralement; conserver seulement les faits utiles et un court résumé original.
 5. Enregistrer chaque annonce normalisée sous `data/offers/YYYY-MM-DD/`. Utiliser le schéma `schemas/job-offer.schema.json` et renseigner au minimum ses champs obligatoires. Marquer toute donnée absente comme inconnue; ne jamais l’inférer silencieusement.
 6. Exécuter `python scripts/delia_life.py rank-offers data/offers/YYYY-MM-DD --output generated/offer-search/YYYY-MM-DD.json`.
@@ -19,7 +19,7 @@ description: Rechercher sur internet des offres d’emploi actuelles pour Délia
 ## Règles de sélection
 
 - Prioriser les CDI. Accepter un nombre limité de missions d’intérim lorsque le contenu est particulièrement pertinent.
-- Utiliser le luxe comme critère de départage fort : c’est un environnement particulièrement recherché par Délia.
+- Utiliser le luxe comme critère de départage fort : c’est un environnement particulièrement recherché par Délia. Rechercher aussi systématiquement les métiers de relation client, gestion de portefeuille, back-office et coordination des portails directs banque-assurance ; ne pas assimiler vente-conseil et démarchage.
 - Exclure le freelance, le temps partiel, l’immobilier, la restauration, la prospection physique et le démarchage téléphonique.
 - Ne pas supposer compatibles le salaire, les horaires, la garde alternée, le travail en soirée ou le dimanche lorsqu’ils ne sont pas précisés.
 - Favoriser la stabilité, l’autonomie, la responsabilité, le travail en équipe, la relation client et la gestion administrative.

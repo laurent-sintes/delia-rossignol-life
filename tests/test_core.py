@@ -6,14 +6,16 @@ import sys
 import unittest
 import uuid
 from pathlib import Path
+from tempfile import gettempdir
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-TEST_TMP = ROOT / ".test-tmp"
+TEST_TMP = Path(gettempdir()) / "delia-rossignol-life-tests"
 TEST_TMP.mkdir(exist_ok=True)
 
 from delia_life.application_plan import plan_personal_response
-from delia_life.core import load_json, sha256_file, stable_id, write_json
+from delia_life.core import load_json, replace_file, sha256_file, stable_id, write_json
 from delia_life.experience import missing_experience_missions, missing_experience_responsibilities
 from delia_life.ingestion import (
     apply_proposal,
@@ -50,6 +52,29 @@ class CoreTests(unittest.TestCase):
 
     def test_stable_id_normalizes_case_and_spaces(self) -> None:
         self.assertEqual(stable_id("SRC", " Délia "), stable_id("src", "délia"))
+
+    def test_atomic_replace_retries_a_short_lived_file_lock(self) -> None:
+        source = self.work / "source.json"
+        target = self.work / "target.json"
+        source.write_text("new", encoding="utf-8")
+        target.write_text("old", encoding="utf-8")
+        original_replace = __import__("os").replace
+        attempts = 0
+
+        def locked_then_replace(from_path: str | Path, to_path: str | Path) -> None:
+            nonlocal attempts
+            attempts += 1
+            if attempts < 3:
+                raise PermissionError(5, "Access is denied", str(to_path))
+            original_replace(from_path, to_path)
+
+        with (
+            patch("delia_life.core.os.replace", side_effect=locked_then_replace),
+            patch("delia_life.core.time.sleep"),
+        ):
+            replace_file(source, target)
+        self.assertEqual(attempts, 3)
+        self.assertEqual(target.read_text(encoding="utf-8"), "new")
 
     def test_review_then_apply_preserves_provenance(self) -> None:
         proposal = {

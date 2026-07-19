@@ -31,6 +31,10 @@ class CliTests(unittest.TestCase):
             self.assertIn(command, help_text)
         parsed = parser.parse_args(["slurp-site", "https://example.com", "--output", "archive", "--max-bytes", "4096"])
         self.assertEqual(parsed.max_bytes, 4096)
+        ranked = parser.parse_args(["rank-offers", "data/offers/2026-07-19", "data/offers/2026-07-20"])
+        self.assertEqual(ranked.offers, [Path("data/offers/2026-07-19"), Path("data/offers/2026-07-20")])
+        feedback = parser.parse_args(["prepare-offer-feedback-email", "report.json", "--recipient", "delia@example.test", "--site-url", "https://example.test", "--output", "draft"])
+        self.assertEqual(feedback.limit, 50)
 
     def test_main_returns_structured_exit_codes(self) -> None:
         stdout = io.StringIO()

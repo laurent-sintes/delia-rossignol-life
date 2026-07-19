@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import shutil
+import tempfile
 import uuid
 from pathlib import Path
 from typing import Any
@@ -79,7 +80,7 @@ def check_documents(root: Path, public_dir: Path | None = None) -> dict[str, Any
     template, strategy = _inputs(root)
     view = compose_standard_cv(root, template, strategy)
     errors: list[str] = []
-    temporary = root / ".test-tmp" / f"document-check-{uuid.uuid4().hex}"
+    temporary = Path(tempfile.gettempdir()) / "delia-rossignol-life" / f"document-check-{uuid.uuid4().hex}"
     temporary.mkdir(parents=True)
     first_result: dict[str, Any] = {}
     try:

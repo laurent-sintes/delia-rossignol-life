@@ -14,6 +14,7 @@ from delia_life.repo_workflow import (
     git_snapshot,
     load_repository_config,
     review_content,
+    review_operational,
     start_preview,
 )
 
@@ -83,7 +84,7 @@ class RepositoryWorkflowTests(unittest.TestCase):
         ):
             result = review_content(ROOT, ROOT / "_site", "127.0.0.1", 8000)
         documents.assert_called_once_with(ROOT)
-        self.assertEqual(run.call_count, 5)
+        self.assertEqual(run.call_count, 6)
         self.assertEqual(result["lint"], "passed")
         self.assertEqual(result["typing"], "passed")
         self.assertEqual(result["coverage"], "passed")
@@ -97,11 +98,31 @@ class RepositoryWorkflowTests(unittest.TestCase):
             patch("delia_life.repo_workflow.build_documents", return_value={"ok": True}),
             patch(
                 "delia_life.repo_workflow.subprocess.run",
-                side_effect=[successful_process, successful_process, failed_process],
+                side_effect=[successful_process, successful_process, successful_process, failed_process],
             ),
             self.assertRaisesRegex(ValueError, "tests failed"),
         ):
             review_content(ROOT, ROOT / "_site", "127.0.0.1", 8000)
+
+    def test_review_operational_skips_documents_and_site_build(self) -> None:
+        successful_process = SimpleNamespace(returncode=0)
+        snapshot = {"branch": "main"}
+        with (
+            patch("delia_life.repo_workflow.subprocess.run", return_value=successful_process) as run,
+            patch(
+                "delia_life.repo_workflow.load_repository_config",
+                return_value={"expected_remote": "https://example.com/repo.git", "publish_branch": "main"},
+            ),
+            patch("delia_life.repo_workflow.git_snapshot", return_value=snapshot),
+            patch("delia_life.repo_workflow.build_documents") as documents,
+            patch("delia_life.repo_workflow.build_site") as site,
+        ):
+            result = review_operational(ROOT)
+        self.assertEqual(run.call_count, 6)
+        documents.assert_not_called()
+        site.assert_not_called()
+        self.assertEqual(result["validation"], "passed")
+        self.assertEqual(result["git"], snapshot)
 
 
 if __name__ == "__main__":

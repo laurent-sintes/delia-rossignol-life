@@ -16,6 +16,7 @@ from delia_life.repo_workflow import (  # noqa: E402
     prepare_commit,
     preview_status,
     review_content,
+    review_operational,
     start_preview,
     stop_preview,
 )
@@ -41,6 +42,8 @@ def main() -> int:
     review.add_argument("--host", default=config["preview_host"])
     review.add_argument("--port", type=int, default=config["preview_port"])
 
+    commands.add_parser("review-operational", help="test and validate code or operational data without rebuilding documents")
+
     start = commands.add_parser("preview-start", help="build and start the preview")
     start.add_argument("--output", type=Path, default=ROOT / "_site")
     start.add_argument("--host", default=config["preview_host"])
@@ -56,6 +59,8 @@ def main() -> int:
             emit(prepare_commit(ROOT, args.output, args.host, args.port))
         elif args.command == "review-content":
             emit(review_content(ROOT, args.output, args.host, args.port))
+        elif args.command == "review-operational":
+            emit(review_operational(ROOT))
         elif args.command == "preview-start":
             build_documents(ROOT)
             build_site(ROOT, args.output)

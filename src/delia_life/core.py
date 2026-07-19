@@ -4,10 +4,14 @@ import hashlib
 import json
 import os
 import re
+import time
 import uuid
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
+
+_FILE_LOCK_RETRY_ATTEMPTS = 8
+_FILE_LOCK_RETRY_DELAY_SECONDS = 0.025
 
 
 def utc_now() -> str:
@@ -34,6 +38,25 @@ def load_json(path: Path) -> Any:
         return json.load(handle)
 
 
+def replace_file(source: Path, target: Path) -> None:
+    """Replace a file atomically, tolerating short-lived sync-client locks."""
+    last_error: OSError | None = None
+    for attempt in range(_FILE_LOCK_RETRY_ATTEMPTS):
+        try:
+            os.replace(source, target)
+            return
+        except PermissionError as error:
+            last_error = error
+        except OSError as error:
+            if getattr(error, "winerror", None) not in {5, 32, 33}:
+                raise
+            last_error = error
+        time.sleep(_FILE_LOCK_RETRY_DELAY_SECONDS * (2**attempt))
+    if last_error is not None:
+        raise last_error
+    raise RuntimeError("atomic replacement failed without an operating-system error")
+
+
 def write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(f".{path.name}.{os.getpid()}.{uuid.uuid4().hex}.tmp")
@@ -42,7 +65,7 @@ def write_json(path: Path, value: Any) -> None:
         handle.write("\n")
         handle.flush()
         os.fsync(handle.fileno())
-    os.replace(temporary, path)
+    replace_file(temporary, path)
 
 
 def canonical_json_bytes(value: Any) -> bytes:

@@ -1,0 +1,22 @@
+{
+  "id": "figaret-conseiller-vente-11810346",
+  "title": "Conseiller de Vente H/F",
+  "employer": "Figaret",
+  "source_url": "https://fr.fashionjobs.com/emploi/figaret/Conseiller-de-vente-bordeaux-cdi-35h%2C11810346.html",
+  "source_site": "fashionjobs.com",
+  "published_at": "2026-07-01",
+  "captured_at": "2026-07-20T00:24:58+02:00",
+  "last_verified_at": "2026-07-20T00:24:58+02:00",
+  "summary": "En CDI à temps plein à Bordeaux, représenter une maison de prêt-à-porter haut de gamme, conseiller et fidéliser la clientèle, contribuer aux ventes, au merchandising, aux encaissements, aux réceptions et au suivi des indicateurs commerciaux.",
+  "location_label": "Bordeaux",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": ["mode premium", "commerce et distribution"],
+  "functional_domains": ["relation client", "vente"],
+  "required_skills": ["conseil client", "fidélisation", "merchandising", "encaissement", "suivi des indicateurs"],
+  "preferred_skills": ["prêt-à-porter", "organisation"],
+  "conditions": {"work_mode": "onsite"},
+  "evidence": [
+    {"field": "summary", "locator": "fashionjobs.com/emploi/figaret/Conseiller-de-vente-bordeaux-cdi-35h,11810346.html", "excerpt": "CDI temps plein ; clientèle haut de gamme, vente, fidélisation, merchandising et indicateurs."}
+  ]
+}

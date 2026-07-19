@@ -1,0 +1,24 @@
+{
+  "id": "galeries-lafayette-conseiller-personnel-espace-luxe-78207309",
+  "title": "Conseiller Personnel Espace Luxe H/F",
+  "employer": "Galeries Lafayette",
+  "source_url": "https://www.hellowork.com/fr-fr/emplois/78207309.html",
+  "source_site": "hellowork.com",
+  "published_at": "2026-04-21",
+  "captured_at": "2026-07-20T00:24:58+02:00",
+  "last_verified_at": "2026-07-20T00:24:58+02:00",
+  "summary": "En CDI 35 heures à partir de septembre, construire une relation personnalisée avec les clients de l'espace luxe, animer et enrichir le fichier clients et proposer un accompagnement de shopping sur mesure avec des outils digitaux.",
+  "location_label": "Bordeaux",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": ["luxe", "commerce et distribution"],
+  "functional_domains": ["relation client", "vente"],
+  "required_skills": ["relation client", "conseil personnalisé", "fidélisation", "anglais opérationnel", "outils digitaux"],
+  "preferred_skills": ["mode", "orientation résultat"],
+  "conditions": {"work_mode": "onsite", "hours_per_week": 35},
+  "compensation": {"minimum": 29000, "maximum": 35000, "currency": "EUR", "period": "year"},
+  "evidence": [
+    {"field": "summary", "locator": "hellowork.com/emplois/78207309.html", "excerpt": "CDI 35h à partir de septembre ; relation privilégiée, shopping personnalisé et outils digitaux."},
+    {"field": "compensation", "locator": "hellowork.com/emplois/78207309.html", "excerpt": "29 000 à 35 000 euros annuels affichés."}
+  ]
+}

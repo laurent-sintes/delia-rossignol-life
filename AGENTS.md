@@ -38,6 +38,8 @@ Utiliser le paquet Python `delia_life` pour toute opération déterministe :
 
 Ne pas recalculer manuellement ce que la CLI sait calculer. Cela réduit le coût en tokens et garantit la reproductibilité.
 
+Pour la recherche d’offres, la stratégie de sourcing vit dans `config/offer-search.json` : privilégier les portails directs des grandes enseignes et des maisons, puis les sites spécialisés, puis les agrégateurs. Toute annonce issue d’un agrégateur doit être vérifiée sur la page exacte de l’employeur lorsqu’elle est disponible. La configuration doit déclarer au moins une source pour chaque secteur prioritaire du projet de carrière ; le contrôle Python bloque un scan si cette couverture est incomplète.
+
 ## Modèle mental
 
 Le répertoire `model/` est la source de vérité conceptuelle. `model/model.yaml` référence les concepts, relations, cardinalités, invariants et règles de refactor. Les fichiers sous `data/` sont des instances de ce modèle.
@@ -78,6 +80,8 @@ Un template ne contient aucune donnée personnelle. Son fichier `template.json` 
 
 Un retour employeur est une observation rattachée à une candidature, pas une vérité universelle. Ne pas modifier automatiquement le profil ou les règles de génération. Produire une proposition d'amélioration, puis la soumettre à validation.
 
+Pour un email de revue d’offres à Délia, partir du rapport complet, conserver l’ordre de pertinence et inclure jusqu’à 50 offres. Chaque offre doit présenter secteur, mission / poste, salaire proposé ou non communiqué, pertinence sur 100, puis un point de vigilance factuel visuellement signalé ; ne jamais révéler les contraintes personnelles utilisées pour le classement.
+
 ## Publication GitHub Pages
 
 Le fichier `site/publication.json` est la liste blanche de publication. N'ajouter une source ou une clé qu'après validation explicite de son caractère public. Ne jamais publier depuis `private/`, `generated/`, `data/applications/`, `data/offers/`, `data/review/` ou `data/sources/`.
@@ -97,6 +101,8 @@ Pour `publish`, vérifier `config/repository.json`, exécuter `python scripts/re
 Après toute demande utilisateur qui modifie un contenu visible ou publiable — notamment `data/knowledge/`, `model/`, `templates/`, `site/content/`, `site/assets/` ou les descriptions de skills affichées sur le site — exécuter `python scripts/repo_flow.py review-content`.
 
 Cette commande doit régénérer les documents déterministes, terminer les tests, contrôler leur reproductibilité et leur fraîcheur, valider le modèle et la base, construire le site puis assurer le déploiement local. Communiquer l'URL produite et laisser le serveur actif pour permettre la vérification utilisateur. Lors d'une correction suivante, reconstruire sur le même serveur. Ne l'arrêter qu'à la demande explicite de l'utilisateur. Un commit, une publication ou la fin d'un échange ne sont pas des motifs d'arrêt.
+
+Pour une modification limitée au code de recherche, aux offres opérationnelles ou au message de revue par email, exécuter `python scripts/repo_flow.py review-operational` : les mêmes contrôles de code et de données s’appliquent, mais sans régénérer le CV ni reconstruire le site. Le serveur local existant reste actif.
 
 Ne pas créer de commit et ne pas publier sur GitHub au titre de cette règle. `commit` et `publish` restent des autorisations explicites séparées.
 

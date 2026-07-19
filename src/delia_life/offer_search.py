@@ -344,7 +344,12 @@ def rank_offers(
                 "source_site": item.get("source_site"),
                 "published_at": item.get("published_at"),
                 "contract_type": item.get("contract_type"),
+                "full_time": item.get("full_time"),
                 "location_label": item.get("location_label"),
+                "sector_labels": item.get("sector_labels", []),
+                "industry_sector_ids": item.get("industry_sector_ids", []),
+                "compensation": item.get("compensation"),
+                "conditions": item.get("conditions", {}),
                 "summary": item.get("summary"),
                 "assessment": item["assessment"],
             }

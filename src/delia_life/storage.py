@@ -10,6 +10,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
+from .core import replace_file
 from .errors import TransactionError
 
 
@@ -75,7 +76,7 @@ def atomic_write_bytes_group(changes: Mapping[Path, bytes]) -> None:
                 os.fsync(handle.fileno())
             staged[path] = temporary
         for path, temporary in staged.items():
-            os.replace(temporary, path)
+            replace_file(temporary, path)
             replaced.append(path)
     except Exception as error:
         rollback_errors: list[str] = []
@@ -87,7 +88,7 @@ def atomic_write_bytes_group(changes: Mapping[Path, bytes]) -> None:
                 else:
                     recovery = path.with_name(f".{path.name}.{transaction_id}.rollback.tmp")
                     recovery.write_bytes(previous)
-                    os.replace(recovery, path)
+                    replace_file(recovery, path)
             except OSError as rollback_error:
                 rollback_errors.append(f"{path}: {rollback_error}")
         detail = f"; rollback errors: {'; '.join(rollback_errors)}" if rollback_errors else ""
@@ -120,7 +121,7 @@ def atomic_write_json_group(changes: Mapping[Path, Any]) -> None:
                 os.fsync(handle.fileno())
             staged[path] = temporary
         for path, temporary in staged.items():
-            os.replace(temporary, path)
+            replace_file(temporary, path)
             replaced.append(path)
     except Exception as error:
         rollback_errors: list[str] = []
@@ -132,7 +133,7 @@ def atomic_write_json_group(changes: Mapping[Path, Any]) -> None:
                 else:
                     recovery = path.with_name(f".{path.name}.{transaction_id}.rollback.tmp")
                     recovery.write_bytes(previous)
-                    os.replace(recovery, path)
+                    replace_file(recovery, path)
             except OSError as rollback_error:
                 rollback_errors.append(f"{path}: {rollback_error}")
         detail = f"; rollback errors: {'; '.join(rollback_errors)}" if rollback_errors else ""

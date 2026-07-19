@@ -5,11 +5,12 @@ import sys
 import unittest
 import uuid
 from pathlib import Path
+from tempfile import gettempdir
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-TEST_TMP = ROOT / ".test-tmp"
+TEST_TMP = Path(gettempdir()) / "delia-rossignol-life-tests"
 TEST_TMP.mkdir(exist_ok=True)
 
 from delia_life.site_audit import audit_site

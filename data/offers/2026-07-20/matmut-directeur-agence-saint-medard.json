@@ -1,0 +1,25 @@
+{
+  "id": "matmut-directeur-agence-saint-medard-10523",
+  "title": "Directeur(trice) d'Agence",
+  "employer": "Matmut",
+  "source_url": "https://recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx",
+  "source_site": "recrutement.matmut.fr",
+  "published_at": null,
+  "captured_at": "2026-07-20T13:20:00+02:00",
+  "last_verified_at": "2026-07-20T13:20:00+02:00",
+  "summary": "En CDI à temps complet à Saint-Médard-en-Jalles, piloter une agence d'assurance, animer une équipe de conseillers, suivre l'activité et le portefeuille, accompagner les collaborateurs et garantir une expérience client de proximité.",
+  "location_label": "Saint-Médard-en-Jalles",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": ["banque et assurance"],
+  "functional_domains": ["relation client", "gestion administrative", "gestion d'équipe"],
+  "compensation": {"minimum": 38500, "currency": "EUR", "period": "year"},
+  "required_skills": ["animation d'équipe", "pilotage d'activité", "développement de portefeuille", "relation client", "expérience assurantielle"],
+  "preferred_skills": ["accompagnement individuel", "analyse quantitative et qualitative", "gestion de carrière"],
+  "conditions": {"work_mode": "onsite", "hours": "unknown", "insurance_experience_required": true},
+  "evidence": [
+    {"field": "mission", "locator": "recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx#description", "excerpt": "Animer une équipe de conseillers, assurer le développement et la performance du portefeuille de l'agence."},
+    {"field": "compensation", "locator": "recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx#salaire", "excerpt": "Salaire à partir de 38 500 euros brut annuel."},
+    {"field": "profile", "locator": "recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx#profil", "excerpt": "Expérience dans le domaine assurantiel et aptitudes managériales et commerciales demandées."}
+  ]
+}

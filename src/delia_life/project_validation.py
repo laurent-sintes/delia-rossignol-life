@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import re
+import unicodedata
 from collections.abc import Iterable
 from pathlib import Path
 from typing import Any
@@ -23,6 +25,28 @@ def _json_files(directory: Path, recursive: bool = True) -> Iterable[Path]:
     if not directory.exists():
         return []
     return sorted(directory.rglob("*.json") if recursive else directory.glob("*.json"))
+
+
+def _identifier(value: str) -> str:
+    normalized = unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode("ascii")
+    return re.sub(r"[^a-z0-9]+", "-", normalized.lower()).strip("-")
+
+
+def missing_priority_sector_coverage(career_project: dict[str, Any], policy: dict[str, Any]) -> list[str]:
+    priority_sectors = career_project.get("target_preferences", {}).get("industry_sectors", {}).get("priority", [])
+    coverage = policy.get("priority_sector_coverage", {})
+    source_domains = set(policy.get("source_domains", []))
+    errors: list[str] = []
+    for sector in priority_sectors:
+        identifier = _identifier(str(sector))
+        sources = coverage.get(identifier, [])
+        if not sources:
+            errors.append(f"offer search policy: missing source coverage for priority sector {identifier}")
+        elif unknown_domains := sorted(set(sources) - source_domains):
+            errors.append(
+                f"offer search policy: source coverage for {identifier} uses undeclared domains: {', '.join(unknown_domains)}"
+            )
+    return errors
 
 
 def validate_project(root: Path) -> dict[str, Any]:
@@ -76,8 +100,17 @@ def validate_project(root: Path) -> dict[str, Any]:
         (root / "config" / "repository.json", "repository-config"),
         (root / "config" / "offer-search.json", "offer-search-policy"),
     ]
+    loaded_single_contracts: dict[str, dict[str, Any]] = {}
     for path, schema_name in single_contracts:
-        check(path, schema_name)
+        document = check(path, schema_name)
+        if document is not None:
+            loaded_single_contracts[schema_name] = document
+
+    career_projects = [document for _, document in loaded_by_contract.get("career-project", [])]
+    policy = loaded_single_contracts.get("offer-search-policy")
+    for career_project in career_projects:
+        if policy is not None:
+            errors.extend(missing_priority_sector_coverage(career_project, policy))
 
     proposals = [document for _, document in loaded_by_contract.get("proposal", [])]
     for key in find_unresolved_duplicate_keys(proposals):

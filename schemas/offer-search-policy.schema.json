@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
-  "required": ["id", "result_limit", "candidate_pool_minimum", "freshness_days", "contracts", "diversity", "location_queries", "source_domains", "weights"],
+  "required": ["id", "result_limit", "candidate_pool_minimum", "freshness_days", "contracts", "diversity", "location_queries", "source_domains", "priority_sector_coverage", "source_strategy", "weights"],
   "properties": {
     "id": {"type": "string", "minLength": 1},
     "result_limit": {"type": "integer", "minimum": 1, "maximum": 50},
@@ -37,6 +37,30 @@
       "additionalProperties": false
     },
     "source_domains": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "priority_sector_coverage": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {"type": "string", "minLength": 1}
+      }
+    },
+    "source_strategy": {
+      "type": "object",
+      "required": ["priority_order", "direct_employer_domains", "specialized_domains", "require_direct_offer_verification"],
+      "properties": {
+        "priority_order": {
+          "type": "array",
+          "const": ["direct_employer", "specialized", "generalist"]
+        },
+        "direct_employer_domains": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "specialized_domains": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "require_direct_offer_verification": {"type": "boolean", "const": true}
+      },
+      "additionalProperties": false
+    },
     "weights": {
       "type": "object",
       "required": ["contract", "sector", "functional_domain", "knowledge_overlap", "freshness", "constraints"],

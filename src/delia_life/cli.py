@@ -101,8 +101,9 @@ def command_match(args: argparse.Namespace) -> int:
 
 
 def command_rank_offers(args: argparse.Namespace) -> int:
+    offers = [offer for path in args.offers for offer in load_offer_files(path)]
     result = rank_offers(
-        load_offer_files(args.offers),
+        offers,
         load_json(args.career_project),
         load_json(args.policy),
         collect_validated_knowledge_tokens(args.knowledge_root),
@@ -264,7 +265,7 @@ def build_parser() -> argparse.ArgumentParser:
     match.set_defaults(func=command_match)
 
     rank = subparsers.add_parser("rank-offers", help="rank a collected offer pool against Delia's validated career project")
-    rank.add_argument("offers", type=Path, help="job-offer JSON file or directory")
+    rank.add_argument("offers", type=Path, nargs="+", help="one or more job-offer JSON files or directories")
     rank.add_argument("--career-project", type=Path, default=Path("private/career-project/delia-next-role-2026.json"))
     rank.add_argument("--policy", type=Path, default=Path("config/offer-search.json"))
     rank.add_argument("--knowledge-root", type=Path, default=Path("data/knowledge"))
@@ -281,7 +282,7 @@ def build_parser() -> argparse.ArgumentParser:
     feedback_email.add_argument("--site-url", required=True)
     feedback_email.add_argument("--cv-pdf", type=Path, default=Path("site/assets/downloads/cv-delia-rossignol-signature.pdf"))
     feedback_email.add_argument("--output", type=Path, required=True)
-    feedback_email.add_argument("--limit", type=int, default=10)
+    feedback_email.add_argument("--limit", type=int, choices=range(1, 51), default=50)
     feedback_email.add_argument("--offer-id", dest="offer_ids", action="append")
     feedback_email.set_defaults(func=command_prepare_offer_feedback_email)
 
