@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "result_limit", "candidate_pool_minimum", "freshness_days", "contracts", "diversity", "location_queries", "source_domains", "weights"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "result_limit": {"type": "integer", "minimum": 1, "maximum": 50},
+    "candidate_pool_minimum": {"type": "integer", "minimum": 10},
+    "freshness_days": {"type": "integer", "minimum": 1},
+    "contracts": {
+      "type": "object",
+      "required": ["preferred", "acceptable", "excluded"],
+      "properties": {
+        "preferred": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "acceptable": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "excluded": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      },
+      "additionalProperties": false
+    },
+    "diversity": {
+      "type": "object",
+      "required": ["max_per_employer", "max_per_source"],
+      "properties": {
+        "max_per_employer": {"type": "integer", "minimum": 1},
+        "max_per_source": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "location_queries": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "sector_emphasis": {
+      "type": "object",
+      "required": ["labels", "multiplier"],
+      "properties": {
+        "labels": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "multiplier": {"type": "number", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "source_domains": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "weights": {
+      "type": "object",
+      "required": ["contract", "sector", "functional_domain", "knowledge_overlap", "freshness", "constraints"],
+      "properties": {
+        "contract": {"type": "number", "minimum": 0},
+        "sector": {"type": "number", "minimum": 0},
+        "functional_domain": {"type": "number", "minimum": 0},
+        "knowledge_overlap": {"type": "number", "minimum": 0},
+        "freshness": {"type": "number", "minimum": 0},
+        "constraints": {"type": "number", "minimum": 0}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

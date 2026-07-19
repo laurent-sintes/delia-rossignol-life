@@ -74,6 +74,7 @@ def validate_project(root: Path) -> dict[str, Any]:
         (root / "data" / "knowledge" / "skills.json", "skills-index"),
         (root / "site" / "publication.json", "publication"),
         (root / "config" / "repository.json", "repository-config"),
+        (root / "config" / "offer-search.json", "offer-search-policy"),
     ]
     for path, schema_name in single_contracts:
         check(path, schema_name)

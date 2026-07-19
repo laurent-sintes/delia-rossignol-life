@@ -8,7 +8,7 @@ Invoquer `$ingest-delia-knowledge` pour importer un CV, un diplôme, une note ou
 
 ### Préparer une candidature
 
-Utiliser `$match-delia-offers` pour analyser une offre, puis `$generate-delia-application` pour préparer le CV et la lettre. Les templates sont gérés avec `$manage-delia-templates`.
+Utiliser `$search-delia-offers` pour scanner plusieurs sites et classer les 10 opportunités les plus intéressantes. Approfondir ensuite une annonce avec `$match-delia-offers`, puis utiliser `$generate-delia-application` pour préparer le CV et la lettre. Les templates sont gérés avec `$manage-delia-templates`.
 
 ### Suivre les candidatures
 

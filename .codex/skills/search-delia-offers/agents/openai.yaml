@@ -1,0 +1,4 @@
+interface:
+  display_name: "Recherche offres Delia"
+  short_description: "Scanner et classer les offres pertinentes"
+  default_prompt: "Utilise $search-delia-offers pour trouver et classer les 10 meilleures offres actuelles pour Delia."

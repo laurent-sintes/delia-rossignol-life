@@ -105,6 +105,8 @@ Ne pas créer de commit et ne pas publier sur GitHub au titre de cette règle. `
 - Import de CV, diplôme, document ou site : `$ingest-delia-knowledge`.
 - Ajout ou choix d'un modèle : `$manage-delia-templates`.
 - Création d'un CV ou d'une lettre : `$generate-delia-application`.
+- Recherche multi-site et classement d'offres : `$search-delia-offers`.
+- Partage d'une sélection d'offres et collecte du feedback de Délia : `$share-delia-offer-selection`.
 - Analyse et rapprochement d'une offre : `$match-delia-offers`.
 - Événement de candidature ou feedback : `$track-delia-applications`.
 - Construction, contrôle ou publication du site : `$publish-delia-site`.

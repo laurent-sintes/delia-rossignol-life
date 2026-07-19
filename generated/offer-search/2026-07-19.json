@@ -1,0 +1,502 @@
+{
+  "candidate_count": 31,
+  "eligible_count": 21,
+  "excluded": [
+    {
+      "employer": "Maison Aurian via Arobase Emploi",
+      "failures": [
+        "rémunération maximale sous le minimum validé"
+      ],
+      "id": "arobase-boutique-vins-7fb0ca299f0b76a1",
+      "title": "Responsable de Boutique vins & spiritueux H/F"
+    },
+    {
+      "employer": "Acteur de l’énergie via Capactuel",
+      "failures": [
+        "rémunération maximale sous le minimum validé"
+      ],
+      "id": "capactuel-conseiller-clientele-81239276",
+      "title": "Conseiller clientèle en réception d’appels H/F"
+    },
+    {
+      "employer": "Startup via Perles Office",
+      "failures": [
+        "contrat exclu : freelance",
+        "offre à temps partiel"
+      ],
+      "id": "perles-office-manager-freelance",
+      "title": "Office Manager / Responsable RH freelance H/F"
+    },
+    {
+      "employer": "La Poste Groupe",
+      "failures": [
+        "activité exclue : démarchage téléphonique",
+        "rémunération maximale sous le minimum validé"
+      ],
+      "id": "la-poste-relation-client-80563709",
+      "title": "Conseiller en Service Relation Client H/F"
+    },
+    {
+      "employer": "Rectorat de Bordeaux",
+      "failures": [
+        "contrat hors politique de recherche : CDD",
+        "rémunération maximale sous le minimum validé"
+      ],
+      "id": "rectorat-gestionnaire-81317593",
+      "title": "Gestionnaire Administratif et Financier H/F"
+    },
+    {
+      "employer": "Rituals Cosmetics",
+      "failures": [
+        "rémunération maximale sous le minimum validé"
+      ],
+      "id": "rituals-adjoint-merignac-79481939",
+      "title": "Responsable Adjoint — CDI 35H"
+    },
+    {
+      "employer": "TCS — Groupe Sterne",
+      "failures": [
+        "rémunération maximale sous le minimum validé"
+      ],
+      "id": "tcs-conseiller-service-clients-79173745",
+      "title": "Conseiller Service Clients H/F"
+    },
+    {
+      "employer": "Client de Transicia",
+      "failures": [
+        "activité exclue : démarchage téléphonique"
+      ],
+      "id": "transicia-relation-client-77838923",
+      "title": "Chargé de Relation Client B to B H/F"
+    },
+    {
+      "employer": "Université de Bordeaux",
+      "failures": [
+        "contrat hors politique de recherche : CDD",
+        "rémunération maximale sous le minimum validé"
+      ],
+      "id": "universite-gestionnaire-labos-81311925",
+      "title": "Gestionnaire Administratif et Financier de laboratoires H/F"
+    },
+    {
+      "employer": "Entreprise Vince",
+      "failures": [
+        "contrat exclu : temps partiel",
+        "offre à temps partiel"
+      ],
+      "id": "vince-assistant-direction-78115070",
+      "title": "Assistant de Direction polyvalent H/F"
+    }
+  ],
+  "excluded_count": 10,
+  "offers": [
+    {
+      "assessment": {
+        "eligible": true,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "anglais",
+          "bordeaux",
+          "client",
+          "clientele",
+          "conseiller",
+          "contribuer",
+          "corner",
+          "equipe",
+          "galeries",
+          "gestion",
+          "internationale",
+          "lafayette",
+          "ouverture",
+          "participer",
+          "service",
+          "suivi",
+          "valoriser",
+          "vente"
+        ],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur très recherché : luxe",
+          "activité cohérente : relation client",
+          "expérience transférable : anglais, bordeaux, client, clientele, conseiller",
+          "offre publiée il y a 21 jours",
+          "dimension collective explicite"
+        ],
+        "score": 95.0,
+        "unknowns": [
+          "rémunération non précisée"
+        ]
+      },
+      "contract_type": "CDI",
+      "employer": "AMI Paris",
+      "id": "ami-client-advisor-4409991302",
+      "location_label": "Bordeaux",
+      "published_at": "2026-06-28",
+      "rank": 1,
+      "source_site": "linkedin.com",
+      "source_url": "https://fr.linkedin.com/jobs/view/cdi-client-advisor-galeries-lafayette-bordeaux-temps-plein-at-ami-paris-4409991302",
+      "summary": "Participer à l’ouverture d’un corner, accueillir une clientèle locale et internationale, conseiller, fidéliser, valoriser le savoir-faire de la Maison et contribuer au merchandising et au suivi des stocks.",
+      "title": "Client Advisor — Galeries Lafayette Bordeaux"
+    },
+    {
+      "assessment": {
+        "eligible": true,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "autonomie",
+          "bordeaux",
+          "client",
+          "clients",
+          "gerer",
+          "gestion",
+          "magasin",
+          "relation",
+          "service",
+          "suivi",
+          "vente"
+        ],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur très recherché : luxe",
+          "activité prioritaire : gestion administrative",
+          "expérience transférable : autonomie, bordeaux, client, clients, gerer",
+          "offre publiée depuis moins de 8 jours"
+        ],
+        "score": 93.0,
+        "unknowns": [
+          "temps plein à confirmer",
+          "travail en équipe à confirmer",
+          "rémunération non précisée"
+        ]
+      },
+      "contract_type": "CDI",
+      "employer": "Hermès",
+      "id": "hermes-charge-sav-4423205937",
+      "location_label": "Bordeaux",
+      "published_at": "2026-07-16",
+      "rank": 2,
+      "source_site": "linkedin.com",
+      "source_url": "https://fr.linkedin.com/jobs/view/cdi-charg%C3%A9-sav-h-f-magasin-de-bordeaux-at-herm%C3%A8s-4423205937",
+      "summary": "Prendre en charge les demandes après-vente en boutique, maintenir une relation personnalisée, informer les clients du suivi des réparations, gérer les litiges et garantir le niveau de service de la Maison.",
+      "title": "Chargé SAV H/F — Magasin de Bordeaux"
+    },
+    {
+      "assessment": {
+        "eligible": true,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "client",
+          "equipe",
+          "gestion",
+          "magasin",
+          "service",
+          "univers"
+        ],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur très recherché : luxe",
+          "activité prioritaire : gestion administrative",
+          "expérience transférable : client, equipe, gestion, magasin, service",
+          "offre publiée depuis moins de 8 jours",
+          "dimension collective explicite"
+        ],
+        "score": 93.0,
+        "unknowns": [
+          "rémunération non précisée"
+        ]
+      },
+      "contract_type": "CDI",
+      "employer": "Galeries Lafayette Bordeaux",
+      "id": "galeries-lafayette-service-client-4401091856",
+      "location_label": "Bordeaux",
+      "published_at": "2026-07-12",
+      "rank": 3,
+      "source_site": "linkedin.com",
+      "source_url": "https://fr.linkedin.com/jobs/view/employ%C3%A9-service-client-f-h-cdi-at-galeries-lafayette-4401091856",
+      "summary": "Garantir un parcours client fluide de l’accueil à l’encaissement : remboursements, services magasin, fidélité, constitution de dossiers et résolution des litiges dans un univers lifestyle premium.",
+      "title": "Employé Service Client F/H"
+    },
+    {
+      "assessment": {
+        "eligible": true,
+        "gaps": [
+          "offre ancienne : 164 jours"
+        ],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "bordeaux",
+          "client",
+          "corner",
+          "developper",
+          "equipe",
+          "galeries",
+          "lafayette",
+          "piloter",
+          "responsable"
+        ],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur très recherché : luxe",
+          "activité prioritaire : gestion administrative",
+          "expérience transférable : bordeaux, client, corner, developper, equipe",
+          "dimension collective explicite"
+        ],
+        "score": 86.0,
+        "unknowns": []
+      },
+      "contract_type": "CDI",
+      "employer": "Tara Jarmon",
+      "id": "tara-jarmon-responsable-corner-75434413",
+      "location_label": "Bordeaux",
+      "published_at": "2026-02-05",
+      "rank": 4,
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/75434413.html",
+      "summary": "Développer les ventes et l’expérience client, recruter, former et coacher l’équipe, piloter les indicateurs, le merchandising, les flux financiers, les procédures RH et les stocks d’un corner mode.",
+      "title": "Responsable Corner — Galeries Lafayette Bordeaux H/F"
+    },
+    {
+      "assessment": {
+        "eligible": true,
+        "gaps": [
+          "offre ancienne : 39 jours"
+        ],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "anglais",
+          "client",
+          "equipe",
+          "manager",
+          "piloter",
+          "vente"
+        ],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur très recherché : luxe",
+          "activité prioritaire : gestion administrative",
+          "expérience transférable : anglais, client, equipe, manager, piloter",
+          "dimension collective explicite"
+        ],
+        "score": 83.0,
+        "unknowns": []
+      },
+      "contract_type": "CDI",
+      "employer": "Sunglass Hut France",
+      "id": "rayban-store-manager-80023286",
+      "location_label": "Bordeaux",
+      "published_at": "2026-06-10",
+      "rank": 5,
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/80023286.html",
+      "summary": "Piloter un point de vente Ray-Ban, les indicateurs, stocks et reportings ; animer, coacher et recruter l’équipe ; suivre l’administration RH, le merchandising et la fidélisation client.",
+      "title": "Store Manager — Ray-Ban H/F"
+    },
+    {
+      "assessment": {
+        "eligible": true,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "avant",
+          "bordeaux",
+          "client",
+          "confirme",
+          "detail",
+          "responsable",
+          "service"
+        ],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur très recherché : luxe",
+          "activité cohérente : relation client",
+          "expérience transférable : avant, bordeaux, client, confirme, detail",
+          "offre publiée il y a 8 jours"
+        ],
+        "score": 79.0,
+        "unknowns": [
+          "temps plein à confirmer",
+          "travail en équipe à confirmer",
+          "rémunération non précisée"
+        ]
+      },
+      "contract_type": "CDI",
+      "employer": "Maison de luxe via Theodore Search",
+      "id": "theodore-responsable-boutique-luxe",
+      "location_label": "Bordeaux",
+      "published_at": "2026-07-11",
+      "rank": 6,
+      "source_site": "theodore-search.com",
+      "source_url": "https://www.theodore-search.com/en/our-offers/",
+      "summary": "Opportunité actuelle de responsable de boutique dans le luxe à Bordeaux. Le détail des missions et des conditions doit être confirmé sur la fiche complète du cabinet avant toute candidature.",
+      "title": "Responsable de Boutique Luxe F/H"
+    },
+    {
+      "assessment": {
+        "eligible": true,
+        "gaps": [
+          "offre ancienne : 61 jours"
+        ],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "assurer",
+          "avant",
+          "client",
+          "clientele",
+          "conseiller",
+          "gerer",
+          "haut",
+          "produits",
+          "service",
+          "vendeuse",
+          "vente"
+        ],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur très recherché : luxe",
+          "activité cohérente : relation client",
+          "expérience transférable : assurer, avant, client, clientele, conseiller"
+        ],
+        "score": 77.0,
+        "unknowns": [
+          "travail en équipe à confirmer"
+        ]
+      },
+      "contract_type": "CDI",
+      "employer": "Glowee",
+      "id": "glowee-vendeuse-luxe-ae82a13ef5e75793",
+      "location_label": "Bordeaux",
+      "published_at": "2026-05-19",
+      "rank": 7,
+      "source_site": "indeed.com",
+      "source_url": "https://fr.indeed.com/viewjob?jk=ae82a13ef5e75793",
+      "summary": "Accueillir et conseiller une clientèle dans un environnement haut de gamme, assurer la présentation des produits, gérer les stocks et mettre en avant les nouveautés.",
+      "title": "Vendeuse luxe H/F"
+    },
+    {
+      "assessment": {
+        "eligible": true,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "client",
+          "equipe",
+          "gerer",
+          "internationale",
+          "relation",
+          "sont"
+        ],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur acceptable : commerce et distribution",
+          "activité prioritaire : gestion administrative",
+          "expérience transférable : client, equipe, gerer, internationale, relation",
+          "offre publiée depuis moins de 8 jours",
+          "dimension collective explicite"
+        ],
+        "score": 77.0,
+        "unknowns": [
+          "temps plein à confirmer",
+          "rémunération non précisée"
+        ]
+      },
+      "contract_type": "CDI",
+      "employer": "Client de Skills Bordeaux",
+      "id": "skills-adv-export-81285221",
+      "location_label": "Blanquefort",
+      "published_at": "2026-07-14",
+      "rank": 8,
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81285221.html",
+      "summary": "Gérer l’administration des ventes export, la relation client internationale et les flux commerciaux, en lien avec les équipes ; les incoterms, documents douaniers et procédures export sont particulièrement appréciés.",
+      "title": "Gestionnaire ADV Export H/F"
+    },
+    {
+      "assessment": {
+        "eligible": true,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "assurer",
+          "client",
+          "conseiller",
+          "coordination",
+          "ecoute",
+          "equipe",
+          "proposer",
+          "relation",
+          "responsable",
+          "satisfaction",
+          "sein",
+          "solutions"
+        ],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "activité cohérente : relation client",
+          "expérience transférable : assurer, client, conseiller, coordination, ecoute",
+          "offre publiée depuis moins de 8 jours",
+          "dimension collective explicite"
+        ],
+        "score": 67.3,
+        "unknowns": [
+          "adéquation sectorielle à confirmer",
+          "rémunération non précisée"
+        ]
+      },
+      "contract_type": "CDI",
+      "employer": "IZI by EDF",
+      "id": "izi-conseiller-relation-client-8056920",
+      "location_label": "Le Haillan (Bordeaux)",
+      "published_at": "2026-07-13",
+      "rank": 9,
+      "source_site": "recrutement.izi-by-edf.fr",
+      "source_url": "https://recrutement.izi-by-edf.fr/jobs/8056920-conseiller-relation-client-f-h",
+      "summary": "Au sein de l’agence du Haillan, assurer la satisfaction client, comprendre les besoins et proposer des solutions adaptées en coordination avec le responsable d’agence et l’équipe.",
+      "title": "Conseiller Relation Client F/H"
+    },
+    {
+      "assessment": {
+        "eligible": true,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "accompagner",
+          "assurer",
+          "communication",
+          "coordination",
+          "direction",
+          "equipe",
+          "huit",
+          "manager",
+          "responsable"
+        ],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "activité prioritaire : gestion administrative",
+          "expérience transférable : accompagner, assurer, communication, coordination, direction",
+          "offre publiée il y a 20 jours",
+          "dimension collective explicite"
+        ],
+        "score": 65.0,
+        "unknowns": [
+          "adéquation sectorielle à confirmer"
+        ]
+      },
+      "contract_type": "CDI",
+      "employer": "Centre médical via LIP Tertiaire",
+      "id": "lip-responsable-administratif-80751400",
+      "location_label": "Bordeaux",
+      "published_at": "2026-06-29",
+      "rank": 10,
+      "source_site": "bordeaux-emplois.com",
+      "source_url": "https://www.bordeaux-emplois.com/emplois/80751400.html",
+      "summary": "Manager 18 assistants médicaux répartis sur huit sites, animer les réunions, accompagner l’intégration et la montée en compétences, puis assurer le lien entre administration, opérations et direction.",
+      "title": "Responsable Administratif H/F"
+    }
+  ],
+  "policy_id": "delia-offer-search-v1",
+  "unique_count": 31,
+  "warnings": []
+}

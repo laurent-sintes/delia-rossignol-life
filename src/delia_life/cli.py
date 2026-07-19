@@ -16,6 +16,8 @@ from .ingestion import (
     transition_proposal,
 )
 from .mental_model import load_mental_model, model_impact, model_summary
+from .offer_feedback_email import prepare_offer_feedback_email
+from .offer_search import collect_validated_knowledge_tokens, load_offer_files, rank_offers
 from .project_validation import validate_project
 from .recommendation import match_offer, rank_templates
 from .review_batch import create_review_batch, review_batch
@@ -95,6 +97,34 @@ def command_migrate_career_project(args: argparse.Namespace) -> int:
 
 def command_match(args: argparse.Namespace) -> int:
     _print(match_offer(load_json(args.offer), load_json(args.knowledge)))
+    return 0
+
+
+def command_rank_offers(args: argparse.Namespace) -> int:
+    result = rank_offers(
+        load_offer_files(args.offers),
+        load_json(args.career_project),
+        load_json(args.policy),
+        collect_validated_knowledge_tokens(args.knowledge_root),
+        args.limit,
+    )
+    if args.output:
+        write_json(args.output, result)
+    _print(result)
+    return 0
+
+
+def command_prepare_offer_feedback_email(args: argparse.Namespace) -> int:
+    result = prepare_offer_feedback_email(
+        load_json(args.report),
+        args.recipient,
+        args.site_url,
+        args.cv_pdf,
+        args.output,
+        args.limit,
+        args.offer_ids,
+    )
+    _print(result)
     return 0
 
 
@@ -232,6 +262,28 @@ def build_parser() -> argparse.ArgumentParser:
     match.add_argument("offer", type=Path)
     match.add_argument("knowledge", type=Path)
     match.set_defaults(func=command_match)
+
+    rank = subparsers.add_parser("rank-offers", help="rank a collected offer pool against Delia's validated career project")
+    rank.add_argument("offers", type=Path, help="job-offer JSON file or directory")
+    rank.add_argument("--career-project", type=Path, default=Path("private/career-project/delia-next-role-2026.json"))
+    rank.add_argument("--policy", type=Path, default=Path("config/offer-search.json"))
+    rank.add_argument("--knowledge-root", type=Path, default=Path("data/knowledge"))
+    rank.add_argument("--limit", type=int)
+    rank.add_argument("--output", type=Path)
+    rank.set_defaults(func=command_rank_offers)
+
+    feedback_email = subparsers.add_parser(
+        "prepare-offer-feedback-email",
+        help="prepare a non-sending email draft for an offer selection",
+    )
+    feedback_email.add_argument("report", type=Path, help="rank-offers JSON report")
+    feedback_email.add_argument("--recipient", required=True)
+    feedback_email.add_argument("--site-url", required=True)
+    feedback_email.add_argument("--cv-pdf", type=Path, default=Path("site/assets/downloads/cv-delia-rossignol-signature.pdf"))
+    feedback_email.add_argument("--output", type=Path, required=True)
+    feedback_email.add_argument("--limit", type=int, default=10)
+    feedback_email.add_argument("--offer-id", dest="offer_ids", action="append")
+    feedback_email.set_defaults(func=command_prepare_offer_feedback_email)
 
     response_plan = subparsers.add_parser("plan-personal-response", help="create a traceable evidence plan for a personal response")
     response_plan.add_argument("offer", type=Path)

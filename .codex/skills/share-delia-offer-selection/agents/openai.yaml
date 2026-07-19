@@ -1,0 +1,4 @@
+interface:
+  display_name: "Partage offres Délia"
+  short_description: "Préparer un brouillon de sélection"
+  default_prompt: "Utilise -delia-offer-selection pour préparer un email de revue des offres à Délia."

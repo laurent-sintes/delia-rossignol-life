@@ -1,16 +1,29 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
-  "required": ["id", "title", "employer", "required_skills", "preferred_skills"],
+  "required": [
+    "id", "title", "employer", "source_url", "source_site", "published_at", "captured_at",
+    "last_verified_at", "summary", "location_label", "contract_type", "full_time",
+    "required_skills", "preferred_skills", "conditions"
+  ],
   "properties": {
     "id": {"type": "string", "minLength": 1},
     "title": {"type": "string", "minLength": 1},
     "employer": {"type": "string", "minLength": 1},
-    "source_url": {"type": "string", "minLength": 1},
+    "source_url": {"type": "string", "format": "uri", "minLength": 1},
+    "source_site": {"type": "string", "minLength": 1},
+    "published_at": {"type": ["string", "null"], "format": "date"},
+    "captured_at": {"type": "string", "format": "date-time"},
+    "last_verified_at": {"type": "string", "format": "date-time"},
+    "summary": {"type": "string", "minLength": 1},
+    "location_label": {"type": "string", "minLength": 1},
     "industry_sector_ids": {"type": "array", "items": {"type": "string", "minLength": 1}},
     "job_role_ids": {"type": "array", "items": {"type": "string", "minLength": 1}},
     "location_ids": {"type": "array", "items": {"type": "string", "minLength": 1}},
     "contract_type": {"type": "string", "minLength": 1},
+    "full_time": {"type": ["boolean", "null"]},
+    "sector_labels": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "functional_domains": {"type": "array", "items": {"type": "string", "minLength": 1}},
     "work_mode": {"type": "string", "enum": ["onsite", "hybrid", "remote", "mobile", "unknown"]},
     "schedule": {"type": "object"},
     "compensation": {
@@ -24,6 +37,19 @@
     },
     "required_skills": {"type": "array", "items": {"type": "string", "minLength": 1}},
     "preferred_skills": {"type": "array", "items": {"type": "string", "minLength": 1}},
-    "conditions": {"type": "object"}
+    "conditions": {"type": "object"},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["field", "locator", "excerpt"],
+        "properties": {
+          "field": {"type": "string", "minLength": 1},
+          "locator": {"type": "string", "minLength": 1},
+          "excerpt": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    }
   }
 }

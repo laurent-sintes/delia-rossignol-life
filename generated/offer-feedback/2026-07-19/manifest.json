@@ -1,0 +1,25 @@
+{
+  "attachment": {
+    "path": "site\\assets\\downloads\\cv-delia-rossignol-signature.pdf",
+    "sha256": "df6a46f666071904fce4a80841334173e8129f5a4d09e6f7ea4aa7bfc426e218"
+  },
+  "offer_count": 10,
+  "offer_ids": [
+    "hermes-charge-sav-4423205937",
+    "rayban-store-manager-80023286",
+    "ami-client-advisor-4409991302",
+    "galeries-lafayette-service-client-4401091856",
+    "avril-responsable-boutique-80016111",
+    "aroma-zone-adjoint-responsable-80798774",
+    "tara-jarmon-responsable-corner-75434413",
+    "lip-responsable-administratif-80751400",
+    "sii-office-manager-80832913",
+    "adsearch-office-manager-144781"
+  ],
+  "prepared_at": "2026-07-19T21:56:57.599905+00:00",
+  "recipient": "deliarossignol@gmail.com",
+  "send_authorization": "required",
+  "site_url": "https://laurent-sintes.github.io/delia-rossignol-life/",
+  "status": "draft_prepared",
+  "subject": "Sélection de 10 offres — ton avis"
+}

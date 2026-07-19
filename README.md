@@ -30,6 +30,12 @@ python scripts/delia_life.py check-documents
 python scripts/delia_life.py --help
 ```
 
+Le classement déterministe d'un pool d'offres normalisées s'exécute avec :
+
+```powershell
+python scripts/delia_life.py rank-offers data/offers/2026-07-19 --output generated/offer-search/2026-07-19.json
+```
+
 Les originaux sont déposés dans `private/originals/` et versionnés avec les manifestes, propositions, décisions et connaissances produites. Le nom `private/` indique une exclusion de GitHub Pages et des candidatures par défaut; il ne constitue pas une protection contre la lecture du dépôt public.
 
 ## Site GitHub Pages

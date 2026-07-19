@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import io
+import json
 import sys
 import unittest
 from contextlib import redirect_stderr, redirect_stdout
@@ -22,6 +23,8 @@ class CliTests(unittest.TestCase):
             "slurp-site",
             "build-documents",
             "check-documents",
+            "rank-offers",
+            "prepare-offer-feedback-email",
             "build-site",
             "model-impact",
         ]:
@@ -44,7 +47,9 @@ class CliTests(unittest.TestCase):
         stdout = io.StringIO()
         with redirect_stdout(stdout):
             self.assertEqual(main(["check", "--root", str(ROOT)]), 0)
-        self.assertIn('"checked_files": 145', stdout.getvalue())
+        report = json.loads(stdout.getvalue())
+        self.assertTrue(report["ok"])
+        self.assertGreaterEqual(report["checked_files"], 146)
 
 
 if __name__ == "__main__":

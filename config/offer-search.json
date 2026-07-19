@@ -1,0 +1,52 @@
+{
+  "candidate_pool_minimum": 30,
+  "contracts": {
+    "acceptable": [
+      "intérim"
+    ],
+    "excluded": [
+      "freelance",
+      "temps partiel"
+    ],
+    "preferred": [
+      "CDI"
+    ]
+  },
+  "diversity": {
+    "max_per_employer": 2,
+    "max_per_source": 3
+  },
+  "freshness_days": 30,
+  "id": "delia-offer-search-v1",
+  "location_queries": [
+    "Bordeaux",
+    "Bordeaux Métropole",
+    "Bordeaux et alentours"
+  ],
+  "result_limit": 10,
+  "sector_emphasis": {
+    "labels": [
+      "luxe"
+    ],
+    "multiplier": 1.35
+  },
+  "source_domains": [
+    "francetravail.fr",
+    "apec.fr",
+    "hellowork.com",
+    "welcometothejungle.com",
+    "linkedin.com",
+    "indeed.com",
+    "randstad.fr",
+    "adecco.fr",
+    "manpower.fr"
+  ],
+  "weights": {
+    "constraints": 5,
+    "contract": 30,
+    "freshness": 10,
+    "functional_domain": 15,
+    "knowledge_overlap": 20,
+    "sector": 20
+  }
+}
