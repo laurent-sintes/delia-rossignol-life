@@ -1,0 +1,18 @@
+{
+  "fields": {
+    "statement": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-20T14:49:32+00:00",
+          "locator": "precision-perimetre-entrepreneurial-bleu-rossignol-2026-07-20.txt#P02",
+          "proposal_id": "proposal-delia-bleu-rossignol-website-pilotage",
+          "source_id": "src-7b00300a5a39f5be"
+        }
+      ],
+      "value": "Pilotage du développement du site de BLEU ROSSIGNOL, avec apport des photos, du style, des couleurs et du contenu."
+    }
+  },
+  "id": "bleu-rossignol-website-pilotage",
+  "type": "achievement",
+  "updated_at": "2026-07-20T14:49:32+00:00"
+}

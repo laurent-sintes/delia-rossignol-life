@@ -1,0 +1,18 @@
+{
+  "fields": {
+    "statement": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-20T14:49:45+00:00",
+          "locator": "precision-perimetre-entrepreneurial-bleu-rossignol-2026-07-20.txt#P06",
+          "proposal_id": "proposal-delia-bleu-rossignol-supplier-management",
+          "source_id": "src-7b00300a5a39f5be"
+        }
+      ],
+      "value": "Recherche, visite d’usines, évaluation et négociation directe avec les fournisseurs."
+    }
+  },
+  "id": "bleu-rossignol-supplier-management",
+  "type": "achievement",
+  "updated_at": "2026-07-20T14:49:45+00:00"
+}

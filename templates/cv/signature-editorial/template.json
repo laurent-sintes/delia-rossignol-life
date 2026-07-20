@@ -8,7 +8,7 @@
   "roles": ["conseil", "commerce", "gestion-de-projet", "management"],
   "sectors": ["agencement", "commerce", "luxe", "hospitality"],
   "seniority": ["confirmé", "management", "entrepreneuriat"],
-  "version": "1.12.1",
+  "version": "1.13.0",
   "rendering": {
     "engine": "signature-editorial-pdf-v1",
     "page_size": "A4",

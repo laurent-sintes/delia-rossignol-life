@@ -103,11 +103,36 @@
           "context_evidence": {"$ref": "#/$defs/entityField"},
           "highlight": {
             "type": "object",
-            "required": ["label", "evidence"],
+            "required": ["label", "cards"],
             "additionalProperties": false,
             "properties": {
               "label": {"type": "string", "minLength": 1},
-              "evidence": {"$ref": "#/$defs/entityField"}
+              "cards": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 4,
+                "items": {
+                  "type": "object",
+                  "required": ["label", "items"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "label": {"type": "string", "minLength": 1},
+                    "items": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "object",
+                        "required": ["label", "evidence"],
+                        "additionalProperties": false,
+                        "properties": {
+                          "label": {"type": "string", "minLength": 1},
+                          "evidence": {"$ref": "#/$defs/entityField"}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }

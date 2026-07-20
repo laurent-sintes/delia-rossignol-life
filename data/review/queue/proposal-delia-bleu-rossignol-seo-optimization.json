@@ -1,0 +1,31 @@
+{
+  "application": {
+    "applied_at": "2026-07-20T14:49:35+00:00",
+    "knowledge_path": "data/knowledge/entities/achievement/bleu-rossignol-seo-optimization.json"
+  },
+  "classification": "fact",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-20T14:49:34+00:00",
+      "from": "pending",
+      "note": "Validation explicite de l’utilisateur : Go.",
+      "reviewer": "Laurent",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-bleu-rossignol-seo-optimization",
+  "proposed_value": "Analyse des données de visite de Wix et Google Analytics, suivie de trois évolutions du contenu pour améliorer l’indexation et la visibilité SEO.",
+  "source": {
+    "evidence": "Après analyse des données de visite de Wix et Google Analytics, le contenu a été modifié trois fois pour améliorer l'indexation et la visibilité (SEO).",
+    "id": "src-7b00300a5a39f5be",
+    "locator": "precision-perimetre-entrepreneurial-bleu-rossignol-2026-07-20.txt#P03"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "bleu-rossignol-seo-optimization",
+    "entity_type": "achievement",
+    "field": "statement"
+  },
+  "validated_value": "Analyse des données de visite de Wix et Google Analytics, suivie de trois évolutions du contenu pour améliorer l’indexation et la visibilité SEO."
+}

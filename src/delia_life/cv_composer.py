@@ -6,7 +6,16 @@ from pathlib import Path
 from typing import Any
 
 from .core import load_json
-from .cv_model import CVContinuityGroup, CVEducation, CVExperience, CVHighlight, CVSequenceStep, CVViewModel, EvidenceRef
+from .cv_model import (
+    CVContinuityGroup,
+    CVEducation,
+    CVExperience,
+    CVHighlight,
+    CVHighlightCard,
+    CVSequenceStep,
+    CVViewModel,
+    EvidenceRef,
+)
 from .errors import ValidationError
 from .pdf_layout import CVLayoutRules
 
@@ -234,10 +243,26 @@ def _experience_highlight(
     highlight_spec = specification.get("highlight")
     if not highlight_spec:
         return None, ()
-    value, evidence = _referenced_field(context, highlight_spec["evidence"])
-    if not isinstance(value, list) or not value:
-        raise ValidationError(f"Experience highlight must reference a non-empty list: {entity_id}")
-    return CVHighlight(label=str(highlight_spec["label"]), items=tuple(str(item) for item in value)), evidence
+    cards_spec = highlight_spec.get("cards")
+    if not isinstance(cards_spec, list) or not 2 <= len(cards_spec) <= context.maximum_sequence_steps:
+        raise ValidationError(f"Experience highlight must define a valid card sequence: {entity_id}")
+    cards: list[CVHighlightCard] = []
+    evidence: list[EvidenceRef] = []
+    for card_spec in cards_spec:
+        card_label = str(card_spec.get("label", "")).strip()
+        item_specs = card_spec.get("items")
+        if not card_label or not isinstance(item_specs, list) or not item_specs:
+            raise ValidationError(f"Experience highlight card is incomplete: {entity_id}")
+        items: list[str] = []
+        for item_spec in item_specs:
+            item_label = str(item_spec.get("label", "")).strip()
+            if not item_label:
+                raise ValidationError(f"Experience highlight item label is missing: {entity_id}")
+            _, item_evidence = _referenced_field(context, item_spec["evidence"])
+            items.append(item_label)
+            evidence.extend(item_evidence)
+        cards.append(CVHighlightCard(label=card_label, items=tuple(items)))
+    return CVHighlight(label=str(highlight_spec["label"]), cards=tuple(cards)), tuple(evidence)
 
 
 def _experience(

@@ -1,5 +1,5 @@
 {
-  "id": "delia-standard-cv-content-v6",
+  "id": "delia-standard-cv-content-v7",
   "status": "validated",
   "template_id": "signature-editorial",
   "person_id": "delia-rossignol",
@@ -53,7 +53,47 @@
       "context_evidence": {"entity_type": "organization", "entity_id": "bleu-rossignol", "field": "legal_continuity"},
       "highlight": {
         "label": "Périmètre entrepreneurial",
-        "evidence": {"entity_type": "achievement", "entity_id": "bleu-rossignol-entrepreneurial-scope", "field": "capabilities"}
+        "cards": [
+          {
+            "label": "Développer l’activité",
+            "items": [
+              {
+                "label": "création d’entreprise",
+                "evidence": {"entity_type": "achievement", "entity_id": "entrepreneurial-career-change", "field": "statement"}
+              },
+              {
+                "label": "acquisition & fidélisation clients",
+                "evidence": {"entity_type": "achievement", "entity_id": "bleu-rossignol-customer-development", "field": "statement"}
+              }
+            ]
+          },
+          {
+            "label": "Piloter le digital",
+            "items": [
+              {
+                "label": "site : contenus & identité visuelle",
+                "evidence": {"entity_type": "achievement", "entity_id": "bleu-rossignol-website-pilotage", "field": "statement"}
+              },
+              {
+                "label": "Wix & Google Analytics · 3 optimisations SEO",
+                "evidence": {"entity_type": "achievement", "entity_id": "bleu-rossignol-seo-optimization", "field": "statement"}
+              }
+            ]
+          },
+          {
+            "label": "Structurer l’écosystème",
+            "items": [
+              {
+                "label": "clubs d’entrepreneurs",
+                "evidence": {"entity_type": "achievement", "entity_id": "bleu-rossignol-entrepreneur-network", "field": "statement"}
+              },
+              {
+                "label": "sourcing · évaluation · négociation fournisseurs",
+                "evidence": {"entity_type": "achievement", "entity_id": "bleu-rossignol-supplier-management", "field": "statement"}
+              }
+            ]
+          }
+        ]
       }
     },
     {

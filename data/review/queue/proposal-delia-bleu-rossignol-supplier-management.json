@@ -1,0 +1,31 @@
+{
+  "application": {
+    "applied_at": "2026-07-20T14:49:45+00:00",
+    "knowledge_path": "data/knowledge/entities/achievement/bleu-rossignol-supplier-management.json"
+  },
+  "classification": "fact",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-20T14:49:44+00:00",
+      "from": "pending",
+      "note": "Validation explicite de l’utilisateur : Go.",
+      "reviewer": "Laurent",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-bleu-rossignol-supplier-management",
+  "proposed_value": "Recherche, visite d’usines, évaluation et négociation directe avec les fournisseurs.",
+  "source": {
+    "evidence": "Délia trouvait et négociait elle-même avec les fournisseurs : visites d'usine et évaluation des fournisseurs.",
+    "id": "src-7b00300a5a39f5be",
+    "locator": "precision-perimetre-entrepreneurial-bleu-rossignol-2026-07-20.txt#P06"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "bleu-rossignol-supplier-management",
+    "entity_type": "achievement",
+    "field": "statement"
+  },
+  "validated_value": "Recherche, visite d’usines, évaluation et négociation directe avec les fournisseurs."
+}

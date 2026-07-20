@@ -1,0 +1,18 @@
+{
+  "fields": {
+    "statement": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-20T14:49:39+00:00",
+          "locator": "precision-perimetre-entrepreneurial-bleu-rossignol-2026-07-20.txt#P04",
+          "proposal_id": "proposal-delia-bleu-rossignol-customer-development",
+          "source_id": "src-7b00300a5a39f5be"
+        }
+      ],
+      "value": "Acquisition et fidélisation de nouveaux clients, avec notamment une cliente ayant repris contact deux ans après l’achat d’une cuisine pour un projet de dressing."
+    }
+  },
+  "id": "bleu-rossignol-customer-development",
+  "type": "achievement",
+  "updated_at": "2026-07-20T14:49:39+00:00"
+}

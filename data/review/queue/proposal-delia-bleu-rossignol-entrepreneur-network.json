@@ -1,0 +1,31 @@
+{
+  "application": {
+    "applied_at": "2026-07-20T14:49:42+00:00",
+    "knowledge_path": "data/knowledge/entities/achievement/bleu-rossignol-entrepreneur-network.json"
+  },
+  "classification": "fact",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-20T14:49:40+00:00",
+      "from": "pending",
+      "note": "Validation explicite de l’utilisateur : Go.",
+      "reviewer": "Laurent",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-bleu-rossignol-entrepreneur-network",
+  "proposed_value": "Développement d’un réseau d’entrepreneurs au travers de plusieurs clubs.",
+  "source": {
+    "evidence": "Délia a développé un réseau d'entrepreneurs au travers de plusieurs clubs.",
+    "id": "src-7b00300a5a39f5be",
+    "locator": "precision-perimetre-entrepreneurial-bleu-rossignol-2026-07-20.txt#P05"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "bleu-rossignol-entrepreneur-network",
+    "entity_type": "achievement",
+    "field": "statement"
+  },
+  "validated_value": "Développement d’un réseau d’entrepreneurs au travers de plusieurs clubs."
+}

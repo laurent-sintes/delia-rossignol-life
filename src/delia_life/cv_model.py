@@ -20,9 +20,15 @@ class CVSequenceStep:
 
 
 @dataclass(frozen=True, slots=True)
-class CVHighlight:
+class CVHighlightCard:
     label: str
     items: tuple[str, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class CVHighlight:
+    label: str
+    cards: tuple[CVHighlightCard, ...]
 
 
 @dataclass(frozen=True, slots=True)

@@ -1,0 +1,31 @@
+{
+  "application": {
+    "applied_at": "2026-07-20T14:49:32+00:00",
+    "knowledge_path": "data/knowledge/entities/achievement/bleu-rossignol-website-pilotage.json"
+  },
+  "classification": "fact",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-20T14:49:31+00:00",
+      "from": "pending",
+      "note": "Validation explicite de l’utilisateur : Go.",
+      "reviewer": "Laurent",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-bleu-rossignol-website-pilotage",
+  "proposed_value": "Pilotage du développement du site de BLEU ROSSIGNOL, avec apport des photos, du style, des couleurs et du contenu.",
+  "source": {
+    "evidence": "Elle a piloté le développement du site, elle a apporté les photos, le style, les couleurs et le contenu.",
+    "id": "src-7b00300a5a39f5be",
+    "locator": "precision-perimetre-entrepreneurial-bleu-rossignol-2026-07-20.txt#P02"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "bleu-rossignol-website-pilotage",
+    "entity_type": "achievement",
+    "field": "statement"
+  },
+  "validated_value": "Pilotage du développement du site de BLEU ROSSIGNOL, avec apport des photos, du style, des couleurs et du contenu."
+}

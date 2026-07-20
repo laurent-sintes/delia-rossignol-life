@@ -178,9 +178,9 @@ def pill(pdf: canvas.Canvas, label: str, x: float, y: float, maximum_x: float) -
     return x + width + 5, y
 
 
-def draw_responsibility_sequence(
+def _draw_card_row(
     pdf: canvas.Canvas,
-    steps: tuple[CVSequenceStep, ...],
+    cards: tuple[tuple[str, tuple[str, ...]], ...],
     x: float,
     top: float,
     width: float,
@@ -188,21 +188,23 @@ def draw_responsibility_sequence(
     audit: LayoutAudit,
     page: int,
     name_prefix: str,
+    *,
+    minimum_height: float = 56.0,
 ) -> float:
     gap = rules.component_gap_pt
-    box_width = (width - (gap * (len(steps) - 1))) / len(steps)
+    box_width = (width - (gap * (len(cards) - 1))) / len(cards)
     label_size = 7.0
     label_leading = 8.0
     body_size = 6.5
     body_leading = 8.0
-    wrapped_steps = [
-        line_wrap(", ".join(step.responsibilities), "Helvetica", body_size, box_width - (rules.card_padding_pt * 2))
-        for step in steps
+    wrapped_cards = [
+        line_wrap(", ".join(items), "Helvetica", body_size, box_width - (rules.card_padding_pt * 2))
+        for _, items in cards
     ]
-    maximum_lines = max(len(lines) for lines in wrapped_steps)
+    maximum_lines = max(len(lines) for lines in wrapped_cards)
     bottom = top
 
-    for index, (step, lines) in enumerate(zip(steps, wrapped_steps, strict=True)):
+    for index, ((label, _), lines) in enumerate(zip(cards, wrapped_cards, strict=True)):
         box_x = x + (index * (box_width + gap))
         geometry = calculate_card_geometry(
             x=box_x,
@@ -214,9 +216,9 @@ def draw_responsibility_sequence(
             body_size=body_size,
             body_leading=body_leading,
             rules=rules,
-            minimum_height=56.0,
+            minimum_height=minimum_height,
         )
-        audit.add_card(f"{name_prefix}:{step.label}", page, geometry)
+        audit.add_card(f"{name_prefix}:{label}", page, geometry)
         pdf.setFillColor(IVORY)
         pdf.setStrokeColor(CHAMPAGNE)
         pdf.setLineWidth(geometry.stroke_width)
@@ -231,7 +233,7 @@ def draw_responsibility_sequence(
         )
         pdf.setFillColor(NAVY)
         pdf.setFont("Helvetica-Bold", label_size)
-        pdf.drawString(box_x + rules.card_padding_pt, geometry.label_baseline, step.label.upper())
+        pdf.drawString(box_x + rules.card_padding_pt, geometry.label_baseline, label.upper())
         pdf.setStrokeColor(CHAMPAGNE)
         pdf.setLineWidth(0.6)
         pdf.line(
@@ -248,6 +250,21 @@ def draw_responsibility_sequence(
     return bottom
 
 
+def draw_responsibility_sequence(
+    pdf: canvas.Canvas,
+    steps: tuple[CVSequenceStep, ...],
+    x: float,
+    top: float,
+    width: float,
+    rules: CVLayoutRules,
+    audit: LayoutAudit,
+    page: int,
+    name_prefix: str,
+) -> float:
+    cards = tuple((step.label, step.responsibilities) for step in steps)
+    return _draw_card_row(pdf, cards, x, top, width, rules, audit, page, name_prefix)
+
+
 def draw_highlight(
     pdf: canvas.Canvas,
     highlight: CVHighlight,
@@ -258,55 +275,31 @@ def draw_highlight(
     audit: LayoutAudit,
     page: int,
 ) -> float:
-    label_size = 7.0
-    label_leading = 8.0
-    body_size = 6.9
-    body_leading = 8.0
-    lines = line_wrap(", ".join(highlight.items), "Helvetica", body_size, width - 2 * rules.card_padding_pt)
-    geometry = calculate_card_geometry(
-        x=x,
-        top=top,
-        width=width,
-        line_count=len(lines),
-        label_size=label_size,
-        label_leading=label_leading,
-        body_size=body_size,
-        body_leading=body_leading,
-        rules=rules,
-        minimum_height=40.0,
-    )
-    audit.add_card(f"highlight:{highlight.label}", page, geometry)
-
-    pdf.setFillColor(IVORY)
-    pdf.setStrokeColor(CHAMPAGNE_SOFT)
-    pdf.setLineWidth(geometry.stroke_width)
-    pdf.roundRect(
-        geometry.path_x,
-        geometry.path_bottom,
-        geometry.path_width,
-        geometry.path_height,
-        4,
-        fill=1,
-        stroke=1,
-    )
-
     pdf.setFillColor(NAVY)
-    pdf.setFont("Helvetica-Bold", label_size)
-    pdf.drawString(x + rules.card_padding_pt, geometry.label_baseline, highlight.label.upper())
-    pdf.setStrokeColor(CHAMPAGNE_SOFT)
-    pdf.setLineWidth(0.5)
-    pdf.line(
-        x + rules.card_padding_pt,
-        geometry.divider_y,
-        x + width - rules.card_padding_pt,
-        geometry.divider_y,
+    pdf.setFont("Helvetica-Bold", 6.8)
+    label_baseline = top - getAscent("Helvetica-Bold", 6.8)
+    pdf.drawString(x, label_baseline, highlight.label.upper())
+    label_bottom = label_baseline + getDescent("Helvetica-Bold", 6.8)
+    cards_top = label_bottom - rules.component_gap_pt
+    audit.add_vertical_gap(
+        f"highlight:{highlight.label}:text-to-cards",
+        label_bottom,
+        cards_top,
+        rules.component_gap_pt,
     )
-
-    pdf.setFillColor(MUTED)
-    pdf.setFont("Helvetica", body_size)
-    for line, line_y in zip(lines, geometry.body_baselines, strict=True):
-        pdf.drawString(x + rules.card_padding_pt, line_y, line)
-    return geometry.outer_bottom
+    cards = tuple((card.label, card.items) for card in highlight.cards)
+    return _draw_card_row(
+        pdf,
+        cards,
+        x,
+        cards_top,
+        width,
+        rules,
+        audit,
+        page,
+        f"highlight:{highlight.label}",
+        minimum_height=56.0,
+    )
 
 
 def _draw_continuity_experience(
@@ -636,11 +629,13 @@ def _render_first_page(view: CVViewModel, context: RenderContext) -> float:
             y = next_top - getAscent("Helvetica-Bold", 7.8) - 9
         else:
             y = group_bottom
+    final_content_bottom = y
     for experience in view.recent_experiences:
         y = draw_experience(context, experience, y, CONTENT_WIDTH)
-        minimum_y = min(minimum_y, y)
-    if y < rules.safe_bottom_pt:
-        raise ValidationError(f"Recent experiences overflow page 1 at y={y:.1f}")
+        final_content_bottom = y + rules.experience_gap_pt
+        minimum_y = min(minimum_y, final_content_bottom)
+    if final_content_bottom < rules.safe_bottom_pt:
+        raise ValidationError(f"Recent experiences overflow page 1 at y={final_content_bottom:.1f}")
     pdf.setFillColor(MUTED)
     pdf.setFont("Helvetica", 7.4)
     pdf.drawRightString(RIGHT, 24, "1 / 2")

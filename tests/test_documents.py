@@ -60,7 +60,10 @@ class DocumentTests(unittest.TestCase):
         self.assertIn("SOCLE MÉTIER COMMUN", text)
         self.assertIn("BLEU ROSSIGNOL", text)
         self.assertIn("PERFECTEUR D’INTÉRIEUR", text)
-        self.assertIn("Suivi commercial via Google Analytics", text)
+        self.assertIn("acquisition & fidélisation", text)
+        self.assertIn("Analytics · 3 optimisations SEO", text)
+        self.assertIn("sourcing · évaluation ·", text)
+        self.assertIn("négociation fournisseurs", text)
         self.assertNotIn("CV standard", text)
         self.assertNotIn("Signature éditoriale", text)
         self.assertIn("1 / 2", page_texts[0])
@@ -98,6 +101,14 @@ class DocumentTests(unittest.TestCase):
         self.assertEqual(group.experiences[0].organization_name, "BLEU ROSSIGNOL")
         self.assertEqual(group.experiences[0].organization_tagline, "PERFECTEUR D’INTÉRIEUR")
         self.assertEqual(group.experiences[1].organization_name, "RAISON HOME")
+        highlight = group.experiences[0].highlight
+        self.assertIsNotNone(highlight)
+        assert highlight is not None
+        self.assertEqual(
+            tuple(card.label for card in highlight.cards),
+            ("Développer l’activité", "Piloter le digital", "Structurer l’écosystème"),
+        )
+        self.assertEqual(tuple(len(card.items) for card in highlight.cards), (2, 2, 2))
         sequence = group.responsibility_sequence
         self.assertEqual(
             tuple(step.label for step in sequence),
@@ -226,6 +237,17 @@ class DocumentTests(unittest.TestCase):
             {item["name"] for item in audit["gaps"]},
         )
 
+    def test_entrepreneurial_cards_share_one_aligned_row(self) -> None:
+        result = build_standard_cv(ROOT, self.work / "entrepreneurial-cards.pdf")
+        frames = [
+            frame
+            for frame in result["layout"]["audit"]["frames"]
+            if str(frame["name"]).startswith("highlight:Périmètre entrepreneurial:")
+        ]
+        self.assertEqual(len(frames), 3)
+        self.assertEqual({float(frame["top"]) for frame in frames}, {float(frames[0]["top"])})
+        self.assertEqual({float(frame["bottom"]) for frame in frames}, {float(frames[0]["bottom"])})
+
     def test_vertical_bars_match_their_content_boxes_and_rendered_paths(self) -> None:
         output = self.work / "bars.pdf"
         result = build_standard_cv(ROOT, output)
@@ -310,7 +332,7 @@ class DocumentTests(unittest.TestCase):
                     frame_bottoms.append(min(path_y) - (stroke_width / 2))
                 path_x = []
                 path_y = []
-        self.assertEqual(audited_frames, 5)
+        self.assertEqual(audited_frames, 7)
 
         date_runs: list[tuple[float, float]] = []
 
