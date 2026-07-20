@@ -131,6 +131,7 @@ def command_prepare_offer_feedback_email(args: argparse.Namespace) -> int:
         args.output,
         args.limit,
         args.offer_ids,
+        bcc=args.bcc,
     )
     _print(result)
     return 0
@@ -287,6 +288,8 @@ def _add_ingestion_commands(subparsers: SubparserRegistry) -> None:
 
 
 def _add_offer_commands(subparsers: SubparserRegistry) -> None:
+    from .offer_feedback_email import DEFAULT_FEEDBACK_BCC
+
     match = subparsers.add_parser("match-offer", help="score literal skill coverage")
     match.add_argument("offer", type=Path)
     match.add_argument("knowledge", type=Path)
@@ -313,6 +316,7 @@ def _add_offer_commands(subparsers: SubparserRegistry) -> None:
     )
     feedback_email.add_argument("report", type=Path, help="rank-offers JSON report")
     feedback_email.add_argument("--recipient", required=True)
+    feedback_email.add_argument("--bcc", default=DEFAULT_FEEDBACK_BCC)
     feedback_email.add_argument("--site-url", required=True)
     feedback_email.add_argument("--cv-pdf", type=Path, default=Path("site/assets/downloads/cv-delia-rossignol-signature.pdf"))
     feedback_email.add_argument("--output", type=Path, required=True)

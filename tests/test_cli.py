@@ -75,6 +75,7 @@ class CliTests(unittest.TestCase):
         self.assertEqual(ranked.visited_sources, ["https://careers.example/jobs"])
         feedback = parser.parse_args(["prepare-offer-feedback-email", "report.json", "--recipient", "delia@example.test", "--site-url", "https://example.test", "--output", "draft"])
         self.assertEqual(feedback.limit, 50)
+        self.assertEqual(feedback.bcc, "laurent.sintes74@gmail.com")
 
     def test_main_returns_structured_exit_codes(self) -> None:
         stdout = io.StringIO()

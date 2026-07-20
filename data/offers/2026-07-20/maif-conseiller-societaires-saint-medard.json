@@ -1,0 +1,26 @@
+{
+  "id": "maif-conseiller-societaires-10301",
+  "title": "Conseiller sociétaires en face à face F/H",
+  "employer": "MAIF",
+  "source_url": "https://recrutement.maif.fr/offre-de-emploi/emploi-conseiller-societaires-en-face-a-face-f-h_10301.aspx",
+  "source_site": "recrutement.maif.fr",
+  "published_at": "2026-06-12",
+  "captured_at": "2026-07-20T20:55:35+02:00",
+  "last_verified_at": "2026-07-20T20:55:35+02:00",
+  "summary": "Conseiller les sociétaires et prospects en agence, par téléphone ou par mail, analyser leurs besoins, proposer les produits adaptés et fidéliser la clientèle dans une relation de confiance.",
+  "location_label": "Saint-Médard-en-Jalles / Mérignac",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": ["banque et assurance"],
+  "functional_domains": ["conseil et relation client", "commerce et vente", "gestion administrative"],
+  "work_mode": "onsite",
+  "compensation": {"minimum": 28000, "maximum": 33000, "currency": "EUR", "period": "year"},
+  "required_skills": ["conseil client", "vente", "fidélisation", "relation multicanale", "expression orale et écrite"],
+  "preferred_skills": ["entretien de vente", "adaptabilité", "travail en équipe"],
+  "conditions": {"start_date": "2026-06-01", "training_provided": true},
+  "evidence": [
+    {"field": "mission", "locator": "recrutement.maif.fr#description", "excerpt": "Prendre en charge les prospects, détecter les besoins, conseiller et vendre les produits et services MAIF adaptés."},
+    {"field": "contract", "locator": "recrutement.maif.fr#informations-generales", "excerpt": "Contrat à durée indéterminée, plein temps, 28 000 € à 33 000 €."},
+    {"field": "location", "locator": "recrutement.maif.fr#localisation", "excerpt": "Lieu : ST MEDARD EN JALLES ; délégation conseil de Mérignac."}
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "page-personnel-gestionnaire-adv-france-79782528",
+  "title": "Gestionnaire ADV France H/F",
+  "employer": "Entreprise de négoce et distribution viti-vini via Page Personnel",
+  "source_url": "https://www.bordeaux-emplois.com/emplois/79782528.html",
+  "source_site": "bordeaux-emplois.com",
+  "published_at": "2026-06-04",
+  "captured_at": "2026-07-20T20:55:35+02:00",
+  "last_verified_at": "2026-07-20T20:55:35+02:00",
+  "summary": "Assurer la gestion administrative des ventes en France et le suivi complet des dossiers clients, de la saisie des commandes à la facturation, en coordonnant les équipes commerciales et logistiques.",
+  "location_label": "Nord de Bordeaux",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": ["commerce et distribution"],
+  "functional_domains": ["gestion administrative", "conseil et relation client", "gestion et coordination de projets"],
+  "work_mode": "onsite",
+  "required_skills": ["administration des ventes", "suivi de commandes", "facturation", "coordination commerciale et logistique", "suivi client"],
+  "preferred_skills": ["autonomie", "amélioration continue", "rigueur"],
+  "conditions": {},
+  "evidence": [
+    {"field": "mission", "locator": "bordeaux-emplois.com/emplois/79782528.html#missions", "excerpt": "Assurer la gestion administrative des ventes France et le suivi complet des dossiers clients."},
+    {"field": "responsibilities", "locator": "bordeaux-emplois.com/emplois/79782528.html#missions", "excerpt": "Saisir et suivre les commandes, assurer la facturation et coordonner les échanges avec les équipes commerciales et logistiques."},
+    {"field": "contract", "locator": "bordeaux-emplois.com/emplois/79782528.html", "excerpt": "Gestionnaire ADV France H/F, CDI, publié le 4 juin 2026."}
+  ]
+}

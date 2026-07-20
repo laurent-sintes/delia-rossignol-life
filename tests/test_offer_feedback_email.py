@@ -57,6 +57,7 @@ class OfferFeedbackEmailTests(unittest.TestCase):
         self.assertEqual(result["status"], "draft_prepared")
         message = BytesParser(policy=policy.default).parsebytes((self.work / "draft" / "offer-selection.eml").read_bytes())
         self.assertEqual(message["To"], "delia@example.test")
+        self.assertEqual(message["Bcc"], "laurent.sintes74@gmail.com")
         self.assertEqual(message["Subject"], "Sélection de 1 offre — ton avis")
         draft_text = (self.work / "draft" / "offer-selection.txt").read_text(encoding="utf-8")
         self.assertIn("sites consultés pour cette recherche", draft_text)
@@ -68,11 +69,14 @@ class OfferFeedbackEmailTests(unittest.TestCase):
         self.assertIn("Salaire proposé : 32\u202f000 – 36\u202f000 € brut/an", draft_text)
         self.assertIn("Pertinence : 91/100", draft_text)
         self.assertIn("Point de vigilance : aucun point bloquant identifié", draft_text)
+        self.assertNotIn("laurent.sintes74@gmail.com", draft_text)
         self.assertEqual([attachment.get_filename() for attachment in message.iter_attachments()], ["cv.pdf"])
         manifest = json.loads((self.work / "draft" / "manifest.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["visited_sources"], ["https://jobs.example", "https://careers.example"])
+        self.assertEqual(manifest["bcc"], "laurent.sintes74@gmail.com")
         self.assertEqual(manifest["send_authorization"], "required")
         html_body = (self.work / "draft" / "offer-selection.html").read_text(encoding="utf-8")
+        self.assertNotIn("laurent.sintes74@gmail.com", html_body)
         self.assertIn("careers.example", html_body)
         self.assertIn('style="color: #b85c20;"', html_body)
         self.assertIn('<li style="margin: 0 0 18px 0; padding: 0;">', html_body)
@@ -116,11 +120,43 @@ class OfferFeedbackEmailTests(unittest.TestCase):
         result = prepare_offer_feedback_email(report, "delia@example.test", "https://example.test", cv, self.work / "draft")
         self.assertEqual(result["offer_ids"], ["higher", "lower"])
 
+    def test_email_caps_relevance_display_to_one_hundred(self) -> None:
+        report = {
+            "offers": [
+                {
+                    "id": "over-100",
+                    "title": "Poste",
+                    "employer": "Employeur",
+                    "source_url": "https://jobs.example/over-100",
+                    "assessment": {"score": 103},
+                }
+            ]
+        }
+        cv = self.work / "cv.pdf"
+        cv.write_bytes(b"%PDF-1.4\nexample")
+        prepare_offer_feedback_email(report, "delia@example.test", "https://example.test", cv, self.work / "draft")
+        draft_text = (self.work / "draft" / "offer-selection.txt").read_text(encoding="utf-8")
+        self.assertIn("Pertinence : 100/100", draft_text)
+        self.assertNotIn("Pertinence : 103/100", draft_text)
+
     def test_rejects_invalid_recipient(self) -> None:
         cv = self.work / "cv.pdf"
         cv.write_bytes(b"%PDF-1.4\nexample")
         with self.assertRaises(ValueError):
             prepare_offer_feedback_email({"offers": [{"id": "x"}]}, "invalid", "https://example.test", cv, self.work / "draft")
+
+    def test_rejects_invalid_bcc(self) -> None:
+        cv = self.work / "cv.pdf"
+        cv.write_bytes(b"%PDF-1.4\nexample")
+        with self.assertRaisesRegex(ValueError, "valid BCC"):
+            prepare_offer_feedback_email(
+                {"offers": [{"id": "x"}]},
+                "delia@example.test",
+                "https://example.test",
+                cv,
+                self.work / "draft",
+                bcc="invalid",
+            )
 
     def test_unsafe_offer_links_are_not_rendered_as_links(self) -> None:
         cv = self.work / "cv.pdf"

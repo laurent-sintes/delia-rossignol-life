@@ -14,6 +14,7 @@ from .core import sha256_file
 from .storage import atomic_write_bytes_group
 
 MAX_OFFERS_PER_EMAIL = 50
+DEFAULT_FEEDBACK_BCC = "laurent.sintes74@gmail.com"
 
 
 def _text(value: Any) -> str:
@@ -73,9 +74,10 @@ def _relevance_label(assessment: dict[str, Any]) -> str:
     score = assessment.get("score")
     if not isinstance(score, (int, float)):
         return "non calculée"
-    if float(score).is_integer():
-        return f"{int(score)}/100"
-    return f"{score:.1f}".replace(".", ",") + "/100"
+    bounded_score = min(100.0, max(0.0, float(score)))
+    if bounded_score.is_integer():
+        return f"{int(bounded_score)}/100"
+    return f"{bounded_score:.1f}".replace(".", ",") + "/100"
 
 
 def _offer_lines(offer: dict[str, Any]) -> tuple[str, str]:
@@ -128,10 +130,10 @@ def _offer_lines(offer: dict[str, Any]) -> tuple[str, str]:
     return text_line, html_line
 
 
-def _validate_recipient(recipient: str) -> str:
-    value = recipient.strip()
+def _validate_email_address(address: str, label: str) -> str:
+    value = address.strip()
     if "@" not in value or value.startswith("@") or value.endswith("@"):
-        raise ValueError("A valid recipient email address is required")
+        raise ValueError(f"A valid {label} email address is required")
     return value
 
 
@@ -148,6 +150,7 @@ def _offer_relevance_key(offer: dict[str, Any]) -> tuple[float, int, str]:
 class FeedbackEmailRequest:
     report: dict[str, Any]
     recipient: str
+    bcc: str
     site_url: str
     cv_pdf: Path
     output_dir: Path
@@ -158,6 +161,7 @@ class FeedbackEmailRequest:
 @dataclass(frozen=True)
 class FeedbackEmailSelection:
     recipient: str
+    bcc: str
     site_url: str
     cv_pdf: Path
     output_dir: Path
@@ -209,7 +213,8 @@ def _select_offers(
 
 
 def _prepare_selection(request: FeedbackEmailRequest) -> FeedbackEmailSelection:
-    recipient = _validate_recipient(request.recipient)
+    recipient = _validate_email_address(request.recipient, "recipient")
+    bcc = _validate_email_address(request.bcc, "BCC")
     site_url = _normalize_site_url(request.site_url)
     if not request.cv_pdf.is_file() or request.cv_pdf.suffix.casefold() != ".pdf":
         raise ValueError("cv_pdf must be an existing PDF file")
@@ -217,6 +222,7 @@ def _prepare_selection(request: FeedbackEmailRequest) -> FeedbackEmailSelection:
     selected_offers = _select_offers(usable_offers, request.limit, request.offer_ids)
     return FeedbackEmailSelection(
         recipient=recipient,
+        bcc=bcc,
         site_url=site_url,
         cv_pdf=request.cv_pdf,
         output_dir=request.output_dir,
@@ -276,6 +282,7 @@ def _render_email_content(selection: FeedbackEmailSelection) -> FeedbackEmailCon
 def _build_message(selection: FeedbackEmailSelection, content: FeedbackEmailContent) -> EmailMessage:
     message = EmailMessage(policy=SMTP)
     message["To"] = selection.recipient
+    message["Bcc"] = selection.bcc
     message["Subject"] = content.subject
     message.set_content(content.text_body)
     message.add_alternative(content.html_body, subtype="html")
@@ -293,6 +300,7 @@ def _build_manifest(selection: FeedbackEmailSelection, content: FeedbackEmailCon
         "status": "draft_prepared",
         "prepared_at": datetime.now(UTC).isoformat(),
         "recipient": selection.recipient,
+        "bcc": selection.bcc,
         "subject": content.subject,
         "site_url": selection.site_url,
         "offer_count": len(selection.offers),
@@ -334,11 +342,13 @@ def prepare_offer_feedback_email(
     output_dir: Path,
     limit: int = MAX_OFFERS_PER_EMAIL,
     offer_ids: list[str] | None = None,
+    bcc: str = DEFAULT_FEEDBACK_BCC,
 ) -> dict[str, Any]:
     """Render a review email package without contacting a mail service."""
     request = FeedbackEmailRequest(
         report=report,
         recipient=recipient,
+        bcc=bcc,
         site_url=site_url,
         cv_pdf=cv_pdf,
         output_dir=output_dir,
