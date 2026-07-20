@@ -6,7 +6,7 @@ import unittest
 import uuid
 from pathlib import Path
 from tempfile import gettempdir
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -16,6 +16,7 @@ TEST_TMP.mkdir(exist_ok=True)
 from delia_life.site_audit import audit_site
 from delia_life.site_builder import (
     _cleanup_stale_site_builds,
+    _relative_staged_path,
     build_site,
     markdown_to_html,
     render_cv_template_preview,
@@ -212,6 +213,19 @@ class SiteTests(unittest.TestCase):
                 result = build_site(ROOT, output)
                 self.assertEqual(result["staging_cleanup"]["remaining"], 0)
                 self.assertEqual(list(runtime.glob("site.staging-*")), [])
+
+    def test_staged_document_path_accepts_equivalent_windows_alias(self) -> None:
+        document = Mock(spec=Path)
+        document.relative_to.side_effect = ValueError("different lexical spelling")
+        candidate = Mock(spec=Path)
+        candidate.samefile.return_value = True
+        candidate.relative_to.return_value = Path("assets/downloads/cv.pdf")
+
+        self.assertEqual(
+            _relative_staged_path(document, Path("staging"), [candidate]),
+            Path("assets/downloads/cv.pdf"),
+        )
+        candidate.samefile.assert_called_once_with(document)
 
     def test_build_result_keeps_cv_metadata_when_json_page_is_last(self) -> None:
         config = {

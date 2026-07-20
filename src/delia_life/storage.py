@@ -21,11 +21,14 @@ def _clear_readonly_and_retry(
     path: str,
     error_info: tuple[type[BaseException], BaseException, TracebackType | None],
 ) -> None:
-    """Clear Windows read-only attributes before retrying a failed removal."""
+    """Make a blocked entry and its parent removable before retrying."""
     error = error_info[1]
     if not isinstance(error, PermissionError):
         raise error
-    os.chmod(path, stat.S_IREAD | stat.S_IWRITE)
+    blocked = Path(path)
+    parent = blocked.parent
+    parent.chmod(parent.stat().st_mode | stat.S_IWUSR | stat.S_IXUSR)
+    blocked.chmod(blocked.stat().st_mode | stat.S_IWUSR)
     function(path)
 
 

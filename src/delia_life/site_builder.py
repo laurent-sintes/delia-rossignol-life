@@ -822,6 +822,19 @@ def _site_runtime_root(root: Path) -> Path:
     return Path(tempfile.gettempdir()) / "delia-rossignol-life" / "site-builds" / project_key
 
 
+def _relative_staged_path(path: Path, staging: Path, staged_files: list[Path]) -> Path:
+    try:
+        return path.relative_to(staging)
+    except ValueError as error:
+        for candidate in staged_files:
+            try:
+                if candidate.samefile(path):
+                    return candidate.relative_to(staging)
+            except OSError:
+                continue
+        raise ValueError(f"Generated document is outside site staging: {path}") from error
+
+
 def build_site(
     root: Path,
     output: Path,
@@ -856,7 +869,7 @@ def build_site(
         result["output"] = str(output)
         for document in result.get("documents", []):
             document_path = Path(document["output"])
-            document["output"] = str(output / document_path.relative_to(staging))
+            document["output"] = str(output / _relative_staged_path(document_path, staging, staged_files))
         return result
     finally:
         if staging.exists():
