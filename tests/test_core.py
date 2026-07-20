@@ -26,10 +26,19 @@ from delia_life.ingestion import (
 )
 from delia_life.recommendation import match_offer, rank_templates
 from delia_life.review_batch import create_review_batch, review_batch
-from delia_life.schema import validate
+from delia_life.schema import _compiled_validator, validate
 from delia_life.storage import remove_tree
 from delia_life.tracking import append_event
-from delia_life.website import LinkParser, _fetch_url, _robot_parser, normalize_url, same_origin, slurp_site, validate_network_url
+from delia_life.website import (
+    LinkParser,
+    _fetch_url,
+    _robot_parser,
+    crawl_site,
+    normalize_url,
+    same_origin,
+    slurp_site,
+    validate_network_url,
+)
 
 
 class CoreTests(unittest.TestCase):
@@ -75,6 +84,23 @@ class CoreTests(unittest.TestCase):
             replace_file(source, target)
         self.assertEqual(attempts, 3)
         self.assertEqual(target.read_text(encoding="utf-8"), "new")
+
+    def test_schema_validator_is_reused_for_equivalent_schemas(self) -> None:
+        schema = {"type": "object", "properties": {"name": {"type": "string"}}}
+        _compiled_validator.cache_clear()
+        self.assertEqual(validate({"name": "DÃ©lia"}, schema), [])
+        self.assertEqual(validate({"name": "DÃ©lia"}, dict(schema)), [])
+        cache = _compiled_validator.cache_info()
+        self.assertEqual(cache.misses, 1)
+        self.assertEqual(cache.hits, 1)
+
+    def test_remove_tree_clears_readonly_generated_directories(self) -> None:
+        generated = self.work / "generated"
+        generated.mkdir()
+        (generated / "file.txt").write_text("temporary", encoding="utf-8")
+        generated.chmod(0o444)
+        remove_tree(generated)
+        self.assertFalse(generated.exists())
 
     def test_review_then_apply_preserves_provenance(self) -> None:
         proposal = {
@@ -481,7 +507,10 @@ class CoreTests(unittest.TestCase):
             robots = _robot_parser("https://example.com/", "test")
         self.assertFalse(robots.can_fetch("test", "https://example.com/page"))
 
-    def test_website_slurp_captures_a_bounded_resumable_archive(self) -> None:
+    def test_website_slurp_name_remains_a_compatible_alias(self) -> None:
+        self.assertIs(slurp_site, crawl_site)
+
+    def test_website_crawl_captures_a_bounded_resumable_archive(self) -> None:
         from unittest.mock import patch
 
         class Robots:
@@ -515,7 +544,7 @@ class CoreTests(unittest.TestCase):
             patch("delia_life.website._robot_parser", return_value=Robots()),
             patch("delia_life.website._fetch_url", side_effect=fetched),
         ):
-            manifest = slurp_site(
+            manifest = crawl_site(
                 "http://127.0.0.1/",
                 output,
                 max_pages=3,

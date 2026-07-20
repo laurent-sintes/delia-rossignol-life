@@ -185,22 +185,79 @@ class SiteTests(unittest.TestCase):
         self.assertIn("assets/downloads/cv-delia-rossignol-signature.pdf", homepage)
         self.assertTrue((output / "assets" / "downloads" / "cv-delia-rossignol-signature.pdf").exists())
         self.assertIn("knowledge-section--editorial", parcours)
+        self.assertIn("knowledge-section--continuity", parcours)
         self.assertIn("knowledge-card--editorial", parcours)
+        self.assertIn("knowledge-card--continuity-foundation", parcours)
+        self.assertIn("knowledge-card--continuity-highlight", parcours)
+        self.assertIn("BLEU ROSSIGNOL, PERFECTEUR D’INTÉRIEUR", parcours)
+        self.assertIn("Création et développement d’une activité indépendante", parcours)
+        self.assertIn("Développement du site", parcours)
+        self.assertIn("Suivi commercial via Google Analytics", parcours)
+        self.assertEqual(parcours.count("Responsabilités exercées dans les deux contextes"), 1)
+        self.assertLess(parcours.index("Raison Home"), parcours.index("BLEU ROSSIGNOL, PERFECTEUR D’INTÉRIEUR"))
         self.assertNotIn("tel:", homepage)
         logo = (output / "assets" / "delia-rossignol-logo.svg").read_text(encoding="utf-8")
         self.assertIn("Délia Rossignol", logo)
         self.assertNotIn("Agenceur", logo)
 
+        stylesheet = (output / "assets" / "style.css").read_text(encoding="utf-8")
+        self.assertRegex(stylesheet, r"\.site-header\s*\{[^}]*position:\s*sticky;")
+        self.assertRegex(stylesheet, r"\.site-header\s*\{[^}]*top:\s*0;")
+
+    def test_repeated_builds_leave_no_staging_directory(self) -> None:
+        output = self.work / "site"
+        runtime = self.work / "runtime"
+        with patch("delia_life.site_builder._site_runtime_root", return_value=runtime):
+            for _ in range(3):
+                result = build_site(ROOT, output)
+                self.assertEqual(result["staging_cleanup"]["remaining"], 0)
+                self.assertEqual(list(runtime.glob("site.staging-*")), [])
+
+    def test_build_result_keeps_cv_metadata_when_json_page_is_last(self) -> None:
+        config = {
+            "site": {"description": "Test", "title": "Test"},
+            "pages": [
+                {
+                    "kind": "markdown",
+                    "slug": "index",
+                    "source": "site/content/index.md",
+                    "title": "Accueil",
+                },
+                {
+                    "kind": "json",
+                    "slug": "late-json",
+                    "title": "JSON tardif",
+                    "sections": [
+                        {
+                            "title": "Style",
+                            "source": "data/style/delia.json",
+                            "fields": ["status"],
+                        }
+                    ],
+                },
+            ],
+        }
+        config_path = self.work / "publication.json"
+        config_path.write_text(json.dumps(config), encoding="utf-8")
+        runtime = self.work / "runtime"
+        with patch("delia_life.site_builder._site_runtime_root", return_value=runtime):
+            result = build_site(ROOT, self.work / "site", config_path)
+        self.assertEqual(result["documents"][0]["id"], "standard-cv-signature-editorial")
+        self.assertTrue(result["documents"][0]["output"].endswith("cv-delia-rossignol-signature.pdf"))
+
     def test_stale_site_build_cleanup_is_requested_deterministically(self) -> None:
         staging_root = self.work / "site-builds"
         stale = staging_root / "_site.staging-deadbeef"
+        stale.mkdir(parents=True)
         with (
-            patch.object(Path, "glob", return_value=iter([stale])) as glob,
-            patch("delia_life.site_builder.remove_tree") as remove,
+            patch.object(Path, "glob", side_effect=[iter([stale]), iter([])]) as glob,
+            patch("delia_life.site_builder.time.time", return_value=stale.stat().st_mtime + 7200),
+            patch("delia_life.site_builder.remove_tree", side_effect=lambda path, ignore_errors: path.rmdir()) as remove,
         ):
-            _cleanup_stale_site_builds(staging_root, "_site")
-        glob.assert_called_once_with("_site.staging-*")
+            result = _cleanup_stale_site_builds(staging_root, "_site")
+        self.assertEqual(glob.call_count, 2)
         remove.assert_called_once_with(stale, ignore_errors=True)
+        self.assertEqual(result, {"removed": 1, "remaining": 0})
 
     def test_failed_site_build_preserves_the_previous_output(self) -> None:
         output = self.work / "site"

@@ -1,6 +1,6 @@
 ---
 name: match-delia-offers
-description: Importer, structurer, comparer et expliquer la pertinence d'une offre d'emploi pour Délia Rossignol face à ses compétences et expériences validées. Utiliser cette skill pour rechercher ou analyser une offre, calculer sa couverture, relever les écarts et prioriser des opportunités.
+description: Importer, structurer, comparer et expliquer la pertinence d'une offre d'emploi déjà identifiée pour Délia Rossignol face à ses compétences et expériences validées. Utiliser cette skill pour analyser une annonce précise ou approfondir des finalistes, calculer leur couverture et relever les écarts. Pour scanner le marché, utiliser search-delia-offers.
 ---
 
 # Rapprochement des offres

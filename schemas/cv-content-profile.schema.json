@@ -17,6 +17,19 @@
         "entity_id": {"type": "string", "minLength": 1},
         "field": {"type": "string", "minLength": 1}
       }
+    },
+    "sequence": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["label", "responsibility_count"],
+        "additionalProperties": false,
+        "properties": {
+          "label": {"type": "string", "minLength": 1},
+          "responsibility_count": {"type": "integer", "minimum": 1}
+        }
+      }
     }
   },
   "properties": {
@@ -45,6 +58,22 @@
     },
     "include_signature_strengths": {"type": "boolean"},
     "tools": {"$ref": "#/$defs/entityField"},
+    "continuity_groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "context_label", "job_role_id", "experience_ids", "responsibility_sequence"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "label": {"type": "string", "minLength": 1},
+          "context_label": {"type": "string", "minLength": 1},
+          "job_role_id": {"type": "string", "minLength": 1},
+          "experience_ids": {"type": "array", "minItems": 2, "items": {"type": "string", "minLength": 1}},
+          "responsibility_sequence": {"$ref": "#/$defs/sequence"}
+        }
+      }
+    },
     "experiences": {
       "type": "array",
       "minItems": 1,
@@ -57,7 +86,30 @@
           "group": {"type": "string", "enum": ["recent", "complementary"]},
           "heading": {"type": "string", "minLength": 1},
           "heading_evidence_fields": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
-          "bullet_limit": {"type": "integer", "minimum": 0}
+          "bullet_limit": {"type": "integer", "minimum": 0},
+          "responsibility_sequence": {"$ref": "#/$defs/sequence"},
+          "continuity_group_id": {"type": "string", "minLength": 1},
+          "organization_display": {
+            "type": "object",
+            "required": ["name", "evidence"],
+            "additionalProperties": false,
+            "properties": {
+              "name": {"type": "string", "minLength": 1},
+              "tagline": {"type": "string", "minLength": 1},
+              "evidence": {"$ref": "#/$defs/entityField"}
+            }
+          },
+          "context_label": {"type": "string", "minLength": 1},
+          "context_evidence": {"$ref": "#/$defs/entityField"},
+          "highlight": {
+            "type": "object",
+            "required": ["label", "evidence"],
+            "additionalProperties": false,
+            "properties": {
+              "label": {"type": "string", "minLength": 1},
+              "evidence": {"$ref": "#/$defs/entityField"}
+            }
+          }
         }
       }
     },

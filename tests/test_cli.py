@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import io
 import json
 import sys
@@ -16,11 +17,40 @@ from delia_life.cli import build_parser, main
 class CliTests(unittest.TestCase):
     def test_parser_exposes_all_operational_commands(self) -> None:
         parser = build_parser()
+        command_registry = next(
+            action for action in parser._actions if isinstance(action, argparse._SubParsersAction)
+        )
+        self.assertEqual(
+            set(command_registry.choices),
+            {
+                "apply-proposal",
+                "build-documents",
+                "build-site",
+                "check",
+                "check-documents",
+                "crawl-site",
+                "create-review-batch",
+                "hash",
+                "manifest",
+                "match-offer",
+                "migrate-career-project",
+                "model-check",
+                "model-impact",
+                "plan-personal-response",
+                "prepare-offer-feedback-email",
+                "rank-offers",
+                "review",
+                "review-batch",
+                "select-template",
+                "site-audit",
+                "track-event",
+            },
+        )
         help_text = parser.format_help()
         for command in [
             "check",
             "review-batch",
-            "slurp-site",
+            "crawl-site",
             "build-documents",
             "check-documents",
             "rank-offers",
@@ -29,10 +59,20 @@ class CliTests(unittest.TestCase):
             "model-impact",
         ]:
             self.assertIn(command, help_text)
-        parsed = parser.parse_args(["slurp-site", "https://example.com", "--output", "archive", "--max-bytes", "4096"])
+        self.assertNotIn("slurp-site", help_text)
+        parsed = parser.parse_args(["crawl-site", "https://example.com", "--output", "archive", "--max-bytes", "4096"])
         self.assertEqual(parsed.max_bytes, 4096)
-        ranked = parser.parse_args(["rank-offers", "data/offers/2026-07-19", "data/offers/2026-07-20"])
+        ranked = parser.parse_args(
+            [
+                "rank-offers",
+                "data/offers/2026-07-19",
+                "data/offers/2026-07-20",
+                "--visited-source",
+                "https://careers.example/jobs",
+            ]
+        )
         self.assertEqual(ranked.offers, [Path("data/offers/2026-07-19"), Path("data/offers/2026-07-20")])
+        self.assertEqual(ranked.visited_sources, ["https://careers.example/jobs"])
         feedback = parser.parse_args(["prepare-offer-feedback-email", "report.json", "--recipient", "delia@example.test", "--site-url", "https://example.test", "--output", "draft"])
         self.assertEqual(feedback.limit, 50)
 

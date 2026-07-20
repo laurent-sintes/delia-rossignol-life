@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+import json
 import re
+from functools import lru_cache
 from typing import Any
 
 from jsonschema import Draft202012Validator, FormatChecker
 from jsonschema.exceptions import ValidationError as JsonSchemaValidationError
+
+FORMAT_CHECKER = FormatChecker()
 
 
 def _path(error: JsonSchemaValidationError, root: str) -> str:
@@ -32,9 +36,16 @@ def _message(error: JsonSchemaValidationError, path: str) -> str:
     return f"{path}: {error.message}"
 
 
-def validate(instance: Any, schema: dict[str, Any], path: str = "$") -> list[str]:
-    """Validate with the declared JSON Schema 2020-12 contract."""
+@lru_cache(maxsize=64)
+def _compiled_validator(serialized_schema: str) -> Draft202012Validator:
+    schema = json.loads(serialized_schema)
     Draft202012Validator.check_schema(schema)
-    validator = Draft202012Validator(schema, format_checker=FormatChecker())
+    return Draft202012Validator(schema, format_checker=FORMAT_CHECKER)
+
+
+def validate(instance: Any, schema: dict[str, Any], path: str = "$") -> list[str]:
+    """Validate with a cached JSON Schema 2020-12 validator."""
+    serialized_schema = json.dumps(schema, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    validator = _compiled_validator(serialized_schema)
     errors = sorted(validator.iter_errors(instance), key=lambda error: (list(error.absolute_path), error.message))
     return [_message(error, _path(error, path)) for error in errors]

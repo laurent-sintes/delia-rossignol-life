@@ -249,7 +249,8 @@ def review_content(root: Path, output: Path, host: str, port: int) -> dict[str, 
     audit = audit_site(root)
     if not audit["ok"]:
         raise ValueError("site audit failed")
-    build = build_site(root, output)
+    cv_document = documents["documents"][0]
+    build = build_site(root, output, cv_document=cv_document)
     preview = start_preview(root, output.resolve(), host, port)
     config = load_repository_config(root)
     snapshot = git_snapshot(root, config["expected_remote"], config["publish_branch"])

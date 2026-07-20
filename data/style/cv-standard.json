@@ -1,12 +1,12 @@
 {
-  "id": "delia-standard-cv-content-v1",
+  "id": "delia-standard-cv-content-v6",
   "status": "validated",
   "template_id": "signature-editorial",
   "person_id": "delia-rossignol",
   "email_contact_id": "delia-application-email",
   "phone_contact_id": "delia-personal-phone",
   "profile_signature_id": "cv-standard-end-to-end",
-  "tagline": "Conseil · Commerce · Gestion de projet",
+  "tagline": "Conseil · Commerce · Gestion administrative · Gestion de projet",
   "profile_summary": "Expérience en conseil, commerce, gestion d'activité et conduite de projets sur mesure. Parcours associant entrepreneuriat, management d'équipe et relation client.",
   "photo": "site/assets/delia-rossignol.avif",
   "key_skills": [
@@ -21,12 +21,58 @@
   ],
   "include_signature_strengths": true,
   "tools": {"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "software_proficiency"},
+  "continuity_groups": [
+    {
+      "id": "agencement-sur-mesure-2020-2026",
+      "label": "Conception & pilotage de projets d’agencement",
+      "context_label": "Même métier, deux contextes successifs",
+      "job_role_id": "conception-pilotage-agencement-sur-mesure",
+      "experience_ids": ["bleu-rossignol-founder", "raison-home-franchisee"],
+      "responsibility_sequence": [
+        {"label": "Cadrer", "responsibility_count": 2},
+        {"label": "Concevoir", "responsibility_count": 4},
+        {"label": "Vendre & engager", "responsibility_count": 3},
+        {"label": "Piloter & livrer", "responsibility_count": 7}
+      ]
+    }
+  ],
   "experiences": [
-    {"entity_id": "bleu-rossignol-founder", "group": "recent", "heading": "Fondatrice & conceptrice-agenceuse · BLEU ROSSIGNOL", "heading_evidence_fields": ["titles"], "bullet_limit": 2},
-    {"entity_id": "raison-home-franchisee", "group": "recent", "heading": "Franchisée · Raison Home", "heading_evidence_fields": ["details"], "bullet_limit": 0},
+    {
+      "entity_id": "bleu-rossignol-founder",
+      "group": "recent",
+      "heading": "Fondatrice & conceptrice-agenceuse",
+      "heading_evidence_fields": ["titles"],
+      "bullet_limit": 0,
+      "continuity_group_id": "agencement-sur-mesure-2020-2026",
+      "organization_display": {
+        "name": "BLEU ROSSIGNOL",
+        "tagline": "PERFECTEUR D’INTÉRIEUR",
+        "evidence": {"entity_type": "organization", "entity_id": "bleu-rossignol", "field": "legal_name"}
+      },
+      "context_label": "Activité indépendante",
+      "context_evidence": {"entity_type": "organization", "entity_id": "bleu-rossignol", "field": "legal_continuity"},
+      "highlight": {
+        "label": "Périmètre entrepreneurial",
+        "evidence": {"entity_type": "achievement", "entity_id": "bleu-rossignol-entrepreneurial-scope", "field": "capabilities"}
+      }
+    },
+    {
+      "entity_id": "raison-home-franchisee",
+      "group": "recent",
+      "heading": "Franchisée",
+      "heading_evidence_fields": ["details"],
+      "bullet_limit": 0,
+      "continuity_group_id": "agencement-sur-mesure-2020-2026",
+      "organization_display": {
+        "name": "RAISON HOME",
+        "evidence": {"entity_type": "experience", "entity_id": "raison-home-franchisee", "field": "details"}
+      },
+      "context_label": "Exercice du métier au sein d’un réseau",
+      "context_evidence": {"entity_type": "experience", "entity_id": "raison-home-franchisee", "field": "mission"}
+    },
     {"entity_id": "cuisinella-sainte-eulalie", "group": "recent", "heading": "Concepteur-vendeur · Cuisinella Sainte-Eulalie", "heading_evidence_fields": ["details"], "bullet_limit": 1},
     {"entity_id": "promod-bordeaux", "group": "recent", "heading": "Responsable adjointe de magasin · Promod, Bordeaux", "heading_evidence_fields": ["details"], "bullet_limit": 1},
-    {"entity_id": "era-entre-deux-mers", "group": "recent", "heading": "Agent immobilier · ERA Entre Deux Mers", "heading_evidence_fields": ["details"], "bullet_limit": 1},
+    {"entity_id": "era-entre-deux-mers", "group": "complementary", "heading": "Agent immobilier · ERA Entre Deux Mers", "heading_evidence_fields": ["details"], "bullet_limit": 1},
     {"entity_id": "restaurant-la-maison", "group": "complementary", "heading": "Associée-propriétaire · La Maison, Bordeaux", "heading_evidence_fields": ["details"], "bullet_limit": 1},
     {"entity_id": "restaurant-le-manoir", "group": "complementary", "heading": "Location-gérance · Le Manoir, Paris", "heading_evidence_fields": ["details"], "bullet_limit": 1},
     {"entity_id": "sergio-rossi-paris", "group": "complementary", "heading": "Première vendeuse puis responsable de corner · SERGIO ROSSI", "heading_evidence_fields": ["details"], "bullet_limit": 0},

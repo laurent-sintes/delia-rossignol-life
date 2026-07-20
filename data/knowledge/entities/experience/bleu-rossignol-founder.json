@@ -11,6 +11,19 @@
       ],
       "value": "Fermeture dans un contexte de crise du bâtiment, avec un volume de projets et une rémunération insuffisants, malgré un intérêt confirmé pour le métier."
     },
+    "job_role_ids": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-20T07:46:44+00:00",
+          "locator": "validation-continuite-editoriale-cv-2026-07-20.txt#P01",
+          "proposal_id": "proposal-delia-bleu-rossignol-job-role",
+          "source_id": "src-79423e0e14ff47be"
+        }
+      ],
+      "value": [
+        "conception-pilotage-agencement-sur-mesure"
+      ]
+    },
     "mission": {
       "provenance": [
         {
@@ -37,6 +50,17 @@
         "pose",
         "livraison"
       ]
+    },
+    "previous_experience_id": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-20T07:46:47+00:00",
+          "locator": "validation-continuite-editoriale-cv-2026-07-20.txt#P01",
+          "proposal_id": "proposal-delia-bleu-rossignol-follows-raison-home",
+          "source_id": "src-79423e0e14ff47be"
+        }
+      ],
+      "value": "raison-home-franchisee"
     },
     "responsibilities": {
       "provenance": [
@@ -161,5 +185,5 @@
   },
   "id": "bleu-rossignol-founder",
   "type": "experience",
-  "updated_at": "2026-07-19T18:23:25+00:00"
+  "updated_at": "2026-07-20T07:46:47+00:00"
 }

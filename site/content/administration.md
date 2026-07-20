@@ -4,7 +4,7 @@ Cette page aide à enrichir le dossier, préparer des candidatures et entretenir
 
 ### Importer un document ou un site
 
-Invoquer `$ingest-delia-knowledge` pour importer un CV, un diplôme, une note ou un site professionnel. Pour un site : `python scripts/delia_life.py slurp-site <url> --output private/website-archives/<capture> --retries 2`.
+Invoquer `$ingest-delia-knowledge` pour importer un CV, un diplôme, une note ou un site professionnel. Pour un site : `python scripts/delia_life.py crawl-site <url> --output private/website-archives/<capture> --retries 2`.
 
 ### Préparer une candidature
 

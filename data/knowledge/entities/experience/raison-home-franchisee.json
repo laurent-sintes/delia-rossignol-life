@@ -16,6 +16,19 @@
         "title": "franchisée"
       }
     },
+    "job_role_ids": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-20T07:46:45+00:00",
+          "locator": "validation-continuite-editoriale-cv-2026-07-20.txt#P01",
+          "proposal_id": "proposal-delia-raison-home-job-role",
+          "source_id": "src-79423e0e14ff47be"
+        }
+      ],
+      "value": [
+        "conception-pilotage-agencement-sur-mesure"
+      ]
+    },
     "mission": {
       "provenance": [
         {
@@ -34,14 +47,35 @@
           "locator": "validation-responsabilites-experiences-restantes-2026-07-19.txt#P05",
           "proposal_id": "proposal-delia-responsibilities-raison-home",
           "source_id": "src-a9315033eec20535"
+        },
+        {
+          "applied_at": "2026-07-20T07:34:31+00:00",
+          "locator": "precision-continuite-metier-perimetre-entrepreneurial-2026-07-20.txt#P01",
+          "proposal_id": "proposal-delia-raison-home-core-activity-continuity",
+          "source_id": "src-436f63a40b54e690"
         }
       ],
       "value": [
-        "Concevoir et vendre des projets d’agencement dans le cadre de la franchise Raison Home."
+        "analyse du besoin client",
+        "relevé de mesures et prise de cotes",
+        "conception fonctionnelle",
+        "choix esthétique",
+        "rendus 3D",
+        "plans techniques d’exécution",
+        "chiffrage et devis",
+        "négociation commerciale",
+        "commande fabricants",
+        "planification",
+        "coordination des artisans",
+        "suivi de chantier",
+        "contrôle de la pose",
+        "réception du chantier",
+        "gestion des réclamations",
+        "facturation"
       ]
     }
   },
   "id": "raison-home-franchisee",
   "type": "experience",
-  "updated_at": "2026-07-19T18:38:57+00:00"
+  "updated_at": "2026-07-20T07:46:45+00:00"
 }

@@ -1,0 +1,31 @@
+{
+  "application": {
+    "applied_at": "2026-07-20T07:34:32+00:00",
+    "knowledge_path": "data/knowledge/entities/achievement/bleu-rossignol-entrepreneurial-scope.json"
+  },
+  "classification": "claim",
+  "confidence": 0.95,
+  "history": [
+    {
+      "at": "2026-07-20T07:34:29+00:00",
+      "from": "pending",
+      "note": "Validation explicite dans Codex le 20 juillet 2026 : Je valide les 2 points.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-bleu-rossignol-entrepreneurial-scope",
+  "proposed_value": "Le développement de BLEU ROSSIGNOL a conduit Délia à développer un site, suivre le développement commercial avec Google Analytics, faire de la publicité et développer son réseau.",
+  "source": {
+    "evidence": "La différence avec la dernière expérience, c'est qu'elle a monté sa boite. Ce qui a occasionné un développement de compétence supplémentaire : développement d'un site, suivi du développement commercial via Google Analytics, publicité, développement de réseau.",
+    "id": "src-436f63a40b54e690",
+    "locator": "precision-continuite-metier-perimetre-entrepreneurial-2026-07-20.txt#P02"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "bleu-rossignol-entrepreneurial-scope",
+    "entity_type": "achievement",
+    "field": "statement"
+  },
+  "validated_value": "Le développement de BLEU ROSSIGNOL a conduit Délia à développer un site, suivre le développement commercial avec Google Analytics, faire de la publicité et développer son réseau."
+}

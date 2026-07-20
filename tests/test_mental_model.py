@@ -19,7 +19,7 @@ class MentalModelTests(unittest.TestCase):
     def test_model_is_valid_and_has_expected_scope(self) -> None:
         summary = model_summary(self.model)
         self.assertTrue(summary["ok"], summary["errors"])
-        self.assertEqual(summary["model_version"], "1.1.4")
+        self.assertEqual(summary["model_version"], "1.1.5")
         self.assertGreaterEqual(summary["concept_count"], 31)
         self.assertIn("professional-posture", {concept["id"] for concept in self.model["concepts"]})
         self.assertGreaterEqual(summary["relation_count"], 55)

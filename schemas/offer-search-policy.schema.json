@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
-  "required": ["id", "result_limit", "candidate_pool_minimum", "freshness_days", "contracts", "diversity", "location_queries", "source_domains", "priority_sector_coverage", "source_strategy", "weights"],
+  "required": ["id", "result_limit", "candidate_pool_minimum", "freshness_days", "contracts", "diversity", "functional_query_families", "location_queries", "source_domains", "priority_sector_coverage", "source_strategy", "weights"],
   "properties": {
     "id": {"type": "string", "minLength": 1},
     "result_limit": {"type": "integer", "minimum": 1, "maximum": 50},
@@ -27,6 +27,16 @@
       "additionalProperties": false
     },
     "location_queries": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "functional_query_families": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {"type": "string", "minLength": 1}
+      }
+    },
     "sector_emphasis": {
       "type": "object",
       "required": ["labels", "multiplier"],

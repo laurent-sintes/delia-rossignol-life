@@ -1,0 +1,66 @@
+{
+  "application": {
+    "applied_at": "2026-07-20T07:34:31+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/raison-home-franchisee.json"
+  },
+  "classification": "inference",
+  "confidence": 0.75,
+  "history": [
+    {
+      "at": "2026-07-20T07:34:28+00:00",
+      "from": "pending",
+      "note": "Validation explicite dans Codex le 20 juillet 2026 : Je valide les 2 points.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-raison-home-core-activity-continuity",
+  "proposed_value": [
+    "analyse du besoin client",
+    "relevé de mesures et prise de cotes",
+    "conception fonctionnelle",
+    "choix esthétique",
+    "rendus 3D",
+    "plans techniques d’exécution",
+    "chiffrage et devis",
+    "négociation commerciale",
+    "commande fabricants",
+    "planification",
+    "coordination des artisans",
+    "suivi de chantier",
+    "contrôle de la pose",
+    "réception du chantier",
+    "gestion des réclamations",
+    "facturation"
+  ],
+  "replaces_proposal_id": "proposal-delia-responsibilities-raison-home",
+  "source": {
+    "evidence": "Chez Raison Home, elle faisait la même activité.",
+    "id": "src-436f63a40b54e690",
+    "locator": "precision-continuite-metier-perimetre-entrepreneurial-2026-07-20.txt#P01"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "raison-home-franchisee",
+    "entity_type": "experience",
+    "field": "responsibilities"
+  },
+  "validated_value": [
+    "analyse du besoin client",
+    "relevé de mesures et prise de cotes",
+    "conception fonctionnelle",
+    "choix esthétique",
+    "rendus 3D",
+    "plans techniques d’exécution",
+    "chiffrage et devis",
+    "négociation commerciale",
+    "commande fabricants",
+    "planification",
+    "coordination des artisans",
+    "suivi de chantier",
+    "contrôle de la pose",
+    "réception du chantier",
+    "gestion des réclamations",
+    "facturation"
+  ]
+}

@@ -1,6 +1,6 @@
 ---
 name: manage-delia-git
-description: Tester, prévisualiser, committer et publier les changements du dépôt Delia Rossignol Life. Utiliser cette skill après une modification de contenu, lorsque l'utilisateur demande une revue locale, dit « commit », « publie », « publish », « pousse », veut vérifier Git ou déclencher GitHub Pages.
+description: Tester, prévisualiser, committer et publier les changements du dépôt Delia Rossignol Life. Utiliser cette skill lorsque l'utilisateur demande explicitement une revue locale, un contrôle Git, un commit, une publication, un push ou le déclenchement de GitHub Pages.
 ---
 
 # Gestion Git du projet Délia
@@ -29,7 +29,7 @@ Si un test ou le build échoue, ne pas committer. Corriger uniquement si la dema
 1. Lire `config/repository.json`, puis inspecter la branche, le remote et le statut Git.
 2. Si `origin` manque, le configurer avec `expected_remote`. Si un autre remote existe, arrêter et demander une décision; ne jamais le remplacer silencieusement.
 3. Exécuter `python scripts/repo_flow.py publish-check`. Ne pas pousser si le dépôt est sale, sans commit, sur une autre branche ou en retard sur son upstream.
-4. Exécuter `git push -u origin main`. Ne jamais utiliser `--force` ou `--force-with-lease` dans ce workflow.
+4. Exécuter `git push -u origin <publish_branch>` avec la valeur lue dans `config/repository.json`. Ne jamais utiliser `--force` ou `--force-with-lease` dans ce workflow.
 5. Vérifier le statut après push. Si `gh` est disponible, afficher le dernier run du workflow `pages.yml`; ne pas prétendre que Pages est déployé avant confirmation du run.
 
 La commande explicite `publish` autorise le push du commit courant vers le remote et la branche configurés, mais n'autorise ni merge, ni rebase, ni réécriture d'historique.

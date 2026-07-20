@@ -1,0 +1,27 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-20T07:46:43+00:00",
+          "locator": "validation-continuite-editoriale-cv-2026-07-20.txt#P01",
+          "proposal_id": "proposal-delia-job-role-agencement-sur-mesure",
+          "source_id": "src-79423e0e14ff47be"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "conceptrice-agenceuse",
+          "conception et vente de projets d’agencement"
+        ],
+        "description": "Concevoir, vendre et piloter de bout en bout des projets d’agencement sur mesure.",
+        "job_family": "agencement intérieur",
+        "name": "Conception et pilotage de projets d’agencement sur mesure",
+        "source_label": "même métier exercé dans des contextes différents"
+      }
+    }
+  },
+  "id": "conception-pilotage-agencement-sur-mesure",
+  "type": "job-role",
+  "updated_at": "2026-07-20T07:46:43+00:00"
+}

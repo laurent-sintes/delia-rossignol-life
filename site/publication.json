@@ -42,7 +42,7 @@
             },
             {
               "source": "data/knowledge/entities/organization/bleu-rossignol.json",
-              "title": "BLEU ROSSIGNOL",
+              "title": "BLEU ROSSIGNOL, PERFECTEUR D’INTÉRIEUR",
               "eyebrow": "Cadre entrepreneurial",
               "fields": [
                 {"path": "fields.legal_name.value", "label": "Dénomination"},
@@ -137,21 +137,42 @@
       "title": "Parcours et formation",
       "sections": [
         {
-          "title": "Expériences professionnelles",
-          "layout": "editorial",
-          "description": "Des expériences au croisement du conseil, du commerce, de la gestion et de l’entrepreneuriat.",
+          "title": "Agencement sur mesure · 2020 — 2026",
+          "layout": "continuity",
+          "description": "Un même métier exercé dans deux contextes successifs : d’abord au sein du réseau Raison Home, puis dans le cadre d’une activité indépendante créée et développée par Délia.",
           "cards": [
             {
               "source": "data/knowledge/entities/experience/bleu-rossignol-founder.json",
-              "title": "BLEU ROSSIGNOL",
-              "eyebrow": "2024 — 2026",
+              "title": "Socle métier commun",
+              "eyebrow": "Conception et pilotage de projets d’agencement sur mesure",
+              "variant": "continuity-foundation",
               "fields": [
-                {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
+                {"path": "fields.responsibilities.value", "label": "Responsabilités exercées dans les deux contextes", "presentation": "detail"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/experience/raison-home-franchisee.json",
+              "title": "Raison Home",
+              "eyebrow": "2020 — 2023 · Exercice du métier au sein d’un réseau",
+              "variant": "continuity-context",
+              "fields": [
+                {"path": "fields.mission.value", "label": "Contexte et mission", "presentation": "detail"},
+                {"path": "fields.details.value.title", "label": "Fonction"},
+                {"path": "fields.details.value.start_date", "label": "Début"},
+                {"path": "fields.details.value.end_date", "label": "Fin"}
+              ]
+            },
+            {
+              "source": "data/knowledge/entities/experience/bleu-rossignol-founder.json",
+              "title": "BLEU ROSSIGNOL, PERFECTEUR D’INTÉRIEUR",
+              "eyebrow": "2024 — 2026 · Création et développement d’une activité indépendante",
+              "variant": "continuity-context",
+              "fields": [
+                {"path": "fields.mission.value", "label": "Contexte et mission", "presentation": "detail"},
                 {"path": "fields.titles.value.corporate", "label": "Fonctions"},
                 {"path": "fields.titles.value.operational", "label": "Métier"},
                 {"path": "fields.timeframe.value.start_date", "label": "Début"},
                 {"path": "fields.timeframe.value.end_date", "label": "Fin prévue"},
-                {"path": "fields.responsibilities.value", "label": "Responsabilités", "presentation": "detail"},
                 {
                   "path": "fields.software_proficiency.value",
                   "label": "Logiciels",
@@ -163,17 +184,21 @@
               ]
             },
             {
-              "source": "data/knowledge/entities/experience/raison-home-franchisee.json",
-              "title": "Raison Home",
-              "eyebrow": "2020 — 2023",
+              "source": "data/knowledge/entities/achievement/bleu-rossignol-entrepreneurial-scope.json",
+              "title": "Périmètre entrepreneurial",
+              "eyebrow": "Compétences développées avec BLEU ROSSIGNOL, PERFECTEUR D’INTÉRIEUR",
+              "variant": "continuity-highlight",
               "fields": [
-                {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
-                {"path": "fields.responsibilities.value", "label": "Responsabilités", "presentation": "detail"},
-                {"path": "fields.details.value.title", "label": "Fonction"},
-                {"path": "fields.details.value.start_date", "label": "Début"},
-                {"path": "fields.details.value.end_date", "label": "Fin"}
+                {"path": "fields.capabilities.value", "label": "Développement de l’activité", "presentation": "badge"}
               ]
-            },
+            }
+          ]
+        },
+        {
+          "title": "Autres expériences professionnelles",
+          "layout": "editorial",
+          "description": "Des expériences au croisement du conseil, du commerce, de la gestion et du management.",
+          "cards": [
             {
               "source": "data/knowledge/entities/experience/cuisinella-sainte-eulalie.json",
               "title": "Cuisinella Sainte-Eulalie",

@@ -5,12 +5,16 @@ import html
 import json
 import re
 import shutil
+import sys
 import tempfile
+import time
 import urllib.parse
 import uuid
+from dataclasses import dataclass
+from dataclasses import field as dataclass_field
 from datetime import date
 from pathlib import Path
-from typing import Any
+from typing import Any, TypedDict
 
 from .core import load_json, sha256_file
 from .document_builder import STANDARD_CV_FILENAME, build_standard_cv
@@ -36,6 +40,18 @@ FORBIDDEN_SOURCE_PREFIXES = {
 }
 SLUG_PATTERN = re.compile(r"^[a-z0-9-]+$")
 INLINE_PATTERN = re.compile(r"`([^`]+)`|==([^=]+)==|\[([^\]]+)\]\(([^)]+)\)")
+HEADING_PATTERN = re.compile(r"^(#{1,3})\s+(.+)$")
+BULLET_PATTERN = re.compile(r"^[-*]\s+(.+)$")
+NUMBERED_PATTERN = re.compile(r"^\d+\.\s+(.+)$")
+KNOWLEDGE_CARD_VARIANTS = {"continuity-foundation", "continuity-context", "continuity-highlight"}
+
+
+class SiteBuildResult(TypedDict):
+    output: str
+    pages: list[str]
+    documents: list[dict[str, Any]]
+    published_sources_are_allowlisted: bool
+    staging_cleanup: dict[str, int]
 
 
 def _is_prefix(parts: tuple[str, ...], prefix: tuple[str, ...]) -> bool:
@@ -78,70 +94,86 @@ def render_inline(text: str) -> str:
     return "".join(chunks)
 
 
-def markdown_to_html(markdown: str) -> str:
-    output: list[str] = []
-    paragraph: list[str] = []
+@dataclass
+class MarkdownRenderState:
+    output: list[str] = dataclass_field(default_factory=list)
+    paragraph: list[str] = dataclass_field(default_factory=list)
     list_kind: str | None = None
-    in_code = False
-    code_lines: list[str] = []
+    in_code: bool = False
+    code_lines: list[str] = dataclass_field(default_factory=list)
 
-    def flush_paragraph() -> None:
-        if paragraph:
-            output.append(f"<p>{render_inline(' '.join(paragraph))}</p>")
-            paragraph.clear()
+    def flush_paragraph(self) -> None:
+        if self.paragraph:
+            self.output.append(f"<p>{render_inline(' '.join(self.paragraph))}</p>")
+            self.paragraph.clear()
 
-    def close_list() -> None:
-        nonlocal list_kind
-        if list_kind:
-            output.append(f"</{list_kind}>")
-            list_kind = None
+    def close_list(self) -> None:
+        if self.list_kind:
+            self.output.append(f"</{self.list_kind}>")
+            self.list_kind = None
 
+    def toggle_code(self) -> None:
+        self.flush_paragraph()
+        self.close_list()
+        if self.in_code:
+            self.flush_code()
+        else:
+            self.in_code = True
+
+    def flush_code(self) -> None:
+        self.output.append(f"<pre><code>{html.escape(chr(10).join(self.code_lines))}</code></pre>")
+        self.code_lines.clear()
+        self.in_code = False
+
+    def add_list_item(self, kind: str, value: str) -> None:
+        self.flush_paragraph()
+        if self.list_kind != kind:
+            self.close_list()
+            self.output.append(f"<{kind}>")
+            self.list_kind = kind
+        self.output.append(f"<li>{render_inline(value)}</li>")
+
+    def finish(self) -> str:
+        if self.in_code:
+            self.flush_code()
+        self.flush_paragraph()
+        self.close_list()
+        return "\n".join(self.output)
+
+
+def _render_markdown_line(state: MarkdownRenderState, raw_line: str) -> None:
+    line = raw_line.rstrip()
+    if line.startswith("```"):
+        state.toggle_code()
+        return
+    if state.in_code:
+        state.code_lines.append(raw_line)
+        return
+    if not line.strip():
+        state.flush_paragraph()
+        state.close_list()
+        return
+    heading = HEADING_PATTERN.match(line)
+    if heading:
+        state.flush_paragraph()
+        state.close_list()
+        level = len(heading.group(1))
+        state.output.append(f"<h{level}>{render_inline(heading.group(2))}</h{level}>")
+        return
+    bullet = BULLET_PATTERN.match(line)
+    numbered = NUMBERED_PATTERN.match(line)
+    match = bullet or numbered
+    if match:
+        state.add_list_item("ul" if bullet else "ol", match.group(1))
+        return
+    state.paragraph.append(line.strip())
+
+
+def markdown_to_html(markdown: str) -> str:
+    state = MarkdownRenderState()
     for raw_line in markdown.splitlines():
-        line = raw_line.rstrip()
-        if line.startswith("```"):
-            flush_paragraph()
-            close_list()
-            if in_code:
-                output.append(f"<pre><code>{html.escape(chr(10).join(code_lines))}</code></pre>")
-                code_lines.clear()
-                in_code = False
-            else:
-                in_code = True
-            continue
-        if in_code:
-            code_lines.append(raw_line)
-            continue
-        if not line.strip():
-            flush_paragraph()
-            close_list()
-            continue
-        heading = re.match(r"^(#{1,3})\s+(.+)$", line)
-        if heading:
-            flush_paragraph()
-            close_list()
-            level = len(heading.group(1))
-            output.append(f"<h{level}>{render_inline(heading.group(2))}</h{level}>")
-            continue
-        bullet = re.match(r"^[-*]\s+(.+)$", line)
-        numbered = re.match(r"^\d+\.\s+(.+)$", line)
-        if bullet or numbered:
-            flush_paragraph()
-            wanted = "ul" if bullet else "ol"
-            if list_kind != wanted:
-                close_list()
-                output.append(f"<{wanted}>")
-                list_kind = wanted
-            match = bullet or numbered
-            assert match is not None
-            output.append(f"<li>{render_inline(match.group(1))}</li>")
-            continue
-        paragraph.append(line.strip())
-
-    if in_code:
-        output.append(f"<pre><code>{html.escape(chr(10).join(code_lines))}</code></pre>")
-    flush_paragraph()
-    close_list()
-    return "\n".join(output)
+        _render_markdown_line(state, raw_line)
+    return state.finish()
 
 
 def _label(name: str, labels: dict[str, str]) -> str:
@@ -261,16 +293,34 @@ def _render_badges(value: Any) -> str:
     return f'<div class="knowledge-badges">{badges}</div>'
 
 
-def render_knowledge_card(document: dict[str, Any], spec: dict[str, Any]) -> str:
-    fields = spec.get("fields")
-    if not fields:
-        raise ValueError("Every knowledge card requires an explicit non-empty fields allowlist")
-    layout = spec.get("layout", "standard")
-    if layout not in {"standard", "editorial"}:
-        raise ValueError(f"Unsupported knowledge card layout: {layout}")
-    rows: list[str] = []
-    summary_items: list[str] = []
-    detail_sections: list[str] = []
+@dataclass
+class KnowledgeCardContent:
+    rows: list[str] = dataclass_field(default_factory=list)
+    summary_items: list[str] = dataclass_field(default_factory=list)
+    detail_sections: list[str] = dataclass_field(default_factory=list)
+
+    @property
+    def has_values(self) -> bool:
+        return bool(self.rows or self.summary_items or self.detail_sections)
+
+
+def _knowledge_card_class(layout: str, variant: Any) -> str:
+    if variant is not None and variant not in KNOWLEDGE_CARD_VARIANTS:
+        raise ValueError(f"Unsupported knowledge card variant: {variant}")
+    card_classes = ["knowledge-card"]
+    if layout == "editorial":
+        card_classes.append("knowledge-card--editorial")
+    if variant is not None:
+        card_classes.append(f"knowledge-card--{variant}")
+    return " ".join(card_classes)
+
+
+def _collect_knowledge_card_content(
+    document: dict[str, Any],
+    fields: list[dict[str, Any]],
+    layout: str,
+) -> KnowledgeCardContent:
+    result = KnowledgeCardContent()
     for field in fields:
         path = field.get("path")
         label = field.get("label")
@@ -286,39 +336,61 @@ def render_knowledge_card(document: dict[str, Any], spec: dict[str, Any]) -> str
             else _render_value(value, field.get("item_fields"), field.get("labels", {}), field.get("highlights"))
         )
         if layout == "editorial" and presentation == "detail":
-            detail_sections.append(
+            result.detail_sections.append(
                 '<section class="knowledge-detail">'
                 f"<h4>{html.escape(str(label))}</h4>{content}</section>"
             )
         elif layout == "editorial":
-            summary_items.append(
+            result.summary_items.append(
                 '<div class="knowledge-summary-item">'
                 f"<p>{html.escape(str(label))}</p><div>{content}</div></div>"
             )
         else:
-            rows.append(f"<dt>{html.escape(str(label))}</dt><dd>{content}</dd>")
-    if not rows and not summary_items and not detail_sections:
+            result.rows.append(f"<dt>{html.escape(str(label))}</dt><dd>{content}</dd>")
+    return result
+
+
+def _render_editorial_knowledge_card(
+    spec: dict[str, Any], card_class: str, eyebrow_html: str, content: KnowledgeCardContent
+) -> str:
+    summary = (
+        '<div class="knowledge-summary">' + "".join(content.summary_items) + "</div>"
+        if content.summary_items
+        else ""
+    )
+    return (
+        f'<article class="{card_class}">'
+        + eyebrow_html
+        + f'<h3>{html.escape(str(spec["title"]))}</h3>'
+        + summary
+        + '<div class="knowledge-details">'
+        + "".join(content.detail_sections)
+        + "</div></article>"
+    )
+
+
+def render_knowledge_card(document: dict[str, Any], spec: dict[str, Any]) -> str:
+    fields = spec.get("fields")
+    if not fields:
+        raise ValueError("Every knowledge card requires an explicit non-empty fields allowlist")
+    layout = spec.get("layout", "standard")
+    if layout not in {"standard", "editorial"}:
+        raise ValueError(f"Unsupported knowledge card layout: {layout}")
+    card_class = _knowledge_card_class(layout, spec.get("variant"))
+    content = _collect_knowledge_card_content(document, fields, layout)
+    if not content.has_values:
         raise ValueError(f"Knowledge card publishes no values: {spec.get('title', 'untitled')}")
     eyebrow = spec.get("eyebrow")
     eyebrow_html = f'<p class="knowledge-card-eyebrow">{html.escape(str(eyebrow))}</p>' if eyebrow else ""
     if layout == "editorial":
-        summary = '<div class="knowledge-summary">' + "".join(summary_items) + "</div>" if summary_items else ""
-        return (
-            '<article class="knowledge-card knowledge-card--editorial">'
-            + eyebrow_html
-            + f'<h3>{html.escape(str(spec["title"]))}</h3>'
-            + summary
-            + '<div class="knowledge-details">'
-            + "".join(detail_sections)
-            + "</div></article>"
-        )
-    field_list_class = "knowledge-fields knowledge-fields--single" if len(rows) == 1 else "knowledge-fields"
+        return _render_editorial_knowledge_card(spec, card_class, eyebrow_html, content)
+    field_list_class = "knowledge-fields knowledge-fields--single" if len(content.rows) == 1 else "knowledge-fields"
     return (
-        '<article class="knowledge-card">'
+        f'<article class="{card_class}">'
         + eyebrow_html
         + f'<h3>{html.escape(str(spec["title"]))}</h3>'
         + f'<dl class="{field_list_class}">'
-        + "".join(rows)
+        + "".join(content.rows)
         + "</dl></article>"
     )
 
@@ -327,12 +399,13 @@ def render_knowledge_page(root: Path, page: dict[str, Any]) -> str:
     sections: list[str] = []
     for section in page.get("sections", []):
         section_layout = section.get("layout", "standard")
-        if section_layout not in {"standard", "editorial"}:
+        if section_layout not in {"standard", "editorial", "continuity"}:
             raise ValueError(f"Unsupported knowledge section layout: {section_layout}")
         cards: list[str] = []
         for card in section.get("cards", []):
             source = safe_source(root, card["source"])
-            card_spec = {**card, "layout": card.get("layout", section_layout)}
+            default_card_layout = "editorial" if section_layout == "continuity" else section_layout
+            card_spec = {**card, "layout": card.get("layout", default_card_layout)}
             cards.append(render_knowledge_card(load_json(source), card_spec))
         if not cards:
             raise ValueError(f"Knowledge section has no cards: {section.get('title', 'untitled')}")
@@ -594,12 +667,7 @@ def _prepare_output(root: Path, output: Path) -> Path:
     return output
 
 
-def _build_site_in_place(root: Path, output: Path, config_path: Path | None = None) -> dict[str, Any]:
-    root = root.resolve()
-    config_path = config_path or root / "site" / "publication.json"
-    config = load_json(config_path)
-    site = config["site"]
-    pages = config["pages"]
+def _validate_page_slugs(pages: list[dict[str, Any]]) -> None:
     slugs: set[str] = set()
     for page in pages:
         slug = page["slug"]
@@ -609,63 +677,66 @@ def _build_site_in_place(root: Path, output: Path, config_path: Path | None = No
     if "index" not in slugs:
         raise ValueError("Publication requires an index page")
 
-    output = _prepare_output(root, output)
-    assets_source = safe_source(root, "site/assets")
-    previous_manifest_path = output / ".delia-site-manifest.json"
-    previous_files = set(load_json(previous_manifest_path).get("files", [])) if previous_manifest_path.exists() else set()
-    shutil.copytree(assets_source, output / "assets", dirs_exist_ok=True)
-    document = build_standard_cv(root, output / "assets" / "downloads" / STANDARD_CV_FILENAME)
-    asset_version = sha256_file(output / "assets" / "style.css")[:12]
-    (output / ".nojekyll").write_text("", encoding="utf-8")
 
+def _render_collection_page(root: Path, page: dict[str, Any]) -> str:
+    pattern = page["source_glob"]
+    prefix = pattern.split("*", 1)[0].rstrip("/\\")
+    safe_source(root, prefix)
+    cards: list[str] = []
+    for source in sorted(root.glob(pattern)):
+        safe_source(root, source.relative_to(root).as_posix())
+        template_document = load_json(source)
+        name = html.escape(str(template_document.get("name", source.parent.name)))
+        preview = render_cv_template_preview(template_document)
+        cards.append(
+            f'<article class="template-card"><h2>{name}</h2>'
+            f"{render_json_document(template_document, page)}{preview}</article>"
+        )
+    return '<div class="card-grid">' + "".join(cards) + "</div>"
+
+
+def _render_page_body(root: Path, page: dict[str, Any]) -> str:
+    kind = page["kind"]
+    if kind in {"markdown", "administration"}:
+        source = safe_source(root, page["source"])
+        return markdown_to_html(source.read_text(encoding="utf-8"))
+    if kind == "json":
+        sections: list[str] = []
+        for section in page["sections"]:
+            page_document = load_json(safe_source(root, section["source"]))
+            heading = html.escape(section["title"])
+            sections.append(f"<section><h2>{heading}</h2>{render_json_document(page_document, section)}</section>")
+        return "".join(sections)
+    if kind == "collection":
+        return _render_collection_page(root, page)
+    if kind == "knowledge":
+        return render_knowledge_page(root, page)
+    if kind == "mental-model":
+        return render_mental_model(load_mental_model(safe_source(root, page["source"])))
+    raise ValueError(f"Unsupported page kind: {kind}")
+
+
+def _write_site_pages(
+    root: Path,
+    output: Path,
+    site: dict[str, Any],
+    pages: list[dict[str, Any]],
+    asset_version: str,
+) -> list[str]:
     built: list[str] = []
     for page in pages:
-        kind = page["kind"]
-        if kind in {"markdown", "administration"}:
-            source = safe_source(root, page["source"])
-            body = markdown_to_html(source.read_text(encoding="utf-8"))
-        elif kind == "json":
-            sections: list[str] = []
-            for section in page["sections"]:
-                source = safe_source(root, section["source"])
-                document = load_json(source)
-                heading = html.escape(section["title"])
-                sections.append(f"<section><h2>{heading}</h2>{render_json_document(document, section)}</section>")
-            body = "".join(sections)
-        elif kind == "collection":
-            pattern = page["source_glob"]
-            prefix = pattern.split("*", 1)[0].rstrip("/\\")
-            safe_source(root, prefix)
-            documents = sorted(root.glob(pattern))
-            cards: list[str] = []
-            for source in documents:
-                safe_source(root, source.relative_to(root).as_posix())
-                document = load_json(source)
-                name = html.escape(str(document.get("name", source.parent.name)))
-                preview = render_cv_template_preview(document)
-                cards.append(
-                    f'<article class="template-card"><h2>{name}</h2>'
-                    f"{render_json_document(document, page)}{preview}</article>"
-                )
-            body = '<div class="card-grid">' + "".join(cards) + "</div>"
-        elif kind == "knowledge":
-            body = render_knowledge_page(root, page)
-        elif kind == "mental-model":
-            source = safe_source(root, page["source"])
-            body = render_mental_model(load_mental_model(source))
-        else:
-            raise ValueError(f"Unsupported page kind: {kind}")
         filename = "index.html" if page["slug"] == "index" else f'{page["slug"]}.html'
         (output / filename).write_text(
-            _page_template(site, page, pages, body, asset_version),
+            _page_template(site, page, pages, _render_page_body(root, page), asset_version),
             encoding="utf-8",
             newline="\n",
         )
         built.append(filename)
+    return built
 
-    asset_files = [path.relative_to(output).as_posix() for path in (output / "assets").rglob("*") if path.is_file()]
-    current_files = set(built + asset_files + [".nojekyll", ".delia-site-output"])
-    for stale in sorted(previous_files - current_files):
+
+def _remove_stale_files(output: Path, stale_files: set[str]) -> None:
+    for stale in sorted(stale_files):
         stale_path = (output / stale).resolve()
         try:
             stale_path.relative_to(output)
@@ -673,6 +744,41 @@ def _build_site_in_place(root: Path, output: Path, config_path: Path | None = No
             raise ValueError(f"Unsafe stale output path: {stale}") from error
         if stale_path.is_file():
             stale_path.unlink()
+
+
+def _build_site_in_place(
+    root: Path,
+    output: Path,
+    config_path: Path | None = None,
+    cv_document: dict[str, Any] | None = None,
+) -> SiteBuildResult:
+    root = root.resolve()
+    config_path = config_path or root / "site" / "publication.json"
+    config = load_json(config_path)
+    site = config["site"]
+    pages = config["pages"]
+    _validate_page_slugs(pages)
+
+    output = _prepare_output(root, output)
+    assets_source = safe_source(root, "site/assets")
+    previous_manifest_path = output / ".delia-site-manifest.json"
+    previous_files = set(load_json(previous_manifest_path).get("files", [])) if previous_manifest_path.exists() else set()
+    shutil.copytree(assets_source, output / "assets", dirs_exist_ok=True)
+    if cv_document is None:
+        cv_document = build_standard_cv(root, output / "assets" / "downloads" / STANDARD_CV_FILENAME)
+    else:
+        cv_document = {
+            **cv_document,
+            "output": str(output / "assets" / "downloads" / STANDARD_CV_FILENAME),
+        }
+    asset_version = sha256_file(output / "assets" / "style.css")[:12]
+    (output / ".nojekyll").write_text("", encoding="utf-8")
+
+    built = _write_site_pages(root, output, site, pages, asset_version)
+
+    asset_files = [path.relative_to(output).as_posix() for path in (output / "assets").rglob("*") if path.is_file()]
+    current_files = set(built + asset_files + [".nojekyll", ".delia-site-output"])
+    _remove_stale_files(output, previous_files - current_files)
     (output / ".delia-site-manifest.json").write_text(
         json.dumps({"files": sorted(current_files)}, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
@@ -681,14 +787,34 @@ def _build_site_in_place(root: Path, output: Path, config_path: Path | None = No
     return {
         "output": str(output),
         "pages": built,
-        "documents": [document],
+        "documents": [cv_document],
         "published_sources_are_allowlisted": True,
+        "staging_cleanup": {"removed": 0, "remaining": 0},
     }
 
 
-def _cleanup_stale_site_builds(staging_root: Path, output_name: str) -> None:
-    for stale_staging in staging_root.glob(f"{output_name}.staging-*"):
+def _cleanup_stale_site_builds(
+    staging_root: Path,
+    output_name: str | None,
+    time_budget_seconds: float = 0.25,
+    minimum_age_seconds: float = 3600.0,
+) -> dict[str, int]:
+    deadline = time.monotonic() + max(0.0, time_budget_seconds)
+    removed = 0
+    pattern = f"{output_name}.staging-*" if output_name else "*.staging-*"
+    for stale_staging in staging_root.glob(pattern):
+        if time.monotonic() >= deadline:
+            break
+        try:
+            age_seconds = time.time() - stale_staging.stat().st_mtime
+        except OSError:
+            continue
+        if age_seconds < minimum_age_seconds:
+            continue
         remove_tree(stale_staging, ignore_errors=True)
+        removed += not stale_staging.exists()
+    remaining = sum(1 for _ in staging_root.glob(pattern))
+    return {"removed": removed, "remaining": remaining}
 
 
 def _site_runtime_root(root: Path) -> Path:
@@ -696,7 +822,12 @@ def _site_runtime_root(root: Path) -> Path:
     return Path(tempfile.gettempdir()) / "delia-rossignol-life" / "site-builds" / project_key
 
 
-def build_site(root: Path, output: Path, config_path: Path | None = None) -> dict[str, Any]:
+def build_site(
+    root: Path,
+    output: Path,
+    config_path: Path | None = None,
+    cv_document: dict[str, Any] | None = None,
+) -> SiteBuildResult:
     """Build completely in staging, then publish files with rollback protection."""
     root = root.resolve()
     output = output.resolve()
@@ -707,10 +838,11 @@ def build_site(root: Path, output: Path, config_path: Path | None = None) -> dic
     transaction_id = uuid.uuid4().hex
     staging_root = _site_runtime_root(root)
     staging_root.mkdir(parents=True, exist_ok=True)
-    _cleanup_stale_site_builds(staging_root, output.name)
+    cleanup = _cleanup_stale_site_builds(staging_root, None)
     staging = staging_root / f"{output.name}.staging-{transaction_id}"
     try:
-        result = _build_site_in_place(root, staging, config_path)
+        result = _build_site_in_place(root, staging, config_path, cv_document)
+        result["staging_cleanup"] = cleanup
         output.mkdir(parents=True, exist_ok=True)
         lock_path = staging_root / "site-publish.lock"
         with exclusive_directory_lock(lock_path):
@@ -720,13 +852,7 @@ def build_site(root: Path, output: Path, config_path: Path | None = None) -> dic
             changes = {output / path.relative_to(staging): path.read_bytes() for path in staged_files}
             atomic_write_bytes_group(changes)
             current_files = {path.relative_to(staging).as_posix() for path in staged_files}
-            for stale in sorted(previous_files - current_files):
-                stale_path = (output / stale).resolve()
-                try:
-                    stale_path.relative_to(output)
-                except ValueError as error:
-                    raise ValueError(f"Unsafe stale output path: {stale}") from error
-                stale_path.unlink(missing_ok=True)
+            _remove_stale_files(output, previous_files - current_files)
         result["output"] = str(output)
         for document in result.get("documents", []):
             document_path = Path(document["output"])
@@ -734,4 +860,9 @@ def build_site(root: Path, output: Path, config_path: Path | None = None) -> dic
         return result
     finally:
         if staging.exists():
-            remove_tree(staging, ignore_errors=True)
+            build_failed = sys.exc_info()[0] is not None
+            try:
+                remove_tree(staging, attempts=3)
+            except OSError:
+                if not build_failed:
+                    raise

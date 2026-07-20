@@ -10,7 +10,7 @@ description: Importer un CV, diplôme, document, note, archive ou site web relat
 1. Lire `AGENTS.md` et respecter la séparation source, proposition et connaissance validée.
 2. Placer un original local dans `private/originals/` et le conserver pour le prochain commit. Ce répertoire est versionné mais exclu de GitHub Pages.
 3. Créer son manifeste avec `python scripts/delia_life.py manifest <fichier> --kind <type> --output data/sources/manifests/<id>.json`.
-4. Pour un site, lancer `python scripts/delia_life.py slurp-site <url> --output private/website-archives/<nom>`. Rester sur le même domaine et conserver le manifeste produit.
+4. Pour un site, lancer `python scripts/delia_life.py crawl-site <url> --output private/website-archives/<nom>`. Rester sur le même domaine et conserver le manifeste produit.
 5. Extraire des propositions atomiques dans `data/review/queue/`. Fournir pour chacune une source, un emplacement, un extrait, une classification et un niveau de confiance.
 6. Classer chaque proposition comme `fact`, `claim` ou `inference`. Ne jamais transformer une inférence en fait.
 7. Pour chaque expérience, extraire une `mission` explicite et distincte des responsabilités. Si la source ne permet pas de l'établir, créer une question de validation au lieu de la déduire.

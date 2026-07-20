@@ -157,7 +157,7 @@ concepts:
     description: Période d'activité professionnelle, entrepreneuriale, associative ou de mission, décrite par une mission explicite et sourcée.
     privacy: public
     storage: data/knowledge/entities/experience
-    key_attributes: [title, engagement_type, organization, location, start_date, start_precision, end_date, end_precision, ongoing, mission, responsibilities, outcomes]
+    key_attributes: [title, engagement_type, organization, location, start_date, start_precision, end_date, end_precision, ongoing, mission, responsibilities, outcomes, job_role_ids, previous_experience_id]
 
   - id: education
     label: Formation

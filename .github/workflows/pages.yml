@@ -40,6 +40,9 @@ jobs:
       - name: Type check
         run: python -m mypy
 
+      - name: Validate project skills
+        run: python scripts/validate_skills.py
+
       - name: Build deterministic documents
         run: python scripts/delia_life.py build-documents
 
@@ -54,9 +57,30 @@ jobs:
       - name: Validate generated documents
         run: python scripts/delia_life.py check-documents
 
+  windows-smoke:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Install project
+        run: python -m pip install -e ".[dev]" -c requirements/constraints.txt
+
+      - name: Verify Windows staging cleanup
+        run: >-
+          python -m unittest
+          tests.test_core.CoreTests.test_remove_tree_clears_readonly_generated_directories
+          tests.test_site.SiteTests.test_repeated_builds_leave_no_staging_directory
+          -v
+
   build:
     runs-on: ubuntu-latest
-    needs: quality
+    needs: [quality, windows-smoke]
     steps:
       - name: Checkout
         uses: actions/checkout@v6

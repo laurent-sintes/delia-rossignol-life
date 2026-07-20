@@ -25,6 +25,7 @@ Préparer un paquet de brouillon traçable : texte, HTML, fichier `.eml`, manife
 ## Règles
 
 - Pour chaque offre, afficher un en-tête constant : secteur d’activité, mission / poste, salaire proposé (ou « non communiquée »), pertinence sur 100, puis contrat et lieu. Terminer par le « Point de vigilance » éventuel en orange dans le HTML. Ne jamais inclure de seuil salarial, contrainte familiale ou détail sensible dans le message.
+- Terminer le message par une section informative « Sites consultés » provenant de `visited_sources` dans le rapport complet. Elle doit inclure tous les sites visités pendant la recherche, même ceux qui n'ont fourni aucune offre retenue.
 - Ne joindre que le CV PDF validé et généré localement.
 - Garder les paquets de communication sous `generated/offer-feedback/` : ils sont versionnés mais exclus de GitHub Pages.
 - Un message préparé a le statut `draft_prepared`; seul un connecteur de messagerie peut créer ou envoyer un brouillon distant.

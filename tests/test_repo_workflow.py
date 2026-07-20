@@ -69,12 +69,16 @@ class RepositoryWorkflowTests(unittest.TestCase):
         successful_process = SimpleNamespace(returncode=0)
         preview = {"running": True, "url": "http://127.0.0.1:8000/"}
         snapshot = {"branch": "main"}
+        cv_document = {"id": "standard-cv", "output": "cv.pdf"}
         with (
-            patch("delia_life.repo_workflow.build_documents", return_value={"ok": True}) as documents,
+            patch(
+                "delia_life.repo_workflow.build_documents",
+                return_value={"ok": True, "documents": [cv_document]},
+            ) as documents,
             patch("delia_life.repo_workflow.subprocess.run", return_value=successful_process) as run,
             patch("delia_life.repo_workflow.check_documents", return_value={"ok": True, "errors": []}),
             patch("delia_life.repo_workflow.audit_site", return_value={"ok": True}),
-            patch("delia_life.repo_workflow.build_site", return_value={"pages": ["index.html"]}),
+            patch("delia_life.repo_workflow.build_site", return_value={"pages": ["index.html"]}) as site,
             patch("delia_life.repo_workflow.start_preview", return_value=preview),
             patch(
                 "delia_life.repo_workflow.load_repository_config",
@@ -84,6 +88,7 @@ class RepositoryWorkflowTests(unittest.TestCase):
         ):
             result = review_content(ROOT, ROOT / "_site", "127.0.0.1", 8000)
         documents.assert_called_once_with(ROOT)
+        site.assert_called_once_with(ROOT, ROOT / "_site", cv_document=cv_document)
         self.assertEqual(run.call_count, 6)
         self.assertEqual(result["lint"], "passed")
         self.assertEqual(result["typing"], "passed")

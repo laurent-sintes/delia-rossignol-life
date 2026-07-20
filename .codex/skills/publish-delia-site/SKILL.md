@@ -9,13 +9,12 @@ description: Construire, contrôler et publier le site GitHub Pages de Délia Ro
 
 1. Lire `AGENTS.md`, particulièrement la distinction entre dépôt public complet et projection GitHub Pages.
 2. Vérifier que toute information demandée est appropriée pour la projection GitHub Pages.
-3. Modifier les données validées avant de modifier leur présentation.
+3. Si la demande change un fait ou un contenu éditorial, modifier d'abord les données validées. Pour une correction purement graphique ou technique, ne pas toucher à la base de connaissances.
 4. Administrer la liste blanche dans `site/publication.json`. Autoriser seulement les clés nécessaires; ne jamais autoriser un objet complet implicitement.
 5. Modifier les contenus éditoriaux dans `site/content/` et le style dans `site/assets/`.
-6. Exécuter `python -m unittest discover -s tests -v` puis `python scripts/delia_life.py check`.
-7. Exécuter `python scripts/repo_flow.py review-content` pour construire et déployer l'aperçu local.
-8. Communiquer l'URL et laisser le serveur actif pendant la vérification utilisateur.
-9. Inspecter toutes les pages générées et rechercher les coordonnées, feedbacks, offres, preuves ou données inattendues.
-10. Ne pousser sur `main` qu'après validation humaine du contenu public. GitHub Actions effectuera le déploiement Pages.
+6. Exécuter uniquement `python scripts/repo_flow.py review-content` : cette commande porte les contrôles de code, données, documents et site, puis déploie l'aperçu local. Ne pas relancer séparément les mêmes contrôles.
+7. Communiquer l'URL et laisser le serveur actif pendant la vérification utilisateur.
+8. Inspecter toutes les pages générées et rechercher les coordonnées, feedbacks, offres, preuves ou données inattendues.
+9. Ne pousser sur la branche configurée qu'après validation humaine du contenu public. GitHub Actions effectuera le déploiement Pages.
 
 Les dossiers `private/`, `generated/`, `data/applications/`, `data/offers/`, `data/review/` et `data/sources/` peuvent être versionnés dans Git, mais restent interdits comme sources de Pages. Ne jamais contourner la liste blanche en copiant leur contenu dans `site/` ou dans `_site/`.

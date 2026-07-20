@@ -17,6 +17,19 @@
     "max_per_source": 3
   },
   "freshness_days": 30,
+  "functional_query_families": {
+    "gestion-administrative": [
+      "gestionnaire administratif",
+      "responsable administratif",
+      "assistant de direction",
+      "office manager",
+      "gestionnaire ADV",
+      "coordination administrative",
+      "back-office",
+      "service client",
+      "gestion de portefeuille"
+    ]
+  },
   "id": "delia-offer-search-v1",
   "location_queries": [
     "Bordeaux",

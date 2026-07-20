@@ -11,6 +11,7 @@ import urllib.request
 import urllib.robotparser
 from collections import deque
 from collections.abc import Callable
+from dataclasses import dataclass, field
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
@@ -19,6 +20,38 @@ from .core import load_json, sha256_file, stable_id, utc_now, write_json
 from .errors import ValidationError
 
 DEFAULT_MAX_RESPONSE_BYTES = 20 * 1024 * 1024
+
+
+@dataclass(frozen=True)
+class CrawlConfig:
+    start_url: str
+    output_dir: Path
+    max_pages: int = 50
+    delay_seconds: float = 0.5
+    user_agent: str = "DeliaCareerArchive/0.1"
+    timeout_seconds: float = 30
+    retries: int = 1
+    resume: bool = True
+    max_response_bytes: int = DEFAULT_MAX_RESPONSE_BYTES
+    allow_private_networks: bool = False
+    sleep: Callable[[float], None] = time.sleep
+
+
+@dataclass
+class CrawlState:
+    pending: deque[str]
+    queued: set[str]
+    visited: set[str]
+    records: list[dict[str, Any]] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
+class CrawlRuntime:
+    config: CrawlConfig
+    state: CrawlState
+    pages_dir: Path
+    opener: Any
+    robots: urllib.robotparser.RobotFileParser
 
 
 class LinkParser(HTMLParser):
@@ -163,11 +196,131 @@ def _fetch_url(
     raise AssertionError("unreachable")
 
 
-def _write_progress(output_dir: Path, start_url: str, pending: deque[str], queued: set[str], visited: set[str], records: list[dict[str, Any]]) -> None:
-    write_json(output_dir / "progress.json", {"start_url": start_url, "pending": list(pending), "queued": sorted(queued), "visited": sorted(visited), "records": records, "updated_at": utc_now()})
+def _validate_crawl_config(config: CrawlConfig) -> None:
+    if urllib.parse.urlsplit(config.start_url).scheme not in {"http", "https"}:
+        raise ValueError("Only HTTP and HTTPS URLs are supported")
+    if config.max_pages < 1 or config.max_pages > 500:
+        raise ValueError("max_pages must be between 1 and 500")
+    if config.delay_seconds < 0:
+        raise ValueError("delay_seconds cannot be negative")
+    if config.timeout_seconds <= 0:
+        raise ValueError("timeout_seconds must be positive")
+    if config.retries < 0 or config.retries > 5:
+        raise ValueError("retries must be between 0 and 5")
+    if config.max_response_bytes < 1024 or config.max_response_bytes > 100 * 1024 * 1024:
+        raise ValueError("max_response_bytes must be between 1024 and 104857600")
+    validate_network_url(config.start_url, config.allow_private_networks)
 
 
-def slurp_site(
+def _load_crawl_state(config: CrawlConfig) -> CrawlState:
+    progress_path = config.output_dir / "progress.json"
+    if config.resume and progress_path.exists():
+        progress = load_json(progress_path)
+        if progress.get("start_url") != config.start_url:
+            raise ValueError("Existing crawl progress belongs to another start URL")
+        return CrawlState(
+            pending=deque(str(item) for item in progress.get("pending", [])),
+            queued={str(item) for item in progress.get("queued", [])},
+            visited={str(item) for item in progress.get("visited", [])},
+            records=list(progress.get("records", [])),
+        )
+    return CrawlState(pending=deque([config.start_url]), queued={config.start_url}, visited=set())
+
+
+def _write_progress(config: CrawlConfig, state: CrawlState) -> None:
+    write_json(
+        config.output_dir / "progress.json",
+        {
+            "start_url": config.start_url,
+            "pending": list(state.pending),
+            "queued": sorted(state.queued),
+            "visited": sorted(state.visited),
+            "records": state.records,
+            "updated_at": utc_now(),
+        },
+    )
+
+
+def _captured_record(runtime: CrawlRuntime, url: str, fetched: dict[str, Any]) -> dict[str, Any]:
+    media_type = str(fetched["media_type"])
+    body = bytes(fetched["body"])
+    suffix = ".html" if media_type == "text/html" else mimetypes.guess_extension(media_type) or ".bin"
+    destination = runtime.pages_dir / (hashlib.sha256(url.encode("utf-8")).hexdigest()[:20] + suffix)
+    destination.write_bytes(body)
+    return {
+        "url": url,
+        "final_url": str(fetched["final_url"]),
+        "http_status": int(fetched["status"]),
+        "media_type": media_type,
+        "path": destination.relative_to(runtime.config.output_dir).as_posix(),
+        "sha256": sha256_file(destination),
+        "size_bytes": len(body),
+        "status": "captured",
+        "attempts": fetched["attempts"],
+    }
+
+
+def _enqueue_page_links(runtime: CrawlRuntime, fetched: dict[str, Any]) -> None:
+    if str(fetched["media_type"]) != "text/html":
+        return
+    parser = LinkParser()
+    parser.feed(bytes(fetched["body"]).decode(str(fetched["charset"]), errors="replace"))
+    final_url = str(fetched["final_url"])
+    for href in parser.links:
+        candidate = normalize_url(urllib.parse.urljoin(final_url, href))
+        if same_origin(candidate, runtime.config.start_url) and candidate not in runtime.state.queued:
+            runtime.state.queued.add(candidate)
+            runtime.state.pending.append(candidate)
+
+
+def _process_crawl_url(runtime: CrawlRuntime, url: str) -> None:
+    config = runtime.config
+    state = runtime.state
+    if not runtime.robots.can_fetch(config.user_agent, url):
+        state.records.append({"url": url, "status": "blocked-by-robots"})
+        _write_progress(config, state)
+        return
+    fetched = _fetch_url(
+        url,
+        config.user_agent,
+        config.timeout_seconds,
+        config.retries,
+        config.delay_seconds,
+        max_response_bytes=config.max_response_bytes,
+        start_origin=config.start_url,
+        open_url=runtime.opener.open,
+        sleep=config.sleep,
+    )
+    if "error" in fetched:
+        state.records.append(
+            {
+                "url": url,
+                "status": "error",
+                "error": fetched["error"],
+                "error_type": fetched.get("error_type", "network"),
+                "attempts": fetched["attempts"],
+            }
+        )
+        _write_progress(config, state)
+        return
+    state.records.append(_captured_record(runtime, url, fetched))
+    _enqueue_page_links(runtime, fetched)
+    _write_progress(config, state)
+    if config.delay_seconds:
+        config.sleep(config.delay_seconds)
+
+
+def _run_crawl(runtime: CrawlRuntime) -> None:
+    state = runtime.state
+    while state.pending and len(state.records) < runtime.config.max_pages:
+        url = state.pending.popleft()
+        if url in state.visited:
+            continue
+        state.visited.add(url)
+        _process_crawl_url(runtime, url)
+
+
+def crawl_site(
     start_url: str,
     output_dir: Path,
     max_pages: int = 50,
@@ -180,118 +333,53 @@ def slurp_site(
     allow_private_networks: bool = False,
     sleep: Callable[[float], None] = time.sleep,
 ) -> dict[str, Any]:
-    start_url = normalize_url(start_url)
-    if urllib.parse.urlsplit(start_url).scheme not in {"http", "https"}:
-        raise ValueError("Only HTTP and HTTPS URLs are supported")
-    if max_pages < 1 or max_pages > 500:
-        raise ValueError("max_pages must be between 1 and 500")
-    if delay_seconds < 0:
-        raise ValueError("delay_seconds cannot be negative")
-    if timeout_seconds <= 0:
-        raise ValueError("timeout_seconds must be positive")
-    if retries < 0 or retries > 5:
-        raise ValueError("retries must be between 0 and 5")
-    if max_response_bytes < 1024 or max_response_bytes > 100 * 1024 * 1024:
-        raise ValueError("max_response_bytes must be between 1024 and 104857600")
-    validate_network_url(start_url, allow_private_networks)
-
-    output_dir.mkdir(parents=True, exist_ok=True)
-    pages_dir = output_dir / "pages"
+    config = CrawlConfig(
+        start_url=normalize_url(start_url),
+        output_dir=output_dir,
+        max_pages=max_pages,
+        delay_seconds=delay_seconds,
+        user_agent=user_agent,
+        timeout_seconds=timeout_seconds,
+        retries=retries,
+        resume=resume,
+        max_response_bytes=max_response_bytes,
+        allow_private_networks=allow_private_networks,
+        sleep=sleep,
+    )
+    _validate_crawl_config(config)
+    config.output_dir.mkdir(parents=True, exist_ok=True)
+    pages_dir = config.output_dir / "pages"
     pages_dir.mkdir(exist_ok=True)
-    opener = urllib.request.build_opener(SameOriginRedirectHandler(start_url, allow_private_networks))
-    robots = _robot_parser(start_url, user_agent, opener.open)
-    progress_path = output_dir / "progress.json"
-    if resume and progress_path.exists():
-        progress = load_json(progress_path)
-        if progress.get("start_url") != start_url:
-            raise ValueError("Existing crawl progress belongs to another start URL")
-        pending = deque(str(item) for item in progress.get("pending", []))
-        queued = {str(item) for item in progress.get("queued", [])}
-        visited = {str(item) for item in progress.get("visited", [])}
-        records = list(progress.get("records", []))
-    else:
-        pending = deque([start_url])
-        queued = {start_url}
-        visited = set()
-        records = []
-
-    while pending and len(records) < max_pages:
-        url = pending.popleft()
-        if url in visited:
-            continue
-        visited.add(url)
-        if not robots.can_fetch(user_agent, url):
-            records.append({"url": url, "status": "blocked-by-robots"})
-            _write_progress(output_dir, start_url, pending, queued, visited, records)
-            continue
-
-        fetched = _fetch_url(
-            url,
-            user_agent,
-            timeout_seconds,
-            retries,
-            delay_seconds,
-            max_response_bytes=max_response_bytes,
-            start_origin=start_url,
-            open_url=opener.open,
-            sleep=sleep,
-        )
-        if "error" in fetched:
-            records.append({"url": url, "status": "error", "error": fetched["error"], "error_type": fetched.get("error_type", "network"), "attempts": fetched["attempts"]})
-            _write_progress(output_dir, start_url, pending, queued, visited, records)
-            continue
-        media_type = str(fetched["media_type"])
-        body = bytes(fetched["body"])
-        final_url = str(fetched["final_url"])
-        status = int(fetched["status"])
-
-        suffix = mimetypes.guess_extension(media_type) or ".bin"
-        if media_type == "text/html":
-            suffix = ".html"
-        file_name = hashlib.sha256(url.encode("utf-8")).hexdigest()[:20] + suffix
-        destination = pages_dir / file_name
-        destination.write_bytes(body)
-        record = {
-            "url": url,
-            "final_url": final_url,
-            "http_status": status,
-            "media_type": media_type,
-            "path": destination.relative_to(output_dir).as_posix(),
-            "sha256": sha256_file(destination),
-            "size_bytes": len(body),
-            "status": "captured",
-            "attempts": fetched["attempts"],
-        }
-        records.append(record)
-
-        if media_type == "text/html":
-            parser = LinkParser()
-            parser.feed(body.decode(str(fetched["charset"]), errors="replace"))
-            for href in parser.links:
-                candidate = normalize_url(urllib.parse.urljoin(final_url, href))
-                if same_origin(candidate, start_url) and candidate not in queued:
-                    queued.add(candidate)
-                    pending.append(candidate)
-        _write_progress(output_dir, start_url, pending, queued, visited, records)
-        if delay_seconds:
-            sleep(delay_seconds)
-
+    opener = urllib.request.build_opener(SameOriginRedirectHandler(config.start_url, config.allow_private_networks))
+    runtime = CrawlRuntime(
+        config=config,
+        state=_load_crawl_state(config),
+        pages_dir=pages_dir,
+        opener=opener,
+        robots=_robot_parser(config.start_url, config.user_agent, opener.open),
+    )
+    _run_crawl(runtime)
     manifest = {
-        "id": stable_id("web", start_url, utc_now()),
+        "id": stable_id("web", config.start_url, utc_now()),
         "kind": "website",
-        "start_url": start_url,
+        "start_url": config.start_url,
         "captured_at": utc_now(),
-        "max_pages": max_pages,
-        "delay_seconds": delay_seconds,
-        "timeout_seconds": timeout_seconds,
-        "retries": retries,
-        "max_response_bytes": max_response_bytes,
-        "allow_private_networks": allow_private_networks,
-        "user_agent": user_agent,
-        "records": records,
-        "truncated": bool(pending),
+        "max_pages": config.max_pages,
+        "delay_seconds": config.delay_seconds,
+        "timeout_seconds": config.timeout_seconds,
+        "retries": config.retries,
+        "max_response_bytes": config.max_response_bytes,
+        "allow_private_networks": config.allow_private_networks,
+        "user_agent": config.user_agent,
+        "records": runtime.state.records,
+        "truncated": bool(runtime.state.pending),
     }
-    write_json(output_dir / "manifest.json", manifest)
-    if not pending and progress_path.exists():
+    write_json(config.output_dir / "manifest.json", manifest)
+    progress_path = config.output_dir / "progress.json"
+    if not runtime.state.pending and progress_path.exists():
         progress_path.unlink()
     return manifest
+
+
+# Backward-compatible Python API for existing integrations. New code should use crawl_site.
+slurp_site = crawl_site

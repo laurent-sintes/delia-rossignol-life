@@ -1,0 +1,35 @@
+{
+  "application": {
+    "applied_at": "2026-07-20T07:46:44+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/bleu-rossignol-founder.json"
+  },
+  "classification": "inference",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-20T07:46:31+00:00",
+      "from": "pending",
+      "note": "Validation utilisateur : même métier, contextes différents, puis accord go.",
+      "reviewer": "Laurent",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-bleu-rossignol-job-role",
+  "proposed_value": [
+    "conception-pilotage-agencement-sur-mesure"
+  ],
+  "source": {
+    "evidence": "Le parcours Raison Home puis BLEU ROSSIGNOL correspond au même métier exercé dans des contextes différents.",
+    "id": "src-79423e0e14ff47be",
+    "locator": "validation-continuite-editoriale-cv-2026-07-20.txt#P01"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "bleu-rossignol-founder",
+    "entity_type": "experience",
+    "field": "job_role_ids"
+  },
+  "validated_value": [
+    "conception-pilotage-agencement-sur-mesure"
+  ]
+}

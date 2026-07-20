@@ -4,6 +4,7 @@ import json
 import re
 import unicodedata
 from collections.abc import Iterable
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
@@ -49,27 +50,44 @@ def missing_priority_sector_coverage(career_project: dict[str, Any], policy: dic
     return errors
 
 
-def validate_project(root: Path) -> dict[str, Any]:
-    root = root.resolve()
-    schemas = _schema_registry(root)
-    errors: list[str] = []
-    warnings: list[str] = []
-    checked_paths: set[Path] = set()
+def missing_priority_functional_coverage(career_project: dict[str, Any], policy: dict[str, Any]) -> list[str]:
+    priority_domains = career_project.get("target_preferences", {}).get("functional_domains", {}).get("priority", [])
+    query_families = policy.get("functional_query_families", {})
+    return [
+        f"offer search policy: missing query family for priority functional domain {identifier}"
+        for domain in priority_domains
+        for identifier in [_identifier(str(domain))]
+        if not query_families.get(identifier)
+    ]
 
-    def check(path: Path, schema_name: str) -> dict[str, Any] | None:
-        schema = schemas.get(schema_name)
+
+@dataclass
+class ProjectValidationState:
+    root: Path
+    schemas: dict[str, dict[str, Any]]
+    errors: list[str] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
+    checked_paths: set[Path] = field(default_factory=set)
+    loaded_by_contract: dict[str, list[tuple[Path, dict[str, Any]]]] = field(default_factory=dict)
+    loaded_single_contracts: dict[str, dict[str, Any]] = field(default_factory=dict)
+
+    def check(self, path: Path, schema_name: str) -> dict[str, Any] | None:
+        schema = self.schemas.get(schema_name)
         if schema is None:
-            errors.append(f"missing schema: {schema_name}")
+            self.errors.append(f"missing schema: {schema_name}")
             return None
         try:
             document = load_json(path)
         except (OSError, json.JSONDecodeError) as error:
-            errors.append(f"{path.relative_to(root)}: invalid JSON: {error}")
+            self.errors.append(f"{path.relative_to(self.root)}: invalid JSON: {error}")
             return None
-        checked_paths.add(path.resolve())
-        errors.extend(f"{path.relative_to(root)}: {message}" for message in validate(document, schema))
+        self.checked_paths.add(path.resolve())
+        self.errors.extend(f"{path.relative_to(self.root)}: {message}" for message in validate(document, schema))
         return document
 
+
+def _load_directory_contracts(state: ProjectValidationState) -> None:
+    root = state.root
     directory_contracts = [
         (root / "data" / "review" / "queue", "proposal"),
         (root / "data" / "offers", "job-offer"),
@@ -77,20 +95,23 @@ def validate_project(root: Path) -> dict[str, Any]:
         (root / "templates" / "cv", "template"),
         (root / "data" / "sources" / "manifests", "source-manifest"),
         (root / "data" / "knowledge" / "entities", "knowledge-entity"),
+        (root / "data" / "knowledge" / "reference", "knowledge-entity"),
         (root / "private" / "knowledge", "knowledge-entity"),
         (root / "private" / "search-criterion", "knowledge-entity"),
         (root / "data" / "applications", "application"),
         (root / "private" / "website-archives", "website-archive"),
     ]
-    loaded_by_contract: dict[str, list[tuple[Path, dict[str, Any]]]] = {}
     for directory, schema_name in directory_contracts:
         for path in _json_files(directory):
             if path.name == "progress.json":
                 continue
-            document = check(path, schema_name)
+            document = state.check(path, schema_name)
             if document is not None:
-                loaded_by_contract.setdefault(schema_name, []).append((path, document))
+                state.loaded_by_contract.setdefault(schema_name, []).append((path, document))
 
+
+def _load_single_contracts(state: ProjectValidationState) -> None:
+    root = state.root
     single_contracts = [
         (root / "data" / "style" / "delia.json", "delia-style"),
         (root / "data" / "style" / "cv-standard.json", "cv-content-profile"),
@@ -100,23 +121,27 @@ def validate_project(root: Path) -> dict[str, Any]:
         (root / "config" / "repository.json", "repository-config"),
         (root / "config" / "offer-search.json", "offer-search-policy"),
     ]
-    loaded_single_contracts: dict[str, dict[str, Any]] = {}
     for path, schema_name in single_contracts:
-        document = check(path, schema_name)
+        document = state.check(path, schema_name)
         if document is not None:
-            loaded_single_contracts[schema_name] = document
+            state.loaded_single_contracts[schema_name] = document
 
-    career_projects = [document for _, document in loaded_by_contract.get("career-project", [])]
-    policy = loaded_single_contracts.get("offer-search-policy")
+
+def _validate_offer_search_coverage(state: ProjectValidationState) -> None:
+    career_projects = [document for _, document in state.loaded_by_contract.get("career-project", [])]
+    policy = state.loaded_single_contracts.get("offer-search-policy")
     for career_project in career_projects:
         if policy is not None:
-            errors.extend(missing_priority_sector_coverage(career_project, policy))
+            state.errors.extend(missing_priority_sector_coverage(career_project, policy))
+            state.errors.extend(missing_priority_functional_coverage(career_project, policy))
 
-    proposals = [document for _, document in loaded_by_contract.get("proposal", [])]
+
+def _validate_proposals_and_knowledge(state: ProjectValidationState) -> None:
+    proposals = [document for _, document in state.loaded_by_contract.get("proposal", [])]
     for key in find_unresolved_duplicate_keys(proposals):
-        errors.append(f"duplicate proposal target: {'/'.join(key)}")
+        state.errors.append(f"duplicate proposal target: {'/'.join(key)}")
 
-    manifests = [document for _, document in loaded_by_contract.get("source-manifest", [])]
+    manifests = [document for _, document in state.loaded_by_contract.get("source-manifest", [])]
     source_ids = {
         identifier
         for manifest in manifests
@@ -124,39 +149,60 @@ def validate_project(root: Path) -> dict[str, Any]:
         if identifier
     }
     proposal_ids = {str(proposal.get("id", "")) for proposal in proposals}
-    for path, entity in loaded_by_contract.get("knowledge-entity", []):
+    for path, entity in state.loaded_by_contract.get("knowledge-entity", []):
         expected_type = path.parent.name
         if entity.get("id") != path.stem:
-            errors.append(f"{path.relative_to(root)}: $.id must match filename {path.stem}")
+            state.errors.append(f"{path.relative_to(state.root)}: $.id must match filename {path.stem}")
         if entity.get("type") != expected_type:
-            errors.append(f"{path.relative_to(root)}: $.type must match directory {expected_type}")
+            state.errors.append(f"{path.relative_to(state.root)}: $.type must match directory {expected_type}")
         for field_name, envelope in entity.get("fields", {}).items():
             for index, provenance in enumerate(envelope.get("provenance", [])):
                 proposal_id = str(provenance.get("proposal_id", ""))
                 source_id = str(provenance.get("source_id", ""))
                 if proposal_id not in proposal_ids:
-                    errors.append(f"{path.relative_to(root)}: $.fields.{field_name}.provenance[{index}] unknown proposal_id {proposal_id}")
+                    state.errors.append(
+                        f"{path.relative_to(state.root)}: $.fields.{field_name}.provenance[{index}] "
+                        f"unknown proposal_id {proposal_id}"
+                    )
                 if source_id not in source_ids:
-                    errors.append(f"{path.relative_to(root)}: $.fields.{field_name}.provenance[{index}] unknown source_id {source_id}")
+                    state.errors.append(
+                        f"{path.relative_to(state.root)}: $.fields.{field_name}.provenance[{index}] "
+                        f"unknown source_id {source_id}"
+                    )
 
-    experience_root = root / "data" / "knowledge" / "entities"
+
+def _validate_experiences(state: ProjectValidationState) -> None:
+    experience_root = state.root / "data" / "knowledge" / "entities"
     for path, experience_id in missing_experience_missions(experience_root):
-        errors.append(f"{path.relative_to(root)}: experience mission is required ({experience_id})")
+        state.errors.append(f"{path.relative_to(state.root)}: experience mission is required ({experience_id})")
     for path, experience_id in missing_experience_responsibilities(experience_root):
-        errors.append(f"{path.relative_to(root)}: experience responsibilities are required ({experience_id})")
+        state.errors.append(f"{path.relative_to(state.root)}: experience responsibilities are required ({experience_id})")
 
-    model_manifest = root / "model" / "model.yaml"
+
+def _validate_model_files(state: ProjectValidationState) -> None:
+    model_manifest = state.root / "model" / "model.yaml"
     if model_manifest.exists():
         try:
             summary = model_summary(load_mental_model(model_manifest))
-            checked_paths.update(Path(path).resolve() for path in summary["loaded_files"])
-            errors.extend(f"mental model: {message}" for message in summary["errors"])
+            state.checked_paths.update(Path(path).resolve() for path in summary["loaded_files"])
+            state.errors.extend(f"mental model: {message}" for message in summary["errors"])
         except (OSError, ValueError) as error:
-            errors.append(f"mental model: {error}")
+            state.errors.append(f"mental model: {error}")
+
+
+def validate_project(root: Path) -> dict[str, Any]:
+    resolved_root = root.resolve()
+    state = ProjectValidationState(root=resolved_root, schemas=_schema_registry(resolved_root))
+    _load_directory_contracts(state)
+    _load_single_contracts(state)
+    _validate_offer_search_coverage(state)
+    _validate_proposals_and_knowledge(state)
+    _validate_experiences(state)
+    _validate_model_files(state)
 
     return {
-        "checked_files": len(checked_paths),
-        "errors": errors,
-        "warnings": warnings,
-        "ok": not errors,
+        "checked_files": len(state.checked_paths),
+        "errors": state.errors,
+        "warnings": state.warnings,
+        "ok": not state.errors,
     }

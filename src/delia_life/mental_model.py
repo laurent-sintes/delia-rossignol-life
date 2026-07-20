@@ -67,16 +67,7 @@ def load_mental_model(manifest_path: Path) -> dict[str, Any]:
     }
 
 
-def validate_mental_model(model: dict[str, Any]) -> list[str]:
-    errors: list[str] = []
-    if not model.get("model_version"):
-        errors.append("model_version is required")
-    concepts = model.get("concepts", [])
-    relations = model.get("relations", [])
-    if not isinstance(concepts, list) or not concepts:
-        errors.append("at least one concept is required")
-        return errors
-
+def _validate_concepts(concepts: list[Any], errors: list[str]) -> set[str]:
     concept_ids: set[str] = set()
     required_concept_fields = {"id", "label", "kind", "description", "privacy", "storage", "key_attributes"}
     for index, concept in enumerate(concepts):
@@ -98,7 +89,10 @@ def validate_mental_model(model: dict[str, Any]) -> list[str]:
             errors.append(f"{concept_id}: invalid privacy {concept.get('privacy')!r}")
         if not isinstance(concept.get("key_attributes"), list):
             errors.append(f"{concept_id}: key_attributes must be a list")
+    return concept_ids
 
+
+def _validate_relations(relations: Any, concept_ids: set[str], errors: list[str]) -> None:
     relation_ids: set[str] = set()
     required_relation_fields = {"id", "from", "to", "label", "cardinality", "required"}
     for index, relation in enumerate(relations):
@@ -122,8 +116,10 @@ def validate_mental_model(model: dict[str, Any]) -> list[str]:
         if not isinstance(relation.get("required"), bool):
             errors.append(f"{relation_id}: required must be boolean")
 
+
+def _validate_invariants(invariants: Any, errors: list[str]) -> None:
     invariant_ids: set[str] = set()
-    for invariant in model.get("invariants", []):
+    for invariant in invariants:
         invariant_id = str(invariant.get("id", "")) if isinstance(invariant, dict) else ""
         if not ID_PATTERN.fullmatch(invariant_id):
             errors.append(f"invalid invariant id: {invariant_id!r}")
@@ -132,6 +128,19 @@ def validate_mental_model(model: dict[str, Any]) -> list[str]:
         invariant_ids.add(invariant_id)
         if not isinstance(invariant, dict) or not invariant.get("rule"):
             errors.append(f"{invariant_id or 'invariant'}: rule is required")
+
+
+def validate_mental_model(model: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    if not model.get("model_version"):
+        errors.append("model_version is required")
+    concepts = model.get("concepts", [])
+    if not isinstance(concepts, list) or not concepts:
+        errors.append("at least one concept is required")
+        return errors
+    concept_ids = _validate_concepts(concepts, errors)
+    _validate_relations(model.get("relations", []), concept_ids, errors)
+    _validate_invariants(model.get("invariants", []), errors)
     return errors
 
 

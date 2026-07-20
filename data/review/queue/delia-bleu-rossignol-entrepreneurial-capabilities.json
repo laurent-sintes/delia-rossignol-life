@@ -1,0 +1,41 @@
+{
+  "application": {
+    "applied_at": "2026-07-20T07:46:48+00:00",
+    "knowledge_path": "data/knowledge/entities/achievement/bleu-rossignol-entrepreneurial-scope.json"
+  },
+  "classification": "fact",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-20T07:46:35+00:00",
+      "from": "pending",
+      "note": "Périmètre entrepreneurial validé par l’utilisateur, puis accord go.",
+      "reviewer": "Laurent",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-bleu-rossignol-entrepreneurial-capabilities",
+  "proposed_value": [
+    "Développement du site",
+    "Suivi commercial via Google Analytics",
+    "Publicité",
+    "Développement de réseau"
+  ],
+  "source": {
+    "evidence": "Le périmètre entrepreneurial propre à BLEU ROSSIGNOL comprend le développement d’un site, le suivi du développement commercial via Google Analytics, la publicité et le développement de réseau.",
+    "id": "src-79423e0e14ff47be",
+    "locator": "validation-continuite-editoriale-cv-2026-07-20.txt#P04"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "bleu-rossignol-entrepreneurial-scope",
+    "entity_type": "achievement",
+    "field": "capabilities"
+  },
+  "validated_value": [
+    "Développement du site",
+    "Suivi commercial via Google Analytics",
+    "Publicité",
+    "Développement de réseau"
+  ]
+}

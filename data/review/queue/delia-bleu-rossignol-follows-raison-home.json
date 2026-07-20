@@ -1,0 +1,31 @@
+{
+  "application": {
+    "applied_at": "2026-07-20T07:46:47+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/bleu-rossignol-founder.json"
+  },
+  "classification": "fact",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-20T07:46:34+00:00",
+      "from": "pending",
+      "note": "Validation utilisateur du parcours continu, puis accord go.",
+      "reviewer": "Laurent",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-bleu-rossignol-follows-raison-home",
+  "proposed_value": "raison-home-franchisee",
+  "source": {
+    "evidence": "Le parcours Raison Home puis BLEU ROSSIGNOL correspond au même métier exercé dans des contextes différents.",
+    "id": "src-79423e0e14ff47be",
+    "locator": "validation-continuite-editoriale-cv-2026-07-20.txt#P01"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "bleu-rossignol-founder",
+    "entity_type": "experience",
+    "field": "previous_experience_id"
+  },
+  "validated_value": "raison-home-franchisee"
+}

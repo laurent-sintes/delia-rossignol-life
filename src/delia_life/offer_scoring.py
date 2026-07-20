@@ -1,0 +1,330 @@
+from __future__ import annotations
+
+import re
+import unicodedata
+from dataclasses import dataclass, field
+from datetime import UTC, date, datetime
+from typing import Any
+
+TOKEN_PATTERN = re.compile(r"[a-z0-9]+")
+STOPWORDS = {
+    "avec",
+    "cette",
+    "dans",
+    "des",
+    "elle",
+    "entre",
+    "est",
+    "les",
+    "leur",
+    "nous",
+    "offre",
+    "pour",
+    "sur",
+    "une",
+    "vous",
+}
+
+
+def plain(value: str) -> str:
+    normalized = unicodedata.normalize("NFKD", value.casefold())
+    return "".join(character for character in normalized if not unicodedata.combining(character))
+
+
+def strings(value: Any) -> list[str]:
+    if isinstance(value, str):
+        return [value]
+    if isinstance(value, dict):
+        return [item for child in value.values() for item in strings(child)]
+    if isinstance(value, list):
+        return [item for child in value for item in strings(child)]
+    return []
+
+
+def tokens(value: Any) -> set[str]:
+    return {
+        token
+        for token in TOKEN_PATTERN.findall(plain(" ".join(strings(value))))
+        if len(token) >= 4 and token not in STOPWORDS
+    }
+
+
+def _criterion(career_project: dict[str, Any], identifier: str) -> Any:
+    for criterion in career_project.get("criteria", []):
+        if criterion.get("id") == identifier:
+            return criterion.get("value")
+    return None
+
+
+def _contract(value: str) -> str:
+    normalized = plain(value).replace("-", " ").strip()
+    aliases = {
+        "contrat a duree indeterminee": "cdi",
+        "cdi": "cdi",
+        "interim": "interim",
+        "mission interim": "interim",
+        "travail temporaire": "interim",
+        "freelance": "freelance",
+        "independant": "freelance",
+        "temps partiel": "temps partiel",
+    }
+    return aliases.get(normalized, normalized)
+
+
+def _iso_date(value: Any) -> date | None:
+    if not isinstance(value, str) or not value.strip():
+        return None
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00")).date()
+    except ValueError:
+        try:
+            return date.fromisoformat(value)
+        except ValueError:
+            return None
+
+
+def _annual_compensation(value: Any, period: Any) -> float | None:
+    if not isinstance(value, (int, float)):
+        return None
+    multipliers = {"hour": 35 * 52, "month": 12, "year": 1}
+    multiplier = multipliers.get(str(period).casefold())
+    return float(value) * multiplier if multiplier is not None else None
+
+
+def _offer_text(offer: dict[str, Any]) -> str:
+    selected = {
+        key: offer.get(key)
+        for key in (
+            "title",
+            "summary",
+            "industry_sector_ids",
+            "sector_labels",
+            "functional_domains",
+            "required_skills",
+            "preferred_skills",
+            "conditions",
+        )
+    }
+    return " ".join(strings(selected))
+
+
+@dataclass(frozen=True)
+class ScoringContext:
+    today: date
+    weights: dict[str, Any]
+    preferred_contracts: frozenset[str]
+    acceptable_contracts: frozenset[str]
+    excluded_contracts: frozenset[str]
+    priority_sectors: tuple[str, ...]
+    acceptable_sectors: tuple[str, ...]
+    excluded_sectors: tuple[str, ...]
+    emphasized_sectors: frozenset[str]
+    sector_multiplier: float
+    priority_domains: tuple[str, ...]
+    acceptable_domains: tuple[str, ...]
+    knowledge_tokens: frozenset[str]
+    freshness_days: int
+    activity_exclusions: tuple[tuple[str, str], ...]
+    work_arrangement: dict[str, Any]
+    expected_compensation: dict[str, Any]
+
+
+@dataclass
+class ScoreState:
+    score: float = 0.0
+    reasons: list[str] = field(default_factory=list)
+    gaps: list[str] = field(default_factory=list)
+    unknowns: list[str] = field(default_factory=list)
+    failures: list[str] = field(default_factory=list)
+    knowledge_keyword_matches: list[str] = field(default_factory=list)
+
+    def as_dict(self) -> dict[str, Any]:
+        return {
+            "eligible": not self.failures,
+            "score": round(max(0.0, self.score), 1),
+            "reasons": self.reasons,
+            "gaps": self.gaps,
+            "unknowns": self.unknowns,
+            "hard_constraint_failures": self.failures,
+            "knowledge_keyword_matches": self.knowledge_keyword_matches,
+        }
+
+
+def _build_scoring_context(
+    career_project: dict[str, Any],
+    policy: dict[str, Any],
+    knowledge_tokens: set[str],
+    today: date | None,
+) -> ScoringContext:
+    targets = career_project.get("target_preferences", {})
+    sectors = targets.get("industry_sectors", {})
+    domains = targets.get("functional_domains", {})
+    emphasis = policy.get("sector_emphasis", {})
+    boundaries = _criterion(career_project, "criterion-activity-boundaries") or {}
+    activity_exclusions = tuple((plain(str(value)), str(value)) for value in boundaries.get("excluded", []))
+    return ScoringContext(
+        today=today or datetime.now(UTC).date(),
+        weights=policy["weights"],
+        preferred_contracts=frozenset(_contract(value) for value in policy["contracts"]["preferred"]),
+        acceptable_contracts=frozenset(_contract(value) for value in policy["contracts"]["acceptable"]),
+        excluded_contracts=frozenset(_contract(value) for value in policy["contracts"]["excluded"]),
+        priority_sectors=tuple(plain(value) for value in sectors.get("priority", [])),
+        acceptable_sectors=tuple(plain(value) for value in sectors.get("acceptable", [])),
+        excluded_sectors=tuple(plain(value) for value in sectors.get("excluded", [])),
+        emphasized_sectors=frozenset(plain(value) for value in emphasis.get("labels", [])),
+        sector_multiplier=float(emphasis.get("multiplier", 1.0)),
+        priority_domains=tuple(plain(value) for value in domains.get("priority", [])),
+        acceptable_domains=tuple(plain(value) for value in domains.get("acceptable", [])),
+        knowledge_tokens=frozenset(knowledge_tokens),
+        freshness_days=int(policy["freshness_days"]),
+        activity_exclusions=activity_exclusions,
+        work_arrangement=_criterion(career_project, "criterion-work-arrangement") or {},
+        expected_compensation=_criterion(career_project, "criterion-compensation") or {},
+    )
+
+
+def _apply_contract_rules(offer: dict[str, Any], context: ScoringContext, state: ScoreState) -> None:
+    contract = _contract(str(offer.get("contract_type", "")))
+    if not contract:
+        state.unknowns.append("type de contrat non précisé")
+    elif contract in context.excluded_contracts:
+        state.failures.append(f"contrat exclu : {offer.get('contract_type')}")
+    elif contract in context.preferred_contracts:
+        state.score += float(context.weights["contract"])
+        state.reasons.append("CDI, contrat prioritaire")
+    elif contract in context.acceptable_contracts:
+        state.score += float(context.weights["contract"]) * 0.4
+        state.reasons.append("mission d’intérim envisageable")
+    else:
+        state.failures.append(f"contrat hors politique de recherche : {offer.get('contract_type')}")
+
+
+def _apply_work_time_rules(offer: dict[str, Any], conditions: dict[str, Any], state: ScoreState) -> None:
+    if offer.get("full_time") is False or conditions.get("full_time") is False:
+        state.failures.append("offre à temps partiel")
+    elif offer.get("full_time") is None:
+        state.unknowns.append("temps plein à confirmer")
+
+
+def _apply_sector_rules(text: str, context: ScoringContext, state: ScoreState) -> None:
+    matched_excluded = next((value for value in context.excluded_sectors if value and value in text), None)
+    matched_priority = next((value for value in context.priority_sectors if value and value in text), None)
+    matched_acceptable = next((value for value in context.acceptable_sectors if value and value in text), None)
+    if matched_excluded:
+        state.failures.append(f"secteur exclu : {matched_excluded}")
+    elif matched_priority:
+        multiplier = context.sector_multiplier if matched_priority in context.emphasized_sectors else 1.0
+        state.score += float(context.weights["sector"]) * multiplier
+        label = "secteur très recherché" if multiplier > 1 else "secteur prioritaire"
+        state.reasons.append(f"{label} : {matched_priority}")
+    elif matched_acceptable:
+        state.score += float(context.weights["sector"]) * 0.55
+        state.reasons.append(f"secteur acceptable : {matched_acceptable}")
+    else:
+        state.unknowns.append("adéquation sectorielle à confirmer")
+
+
+def _apply_functional_domain_rules(text: str, context: ScoringContext, state: ScoreState) -> None:
+    matched_priority = next((value for value in context.priority_domains if value and value in text), None)
+    matched_acceptable = next((value for value in context.acceptable_domains if value and value in text), None)
+    if matched_priority:
+        state.score += float(context.weights["functional_domain"])
+        state.reasons.append(f"activité prioritaire : {matched_priority}")
+    elif matched_acceptable:
+        state.score += float(context.weights["functional_domain"]) * 0.6
+        state.reasons.append(f"activité cohérente : {matched_acceptable}")
+    else:
+        state.gaps.append("domaine fonctionnel peu explicite")
+
+
+def _apply_knowledge_overlap(offer: dict[str, Any], context: ScoringContext, state: ScoreState) -> None:
+    offer_tokens = tokens(
+        {
+            "title": offer.get("title"),
+            "summary": offer.get("summary"),
+            "required_skills": offer.get("required_skills", []),
+            "preferred_skills": offer.get("preferred_skills", []),
+        }
+    )
+    overlap = sorted(offer_tokens & context.knowledge_tokens)
+    state.knowledge_keyword_matches = overlap
+    if overlap:
+        ratio = min(1.0, len(overlap) / max(5, min(20, len(offer_tokens))))
+        state.score += float(context.weights["knowledge_overlap"]) * ratio
+        state.reasons.append("expérience transférable : " + ", ".join(overlap[:5]))
+    else:
+        state.gaps.append("aucun recouvrement littéral démontré avec la base validée")
+
+
+def _apply_freshness_rules(offer: dict[str, Any], context: ScoringContext, state: ScoreState) -> None:
+    published_at = _iso_date(offer.get("published_at"))
+    if published_at is None:
+        state.unknowns.append("date de publication inconnue")
+        return
+    age_days = max(0, (context.today - published_at).days)
+    if age_days <= 7:
+        state.score += float(context.weights["freshness"])
+        state.reasons.append("offre publiée depuis moins de 8 jours")
+    elif age_days <= context.freshness_days:
+        state.score += float(context.weights["freshness"]) * 0.6
+        state.reasons.append(f"offre publiée il y a {age_days} jours")
+    else:
+        state.gaps.append(f"offre ancienne : {age_days} jours")
+
+
+def _apply_activity_rules(text: str, context: ScoringContext, state: ScoreState) -> None:
+    for normalized, original in context.activity_exclusions:
+        if normalized in text:
+            state.failures.append(f"activité exclue : {original}")
+    if "equipe" in text or "collabor" in text:
+        state.score += float(context.weights["constraints"])
+        state.reasons.append("dimension collective explicite")
+    else:
+        state.unknowns.append("travail en équipe à confirmer")
+
+
+def _apply_arrangement_and_compensation_rules(
+    offer: dict[str, Any],
+    conditions: dict[str, Any],
+    context: ScoringContext,
+    state: ScoreState,
+) -> None:
+    for field_name, label in (("sunday_work", "travail le dimanche"), ("evening_work", "travail en soirée")):
+        if context.work_arrangement.get(field_name) is False and conditions.get(field_name) is True:
+            state.failures.append(label)
+    compensation = offer.get("compensation", {}) if isinstance(offer.get("compensation"), dict) else {}
+    offered_maximum = _annual_compensation(compensation.get("maximum"), compensation.get("period"))
+    minimum_expected = context.expected_compensation.get("fixed_minimum_gross")
+    if (
+        isinstance(offered_maximum, (int, float))
+        and isinstance(minimum_expected, (int, float))
+        and offered_maximum < minimum_expected
+    ):
+        state.failures.append("rémunération maximale sous le minimum validé")
+    elif not compensation or offered_maximum is None:
+        state.unknowns.append("rémunération non précisée")
+
+
+def _score_offer_with_context(offer: dict[str, Any], context: ScoringContext) -> dict[str, Any]:
+    state = ScoreState()
+    text = plain(_offer_text(offer))
+    conditions = offer.get("conditions", {}) if isinstance(offer.get("conditions"), dict) else {}
+    _apply_contract_rules(offer, context, state)
+    _apply_work_time_rules(offer, conditions, state)
+    _apply_sector_rules(text, context, state)
+    _apply_functional_domain_rules(text, context, state)
+    _apply_knowledge_overlap(offer, context, state)
+    _apply_freshness_rules(offer, context, state)
+    _apply_activity_rules(text, context, state)
+    _apply_arrangement_and_compensation_rules(offer, conditions, context, state)
+    return state.as_dict()
+
+
+def score_offer(
+    offer: dict[str, Any],
+    career_project: dict[str, Any],
+    policy: dict[str, Any],
+    knowledge_tokens: set[str],
+    today: date | None = None,
+) -> dict[str, Any]:
+    return _score_offer_with_context(offer, _build_scoring_context(career_project, policy, knowledge_tokens, today))

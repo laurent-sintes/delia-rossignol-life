@@ -32,6 +32,21 @@
           "enum": ["disabled", "optional-disabled-by-default", "required"]
         },
         "palette": {"type": "string", "enum": ["delia-champagne-navy"]},
+        "layout": {
+          "type": "object",
+          "required": [
+            "spacing_unit_pt", "text_gap_pt", "component_gap_pt",
+            "card_padding_pt", "experience_gap_pt", "safe_bottom_pt"
+          ],
+          "properties": {
+            "spacing_unit_pt": {"type": "number", "exclusiveMinimum": 0},
+            "text_gap_pt": {"type": "number", "exclusiveMinimum": 0},
+            "component_gap_pt": {"type": "number", "exclusiveMinimum": 0},
+            "card_padding_pt": {"type": "number", "exclusiveMinimum": 0},
+            "experience_gap_pt": {"type": "number", "exclusiveMinimum": 0},
+            "safe_bottom_pt": {"type": "number", "exclusiveMinimum": 0}
+          }
+        },
         "sections": {
           "type": "array",
           "items": {
@@ -55,6 +70,7 @@
         "profile_max_words": {"type": "integer", "minimum": 1},
         "key_skills_max": {"type": "integer", "minimum": 1},
         "experience_bullets_max": {"type": "integer", "minimum": 1},
+        "experience_sequence_steps_max": {"type": "integer", "minimum": 2},
         "bullet_max_words": {"type": "integer", "minimum": 1},
         "date_format": {"type": "string", "enum": ["MM/YYYY"]},
         "prioritize_relevance_over_completeness": {"type": "boolean"},

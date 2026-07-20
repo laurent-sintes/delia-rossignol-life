@@ -30,8 +30,9 @@ body {
 a { color: var(--navy); text-underline-offset: .22em; }
 
 .site-header {
-  position: relative;
-  z-index: 5;
+  position: sticky;
+  z-index: 100;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -40,6 +41,9 @@ a { color: var(--navy); text-underline-offset: .22em; }
   padding: 1.15rem clamp(1.25rem, 5vw, 5rem);
   border-bottom: 1px solid var(--line);
   background: rgba(249, 245, 243, .96);
+  box-shadow: 0 10px 30px rgba(13, 47, 90, .08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .brand {
@@ -408,11 +412,26 @@ details summary { cursor: pointer; color: var(--navy); }
 
 .knowledge-section--editorial .knowledge-grid { grid-template-columns: minmax(0, 1fr); }
 
+.knowledge-section--continuity .knowledge-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+
+.knowledge-card--continuity-foundation { grid-column: 1 / -1; }
+.knowledge-card--continuity-foundation .knowledge-detail > ul { columns: 2; column-gap: 2.5rem; }
+.knowledge-card--continuity-foundation .knowledge-detail li { break-inside: avoid; }
+
+.knowledge-card--continuity-highlight {
+  grid-column: 2;
+  border-color: rgba(183, 145, 99, .52);
+  background: linear-gradient(145deg, rgba(231, 218, 203, .52), rgba(255, 253, 251, .96));
+}
+
 .knowledge-card--editorial {
   padding: clamp(1.65rem, 4vw, 2.5rem);
 }
 
-.knowledge-section:not(.knowledge-section--editorial) .knowledge-card--editorial {
+.knowledge-section:not(.knowledge-section--editorial):not(.knowledge-section--continuity) .knowledge-card--editorial {
   grid-column: 1 / -1;
 }
 
@@ -628,6 +647,8 @@ footer span:first-child { color: var(--champagne-soft); font-family: var(--serif
   .hero { grid-template-columns: 1fr; }
   .hero-copy { padding: 4.5rem clamp(1.5rem, 8vw, 5rem); }
   .hero-visual { min-height: 620px; }
+  .knowledge-section--continuity .knowledge-grid { grid-template-columns: minmax(0, 1fr); }
+  .knowledge-card--continuity-highlight { grid-column: 1; }
 }
 
 @media (max-width: 620px) {

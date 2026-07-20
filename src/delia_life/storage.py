@@ -3,29 +3,46 @@ from __future__ import annotations
 import json
 import os
 import shutil
+import stat
 import time
 import uuid
-from collections.abc import Iterator, Mapping
+from collections.abc import Callable, Iterator, Mapping
 from contextlib import contextmanager
 from pathlib import Path
+from types import TracebackType
 from typing import Any
 
 from .core import replace_file
 from .errors import TransactionError
 
 
+def _clear_readonly_and_retry(
+    function: Callable[[str], object],
+    path: str,
+    error_info: tuple[type[BaseException], BaseException, TracebackType | None],
+) -> None:
+    """Clear Windows read-only attributes before retrying a failed removal."""
+    error = error_info[1]
+    if not isinstance(error, PermissionError):
+        raise error
+    os.chmod(path, stat.S_IREAD | stat.S_IWRITE)
+    function(path)
+
+
 def remove_tree(path: Path, attempts: int = 20, delay_seconds: float = 0.05, ignore_errors: bool = False) -> None:
     """Remove a generated tree while tolerating short-lived Windows/OneDrive locks."""
     last_error: OSError | None = None
-    for _ in range(attempts):
+    effective_attempts = 1 if ignore_errors else max(1, attempts)
+    for attempt in range(effective_attempts):
         if not path.exists():
             return
         try:
-            shutil.rmtree(path)
+            shutil.rmtree(path, onerror=_clear_readonly_and_retry)
             return
         except OSError as error:
             last_error = error
-            time.sleep(delay_seconds)
+            if attempt + 1 < effective_attempts:
+                time.sleep(delay_seconds)
     if not ignore_errors and last_error is not None:
         raise last_error
 
