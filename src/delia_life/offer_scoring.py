@@ -108,6 +108,17 @@ def _offer_text(offer: dict[str, Any]) -> str:
     return " ".join(strings(selected))
 
 
+def _domain_matchers(domains: list[Any], query_families: dict[str, Any]) -> tuple[tuple[str, tuple[str, ...]], ...]:
+    matchers: list[tuple[str, tuple[str, ...]]] = []
+    for value in domains:
+        label = str(value)
+        identifier = re.sub(r"[^a-z0-9]+", "-", plain(label)).strip("-")
+        aliases = [label, *strings(query_families.get(identifier, []))]
+        normalized = tuple(dict.fromkeys(plain(alias) for alias in aliases if alias.strip()))
+        matchers.append((plain(label), normalized))
+    return tuple(matchers)
+
+
 @dataclass(frozen=True)
 class ScoringContext:
     today: date
@@ -120,8 +131,8 @@ class ScoringContext:
     excluded_sectors: tuple[str, ...]
     emphasized_sectors: frozenset[str]
     sector_multiplier: float
-    priority_domains: tuple[str, ...]
-    acceptable_domains: tuple[str, ...]
+    priority_domains: tuple[tuple[str, tuple[str, ...]], ...]
+    acceptable_domains: tuple[tuple[str, tuple[str, ...]], ...]
     knowledge_tokens: frozenset[str]
     freshness_days: int
     activity_exclusions: tuple[tuple[str, str], ...]
@@ -159,6 +170,7 @@ def _build_scoring_context(
     targets = career_project.get("target_preferences", {})
     sectors = targets.get("industry_sectors", {})
     domains = targets.get("functional_domains", {})
+    query_families = policy.get("functional_query_families", {})
     emphasis = policy.get("sector_emphasis", {})
     boundaries = _criterion(career_project, "criterion-activity-boundaries") or {}
     activity_exclusions = tuple((plain(str(value)), str(value)) for value in boundaries.get("excluded", []))
@@ -173,8 +185,8 @@ def _build_scoring_context(
         excluded_sectors=tuple(plain(value) for value in sectors.get("excluded", [])),
         emphasized_sectors=frozenset(plain(value) for value in emphasis.get("labels", [])),
         sector_multiplier=float(emphasis.get("multiplier", 1.0)),
-        priority_domains=tuple(plain(value) for value in domains.get("priority", [])),
-        acceptable_domains=tuple(plain(value) for value in domains.get("acceptable", [])),
+        priority_domains=_domain_matchers(domains.get("priority", []), query_families),
+        acceptable_domains=_domain_matchers(domains.get("acceptable", []), query_families),
         knowledge_tokens=frozenset(knowledge_tokens),
         freshness_days=int(policy["freshness_days"]),
         activity_exclusions=activity_exclusions,
@@ -225,8 +237,14 @@ def _apply_sector_rules(text: str, context: ScoringContext, state: ScoreState) -
 
 
 def _apply_functional_domain_rules(text: str, context: ScoringContext, state: ScoreState) -> None:
-    matched_priority = next((value for value in context.priority_domains if value and value in text), None)
-    matched_acceptable = next((value for value in context.acceptable_domains if value and value in text), None)
+    matched_priority = next(
+        (label for label, aliases in context.priority_domains if any(alias in text for alias in aliases)),
+        None,
+    )
+    matched_acceptable = next(
+        (label for label, aliases in context.acceptable_domains if any(alias in text for alias in aliases)),
+        None,
+    )
     if matched_priority:
         state.score += float(context.weights["functional_domain"])
         state.reasons.append(f"activité prioritaire : {matched_priority}")

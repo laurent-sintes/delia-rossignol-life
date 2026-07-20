@@ -7,6 +7,7 @@ from pathlib import Path
 from tempfile import gettempdir
 from unittest.mock import patch
 
+from docx import Document
 from PIL import Image
 from pypdf import PdfReader
 from pypdf.generic import ContentStream
@@ -17,6 +18,15 @@ sys.path.insert(0, str(ROOT / "src"))
 TEST_TMP = Path(gettempdir()) / "delia-rossignol-life-tests"
 TEST_TMP.mkdir(exist_ok=True)
 
+from delia_life.ats_cv import (
+    ATS_DOCX_FILENAME,
+    ATS_PDF_FILENAME,
+    ATS_VARIANTS,
+    build_all_ats_cvs,
+    build_ats_cv,
+    compose_ats_cv,
+    load_ats_strategy,
+)
 from delia_life.core import load_json
 from delia_life.cv_composer import compose_standard_cv
 from delia_life.document_builder import build_documents, build_standard_cv, check_documents
@@ -68,6 +78,16 @@ class DocumentTests(unittest.TestCase):
         self.assertNotIn("Signature éditoriale", text)
         self.assertIn("1 / 2", page_texts[0])
         self.assertIn("2 / 2", page_texts[1])
+        self.assertEqual(page_texts[1].count("PÉRIMÈTRE"), 6)
+        for complementary_detail in (
+            "Gérer 3 mandats immobiliers",
+            "relations bancaires",
+            "100 couverts par jour",
+            "objectif commercial",
+            "Flowerbomb et Amor Amor",
+            "avenue Montaigne",
+        ):
+            self.assertIn(complementary_detail, page_texts[1])
         self.assertNotIn("41 ans", text)
         self.assertNotIn("2 enfants", text)
 
@@ -77,11 +97,101 @@ class DocumentTests(unittest.TestCase):
 
     def test_document_build_publishes_the_same_atomic_artifact(self) -> None:
         result = build_documents(ROOT, self.work / "output", self.work / "public")
-        document = result["documents"][0]
-        output = Path(document["output"])
-        public = Path(document["public_output"])
-        self.assertEqual(output.read_bytes(), public.read_bytes())
-        self.assertEqual(document["sha256"], __import__("hashlib").sha256(output.read_bytes()).hexdigest())
+        self.assertEqual(
+            [document["id"] for document in result["documents"]],
+            [
+                "standard-cv-signature-editorial",
+                "standard-cv-ats-pdf",
+                "standard-cv-ats-docx",
+                "standard-cv-ats-relation-client-pdf",
+                "standard-cv-ats-relation-client-docx",
+                "standard-cv-ats-commerce-vente-pdf",
+                "standard-cv-ats-commerce-vente-docx",
+                "standard-cv-ats-gestion-administrative-pdf",
+                "standard-cv-ats-gestion-administrative-docx",
+            ],
+        )
+        for document in result["documents"]:
+            output = Path(document["output"])
+            public = Path(document["public_output"])
+            self.assertEqual(output.read_bytes(), public.read_bytes())
+            self.assertEqual(document["sha256"], __import__("hashlib").sha256(output.read_bytes()).hexdigest())
+
+    def test_ats_cv_is_reproducible_traceable_and_extracted_in_section_order(self) -> None:
+        first_dir = self.work / "first"
+        second_dir = self.work / "second"
+        first = build_ats_cv(ROOT, first_dir / ATS_PDF_FILENAME, first_dir / ATS_DOCX_FILENAME)
+        build_ats_cv(ROOT, second_dir / ATS_PDF_FILENAME, second_dir / ATS_DOCX_FILENAME)
+        self.assertEqual(
+            (first_dir / ATS_PDF_FILENAME).read_bytes(),
+            (second_dir / ATS_PDF_FILENAME).read_bytes(),
+        )
+        self.assertEqual(
+            (first_dir / ATS_DOCX_FILENAME).read_bytes(),
+            (second_dir / ATS_DOCX_FILENAME).read_bytes(),
+        )
+        self.assertTrue(all(document["source_ids"] for document in first))
+
+        reader = PdfReader(first_dir / ATS_PDF_FILENAME)
+        self.assertEqual(len(reader.pages), 1)
+        text = "\n".join(page.extract_text() or "" for page in reader.pages)
+        sections = [
+            "PROFIL PROFESSIONNEL",
+            "COMP\u00c9TENCES",
+            "EXP\u00c9RIENCE PROFESSIONNELLE",
+            "FORMATION",
+            "LANGUES",
+        ]
+        positions = [text.casefold().find(section.casefold()) for section in sections]
+        self.assertTrue(all(position >= 0 for position in positions), (positions, text))
+        self.assertEqual(positions, sorted(positions))
+        self.assertIn("Google Analytics", text)
+        self.assertIn("comptabilit\u00e9", text)
+        self.assertIn("150 %", text)
+        self.assertFalse(any(ord(character) < 32 and character not in "\n\r\t" for character in text))
+
+        document = Document(first_dir / ATS_DOCX_FILENAME)
+        docx_text = "\n".join(paragraph.text for paragraph in document.paragraphs)
+        self.assertIn("Gestion administrative", docx_text)
+        self.assertFalse(document.tables)
+        self.assertFalse(document.inline_shapes)
+        self.assertGreaterEqual(sum(paragraph.style.name == "List Bullet" for paragraph in document.paragraphs), 10)
+
+    def test_ats_cv_uses_only_validated_transferable_skills(self) -> None:
+        template = load_json(ROOT / "templates" / "cv" / "ats-classic" / "template.json")
+        strategy = load_json(ROOT / "data" / "style" / "cv-ats.json")
+        view = compose_ats_cv(ROOT, template, strategy)
+        self.assertEqual(view.skills[0], "Relation et service client")
+        self.assertEqual(len(view.skills), 8)
+        self.assertEqual(view.experiences[0].entity_id, "bleu-rossignol-founder")
+        self.assertGreater(len(view.source_ids), 5)
+
+        strategy["skill_ids"][0] = "unknown-skill"
+        with self.assertRaisesRegex(ValueError, "unknown skill"):
+            compose_ats_cv(ROOT, template, strategy)
+
+    def test_all_ats_variants_are_one_page_and_use_distinct_positioning(self) -> None:
+        results = build_all_ats_cvs(ROOT, self.work)
+        self.assertEqual(len(results), len(ATS_VARIANTS) * 2)
+        template = load_json(ROOT / "templates" / "cv" / "ats-classic" / "template.json")
+        titles: set[str] = set()
+        expected_first_skills = {
+            "transverse": "Relation et service client",
+            "relation-client": "Relation et service client",
+            "commerce-vente": "Vente-conseil et négociation",
+            "gestion-administrative": "Gestion administrative",
+        }
+        for variant in ATS_VARIANTS:
+            strategy = load_ats_strategy(ROOT, variant.id)
+            view = compose_ats_cv(ROOT, template, strategy)
+            titles.add(view.target_title)
+            self.assertEqual(view.skills[0], expected_first_skills[variant.id])
+            reader = PdfReader(self.work / variant.pdf_filename)
+            self.assertEqual(len(reader.pages), 1, variant.id)
+            text = "\n".join(page.extract_text() or "" for page in reader.pages)
+            for keyword in variant.required_keywords:
+                self.assertIn(keyword.casefold(), text.casefold(), (variant.id, keyword))
+        self.assertEqual(len(titles), len(ATS_VARIANTS))
 
     def test_cv_composition_is_traceable_and_derives_periods(self) -> None:
         template = load_json(ROOT / "templates" / "cv" / "signature-editorial" / "template.json")
@@ -136,6 +246,10 @@ class DocumentTests(unittest.TestCase):
             ),
         )
         self.assertEqual(view.complementary_experiences[3].period, "11/2006 - 09/2008")
+        self.assertEqual(
+            tuple(item.bullet_limit for item in view.complementary_experiences),
+            (2, 5, 2, 2, 2, 1),
+        )
         self.assertTrue(all(experience.evidence for experience in (*view.recent_experiences, *view.complementary_experiences)))
 
     def test_cv_template_rules_are_enforced_by_the_composer(self) -> None:
@@ -169,6 +283,7 @@ class DocumentTests(unittest.TestCase):
         values = dict(template["rendering"]["layout"])
         rules = CVLayoutRules.from_mapping(values)
         self.assertEqual(rules.component_gap_pt, rules.spacing_unit_pt * 2)
+        self.assertEqual(rules.compact_experience_gap_pt, rules.spacing_unit_pt * 3)
         values["component_gap_pt"] = 7
         with self.assertRaisesRegex(ValueError, "multiple of spacing_unit_pt"):
             CVLayoutRules.from_mapping(values)

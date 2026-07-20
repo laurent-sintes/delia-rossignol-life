@@ -112,12 +112,12 @@
     },
     {"entity_id": "cuisinella-sainte-eulalie", "group": "recent", "heading": "Concepteur-vendeur · Cuisinella Sainte-Eulalie", "heading_evidence_fields": ["details"], "bullet_limit": 1},
     {"entity_id": "promod-bordeaux", "group": "recent", "heading": "Responsable adjointe de magasin · Promod, Bordeaux", "heading_evidence_fields": ["details"], "bullet_limit": 1},
-    {"entity_id": "era-entre-deux-mers", "group": "complementary", "heading": "Agent immobilier · ERA Entre Deux Mers", "heading_evidence_fields": ["details"], "bullet_limit": 1},
-    {"entity_id": "restaurant-la-maison", "group": "complementary", "heading": "Associée-propriétaire · La Maison, Bordeaux", "heading_evidence_fields": ["details"], "bullet_limit": 1},
-    {"entity_id": "restaurant-le-manoir", "group": "complementary", "heading": "Location-gérance · Le Manoir, Paris", "heading_evidence_fields": ["details"], "bullet_limit": 1},
-    {"entity_id": "sergio-rossi-paris", "group": "complementary", "heading": "Première vendeuse puis responsable de corner · SERGIO ROSSI", "heading_evidence_fields": ["details"], "bullet_limit": 0},
-    {"entity_id": "loreal-luxury-products", "group": "complementary", "heading": "Assistante décor · L'Oréal", "heading_evidence_fields": ["details"], "bullet_limit": 1},
-    {"entity_id": "prada-paris", "group": "complementary", "heading": "Vente au détail · Prada, Paris", "heading_evidence_fields": ["details"], "bullet_limit": 0}
+    {"entity_id": "era-entre-deux-mers", "group": "complementary", "heading": "Agent immobilier · ERA Entre Deux Mers", "heading_evidence_fields": ["details"], "bullet_limit": 2},
+    {"entity_id": "restaurant-la-maison", "group": "complementary", "heading": "Associée-propriétaire · La Maison, Bordeaux", "heading_evidence_fields": ["details"], "bullet_limit": 5},
+    {"entity_id": "restaurant-le-manoir", "group": "complementary", "heading": "Location-gérance · Le Manoir, Paris", "heading_evidence_fields": ["details"], "bullet_limit": 2},
+    {"entity_id": "sergio-rossi-paris", "group": "complementary", "heading": "Première vendeuse puis responsable de corner · SERGIO ROSSI", "heading_evidence_fields": ["details"], "bullet_limit": 2},
+    {"entity_id": "loreal-luxury-products", "group": "complementary", "heading": "Assistante décor · L'Oréal", "heading_evidence_fields": ["details"], "bullet_limit": 2},
+    {"entity_id": "prada-paris", "group": "complementary", "heading": "Vente au détail · Prada, Paris", "heading_evidence_fields": ["details"], "bullet_limit": 1}
   ],
   "education": [
     {"entity_type": "credential", "entity_id": "esgci-marketing-commerce-2003"},

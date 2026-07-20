@@ -115,6 +115,8 @@ def _load_single_contracts(state: ProjectValidationState) -> None:
     single_contracts = [
         (root / "data" / "style" / "delia.json", "delia-style"),
         (root / "data" / "style" / "cv-standard.json", "cv-content-profile"),
+        (root / "data" / "style" / "cv-ats.json", "ats-cv-content-profile"),
+        (root / "data" / "style" / "cv-ats-variants.json", "ats-cv-variants"),
         (root / "data" / "knowledge" / "profile.json", "profile-index"),
         (root / "data" / "knowledge" / "skills.json", "skills-index"),
         (root / "site" / "publication.json", "publication"),
@@ -179,6 +181,36 @@ def _validate_experiences(state: ProjectValidationState) -> None:
         state.errors.append(f"{path.relative_to(state.root)}: experience responsibilities are required ({experience_id})")
 
 
+def _validate_skill_index(state: ProjectValidationState) -> None:
+    index = state.loaded_single_contracts.get("skills-index")
+    if index is None:
+        return
+    skills = index.get("skills", [])
+    identifiers = [str(item.get("id", "")) for item in skills if isinstance(item, dict)]
+    duplicates = sorted({identifier for identifier in identifiers if identifiers.count(identifier) > 1})
+    if duplicates:
+        state.errors.append(f"skills index: duplicate ids: {', '.join(duplicates)}")
+    entities = {
+        (str(document.get("type", "")), str(document.get("id", ""))): document
+        for _, document in state.loaded_by_contract.get("knowledge-entity", [])
+    }
+    for skill in skills:
+        if not isinstance(skill, dict):
+            continue
+        for index_position, reference in enumerate(skill.get("evidence", [])):
+            key = (str(reference.get("entity_type", "")), str(reference.get("entity_id", "")))
+            entity = entities.get(key)
+            field_name = str(reference.get("field", ""))
+            if entity is None:
+                state.errors.append(
+                    f"skills index: {skill.get('id')} evidence[{index_position}] references unknown entity {'/'.join(key)}"
+                )
+            elif field_name not in entity.get("fields", {}):
+                state.errors.append(
+                    f"skills index: {skill.get('id')} evidence[{index_position}] references unknown field {field_name}"
+                )
+
+
 def _validate_model_files(state: ProjectValidationState) -> None:
     model_manifest = state.root / "model" / "model.yaml"
     if model_manifest.exists():
@@ -198,6 +230,7 @@ def validate_project(root: Path) -> dict[str, Any]:
     _validate_offer_search_coverage(state)
     _validate_proposals_and_knowledge(state)
     _validate_experiences(state)
+    _validate_skill_index(state)
     _validate_model_files(state)
 
     return {

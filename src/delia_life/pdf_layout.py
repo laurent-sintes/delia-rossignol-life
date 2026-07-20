@@ -17,6 +17,7 @@ class CVLayoutRules:
     component_gap_pt: float
     card_padding_pt: float
     experience_gap_pt: float
+    compact_experience_gap_pt: float
     safe_bottom_pt: float
 
     @classmethod
@@ -27,6 +28,7 @@ class CVLayoutRules:
             component_gap_pt=float(value["component_gap_pt"]),
             card_padding_pt=float(value["card_padding_pt"]),
             experience_gap_pt=float(value["experience_gap_pt"]),
+            compact_experience_gap_pt=float(value["compact_experience_gap_pt"]),
             safe_bottom_pt=float(value["safe_bottom_pt"]),
         )
         rules.validate()
@@ -40,6 +42,7 @@ class CVLayoutRules:
             ("component_gap_pt", self.component_gap_pt),
             ("card_padding_pt", self.card_padding_pt),
             ("experience_gap_pt", self.experience_gap_pt),
+            ("compact_experience_gap_pt", self.compact_experience_gap_pt),
             ("safe_bottom_pt", self.safe_bottom_pt),
         ):
             if value <= 0:

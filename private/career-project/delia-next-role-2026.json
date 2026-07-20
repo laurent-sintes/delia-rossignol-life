@@ -187,22 +187,6 @@
           "travail d’équipe"
         ]
       }
-    },
-    {
-      "dimension": "schedule",
-      "hard_constraint": true,
-      "id": "alternating-week-schedule",
-      "operator": "custom",
-      "priority": 5,
-      "provenance": [
-        {
-          "applied_at": "2026-07-19T17:13:24+00:00",
-          "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q77",
-          "proposal_id": "proposal-delia-q77-hard-constraint",
-          "source_id": "src-6d29e5e55ff715de"
-        }
-      ],
-      "value": "horaires compatibles avec une garde alternée une semaine sur deux"
     }
   ],
   "fields": {
@@ -321,16 +305,22 @@
           "locator": "reponses-delia-questionnaire-2026-07-19.txt#Q62-Q64",
           "proposal_id": "proposal-delia-q62-q64-career-targets",
           "source_id": "src-6d29e5e55ff715de"
+        },
+        {
+          "applied_at": "2026-07-20T18:10:54+00:00",
+          "locator": "validation-ordre-domaines-prioritaires-2026-07-20.txt#P01",
+          "proposal_id": "proposal-delia-priority-functional-domain-order",
+          "source_id": "src-af7e8d2e4445fe46"
         }
       ],
       "value": {
         "functional_domains": {
-          "acceptable": [
-            "relation client",
-            "gestion de projet"
-          ],
+          "acceptable": [],
           "priority": [
-            "gestion administrative"
+            "conseil et relation client",
+            "commerce et vente",
+            "gestion administrative",
+            "gestion et coordination de projets"
           ]
         },
         "industry_sectors": {
@@ -402,12 +392,12 @@
   "status": "active",
   "target_preferences": {
     "functional_domains": {
-      "acceptable": [
-        "relation client",
-        "gestion de projet"
-      ],
+      "acceptable": [],
       "priority": [
-        "gestion administrative"
+        "conseil et relation client",
+        "commerce et vente",
+        "gestion administrative",
+        "gestion et coordination de projets"
       ]
     },
     "industry_sectors": {
@@ -448,5 +438,5 @@
     "location_ids": []
   },
   "type": "career-project",
-  "updated_at": "2026-07-19T17:13:23+00:00"
+  "updated_at": "2026-07-20T18:10:54+00:00"
 }

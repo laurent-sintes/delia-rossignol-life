@@ -18,6 +18,23 @@
   },
   "freshness_days": 30,
   "functional_query_families": {
+    "conseil-et-relation-client": [
+      "relation client",
+      "conseil client",
+      "service client",
+      "conseiller clientèle",
+      "chargé de relation client",
+      "expérience client",
+      "suivi client"
+    ],
+    "commerce-et-vente": [
+      "vente",
+      "commerce",
+      "conseiller de vente",
+      "développement commercial",
+      "fidélisation client",
+      "gestion de portefeuille"
+    ],
     "gestion-administrative": [
       "gestionnaire administratif",
       "responsable administratif",
@@ -28,6 +45,14 @@
       "back-office",
       "service client",
       "gestion de portefeuille"
+    ],
+    "gestion-et-coordination-de-projets": [
+      "gestion de projet",
+      "coordination de projet",
+      "coordinateur de projet",
+      "chef de projet",
+      "planification",
+      "suivi de projet"
     ]
   },
   "id": "delia-offer-search-v1",

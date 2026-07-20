@@ -1,3 +1,150 @@
 {
-  "skills": []
+  "status": "validated",
+  "updated_at": "2026-07-20",
+  "skills": [
+    {
+      "id": "gestion-administrative",
+      "name": "Gestion administrative",
+      "category": "administration",
+      "level": "demontree",
+      "transferable": true,
+      "summary": "Piloter les dimensions administratives, financières et opérationnelles d'une activité.",
+      "keywords": ["gestion administrative", "contrats", "paie", "comptabilité", "relations bancaires"],
+      "evidence": [
+        {"entity_type": "experience", "entity_id": "restaurant-la-maison", "field": "mission"},
+        {"entity_type": "experience", "entity_id": "restaurant-la-maison", "field": "details"}
+      ]
+    },
+    {
+      "id": "relation-client",
+      "name": "Relation et service client",
+      "category": "client",
+      "level": "demontree",
+      "transferable": true,
+      "summary": "Analyser un besoin, conseiller, suivre la relation et traiter les réclamations jusqu'à la livraison.",
+      "keywords": ["relation client", "service client", "analyse du besoin", "conseil client", "gestion des réclamations"],
+      "evidence": [
+        {"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "responsibilities"},
+        {"entity_type": "experience", "entity_id": "sergio-rossi-paris", "field": "mission"}
+      ]
+    },
+    {
+      "id": "vente-negociation",
+      "name": "Vente-conseil et négociation",
+      "category": "commerce",
+      "level": "demontree",
+      "transferable": true,
+      "summary": "Construire une proposition, chiffrer, argumenter et négocier une solution adaptée au besoin client.",
+      "keywords": ["vente", "vente-conseil", "chiffrage", "devis", "négociation commerciale"],
+      "evidence": [
+        {"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "responsibilities"},
+        {"entity_type": "experience", "entity_id": "cuisinella-sainte-eulalie", "field": "responsibilities"}
+      ]
+    },
+    {
+      "id": "acquisition-fidelisation-clients",
+      "name": "Acquisition et fidélisation clients",
+      "category": "commerce",
+      "level": "demontree",
+      "transferable": true,
+      "summary": "Développer une clientèle et entretenir la relation dans la durée jusqu'à de nouveaux projets.",
+      "keywords": ["acquisition clients", "développement de clientèle", "fidélisation", "expérience client"],
+      "evidence": [
+        {"entity_type": "achievement", "entity_id": "bleu-rossignol-customer-development", "field": "statement"},
+        {"entity_type": "experience", "entity_id": "era-entre-deux-mers", "field": "mission"}
+      ]
+    },
+    {
+      "id": "coordination-projets",
+      "name": "Coordination de projets",
+      "category": "projet",
+      "level": "demontree",
+      "transferable": true,
+      "summary": "Planifier et coordonner plusieurs intervenants de l'analyse du besoin à la réception.",
+      "keywords": ["gestion de projet", "coordination", "planification", "suivi", "livraison"],
+      "evidence": [
+        {"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "mission"},
+        {"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "responsibilities"}
+      ]
+    },
+    {
+      "id": "gestion-fournisseurs",
+      "name": "Gestion et négociation fournisseurs",
+      "category": "fournisseurs",
+      "level": "demontree",
+      "transferable": true,
+      "summary": "Rechercher, évaluer et négocier avec des fournisseurs, puis suivre les commandes fabricants.",
+      "keywords": ["sourcing fournisseurs", "évaluation fournisseurs", "négociation fournisseurs", "commandes"],
+      "evidence": [
+        {"entity_type": "achievement", "entity_id": "bleu-rossignol-supplier-management", "field": "statement"},
+        {"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "responsibilities"}
+      ]
+    },
+    {
+      "id": "facturation-suivi-activite",
+      "name": "Facturation et suivi d'activité",
+      "category": "administration",
+      "level": "demontree",
+      "transferable": true,
+      "summary": "Assurer le suivi des devis, commandes, réclamations et factures d'une activité orientée client.",
+      "keywords": ["facturation", "suivi d'activité", "devis", "commandes", "réclamations"],
+      "evidence": [
+        {"entity_type": "experience", "entity_id": "raison-home-franchisee", "field": "responsibilities"},
+        {"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "responsibilities"}
+      ]
+    },
+    {
+      "id": "pilotage-performance",
+      "name": "Pilotage de la performance",
+      "category": "pilotage",
+      "level": "demontree",
+      "transferable": true,
+      "summary": "Suivre des indicateurs commerciaux et analyser les résultats pour orienter les actions.",
+      "keywords": ["indicateurs commerciaux", "KPI", "analyse de performance", "taux de transformation"],
+      "evidence": [
+        {"entity_type": "achievement", "entity_id": "bleu-rossignol-business-metrics", "field": "metrics"},
+        {"entity_type": "achievement", "entity_id": "sergio-rossi-corner-opening", "field": "metrics"}
+      ]
+    },
+    {
+      "id": "marketing-digital-seo",
+      "name": "Marketing digital, Web Analytics et SEO",
+      "category": "digital",
+      "level": "demontree",
+      "transferable": true,
+      "summary": "Piloter un site et faire évoluer ses contenus à partir de Wix et Google Analytics pour soutenir la visibilité SEO.",
+      "keywords": ["création de site web", "Wix", "Google Analytics", "Web Analytics", "SEO"],
+      "evidence": [
+        {"entity_type": "achievement", "entity_id": "bleu-rossignol-website-pilotage", "field": "statement"},
+        {"entity_type": "achievement", "entity_id": "bleu-rossignol-seo-optimization", "field": "statement"}
+      ]
+    },
+    {
+      "id": "management-equipe",
+      "name": "Management d'équipe",
+      "category": "management",
+      "level": "demontree",
+      "transferable": true,
+      "summary": "Encadrer une équipe et contribuer au maintien de l'activité dans un contexte de transformation.",
+      "keywords": ["management d'équipe", "animation d'équipe", "encadrement", "organisation"],
+      "evidence": [
+        {"entity_type": "experience", "entity_id": "promod-bordeaux", "field": "mission"},
+        {"entity_type": "experience", "entity_id": "promod-bordeaux", "field": "team_management"},
+        {"entity_type": "experience", "entity_id": "cadet-roussel-president", "field": "mission"}
+      ]
+    },
+    {
+      "id": "anglais-professionnel",
+      "name": "Anglais professionnel",
+      "category": "langue",
+      "level": "demontree",
+      "transferable": true,
+      "summary": "Utiliser l'anglais à l'oral et en lecture dans un contexte professionnel et auprès d'une clientèle internationale.",
+      "keywords": ["anglais courant", "anglais professionnel", "clientèle internationale"],
+      "evidence": [
+        {"entity_type": "language-proficiency", "entity_id": "delia-english", "field": "details"},
+        {"entity_type": "experience", "entity_id": "sergio-rossi-paris", "field": "mission"}
+      ]
+    }
+  ]
 }

@@ -8,7 +8,7 @@
   "roles": ["conseil", "commerce", "gestion-de-projet", "management"],
   "sectors": ["agencement", "commerce", "luxe", "hospitality"],
   "seniority": ["confirmé", "management", "entrepreneuriat"],
-  "version": "1.13.0",
+  "version": "1.14.0",
   "rendering": {
     "engine": "signature-editorial-pdf-v1",
     "page_size": "A4",
@@ -22,6 +22,7 @@
       "component_gap_pt": 8,
       "card_padding_pt": 8,
       "experience_gap_pt": 16,
+      "compact_experience_gap_pt": 12,
       "safe_bottom_pt": 40
     },
     "sections": [
@@ -36,7 +37,7 @@
   "content_rules": {
     "profile_max_words": 60,
     "key_skills_max": 12,
-    "experience_bullets_max": 3,
+    "experience_bullets_max": 5,
     "experience_sequence_steps_max": 4,
     "bullet_max_words": 28,
     "date_format": "MM/YYYY",

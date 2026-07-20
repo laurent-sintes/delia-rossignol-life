@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["status", "variants"],
+  "additionalProperties": false,
+  "$defs": {
+    "entityField": {
+      "type": "object",
+      "required": ["entity_type", "entity_id", "field"],
+      "additionalProperties": false,
+      "properties": {
+        "entity_type": {"type": "string", "minLength": 1},
+        "entity_id": {"type": "string", "minLength": 1},
+        "field": {"type": "string", "minLength": 1}
+      }
+    },
+    "bullet": {
+      "type": "object",
+      "required": ["text", "evidence"],
+      "additionalProperties": false,
+      "properties": {
+        "text": {"type": "string", "minLength": 1},
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/entityField"}
+        }
+      }
+    }
+  },
+  "properties": {
+    "status": {"type": "string", "const": "validated"},
+    "variants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "strategy_id", "target_title", "profile_summary", "skill_ids", "experience_overrides"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "strategy_id": {"type": "string", "minLength": 1},
+          "target_title": {"type": "string", "minLength": 1},
+          "profile_summary": {"type": "string", "minLength": 1},
+          "skill_ids": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {"type": "string", "minLength": 1}
+          },
+          "experience_overrides": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["entity_id", "bullets"],
+              "additionalProperties": false,
+              "properties": {
+                "entity_id": {"type": "string", "minLength": 1},
+                "bullets": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {"$ref": "#/$defs/bullet"}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

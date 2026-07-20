@@ -52,11 +52,11 @@ class OfferSearchTests(unittest.TestCase):
             ),
             {
                 "eligible": True,
-                "score": 88.5,
+                "score": 94.5,
                 "reasons": [
                     "CDI, contrat prioritaire",
                     "secteur très recherché : luxe",
-                    "activité cohérente : relation client",
+                    "activité prioritaire : conseil et relation client",
                     "expérience transférable : administration, client, relation",
                     "offre publiée depuis moins de 8 jours",
                     "dimension collective explicite",
@@ -122,7 +122,7 @@ class OfferSearchTests(unittest.TestCase):
                 "eligible_count": 2,
                 "excluded_count": 1,
                 "ranked_ids": ["offer-1", "offer-interim"],
-                "ranked_scores": [88.5, 70.5],
+                "ranked_scores": [94.5, 76.5],
                 "excluded": [
                     {
                         "id": "offer-excluded",
@@ -225,8 +225,18 @@ class OfferSearchTests(unittest.TestCase):
         errors = missing_priority_functional_coverage(self.project, incomplete_policy)
         self.assertEqual(
             errors,
-            ["offer search policy: missing query family for priority functional domain gestion-administrative"],
+            [
+                "offer search policy: missing query family for priority functional domain conseil-et-relation-client",
+                "offer search policy: missing query family for priority functional domain commerce-et-vente",
+                "offer search policy: missing query family for priority functional domain gestion-administrative",
+                "offer search policy: missing query family for priority functional domain gestion-et-coordination-de-projets",
+            ],
         )
+
+    def test_functional_domain_aliases_respect_the_validated_priority_order(self) -> None:
+        result = score_offer(self.base, self.project, self.policy, set(), self.today)
+        functional_reasons = [reason for reason in result["reasons"] if reason.startswith("activité prioritaire")]
+        self.assertEqual(functional_reasons, ["activité prioritaire : conseil et relation client"])
 
     def test_ranked_report_records_all_consulted_source_origins(self) -> None:
         result = rank_offers(

@@ -8,8 +8,14 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+from docx import Document
 from pypdf import PdfReader
 
+from .ats_cv import (
+    ATS_TEMPLATE_PATH,
+    ATS_VARIANTS,
+    build_all_ats_cvs,
+)
 from .core import load_json, sha256_file
 from .cv_composer import compose_standard_cv
 from .cv_model import CVViewModel
@@ -94,7 +100,13 @@ def build_documents(
     result = build_standard_cv(root, output)
     _atomic_copy(output, public_asset)
     result["public_output"] = str(public_asset.resolve())
-    return {"documents": [result], "ok": True}
+    ats_results = build_all_ats_cvs(root, output_dir)
+    for ats_result in ats_results:
+        source = Path(str(ats_result["output"]))
+        published = public_dir / source.name
+        _atomic_copy(source, published)
+        ats_result["public_output"] = str(published.resolve())
+    return {"documents": [result, *ats_results], "ok": True}
 
 
 def _generate_check_copies(state: DocumentCheckState, temporary: Path) -> Path:
@@ -146,6 +158,88 @@ def _check_rendered_layout(state: DocumentCheckState) -> None:
         state.errors.append("standard CV layout contains overflowing graphical elements")
 
 
+def _document_text(document: Any) -> str:
+    return "\n".join(paragraph.text for paragraph in document.paragraphs)
+
+
+def _check_ats_reproducibility(
+    root: Path,
+    published_dir: Path,
+    temporary: Path,
+) -> tuple[list[dict[str, Any]], list[str]]:
+    errors: list[str] = []
+    first_dir = temporary / "ats-first"
+    second_dir = temporary / "ats-second"
+    first_results = build_all_ats_cvs(root, first_dir)
+    build_all_ats_cvs(root, second_dir)
+    for variant in ATS_VARIANTS:
+        for filename in (variant.pdf_filename, variant.docx_filename):
+            first = first_dir / filename
+            second = second_dir / filename
+            if first.read_bytes() != second.read_bytes():
+                errors.append(f"ATS CV generation is not byte-for-byte reproducible: {filename}")
+            published = published_dir / filename
+            if not published.is_file():
+                errors.append(f"published ATS CV is missing: {published.relative_to(root)}")
+            elif first.read_bytes() != published.read_bytes():
+                errors.append(f"published ATS CV is stale: {published.relative_to(root)}")
+    return first_results, errors
+
+
+def _check_ats_pdf(root: Path, path: Path, required_keywords: tuple[str, ...]) -> list[str]:
+    errors: list[str] = []
+    template = load_json(root / ATS_TEMPLATE_PATH)
+    reader = PdfReader(str(path))
+    maximum_pages = int(template["rendering"]["maximum_pages"])
+    if len(reader.pages) > maximum_pages:
+        errors.append(f"ATS PDF exceeds maximum page count: {maximum_pages}")
+    for index, page in enumerate(reader.pages, start=1):
+        width = float(page.mediabox.width)
+        height = float(page.mediabox.height)
+        if abs(width - PAGE_WIDTH) > 0.1 or abs(height - PAGE_HEIGHT) > 0.1:
+            errors.append(f"ATS PDF page {index} is not A4: {width:.2f} x {height:.2f} points")
+    text = "\n".join(page.extract_text() or "" for page in reader.pages)
+    errors.extend(_ats_text_errors(text, "ATS PDF", required_keywords))
+    return errors
+
+
+def _ats_text_errors(text: str, label: str, required_keywords: tuple[str, ...]) -> list[str]:
+    errors: list[str] = []
+    required = (
+        "Profil professionnel",
+        "Compétences",
+        "Expérience professionnelle",
+        "comptabilité",
+        "150 %",
+        *required_keywords,
+    )
+    for value in required:
+        if value.casefold() not in text.casefold():
+            errors.append(f"{label} is missing required text: {value}")
+    positions = [text.casefold().find(value.casefold()) for value in ("Profil professionnel", "Compétences", "Expérience professionnelle", "Formation", "Langues")]
+    if any(position < 0 for position in positions) or positions != sorted(positions):
+        errors.append(f"{label} sections are not extracted in the expected ATS order")
+    for forbidden in FORBIDDEN_CV_TEXT:
+        if forbidden.casefold() in text.casefold():
+            errors.append(f"{label} contains forbidden text: {forbidden}")
+    if any(ord(character) < 32 and character not in "\n\r\t" for character in text):
+        errors.append(f"{label} extraction contains control characters")
+    return errors
+
+
+def _check_ats_docx(path: Path, required_keywords: tuple[str, ...]) -> list[str]:
+    errors: list[str] = []
+    document = Document(str(path))
+    errors.extend(_ats_text_errors(_document_text(document), "ATS DOCX", required_keywords))
+    if document.tables:
+        errors.append("ATS DOCX must not contain tables")
+    if document.inline_shapes:
+        errors.append("ATS DOCX must not contain images")
+    if len(document.sections) != 1:
+        errors.append("ATS DOCX must use a single document section")
+    return errors
+
+
 def check_documents(root: Path, public_dir: Path | None = None) -> dict[str, Any]:
     root = root.resolve()
     public_dir = public_dir or root / "site" / "assets" / "downloads"
@@ -157,12 +251,26 @@ def check_documents(root: Path, public_dir: Path | None = None) -> dict[str, Any
     state = DocumentCheckState(root=root, published=published, template=template, view=view)
     temporary = Path(tempfile.gettempdir()) / "delia-rossignol-life" / f"document-check-{uuid.uuid4().hex}"
     temporary.mkdir(parents=True)
+    ats_results: list[dict[str, Any]] = []
     try:
         first = _generate_check_copies(state, temporary)
         reader = PdfReader(str(first))
         _check_pdf_pages(state, reader)
         _check_pdf_text(state, reader)
         _check_rendered_layout(state)
+        ats_results, ats_errors = _check_ats_reproducibility(root, public_dir, temporary)
+        state.errors.extend(ats_errors)
+        for variant in ATS_VARIANTS:
+            state.errors.extend(
+                _check_ats_pdf(root, temporary / "ats-first" / variant.pdf_filename, variant.required_keywords)
+            )
+            state.errors.extend(
+                _check_ats_docx(temporary / "ats-first" / variant.docx_filename, variant.required_keywords)
+            )
     finally:
         shutil.rmtree(temporary, ignore_errors=True)
-    return state.report()
+    report = state.report()
+    report["documents"].extend(ats_results)
+    report["errors"] = state.errors
+    report["ok"] = not state.errors
+    return report

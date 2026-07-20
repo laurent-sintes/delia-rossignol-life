@@ -1,0 +1,126 @@
+{
+  "status": "validated",
+  "variants": [
+    {
+      "id": "relation-client",
+      "strategy_id": "delia-ats-cv-relation-client-v1",
+      "target_title": "Conseil & relation client · Fidélisation · Expérience client",
+      "profile_summary": "Expérience en conseil et relation client, analyse des besoins, accompagnement personnalisé, gestion des réclamations et fidélisation. Parcours associant vente-conseil, coordination de projets, management et service auprès de clientèles nationales et internationales dans l'agencement, la distribution et le luxe.",
+      "skill_ids": [
+        "relation-client",
+        "acquisition-fidelisation-clients",
+        "vente-negociation",
+        "facturation-suivi-activite",
+        "coordination-projets",
+        "pilotage-performance",
+        "anglais-professionnel",
+        "management-equipe"
+      ],
+      "experience_overrides": [
+        {
+          "entity_id": "bleu-rossignol-founder",
+          "bullets": [
+            {
+              "text": "Analyser les besoins, conseiller les clients et construire des solutions d'agencement sur mesure adaptées à leurs usages.",
+              "evidence": [{"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "responsibilities"}]
+            },
+            {
+              "text": "Développer et fidéliser une clientèle, jusqu'à la réalisation d'un nouveau projet deux ans après une première commande.",
+              "evidence": [{"entity_type": "achievement", "entity_id": "bleu-rossignol-customer-development", "field": "statement"}]
+            },
+            {
+              "text": "Coordonner les artisans, suivre la pose, traiter les réclamations et accompagner les clients jusqu'à la réception.",
+              "evidence": [{"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "responsibilities"}]
+            },
+            {
+              "text": "Transformer 80 % des devis et piloter environ 100 projets, avec des budgets de 3 000 à 80 000 €.",
+              "evidence": [{"entity_type": "achievement", "entity_id": "bleu-rossignol-business-metrics", "field": "metrics"}]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "commerce-vente",
+      "strategy_id": "delia-ats-cv-commerce-vente-v1",
+      "target_title": "Commerce & vente · Développement et fidélisation clients",
+      "profile_summary": "Expérience en vente-conseil, négociation, développement et fidélisation clients, avec pilotage d'indicateurs commerciaux. Parcours associant entrepreneuriat, management, ouverture de point de vente, réseau professionnel et marketing digital dans l'agencement, la distribution et le luxe.",
+      "skill_ids": [
+        "vente-negociation",
+        "acquisition-fidelisation-clients",
+        "relation-client",
+        "pilotage-performance",
+        "gestion-fournisseurs",
+        "marketing-digital-seo",
+        "management-equipe",
+        "anglais-professionnel"
+      ],
+      "experience_overrides": [
+        {
+          "entity_id": "bleu-rossignol-founder",
+          "bullets": [
+            {
+              "text": "Piloter environ 100 projets, avec 80 % des devis transformés et des budgets de 3 000 à 80 000 €.",
+              "evidence": [{"entity_type": "achievement", "entity_id": "bleu-rossignol-business-metrics", "field": "metrics"}]
+            },
+            {
+              "text": "Développer et fidéliser une clientèle, jusqu'à la réalisation d'un nouveau projet deux ans après une première commande.",
+              "evidence": [{"entity_type": "achievement", "entity_id": "bleu-rossignol-customer-development", "field": "statement"}]
+            },
+            {
+              "text": "Rechercher les fournisseurs, visiter les usines, évaluer les partenaires et négocier directement les conditions.",
+              "evidence": [{"entity_type": "achievement", "entity_id": "bleu-rossignol-supplier-management", "field": "statement"}]
+            },
+            {
+              "text": "Développer un réseau d'entrepreneurs et piloter trois optimisations SEO à partir des données Wix et Google Analytics.",
+              "evidence": [
+                {"entity_type": "achievement", "entity_id": "bleu-rossignol-entrepreneur-network", "field": "statement"},
+                {"entity_type": "achievement", "entity_id": "bleu-rossignol-website-pilotage", "field": "statement"},
+                {"entity_type": "achievement", "entity_id": "bleu-rossignol-seo-optimization", "field": "statement"}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gestion-administrative",
+      "strategy_id": "delia-ats-cv-gestion-administrative-v1",
+      "target_title": "Gestion administrative · Coordination de projets · Suivi d'activité",
+      "profile_summary": "Expérience en gestion administrative et opérationnelle, facturation, suivi des contrats et coordination de projets. Parcours associant pilotage d'activité, gestion de fournisseurs, management d'équipe et relation client dans l'agencement, la distribution et la restauration.",
+      "skill_ids": [
+        "gestion-administrative",
+        "facturation-suivi-activite",
+        "coordination-projets",
+        "gestion-fournisseurs",
+        "pilotage-performance",
+        "relation-client",
+        "management-equipe",
+        "vente-negociation"
+      ],
+      "experience_overrides": [
+        {
+          "entity_id": "bleu-rossignol-founder",
+          "bullets": [
+            {
+              "text": "Piloter environ 100 projets, avec des budgets de 3 000 à 80 000 € et une moyenne de 8 000 €.",
+              "evidence": [{"entity_type": "achievement", "entity_id": "bleu-rossignol-business-metrics", "field": "metrics"}]
+            },
+            {
+              "text": "Établir les devis, suivre les commandes fabricants, traiter les réclamations et assurer la facturation.",
+              "evidence": [{"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "responsibilities"}]
+            },
+            {
+              "text": "Planifier les projets, coordonner les artisans, suivre les chantiers et contrôler la pose jusqu'à la réception.",
+              "evidence": [{"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "responsibilities"}]
+            },
+            {
+              "text": "Rechercher les fournisseurs, visiter les usines, évaluer les partenaires et négocier directement les conditions.",
+              "evidence": [{"entity_type": "achievement", "entity_id": "bleu-rossignol-supplier-management", "field": "statement"}]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

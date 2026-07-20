@@ -8,11 +8,11 @@
   "roles": [],
   "sectors": [],
   "seniority": ["confirmé", "management"],
-  "version": "0.2.0",
+  "version": "0.3.0",
   "rendering": {
     "engine": "standard-single-column-v1",
     "page_size": "A4",
-    "preferred_pages": 2,
+    "preferred_pages": 1,
     "maximum_pages": 2,
     "photo_policy": "optional-disabled-by-default",
     "palette": "delia-champagne-navy",

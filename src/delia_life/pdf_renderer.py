@@ -136,6 +136,67 @@ def draw_wrapped(
     return draw_wrapped_block(pdf, text, x, y, width, font, size, leading, color).next_y
 
 
+def draw_inline_responsibilities(
+    pdf: canvas.Canvas,
+    responsibilities: tuple[str, ...],
+    x: float,
+    y: float,
+    width: float,
+) -> DrawnTextBlock:
+    """Render several validated responsibilities as one compact editorial line."""
+    label = "PÉRIMÈTRE"
+    label_font = "Helvetica-Bold"
+    label_size = 7.2
+    body_font = "Helvetica"
+    body_size = 8.3
+    leading = 12.0
+    label_gap = 7.0
+    label_width = stringWidth(label, label_font, label_size) + label_gap
+    first_line_width = width - label_width
+    if first_line_width <= 0:
+        raise ValidationError("Inline responsibility label leaves no room for content")
+
+    text = " · ".join(item.rstrip(". ") for item in responsibilities)
+    words = text.split()
+    first_line_words: list[str] = []
+    split_index = 0
+    while split_index < len(words):
+        candidate = " ".join((*first_line_words, words[split_index]))
+        if first_line_words and stringWidth(candidate, body_font, body_size) > first_line_width:
+            break
+        if not first_line_words and stringWidth(candidate, body_font, body_size) > first_line_width:
+            break
+        first_line_words.append(words[split_index])
+        split_index += 1
+
+    if not first_line_words:
+        lines = line_wrap(text, body_font, body_size, width)
+        label_baseline = y
+        first_body_x = x
+    else:
+        remaining = " ".join(words[split_index:])
+        remaining_lines = line_wrap(remaining, body_font, body_size, width) if remaining else []
+        lines = [" ".join(first_line_words), *remaining_lines]
+        label_baseline = y
+        first_body_x = x + label_width
+
+    pdf.setFillColor(NAVY)
+    pdf.setFont(label_font, label_size)
+    pdf.drawString(x, label_baseline, label)
+    pdf.setFillColor(MUTED)
+    pdf.setFont(body_font, body_size)
+    for index, line in enumerate(lines):
+        line_y = y - (index * leading)
+        pdf.drawString(first_body_x if index == 0 else x, line_y, line)
+
+    last_baseline = y - ((len(lines) - 1) * leading)
+    return DrawnTextBlock(
+        next_y=y - (len(lines) * leading),
+        top=y + max(getAscent(label_font, label_size), getAscent(body_font, body_size)),
+        bottom=last_baseline + min(getDescent(label_font, label_size), getDescent(body_font, body_size)),
+    )
+
+
 def section_title(pdf: canvas.Canvas, title: str, y: float) -> float:
     pdf.setStrokeColor(CHAMPAGNE)
     pdf.setLineWidth(1.3)
@@ -453,6 +514,9 @@ def draw_experience(
     item: CVExperience,
     y: float,
     width: float,
+    *,
+    inline_responsibilities: bool = False,
+    gap_after: float | None = None,
 ) -> float:
     pdf = context.pdf
     rules = context.rules
@@ -485,12 +549,17 @@ def draw_experience(
         )
         content_bottom = y
     bullets = item.responsibilities[: item.bullet_limit]
-    for bullet in bullets:
-        pdf.setFillColor(CHAMPAGNE)
-        pdf.circle(LEFT + 15, y + 2.6, 1.4, fill=1, stroke=0)
-        bullet_block = draw_wrapped_block(pdf, bullet, LEFT + 23, y, width - 23, "Helvetica", 8.5, 13.0, MUTED)
-        y = bullet_block.next_y
-        content_bottom = bullet_block.bottom
+    if bullets and inline_responsibilities:
+        inline_block = draw_inline_responsibilities(pdf, bullets, LEFT + 11, y, width - 11)
+        y = inline_block.next_y
+        content_bottom = inline_block.bottom
+    else:
+        for bullet in bullets:
+            pdf.setFillColor(CHAMPAGNE)
+            pdf.circle(LEFT + 15, y + 2.6, 1.4, fill=1, stroke=0)
+            bullet_block = draw_wrapped_block(pdf, bullet, LEFT + 23, y, width - 23, "Helvetica", 8.5, 13.0, MUTED)
+            y = bullet_block.next_y
+            content_bottom = bullet_block.bottom
     pdf.setFillColor(CHAMPAGNE)
     pdf.roundRect(LEFT, content_bottom, 3, content_top - content_bottom, 1.5, fill=1, stroke=0)
     audit.add_box(
@@ -517,7 +586,7 @@ def draw_experience(
     )
     audit.add_edge_alignment(f"{item.entity_id}:bar-top", content_top, content_top)
     audit.add_edge_alignment(f"{item.entity_id}:bar-bottom", content_bottom, content_bottom)
-    return y - rules.experience_gap_pt
+    return y - (rules.experience_gap_pt if gap_after is None else gap_after)
 
 
 def composite_photo_background(image: Image.Image) -> Image.Image:
@@ -650,7 +719,14 @@ def _render_second_page(view: CVViewModel, context: RenderContext) -> float:
     y = header(pdf, view.name, view.email, view.phone, view.tagline, view.photo, page=2)
     y = section_title(pdf, "Expériences complémentaires", y)
     for experience in view.complementary_experiences:
-        y = draw_experience(context, experience, y, CONTENT_WIDTH)
+        y = draw_experience(
+            context,
+            experience,
+            y,
+            CONTENT_WIDTH,
+            inline_responsibilities=True,
+            gap_after=rules.compact_experience_gap_pt,
+        )
         minimum_y = min(minimum_y, y)
     y = section_title(pdf, "Formation", y)
     pdf.setFillColor(NAVY)

@@ -1,0 +1,94 @@
+{
+  "application": {
+    "applied_at": "2026-07-20T18:10:54+00:00",
+    "knowledge_path": "private/career-project/delia-next-role-2026.json"
+  },
+  "classification": "claim",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-20T18:10:54+00:00",
+      "from": "pending",
+      "note": "Ordre explicitement validé dans Codex le 20 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-priority-functional-domain-order",
+  "proposed_value": {
+    "functional_domains": {
+      "acceptable": [],
+      "priority": [
+        "conseil et relation client",
+        "commerce et vente",
+        "gestion administrative",
+        "gestion et coordination de projets"
+      ]
+    },
+    "industry_sectors": {
+      "acceptable": [
+        "agencement et aménagement intérieur",
+        "cuisine et mobilier sur mesure",
+        "architecture ou décoration",
+        "commerce et distribution"
+      ],
+      "excluded": [
+        "immobilier",
+        "restauration"
+      ],
+      "priority": [
+        "luxe",
+        "hôtellerie",
+        "cosmétique",
+        "bien-être",
+        "banque et assurance"
+      ]
+    },
+    "job_roles_status": "to_be_defined",
+    "minimum_responsibility_level": "autonome"
+  },
+  "replaces_proposal_id": "proposal-delia-q62-q64-career-targets",
+  "source": {
+    "evidence": "Ordre : Conseil et relation client ; Commerce et vente ; Gestion administrative ; Gestion et coordination de projets.",
+    "id": "src-af7e8d2e4445fe46",
+    "locator": "validation-ordre-domaines-prioritaires-2026-07-20.txt#P01"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-next-role-2026",
+    "entity_type": "career-project",
+    "field": "targets"
+  },
+  "validated_value": {
+    "functional_domains": {
+      "acceptable": [],
+      "priority": [
+        "conseil et relation client",
+        "commerce et vente",
+        "gestion administrative",
+        "gestion et coordination de projets"
+      ]
+    },
+    "industry_sectors": {
+      "acceptable": [
+        "agencement et aménagement intérieur",
+        "cuisine et mobilier sur mesure",
+        "architecture ou décoration",
+        "commerce et distribution"
+      ],
+      "excluded": [
+        "immobilier",
+        "restauration"
+      ],
+      "priority": [
+        "luxe",
+        "hôtellerie",
+        "cosmétique",
+        "bien-être",
+        "banque et assurance"
+      ]
+    },
+    "job_roles_status": "to_be_defined",
+    "minimum_responsibility_level": "autonome"
+  }
+}

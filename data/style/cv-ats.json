@@ -1,0 +1,157 @@
+{
+  "id": "delia-ats-cv-content-v1",
+  "status": "validated",
+  "template_id": "ats-classic",
+  "person_id": "delia-rossignol",
+  "email_contact_id": "delia-application-email",
+  "phone_contact_id": "delia-personal-phone",
+  "target_title": "Conseil & relation client · Commerce & vente · Gestion administrative · Coordination de projets",
+  "profile_summary": "Expérience en conseil et relation client, commerce et vente, gestion administrative et coordination de projets. Parcours associant entrepreneuriat, management d'équipe, pilotage de fournisseurs et suivi d'activité dans des environnements d'agencement, de distribution, de restauration, de luxe et de cosmétique.",
+  "skill_ids": [
+    "relation-client",
+    "vente-negociation",
+    "acquisition-fidelisation-clients",
+    "gestion-administrative",
+    "facturation-suivi-activite",
+    "coordination-projets",
+    "gestion-fournisseurs",
+    "pilotage-performance"
+  ],
+  "experiences": [
+    {
+      "entity_id": "bleu-rossignol-founder",
+      "heading": "Fondatrice, dirigeante & conceptrice-agenceuse | BLEU ROSSIGNOL, PERFECTEUR D’INTÉRIEUR",
+      "heading_evidence": [
+        {"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "titles"},
+        {"entity_type": "organization", "entity_id": "bleu-rossignol", "field": "legal_name"}
+      ],
+      "bullets": [
+        {
+          "text": "Piloter environ 100 projets (budgets : 3 000 à 80 000 €, moyenne : 8 000 € ; 80 % des devis transformés).",
+          "evidence": [{"entity_type": "achievement", "entity_id": "bleu-rossignol-business-metrics", "field": "metrics"}]
+        },
+        {
+          "text": "Développer et fidéliser une clientèle, jusqu'à la réalisation d'un nouveau projet deux ans après une première commande.",
+          "evidence": [{"entity_type": "achievement", "entity_id": "bleu-rossignol-customer-development", "field": "statement"}]
+        },
+        {
+          "text": "Rechercher les fournisseurs, visiter les usines, évaluer les partenaires et négocier directement les conditions.",
+          "evidence": [{"entity_type": "achievement", "entity_id": "bleu-rossignol-supplier-management", "field": "statement"}]
+        },
+        {
+          "text": "Piloter le site et conduire trois optimisations SEO à partir des données Wix et Google Analytics.",
+          "evidence": [
+            {"entity_type": "achievement", "entity_id": "bleu-rossignol-website-pilotage", "field": "statement"},
+            {"entity_type": "achievement", "entity_id": "bleu-rossignol-seo-optimization", "field": "statement"}
+          ]
+        }
+      ]
+    },
+    {
+      "entity_id": "raison-home-franchisee",
+      "heading": "Franchisée | Raison Home",
+      "heading_evidence": [{"entity_type": "experience", "entity_id": "raison-home-franchisee", "field": "details"}],
+      "bullets": [
+        {
+          "text": "Analyser les besoins, relever les mesures, concevoir les solutions, établir les devis et négocier les ventes.",
+          "evidence": [{"entity_type": "experience", "entity_id": "raison-home-franchisee", "field": "responsibilities"}]
+        },
+        {
+          "text": "Planifier les projets, commander auprès des fabricants et coordonner les artisans jusqu'à la réception.",
+          "evidence": [{"entity_type": "experience", "entity_id": "raison-home-franchisee", "field": "responsibilities"}]
+        },
+        {
+          "text": "Suivre la pose, traiter les réclamations et assurer la facturation.",
+          "evidence": [{"entity_type": "experience", "entity_id": "raison-home-franchisee", "field": "responsibilities"}]
+        }
+      ]
+    },
+    {
+      "entity_id": "cuisinella-sainte-eulalie",
+      "heading": "Concepteur-vendeur | Cuisinella Sainte-Eulalie",
+      "heading_evidence": [{"entity_type": "experience", "entity_id": "cuisinella-sainte-eulalie", "field": "details"}],
+      "bullets": [
+        {
+          "text": "Concevoir des projets d'aménagement intérieur, à dominante cuisines (90 %) et dressings (10 %).",
+          "evidence": [{"entity_type": "experience", "entity_id": "cuisinella-sainte-eulalie", "field": "responsibilities"}]
+        },
+        {
+          "text": "Conseiller les clients et vendre les projets conçus.",
+          "evidence": [{"entity_type": "experience", "entity_id": "cuisinella-sainte-eulalie", "field": "responsibilities"}]
+        }
+      ]
+    },
+    {
+      "entity_id": "promod-bordeaux",
+      "heading": "Responsable adjointe de magasin | Promod, Bordeaux",
+      "heading_evidence": [{"entity_type": "experience", "entity_id": "promod-bordeaux", "field": "details"}],
+      "bullets": [
+        {
+          "text": "Manager les huit membres de l'équipe du magasin.",
+          "evidence": [{"entity_type": "experience", "entity_id": "promod-bordeaux", "field": "responsibilities"}]
+        },
+        {
+          "text": "Contribuer au maintien du chiffre d'affaires du flagship régional pendant la transformation de la marque et la crise des Gilets jaunes.",
+          "evidence": [{"entity_type": "experience", "entity_id": "promod-bordeaux", "field": "responsibilities"}]
+        }
+      ]
+    },
+    {
+      "entity_id": "restaurant-la-maison",
+      "heading": "Associée-propriétaire | La Maison, Bordeaux",
+      "heading_evidence": [{"entity_type": "experience", "entity_id": "restaurant-la-maison", "field": "engagement_type"}],
+      "bullets": [
+        {
+          "text": "Piloter la gestion administrative, financière et opérationnelle d'une brasserie de 40 couverts par jour.",
+          "evidence": [
+            {"entity_type": "experience", "entity_id": "restaurant-la-maison", "field": "mission"},
+            {"entity_type": "experience", "entity_id": "restaurant-la-maison", "field": "details"}
+          ]
+        },
+        {
+          "text": "Assurer la fixation des prix, le suivi des contrats, la paie, la comptabilité et les relations bancaires.",
+          "evidence": [{"entity_type": "experience", "entity_id": "restaurant-la-maison", "field": "details"}]
+        }
+      ]
+    },
+    {
+      "entity_id": "sergio-rossi-paris",
+      "heading": "Première vendeuse puis responsable de corner | SERGIO ROSSI / Gucci Group",
+      "heading_evidence": [{"entity_type": "experience", "entity_id": "sergio-rossi-paris", "field": "details"}],
+      "bullets": [
+        {
+          "text": "Ouvrir le corner du Bon Marché et atteindre 150 % de l'objectif commercial au premier trimestre.",
+          "evidence": [{"entity_type": "achievement", "entity_id": "sergio-rossi-corner-opening", "field": "metrics"}]
+        },
+        {
+          "text": "Gérer le stock et développer les ventes auprès d'une clientèle nationale et internationale.",
+          "evidence": [
+            {"entity_type": "experience", "entity_id": "sergio-rossi-paris", "field": "details"},
+            {"entity_type": "experience", "entity_id": "sergio-rossi-paris", "field": "mission"}
+          ]
+        }
+      ]
+    },
+    {
+      "entity_id": "loreal-luxury-products",
+      "heading": "Assistante décor - développement packaging & lancements produits | L'Oréal",
+      "heading_evidence": [{"entity_type": "experience", "entity_id": "loreal-luxury-products", "field": "details"}],
+      "bullets": [
+        {
+          "text": "Assister un ingénieur développeur sur le repackaging des gammes et les lancements de produits.",
+          "evidence": [{"entity_type": "experience", "entity_id": "loreal-luxury-products", "field": "responsibilities"}]
+        },
+        {
+          "text": "Contribuer aux projets Biotherm, Anaïs Anaïs, Flowerbomb de Viktor & Rolf et Amor Amor.",
+          "evidence": [{"entity_type": "experience", "entity_id": "loreal-luxury-products", "field": "responsibilities"}]
+        }
+      ]
+    }
+  ],
+  "education": [
+    {"entity_type": "credential", "entity_id": "esgci-marketing-commerce-2003"},
+    {"entity_type": "education", "entity_id": "raison-home-design-2020"},
+    {"entity_type": "education", "entity_id": "birkbeck-semester-2002"}
+  ],
+  "language_id": "delia-english"
+}

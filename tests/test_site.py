@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / "src"))
 TEST_TMP = Path(gettempdir()) / "delia-rossignol-life-tests"
 TEST_TMP.mkdir(exist_ok=True)
 
+from delia_life.ats_cv import ATS_VARIANTS
 from delia_life.site_audit import audit_site
 from delia_life.site_builder import (
     _cleanup_stale_site_builds,
@@ -185,6 +186,14 @@ class SiteTests(unittest.TestCase):
         self.assertIn("delia-rossignol-logo.svg", homepage)
         self.assertIn("assets/downloads/cv-delia-rossignol-signature.pdf", homepage)
         self.assertTrue((output / "assets" / "downloads" / "cv-delia-rossignol-signature.pdf").exists())
+        self.assertIn('id="cv-downloads"', homepage)
+        self.assertIn("ATS, c’est quoi", homepage)
+        self.assertIn("système de suivi des candidatures", homepage)
+        for variant in ATS_VARIANTS:
+            self.assertIn(f"assets/downloads/{variant.pdf_filename}", homepage)
+            self.assertIn(f"assets/downloads/{variant.docx_filename}", homepage)
+            self.assertTrue((output / "assets" / "downloads" / variant.pdf_filename).exists())
+            self.assertTrue((output / "assets" / "downloads" / variant.docx_filename).exists())
         self.assertIn("knowledge-section--editorial", parcours)
         self.assertIn("knowledge-section--continuity", parcours)
         self.assertIn("knowledge-card--editorial", parcours)

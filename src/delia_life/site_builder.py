@@ -16,6 +16,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any, TypedDict
 
+from .ats_cv import ATS_VARIANTS
 from .core import load_json, sha256_file
 from .document_builder import STANDARD_CV_FILENAME, build_standard_cv
 from .mental_model import load_mental_model, model_summary
@@ -595,6 +596,17 @@ def _page_template(
     site_title = html.escape(site["title"])
     description = html.escape(site.get("description", ""), quote=True)
     if page["slug"] == "index":
+        ats_cards = "".join(
+            '<article class="cv-download-card">'
+            f'<p class="cv-download-kicker">{"CV socle" if variant.id == "transverse" else "CV ciblé"}</p>'
+            f'<h3>{html.escape(variant.label)}</h3>'
+            f'<p>{html.escape(variant.description)}</p>'
+            '<div class="cv-download-actions">'
+            f'<a href="assets/downloads/{html.escape(variant.pdf_filename, quote=True)}" download>PDF</a>'
+            f'<a href="assets/downloads/{html.escape(variant.docx_filename, quote=True)}" download>Word</a>'
+            '</div></article>'
+            for variant in ATS_VARIANTS
+        )
         page_content = f"""
   <main class="page page-home">
     <section class="hero" aria-labelledby="hero-title">
@@ -603,9 +615,9 @@ def _page_template(
         <h1 id="hero-title">Le parcours de Délia,<br><em>pensé sur mesure.</em></h1>
         <p class="hero-lead">Un parcours façonné par le conseil, le commerce, la gestion de projets et l’entrepreneuriat.</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="assets/downloads/cv-delia-rossignol-signature.pdf" download>Télécharger le CV (PDF)</a>
+          <a class="button button-primary" href="assets/downloads/cv-delia-rossignol-signature.pdf" download>CV Signature (PDF)</a>
+          <a class="button button-secondary" href="#cv-downloads">Choisir un CV ATS</a>
           <a class="button button-secondary" href="profil.html">Découvrir le profil</a>
-          <a class="button button-secondary" href="administration.html">Conseils et outils</a>
         </div>
       </div>
       <div class="hero-visual">
@@ -613,6 +625,15 @@ def _page_template(
         <div class="portrait-frame">
           <img src="assets/delia-rossignol.avif" alt="Portrait de Délia Rossignol" width="656" height="998">
         </div>
+      </div>
+    </section>
+    <section class="cv-downloads" id="cv-downloads" aria-labelledby="cv-downloads-title">
+      <div class="cv-downloads-shell">
+        <p class="eyebrow">Candidatures</p>
+        <h2 id="cv-downloads-title">Choisir le CV adapté</h2>
+        <p class="cv-downloads-intro">Le CV transverse présente les quatre domaines prioritaires. Les trois variantes renforcent les mots-clés et les preuves du métier visé, sans modifier les faits.</p>
+        <p class="cv-ats-note"><strong>ATS, c’est quoi&nbsp;?</strong> ATS signifie <em>Applicant Tracking System</em>, ou «&nbsp;système de suivi des candidatures&nbsp;»&nbsp;: un logiciel qui aide les recruteurs à lire, organiser et rechercher les CV. Ces versions utilisent une structure simple et des mots-clés explicites.</p>
+        <div class="cv-download-grid">{ats_cards}</div>
       </div>
     </section>
     <section class="home-content" aria-label="Présentation du dossier">

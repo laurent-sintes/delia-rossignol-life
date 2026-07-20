@@ -146,10 +146,10 @@ concepts:
   - id: skill
     label: Compétence
     kind: entity
-    description: Capacité démontrée ou connaissance détenue par la personne, avec preuves et niveau qualifié.
+    description: Capacité démontrée ou connaissance détenue par la personne, qualifiée pour sa transférabilité et reliée aux champs validés qui la prouvent.
     privacy: public
     storage: data/knowledge/skills.json
-    key_attributes: [name, category, level, proficiency_dimensions, summary]
+    key_attributes: [name, category, level, transferable, summary, keywords, evidence]
 
   - id: experience
     label: Expérience
