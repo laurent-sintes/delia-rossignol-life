@@ -22,10 +22,11 @@
       "level": "demontree",
       "transferable": true,
       "summary": "Analyser un besoin, conseiller, suivre la relation et traiter les réclamations jusqu'à la livraison.",
-      "keywords": ["relation client", "service client", "analyse du besoin", "conseil client", "gestion des réclamations"],
+      "keywords": ["relation client", "service client", "analyse du besoin", "conseil client", "accompagnement personnalisé", "gestion des réclamations"],
       "evidence": [
         {"entity_type": "experience", "entity_id": "bleu-rossignol-founder", "field": "responsibilities"},
-        {"entity_type": "experience", "entity_id": "sergio-rossi-paris", "field": "mission"}
+        {"entity_type": "experience", "entity_id": "sergio-rossi-paris", "field": "mission"},
+        {"entity_type": "knowledge-fact", "entity_id": "delia-personalized-client-support-skill", "field": "details"}
       ]
     },
     {

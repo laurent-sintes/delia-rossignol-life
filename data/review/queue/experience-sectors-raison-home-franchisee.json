@@ -1,0 +1,39 @@
+{
+  "application": {
+    "applied_at": "2026-07-21T16:12:20+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/raison-home-franchisee.json"
+  },
+  "classification": "inference",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-21T16:12:09+00:00",
+      "from": "pending",
+      "note": "Validation explicite de la normalisation sectorielle dans Codex le 21 juillet 2026 ; rattachements conservateurs fondés sur les expériences validées.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-experience-sectors-raison-home-franchisee-2026-07-21",
+  "proposed_value": [
+    "agencement-et-amenagement-interieur",
+    "cuisine-et-mobilier-sur-mesure",
+    "commerce-et-distribution"
+  ],
+  "source": {
+    "evidence": "raison-home-franchisee → agencement et aménagement intérieur ; cuisine et mobilier sur mesure ; commerce et distribution",
+    "id": "src-7cfae887f36b6c4d",
+    "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P03"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "raison-home-franchisee",
+    "entity_type": "experience",
+    "field": "industry_sector_ids"
+  },
+  "validated_value": [
+    "agencement-et-amenagement-interieur",
+    "cuisine-et-mobilier-sur-mesure",
+    "commerce-et-distribution"
+  ]
+}

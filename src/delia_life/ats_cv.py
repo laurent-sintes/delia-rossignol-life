@@ -88,6 +88,13 @@ ATS_VARIANTS = (
         filename_stem="cv-delia-rossignol-ats-gestion-administrative",
         required_keywords=("Gestion administrative", "facturation", "Coordination de projets", "fournisseurs", "contrats"),
     ),
+    ATSCVVariant(
+        id="luxe-mode-relation-client",
+        label="Luxe, mode & relation client",
+        description="Vente-conseil, accompagnement personnalisé et clientèles nationales et internationales.",
+        filename_stem="cv-delia-rossignol-ats-luxe-mode-relation-client",
+        required_keywords=("luxe", "mode", "prêt-à-porter", "accompagnement personnalisé", "clientèle"),
+    ),
 )
 
 
@@ -116,6 +123,8 @@ def load_ats_strategy(root: Path, variant_id: str) -> dict[str, Any]:
     for key in ("strategy_id", "target_title", "profile_summary", "skill_ids"):
         target_key = "id" if key == "strategy_id" else key
         result[target_key] = copy.deepcopy(overlay[key])
+    if "profile_summary_evidence" in overlay:
+        result["profile_summary_evidence"] = copy.deepcopy(overlay["profile_summary_evidence"])
     experiences = {str(item["entity_id"]): item for item in result["experiences"]}
     for override in overlay["experience_overrides"]:
         entity_id = str(override["entity_id"])
@@ -344,6 +353,7 @@ def compose_ats_cv(root: Path, template: dict[str, Any], strategy: dict[str, Any
         raise ValidationError("ATS CV profile exceeds template word limit")
     resolver = KnowledgeResolver(root.resolve())
     name, email, phone, profile_evidence = _profile(resolver, strategy)
+    summary_evidence = resolver.evidence_for(strategy.get("profile_summary_evidence", []))
     skills, skill_evidence = _skills(root, resolver, strategy, int(rules["key_skills_max"]))
     experiences = _experiences(
         resolver,
@@ -362,6 +372,7 @@ def compose_ats_cv(root: Path, template: dict[str, Any], strategy: dict[str, Any
     evidence = tuple(
         (
             *profile_evidence,
+            *summary_evidence,
             *skill_evidence,
             *language_evidence,
             *(reference for item in experiences for reference in item.evidence),

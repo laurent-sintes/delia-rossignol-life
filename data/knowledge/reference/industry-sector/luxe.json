@@ -1,0 +1,29 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-21T16:12:15+00:00",
+          "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P02",
+          "proposal_id": "proposal-industry-sector-luxe-2026-07-21",
+          "source_id": "src-7cfae887f36b6c4d"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "luxe",
+          "maison de luxe",
+          "produits de luxe"
+        ],
+        "classification": "delia-career-v1",
+        "code": "luxe",
+        "name": "Luxe",
+        "parent_id": "commerce-et-distribution",
+        "source_label": "luxe"
+      }
+    }
+  },
+  "id": "luxe",
+  "type": "industry-sector",
+  "updated_at": "2026-07-21T16:12:15+00:00"
+}

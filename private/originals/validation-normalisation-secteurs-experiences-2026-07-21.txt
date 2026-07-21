@@ -1,0 +1,41 @@
+# Validation — normalisation sectorielle des expériences
+
+Date : 2026-07-21
+Validateur : Laurent Sintes
+
+## P01 — Décision
+
+Les expériences validées de Délia doivent être associées à des secteurs normalisés afin que le moteur rapproche automatiquement les prérequis sectoriels et leur durée. L'utilisateur a notamment confirmé que les expériences Promod et Sergio Rossi doivent être reconnues dans le champ de la mode / du prêt-à-porter.
+
+## P02 — Référentiel normalisé
+
+- `agencement-et-amenagement-interieur` : agencement, aménagement intérieur, conception d'intérieurs.
+- `cuisine-et-mobilier-sur-mesure` : cuisines, dressings et mobilier sur mesure.
+- `commerce-et-distribution` : vente au détail, boutique, distribution.
+- `mode-et-pret-a-porter` : mode, prêt-à-porter, chaussures et accessoires de mode.
+- `luxe` : maisons et produits de luxe.
+- `cosmetique` : cosmétique, beauté et parfumerie.
+- `immobilier` : transaction et services immobiliers.
+- `restauration` : restaurant, brasserie et exploitation de restauration.
+- `petite-enfance` : accueil collectif et structures de petite enfance.
+- `education-et-vie-associative` : associations liées à l'école et aux parents d'élèves.
+- `economie-sociale-et-associative` : gouvernance et gestion d'organisations associatives.
+
+## P03 — Associations validées
+
+- `bleu-rossignol-founder` → agencement et aménagement intérieur ; commerce et distribution.
+- `cuisinella-sainte-eulalie` → agencement et aménagement intérieur ; cuisine et mobilier sur mesure ; commerce et distribution.
+- `raison-home-franchisee` → agencement et aménagement intérieur ; cuisine et mobilier sur mesure ; commerce et distribution.
+- `era-entre-deux-mers` → immobilier.
+- `restaurant-la-maison` → restauration.
+- `restaurant-le-manoir` → restauration.
+- `promod-bordeaux` → mode et prêt-à-porter ; commerce et distribution.
+- `sergio-rossi-paris` → mode et prêt-à-porter ; luxe ; commerce et distribution.
+- `prada-paris` → mode et prêt-à-porter ; luxe ; commerce et distribution.
+- `loreal-luxury-products` → cosmétique ; luxe.
+- `cadet-roussel-president` → petite enfance ; économie sociale et associative.
+- `tresor-des-pirates-treasurer` → éducation et vie associative ; économie sociale et associative.
+
+## P04 — Calcul des durées
+
+Le calcul automatique additionne les mois couverts par les périodes validées avec une précision au mois ou au jour. Les périodes qui se chevauchent dans un même secteur ne sont comptées qu'une fois. Une chronologie connue seulement à l'année reste associée au secteur mais n'alimente pas automatiquement un seuil de durée, afin de ne pas inventer de mois.

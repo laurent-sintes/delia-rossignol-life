@@ -1,0 +1,41 @@
+{
+  "application": {
+    "applied_at": "2026-07-21T15:53:16+00:00",
+    "knowledge_path": "data/knowledge/entities/knowledge-fact/delia-amf-certification-absent.json"
+  },
+  "classification": "fact",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-21T15:53:04+00:00",
+      "from": "pending",
+      "note": "Validation explicite par l'utilisateur le 21 juillet 2026 : Délia ne possède pas la certification AMF.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-amf-certification-absent-2026-07-21",
+  "proposed_value": {
+    "credential_id": "certification-amf",
+    "dimension": "certification",
+    "status": "absent",
+    "subject_id": "delia-rossignol"
+  },
+  "source": {
+    "evidence": "Délia ne possède pas la certification AMF.",
+    "id": "src-73fd74299d1e26be",
+    "locator": "validation-prerequis-et-mode-delia-2026-07-21.txt#P01"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-amf-certification-absent",
+    "entity_type": "knowledge-fact",
+    "field": "details"
+  },
+  "validated_value": {
+    "credential_id": "certification-amf",
+    "dimension": "certification",
+    "status": "absent",
+    "subject_id": "delia-rossignol"
+  }
+}

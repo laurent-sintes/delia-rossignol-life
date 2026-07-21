@@ -8,6 +8,27 @@ from typing import Any
 import yaml  # type: ignore[import-untyped]
 
 COMMAND_PATTERN = re.compile(r"python\s+scripts/(?P<script>delia_life|repo_flow)\.py\s+(?P<command>[a-z][a-z0-9-]*)")
+SKILL_REFERENCE_PATTERN = re.compile(r"\$([a-z][a-z0-9-]+)")
+REQUIRED_SKILL_SNIPPETS = {
+    "ingest-delia-knowledge": ("review-content",),
+    "manage-delia-templates": ("review-content",),
+    "match-delia-offers": ("review-operational",),
+    "manage-delia-offer-scans": (
+        "revalidation_queue",
+        "--scan-manifest",
+        "--covered-query-family",
+        "--covered-priority-sector",
+    ),
+    "search-delia-offers": (
+        "credential_id",
+        "revalidation_queue",
+        "--scan-manifest",
+        "--covered-query-family",
+        "--covered-priority-sector",
+        "review-operational",
+    ),
+    "share-delia-offer-selection": ("finalization_allowed: false", "--limit", "100", "review-operational"),
+}
 
 
 def _parser_commands(path: Path) -> set[str]:
@@ -44,6 +65,7 @@ def validate_skill_catalog(root: Path) -> dict[str, Any]:
     }
     errors: list[str] = []
     skill_names: list[str] = []
+    skill_bodies: dict[str, tuple[Path, str]] = {}
     for skill_file in sorted(skills_root.glob("*/SKILL.md")):
         folder_name = skill_file.parent.name
         try:
@@ -62,6 +84,7 @@ def validate_skill_catalog(root: Path) -> dict[str, Any]:
             errors.append(f"{skill_file.relative_to(root)}: description is required")
         if isinstance(name, str):
             skill_names.append(name)
+            skill_bodies[name] = (skill_file, body)
         for match in COMMAND_PATTERN.finditer(body):
             script = match.group("script")
             command = match.group("command")
@@ -70,6 +93,18 @@ def validate_skill_catalog(root: Path) -> dict[str, Any]:
     duplicates = sorted({name for name in skill_names if skill_names.count(name) > 1})
     if duplicates:
         errors.append(f"duplicate skill names: {duplicates}")
+    known_skills = set(skill_names)
+    for name, (skill_file, body) in skill_bodies.items():
+        for reference in SKILL_REFERENCE_PATTERN.findall(body):
+            if reference not in known_skills:
+                errors.append(f"{skill_file.relative_to(root)}: unknown skill reference ${reference}")
+        for snippet in REQUIRED_SKILL_SNIPPETS.get(name, ()):
+            if snippet not in body:
+                errors.append(f"{skill_file.relative_to(root)}: required workflow marker is missing: {snippet}")
+        if name in {"manage-delia-offer-scans", "search-delia-offers", "share-delia-offer-selection"} and re.search(
+            r"(?:limite|plafond|max(?:imum)?)\D{0,12}50\b", body, re.IGNORECASE
+        ):
+            errors.append(f"{skill_file.relative_to(root)}: obsolete 50-result limit")
     return {
         "ok": not errors,
         "skills": len(skill_names),

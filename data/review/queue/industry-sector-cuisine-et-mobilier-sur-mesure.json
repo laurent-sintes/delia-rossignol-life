@@ -1,0 +1,53 @@
+{
+  "application": {
+    "applied_at": "2026-07-21T16:12:13+00:00",
+    "knowledge_path": "data/knowledge/reference/industry-sector/cuisine-et-mobilier-sur-mesure.json"
+  },
+  "classification": "inference",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-21T16:11:38+00:00",
+      "from": "pending",
+      "note": "Validation explicite de la normalisation sectorielle dans Codex le 21 juillet 2026 ; rattachements conservateurs fondés sur les expériences validées.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-industry-sector-cuisine-et-mobilier-sur-mesure-2026-07-21",
+  "proposed_value": {
+    "aliases": [
+      "cuisine",
+      "dressing",
+      "mobilier sur mesure"
+    ],
+    "classification": "delia-career-v1",
+    "code": "cuisine-et-mobilier-sur-mesure",
+    "name": "Cuisine et mobilier sur mesure",
+    "parent_id": "agencement-et-amenagement-interieur",
+    "source_label": "cuisine et mobilier sur mesure"
+  },
+  "source": {
+    "evidence": "cuisines, dressings et mobilier sur mesure",
+    "id": "src-7cfae887f36b6c4d",
+    "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P02"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "cuisine-et-mobilier-sur-mesure",
+    "entity_type": "industry-sector",
+    "field": "details"
+  },
+  "validated_value": {
+    "aliases": [
+      "cuisine",
+      "dressing",
+      "mobilier sur mesure"
+    ],
+    "classification": "delia-career-v1",
+    "code": "cuisine-et-mobilier-sur-mesure",
+    "name": "Cuisine et mobilier sur mesure",
+    "parent_id": "agencement-et-amenagement-interieur",
+    "source_label": "cuisine et mobilier sur mesure"
+  }
+}

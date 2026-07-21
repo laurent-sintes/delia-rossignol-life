@@ -1,0 +1,40 @@
+{
+  "application": {
+    "applied_at": "2026-07-21T15:53:19+00:00",
+    "knowledge_path": "data/knowledge/entities/person/delia-rossignol.json"
+  },
+  "classification": "fact",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-21T15:53:07+00:00",
+      "from": "pending",
+      "note": "Validation explicite par l'utilisateur le 21 juillet 2026 : la mode est un centre d'intérêt de Délia.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-interests-mode-enriched-2026-07-21",
+  "proposed_value": [
+    "chant",
+    "voyages",
+    "mode"
+  ],
+  "replaces_proposal_id": "proposal-delia-q55-interests",
+  "source": {
+    "evidence": "La mode est un centre d'intérêt personnel de Délia.",
+    "id": "src-73fd74299d1e26be",
+    "locator": "validation-prerequis-et-mode-delia-2026-07-21.txt#P04"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-rossignol",
+    "entity_type": "person",
+    "field": "interests"
+  },
+  "validated_value": [
+    "chant",
+    "voyages",
+    "mode"
+  ]
+}

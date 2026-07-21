@@ -16,6 +16,21 @@
         "title": "franchisée"
       }
     },
+    "industry_sector_ids": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-21T16:12:20+00:00",
+          "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P03",
+          "proposal_id": "proposal-experience-sectors-raison-home-franchisee-2026-07-21",
+          "source_id": "src-7cfae887f36b6c4d"
+        }
+      ],
+      "value": [
+        "agencement-et-amenagement-interieur",
+        "cuisine-et-mobilier-sur-mesure",
+        "commerce-et-distribution"
+      ]
+    },
     "job_role_ids": {
       "provenance": [
         {
@@ -77,5 +92,5 @@
   },
   "id": "raison-home-franchisee",
   "type": "experience",
-  "updated_at": "2026-07-20T07:46:45+00:00"
+  "updated_at": "2026-07-21T16:12:20+00:00"
 }

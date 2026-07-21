@@ -1,0 +1,20 @@
+# Validation utilisateur — prérequis et intérêt pour la mode
+
+Date : 2026-07-21
+Validateur : Laurent Sintes
+
+## P01 — Certification AMF
+
+Délia ne possède pas la certification AMF. Une annonce qui exige obligatoirement cette certification ne doit pas être présentée.
+
+## P02 — Expérience banque, assurance ou finance
+
+Délia ne possède pas de première expérience comparable en banque, assurance ou finance. Ce prérequis est non satisfait pour l'offre Filhet-Allard de gestionnaire back-office des déclarations mensuelles.
+
+## P03 — Accompagnement personnalisé
+
+L'accompagnement personnalisé est une compétence acquise par Délia au cours de ses expériences dans le luxe et dans l'aménagement intérieur.
+
+## P04 — Mode
+
+La mode est un centre d'intérêt personnel de Délia. Cet intérêt contribue à expliquer son attrait pour le luxe et pour l'aménagement intérieur, deux univers qui évoluent avec les tendances.

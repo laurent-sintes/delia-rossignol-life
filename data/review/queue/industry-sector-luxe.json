@@ -1,0 +1,53 @@
+{
+  "application": {
+    "applied_at": "2026-07-21T16:12:15+00:00",
+    "knowledge_path": "data/knowledge/reference/industry-sector/luxe.json"
+  },
+  "classification": "inference",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-21T16:11:40+00:00",
+      "from": "pending",
+      "note": "Validation explicite de la normalisation sectorielle dans Codex le 21 juillet 2026 ; rattachements conservateurs fondés sur les expériences validées.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-industry-sector-luxe-2026-07-21",
+  "proposed_value": {
+    "aliases": [
+      "luxe",
+      "maison de luxe",
+      "produits de luxe"
+    ],
+    "classification": "delia-career-v1",
+    "code": "luxe",
+    "name": "Luxe",
+    "parent_id": "commerce-et-distribution",
+    "source_label": "luxe"
+  },
+  "source": {
+    "evidence": "maisons et produits de luxe",
+    "id": "src-7cfae887f36b6c4d",
+    "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P02"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "luxe",
+    "entity_type": "industry-sector",
+    "field": "details"
+  },
+  "validated_value": {
+    "aliases": [
+      "luxe",
+      "maison de luxe",
+      "produits de luxe"
+    ],
+    "classification": "delia-career-v1",
+    "code": "luxe",
+    "name": "Luxe",
+    "parent_id": "commerce-et-distribution",
+    "source_label": "luxe"
+  }
+}

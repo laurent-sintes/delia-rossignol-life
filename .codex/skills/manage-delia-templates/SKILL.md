@@ -11,7 +11,7 @@ description: Créer, modifier, cataloguer, contrôler ou sélectionner des templ
 2. Garder les données personnelles hors du template.
 3. Créer un dossier versionné sous `templates/cv/<id>/` ou `templates/cover-letter/<id>/`.
 4. Décrire le modèle dans `template.json` : formats, ATS, secteurs, rôles, séniorité, pays et version.
-5. Exécuter `python scripts/delia_life.py check` après toute modification.
+5. Exécuter `python scripts/repo_flow.py review-content` après toute modification et conserver l’aperçu local actif.
 6. Pour une offre, formaliser le contexte en JSON puis exécuter `python scripts/delia_life.py select-template <contexte> <templates...>`.
 7. Présenter le classement et ses raisons. Laisser l'utilisateur imposer un autre modèle.
 8. Produire et inspecter un aperçu avant de valider un nouveau rendu.

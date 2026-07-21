@@ -20,6 +20,21 @@
         }
       }
     },
+    "industry_sector_ids": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-21T16:12:18+00:00",
+          "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P03",
+          "proposal_id": "proposal-experience-sectors-cuisinella-sainte-eulalie-2026-07-21",
+          "source_id": "src-7cfae887f36b6c4d"
+        }
+      ],
+      "value": [
+        "agencement-et-amenagement-interieur",
+        "cuisine-et-mobilier-sur-mesure",
+        "commerce-et-distribution"
+      ]
+    },
     "mission": {
       "provenance": [
         {
@@ -64,5 +79,5 @@
   },
   "id": "cuisinella-sainte-eulalie",
   "type": "experience",
-  "updated_at": "2026-07-19T18:38:52+00:00"
+  "updated_at": "2026-07-21T16:12:18+00:00"
 }

@@ -109,6 +109,8 @@ class DocumentTests(unittest.TestCase):
                 "standard-cv-ats-commerce-vente-docx",
                 "standard-cv-ats-gestion-administrative-pdf",
                 "standard-cv-ats-gestion-administrative-docx",
+                "standard-cv-ats-luxe-mode-relation-client-pdf",
+                "standard-cv-ats-luxe-mode-relation-client-docx",
             ],
         )
         for document in result["documents"]:
@@ -180,6 +182,7 @@ class DocumentTests(unittest.TestCase):
             "relation-client": "Relation et service client",
             "commerce-vente": "Vente-conseil et négociation",
             "gestion-administrative": "Gestion administrative",
+            "luxe-mode-relation-client": "Relation et service client",
         }
         for variant in ATS_VARIANTS:
             strategy = load_ats_strategy(ROOT, variant.id)

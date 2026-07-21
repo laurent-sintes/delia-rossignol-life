@@ -1,0 +1,23 @@
+{
+  "id": "soeur-responsable-corner-bordeaux-2026",
+  "title": "Responsable de Corner H/F",
+  "employer": "Soeur",
+  "source_url": "https://fr.fashionjobs.com/ville/Bordeaux.html",
+  "source_site": "fashionjobs.com",
+  "source_kind": "specialized",
+  "verification_status": "active",
+  "published_at": "2026-07-01",
+  "captured_at": "2026-07-21T17:15:00+02:00",
+  "last_verified_at": "2026-07-21T17:15:00+02:00",
+  "summary": "Piloter un corner Soeur à Bordeaux, animer l'équipe de vente, développer le chiffre d'affaires, accueillir et fidéliser la clientèle, faire respecter l'identité visuelle et les procédures merchandising, puis garantir l'organisation quotidienne et la bonne gestion des stocks du point de vente.",
+  "location_label": "Bordeaux",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": ["mode premium", "commerce et distribution"],
+  "functional_domains": ["commerce et vente", "conseil et relation client", "gestion administrative"],
+  "compensation": {},
+  "required_skills": ["management retail", "vente", "fidélisation", "stocks", "merchandising"],
+  "preferred_skills": ["mode", "management d'équipe"],
+  "conditions": {"work_mode": "onsite", "hours_per_week": 40},
+  "prerequisites": [{"id":"experience-manager-deux-ans","kind":"minimum_experience","description":"Au moins deux ans d'expérience comme manager","mandatory":true,"minimum_years":2,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"Deux années comme manager retail ne sont pas démontrées dans les connaissances validées.","evidence":{"locator":"fashionjobs.com/ville/Bordeaux.html#responsable-corner-soeur","excerpt":"Expérience en tant que manager d'au moins deux ans."}}]
+}

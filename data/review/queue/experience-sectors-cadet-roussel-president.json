@@ -1,0 +1,37 @@
+{
+  "application": {
+    "applied_at": "2026-07-21T16:12:17+00:00",
+    "knowledge_path": "data/knowledge/entities/experience/cadet-roussel-president.json"
+  },
+  "classification": "inference",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-21T16:12:05+00:00",
+      "from": "pending",
+      "note": "Validation explicite de la normalisation sectorielle dans Codex le 21 juillet 2026 ; rattachements conservateurs fondés sur les expériences validées.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-experience-sectors-cadet-roussel-president-2026-07-21",
+  "proposed_value": [
+    "petite-enfance",
+    "economie-sociale-et-associative"
+  ],
+  "source": {
+    "evidence": "cadet-roussel-president → petite enfance ; économie sociale et associative",
+    "id": "src-7cfae887f36b6c4d",
+    "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P03"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "cadet-roussel-president",
+    "entity_type": "experience",
+    "field": "industry_sector_ids"
+  },
+  "validated_value": [
+    "petite-enfance",
+    "economie-sociale-et-associative"
+  ]
+}

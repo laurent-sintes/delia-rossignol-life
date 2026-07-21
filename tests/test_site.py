@@ -14,6 +14,7 @@ TEST_TMP = Path(gettempdir()) / "delia-rossignol-life-tests"
 TEST_TMP.mkdir(exist_ok=True)
 
 from delia_life.ats_cv import ATS_VARIANTS
+from delia_life.core import load_json
 from delia_life.site_audit import audit_site
 from delia_life.site_builder import (
     _cleanup_stale_site_builds,
@@ -101,6 +102,27 @@ class SiteTests(unittest.TestCase):
                 {"fields": {"metrics": {"value": {"count": 8}}}},
                 {"title": "Carte", "fields": [{"path": "fields.metrics.value", "label": "Métrique", "presentation": "badge"}]},
             )
+
+    def test_reference_badges_publish_validated_labels_instead_of_identifiers(self) -> None:
+        document = load_json(ROOT / "data" / "knowledge" / "entities" / "experience" / "promod-bordeaux.json")
+        rendered = render_knowledge_card(
+            document,
+            {
+                "title": "Promod",
+                "fields": [
+                    {
+                        "path": "fields.industry_sector_ids.value",
+                        "label": "Secteurs",
+                        "presentation": "badge",
+                        "reference_type": "industry-sector",
+                    }
+                ],
+            },
+            ROOT,
+        )
+        self.assertIn("Mode et prêt-à-porter", rendered)
+        self.assertIn("Commerce et distribution", rendered)
+        self.assertNotIn("mode-et-pret-a-porter", rendered)
 
     def test_editorial_knowledge_card_separates_summary_and_detail(self) -> None:
         rendered = render_knowledge_card(
@@ -203,6 +225,8 @@ class SiteTests(unittest.TestCase):
         self.assertIn("Création et développement d’une activité indépendante", parcours)
         self.assertIn("Développement du site", parcours)
         self.assertIn("Suivi commercial via Google Analytics", parcours)
+        self.assertIn("Mode et prêt-à-porter", parcours)
+        self.assertNotIn("mode-et-pret-a-porter", parcours)
         self.assertEqual(parcours.count("Responsabilités exercées dans les deux contextes"), 1)
         self.assertLess(parcours.index("Raison Home"), parcours.index("BLEU ROSSIGNOL, PERFECTEUR D’INTÉRIEUR"))
         self.assertNotIn("tel:", homepage)

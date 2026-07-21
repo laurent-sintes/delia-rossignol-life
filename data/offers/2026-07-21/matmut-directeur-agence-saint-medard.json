@@ -1,0 +1,59 @@
+{
+  "id": "matmut-directeur-agence-saint-medard-10523",
+  "title": "Directeur(trice) d'Agence - Saint-Médard-en-Jalles",
+  "employer": "Matmut",
+  "source_url": "https://recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx",
+  "source_site": "recrutement.matmut.fr",
+  "source_kind": "direct_employer",
+  "verification_status": "active",
+  "published_at": null,
+  "captured_at": "2026-07-21T16:30:00+02:00",
+  "last_verified_at": "2026-07-21T16:30:00+02:00",
+  "summary": "Piloter une agence Matmut à Saint-Médard-en-Jalles, animer et accompagner l'équipe de conseillers, suivre l'activité et la performance du portefeuille et garantir une expérience sociétaire de proximité.",
+  "location_label": "Saint-Médard-en-Jalles",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": ["banque et assurance"],
+  "functional_domains": ["conseil et relation client", "commerce et vente", "gestion administrative"],
+  "compensation": {"minimum": 38500, "currency": "EUR", "period": "year"},
+  "required_skills": ["management d'équipe", "pilotage d'activité", "développement de portefeuille", "relation client", "expérience assurantielle"],
+  "preferred_skills": ["accompagnement individuel", "analyse de performance", "développement commercial"],
+  "conditions": {"work_mode": "onsite", "hours": "unknown"},
+  "prerequisites": [
+    {
+      "id": "niveau-bac3",
+      "kind": "qualification",
+      "description": "Niveau bac+3",
+      "mandatory": true,
+      "profile_status": "met",
+      "profile_evidence_ids": ["credential:esgci-marketing-commerce-2003"],
+      "assessment_note": "Le diplôme validé de niveau bac+4 couvre le niveau demandé.",
+      "evidence": {"locator": "recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx#criteres", "excerpt": "Niveau d'études minimum requis : bac+3."}
+    },
+    {
+      "id": "experience-assurantielle",
+      "kind": "sector_experience",
+      "description": "Expérience préalable dans le domaine assurantiel",
+      "mandatory": true,
+      "industry_sector_ids": ["banque-et-assurance"],
+      "profile_status": "not_demonstrated",
+      "profile_evidence_ids": [],
+      "assessment_note": "Aucune expérience assurantielle n'est démontrée dans les connaissances validées ; cela ne prouve pas qu'elle est absente.",
+      "evidence": {"locator": "recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx#profil", "excerpt": "Expérience dans le domaine assurantiel demandée."}
+    },
+    {
+      "id": "aptitudes-manageriales-commerciales",
+      "kind": "prior_role",
+      "description": "Aptitudes managériales et commerciales",
+      "mandatory": true,
+      "profile_status": "met",
+      "profile_evidence_ids": ["skill:management-equipe", "skill:vente-negociation"],
+      "assessment_note": "Le management d'équipe et la vente-conseil sont démontrés dans les connaissances validées.",
+      "evidence": {"locator": "recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx#profil", "excerpt": "Aptitudes managériales et commerciales demandées."}
+    }
+  ],
+  "evidence": [
+    {"field": "mission", "locator": "recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx#description", "excerpt": "Animer une équipe de conseillers et garantir le développement et la performance du portefeuille de l'agence."},
+    {"field": "compensation", "locator": "recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx#salaire", "excerpt": "Salaire à partir de 38 500 euros brut annuel."}
+  ]
+}

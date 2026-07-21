@@ -1,0 +1,57 @@
+{
+  "application": {
+    "applied_at": "2026-07-21T15:53:18+00:00",
+    "knowledge_path": "data/knowledge/entities/knowledge-fact/delia-personalized-client-support-skill.json"
+  },
+  "classification": "fact",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-21T15:53:06+00:00",
+      "from": "pending",
+      "note": "Validation explicite par l'utilisateur le 21 juillet 2026 : accompagnement personnalisé acquis dans le luxe et l'aménagement intérieur.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-personalized-client-support-skill-2026-07-21",
+  "proposed_value": {
+    "dimension": "skill",
+    "evidence_experience_ids": [
+      "prada-paris",
+      "sergio-rossi-paris",
+      "cuisinella-sainte-eulalie",
+      "raison-home-franchisee",
+      "bleu-rossignol-founder"
+    ],
+    "skill_id": "relation-client",
+    "status": "demonstrated",
+    "subject_id": "delia-rossignol",
+    "validated_keyword": "accompagnement personnalisé"
+  },
+  "source": {
+    "evidence": "L'accompagnement personnalisé est une compétence acquise par Délia au cours de ses expériences dans le luxe et dans l'aménagement intérieur.",
+    "id": "src-73fd74299d1e26be",
+    "locator": "validation-prerequis-et-mode-delia-2026-07-21.txt#P03"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-personalized-client-support-skill",
+    "entity_type": "knowledge-fact",
+    "field": "details"
+  },
+  "validated_value": {
+    "dimension": "skill",
+    "evidence_experience_ids": [
+      "prada-paris",
+      "sergio-rossi-paris",
+      "cuisinella-sainte-eulalie",
+      "raison-home-franchisee",
+      "bleu-rossignol-founder"
+    ],
+    "skill_id": "relation-client",
+    "status": "demonstrated",
+    "subject_id": "delia-rossignol",
+    "validated_keyword": "accompagnement personnalisé"
+  }
+}

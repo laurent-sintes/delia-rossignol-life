@@ -1,0 +1,31 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-21T16:12:12+00:00",
+          "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P02",
+          "proposal_id": "proposal-industry-sector-commerce-et-distribution-2026-07-21",
+          "source_id": "src-7cfae887f36b6c4d"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "commerce",
+          "vente au détail",
+          "retail",
+          "distribution",
+          "boutique"
+        ],
+        "classification": "delia-career-v1",
+        "code": "commerce-et-distribution",
+        "name": "Commerce et distribution",
+        "parent_id": null,
+        "source_label": "commerce et distribution"
+      }
+    }
+  },
+  "id": "commerce-et-distribution",
+  "type": "industry-sector",
+  "updated_at": "2026-07-21T16:12:12+00:00"
+}

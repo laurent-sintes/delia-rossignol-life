@@ -1,0 +1,36 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-21T15:53:17+00:00",
+          "locator": "validation-prerequis-et-mode-delia-2026-07-21.txt#P02",
+          "proposal_id": "proposal-delia-bank-insurance-finance-experience-absent-2026-07-21",
+          "source_id": "src-73fd74299d1e26be"
+        },
+        {
+          "applied_at": "2026-07-21T16:16:30+00:00",
+          "locator": "validation-prerequis-et-mode-delia-2026-07-21.txt#P02",
+          "proposal_id": "proposal-delia-bank-insurance-finance-experience-absent-normalized-2026-07-21",
+          "source_id": "src-73fd74299d1e26be"
+        }
+      ],
+      "value": {
+        "dimension": "sector_experience",
+        "industry_sector_ids": [
+          "banque-et-assurance"
+        ],
+        "sectors": [
+          "banque",
+          "assurance",
+          "finance"
+        ],
+        "status": "absent",
+        "subject_id": "delia-rossignol"
+      }
+    }
+  },
+  "id": "delia-bank-insurance-finance-experience-absent",
+  "type": "knowledge-fact",
+  "updated_at": "2026-07-21T16:16:30+00:00"
+}

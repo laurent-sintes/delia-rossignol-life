@@ -1,0 +1,5 @@
+Validation utilisateur du 21 juillet 2026
+
+Le profil de Délia est complet en termes de diplômes.
+
+Conséquence validée pour la recherche d'offres : lorsqu'une annonce exige obligatoirement un diplôme absent du référentiel validé de Délia, ce prérequis doit être considéré comme non satisfait et l'annonce doit être exclue du classement des candidatures.

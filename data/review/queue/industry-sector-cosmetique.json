@@ -1,0 +1,53 @@
+{
+  "application": {
+    "applied_at": "2026-07-21T16:12:12+00:00",
+    "knowledge_path": "data/knowledge/reference/industry-sector/cosmetique.json"
+  },
+  "classification": "inference",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-21T16:11:38+00:00",
+      "from": "pending",
+      "note": "Validation explicite de la normalisation sectorielle dans Codex le 21 juillet 2026 ; rattachements conservateurs fondés sur les expériences validées.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-industry-sector-cosmetique-2026-07-21",
+  "proposed_value": {
+    "aliases": [
+      "cosmétique",
+      "beauté",
+      "parfumerie"
+    ],
+    "classification": "delia-career-v1",
+    "code": "cosmetique",
+    "name": "Cosmétique",
+    "parent_id": "commerce-et-distribution",
+    "source_label": "cosmétique"
+  },
+  "source": {
+    "evidence": "cosmétique, beauté et parfumerie",
+    "id": "src-7cfae887f36b6c4d",
+    "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P02"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "cosmetique",
+    "entity_type": "industry-sector",
+    "field": "details"
+  },
+  "validated_value": {
+    "aliases": [
+      "cosmétique",
+      "beauté",
+      "parfumerie"
+    ],
+    "classification": "delia-career-v1",
+    "code": "cosmetique",
+    "name": "Cosmétique",
+    "parent_id": "commerce-et-distribution",
+    "source_label": "cosmétique"
+  }
+}

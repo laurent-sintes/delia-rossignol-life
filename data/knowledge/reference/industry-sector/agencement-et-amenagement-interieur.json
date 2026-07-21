@@ -1,0 +1,29 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-21T16:12:11+00:00",
+          "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P02",
+          "proposal_id": "proposal-industry-sector-agencement-et-amenagement-interieur-2026-07-21",
+          "source_id": "src-7cfae887f36b6c4d"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "agencement",
+          "aménagement intérieur",
+          "conception d'intérieurs"
+        ],
+        "classification": "delia-career-v1",
+        "code": "agencement-et-amenagement-interieur",
+        "name": "Agencement et aménagement intérieur",
+        "parent_id": null,
+        "source_label": "agencement et aménagement intérieur"
+      }
+    }
+  },
+  "id": "agencement-et-amenagement-interieur",
+  "type": "industry-sector",
+  "updated_at": "2026-07-21T16:12:11+00:00"
+}

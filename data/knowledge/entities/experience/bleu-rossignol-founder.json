@@ -11,6 +11,20 @@
       ],
       "value": "Fermeture dans un contexte de crise du bâtiment, avec un volume de projets et une rémunération insuffisants, malgré un intérêt confirmé pour le métier."
     },
+    "industry_sector_ids": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-21T16:12:17+00:00",
+          "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P03",
+          "proposal_id": "proposal-experience-sectors-bleu-rossignol-founder-2026-07-21",
+          "source_id": "src-7cfae887f36b6c4d"
+        }
+      ],
+      "value": [
+        "agencement-et-amenagement-interieur",
+        "commerce-et-distribution"
+      ]
+    },
     "job_role_ids": {
       "provenance": [
         {
@@ -185,5 +199,5 @@
   },
   "id": "bleu-rossignol-founder",
   "type": "experience",
-  "updated_at": "2026-07-20T07:46:47+00:00"
+  "updated_at": "2026-07-21T16:12:17+00:00"
 }

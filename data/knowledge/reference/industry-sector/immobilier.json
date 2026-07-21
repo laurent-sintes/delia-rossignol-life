@@ -1,0 +1,29 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-21T16:12:14+00:00",
+          "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P02",
+          "proposal_id": "proposal-industry-sector-immobilier-2026-07-21",
+          "source_id": "src-7cfae887f36b6c4d"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "immobilier",
+          "transaction immobilière",
+          "services immobiliers"
+        ],
+        "classification": "delia-career-v1",
+        "code": "immobilier",
+        "name": "Immobilier",
+        "parent_id": null,
+        "source_label": "immobilier"
+      }
+    }
+  },
+  "id": "immobilier",
+  "type": "industry-sector",
+  "updated_at": "2026-07-21T16:12:14+00:00"
+}

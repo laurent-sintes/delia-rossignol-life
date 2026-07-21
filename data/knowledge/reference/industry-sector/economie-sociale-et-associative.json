@@ -1,0 +1,29 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-21T16:12:13+00:00",
+          "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P02",
+          "proposal_id": "proposal-industry-sector-economie-sociale-et-associative-2026-07-21",
+          "source_id": "src-7cfae887f36b6c4d"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "économie sociale",
+          "association",
+          "gouvernance associative"
+        ],
+        "classification": "delia-career-v1",
+        "code": "economie-sociale-et-associative",
+        "name": "Économie sociale et associative",
+        "parent_id": null,
+        "source_label": "économie sociale et associative"
+      }
+    }
+  },
+  "id": "economie-sociale-et-associative",
+  "type": "industry-sector",
+  "updated_at": "2026-07-21T16:12:13+00:00"
+}

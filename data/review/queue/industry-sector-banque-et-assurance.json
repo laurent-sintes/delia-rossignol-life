@@ -1,0 +1,55 @@
+{
+  "application": {
+    "applied_at": "2026-07-21T16:16:29+00:00",
+    "knowledge_path": "data/knowledge/reference/industry-sector/banque-et-assurance.json"
+  },
+  "classification": "inference",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-21T16:16:29+00:00",
+      "from": "pending",
+      "note": "Validation explicite de la normalisation sectorielle demandée le 21 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-industry-sector-banque-et-assurance-2026-07-21",
+  "proposed_value": {
+    "aliases": [
+      "banque",
+      "assurance",
+      "finance",
+      "courtage"
+    ],
+    "classification": "delia-career-v1",
+    "code": "banque-et-assurance",
+    "name": "Banque et assurance",
+    "parent_id": null,
+    "source_label": "banque, assurance ou finance"
+  },
+  "source": {
+    "evidence": "banque, assurance ou finance",
+    "id": "src-73fd74299d1e26be",
+    "locator": "validation-prerequis-et-mode-delia-2026-07-21.txt#P02"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "banque-et-assurance",
+    "entity_type": "industry-sector",
+    "field": "details"
+  },
+  "validated_value": {
+    "aliases": [
+      "banque",
+      "assurance",
+      "finance",
+      "courtage"
+    ],
+    "classification": "delia-career-v1",
+    "code": "banque-et-assurance",
+    "name": "Banque et assurance",
+    "parent_id": null,
+    "source_label": "banque, assurance ou finance"
+  }
+}

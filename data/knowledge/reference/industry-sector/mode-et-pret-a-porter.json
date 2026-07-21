@@ -1,0 +1,30 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-21T16:12:15+00:00",
+          "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P02",
+          "proposal_id": "proposal-industry-sector-mode-et-pret-a-porter-2026-07-21",
+          "source_id": "src-7cfae887f36b6c4d"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "mode",
+          "prêt-à-porter",
+          "chaussures de mode",
+          "accessoires de mode"
+        ],
+        "classification": "delia-career-v1",
+        "code": "mode-et-pret-a-porter",
+        "name": "Mode et prêt-à-porter",
+        "parent_id": "commerce-et-distribution",
+        "source_label": "mode et prêt-à-porter"
+      }
+    }
+  },
+  "id": "mode-et-pret-a-porter",
+  "type": "industry-sector",
+  "updated_at": "2026-07-21T16:12:15+00:00"
+}

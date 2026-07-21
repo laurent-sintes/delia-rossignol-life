@@ -1,0 +1,55 @@
+{
+  "application": {
+    "applied_at": "2026-07-21T16:12:15+00:00",
+    "knowledge_path": "data/knowledge/reference/industry-sector/mode-et-pret-a-porter.json"
+  },
+  "classification": "inference",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-21T16:11:40+00:00",
+      "from": "pending",
+      "note": "Validation explicite de la normalisation sectorielle dans Codex le 21 juillet 2026 ; rattachements conservateurs fondés sur les expériences validées.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-industry-sector-mode-et-pret-a-porter-2026-07-21",
+  "proposed_value": {
+    "aliases": [
+      "mode",
+      "prêt-à-porter",
+      "chaussures de mode",
+      "accessoires de mode"
+    ],
+    "classification": "delia-career-v1",
+    "code": "mode-et-pret-a-porter",
+    "name": "Mode et prêt-à-porter",
+    "parent_id": "commerce-et-distribution",
+    "source_label": "mode et prêt-à-porter"
+  },
+  "source": {
+    "evidence": "mode, prêt-à-porter, chaussures et accessoires de mode",
+    "id": "src-7cfae887f36b6c4d",
+    "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P02"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "mode-et-pret-a-porter",
+    "entity_type": "industry-sector",
+    "field": "details"
+  },
+  "validated_value": {
+    "aliases": [
+      "mode",
+      "prêt-à-porter",
+      "chaussures de mode",
+      "accessoires de mode"
+    ],
+    "classification": "delia-career-v1",
+    "code": "mode-et-pret-a-porter",
+    "name": "Mode et prêt-à-porter",
+    "parent_id": "commerce-et-distribution",
+    "source_label": "mode et prêt-à-porter"
+  }
+}

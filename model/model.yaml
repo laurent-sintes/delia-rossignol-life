@@ -1,4 +1,4 @@
-model_version: "1.1.6"
+model_version: "1.1.7"
 namespace: delia-career
 description: >-
   Modèle conceptuel du dossier professionnel, de l'ingestion des preuves,

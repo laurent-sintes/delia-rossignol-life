@@ -335,6 +335,13 @@ relations:
     cardinality: many_to_one
     required: false
 
+  - id: experience-in-industry-sector
+    from: experience
+    to: industry-sector
+    label: s'exerce dans
+    cardinality: many_to_many
+    required: false
+
   - id: education-at-location
     from: education
     to: location

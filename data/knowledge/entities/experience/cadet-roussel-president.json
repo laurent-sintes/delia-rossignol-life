@@ -23,6 +23,20 @@
         "title": "présidente"
       }
     },
+    "industry_sector_ids": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-21T16:12:17+00:00",
+          "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P03",
+          "proposal_id": "proposal-experience-sectors-cadet-roussel-president-2026-07-21",
+          "source_id": "src-7cfae887f36b6c4d"
+        }
+      ],
+      "value": [
+        "petite-enfance",
+        "economie-sociale-et-associative"
+      ]
+    },
     "mission": {
       "provenance": [
         {
@@ -37,5 +51,5 @@
   },
   "id": "cadet-roussel-president",
   "type": "experience",
-  "updated_at": "2026-07-19T18:23:47+00:00"
+  "updated_at": "2026-07-21T16:12:17+00:00"
 }

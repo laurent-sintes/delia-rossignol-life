@@ -1,11 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
-  "required": ["id", "result_limit", "candidate_pool_minimum", "freshness_days", "contracts", "diversity", "recommendation_bands", "functional_query_families", "location_queries", "regional_source_audit", "source_domains", "priority_sector_coverage", "source_strategy", "weights"],
+  "required": ["id", "result_limit", "candidate_pool_minimum", "candidate_pool_maximum", "active_verification_max_age_days", "freshness_days", "contracts", "diversity", "recommendation_bands", "functional_query_families", "profile_family_filters", "location_queries", "regional_source_audit", "source_domains", "priority_sector_coverage", "source_strategy", "weights"],
   "properties": {
     "id": {"type": "string", "minLength": 1},
-    "result_limit": {"type": "integer", "minimum": 1, "maximum": 50},
+    "result_limit": {"type": "integer", "minimum": 1, "maximum": 100},
     "candidate_pool_minimum": {"type": "integer", "minimum": 10},
+    "candidate_pool_maximum": {"type": "integer", "minimum": 10, "maximum": 100},
+    "active_verification_max_age_days": {"type": "integer", "minimum": 1, "maximum": 30},
     "freshness_days": {"type": "integer", "minimum": 1},
     "contracts": {
       "type": "object",
@@ -45,6 +47,24 @@
         "minItems": 1,
         "uniqueItems": true,
         "items": {"type": "string", "minLength": 1}
+      }
+    },
+    "profile_family_filters": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "decision", "strong_title_markers", "family_markers", "technical_markers", "minimum_technical_markers"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+          "label": {"type": "string", "minLength": 1},
+          "decision": {"const": "exclude"},
+          "strong_title_markers": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "family_markers": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "technical_markers": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "minimum_technical_markers": {"type": "integer", "minimum": 1}
+        },
+        "additionalProperties": false
       }
     },
     "sector_emphasis": {

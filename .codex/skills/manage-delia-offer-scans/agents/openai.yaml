@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scans d’offres de Délia"
+  short_description: "Nettoyer, scanner et envoyer les offres"
+  default_prompt: "Utilise $manage-delia-offer-scans pour lancer un scan full des offres de Délia."

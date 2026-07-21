@@ -1,5 +1,7 @@
 {
   "candidate_pool_minimum": 30,
+  "candidate_pool_maximum": 100,
+  "active_verification_max_age_days": 7,
   "contracts": {
     "acceptable": [
       "intérim"
@@ -55,13 +57,46 @@
       "suivi de projet"
     ]
   },
-  "id": "delia-offer-search-v4",
+  "id": "delia-offer-search-v5",
   "location_queries": [
     "Bordeaux",
     "Bordeaux Métropole",
     "Bordeaux et alentours"
   ],
-  "result_limit": 10,
+  "profile_family_filters": [
+    {
+      "id": "specialist-data",
+      "label": "profil spécialiste Data",
+      "decision": "exclude",
+      "strong_title_markers": [
+        "chief data officer",
+        "directeur data",
+        "directrice data",
+        "head of data",
+        "data engineer",
+        "data scientist",
+        "machine learning engineer"
+      ],
+      "family_markers": [
+        "data engineering",
+        "data science",
+        "direction data",
+        "fonction data",
+        "gouvernance des données",
+        "machine learning"
+      ],
+      "technical_markers": [
+        "databricks",
+        "machine learning",
+        "power bi",
+        "python",
+        "snowflake",
+        "sql"
+      ],
+      "minimum_technical_markers": 2
+    }
+  ],
+  "result_limit": 100,
   "recommendation_bands": {
     "priority_minimum_score": 75,
     "possible_minimum_score": 50

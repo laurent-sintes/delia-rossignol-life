@@ -157,6 +157,7 @@
               "variant": "continuity-context",
               "fields": [
                 {"path": "fields.mission.value", "label": "Contexte et mission", "presentation": "detail"},
+                {"path": "fields.industry_sector_ids.value", "label": "Secteurs", "presentation": "badge", "reference_type": "industry-sector"},
                 {"path": "fields.details.value.title", "label": "Fonction"},
                 {"path": "fields.details.value.start_date", "label": "Début"},
                 {"path": "fields.details.value.end_date", "label": "Fin"}
@@ -169,6 +170,7 @@
               "variant": "continuity-context",
               "fields": [
                 {"path": "fields.mission.value", "label": "Contexte et mission", "presentation": "detail"},
+                {"path": "fields.industry_sector_ids.value", "label": "Secteurs", "presentation": "badge", "reference_type": "industry-sector"},
                 {"path": "fields.titles.value.corporate", "label": "Fonctions"},
                 {"path": "fields.titles.value.operational", "label": "Métier"},
                 {"path": "fields.timeframe.value.start_date", "label": "Début"},
@@ -206,6 +208,7 @@
               "fields": [
                 {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
                 {"path": "fields.responsibilities.value", "label": "Responsabilités", "presentation": "detail"},
+                {"path": "fields.industry_sector_ids.value", "label": "Secteurs", "presentation": "badge", "reference_type": "industry-sector"},
                 {"path": "fields.details.value.official_title", "label": "Fonction"},
                 {"path": "fields.details.value.contract_type", "label": "Contrat", "presentation": "badge"},
                 {"path": "fields.timeframe.value.start_date", "label": "Début"},
@@ -221,6 +224,7 @@
               "fields": [
                 {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
                 {"path": "fields.responsibilities.value", "label": "Responsabilités", "presentation": "detail"},
+                {"path": "fields.industry_sector_ids.value", "label": "Secteurs", "presentation": "badge", "reference_type": "industry-sector"},
                 {"path": "fields.details.value.title", "label": "Fonction"},
                 {"path": "fields.details.value.contract_type", "label": "Contrat", "presentation": "badge"},
                 {"path": "fields.details.value.start_date", "label": "Début"},
@@ -236,6 +240,7 @@
               "fields": [
                 {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
                 {"path": "fields.responsibilities.value", "label": "Responsabilités", "presentation": "detail"},
+                {"path": "fields.industry_sector_ids.value", "label": "Secteurs", "presentation": "badge", "reference_type": "industry-sector"},
                 {"path": "fields.official_title.value", "label": "Fonction"},
                 {"path": "fields.details.value.contract_type", "label": "Contrat", "presentation": "badge"},
                 {"path": "fields.timeframe.value.start_date", "label": "Début"},
@@ -250,6 +255,7 @@
               "eyebrow": "2012 — 2018",
               "fields": [
                 {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
+                {"path": "fields.industry_sector_ids.value", "label": "Secteur", "presentation": "badge", "reference_type": "industry-sector"},
                 {"path": "fields.engagement_type.value.roles", "label": "Statut"},
                 {"path": "fields.details.value.activity", "label": "Activité"},
                 {"path": "fields.details.value.start_date", "label": "Début"},
@@ -265,6 +271,7 @@
               "fields": [
                 {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
                 {"path": "fields.responsibilities.value", "label": "Responsabilités", "presentation": "detail"},
+                {"path": "fields.industry_sector_ids.value", "label": "Secteur", "presentation": "badge", "reference_type": "industry-sector"},
                 {"path": "fields.details.value.engagement_type", "label": "Statut"},
                 {"path": "fields.details.value.activity", "label": "Activité"},
                 {"path": "fields.details.value.start_date", "label": "Début"},
@@ -278,6 +285,7 @@
               "eyebrow": "2006 — 2008",
               "fields": [
                 {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
+                {"path": "fields.industry_sector_ids.value", "label": "Secteurs", "presentation": "badge", "reference_type": "industry-sector"},
                 {"path": "fields.details.value.roles", "label": "Fonctions"},
                 {"path": "fields.chronology.value.start_date", "label": "Début"},
                 {
@@ -297,6 +305,7 @@
               "fields": [
                 {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
                 {"path": "fields.responsibilities.value", "label": "Responsabilités", "presentation": "detail"},
+                {"path": "fields.industry_sector_ids.value", "label": "Secteurs", "presentation": "badge", "reference_type": "industry-sector"},
                 {"path": "fields.details.value.title", "label": "Fonction"},
                 {"path": "fields.details.value.contract_type", "label": "Contrat", "presentation": "badge"},
                 {"path": "fields.details.value.role_description", "label": "Périmètre d’intervention", "presentation": "detail"},
@@ -310,6 +319,7 @@
               "fields": [
                 {"path": "fields.mission.value", "label": "Mission", "presentation": "detail"},
                 {"path": "fields.responsibilities.value", "label": "Responsabilités", "presentation": "detail"},
+                {"path": "fields.industry_sector_ids.value", "label": "Secteurs", "presentation": "badge", "reference_type": "industry-sector"},
                 {"path": "fields.details.value.contract_type", "label": "Contrat", "presentation": "badge"},
                 {
                   "path": "fields.details.value.locations",
@@ -331,6 +341,7 @@
               "eyebrow": "2015 — 2018",
               "fields": [
                 {"path": "fields.mission.value", "label": "Mission"},
+                {"path": "fields.industry_sector_ids.value", "label": "Secteurs", "presentation": "badge", "reference_type": "industry-sector"},
                 {"path": "fields.details.value.responsibilities", "label": "Responsabilités"},
                 {"path": "fields.details.value.title", "label": "Fonction"},
                 {"path": "fields.details.value.engagement_type", "label": "Engagement"},
@@ -345,6 +356,7 @@
               "eyebrow": "2018 — 2019",
               "fields": [
                 {"path": "fields.mission.value", "label": "Mission"},
+                {"path": "fields.industry_sector_ids.value", "label": "Secteurs", "presentation": "badge", "reference_type": "industry-sector"},
                 {"path": "fields.details.value.title", "label": "Fonction"},
                 {"path": "fields.details.value.engagement_type", "label": "Engagement"},
                 {"path": "fields.details.value.focus", "label": "Domaine"}

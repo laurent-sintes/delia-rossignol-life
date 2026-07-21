@@ -45,6 +45,7 @@ HEADING_PATTERN = re.compile(r"^(#{1,3})\s+(.+)$")
 BULLET_PATTERN = re.compile(r"^[-*]\s+(.+)$")
 NUMBERED_PATTERN = re.compile(r"^\d+\.\s+(.+)$")
 KNOWLEDGE_CARD_VARIANTS = {"continuity-foundation", "continuity-context", "continuity-highlight"}
+KNOWLEDGE_BADGE_REFERENCE_TYPES = {"industry-sector"}
 
 
 class SiteBuildResult(TypedDict):
@@ -294,6 +295,25 @@ def _render_badges(value: Any) -> str:
     return f'<div class="knowledge-badges">{badges}</div>'
 
 
+def _resolve_badge_references(root: Path, reference_type: str, value: Any) -> list[str]:
+    if reference_type not in KNOWLEDGE_BADGE_REFERENCE_TYPES:
+        raise ValueError(f"Unsupported knowledge badge reference type: {reference_type}")
+    identifiers = value if isinstance(value, list) else [value]
+    if not identifiers or any(not isinstance(identifier, str) or not SLUG_PATTERN.fullmatch(identifier) for identifier in identifiers):
+        raise ValueError("Knowledge badge references require a scalar identifier or a list of scalar identifiers")
+    labels: list[str] = []
+    for identifier in identifiers:
+        source = safe_source(root, f"data/knowledge/reference/{reference_type}/{identifier}.json")
+        document = load_json(source)
+        if document.get("type") != reference_type or document.get("id") != identifier:
+            raise ValueError(f"Invalid knowledge badge reference: {reference_type}/{identifier}")
+        label = _nested_value(document, "fields.details.value.name")
+        if not isinstance(label, str) or not label.strip():
+            raise ValueError(f"Knowledge badge reference has no public label: {reference_type}/{identifier}")
+        labels.append(label)
+    return labels
+
+
 @dataclass
 class KnowledgeCardContent:
     rows: list[str] = dataclass_field(default_factory=list)
@@ -320,6 +340,7 @@ def _collect_knowledge_card_content(
     document: dict[str, Any],
     fields: list[dict[str, Any]],
     layout: str,
+    root: Path | None = None,
 ) -> KnowledgeCardContent:
     result = KnowledgeCardContent()
     for field in fields:
@@ -331,6 +352,13 @@ def _collect_knowledge_card_content(
         if value is None or value == "" or value == []:
             continue
         presentation = field.get("presentation")
+        reference_type = field.get("reference_type")
+        if reference_type is not None:
+            if presentation != "badge":
+                raise ValueError("Knowledge references are only supported with badge presentation")
+            if root is None:
+                raise ValueError("Knowledge badge reference resolution requires the project root")
+            value = _resolve_badge_references(root, str(reference_type), value)
         content = (
             _render_badges(value)
             if presentation == "badge"
@@ -370,7 +398,7 @@ def _render_editorial_knowledge_card(
     )
 
 
-def render_knowledge_card(document: dict[str, Any], spec: dict[str, Any]) -> str:
+def render_knowledge_card(document: dict[str, Any], spec: dict[str, Any], root: Path | None = None) -> str:
     fields = spec.get("fields")
     if not fields:
         raise ValueError("Every knowledge card requires an explicit non-empty fields allowlist")
@@ -378,7 +406,7 @@ def render_knowledge_card(document: dict[str, Any], spec: dict[str, Any]) -> str
     if layout not in {"standard", "editorial"}:
         raise ValueError(f"Unsupported knowledge card layout: {layout}")
     card_class = _knowledge_card_class(layout, spec.get("variant"))
-    content = _collect_knowledge_card_content(document, fields, layout)
+    content = _collect_knowledge_card_content(document, fields, layout, root)
     if not content.has_values:
         raise ValueError(f"Knowledge card publishes no values: {spec.get('title', 'untitled')}")
     eyebrow = spec.get("eyebrow")
@@ -407,7 +435,7 @@ def render_knowledge_page(root: Path, page: dict[str, Any]) -> str:
             source = safe_source(root, card["source"])
             default_card_layout = "editorial" if section_layout == "continuity" else section_layout
             card_spec = {**card, "layout": card.get("layout", default_card_layout)}
-            cards.append(render_knowledge_card(load_json(source), card_spec))
+            cards.append(render_knowledge_card(load_json(source), card_spec, root))
         if not cards:
             raise ValueError(f"Knowledge section has no cards: {section.get('title', 'untitled')}")
         description = section.get("description")
@@ -631,7 +659,7 @@ def _page_template(
       <div class="cv-downloads-shell">
         <p class="eyebrow">Candidatures</p>
         <h2 id="cv-downloads-title">Choisir le CV adapté</h2>
-        <p class="cv-downloads-intro">Le CV transverse présente les quatre domaines prioritaires. Les trois variantes renforcent les mots-clés et les preuves du métier visé, sans modifier les faits.</p>
+        <p class="cv-downloads-intro">Le CV transverse présente les quatre domaines prioritaires. Les quatre variantes renforcent les mots-clés et les preuves du métier visé, sans modifier les faits.</p>
         <p class="cv-ats-note"><strong>ATS, c’est quoi&nbsp;?</strong> ATS signifie <em>Applicant Tracking System</em>, ou «&nbsp;système de suivi des candidatures&nbsp;»&nbsp;: un logiciel qui aide les recruteurs à lire, organiser et rechercher les CV. Ces versions utilisent une structure simple et des mots-clés explicites.</p>
         <div class="cv-download-grid">{ats_cards}</div>
       </div>

@@ -1,0 +1,30 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-21T16:16:29+00:00",
+          "locator": "validation-prerequis-et-mode-delia-2026-07-21.txt#P02",
+          "proposal_id": "proposal-industry-sector-banque-et-assurance-2026-07-21",
+          "source_id": "src-73fd74299d1e26be"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "banque",
+          "assurance",
+          "finance",
+          "courtage"
+        ],
+        "classification": "delia-career-v1",
+        "code": "banque-et-assurance",
+        "name": "Banque et assurance",
+        "parent_id": null,
+        "source_label": "banque, assurance ou finance"
+      }
+    }
+  },
+  "id": "banque-et-assurance",
+  "type": "industry-sector",
+  "updated_at": "2026-07-21T16:16:29+00:00"
+}

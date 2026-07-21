@@ -12,6 +12,11 @@
     "employer": {"type": "string", "minLength": 1},
     "source_url": {"type": "string", "format": "uri", "minLength": 1},
     "source_site": {"type": "string", "minLength": 1},
+    "source_kind": {"type": "string", "enum": ["direct_employer", "specialized", "aggregator"]},
+    "canonical_offer_id": {"type": "string", "minLength": 1},
+    "employer_source_url": {"type": "string", "format": "uri", "minLength": 1},
+    "verification_status": {"type": "string", "enum": ["active", "closed", "expired", "pending", "unreachable"]},
+    "verification_note": {"type": "string", "minLength": 1},
     "published_at": {"type": ["string", "null"], "format": "date"},
     "captured_at": {"type": "string", "format": "date-time"},
     "last_verified_at": {"type": "string", "format": "date-time"},
@@ -51,6 +56,12 @@
           "description": {"type": "string", "minLength": 1},
           "mandatory": {"type": "boolean"},
           "minimum_years": {"type": "number", "minimum": 0},
+          "credential_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "industry_sector_ids": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"type": "string", "minLength": 1}
+          },
           "profile_status": {"type": "string", "enum": ["met", "not_demonstrated", "unmet", "unknown"]},
           "profile_evidence_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
           "assessment_note": {"type": "string", "minLength": 1},
@@ -64,6 +75,12 @@
             "additionalProperties": false
           }
         },
+        "allOf": [
+          {
+            "if": {"properties": {"kind": {"const": "certification"}}},
+            "then": {"required": ["credential_id"]}
+          }
+        ],
         "additionalProperties": false
       }
     },

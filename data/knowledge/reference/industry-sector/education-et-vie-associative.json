@@ -1,0 +1,29 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-21T16:12:14+00:00",
+          "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P02",
+          "proposal_id": "proposal-industry-sector-education-et-vie-associative-2026-07-21",
+          "source_id": "src-7cfae887f36b6c4d"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "éducation",
+          "association de parents d'élèves",
+          "vie associative"
+        ],
+        "classification": "delia-career-v1",
+        "code": "education-et-vie-associative",
+        "name": "Éducation et vie associative",
+        "parent_id": "economie-sociale-et-associative",
+        "source_label": "éducation et vie associative"
+      }
+    }
+  },
+  "id": "education-et-vie-associative",
+  "type": "industry-sector",
+  "updated_at": "2026-07-21T16:12:14+00:00"
+}

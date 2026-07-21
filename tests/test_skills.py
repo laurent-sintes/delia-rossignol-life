@@ -14,7 +14,7 @@ class SkillTests(unittest.TestCase):
     def test_catalog_and_documented_commands_are_valid(self) -> None:
         result = validate_skill_catalog(ROOT)
         self.assertTrue(result["ok"], result["errors"])
-        self.assertEqual(result["skills"], 9)
+        self.assertEqual(result["skills"], 10)
 
     def test_skill_triggers_and_workflows_are_unambiguous(self) -> None:
         skill_root = ROOT / ".codex" / "skills"
@@ -23,6 +23,7 @@ class SkillTests(unittest.TestCase):
         publish_site = (skill_root / "publish-delia-site" / "SKILL.md").read_text(encoding="utf-8")
         generate = (skill_root / "generate-delia-application" / "SKILL.md").read_text(encoding="utf-8")
         share = (skill_root / "share-delia-offer-selection" / "SKILL.md").read_text(encoding="utf-8")
+        manage_scans = (skill_root / "manage-delia-offer-scans" / "SKILL.md").read_text(encoding="utf-8")
 
         self.assertNotIn("après une modification de contenu", manage_git)
         self.assertNotIn("git push -u origin main", manage_git)
@@ -34,6 +35,11 @@ class SkillTests(unittest.TestCase):
         self.assertNotIn("python -m unittest", publish_site)
         self.assertIn("CV standard", generate)
         self.assertIn("Sites consultés", share)
+        self.assertIn("`clean cache`", manage_scans)
+        self.assertIn("`scan full`", manage_scans)
+        self.assertIn("`scan delta`", manage_scans)
+        self.assertIn("`envoi à Délia`", manage_scans)
+        self.assertIn("Ne jamais remplacer `rank_inputs`", manage_scans)
 
 
 if __name__ == "__main__":

@@ -40,6 +40,11 @@ Ne pas recalculer manuellement ce que la CLI sait calculer. Cela réduit le coû
 
 Pour la recherche d’offres, la stratégie de sourcing vit dans `config/offer-search.json` : privilégier les portails directs des grandes enseignes et des maisons, puis les sites spécialisés, puis les agrégateurs. Toute annonce issue d’un agrégateur doit être vérifiée sur la page exacte de l’employeur lorsqu’elle est disponible. La configuration doit déclarer au moins une source pour chaque secteur prioritaire du projet de carrière ; le contrôle Python bloque un scan si cette couverture est incomplète.
 
+Associer chaque expérience validée à un ou plusieurs `industry_sector_ids` du référentiel normalisé. Tout prérequis d’expérience sectorielle d’une offre doit utiliser ces mêmes identifiants et une durée structurée lorsqu’elle est explicite. Le moteur résout la couverture à partir des périodes précises validées, en fusionnant les chevauchements ; les périodes connues seulement à l’année ne prouvent pas automatiquement une durée en mois. Une absence sectorielle ne peut être conclue qu’à partir d’un fait négatif validé. Lorsqu’une offre impose une durée minimale chiffrée dans un secteur dont l’absence d’expérience est validée, cette incompatibilité certaine exclut l’offre sans modifier son score.
+
+Le périmètre de classement dépend du mode préparé par `python scripts/delia_life.py offer-scan` : un `full` ou `send` classe uniquement le répertoire isolé indiqué dans `rank_inputs`, tandis qu’un `delta` classe `data/offers` dans son ensemble. Chaque annonce repérée conserve un `verification_status` et sa dernière date de contrôle ; une annonce ancienne, fermée, inaccessible ou en attente de page employeur reste traçable mais ne participe pas au classement actif. Traiter la `revalidation_queue` du manifeste et transmettre `--scan-manifest`, chaque `--visited-source`, `--covered-query-family` et `--covered-priority-sector` au classement strict. Utiliser `--require-complete-pool` et ne jamais présenter comme finale une recherche dont `pool_complete`, `scan_coverage.complete` ou `finalization_allowed` est faux.
+Le seuil de 30 offres actives est un minimum de complétude, jamais une limite. Conserver et classer toutes les offres actives et éligibles, puis en restituer jusqu’à 100 conformément à `candidate_pool_maximum`.
+
 ## Modèle mental
 
 Le répertoire `model/` est la source de vérité conceptuelle. `model/model.yaml` référence les concepts, relations, cardinalités, invariants et règles de refactor. Les fichiers sous `data/` sont des instances de ce modèle.
@@ -80,7 +85,7 @@ Un template ne contient aucune donnée personnelle. Son fichier `template.json` 
 
 Un retour employeur est une observation rattachée à une candidature, pas une vérité universelle. Ne pas modifier automatiquement le profil ou les règles de génération. Produire une proposition d'amélioration, puis la soumettre à validation.
 
-Pour un email de revue d’offres à Délia, partir du rapport complet et inclure jusqu’à 50 offres. Les regrouper dans trois sections ordonnées : « Il faut répondre, ça matche et tu as des chances d’un retour positif », « Tu peux répondre, on ne sait jamais », puis « Je te les mets pour info, mais il y a peu de chances ». Trier chaque section par pertinence décroissante et conserver une numérotation globale. Chaque offre doit présenter secteur, mission / poste, salaire proposé ou non communiqué, pertinence sur 100, puis un point de vigilance factuel visuellement signalé. Afficher les prérequis contraignants en rouge sans les soustraire du score ; ne jamais révéler les contraintes personnelles utilisées pour le classement.
+Pour un email de revue d’offres à Délia, partir du rapport complet et appliquer le plafond général de la recherche, soit 100 éléments affichés, sans limite propre à l’email. Regrouper les offres classées dans trois sections ordonnées : « Il faut répondre, ça matche et tu as des chances d’un retour positif », « Tu peux répondre, on ne sait jamais », puis « Je te les mets pour info, mais il y a peu de chances ». Trier chaque section par pertinence décroissante et conserver une numérotation globale. Chaque offre doit présenter secteur, mission / poste, salaire proposé ou non communiqué, pertinence sur 100, puis un point de vigilance factuel visuellement signalé. Afficher les prérequis contraignants en rouge sans les soustraire du score ; ne jamais révéler les contraintes personnelles utilisées pour le classement. Ajouter ensuite une annexe non classée « Offres probablement actives à revérifier » pour les annonces `pending`, avec leur lien et leur motif de revérification, sans rang ni score. Terminer la liste par « Offres exclues et pourquoi », sans rang, avec le score calculé lorsqu’il existe et tous les motifs d’exclusion ; ne pas y répéter les annonces `pending`. Réserver de la place aux exclusions avant de remplir l’annexe `pending` et indiquer les annonces omises lorsque le plafond de 100 est atteint.
 
 ## Publication GitHub Pages
 
@@ -112,6 +117,7 @@ Ne pas créer de commit et ne pas publier sur GitHub au titre de cette règle. `
 - Ajout ou choix d'un modèle : `$manage-delia-templates`.
 - Création d'un CV ou d'une lettre : `$generate-delia-application`.
 - Recherche multi-site et classement d'offres : `$search-delia-offers`.
+- Nettoyage de l’état de recherche, scan full, scan delta ou scan full suivi d’un envoi : `$manage-delia-offer-scans`, qui orchestre ensuite `$search-delia-offers` et, pour l’envoi, `$share-delia-offer-selection`.
 - Partage d'une sélection d'offres et collecte du feedback de Délia : `$share-delia-offer-selection`.
 - Analyse et rapprochement d'une offre : `$match-delia-offers`.
 - Événement de candidature ou feedback : `$track-delia-applications`.

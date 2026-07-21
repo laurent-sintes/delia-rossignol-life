@@ -1,0 +1,56 @@
+{
+  "application": {
+    "applied_at": "2026-07-21T16:16:30+00:00",
+    "knowledge_path": "data/knowledge/entities/knowledge-fact/delia-bank-insurance-finance-experience-absent.json"
+  },
+  "classification": "fact",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-21T16:16:29+00:00",
+      "from": "pending",
+      "note": "Rattachement du fait déjà validé au secteur normalisé banque-et-assurance.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-bank-insurance-finance-experience-absent-normalized-2026-07-21",
+  "proposed_value": {
+    "dimension": "sector_experience",
+    "industry_sector_ids": [
+      "banque-et-assurance"
+    ],
+    "sectors": [
+      "banque",
+      "assurance",
+      "finance"
+    ],
+    "status": "absent",
+    "subject_id": "delia-rossignol"
+  },
+  "replaces_proposal_id": "proposal-delia-bank-insurance-finance-experience-absent-2026-07-21",
+  "source": {
+    "evidence": "Délia ne possède pas de première expérience comparable en banque, assurance ou finance.",
+    "id": "src-73fd74299d1e26be",
+    "locator": "validation-prerequis-et-mode-delia-2026-07-21.txt#P02"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-bank-insurance-finance-experience-absent",
+    "entity_type": "knowledge-fact",
+    "field": "details"
+  },
+  "validated_value": {
+    "dimension": "sector_experience",
+    "industry_sector_ids": [
+      "banque-et-assurance"
+    ],
+    "sectors": [
+      "banque",
+      "assurance",
+      "finance"
+    ],
+    "status": "absent",
+    "subject_id": "delia-rossignol"
+  }
+}

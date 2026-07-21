@@ -99,6 +99,131 @@ class OfferFeedbackEmailTests(unittest.TestCase):
         draft_text = (self.work / "draft" / "offer-selection.txt").read_text(encoding="utf-8")
         self.assertIn("- https://jobs.example", draft_text)
 
+    def test_pending_offers_are_rendered_in_a_separate_unranked_section(self) -> None:
+        report = {
+            "visited_sources": ["https://fr.linkedin.com"],
+            "offers": [
+                {
+                    "id": "ranked-offer",
+                    "title": "Poste classé",
+                    "employer": "Employeur",
+                    "source_url": "https://jobs.example/ranked",
+                    "assessment": {"score": 80},
+                }
+            ],
+            "pending_offers": [
+                {
+                    "id": "hermes-charge-sav",
+                    "title": "Chargé SAV H/F — Magasin de Bordeaux",
+                    "employer": "Hermès",
+                    "contract_type": "CDI",
+                    "location_label": "Bordeaux",
+                    "source_url": "https://fr.linkedin.com/jobs/view/hermes-charge-sav",
+                    "verification_status": "pending",
+                    "verification_reason": "page employeur exacte non vérifiée",
+                }
+            ],
+        }
+        cv = self.work / "cv.pdf"
+        cv.write_bytes(b"%PDF-1.4\nexample")
+
+        result = prepare_offer_feedback_email(
+            report,
+            "delia@example.test",
+            "https://example.test",
+            cv,
+            self.work / "draft",
+        )
+
+        text_body = (self.work / "draft" / "offer-selection.txt").read_text(encoding="utf-8")
+        html_body = (self.work / "draft" / "offer-selection.html").read_text(encoding="utf-8")
+        self.assertIn("Offres probablement actives à revérifier", text_body)
+        self.assertIn("Hermès — Chargé SAV H/F — Magasin de Bordeaux", text_body)
+        self.assertIn("page employeur exacte non vérifiée", text_body)
+        self.assertIn('data-verification-status="pending"', html_body)
+        self.assertNotIn("Pertinence : non calculée", text_body)
+        self.assertEqual(result["offer_count"], 1)
+        self.assertEqual(result["pending_offer_count"], 1)
+        self.assertEqual(result["pending_offer_displayed_count"], 1)
+        self.assertEqual(result["displayed_item_count"], 2)
+
+    def test_excluded_offers_are_rendered_last_with_their_reasons(self) -> None:
+        report = {
+            "visited_sources": ["https://jobs.example"],
+            "offers": [
+                {
+                    "id": "ranked-offer",
+                    "title": "Poste classé",
+                    "employer": "Employeur",
+                    "source_url": "https://jobs.example/ranked",
+                    "assessment": {"score": 80},
+                }
+            ],
+            "pending_offers": [
+                {
+                    "id": "pending-offer",
+                    "title": "Poste à revérifier",
+                    "employer": "Employeur",
+                    "source_url": "https://jobs.example/pending",
+                    "verification_status": "pending",
+                    "verification_reason": "page employeur exacte non vérifiée",
+                }
+            ],
+            "excluded": [
+                {
+                    "id": "pending-offer",
+                    "title": "Poste à revérifier",
+                    "employer": "Employeur",
+                    "verification_status": "pending",
+                    "verification_reason": "page employeur exacte non vérifiée",
+                },
+                {
+                    "id": "excluded-offer",
+                    "title": "Gestionnaire assurance",
+                    "employer": "Filhet-Allard",
+                    "contract_type": "CDI",
+                    "location_label": "Mérignac",
+                    "source_url": "https://jobs.example/excluded",
+                    "phase": "policy",
+                    "score": 80,
+                    "failures": [
+                        "diplôme obligatoire non satisfait",
+                        "expérience sectorielle obligatoire non satisfaite",
+                    ],
+                },
+            ],
+        }
+        cv = self.work / "cv.pdf"
+        cv.write_bytes(b"%PDF-1.4\nexample")
+
+        result = prepare_offer_feedback_email(
+            report,
+            "delia@example.test",
+            "https://example.test",
+            cv,
+            self.work / "draft",
+        )
+
+        text_body = (self.work / "draft" / "offer-selection.txt").read_text(encoding="utf-8")
+        html_body = (self.work / "draft" / "offer-selection.html").read_text(encoding="utf-8")
+        self.assertIn("Offres exclues et pourquoi", text_body)
+        self.assertIn("Filhet-Allard — Gestionnaire assurance", text_body)
+        self.assertIn("Pourquoi exclue : diplôme obligatoire non satisfait", text_body)
+        self.assertIn("expérience sectorielle obligatoire non satisfaite", text_body)
+        self.assertLess(
+            text_body.index("Offres probablement actives à revérifier"),
+            text_body.index("Offres exclues et pourquoi"),
+        )
+        self.assertLess(
+            text_body.index("Offres exclues et pourquoi"),
+            text_body.index("sites consultés pour cette recherche"),
+        )
+        self.assertIn('data-result-status="excluded"', html_body)
+        self.assertEqual(result["excluded_offer_count"], 1)
+        self.assertEqual(result["excluded_offer_displayed_count"], 1)
+        self.assertEqual(result["excluded_offer_ids"], ["excluded-offer"])
+        self.assertEqual(result["displayed_item_count"], 3)
+
     def test_prerequisite_constraint_is_rendered_in_red(self) -> None:
         report = {
             "offers": [
@@ -149,14 +274,76 @@ class OfferFeedbackEmailTests(unittest.TestCase):
         self.assertIn('style="color: #b42318;"', html_body)
         self.assertIn("Expérience préalable dans le domaine assurantiel", html_body)
 
-    def test_limits_a_default_email_to_fifty_ranked_offers(self) -> None:
-        report = {"offers": [{"id": f"offer-{index}", "title": "Poste", "employer": "Employeur", "source_url": "https://jobs.example/offers", "assessment": {}} for index in range(55)]}
+    def test_result_display_limit_is_one_hundred_without_an_email_specific_cap(self) -> None:
+        report = {"offers": [{"id": f"offer-{index}", "title": "Poste", "employer": "Employeur", "source_url": "https://jobs.example/offers", "assessment": {}} for index in range(105)]}
         cv = self.work / "cv.pdf"
         cv.write_bytes(b"%PDF-1.4\nexample")
         result = prepare_offer_feedback_email(report, "delia@example.test", "https://example.test", cv, self.work / "draft")
-        self.assertEqual(result["offer_count"], 50)
+        self.assertEqual(result["offer_count"], 100)
         with self.assertRaises(ValueError):
-            prepare_offer_feedback_email(report, "delia@example.test", "https://example.test", cv, self.work / "too-many", limit=51)
+            prepare_offer_feedback_email(report, "delia@example.test", "https://example.test", cv, self.work / "too-many", limit=101)
+
+    def test_display_limit_applies_to_ranked_pending_and_excluded_offers_together(self) -> None:
+        report = {
+            "offers": [
+                {
+                    "id": f"ranked-{index}",
+                    "title": "Poste classé",
+                    "employer": "Employeur",
+                    "source_url": f"https://jobs.example/ranked/{index}",
+                    "assessment": {"score": 80 - index},
+                }
+                for index in range(12)
+            ],
+            "pending_offers": [
+                {
+                    "id": f"pending-{index}",
+                    "title": "Poste à revérifier",
+                    "employer": "Employeur",
+                    "source_url": f"https://jobs.example/pending/{index}",
+                }
+                for index in range(3)
+            ],
+            "excluded": [
+                {
+                    "id": f"excluded-{index}",
+                    "title": "Poste exclu",
+                    "employer": "Employeur",
+                    "source_url": f"https://jobs.example/excluded/{index}",
+                    "failures": ["prérequis obligatoire non satisfait"],
+                }
+                for index in range(3)
+            ],
+        }
+        cv = self.work / "cv.pdf"
+        cv.write_bytes(b"%PDF-1.4\nexample")
+
+        result = prepare_offer_feedback_email(
+            report,
+            "delia@example.test",
+            "https://example.test",
+            cv,
+            self.work / "draft",
+            limit=10,
+        )
+
+        self.assertEqual(result["displayed_item_count"], 10)
+        self.assertEqual(result["offer_count"], 7)
+        self.assertEqual(result["excluded_offer_displayed_count"], 3)
+        self.assertEqual(result["pending_offer_displayed_count"], 0)
+
+    def test_incomplete_report_cannot_be_prepared_for_delivery(self) -> None:
+        cv = self.work / "cv.pdf"
+        cv.write_bytes(b"%PDF-1.4\nexample")
+
+        with self.assertRaisesRegex(ValueError, "incomplete offer report"):
+            prepare_offer_feedback_email(
+                {"offers": [], "finalization_allowed": False},
+                "delia@example.test",
+                "https://example.test",
+                cv,
+                self.work / "draft",
+            )
 
     def test_default_email_orders_offers_by_descending_relevance(self) -> None:
         report = {

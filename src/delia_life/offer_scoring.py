@@ -4,6 +4,7 @@ import re
 import unicodedata
 from dataclasses import dataclass, field
 from datetime import UTC, date, datetime
+from math import ceil
 from typing import Any
 
 TOKEN_PATTERN = re.compile(r"[a-z0-9]+")
@@ -155,6 +156,11 @@ class ScoringContext:
     sector_multiplier: float
     priority_domains: tuple[tuple[str, tuple[str, ...]], ...]
     acceptable_domains: tuple[tuple[str, tuple[str, ...]], ...]
+    profile_family_filters: tuple[dict[str, Any], ...]
+    complete_profile_dimensions: frozenset[str]
+    sector_experience_months: dict[str, int]
+    absent_sector_experience_ids: frozenset[str]
+    absent_certifications: dict[str, frozenset[str]]
     knowledge_tokens: frozenset[str]
     freshness_days: int
     activity_exclusions: tuple[tuple[str, str], ...]
@@ -174,6 +180,7 @@ class ScoreState:
     knowledge_keyword_matches: list[str] = field(default_factory=list)
     prerequisite_alerts: list[dict[str, Any]] = field(default_factory=list)
     application_barriers: list[str] = field(default_factory=list)
+    profile_family_matches: list[dict[str, Any]] = field(default_factory=list)
     recommendation_band: str = "possible"
     recommendation_reasons: list[str] = field(default_factory=list)
     forced_to_end: bool = False
@@ -189,6 +196,7 @@ class ScoreState:
             "knowledge_keyword_matches": self.knowledge_keyword_matches,
             "prerequisite_alerts": self.prerequisite_alerts,
             "application_barriers": self.application_barriers,
+            "profile_family_matches": self.profile_family_matches,
             "recommendation_band": self.recommendation_band,
             "recommendation_reasons": self.recommendation_reasons,
             "forced_to_end": self.forced_to_end,
@@ -200,6 +208,10 @@ def _build_scoring_context(
     policy: dict[str, Any],
     knowledge_tokens: set[str],
     today: date | None,
+    complete_profile_dimensions: set[str] | None = None,
+    sector_experience_months: dict[str, int] | None = None,
+    absent_sector_experience_ids: set[str] | None = None,
+    absent_certifications: dict[str, set[str]] | None = None,
 ) -> ScoringContext:
     targets = career_project.get("target_preferences", {})
     sectors = targets.get("industry_sectors", {})
@@ -226,6 +238,16 @@ def _build_scoring_context(
         sector_multiplier=float(emphasis.get("multiplier", 1.0)),
         priority_domains=_domain_matchers(domains.get("priority", []), query_families),
         acceptable_domains=_domain_matchers(domains.get("acceptable", []), query_families),
+        profile_family_filters=tuple(
+            rule for rule in policy.get("profile_family_filters", []) if isinstance(rule, dict)
+        ),
+        complete_profile_dimensions=frozenset(complete_profile_dimensions or set()),
+        sector_experience_months=dict(sector_experience_months or {}),
+        absent_sector_experience_ids=frozenset(absent_sector_experience_ids or set()),
+        absent_certifications={
+            identifier: frozenset(evidence_ids)
+            for identifier, evidence_ids in (absent_certifications or {}).items()
+        },
         knowledge_tokens=frozenset(knowledge_tokens),
         freshness_days=int(policy["freshness_days"]),
         activity_exclusions=activity_exclusions,
@@ -315,6 +337,64 @@ def _apply_knowledge_overlap(offer: dict[str, Any], context: ScoringContext, sta
         state.gaps.append("aucun recouvrement littéral démontré avec la base validée")
 
 
+def _normalized_markers(rule: dict[str, Any], field_name: str) -> tuple[str, ...]:
+    return tuple(plain(value) for value in strings(rule.get(field_name, [])) if value.strip())
+
+
+def _contains_marker(text: str, marker: str) -> bool:
+    return re.search(rf"(?<![a-z0-9]){re.escape(marker)}(?![a-z0-9])", text) is not None
+
+
+def _apply_profile_family_rules(offer: dict[str, Any], context: ScoringContext, state: ScoreState) -> None:
+    title = plain(str(offer.get("title") or ""))
+    profile_text = plain(
+        " ".join(
+            strings(
+                {
+                    "title": offer.get("title"),
+                    "summary": offer.get("summary"),
+                    "functional_domains": offer.get("functional_domains", []),
+                    "required_skills": offer.get("required_skills", []),
+                    "preferred_skills": offer.get("preferred_skills", []),
+                    "prerequisites": offer.get("prerequisites", []),
+                }
+            )
+        )
+    )
+    for rule in context.profile_family_filters:
+        title_matches = [
+            marker for marker in _normalized_markers(rule, "strong_title_markers") if _contains_marker(title, marker)
+        ]
+        family_matches = [
+            marker
+            for marker in _normalized_markers(rule, "family_markers")
+            if _contains_marker(profile_text, marker)
+        ]
+        technical_matches = [
+            marker
+            for marker in _normalized_markers(rule, "technical_markers")
+            if _contains_marker(profile_text, marker)
+        ]
+        minimum_technical = int(rule.get("minimum_technical_markers", 1))
+        strong_title = bool(title_matches)
+        technical_signature = bool(family_matches) and len(technical_matches) >= minimum_technical
+        if not strong_title and not technical_signature:
+            continue
+        label = str(rule.get("label") or rule.get("id") or "famille de profil exclue")
+        state.profile_family_matches.append(
+            {
+                "id": rule.get("id"),
+                "label": label,
+                "confidence": "high" if strong_title else "medium",
+                "title_markers": title_matches,
+                "family_markers": family_matches,
+                "technical_markers": technical_matches,
+            }
+        )
+        if rule.get("decision") == "exclude":
+            state.failures.append(f"famille de profil exclue : {label}")
+
+
 def _apply_freshness_rules(offer: dict[str, Any], context: ScoringContext, state: ScoreState) -> None:
     published_at = _iso_date(offer.get("published_at"))
     if published_at is None:
@@ -376,6 +456,7 @@ def _apply_prerequisite_rules(offer: dict[str, Any], context: ScoringContext, st
                     "description": "Expérience préalable dans le domaine assurantiel",
                     "mandatory": True,
                     "profile_status": "not_demonstrated",
+                    "industry_sector_ids": ["banque-et-assurance"],
                 }
             ]
         else:
@@ -389,23 +470,80 @@ def _apply_prerequisite_rules(offer: dict[str, Any], context: ScoringContext, st
         if not isinstance(prerequisite, dict):
             continue
         status = str(prerequisite.get("profile_status", "unknown"))
-        if status == "met":
-            continue
-        if status not in status_messages:
+        if status not in {*status_messages, "met"}:
             status = "unknown"
         description = str(prerequisite.get("description") or "prérequis non décrit").strip()
         mandatory = prerequisite.get("mandatory") is True
+        kind = str(prerequisite.get("kind", "other"))
+        sector_ids = prerequisite.get("industry_sector_ids")
+        normalized_sector_ids = {
+            str(value).strip() for value in sector_ids if str(value).strip()
+        } if isinstance(sector_ids, list) else set()
+        minimum_years = prerequisite.get("minimum_years")
+        credential_id = str(prerequisite.get("credential_id") or "").strip()
+        profile_evidence_ids = {
+            str(value).strip()
+            for value in prerequisite.get("profile_evidence_ids", [])
+            if str(value).strip()
+        }
+        automatically_met = False
+        validated_sector_absence = bool(
+            normalized_sector_ids & context.absent_sector_experience_ids
+        )
+        documented_months = 0
+        required_months = 0
+        if normalized_sector_ids and isinstance(minimum_years, (int, float)):
+            documented_months = max(
+                (context.sector_experience_months.get(sector_id, 0) for sector_id in normalized_sector_ids),
+                default=0,
+            )
+            required_months = ceil(float(minimum_years) * 12)
+            if documented_months >= required_months:
+                status = "met"
+                automatically_met = True
+        if not automatically_met and validated_sector_absence:
+            status = "unmet"
+        validated_certification_absence = bool(
+            kind == "certification"
+            and credential_id
+            and profile_evidence_ids & context.absent_certifications.get(credential_id, frozenset())
+        )
+        if kind == "certification":
+            status = "unmet" if validated_certification_absence else ("met" if status == "met" else "not_demonstrated")
+        if status == "met":
+            if automatically_met:
+                state.reasons.append(
+                    f"prérequis sectoriel couvert : {documented_months} mois validés pour {required_months} requis"
+                )
+            continue
+        complete_qualification_inventory = (
+            kind == "qualification" and "credentials" in context.complete_profile_dimensions
+        )
+        if mandatory and complete_qualification_inventory and status in {"not_demonstrated", "unknown"}:
+            status = "unmet"
         state.prerequisite_alerts.append(
             {
                 "id": prerequisite.get("id"),
-                "kind": prerequisite.get("kind", "other"),
+                "kind": kind,
                 "description": description,
                 "mandatory": mandatory,
                 "status": status,
                 "message": status_messages[status],
             }
         )
-        if status == "unmet" and mandatory:
+        if status == "unmet" and mandatory and complete_qualification_inventory:
+            state.failures.append(f"diplôme obligatoire non satisfait : {description}")
+        elif status == "unmet" and mandatory and validated_certification_absence:
+            state.failures.append(f"certification obligatoire non satisfaite : {description}")
+        elif (
+            status == "unmet"
+            and mandatory
+            and validated_sector_absence
+            and isinstance(minimum_years, (int, float))
+            and minimum_years > 0
+        ):
+            state.failures.append(f"expérience sectorielle obligatoire non satisfaite : {description}")
+        elif status == "unmet" and mandatory:
             state.application_barriers.append(f"prérequis obligatoire non satisfait : {description}")
 
 
@@ -450,6 +588,7 @@ def _score_offer_with_context(offer: dict[str, Any], context: ScoringContext) ->
     _apply_work_time_rules(offer, conditions, state)
     _apply_sector_rules(text, context, state)
     _apply_functional_domain_rules(functional_text, context, state)
+    _apply_profile_family_rules(offer, context, state)
     _apply_knowledge_overlap(offer, context, state)
     _apply_freshness_rules(offer, context, state)
     _apply_activity_rules(text, context, state)
@@ -465,5 +604,21 @@ def score_offer(
     policy: dict[str, Any],
     knowledge_tokens: set[str],
     today: date | None = None,
+    complete_profile_dimensions: set[str] | None = None,
+    sector_experience_months: dict[str, int] | None = None,
+    absent_sector_experience_ids: set[str] | None = None,
+    absent_certifications: dict[str, set[str]] | None = None,
 ) -> dict[str, Any]:
-    return _score_offer_with_context(offer, _build_scoring_context(career_project, policy, knowledge_tokens, today))
+    return _score_offer_with_context(
+        offer,
+        _build_scoring_context(
+            career_project,
+            policy,
+            knowledge_tokens,
+            today,
+            complete_profile_dimensions,
+            sector_experience_months,
+            absent_sector_experience_ids,
+            absent_certifications,
+        ),
+    )

@@ -1,0 +1,31 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-21T15:53:18+00:00",
+          "locator": "validation-prerequis-et-mode-delia-2026-07-21.txt#P03",
+          "proposal_id": "proposal-delia-personalized-client-support-skill-2026-07-21",
+          "source_id": "src-73fd74299d1e26be"
+        }
+      ],
+      "value": {
+        "dimension": "skill",
+        "evidence_experience_ids": [
+          "prada-paris",
+          "sergio-rossi-paris",
+          "cuisinella-sainte-eulalie",
+          "raison-home-franchisee",
+          "bleu-rossignol-founder"
+        ],
+        "skill_id": "relation-client",
+        "status": "demonstrated",
+        "subject_id": "delia-rossignol",
+        "validated_keyword": "accompagnement personnalisé"
+      }
+    }
+  },
+  "id": "delia-personalized-client-support-skill",
+  "type": "knowledge-fact",
+  "updated_at": "2026-07-21T15:53:18+00:00"
+}

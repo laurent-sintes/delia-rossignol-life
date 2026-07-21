@@ -1,0 +1,53 @@
+{
+  "application": {
+    "applied_at": "2026-07-21T16:12:16+00:00",
+    "knowledge_path": "data/knowledge/reference/industry-sector/restauration.json"
+  },
+  "classification": "inference",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-21T16:11:41+00:00",
+      "from": "pending",
+      "note": "Validation explicite de la normalisation sectorielle dans Codex le 21 juillet 2026 ; rattachements conservateurs fondés sur les expériences validées.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-industry-sector-restauration-2026-07-21",
+  "proposed_value": {
+    "aliases": [
+      "restauration",
+      "restaurant",
+      "brasserie"
+    ],
+    "classification": "delia-career-v1",
+    "code": "restauration",
+    "name": "Restauration",
+    "parent_id": null,
+    "source_label": "restauration"
+  },
+  "source": {
+    "evidence": "restaurant, brasserie et exploitation de restauration",
+    "id": "src-7cfae887f36b6c4d",
+    "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P02"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "restauration",
+    "entity_type": "industry-sector",
+    "field": "details"
+  },
+  "validated_value": {
+    "aliases": [
+      "restauration",
+      "restaurant",
+      "brasserie"
+    ],
+    "classification": "delia-career-v1",
+    "code": "restauration",
+    "name": "Restauration",
+    "parent_id": null,
+    "source_label": "restauration"
+  }
+}

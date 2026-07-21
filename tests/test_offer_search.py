@@ -10,8 +10,18 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from delia_life.core import load_json
-from delia_life.offer_search import canonical_offer_url, offer_identity, rank_offers, score_offer, source_origin
+from delia_life.offer_search import (
+    canonical_offer_url,
+    collect_validated_absent_sector_experience_ids,
+    collect_validated_profile_completeness,
+    collect_validated_sector_experience_months,
+    offer_identity,
+    rank_offers,
+    score_offer,
+    source_origin,
+)
 from delia_life.project_validation import (
+    invalid_offer_pool_limits,
     invalid_offer_source_audit,
     invalid_recommendation_band_thresholds,
     missing_priority_functional_coverage,
@@ -31,6 +41,9 @@ class OfferSearchTests(unittest.TestCase):
             "employer": "Maison Exemple",
             "source_url": "https://jobs.example/offers/1?utm_source=test",
             "source_site": "jobs.example",
+            "source_kind": "direct_employer",
+            "verification_status": "active",
+            "last_verified_at": "2026-07-19T09:00:00+02:00",
             "published_at": "2026-07-18",
             "contract_type": "CDI",
             "location_label": "Bordeaux",
@@ -73,6 +86,7 @@ class OfferSearchTests(unittest.TestCase):
                 "knowledge_keyword_matches": ["administration", "client", "relation"],
                 "prerequisite_alerts": [],
                 "application_barriers": [],
+                "profile_family_matches": [],
                 "recommendation_band": "priority",
                 "recommendation_reasons": ["forte correspondance sans prérequis obligatoire incertain"],
                 "forced_to_end": False,
@@ -117,14 +131,33 @@ class OfferSearchTests(unittest.TestCase):
             ],
         )
 
+    def test_explicitly_met_prerequisite_stays_resolved_without_an_alert(self) -> None:
+        offer = {
+            **self.base,
+            "prerequisites": [
+                {
+                    "id": "anglais-operationnel",
+                    "kind": "language",
+                    "description": "Anglais opérationnel à l'oral",
+                    "mandatory": True,
+                    "profile_status": "met",
+                }
+            ],
+        }
+
+        assessment = score_offer(offer, self.project, self.policy, set(), self.today)
+
+        self.assertEqual(assessment["prerequisite_alerts"], [])
+        self.assertEqual(assessment["recommendation_band"], "priority")
+
     def test_certain_mandatory_unmet_prerequisite_forces_offer_to_end_without_changing_score(self) -> None:
         offer = {
             **self.base,
             "prerequisites": [
                 {
-                    "id": "certification-obligatoire",
-                    "kind": "certification",
-                    "description": "Certification réglementaire obligatoire",
+                    "id": "experience-obligatoire",
+                    "kind": "prior_role",
+                    "description": "Expérience préalable obligatoire",
                     "mandatory": True,
                     "profile_status": "unmet",
                 }
@@ -137,8 +170,245 @@ class OfferSearchTests(unittest.TestCase):
         self.assertTrue(assessment["forced_to_end"])
         self.assertEqual(assessment["hard_constraint_failures"], [])
         self.assertIn(
-            "prérequis obligatoire non satisfait : Certification réglementaire obligatoire",
+            "prérequis obligatoire non satisfait : Expérience préalable obligatoire",
             assessment["application_barriers"],
+        )
+
+    def test_certain_missing_mandatory_certification_excludes_offer_without_changing_score(self) -> None:
+        offer = {
+            **self.base,
+            "prerequisites": [
+                {
+                    "id": "certification-amf",
+                    "kind": "certification",
+                    "credential_id": "certification-amf",
+                    "description": "Certification AMF",
+                    "mandatory": True,
+                    "profile_status": "unmet",
+                    "profile_evidence_ids": ["knowledge-fact:delia-amf-certification-absent"],
+                }
+            ],
+        }
+
+        assessment = score_offer(
+            offer,
+            self.project,
+            self.policy,
+            set(),
+            self.today,
+            absent_certifications={
+                "certification-amf": {"knowledge-fact:delia-amf-certification-absent"}
+            },
+        )
+
+        self.assertFalse(assessment["eligible"])
+        self.assertEqual(assessment["score"], 87.0)
+        self.assertEqual(assessment["recommendation_band"], "excluded")
+        self.assertFalse(assessment["forced_to_end"])
+        self.assertIn(
+            "certification obligatoire non satisfaite : Certification AMF",
+            assessment["hard_constraint_failures"],
+        )
+
+    def test_unvalidated_missing_certification_is_not_treated_as_certain(self) -> None:
+        offer = {
+            **self.base,
+            "prerequisites": [
+                {
+                    "id": "certification-inconnue",
+                    "kind": "certification",
+                    "credential_id": "certification-inconnue",
+                    "description": "Certification métier",
+                    "mandatory": True,
+                    "profile_status": "unmet",
+                }
+            ],
+        }
+
+        assessment = score_offer(offer, self.project, self.policy, set(), self.today)
+
+        self.assertTrue(assessment["eligible"])
+        self.assertEqual(assessment["recommendation_band"], "possible")
+        self.assertEqual(assessment["prerequisite_alerts"][0]["status"], "not_demonstrated")
+
+    def test_complete_diploma_inventory_excludes_missing_mandatory_qualification(self) -> None:
+        offer = {
+            **self.base,
+            "prerequisites": [
+                {
+                    "id": "diplome-esthetique",
+                    "kind": "qualification",
+                    "description": "CAP, BP ou BTS Esthétique",
+                    "mandatory": True,
+                    "profile_status": "not_demonstrated",
+                }
+            ],
+        }
+        baseline = score_offer(offer, self.project, self.policy, set(), self.today)
+
+        assessment = score_offer(
+            offer,
+            self.project,
+            self.policy,
+            set(),
+            self.today,
+            complete_profile_dimensions={"credentials"},
+        )
+
+        self.assertTrue(baseline["eligible"])
+        self.assertFalse(assessment["eligible"])
+        self.assertEqual(assessment["score"], baseline["score"])
+        self.assertEqual(assessment["recommendation_band"], "excluded")
+        self.assertEqual(assessment["prerequisite_alerts"][0]["status"], "unmet")
+        self.assertIn(
+            "diplôme obligatoire non satisfait : CAP, BP ou BTS Esthétique",
+            assessment["hard_constraint_failures"],
+        )
+
+    def test_complete_diploma_inventory_does_not_exclude_missing_experience(self) -> None:
+        offer = {
+            **self.base,
+            "prerequisites": [
+                {
+                    "id": "experience-mode",
+                    "kind": "minimum_experience",
+                    "description": "Deux ans d'expérience dans la mode",
+                    "mandatory": True,
+                    "profile_status": "not_demonstrated",
+                }
+            ],
+        }
+
+        assessment = score_offer(
+            offer,
+            self.project,
+            self.policy,
+            set(),
+            self.today,
+            complete_profile_dimensions={"credentials"},
+        )
+
+        self.assertTrue(assessment["eligible"])
+        self.assertEqual(assessment["recommendation_band"], "possible")
+        self.assertEqual(assessment["prerequisite_alerts"][0]["status"], "not_demonstrated")
+
+    def test_validated_profile_completeness_is_loaded_from_knowledge(self) -> None:
+        self.assertIn(
+            "credentials",
+            collect_validated_profile_completeness(ROOT / "data" / "knowledge"),
+        )
+
+    def test_validated_sector_experience_months_are_merged_from_precise_periods(self) -> None:
+        months = collect_validated_sector_experience_months(ROOT / "data" / "knowledge")
+
+        self.assertEqual(months["mode-et-pret-a-porter"], 32)
+        self.assertEqual(months["luxe"], 23)
+        self.assertEqual(months["agencement-et-amenagement-interieur"], 89)
+        self.assertNotIn("cosmetique", months)
+
+    def test_validated_absent_sector_experience_uses_normalized_ids(self) -> None:
+        self.assertEqual(
+            collect_validated_absent_sector_experience_ids(ROOT / "data" / "knowledge"),
+            {"banque-et-assurance"},
+        )
+
+    def test_normalized_sector_duration_automatically_resolves_a_prerequisite(self) -> None:
+        offer = {
+            **self.base,
+            "prerequisites": [
+                {
+                    "id": "experience-mode-un-an",
+                    "kind": "sector_experience",
+                    "description": "Au moins un an dans la mode",
+                    "mandatory": True,
+                    "minimum_years": 1,
+                    "industry_sector_ids": ["mode-et-pret-a-porter"],
+                    "profile_status": "not_demonstrated",
+                }
+            ],
+        }
+        baseline = score_offer(offer, self.project, self.policy, set(), self.today)
+
+        assessment = score_offer(
+            offer,
+            self.project,
+            self.policy,
+            set(),
+            self.today,
+            sector_experience_months={"mode-et-pret-a-porter": 32},
+        )
+
+        self.assertEqual(assessment["score"], baseline["score"])
+        self.assertEqual(baseline["recommendation_band"], "possible")
+        self.assertEqual(assessment["recommendation_band"], "priority")
+        self.assertEqual(assessment["prerequisite_alerts"], [])
+        self.assertIn(
+            "prérequis sectoriel couvert : 32 mois validés pour 12 requis",
+            assessment["reasons"],
+        )
+
+    def test_validated_absent_sector_automatically_marks_prerequisite_unmet(self) -> None:
+        offer = {
+            **self.base,
+            "prerequisites": [
+                {
+                    "id": "experience-assurance",
+                    "kind": "sector_experience",
+                    "description": "Expérience préalable dans l'assurance",
+                    "mandatory": True,
+                    "industry_sector_ids": ["banque-et-assurance"],
+                    "profile_status": "not_demonstrated",
+                }
+            ],
+        }
+        baseline = score_offer(offer, self.project, self.policy, set(), self.today)
+
+        assessment = score_offer(
+            offer,
+            self.project,
+            self.policy,
+            set(),
+            self.today,
+            absent_sector_experience_ids={"banque-et-assurance"},
+        )
+
+        self.assertEqual(assessment["score"], baseline["score"])
+        self.assertEqual(assessment["recommendation_band"], "informational")
+        self.assertTrue(assessment["forced_to_end"])
+        self.assertEqual(assessment["prerequisite_alerts"][0]["status"], "unmet")
+
+    def test_quantified_sector_experience_is_excluded_when_sector_absence_is_validated(self) -> None:
+        offer = {
+            **self.base,
+            "prerequisites": [
+                {
+                    "id": "experience-assurance-deux-ans",
+                    "kind": "sector_experience",
+                    "description": "Deux ans chez un assureur ou un courtier",
+                    "mandatory": True,
+                    "industry_sector_ids": ["banque-et-assurance"],
+                    "minimum_years": 2,
+                    "profile_status": "not_demonstrated",
+                }
+            ],
+        }
+        baseline = score_offer(offer, self.project, self.policy, set(), self.today)
+
+        assessment = score_offer(
+            offer,
+            self.project,
+            self.policy,
+            set(),
+            self.today,
+            absent_sector_experience_ids={"banque-et-assurance"},
+        )
+
+        self.assertEqual(assessment["score"], baseline["score"])
+        self.assertFalse(assessment["eligible"])
+        self.assertEqual(assessment["recommendation_band"], "excluded")
+        self.assertIn(
+            "expérience sectorielle obligatoire non satisfaite : Deux ans chez un assureur ou un courtier",
+            assessment["hard_constraint_failures"],
         )
 
     def test_legacy_insurance_condition_uses_the_generic_possible_band(self) -> None:
@@ -160,7 +430,16 @@ class OfferSearchTests(unittest.TestCase):
         original = offer_search._build_scoring_context
         with patch.object(offer_search, "_build_scoring_context", wraps=original) as build_context:
             rank_offers([self.base, {**self.base, "id": "offer-2", "source_url": "https://jobs.example/offers/2"}], self.project, self.policy, set(), today=self.today)
-        build_context.assert_called_once_with(self.project, self.policy, set(), self.today)
+            build_context.assert_called_once_with(
+                self.project,
+                self.policy,
+                set(),
+                self.today,
+                None,
+                None,
+                None,
+                None,
+            )
 
     def test_rank_offers_characterization_preserves_order_diversity_and_exclusions(self) -> None:
         offers = [
@@ -214,6 +493,12 @@ class OfferSearchTests(unittest.TestCase):
                         "id": "offer-excluded",
                         "title": "Responsable administration des ventes luxe",
                         "employer": "Employeur Trois",
+                        "source_url": "https://direct.example/offers/3",
+                        "employer_source_url": None,
+                        "contract_type": "CDI",
+                        "location_label": "Bordeaux",
+                        "sector_labels": [],
+                        "phase": "policy",
                         "score": 87.5,
                         "failures": [
                             "activité exclue : démarchage téléphonique",
@@ -248,13 +533,143 @@ class OfferSearchTests(unittest.TestCase):
         self.assertEqual(canonical_offer_url(self.base["source_url"]), "https://jobs.example/offers/1")
         self.assertEqual(offer_identity(self.base), offer_identity(duplicate))
 
+    def test_canonical_offer_id_deduplicates_aggregator_and_employer_pages(self) -> None:
+        aggregator = {
+            **self.base,
+            "canonical_offer_id": "REF-123",
+            "source_url": "https://aggregator.example/jobs/123",
+            "source_kind": "aggregator",
+        }
+        employer = {
+            **self.base,
+            "canonical_offer_id": "REF-123",
+            "source_url": "https://employer.example/jobs/123",
+            "last_verified_at": "2026-07-19T10:00:00+02:00",
+        }
+
+        result = rank_offers([aggregator, employer], self.project, self.policy, set(), today=self.today)
+
+        self.assertEqual(result["unique_count"], 1)
+        self.assertEqual(result["offers"][0]["source_url"], "https://employer.example/jobs/123")
+
     def test_incomplete_pool_and_unknown_conditions_are_explicit(self) -> None:
         offer = {**self.base, "published_at": None, "conditions": {}, "summary": "Administration dans le luxe."}
         offer.pop("contract_type")
         result = rank_offers([offer], self.project, self.policy, set(), today=self.today)
         self.assertEqual(result["eligible_count"], 1)
-        self.assertTrue(any("pool incomplet" in warning for warning in result["warnings"]))
+        self.assertTrue(any("pool actif incomplet" in warning for warning in result["warnings"]))
         self.assertIn("type de contrat non précisé", result["offers"][0]["assessment"]["unknowns"])
+
+    def test_unverified_legacy_offers_are_queued_instead_of_ranked(self) -> None:
+        legacy = {key: value for key, value in self.base.items() if key != "verification_status"}
+
+        result = rank_offers([legacy], self.project, self.policy, set(), today=self.today)
+
+        self.assertEqual(result["active_count"], 0)
+        self.assertEqual(result["eligible_count"], 0)
+        self.assertEqual(result["verification_counts"]["pending"], 1)
+        self.assertEqual(result["pending_offer_count"], 1)
+        self.assertEqual(result["pending_offers"][0]["id"], "offer-1")
+        self.assertEqual(result["pending_offers"][0]["source_url"], self.base["source_url"])
+        self.assertEqual(
+            result["pending_offers"][0]["verification_reason"],
+            "annonce en attente de revérification",
+        )
+        self.assertEqual(result["excluded"][0]["phase"], "verification")
+        self.assertIn("attente de revérification", result["excluded"][0]["failures"][0])
+
+    def test_latest_verification_supersedes_an_older_active_copy(self) -> None:
+        closed = {
+            **self.base,
+            "id": "offer-closed",
+            "verification_status": "closed",
+            "last_verified_at": "2026-07-20T09:00:00+02:00",
+        }
+
+        result = rank_offers([self.base, closed], self.project, self.policy, set(), today=self.today)
+
+        self.assertEqual(result["unique_count"], 1)
+        self.assertEqual(result["active_count"], 0)
+        self.assertEqual(result["verification_counts"]["closed"], 1)
+        self.assertEqual(result["pending_offer_count"], 0)
+        self.assertEqual(result["pending_offers"], [])
+
+    def test_active_offer_requires_recent_verification(self) -> None:
+        stale = {**self.base, "last_verified_at": "2026-07-01T09:00:00+02:00"}
+
+        result = rank_offers([stale], self.project, self.policy, set(), today=self.today)
+
+        self.assertEqual(result["active_count"], 0)
+        self.assertIn("revérification nécessaire", result["excluded"][0]["failures"][0])
+
+    def test_aggregator_offer_requires_an_exact_employer_page(self) -> None:
+        aggregator = {**self.base, "source_kind": "aggregator"}
+        verified = {
+            **aggregator,
+            "employer_source_url": "https://employer.example/jobs/offer-1",
+        }
+
+        pending_result = rank_offers([aggregator], self.project, self.policy, set(), today=self.today)
+        verified_result = rank_offers([verified], self.project, self.policy, set(), today=self.today)
+
+        self.assertEqual(pending_result["active_count"], 0)
+        self.assertIn("page employeur exacte", pending_result["excluded"][0]["failures"][0])
+        self.assertEqual(verified_result["active_count"], 1)
+
+    def test_report_separates_pool_eligibility_and_selection_metrics(self) -> None:
+        result = rank_offers([self.base], self.project, self.policy, set(), today=self.today)
+
+        self.assertEqual(result["candidate_count"], 1)
+        self.assertEqual(result["unique_count"], 1)
+        self.assertEqual(result["active_count"], 1)
+        self.assertEqual(result["eligible_count"], 1)
+        self.assertEqual(result["selected_count"], 1)
+        self.assertFalse(result["pool_complete"])
+        self.assertEqual(result["report_status"], "incomplete")
+        self.assertFalse(result["finalization_allowed"])
+
+    def test_strict_pool_completeness_requires_declared_scan_coverage(self) -> None:
+        offers = [
+            {
+                **self.base,
+                "id": f"offer-{index}",
+                "source_url": f"https://jobs.example/offers/{index}",
+            }
+            for index in range(30)
+        ]
+        requirements = {
+            "required_source_domains": ["jobs.example"],
+            "required_query_families": ["relation-client"],
+            "required_priority_sectors": ["luxe"],
+        }
+
+        incomplete = rank_offers(
+            offers,
+            self.project,
+            self.policy,
+            set(),
+            today=self.today,
+            scan_requirements=requirements,
+            require_scan_coverage=True,
+        )
+        complete = rank_offers(
+            offers,
+            self.project,
+            self.policy,
+            set(),
+            today=self.today,
+            visited_sources=["https://jobs.example/search"],
+            scan_requirements=requirements,
+            covered_query_families={"relation-client"},
+            covered_priority_sectors={"luxe"},
+            require_scan_coverage=True,
+        )
+
+        self.assertTrue(incomplete["active_pool_complete"])
+        self.assertFalse(incomplete["pool_complete"])
+        self.assertEqual(incomplete["scan_coverage"]["missing_source_domains"], ["jobs.example"])
+        self.assertTrue(complete["pool_complete"])
+        self.assertTrue(complete["finalization_allowed"])
 
     def test_monthly_compensation_is_compared_as_an_annual_amount(self) -> None:
         eligible = {
@@ -337,9 +752,9 @@ class OfferSearchTests(unittest.TestCase):
             "source_url": "https://jobs.example/offers/forced",
             "prerequisites": [
                 {
-                    "id": "certification-obligatoire",
-                    "kind": "certification",
-                    "description": "Certification réglementaire obligatoire",
+                    "id": "experience-obligatoire",
+                    "kind": "prior_role",
+                    "description": "Expérience préalable obligatoire",
                     "mandatory": True,
                     "profile_status": "unmet",
                 }
@@ -367,6 +782,47 @@ class OfferSearchTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(ValueError, "possible recommendation score"):
             score_offer(self.base, self.project, invalid_policy, set(), self.today)
+
+    def test_offer_pool_limits_distinguish_minimum_and_maximum(self) -> None:
+        self.assertEqual(invalid_offer_pool_limits(self.policy), [])
+        invalid_policy = {
+            **self.policy,
+            "candidate_pool_minimum": 101,
+            "candidate_pool_maximum": 100,
+            "result_limit": 101,
+        }
+        self.assertEqual(
+            invalid_offer_pool_limits(invalid_policy),
+            [
+                "offer search policy: candidate pool minimum cannot exceed maximum",
+                "offer search policy: result limit cannot exceed candidate pool maximum",
+            ],
+        )
+        with self.assertRaisesRegex(ValueError, "offer result limit must be between 1 and 100"):
+            rank_offers([self.base], self.project, self.policy, set(), limit=101, today=self.today)
+        with self.assertRaisesRegex(ValueError, "offer result limit must be between 1 and 100"):
+            rank_offers([self.base], self.project, self.policy, set(), limit=0, today=self.today)
+
+    def test_ranking_keeps_more_than_thirty_active_offers_and_returns_up_to_one_hundred(self) -> None:
+        offers = [
+            {
+                **self.base,
+                "id": f"offer-{index}",
+                "source_url": f"https://jobs.example/offers/{index}",
+                "employer": f"Employeur {index}",
+            }
+            for index in range(101)
+        ]
+
+        result = rank_offers(offers, self.project, self.policy, set(), today=self.today)
+
+        self.assertEqual(result["active_count"], 101)
+        self.assertEqual(result["eligible_count"], 101)
+        self.assertEqual(result["selected_count"], 100)
+        self.assertEqual(result["active_overflow_count"], 1)
+        self.assertEqual(len(result["offers"]), 100)
+        self.assertTrue(result["pool_complete"])
+        self.assertIn("100 restituées au maximum", " ".join(result["warnings"]))
 
     def test_priority_sectors_must_have_declared_source_coverage(self) -> None:
         self.assertEqual(missing_priority_sector_coverage(self.project, self.policy), [])
@@ -440,6 +896,52 @@ class OfferSearchTests(unittest.TestCase):
         self.assertIn("secteur acceptable : commerce et distribution", result["reasons"])
         self.assertFalse(any(reason.startswith("activité prioritaire") for reason in result["reasons"]))
         self.assertIn("domaine fonctionnel peu explicite", result["gaps"])
+
+    def test_specialist_data_profile_is_excluded_with_explainable_classification(self) -> None:
+        offer = {
+            **self.base,
+            "title": "Directeur Data F/H",
+            "summary": "Diriger la fonction Data, sa gouvernance et ses équipes techniques.",
+            "required_skills": ["SQL", "Power BI", "Snowflake"],
+            "preferred_skills": ["transformation d'une fonction Data"],
+        }
+
+        result = score_offer(offer, self.project, self.policy, set(), self.today)
+
+        self.assertFalse(result["eligible"])
+        self.assertIn("famille de profil exclue : profil spécialiste Data", result["hard_constraint_failures"])
+        self.assertEqual(result["recommendation_band"], "excluded")
+        self.assertEqual(result["profile_family_matches"][0]["id"], "specialist-data")
+        self.assertEqual(result["profile_family_matches"][0]["confidence"], "high")
+        self.assertIn("directeur data", result["profile_family_matches"][0]["title_markers"])
+
+    def test_single_data_tool_does_not_exclude_a_generalist_project_role(self) -> None:
+        offer = {
+            **self.base,
+            "title": "Chef de projet expérience client",
+            "summary": "Piloter des projets et produire des tableaux de bord pour le service client.",
+            "required_skills": ["Power BI"],
+            "preferred_skills": [],
+        }
+
+        result = score_offer(offer, self.project, self.policy, set(), self.today)
+
+        self.assertTrue(result["eligible"])
+        self.assertEqual(result["profile_family_matches"], [])
+
+    def test_profile_markers_are_matched_as_complete_terms(self) -> None:
+        offer = {
+            **self.base,
+            "title": "Responsable gouvernance des données clients",
+            "summary": "Organiser la gouvernance des données et les tableaux de bord clients.",
+            "required_skills": ["MySQL", "Power BI"],
+            "preferred_skills": [],
+        }
+
+        result = score_offer(offer, self.project, self.policy, set(), self.today)
+
+        self.assertTrue(result["eligible"])
+        self.assertEqual(result["profile_family_matches"], [])
 
     def test_ranked_report_records_all_consulted_source_origins(self) -> None:
         result = rank_offers(

@@ -13,7 +13,7 @@ from urllib.parse import urlsplit
 from .core import sha256_file
 from .storage import atomic_write_bytes_group
 
-MAX_OFFERS_PER_EMAIL = 50
+MAX_RESULT_ITEMS = 100
 DEFAULT_FEEDBACK_BCC = "laurent.sintes74@gmail.com"
 SECTION_DEFINITIONS = (
     ("priority", "Il faut répondre, ça matche et tu as des chances d’un retour positif"),
@@ -21,6 +21,8 @@ SECTION_DEFINITIONS = (
     ("informational", "Je te les mets pour info, mais il y a peu de chances"),
 )
 SECTION_ORDER = {identifier: index for index, (identifier, _) in enumerate(SECTION_DEFINITIONS)}
+PENDING_SECTION_TITLE = "Offres probablement actives à revérifier"
+EXCLUDED_SECTION_TITLE = "Offres exclues et pourquoi"
 
 
 def _text(value: Any) -> str:
@@ -199,6 +201,91 @@ def _offer_relevance_key(offer: dict[str, Any]) -> tuple[int, float, int, str]:
     return (SECTION_ORDER[_offer_band(offer)], -numeric_score, numeric_rank, _text(offer.get("id")))
 
 
+def _pending_offer_key(offer: dict[str, Any]) -> tuple[str, str, str]:
+    return (
+        _text(offer.get("employer")).casefold(),
+        _text(offer.get("title")).casefold(),
+        _text(offer.get("id")),
+    )
+
+
+def _pending_offer_lines(offer: dict[str, Any]) -> tuple[str, str]:
+    title = _text(offer.get("title")) or "Offre sans intitulé"
+    employer = _text(offer.get("employer")) or "employeur non précisé"
+    contract = _text(offer.get("contract_type")) or "contrat à confirmer"
+    location = _text(offer.get("location_label")) or "lieu à confirmer"
+    link = _safe_http_url(offer.get("source_url")) or _safe_http_url(offer.get("employer_source_url"))
+    reason = _text(offer.get("verification_reason"))
+    if not reason:
+        failures = offer.get("failures")
+        if isinstance(failures, list):
+            reason = "; ".join(_text(item) for item in failures if _text(item))
+    reason = reason or "activité de l’annonce à confirmer"
+    text_line = (
+        f"{employer} — {title}\n"
+        f"Contrat et lieu : {contract}, {location}\n"
+        f"{link or 'Lien de l’annonce non disponible'}\n"
+        f"Motif de revérification : {reason}"
+    )
+    html_link = (
+        f'<a href="{html.escape(link, quote=True)}">Voir l’annonce à revérifier</a>'
+        if link is not None
+        else "Lien de l’annonce non disponible"
+    )
+    html_line = (
+        f"<strong>{html.escape(employer)} — {html.escape(title)}</strong><br>"
+        f"<strong>Contrat et lieu :</strong> {html.escape(contract)}, {html.escape(location)}<br>"
+        f"{html_link}<br>"
+        f'<span style="color: #8a5a00;"><strong>Motif de revérification :</strong> '
+        f"{html.escape(reason)}</span>"
+    )
+    return text_line, html_line
+
+
+def _excluded_offer_key(offer: dict[str, Any]) -> tuple[str, str, str]:
+    return (
+        _text(offer.get("employer")).casefold(),
+        _text(offer.get("title")).casefold(),
+        _text(offer.get("id")),
+    )
+
+
+def _excluded_offer_lines(offer: dict[str, Any]) -> tuple[str, str]:
+    title = _text(offer.get("title")) or "Offre sans intitulé"
+    employer = _text(offer.get("employer")) or "employeur non précisé"
+    contract = _text(offer.get("contract_type")) or "contrat à confirmer"
+    location = _text(offer.get("location_label")) or "lieu à confirmer"
+    link = _safe_http_url(offer.get("source_url")) or _safe_http_url(offer.get("employer_source_url"))
+    failures = offer.get("failures")
+    reasons = [_text(item) for item in failures if _text(item)] if isinstance(failures, list) else []
+    verification_reason = _text(offer.get("verification_reason"))
+    if verification_reason:
+        reasons.append(verification_reason)
+    reason = "; ".join(dict.fromkeys(reasons)) or "motif d’exclusion non précisé"
+    score = offer.get("score")
+    relevance = _relevance_label({"score": score}) if isinstance(score, (int, float)) else ""
+    relevance_text = f"\nPertinence calculée : {relevance}" if relevance else ""
+    text_line = (
+        f"{employer} — {title}\n"
+        f"Contrat et lieu : {contract}, {location}{relevance_text}\n"
+        f"{link or 'Lien de l’annonce non disponible'}\n"
+        f"Pourquoi exclue : {reason}"
+    )
+    html_link = (
+        f'<a href="{html.escape(link, quote=True)}">Voir l’annonce exclue</a>'
+        if link is not None
+        else "Lien de l’annonce non disponible"
+    )
+    html_relevance = f"<strong>Pertinence calculée :</strong> {html.escape(relevance)}<br>" if relevance else ""
+    html_line = (
+        f"<strong>{html.escape(employer)} — {html.escape(title)}</strong><br>"
+        f"<strong>Contrat et lieu :</strong> {html.escape(contract)}, {html.escape(location)}<br>"
+        f"{html_relevance}{html_link}<br>"
+        f'<span style="color: #b42318;"><strong>Pourquoi exclue :</strong> {html.escape(reason)}</span>'
+    )
+    return text_line, html_line
+
+
 @dataclass(frozen=True)
 class FeedbackEmailRequest:
     report: dict[str, Any]
@@ -219,6 +306,10 @@ class FeedbackEmailSelection:
     cv_pdf: Path
     output_dir: Path
     offers: tuple[dict[str, Any], ...]
+    pending_offers: tuple[dict[str, Any], ...]
+    pending_offer_count: int
+    excluded_offers: tuple[dict[str, Any], ...]
+    excluded_offer_count: int
     visited_sources: tuple[str, ...]
 
 
@@ -243,16 +334,34 @@ def _usable_offers(report: dict[str, Any]) -> list[dict[str, Any]]:
     return [offer for offer in offers if isinstance(offer, dict)]
 
 
+def _usable_pending_offers(report: dict[str, Any]) -> list[dict[str, Any]]:
+    offers = report.get("pending_offers")
+    if not isinstance(offers, list):
+        return []
+    return [offer for offer in offers if isinstance(offer, dict)]
+
+
+def _usable_excluded_offers(report: dict[str, Any]) -> list[dict[str, Any]]:
+    offers = report.get("excluded")
+    if not isinstance(offers, list):
+        return []
+    return [
+        offer
+        for offer in offers
+        if isinstance(offer, dict) and _text(offer.get("verification_status")) != "pending"
+    ]
+
+
 def _select_offers(
     offers: list[dict[str, Any]],
     limit: int,
     offer_ids: tuple[str, ...] | None,
 ) -> tuple[dict[str, Any], ...]:
-    if not 1 <= limit <= MAX_OFFERS_PER_EMAIL:
-        raise ValueError(f"limit must be between 1 and {MAX_OFFERS_PER_EMAIL}")
+    if not 1 <= limit <= MAX_RESULT_ITEMS:
+        raise ValueError(f"limit must be between 1 and {MAX_RESULT_ITEMS}")
     if offer_ids:
-        if len(offer_ids) > MAX_OFFERS_PER_EMAIL:
-            raise ValueError(f"at most {MAX_OFFERS_PER_EMAIL} offers can be included in one email")
+        if len(offer_ids) > limit:
+            raise ValueError(f"at most {limit} selected offers can be included")
         offers_by_id = {_text(offer.get("id")): offer for offer in offers}
         missing = [identifier for identifier in offer_ids if identifier not in offers_by_id]
         if missing:
@@ -272,8 +381,25 @@ def _prepare_selection(request: FeedbackEmailRequest) -> FeedbackEmailSelection:
     site_url = _normalize_site_url(request.site_url)
     if not request.cv_pdf.is_file() or request.cv_pdf.suffix.casefold() != ".pdf":
         raise ValueError("cv_pdf must be an existing PDF file")
+    if request.report.get("finalization_allowed") is False:
+        raise ValueError("an incomplete offer report cannot be prepared for delivery")
+    if not 1 <= request.limit <= MAX_RESULT_ITEMS:
+        raise ValueError(f"limit must be between 1 and {MAX_RESULT_ITEMS}")
     usable_offers = _usable_offers(request.report)
-    selected_offers = _select_offers(usable_offers, request.limit, request.offer_ids)
+    usable_excluded_offers = sorted(_usable_excluded_offers(request.report), key=_excluded_offer_key)
+    ranked_limit = request.limit
+    if request.offer_ids is None and usable_excluded_offers:
+        excluded_reserve = min(len(usable_excluded_offers), request.limit - 1)
+        ranked_limit = min(ranked_limit, request.limit - excluded_reserve)
+    selected_offers = _select_offers(usable_offers, ranked_limit, request.offer_ids)
+    excluded_capacity = max(0, request.limit - len(selected_offers))
+    selected_excluded_offers = tuple(usable_excluded_offers[:excluded_capacity])
+    usable_pending_offers = sorted(_usable_pending_offers(request.report), key=_pending_offer_key)
+    pending_capacity = max(
+        0,
+        request.limit - len(selected_offers) - len(selected_excluded_offers),
+    )
+    selected_pending_offers = tuple(usable_pending_offers[:pending_capacity])
     return FeedbackEmailSelection(
         recipient=recipient,
         bcc=bcc,
@@ -281,6 +407,10 @@ def _prepare_selection(request: FeedbackEmailRequest) -> FeedbackEmailSelection:
         cv_pdf=request.cv_pdf,
         output_dir=request.output_dir,
         offers=selected_offers,
+        pending_offers=selected_pending_offers,
+        pending_offer_count=len(usable_pending_offers),
+        excluded_offers=selected_excluded_offers,
+        excluded_offer_count=len(usable_excluded_offers),
         visited_sources=tuple(_visited_sources(request.report, usable_offers)),
     )
 
@@ -296,6 +426,65 @@ def _visited_source_notes(visited_sources: tuple[str, ...]) -> tuple[str, str]:
             for source in visited_sources
         )
         + "</ul>"
+    )
+    return text_note, html_note
+
+
+def _pending_offer_notes(selection: FeedbackEmailSelection) -> tuple[str, str]:
+    if selection.pending_offer_count == 0:
+        return "", ""
+    displayed = len(selection.pending_offers)
+    explanation = (
+        "Ces annonces ne sont pas intégrées au classement tant que leur activité ou leur page employeur exacte "
+        "n’est pas confirmée."
+    )
+    omitted = selection.pending_offer_count - displayed
+    omitted_text = f"\n{omitted} autre(s) annonce(s) pending restent consultables dans le rapport complet." if omitted else ""
+    rendered = [_pending_offer_lines(offer) for offer in selection.pending_offers]
+    text_items = "\n\n".join(f"- {text_line}" for text_line, _ in rendered)
+    text_note = f"{PENDING_SECTION_TITLE}\n\n{explanation}"
+    if text_items:
+        text_note += "\n\n" + text_items
+    text_note += omitted_text
+    html_items = "".join(f'<li style="margin: 0 0 14px 0;">{html_line}</li>' for _, html_line in rendered)
+    omitted_html = (
+        f"<p>{omitted} autre(s) annonce(s) pending restent consultables dans le rapport complet.</p>"
+        if omitted
+        else ""
+    )
+    html_note = (
+        f'<section data-verification-status="pending"><h2>{html.escape(PENDING_SECTION_TITLE)}</h2>'
+        f"<p>{html.escape(explanation)}</p>"
+        + (f"<ul>{html_items}</ul>" if html_items else "")
+        + omitted_html
+        + "</section>"
+    )
+    return text_note, html_note
+
+
+def _excluded_offer_notes(selection: FeedbackEmailSelection) -> tuple[str, str]:
+    if selection.excluded_offer_count == 0:
+        return "", ""
+    displayed = len(selection.excluded_offers)
+    omitted = selection.excluded_offer_count - displayed
+    rendered = [_excluded_offer_lines(offer) for offer in selection.excluded_offers]
+    text_items = "\n\n".join(f"- {text_line}" for text_line, _ in rendered)
+    text_note = EXCLUDED_SECTION_TITLE
+    if text_items:
+        text_note += "\n\n" + text_items
+    if omitted:
+        text_note += f"\n{omitted} autre(s) offre(s) exclue(s) restent consultables dans le rapport complet."
+    html_items = "".join(f'<li style="margin: 0 0 14px 0;">{html_line}</li>' for _, html_line in rendered)
+    omitted_html = (
+        f"<p>{omitted} autre(s) offre(s) exclue(s) restent consultables dans le rapport complet.</p>"
+        if omitted
+        else ""
+    )
+    html_note = (
+        f'<section data-result-status="excluded"><h2>{html.escape(EXCLUDED_SECTION_TITLE)}</h2>'
+        + (f"<ul>{html_items}</ul>" if html_items else "")
+        + omitted_html
+        + "</section>"
     )
     return text_note, html_note
 
@@ -324,6 +513,8 @@ def _render_email_content(selection: FeedbackEmailSelection) -> FeedbackEmailCon
             )
             + "</ol></section>"
         )
+    pending_offers_text, pending_offers_html = _pending_offer_notes(selection)
+    excluded_offers_text, excluded_offers_html = _excluded_offer_notes(selection)
     visited_sources_text, visited_sources_html = _visited_source_notes(selection.visited_sources)
     offer_word = "offre" if len(selection.offers) == 1 else "offres"
     subject = f"Sélection de {len(selection.offers)} {offer_word} — ton avis"
@@ -336,6 +527,8 @@ def _render_email_content(selection: FeedbackEmailSelection) -> FeedbackEmailCon
             "Ton CV actuel est joint à ce message.",
             feedback_prompt,
             "\n\n".join(text_sections),
+            pending_offers_text,
+            excluded_offers_text,
             visited_sources_text,
             "À bientôt,",
         ]
@@ -348,6 +541,8 @@ def _render_email_content(selection: FeedbackEmailSelection) -> FeedbackEmailCon
             "<p>Ton CV actuel est joint à ce message.</p>",
             f"<p>{html.escape(feedback_prompt)}</p>",
             "".join(html_sections),
+            pending_offers_html,
+            excluded_offers_html,
             visited_sources_html,
             "<p>À bientôt,</p>",
         ]
@@ -381,6 +576,15 @@ def _build_manifest(selection: FeedbackEmailSelection, content: FeedbackEmailCon
         "site_url": selection.site_url,
         "offer_count": len(selection.offers),
         "offer_ids": [_text(offer.get("id")) for offer in selection.offers],
+        "pending_offer_count": selection.pending_offer_count,
+        "pending_offer_displayed_count": len(selection.pending_offers),
+        "pending_offer_ids": [_text(offer.get("id")) for offer in selection.pending_offers],
+        "excluded_offer_count": selection.excluded_offer_count,
+        "excluded_offer_displayed_count": len(selection.excluded_offers),
+        "excluded_offer_ids": [_text(offer.get("id")) for offer in selection.excluded_offers],
+        "displayed_item_count": (
+            len(selection.offers) + len(selection.pending_offers) + len(selection.excluded_offers)
+        ),
         "section_counts": {
             band: sum(_offer_band(offer) == band for offer in selection.offers)
             for band, _ in SECTION_DEFINITIONS
@@ -420,7 +624,7 @@ def prepare_offer_feedback_email(
     site_url: str,
     cv_pdf: Path,
     output_dir: Path,
-    limit: int = MAX_OFFERS_PER_EMAIL,
+    limit: int = MAX_RESULT_ITEMS,
     offer_ids: list[str] | None = None,
     bcc: str = DEFAULT_FEEDBACK_BCC,
 ) -> dict[str, Any]:

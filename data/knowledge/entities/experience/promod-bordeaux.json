@@ -19,6 +19,20 @@
         "title": "responsable adjointe de magasin"
       }
     },
+    "industry_sector_ids": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-21T16:12:20+00:00",
+          "locator": "validation-normalisation-secteurs-experiences-2026-07-21.txt#P03",
+          "proposal_id": "proposal-experience-sectors-promod-bordeaux-2026-07-21",
+          "source_id": "src-7cfae887f36b6c4d"
+        }
+      ],
+      "value": [
+        "mode-et-pret-a-porter",
+        "commerce-et-distribution"
+      ]
+    },
     "mission": {
       "provenance": [
         {
@@ -61,5 +75,5 @@
   },
   "id": "promod-bordeaux",
   "type": "experience",
-  "updated_at": "2026-07-19T18:38:56+00:00"
+  "updated_at": "2026-07-21T16:12:20+00:00"
 }

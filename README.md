@@ -33,8 +33,19 @@ python scripts/delia_life.py --help
 Le classement déterministe d'un pool d'offres normalisées s'exécute avec :
 
 ```powershell
-python scripts/delia_life.py rank-offers data/offers/2026-07-19 --output generated/offer-search/2026-07-19.json
+python scripts/delia_life.py rank-offers data/offers --require-complete-pool --output generated/offer-search/2026-07-19.json
 ```
+
+Les scans d’offres commencent par une session explicite :
+
+```powershell
+python scripts/delia_life.py offer-scan clean-cache
+python scripts/delia_life.py offer-scan full
+python scripts/delia_life.py offer-scan delta
+python scripts/delia_life.py offer-scan send
+```
+
+`full` et `send` nettoient l’état technique puis isolent la collecte dans un nouveau répertoire ; le classement ne lit que les observations fraîches de cette session. `delta` conserve le pool historique et le dédoublonne. `send` prépare un full destiné au workflow d’envoi à Délia, sans déléguer l’envoi à la CLI.
 
 Les originaux sont déposés dans `private/originals/` et versionnés avec les manifestes, propositions, décisions et connaissances produites. Le nom `private/` indique une exclusion de GitHub Pages et des candidatures par défaut; il ne constitue pas une protection contre la lecture du dépôt public.
 

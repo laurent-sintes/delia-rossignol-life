@@ -18,6 +18,7 @@ description: Importer un CV, diplôme, document, note, archive ou site web relat
 9. Lancer `python scripts/delia_life.py check`. Présenter les doublons, contradictions et propositions à l'utilisateur.
 10. Attendre une décision humaine avant d'exécuter `review`. Utiliser `accept`, `edit` ou `reject` et renseigner le relecteur.
 11. Appliquer uniquement une proposition validée avec la commande Python dédiée. Ne pas éditer directement la connaissance cible.
+12. Après application dans `data/knowledge/`, exécuter `python scripts/repo_flow.py review-content` et conserver l’aperçu local actif.
 
 Versionner avec l'ingestion l'original ou l'archive, le manifeste, les propositions et leur historique de validation. Ne jamais ajouter de secret technique, de cookie d'authentification, de clé privée ou de fichier `.env`.
 

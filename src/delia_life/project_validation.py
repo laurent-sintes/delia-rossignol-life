@@ -70,6 +70,18 @@ def invalid_recommendation_band_thresholds(policy: dict[str, Any]) -> list[str]:
     return []
 
 
+def invalid_offer_pool_limits(policy: dict[str, Any]) -> list[str]:
+    minimum = policy.get("candidate_pool_minimum")
+    maximum = policy.get("candidate_pool_maximum")
+    result_limit = policy.get("result_limit")
+    errors: list[str] = []
+    if isinstance(minimum, int) and isinstance(maximum, int) and minimum > maximum:
+        errors.append("offer search policy: candidate pool minimum cannot exceed maximum")
+    if isinstance(result_limit, int) and isinstance(maximum, int) and result_limit > maximum:
+        errors.append("offer search policy: result limit cannot exceed candidate pool maximum")
+    return errors
+
+
 def invalid_offer_source_audit(policy: dict[str, Any], audit: dict[str, Any]) -> list[str]:
     source_domains = set(policy.get("source_domains", []))
     strategy = policy.get("source_strategy", {})
@@ -167,6 +179,7 @@ def _validate_offer_search_coverage(state: ProjectValidationState) -> None:
     audit = state.loaded_single_contracts.get("offer-source-audit")
     if policy is not None:
         state.errors.extend(invalid_recommendation_band_thresholds(policy))
+        state.errors.extend(invalid_offer_pool_limits(policy))
         if audit is not None:
             state.errors.extend(invalid_offer_source_audit(policy, audit))
     for career_project in career_projects:
