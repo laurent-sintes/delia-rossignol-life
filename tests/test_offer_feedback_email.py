@@ -99,6 +99,56 @@ class OfferFeedbackEmailTests(unittest.TestCase):
         draft_text = (self.work / "draft" / "offer-selection.txt").read_text(encoding="utf-8")
         self.assertIn("- https://jobs.example", draft_text)
 
+    def test_prerequisite_constraint_is_rendered_in_red(self) -> None:
+        report = {
+            "offers": [
+                {
+                    "id": "offer-prerequisite",
+                    "title": "Directrice d’agence",
+                    "employer": "Employeur",
+                    "source_url": "https://jobs.example/offers/prerequisite",
+                    "assessment": {
+                        "score": 62,
+                        "prerequisite_alerts": [
+                            {
+                                "description": "Expérience assurantielle préalable",
+                                "message": "non démontré dans les connaissances validées",
+                            }
+                        ],
+                    },
+                }
+            ]
+        }
+        cv = self.work / "cv.pdf"
+        cv.write_bytes(b"%PDF-1.4\nexample")
+        prepare_offer_feedback_email(report, "delia@example.test", "https://example.test", cv, self.work / "draft")
+        text_body = (self.work / "draft" / "offer-selection.txt").read_text(encoding="utf-8")
+        html_body = (self.work / "draft" / "offer-selection.html").read_text(encoding="utf-8")
+        self.assertIn("⚠ PRÉREQUIS : Expérience assurantielle préalable", text_body)
+        self.assertIn("aucun autre point de vigilance identifié", text_body)
+        self.assertIn('style="color: #b42318;"', html_body)
+        self.assertIn("Expérience assurantielle préalable", html_body)
+
+    def test_legacy_insurance_condition_is_still_rendered_in_red(self) -> None:
+        report = {
+            "offers": [
+                {
+                    "id": "legacy-offer",
+                    "title": "Directrice d’agence",
+                    "employer": "Employeur",
+                    "source_url": "https://jobs.example/offers/legacy",
+                    "conditions": {"insurance_experience_required": True},
+                    "assessment": {"score": 62},
+                }
+            ]
+        }
+        cv = self.work / "cv.pdf"
+        cv.write_bytes(b"%PDF-1.4\nexample")
+        prepare_offer_feedback_email(report, "delia@example.test", "https://example.test", cv, self.work / "draft")
+        html_body = (self.work / "draft" / "offer-selection.html").read_text(encoding="utf-8")
+        self.assertIn('style="color: #b42318;"', html_body)
+        self.assertIn("Expérience préalable dans le domaine assurantiel", html_body)
+
     def test_limits_a_default_email_to_fifty_ranked_offers(self) -> None:
         report = {"offers": [{"id": f"offer-{index}", "title": "Poste", "employer": "Employeur", "source_url": "https://jobs.example/offers", "assessment": {}} for index in range(55)]}
         cv = self.work / "cv.pdf"
@@ -119,6 +169,62 @@ class OfferFeedbackEmailTests(unittest.TestCase):
         cv.write_bytes(b"%PDF-1.4\nexample")
         result = prepare_offer_feedback_email(report, "delia@example.test", "https://example.test", cv, self.work / "draft")
         self.assertEqual(result["offer_ids"], ["higher", "lower"])
+
+    def test_email_groups_three_sections_before_score_and_keeps_global_numbering(self) -> None:
+        report = {
+            "offers": [
+                {
+                    "id": "info-high",
+                    "title": "Poste informationnel",
+                    "employer": "Employeur",
+                    "source_url": "https://jobs.example/info",
+                    "recommendation_band": "informational",
+                    "assessment": {"score": 95},
+                },
+                {
+                    "id": "priority",
+                    "title": "Poste prioritaire",
+                    "employer": "Employeur",
+                    "source_url": "https://jobs.example/priority",
+                    "recommendation_band": "priority",
+                    "assessment": {"score": 80},
+                },
+                {
+                    "id": "possible",
+                    "title": "Poste possible",
+                    "employer": "Employeur",
+                    "source_url": "https://jobs.example/possible",
+                    "recommendation_band": "possible",
+                    "assessment": {"score": 55},
+                },
+            ]
+        }
+        cv = self.work / "cv.pdf"
+        cv.write_bytes(b"%PDF-1.4\nexample")
+        result = prepare_offer_feedback_email(
+            report,
+            "delia@example.test",
+            "https://example.test",
+            cv,
+            self.work / "draft",
+            offer_ids=["info-high", "possible", "priority"],
+        )
+        self.assertEqual(result["offer_ids"], ["priority", "possible", "info-high"])
+        self.assertEqual(result["section_counts"], {"priority": 1, "possible": 1, "informational": 1})
+        text_body = (self.work / "draft" / "offer-selection.txt").read_text(encoding="utf-8")
+        html_body = (self.work / "draft" / "offer-selection.html").read_text(encoding="utf-8")
+        headings = [
+            "Il faut répondre, ça matche et tu as des chances d’un retour positif",
+            "Tu peux répondre, on ne sait jamais",
+            "Je te les mets pour info, mais il y a peu de chances",
+        ]
+        self.assertEqual([text_body.index(heading) for heading in headings], sorted(text_body.index(heading) for heading in headings))
+        self.assertIn("1. Secteur d’activité", text_body)
+        self.assertIn("2. Secteur d’activité", text_body)
+        self.assertIn("3. Secteur d’activité", text_body)
+        self.assertIn('<ol start="1">', html_body)
+        self.assertIn('<ol start="2">', html_body)
+        self.assertIn('<ol start="3">', html_body)
 
     def test_email_caps_relevance_display_to_one_hundred(self) -> None:
         report = {

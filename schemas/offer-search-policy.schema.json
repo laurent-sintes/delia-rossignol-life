@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
-  "required": ["id", "result_limit", "candidate_pool_minimum", "freshness_days", "contracts", "diversity", "functional_query_families", "location_queries", "source_domains", "priority_sector_coverage", "source_strategy", "weights"],
+  "required": ["id", "result_limit", "candidate_pool_minimum", "freshness_days", "contracts", "diversity", "recommendation_bands", "functional_query_families", "location_queries", "regional_source_audit", "source_domains", "priority_sector_coverage", "source_strategy", "weights"],
   "properties": {
     "id": {"type": "string", "minLength": 1},
     "result_limit": {"type": "integer", "minimum": 1, "maximum": 50},
@@ -26,7 +26,17 @@
       },
       "additionalProperties": false
     },
+    "recommendation_bands": {
+      "type": "object",
+      "required": ["priority_minimum_score", "possible_minimum_score"],
+      "properties": {
+        "priority_minimum_score": {"type": "number", "minimum": 0, "maximum": 100},
+        "possible_minimum_score": {"type": "number", "minimum": 0, "maximum": 100}
+      },
+      "additionalProperties": false
+    },
     "location_queries": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "regional_source_audit": {"type": "string", "const": "config/offer-source-audit.json"},
     "functional_query_families": {
       "type": "object",
       "minProperties": 1,

@@ -26,6 +26,9 @@ class SkillTests(unittest.TestCase):
 
         self.assertNotIn("après une modification de contenu", manage_git)
         self.assertNotIn("git push -u origin main", manage_git)
+        self.assertIn("## Action `push` / `publish`", manage_git)
+        self.assertIn("gh run watch <run-id> --exit-status", manage_git)
+        self.assertNotIn("Attendre la validation visuelle", manage_git)
         self.assertNotIn("pour rechercher ou analyser", match_offers.casefold())
         self.assertEqual(publish_site.count("python scripts/repo_flow.py review-content"), 1)
         self.assertNotIn("python -m unittest", publish_site)

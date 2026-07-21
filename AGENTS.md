@@ -80,7 +80,7 @@ Un template ne contient aucune donnée personnelle. Son fichier `template.json` 
 
 Un retour employeur est une observation rattachée à une candidature, pas une vérité universelle. Ne pas modifier automatiquement le profil ou les règles de génération. Produire une proposition d'amélioration, puis la soumettre à validation.
 
-Pour un email de revue d’offres à Délia, partir du rapport complet, conserver l’ordre de pertinence et inclure jusqu’à 50 offres. Chaque offre doit présenter secteur, mission / poste, salaire proposé ou non communiqué, pertinence sur 100, puis un point de vigilance factuel visuellement signalé ; ne jamais révéler les contraintes personnelles utilisées pour le classement.
+Pour un email de revue d’offres à Délia, partir du rapport complet et inclure jusqu’à 50 offres. Les regrouper dans trois sections ordonnées : « Il faut répondre, ça matche et tu as des chances d’un retour positif », « Tu peux répondre, on ne sait jamais », puis « Je te les mets pour info, mais il y a peu de chances ». Trier chaque section par pertinence décroissante et conserver une numérotation globale. Chaque offre doit présenter secteur, mission / poste, salaire proposé ou non communiqué, pertinence sur 100, puis un point de vigilance factuel visuellement signalé. Afficher les prérequis contraignants en rouge sans les soustraire du score ; ne jamais révéler les contraintes personnelles utilisées pour le classement.
 
 ## Publication GitHub Pages
 
@@ -90,11 +90,11 @@ Générer et contrôler les documents avec `python scripts/delia_life.py build-d
 
 ## Git, commit et publication
 
-Utiliser `$manage-delia-git` pour les commandes utilisateur `commit` et `publish`.
+Utiliser `$manage-delia-git` pour les commandes utilisateur `commit`, `push` et `publish`.
 
-Pour `commit`, exécuter `python scripts/repo_flow.py prepare-commit`, communiquer l'URL de prévisualisation et attendre la validation visuelle avant de mettre en index et committer. Inspecter le diff indexé, inclure les données métier utiles à la reproductibilité et exclure tout secret technique ou fichier temporaire.
+Pour `commit`, inspecter le diff, exécuter `python scripts/repo_flow.py prepare-commit`, puis, si tous les tests, validations et builds réussissent, mettre en index les fichiers concernés, inspecter le diff indexé et créer le commit local dans la même action. La demande explicite `commit` autorise ce commit local sans validation intermédiaire; elle n'autorise aucun push. Inclure les données métier utiles à la reproductibilité et exclure tout secret technique ou fichier temporaire.
 
-Pour `publish`, vérifier `config/repository.json`, exécuter `python scripts/repo_flow.py publish-check`, puis pousser uniquement vers le remote et la branche configurés. Ne jamais forcer un push, fusionner ou réécrire l'historique implicitement.
+`push` et `publish` sont synonymes. Vérifier `config/repository.json`, exécuter `python scripts/repo_flow.py publish-check`, puis pousser uniquement le commit local courant vers le remote et la branche configurés. Suivre ensuite le workflow GitHub Actions configuré pour le SHA poussé jusqu'à son résultat final. Ne jamais forcer un push, fusionner, réécrire l'historique, corriger un échec de CI ou créer implicitement un commit local.
 
 ## Revue locale obligatoire des contenus
 
@@ -104,7 +104,7 @@ Cette commande doit régénérer les documents déterministes, terminer les test
 
 Pour une modification limitée au code de recherche, aux offres opérationnelles ou au message de revue par email, exécuter `python scripts/repo_flow.py review-operational` : les mêmes contrôles de code et de données s’appliquent, mais sans régénérer le CV ni reconstruire le site. Le serveur local existant reste actif.
 
-Ne pas créer de commit et ne pas publier sur GitHub au titre de cette règle. `commit` et `publish` restent des autorisations explicites séparées.
+Ne pas créer de commit et ne pas publier sur GitHub au titre de cette règle. `commit` et `push` / `publish` restent des autorisations explicites séparées.
 
 ## Routage vers les skills
 

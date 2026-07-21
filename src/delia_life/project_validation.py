@@ -61,6 +61,37 @@ def missing_priority_functional_coverage(career_project: dict[str, Any], policy:
     ]
 
 
+def invalid_recommendation_band_thresholds(policy: dict[str, Any]) -> list[str]:
+    bands = policy.get("recommendation_bands", {})
+    priority = bands.get("priority_minimum_score")
+    possible = bands.get("possible_minimum_score")
+    if isinstance(priority, (int, float)) and isinstance(possible, (int, float)) and possible > priority:
+        return ["offer search policy: possible score threshold cannot exceed priority score threshold"]
+    return []
+
+
+def invalid_offer_source_audit(policy: dict[str, Any], audit: dict[str, Any]) -> list[str]:
+    source_domains = set(policy.get("source_domains", []))
+    strategy = policy.get("source_strategy", {})
+    direct_domains = set(strategy.get("direct_employer_domains", []))
+    specialized_domains = set(strategy.get("specialized_domains", []))
+    audited_domains = [str(source.get("scan_domain", "")) for source in audit.get("sources", [])]
+    errors: list[str] = []
+    duplicates = sorted({domain for domain in audited_domains if domain and audited_domains.count(domain) > 1})
+    if duplicates:
+        errors.append(f"offer source audit: duplicate scan domains: {', '.join(duplicates)}")
+    if undeclared := sorted(set(audited_domains) - source_domains):
+        errors.append(f"offer source audit: domains missing from offer search policy: {', '.join(undeclared)}")
+    for source in audit.get("sources", []):
+        domain = str(source.get("scan_domain", ""))
+        source_type = source.get("organization_type")
+        if source_type == "public_specialized_portal" and domain not in specialized_domains:
+            errors.append(f"offer source audit: specialized portal not categorized as specialized: {domain}")
+        elif source_type in {"private_employer", "public_employer"} and domain not in direct_domains:
+            errors.append(f"offer source audit: employer portal not categorized as direct: {domain}")
+    return errors
+
+
 @dataclass
 class ProjectValidationState:
     root: Path
@@ -122,6 +153,7 @@ def _load_single_contracts(state: ProjectValidationState) -> None:
         (root / "site" / "publication.json", "publication"),
         (root / "config" / "repository.json", "repository-config"),
         (root / "config" / "offer-search.json", "offer-search-policy"),
+        (root / "config" / "offer-source-audit.json", "offer-source-audit"),
     ]
     for path, schema_name in single_contracts:
         document = state.check(path, schema_name)
@@ -132,6 +164,11 @@ def _load_single_contracts(state: ProjectValidationState) -> None:
 def _validate_offer_search_coverage(state: ProjectValidationState) -> None:
     career_projects = [document for _, document in state.loaded_by_contract.get("career-project", [])]
     policy = state.loaded_single_contracts.get("offer-search-policy")
+    audit = state.loaded_single_contracts.get("offer-source-audit")
+    if policy is not None:
+        state.errors.extend(invalid_recommendation_band_thresholds(policy))
+        if audit is not None:
+            state.errors.extend(invalid_offer_source_audit(policy, audit))
     for career_project in career_projects:
         if policy is not None:
             state.errors.extend(missing_priority_sector_coverage(career_project, policy))

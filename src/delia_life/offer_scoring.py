@@ -25,6 +25,13 @@ STOPWORDS = {
     "vous",
 }
 
+RECOMMENDATION_BAND_ORDER = {
+    "priority": 0,
+    "possible": 1,
+    "informational": 2,
+    "excluded": 3,
+}
+
 
 def plain(value: str) -> str:
     normalized = unicodedata.normalize("NFKD", value.casefold())
@@ -108,6 +115,21 @@ def _offer_text(offer: dict[str, Any]) -> str:
     return " ".join(strings(selected))
 
 
+def _functional_offer_text(offer: dict[str, Any]) -> str:
+    selected = {
+        key: offer.get(key)
+        for key in (
+            "title",
+            "summary",
+            "functional_domains",
+            "required_skills",
+            "preferred_skills",
+            "conditions",
+        )
+    }
+    return " ".join(strings(selected))
+
+
 def _domain_matchers(domains: list[Any], query_families: dict[str, Any]) -> tuple[tuple[str, tuple[str, ...]], ...]:
     matchers: list[tuple[str, tuple[str, ...]]] = []
     for value in domains:
@@ -138,6 +160,8 @@ class ScoringContext:
     activity_exclusions: tuple[tuple[str, str], ...]
     work_arrangement: dict[str, Any]
     expected_compensation: dict[str, Any]
+    priority_minimum_score: float
+    possible_minimum_score: float
 
 
 @dataclass
@@ -148,16 +172,26 @@ class ScoreState:
     unknowns: list[str] = field(default_factory=list)
     failures: list[str] = field(default_factory=list)
     knowledge_keyword_matches: list[str] = field(default_factory=list)
+    prerequisite_alerts: list[dict[str, Any]] = field(default_factory=list)
+    application_barriers: list[str] = field(default_factory=list)
+    recommendation_band: str = "possible"
+    recommendation_reasons: list[str] = field(default_factory=list)
+    forced_to_end: bool = False
 
     def as_dict(self) -> dict[str, Any]:
         return {
             "eligible": not self.failures,
-            "score": round(max(0.0, self.score), 1),
+            "score": round(min(100.0, max(0.0, self.score)), 1),
             "reasons": self.reasons,
             "gaps": self.gaps,
             "unknowns": self.unknowns,
             "hard_constraint_failures": self.failures,
             "knowledge_keyword_matches": self.knowledge_keyword_matches,
+            "prerequisite_alerts": self.prerequisite_alerts,
+            "application_barriers": self.application_barriers,
+            "recommendation_band": self.recommendation_band,
+            "recommendation_reasons": self.recommendation_reasons,
+            "forced_to_end": self.forced_to_end,
         }
 
 
@@ -174,6 +208,11 @@ def _build_scoring_context(
     emphasis = policy.get("sector_emphasis", {})
     boundaries = _criterion(career_project, "criterion-activity-boundaries") or {}
     activity_exclusions = tuple((plain(str(value)), str(value)) for value in boundaries.get("excluded", []))
+    recommendation_policy = policy.get("recommendation_bands", {})
+    priority_minimum_score = float(recommendation_policy.get("priority_minimum_score", 75))
+    possible_minimum_score = float(recommendation_policy.get("possible_minimum_score", 50))
+    if possible_minimum_score > priority_minimum_score:
+        raise ValueError("possible recommendation score cannot exceed priority recommendation score")
     return ScoringContext(
         today=today or datetime.now(UTC).date(),
         weights=policy["weights"],
@@ -192,6 +231,8 @@ def _build_scoring_context(
         activity_exclusions=activity_exclusions,
         work_arrangement=_criterion(career_project, "criterion-work-arrangement") or {},
         expected_compensation=_criterion(career_project, "criterion-compensation") or {},
+        priority_minimum_score=priority_minimum_score,
+        possible_minimum_score=possible_minimum_score,
     )
 
 
@@ -323,18 +364,98 @@ def _apply_arrangement_and_compensation_rules(
         state.unknowns.append("rémunération non précisée")
 
 
+def _apply_prerequisite_rules(offer: dict[str, Any], context: ScoringContext, state: ScoreState) -> None:
+    prerequisites = offer.get("prerequisites")
+    if not isinstance(prerequisites, list):
+        conditions = offer.get("conditions")
+        if isinstance(conditions, dict) and conditions.get("insurance_experience_required") is True:
+            prerequisites = [
+                {
+                    "id": "legacy-experience-assurantielle",
+                    "kind": "sector_experience",
+                    "description": "Expérience préalable dans le domaine assurantiel",
+                    "mandatory": True,
+                    "profile_status": "not_demonstrated",
+                }
+            ]
+        else:
+            return
+    status_messages = {
+        "not_demonstrated": "non démontré dans les connaissances validées",
+        "unmet": "non satisfait d’après les connaissances validées",
+        "unknown": "correspondance avec le profil à vérifier",
+    }
+    for prerequisite in prerequisites:
+        if not isinstance(prerequisite, dict):
+            continue
+        status = str(prerequisite.get("profile_status", "unknown"))
+        if status == "met":
+            continue
+        if status not in status_messages:
+            status = "unknown"
+        description = str(prerequisite.get("description") or "prérequis non décrit").strip()
+        mandatory = prerequisite.get("mandatory") is True
+        state.prerequisite_alerts.append(
+            {
+                "id": prerequisite.get("id"),
+                "kind": prerequisite.get("kind", "other"),
+                "description": description,
+                "mandatory": mandatory,
+                "status": status,
+                "message": status_messages[status],
+            }
+        )
+        if status == "unmet" and mandatory:
+            state.application_barriers.append(f"prérequis obligatoire non satisfait : {description}")
+
+
+def _finalize_recommendation(context: ScoringContext, state: ScoreState) -> None:
+    bounded_score = min(100.0, max(0.0, state.score))
+    mandatory_uncertainties = [
+        item
+        for item in state.prerequisite_alerts
+        if item["mandatory"] and item["status"] in {"not_demonstrated", "unknown"}
+    ]
+    if state.failures:
+        state.recommendation_band = "excluded"
+        state.recommendation_reasons = ["incompatibilité certaine avec la politique de recherche"]
+    elif state.application_barriers:
+        state.recommendation_band = "informational"
+        state.recommendation_reasons = list(state.application_barriers)
+        state.forced_to_end = True
+    elif bounded_score < context.possible_minimum_score:
+        state.recommendation_band = "informational"
+        state.recommendation_reasons = [
+            f"score inférieur au seuil de candidature possible ({context.possible_minimum_score:g})"
+        ]
+    elif mandatory_uncertainties:
+        state.recommendation_band = "possible"
+        state.recommendation_reasons = ["prérequis obligatoire non démontré ou à vérifier"]
+    elif bounded_score >= context.priority_minimum_score:
+        state.recommendation_band = "priority"
+        state.recommendation_reasons = ["forte correspondance sans prérequis obligatoire incertain"]
+    else:
+        state.recommendation_band = "possible"
+        state.recommendation_reasons = [
+            f"score compris entre {context.possible_minimum_score:g} et {context.priority_minimum_score:g}"
+        ]
+
+
 def _score_offer_with_context(offer: dict[str, Any], context: ScoringContext) -> dict[str, Any]:
     state = ScoreState()
     text = plain(_offer_text(offer))
+    functional_text = plain(_functional_offer_text(offer))
     conditions = offer.get("conditions", {}) if isinstance(offer.get("conditions"), dict) else {}
     _apply_contract_rules(offer, context, state)
     _apply_work_time_rules(offer, conditions, state)
     _apply_sector_rules(text, context, state)
-    _apply_functional_domain_rules(text, context, state)
+    _apply_functional_domain_rules(functional_text, context, state)
     _apply_knowledge_overlap(offer, context, state)
     _apply_freshness_rules(offer, context, state)
     _apply_activity_rules(text, context, state)
     _apply_arrangement_and_compensation_rules(offer, conditions, context, state)
+    _apply_prerequisite_rules(offer, context, state)
+    _finalize_recommendation(context, state)
     return state.as_dict()
 
 

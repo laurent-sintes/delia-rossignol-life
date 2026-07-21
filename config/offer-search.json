@@ -55,13 +55,18 @@
       "suivi de projet"
     ]
   },
-  "id": "delia-offer-search-v1",
+  "id": "delia-offer-search-v4",
   "location_queries": [
     "Bordeaux",
     "Bordeaux Métropole",
     "Bordeaux et alentours"
   ],
   "result_limit": 10,
+  "recommendation_bands": {
+    "priority_minimum_score": 75,
+    "possible_minimum_score": 50
+  },
+  "regional_source_audit": "config/offer-source-audit.json",
   "sector_emphasis": {
     "labels": [
       "luxe"
@@ -106,13 +111,39 @@
     "barriere-recrute.com",
     "careers.loreal.com",
     "jobs.rituals.com",
-    "aroma-zone.com"
+    "aroma-zone.com",
+    "emploi.cdiscount.com",
+    "cultura.wd3.myworkdayjobs.com",
+    "betclic-group.breezy.hr",
+    "groupefilhet-allard-career.talent-soft.com",
+    "careers.floa.com",
+    "recrutement.bpce.fr",
+    "jobs.ikea.com",
+    "recrute.leroymerlin.fr",
+    "caudalie.career",
+    "sources-hotels.com",
+    "careers.ihg.com",
+    "recrutement.bordeaux.fr",
+    "recrutement.bordeaux-metropole.fr",
+    "merignac-career.talent-soft.com",
+    "mairie-begles.fr",
+    "gironde.fr",
+    "offresdemploi.nouvelle-aquitaine.fr",
+    "u-bordeaux.fr",
+    "chu-bordeaux.softy.pro",
+    "cdg33.fr",
+    "gironde.gouv.fr",
+    "ars-nouvelle-aquitaine-recrute.talent-soft.com",
+    "emploi-territorial.fr",
+    "choisirleservicepublic.gouv.fr",
+    "emploi.fhf.fr",
+    "lasecurecrute.fr"
   ],
   "priority_sector_coverage": {
-    "luxe": ["careers.lvmh.com", "jobs.richemont.com", "fashionjobs.com"],
-    "hotellerie": ["careers.accor.com", "barriere-recrute.com"],
-    "cosmetique": ["careers.loreal.com", "jobs.sephora.com", "nocibe.fr"],
-    "bien-etre": ["jobs.rituals.com", "aroma-zone.com"],
+    "luxe": ["careers.lvmh.com", "jobs.richemont.com", "fashionjobs.com", "sources-hotels.com", "careers.ihg.com"],
+    "hotellerie": ["careers.accor.com", "barriere-recrute.com", "sources-hotels.com", "careers.ihg.com"],
+    "cosmetique": ["careers.loreal.com", "jobs.sephora.com", "nocibe.fr", "caudalie.career"],
+    "bien-etre": ["jobs.rituals.com", "aroma-zone.com", "caudalie.career", "sources-hotels.com"],
     "banque-et-assurance": [
       "recrutement.maif.fr",
       "macif.fr",
@@ -128,7 +159,10 @@
       "recrutement.creditmutuel.fr",
       "recrutement.credit-agricole.fr",
       "societegenerale.com",
-      "labanquepostale.fr"
+      "labanquepostale.fr",
+      "groupefilhet-allard-career.talent-soft.com",
+      "careers.floa.com",
+      "recrutement.bpce.fr"
     ]
   },
   "source_strategy": {
@@ -165,10 +199,36 @@
       "barriere-recrute.com",
       "careers.loreal.com",
       "jobs.rituals.com",
-      "aroma-zone.com"
+      "aroma-zone.com",
+      "emploi.cdiscount.com",
+      "cultura.wd3.myworkdayjobs.com",
+      "betclic-group.breezy.hr",
+      "groupefilhet-allard-career.talent-soft.com",
+      "careers.floa.com",
+      "recrutement.bpce.fr",
+      "jobs.ikea.com",
+      "recrute.leroymerlin.fr",
+      "caudalie.career",
+      "sources-hotels.com",
+      "careers.ihg.com",
+      "recrutement.bordeaux.fr",
+      "recrutement.bordeaux-metropole.fr",
+      "merignac-career.talent-soft.com",
+      "mairie-begles.fr",
+      "gironde.fr",
+      "offresdemploi.nouvelle-aquitaine.fr",
+      "u-bordeaux.fr",
+      "chu-bordeaux.softy.pro",
+      "cdg33.fr",
+      "gironde.gouv.fr",
+      "ars-nouvelle-aquitaine-recrute.talent-soft.com"
     ],
     "specialized_domains": [
-      "fashionjobs.com"
+      "fashionjobs.com",
+      "emploi-territorial.fr",
+      "choisirleservicepublic.gouv.fr",
+      "emploi.fhf.fr",
+      "lasecurecrute.fr"
     ],
     "require_direct_offer_verification": true
   },

@@ -7,13 +7,13 @@ description: Rechercher sur internet des offres d’emploi actuelles pour Délia
 
 ## Workflow
 
-1. Charger `private/career-project/delia-next-role-2026.json` et `config/offer-search.json`, puis exécuter `python scripts/delia_life.py check`. La couverture de chaque secteur prioritaire doit être déclarée dans `priority_sector_coverage`; la compléter avant tout scan. Ne jamais exposer dans le rapport les critères marqués sensibles.
-2. Rechercher sur le web des annonces actuelles correspondant aux secteurs et fonctions du projet professionnel, autour de Bordeaux. Couvrir chaque domaine fonctionnel prioritaire avec toutes les requêtes déclarées dans `functional_query_families`; le contrôle Python bloque la recherche si une famille manque. Suivre `source_strategy.priority_order` : d’abord les portails directs des grandes enseignes et des maisons, ensuite les sites spécialisés, puis les agrégateurs. Couvrir plusieurs domaines de `source_domains`; viser au moins `candidate_pool_minimum` annonces distinctes.
-3. Ouvrir la page exacte de chaque offre. Vérifier qu’elle est encore active et relever titre, employeur, lien canonique, source, lieu, contrat, date, résumé factuel, compétences et conditions explicites. Pour une annonce repérée par un agrégateur, remonter vers la page employeur lorsqu’elle est disponible, conformément à `require_direct_offer_verification`. Exclure les pages de résultats génériques du classement final.
+1. Charger `private/career-project/delia-next-role-2026.json`, `config/offer-search.json` et l'audit référencé par `regional_source_audit`, puis exécuter `python scripts/delia_life.py check`. La couverture de chaque secteur prioritaire doit être déclarée dans `priority_sector_coverage`; la compléter avant tout scan. Ne jamais exposer dans le rapport les critères marqués sensibles.
+2. Rechercher sur le web des annonces actuelles correspondant aux secteurs et fonctions du projet professionnel, autour de Bordeaux. Couvrir chaque domaine fonctionnel prioritaire avec toutes les requêtes déclarées dans `functional_query_families`; le contrôle Python bloque la recherche si une famille manque. Suivre `source_strategy.priority_order` : d’abord les portails directs des employeurs privés et publics, ensuite les sites spécialisés, puis les agrégateurs. Dans l'audit régional, consulter en premier les sources `core`, puis faire tourner les sources `complementary` entre les scans. Ne pas considérer France Travail comme exhaustif : vérifier séparément les moteurs de la Ville, de la Métropole, du Département, de la Région, des grands établissements publics et les portails spécialisés de la fonction publique. Couvrir plusieurs domaines de `source_domains`; viser au moins `candidate_pool_minimum` annonces distinctes.
+3. Ouvrir la page exacte de chaque offre. Vérifier qu’elle est encore active et relever titre, employeur, lien canonique, source, lieu, contrat, date, résumé factuel, compétences, conditions explicites et prérequis d’accès au poste (durée minimale d’expérience, métier déjà exercé, secteur, diplôme, certification ou langue). Enregistrer chaque prérequis dans `prerequisites` avec son extrait source, son caractère obligatoire ou souhaité et un statut de rapprochement avec les connaissances validées. Utiliser `not_demonstrated` lorsque la base n’apporte pas de preuve, sans en déduire que Délia ne possède pas l’expérience. Pour une annonce repérée par un agrégateur, remonter vers la page employeur lorsqu’elle est disponible, conformément à `require_direct_offer_verification`. Exclure les pages de résultats génériques du classement final.
 4. Respecter les conditions d’utilisation, `robots.txt` et les limites d’accès. Ne contourner ni connexion, ni CAPTCHA, ni dispositif anti-robot. Ne pas recopier l’annonce intégralement; conserver seulement les faits utiles et un court résumé original.
 5. Enregistrer chaque annonce normalisée sous `data/offers/YYYY-MM-DD/`. Utiliser le schéma `schemas/job-offer.schema.json` et renseigner au minimum ses champs obligatoires. Marquer toute donnée absente comme inconnue; ne jamais l’inférer silencieusement.
 6. Exécuter `python scripts/delia_life.py rank-offers data/offers/YYYY-MM-DD --visited-source <site-1> --visited-source <site-2> --output generated/offer-search/YYYY-MM-DD.json`. Répéter `--visited-source` pour chaque site effectivement consulté, y compris s'il n'a fourni aucune offre retenue.
-7. Examiner les exclusions, inconnues et avertissements produits. Une incompatibilité certaine écarte l’offre; une information inconnue reste un point de vigilance.
+7. Examiner les exclusions, inconnues, prérequis et avertissements produits. Le score mesure uniquement la correspondance avec le profil et reste calculé indépendamment des prérequis. Un prérequis obligatoire `not_demonstrated` ou `unknown` place au mieux l’offre dans `possible`; un prérequis obligatoire explicitement `unmet` force l’offre dans `informational`, à la fin de la liste, sans modifier son score. Ne jamais convertir automatiquement `not_demonstrated` en `unmet`. Une autre incompatibilité certaine peut écarter l’offre; une information inconnue reste un point de vigilance.
 8. Utiliser `$match-delia-offers` pour approfondir les finalistes. Employer l’IA uniquement pour résumer l’annonce et expliquer des transferts de compétences non littéraux, en les distinguant du score déterministe.
 
 ## Règles de sélection
@@ -25,10 +25,11 @@ description: Rechercher sur internet des offres d’emploi actuelles pour Délia
 - Favoriser la stabilité, l’autonomie, la responsabilité, le travail en équipe, la relation client et la gestion administrative.
 - Préserver la diversité des employeurs et des sites; ne pas laisser un diffuseur dominer artificiellement le top 10.
 - Ne jamais transformer une exigence d’annonce en compétence détenue par Délia.
+- Ne jamais conclure à l’absence d’une expérience à partir de la seule absence de preuve dans la base validée.
 
 ## Restitution
 
-Présenter jusqu’à 10 offres classées. Pour chacune, fournir :
+Présenter jusqu’à 10 offres classées, regroupées dans cet ordre : `priority`, `possible`, puis `informational`. Au sein de chaque groupe, trier par score décroissant. Pour chacune, fournir :
 
 - le poste, l’employeur, le contrat, le lieu et la date;
 - le lien direct vers l’annonce;
@@ -36,5 +37,6 @@ Présenter jusqu’à 10 offres classées. Pour chacune, fournir :
 - le score déterministe et ses principaux composants;
 - deux à quatre raisons étayées par les connaissances validées;
 - les écarts et informations à vérifier avant candidature.
+- les prérequis contraignants dans un encart rouge distinct, avec leur statut (`non démontré`, `non satisfait` ou `à vérifier`), sans les soustraire du score.
 
 Terminer par la date de recherche, les sources consultées, le nombre d’offres collectées, dédoublonnées, exclues et retenues. Préciser que le classement aide à décider et ne remplace pas la validation de Délia.

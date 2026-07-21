@@ -11,13 +11,19 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from delia_life.core import load_json
 from delia_life.offer_search import canonical_offer_url, offer_identity, rank_offers, score_offer, source_origin
-from delia_life.project_validation import missing_priority_functional_coverage, missing_priority_sector_coverage
+from delia_life.project_validation import (
+    invalid_offer_source_audit,
+    invalid_recommendation_band_thresholds,
+    missing_priority_functional_coverage,
+    missing_priority_sector_coverage,
+)
 
 
 class OfferSearchTests(unittest.TestCase):
     def setUp(self) -> None:
         self.project = load_json(ROOT / "private" / "career-project" / "delia-next-role-2026.json")
         self.policy = load_json(ROOT / "config" / "offer-search.json")
+        self.source_audit = load_json(ROOT / "config" / "offer-source-audit.json")
         self.today = date(2026, 7, 19)
         self.base = {
             "id": "offer-1",
@@ -65,8 +71,88 @@ class OfferSearchTests(unittest.TestCase):
                 "unknowns": ["rémunération non précisée"],
                 "hard_constraint_failures": [],
                 "knowledge_keyword_matches": ["administration", "client", "relation"],
+                "prerequisite_alerts": [],
+                "application_barriers": [],
+                "recommendation_band": "priority",
+                "recommendation_reasons": ["forte correspondance sans prérequis obligatoire incertain"],
+                "forced_to_end": False,
             },
         )
+
+    def test_not_demonstrated_prerequisite_changes_band_without_changing_score(self) -> None:
+        offer = {
+            **self.base,
+            "prerequisites": [
+                {
+                    "id": "experience-assurantielle",
+                    "kind": "sector_experience",
+                    "description": "Expérience préalable dans le domaine assurantiel",
+                    "mandatory": True,
+                    "profile_status": "not_demonstrated",
+                }
+            ],
+        }
+        assessment = score_offer(
+            offer,
+            self.project,
+            self.policy,
+            {"relation", "client", "administration"},
+            self.today,
+        )
+        self.assertTrue(assessment["eligible"])
+        self.assertEqual(assessment["score"], 94.5)
+        self.assertEqual(assessment["recommendation_band"], "possible")
+        self.assertFalse(assessment["forced_to_end"])
+        self.assertEqual(
+            assessment["prerequisite_alerts"],
+            [
+                {
+                    "id": "experience-assurantielle",
+                    "kind": "sector_experience",
+                    "description": "Expérience préalable dans le domaine assurantiel",
+                    "mandatory": True,
+                    "status": "not_demonstrated",
+                    "message": "non démontré dans les connaissances validées",
+                }
+            ],
+        )
+
+    def test_certain_mandatory_unmet_prerequisite_forces_offer_to_end_without_changing_score(self) -> None:
+        offer = {
+            **self.base,
+            "prerequisites": [
+                {
+                    "id": "certification-obligatoire",
+                    "kind": "certification",
+                    "description": "Certification réglementaire obligatoire",
+                    "mandatory": True,
+                    "profile_status": "unmet",
+                }
+            ],
+        }
+        assessment = score_offer(offer, self.project, self.policy, set(), self.today)
+        self.assertTrue(assessment["eligible"])
+        self.assertEqual(assessment["score"], 87.0)
+        self.assertEqual(assessment["recommendation_band"], "informational")
+        self.assertTrue(assessment["forced_to_end"])
+        self.assertEqual(assessment["hard_constraint_failures"], [])
+        self.assertIn(
+            "prérequis obligatoire non satisfait : Certification réglementaire obligatoire",
+            assessment["application_barriers"],
+        )
+
+    def test_legacy_insurance_condition_uses_the_generic_possible_band(self) -> None:
+        offer = {**self.base, "conditions": {"insurance_experience_required": True}}
+        assessment = score_offer(
+            offer,
+            self.project,
+            self.policy,
+            {"relation", "client", "administration"},
+            self.today,
+        )
+        self.assertTrue(assessment["eligible"])
+        self.assertEqual(assessment["score"], 94.5)
+        self.assertEqual(assessment["recommendation_band"], "possible")
 
     def test_rank_offers_compiles_the_scoring_context_once(self) -> None:
         import delia_life.offer_search as offer_search
@@ -128,6 +214,7 @@ class OfferSearchTests(unittest.TestCase):
                         "id": "offer-excluded",
                         "title": "Responsable administration des ventes luxe",
                         "employer": "Employeur Trois",
+                        "score": 87.5,
                         "failures": [
                             "activité exclue : démarchage téléphonique",
                             "activité exclue : prospection physique",
@@ -213,6 +300,74 @@ class OfferSearchTests(unittest.TestCase):
         self.assertTrue(ranked["full_time"])
         self.assertIn("insurance_experience_required", ranked["conditions"])
 
+    def test_ranked_report_preserves_structured_prerequisites(self) -> None:
+        prerequisite = {
+            "id": "experience-metier",
+            "kind": "prior_role",
+            "description": "Avoir déjà exercé le métier",
+            "mandatory": True,
+            "profile_status": "unknown",
+        }
+        result = rank_offers(
+            [{**self.base, "prerequisites": [prerequisite]}],
+            self.project,
+            self.policy,
+            set(),
+            today=self.today,
+        )
+        self.assertEqual(result["offers"][0]["prerequisites"], [prerequisite])
+        self.assertEqual(result["offers"][0]["assessment"]["score"], 87.0)
+        self.assertEqual(result["offers"][0]["recommendation_band"], "possible")
+
+    def test_ranking_groups_sections_before_sorting_by_score(self) -> None:
+        priority = self.base
+        possible = {
+            **self.base,
+            "id": "offer-possible",
+            "source_url": "https://jobs.example/offers/possible",
+            "title": "Responsable relation client",
+            "summary": "Relation client et coordination avec une équipe.",
+            "sector_labels": ["services"],
+            "required_skills": [],
+            "preferred_skills": [],
+        }
+        forced_to_end = {
+            **self.base,
+            "id": "offer-forced",
+            "source_url": "https://jobs.example/offers/forced",
+            "prerequisites": [
+                {
+                    "id": "certification-obligatoire",
+                    "kind": "certification",
+                    "description": "Certification réglementaire obligatoire",
+                    "mandatory": True,
+                    "profile_status": "unmet",
+                }
+            ],
+        }
+        result = rank_offers(
+            [forced_to_end, possible, priority],
+            self.project,
+            self.policy,
+            {"relation", "client", "administration"},
+            today=self.today,
+        )
+        self.assertEqual([offer["id"] for offer in result["offers"]], ["offer-1", "offer-possible", "offer-forced"])
+        self.assertGreater(
+            result["offers"][2]["assessment"]["score"],
+            result["offers"][1]["assessment"]["score"],
+        )
+        self.assertEqual(result["section_counts"], {"priority": 1, "possible": 1, "informational": 1})
+
+    def test_recommendation_thresholds_must_be_ordered(self) -> None:
+        invalid_policy = {**self.policy, "recommendation_bands": {"priority_minimum_score": 60, "possible_minimum_score": 70}}
+        self.assertEqual(
+            invalid_recommendation_band_thresholds(invalid_policy),
+            ["offer search policy: possible score threshold cannot exceed priority score threshold"],
+        )
+        with self.assertRaisesRegex(ValueError, "possible recommendation score"):
+            score_offer(self.base, self.project, invalid_policy, set(), self.today)
+
     def test_priority_sectors_must_have_declared_source_coverage(self) -> None:
         self.assertEqual(missing_priority_sector_coverage(self.project, self.policy), [])
         incomplete_policy = {**self.policy, "priority_sector_coverage": {"luxe": ["careers.lvmh.com"]}}
@@ -233,10 +388,58 @@ class OfferSearchTests(unittest.TestCase):
             ],
         )
 
+    def test_regional_source_audit_is_declared_and_categorized(self) -> None:
+        self.assertEqual(invalid_offer_source_audit(self.policy, self.source_audit), [])
+
+        undeclared_policy = {
+            **self.policy,
+            "source_domains": [
+                domain for domain in self.policy["source_domains"] if domain != "emploi.cdiscount.com"
+            ],
+        }
+        self.assertEqual(
+            invalid_offer_source_audit(undeclared_policy, self.source_audit),
+            ["offer source audit: domains missing from offer search policy: emploi.cdiscount.com"],
+        )
+
+        miscategorizated_policy = {
+            **self.policy,
+            "source_strategy": {
+                **self.policy["source_strategy"],
+                "specialized_domains": [
+                    domain
+                    for domain in self.policy["source_strategy"]["specialized_domains"]
+                    if domain != "emploi-territorial.fr"
+                ],
+            },
+        }
+        self.assertIn(
+            "offer source audit: specialized portal not categorized as specialized: emploi-territorial.fr",
+            invalid_offer_source_audit(miscategorizated_policy, self.source_audit),
+        )
+
     def test_functional_domain_aliases_respect_the_validated_priority_order(self) -> None:
         result = score_offer(self.base, self.project, self.policy, set(), self.today)
         functional_reasons = [reason for reason in result["reasons"] if reason.startswith("activité prioritaire")]
         self.assertEqual(functional_reasons, ["activité prioritaire : conseil et relation client"])
+
+    def test_sector_labels_do_not_inflate_functional_domain_score(self) -> None:
+        data_offer = {
+            **self.base,
+            "title": "Directeur Data",
+            "summary": "Pilotage de la gouvernance des données et des plateformes analytiques.",
+            "industry_sector_ids": ["commerce-et-distribution"],
+            "sector_labels": ["commerce et distribution"],
+            "functional_domains": ["data"],
+            "required_skills": ["SQL", "Power BI", "Snowflake"],
+            "preferred_skills": [],
+        }
+
+        result = score_offer(data_offer, self.project, self.policy, set(), self.today)
+
+        self.assertIn("secteur acceptable : commerce et distribution", result["reasons"])
+        self.assertFalse(any(reason.startswith("activité prioritaire") for reason in result["reasons"]))
+        self.assertIn("domaine fonctionnel peu explicite", result["gaps"])
 
     def test_ranked_report_records_all_consulted_source_origins(self) -> None:
         result = rank_offers(

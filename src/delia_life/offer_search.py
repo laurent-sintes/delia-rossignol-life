@@ -10,6 +10,7 @@ from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 from .core import load_json
 from .offer_scoring import (
+    RECOMMENDATION_BAND_ORDER,
     ScoringContext,
     _build_scoring_context,
     _score_offer_with_context,
@@ -125,7 +126,14 @@ def _assess_offers(
         assessment = _score_offer_with_context(offer, context)
         candidate = AssessedOffer(offer=offer, identity=identity, assessment=assessment)
         (eligible if assessment["eligible"] else excluded).append(candidate)
-    eligible.sort(key=lambda item: (-item.assessment["score"], item.identity, str(item.offer.get("id", ""))))
+    eligible.sort(
+        key=lambda item: (
+            RECOMMENDATION_BAND_ORDER[item.assessment["recommendation_band"]],
+            -item.assessment["score"],
+            item.identity,
+            str(item.offer.get("id", "")),
+        )
+    )
     return eligible, excluded
 
 
@@ -180,8 +188,17 @@ def _ranked_offer_record(item: AssessedOffer, rank: int) -> dict[str, Any]:
         "industry_sector_ids": offer.get("industry_sector_ids", []),
         "compensation": offer.get("compensation"),
         "conditions": offer.get("conditions", {}),
+        "prerequisites": offer.get("prerequisites", []),
         "summary": offer.get("summary"),
+        "recommendation_band": item.assessment["recommendation_band"],
         "assessment": item.assessment,
+    }
+
+
+def _section_counts(offers: list[dict[str, Any]]) -> dict[str, int]:
+    return {
+        band: sum(offer.get("recommendation_band") == band for offer in offers)
+        for band in ("priority", "possible", "informational")
     }
 
 
@@ -225,11 +242,13 @@ def rank_offers(
         "visited_sources": consulted_source_origins(offers, visited_sources),
         "warnings": _ranking_warnings(len(offers), len(ranked), result_limit, policy),
         "offers": ranked,
+        "section_counts": _section_counts(ranked),
         "excluded": [
             {
                 "id": item.offer.get("id"),
                 "title": item.offer.get("title"),
                 "employer": item.offer.get("employer"),
+                "score": item.assessment["score"],
                 "failures": item.assessment["hard_constraint_failures"],
             }
             for item in excluded

@@ -54,7 +54,9 @@ Le dépôt versionne l'ensemble du dossier métier : sources, archives, offres, 
 
 ## Workflow Git assisté
 
-La skill `$manage-delia-git` orchestre deux actions : `commit` prépare les contrôles et ouvre un aperçu local avant validation; `publish` vérifie le remote et pousse le commit validé vers `main`.
+La skill `$manage-delia-git` orchestre deux parcours : `commit` exécute les tests et builds puis crée le commit local; `push` ou `publish` vérifie le dépôt, pousse ce commit vers la branche configurée et suit le run GitHub Actions correspondant jusqu'à son résultat final.
+
+Un `push` / `publish` exige un arbre de travail propre et n'invente jamais un commit local. Après le push, la publication n'est déclarée réussie que lorsque le workflow configuré dans `config/repository.json` termine avec succès.
 
 ```powershell
 python scripts/repo_flow.py review-content

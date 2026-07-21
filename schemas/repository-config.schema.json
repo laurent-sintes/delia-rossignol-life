@@ -1,9 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
-  "required": ["expected_remote", "preview_host", "preview_port", "publish_branch"],
+  "required": ["ci_workflow", "expected_remote", "preview_host", "preview_port", "publish_branch"],
   "additionalProperties": false,
   "properties": {
+    "ci_workflow": {"type": "string", "pattern": "^[A-Za-z0-9._-]+\\.ya?ml$"},
     "expected_remote": {"type": "string", "format": "uri"},
     "preview_host": {"type": "string", "minLength": 1},
     "preview_port": {"type": "integer", "minimum": 1024, "maximum": 65535},

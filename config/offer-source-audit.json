@@ -1,0 +1,329 @@
+{
+  "id": "bordeaux-offer-source-audit-2026-07-21",
+  "audited_at": "2026-07-21",
+  "scope": {
+    "area": "Bordeaux Métropole et Gironde",
+    "method": "Vérification de la présence locale et d'un moteur d'annonces officiel ou institutionnel, puis qualification au regard des secteurs et fonctions du projet professionnel validé de Délia.",
+    "functional_domains": [
+      "conseil-et-relation-client",
+      "commerce-et-vente",
+      "gestion-administrative",
+      "gestion-et-coordination-de-projets"
+    ]
+  },
+  "sources": [
+    {
+      "organization": "Cdiscount",
+      "organization_type": "private_employer",
+      "career_url": "https://emploi.cdiscount.com/nos-offres-demploi",
+      "scan_domain": "emploi.cdiscount.com",
+      "scan_priority": "core",
+      "sectors": ["commerce-et-distribution"],
+      "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://emploi.cdiscount.com/nos-offres-demploi"],
+      "rationale": "Siège bordelais et volume local vérifié, avec des offres en relation client, support, engagement client et projets web."
+    },
+    {
+      "organization": "Cultura",
+      "organization_type": "private_employer",
+      "career_url": "https://cultura.wd3.myworkdayjobs.com/fr-FR/Cultura",
+      "scan_domain": "cultura.wd3.myworkdayjobs.com",
+      "scan_priority": "core",
+      "sectors": ["commerce-et-distribution"],
+      "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://recrutement.cultura.com/services/fonctions-support/", "https://cultura.wd3.myworkdayjobs.com/fr-FR/Cultura"],
+      "rationale": "Le siège des fonctions support est à Mérignac et couvre relation client, commerce, coordination, travaux et aménagement."
+    },
+    {
+      "organization": "Betclic Group",
+      "organization_type": "private_employer",
+      "career_url": "https://betclic-group.breezy.hr/",
+      "scan_domain": "betclic-group.breezy.hr",
+      "scan_priority": "core",
+      "sectors": ["numerique-et-services"],
+      "functional_domains": ["conseil-et-relation-client", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://betclicgroup.com/people", "https://betclic-group.breezy.hr/"],
+      "rationale": "Siège et recrutement massif à Bordeaux, notamment en service client, fonctions support et pilotage de projets."
+    },
+    {
+      "organization": "Groupe Filhet-Allard",
+      "organization_type": "private_employer",
+      "career_url": "https://groupefilhet-allard-career.talent-soft.com/offre-de-emploi/liste-toutes-offres.aspx",
+      "scan_domain": "groupefilhet-allard-career.talent-soft.com",
+      "scan_priority": "core",
+      "sectors": ["banque-et-assurance"],
+      "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-administrative"],
+      "evidence_urls": ["https://www.filhetallard.com/carrieres/", "https://groupefilhet-allard-career.talent-soft.com/"],
+      "rationale": "Siège à Mérignac et nombreuses offres locales en gestion clients, indemnisation, back-office et support commercial."
+    },
+    {
+      "organization": "FLOA",
+      "organization_type": "private_employer",
+      "career_url": "https://careers.floa.com/",
+      "scan_domain": "careers.floa.com",
+      "scan_priority": "core",
+      "sectors": ["banque-et-assurance"],
+      "functional_domains": ["conseil-et-relation-client", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://careers.floa.com/"],
+      "rationale": "Implantation aux Bassins à flot et offres bordelaises en projets, partenariats, opérations et fonctions support."
+    },
+    {
+      "organization": "Groupe BPCE, CEAPC et BPACA",
+      "organization_type": "private_employer",
+      "career_url": "https://recrutement.bpce.fr/offres-emploi",
+      "scan_domain": "recrutement.bpce.fr",
+      "scan_priority": "core",
+      "sectors": ["banque-et-assurance"],
+      "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-administrative"],
+      "evidence_urls": ["https://recrutement.bpce.fr/offres-emploi", "https://www.caisse-epargne-aquitaine-poitou-charentes.fr/offres-d-emploi/"],
+      "rationale": "Portail officiel des deux réseaux régionaux, avec des fonctions récurrentes de clientèle et de gestion autour de Bordeaux."
+    },
+    {
+      "organization": "IKEA Bordeaux",
+      "organization_type": "private_employer",
+      "career_url": "https://jobs.ikea.com/fr/lieu/jobs/22908/3017382-11071620-3031582/4",
+      "scan_domain": "jobs.ikea.com",
+      "scan_priority": "core",
+      "sectors": ["agencement-et-amenagement-interieur", "commerce-et-distribution"],
+      "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://jobs.ikea.com/fr/lieu/jobs/22908/3017382-11071620-3031582/4"],
+      "rationale": "Moteur local Bordeaux-Lac avec des métiers de vente, relation client et aménagement intérieur."
+    },
+    {
+      "organization": "Leroy Merlin Bordeaux",
+      "organization_type": "private_employer",
+      "career_url": "https://recrute.leroymerlin.fr/jobs",
+      "scan_domain": "recrute.leroymerlin.fr",
+      "scan_priority": "core",
+      "sectors": ["agencement-et-amenagement-interieur", "commerce-et-distribution"],
+      "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://recrute.leroymerlin.fr/jobs/838552"],
+      "rationale": "Offres locales vérifiées à Bordeaux-Lac et Mérignac en conseil, vente et accompagnement de projets d'aménagement."
+    },
+    {
+      "organization": "Caudalie",
+      "organization_type": "private_employer",
+      "career_url": "https://caudalie.career/home",
+      "scan_domain": "caudalie.career",
+      "scan_priority": "core",
+      "sectors": ["cosmetique", "bien-etre"],
+      "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-administrative"],
+      "evidence_urls": ["https://caudalie.career/home"],
+      "rationale": "Marque prioritaire liée à la région bordelaise, avec un portail propriétaire et des possibilités locales à Martillac."
+    },
+    {
+      "organization": "Les Sources de Caudalie",
+      "organization_type": "private_employer",
+      "career_url": "https://www.sources-hotels.com/bordeaux/recrutement/",
+      "scan_domain": "sources-hotels.com",
+      "scan_priority": "core",
+      "sectors": ["luxe", "hotellerie", "bien-etre"],
+      "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-administrative"],
+      "evidence_urls": ["https://www.sources-hotels.com/bordeaux/recrutement/"],
+      "rationale": "Palace et spa à Martillac publiant directement ses postes, dont accueil, réception, réservations et gouvernance."
+    },
+    {
+      "organization": "InterContinental Bordeaux - IHG",
+      "organization_type": "private_employer",
+      "career_url": "https://careers.ihg.com/fr-fr/locations/france/",
+      "scan_domain": "careers.ihg.com",
+      "scan_priority": "complementary",
+      "sectors": ["luxe", "hotellerie", "bien-etre"],
+      "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-administrative"],
+      "evidence_urls": ["https://bordeaux.intercontinental.com/en/career/", "https://careers.ihg.com/fr-fr/locations/france/"],
+      "rationale": "Le portail IHG référence explicitement l'InterContinental Bordeaux et ses métiers d'hospitalité haut de gamme."
+    },
+    {
+      "organization": "Ville de Bordeaux et CCAS",
+      "organization_type": "public_employer",
+      "career_url": "https://www.recrutement.bordeaux.fr/",
+      "scan_domain": "recrutement.bordeaux.fr",
+      "scan_priority": "core",
+      "sectors": ["services-publics"],
+      "functional_domains": ["conseil-et-relation-client", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://www.recrutement.bordeaux.fr/"],
+      "rationale": "Moteur direct distinct de France Travail, incluant notamment des fonctions d'accueil et administratives."
+    },
+    {
+      "organization": "Bordeaux Métropole",
+      "organization_type": "public_employer",
+      "career_url": "https://recrutement.bordeaux-metropole.fr/",
+      "scan_domain": "recrutement.bordeaux-metropole.fr",
+      "scan_priority": "core",
+      "sectors": ["services-publics"],
+      "functional_domains": ["conseil-et-relation-client", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://www.bordeaux-metropole.fr/metropole/linstitution-territoire/organisation-fonctionnement-metropole/recrutement/bordeaux", "https://recrutement.bordeaux-metropole.fr/"],
+      "rationale": "Portail propre pour près de 800 recrutements annuels et de nombreuses filières administratives ou de coordination."
+    },
+    {
+      "organization": "Ville de Mérignac",
+      "organization_type": "public_employer",
+      "career_url": "https://merignac-career.talent-soft.com/accueil.aspx?LCID=1036",
+      "scan_domain": "merignac-career.talent-soft.com",
+      "scan_priority": "complementary",
+      "sectors": ["services-publics"],
+      "functional_domains": ["conseil-et-relation-client", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://www.merignac.com/travailler-la-mairie-de-merignac", "https://merignac-career.talent-soft.com/accueil.aspx?LCID=1036"],
+      "rationale": "Moteur municipal autonome couvrant notamment des postes contractuels et des remplacements accessibles sans concours."
+    },
+    {
+      "organization": "Ville de Bègles",
+      "organization_type": "public_employer",
+      "career_url": "https://www.mairie-begles.fr/emplois/",
+      "scan_domain": "mairie-begles.fr",
+      "scan_priority": "complementary",
+      "sectors": ["services-publics"],
+      "functional_domains": ["conseil-et-relation-client", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://www.mairie-begles.fr/emplois/"],
+      "rationale": "La commune publie directement ses annonces, y compris dans la filière administrative."
+    },
+    {
+      "organization": "Département de la Gironde",
+      "organization_type": "public_employer",
+      "career_url": "https://www.gironde.fr/offres-d-emploi",
+      "scan_domain": "gironde.fr",
+      "scan_priority": "core",
+      "sectors": ["services-publics"],
+      "functional_domains": ["conseil-et-relation-client", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://www.gironde.fr/offres-d-emploi"],
+      "rationale": "Liste officielle autonome avec filtres par catégorie et filière, dont la filière administrative."
+    },
+    {
+      "organization": "Région Nouvelle-Aquitaine",
+      "organization_type": "public_employer",
+      "career_url": "https://offresdemploi.nouvelle-aquitaine.fr/search",
+      "scan_domain": "offresdemploi.nouvelle-aquitaine.fr",
+      "scan_priority": "core",
+      "sectors": ["services-publics"],
+      "functional_domains": ["gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://www.nouvelle-aquitaine.fr/aides-et-ressources/les-offres-demploi", "https://offresdemploi.nouvelle-aquitaine.fr/search"],
+      "rationale": "Moteur régional propriétaire filtrable sur la Gironde, distinct des portails nationaux."
+    },
+    {
+      "organization": "Université de Bordeaux",
+      "organization_type": "public_employer",
+      "career_url": "https://www.u-bordeaux.fr/offres/emploi/",
+      "scan_domain": "u-bordeaux.fr",
+      "scan_priority": "core",
+      "sectors": ["enseignement-superieur-et-recherche"],
+      "functional_domains": ["conseil-et-relation-client", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://www.u-bordeaux.fr/universite/travailler-a-l-universite", "https://www.u-bordeaux.fr/offres/emploi/"],
+      "rationale": "Troisième employeur régional, avec près de 1 000 recrutements annuels et des fonctions administratives, techniques et d'encadrement."
+    },
+    {
+      "organization": "CHU de Bordeaux",
+      "organization_type": "public_employer",
+      "career_url": "https://chu-bordeaux.softy.pro/offers",
+      "scan_domain": "chu-bordeaux.softy.pro",
+      "scan_priority": "core",
+      "sectors": ["sante-et-services-publics"],
+      "functional_domains": ["conseil-et-relation-client", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://www.chu-bordeaux.fr/Emplois-recrutement/", "https://chu-bordeaux.softy.pro/offers"],
+      "rationale": "Premier employeur régional, avec un moteur de près de 200 offres incluant accueil, assistanat, communication et projets."
+    },
+    {
+      "organization": "Centre de gestion de la Gironde",
+      "organization_type": "public_employer",
+      "career_url": "https://www.cdg33.fr/offres-emploi-cdg33/",
+      "scan_domain": "cdg33.fr",
+      "scan_priority": "complementary",
+      "sectors": ["services-publics"],
+      "functional_domains": ["gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://www.cdg33.fr/offres-emploi-cdg33/"],
+      "rationale": "Publie ses propres recrutements et signale des fonctions de gestion, opérations et ressources humaines."
+    },
+    {
+      "organization": "Préfecture et services de l'État en Gironde",
+      "organization_type": "public_employer",
+      "career_url": "https://www.gironde.gouv.fr/Publications/Concours-administratif-Examen-professionnel-Recrutement",
+      "scan_domain": "gironde.gouv.fr",
+      "scan_priority": "complementary",
+      "sectors": ["services-publics"],
+      "functional_domains": ["conseil-et-relation-client", "gestion-administrative"],
+      "evidence_urls": ["https://www.gironde.gouv.fr/Publications/Concours-administratif-Examen-professionnel-Recrutement"],
+      "rationale": "Certaines campagnes locales ou voies contractuelles sont publiées directement sur le site préfectoral."
+    },
+    {
+      "organization": "ARS Nouvelle-Aquitaine",
+      "organization_type": "public_employer",
+      "career_url": "https://ars-nouvelle-aquitaine-recrute.talent-soft.com/offre-de-emploi/liste-offres.aspx?showSearchUrl=1",
+      "scan_domain": "ars-nouvelle-aquitaine-recrute.talent-soft.com",
+      "scan_priority": "complementary",
+      "sectors": ["sante-et-services-publics"],
+      "functional_domains": ["gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://ars-nouvelle-aquitaine-recrute.talent-soft.com/"],
+      "rationale": "Portail employeur autonome avec des postes bordelais de gestion et de coordination, parfois dupliqués seulement partiellement ailleurs."
+    },
+    {
+      "organization": "Emploi Territorial",
+      "organization_type": "public_specialized_portal",
+      "career_url": "https://www.emploi-territorial.fr/emploi-mobilite/",
+      "scan_domain": "emploi-territorial.fr",
+      "scan_priority": "core",
+      "sectors": ["services-publics"],
+      "functional_domains": ["conseil-et-relation-client", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://www.emploi-territorial.fr/emploi-mobilite/?search-col=19667", "https://www.cdg33.fr/gestion-des-ressources-humaines/recrutement/"],
+      "rationale": "Bourse officielle des collectivités territoriales, indispensable pour couvrir les communes sans moteur autonome."
+    },
+    {
+      "organization": "Choisir le service public",
+      "organization_type": "public_specialized_portal",
+      "career_url": "https://choisirleservicepublic.gouv.fr/",
+      "scan_domain": "choisirleservicepublic.gouv.fr",
+      "scan_priority": "core",
+      "sectors": ["services-publics"],
+      "functional_domains": ["conseil-et-relation-client", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://choisirleservicepublic.gouv.fr/"],
+      "rationale": "Portail commun aux trois versants de la fonction publique, à filtrer sur Gironde et postes ouverts aux contractuels."
+    },
+    {
+      "organization": "Fédération Hospitalière de France Emploi",
+      "organization_type": "public_specialized_portal",
+      "career_url": "https://emploi.fhf.fr/",
+      "scan_domain": "emploi.fhf.fr",
+      "scan_priority": "complementary",
+      "sectors": ["sante-et-services-publics"],
+      "functional_domains": ["conseil-et-relation-client", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://emploi.fhf.fr/"],
+      "rationale": "Complète les portails hospitaliers directs pour les établissements publics et médico-sociaux de Gironde."
+    },
+    {
+      "organization": "La Sécu recrute",
+      "organization_type": "public_specialized_portal",
+      "career_url": "https://www.lasecurecrute.fr/",
+      "scan_domain": "lasecurecrute.fr",
+      "scan_priority": "core",
+      "sectors": ["protection-sociale-et-services-publics"],
+      "functional_domains": ["conseil-et-relation-client", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://www.lasecurecrute.fr/cpam-gironde", "https://www.lasecurecrute.fr/caf-gironde"],
+      "rationale": "Centralise les recrutements locaux CPAM, CAF, Carsat et Urssaf, avec des métiers d'accueil, de conseil et de gestion particulièrement compatibles."
+    }
+  ],
+  "not_added": [
+    {
+      "organization": "Ville de Talence",
+      "reference_url": "https://www.talence.fr/mairie/recrutements/",
+      "reason": "La page municipale renvoie vers Welcome to the Jungle et Emploi Territorial, déjà configurés ; aucun moteur autonome supplémentaire n'a été identifié."
+    },
+    {
+      "organization": "Ville de Pessac",
+      "reference_url": "https://www.pessac.fr/",
+      "reason": "Aucun moteur municipal autonome d'annonces n'a été vérifié ; les offres territoriales restent couvertes par Emploi Territorial."
+    },
+    {
+      "organization": "Millésima",
+      "reference_url": "https://www.millesima.fr/about-us.html",
+      "reason": "L'implantation bordelaise est confirmée mais aucun portail officiel de gestion des offres n'a été vérifié lors de l'audit."
+    },
+    {
+      "organization": "Marriott International à Bordeaux",
+      "reference_url": "https://careers.marriott.com/fr/jobs",
+      "reason": "Le moteur global existe, mais aucun périmètre bordelais actif ou établissement local publiant par ce portail n'a été vérifié."
+    },
+    {
+      "organization": "Groupe Bernard Magrez",
+      "reference_url": "https://www.bernard-magrez.com/",
+      "reason": "Aucun moteur officiel d'annonces exploitable n'a été vérifié lors de l'audit."
+    }
+  ]
+}

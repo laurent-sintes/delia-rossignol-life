@@ -37,6 +37,36 @@
     },
     "required_skills": {"type": "array", "items": {"type": "string", "minLength": 1}},
     "preferred_skills": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "description", "mandatory", "profile_status", "profile_evidence_ids", "assessment_note", "evidence"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "kind": {
+            "type": "string",
+            "enum": ["minimum_experience", "prior_role", "sector_experience", "qualification", "certification", "language", "other"]
+          },
+          "description": {"type": "string", "minLength": 1},
+          "mandatory": {"type": "boolean"},
+          "minimum_years": {"type": "number", "minimum": 0},
+          "profile_status": {"type": "string", "enum": ["met", "not_demonstrated", "unmet", "unknown"]},
+          "profile_evidence_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "assessment_note": {"type": "string", "minLength": 1},
+          "evidence": {
+            "type": "object",
+            "required": ["locator", "excerpt"],
+            "properties": {
+              "locator": {"type": "string", "minLength": 1},
+              "excerpt": {"type": "string", "minLength": 1}
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
     "conditions": {"type": "object"},
     "evidence": {
       "type": "array",

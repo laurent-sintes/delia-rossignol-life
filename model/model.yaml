@@ -1,4 +1,4 @@
-model_version: "1.1.5"
+model_version: "1.1.6"
 namespace: delia-career
 description: >-
   Modèle conceptuel du dossier professionnel, de l'ingestion des preuves,
@@ -41,7 +41,7 @@ invariants:
   - id: temporal-precision-preserved
     rule: Une date partielle ou une période en cours conserve sa précision d'origine; aucun jour ou mois n'est inventé.
   - id: hard-constraint-is-explicit
-    rule: Un critère bloquant du projet professionnel est évalué séparément du score et tout échec est expliqué.
+    rule: Un critère bloquant du projet professionnel et un obstacle de candidature sont évalués séparément du score; leur effet sur l'exclusion ou la section de recommandation est expliqué.
   - id: normalized-label-retains-source
     rule: Toute normalisation vers un secteur, un type de poste ou un lieu conserve le libellé source et sa preuve.
 

@@ -197,7 +197,7 @@ concepts:
     description: Opportunité structurée avec contexte, exigences obligatoires et préférences employeur.
     privacy: private
     storage: data/offers
-    key_attributes: [employer, role, sectors, location, contract_type, work_mode, schedule, compensation, required_skills, preferred_skills, source_url]
+    key_attributes: [employer, role, sectors, location, contract_type, work_mode, schedule, compensation, required_skills, preferred_skills, prerequisites, source_url]
 
   - id: match-assessment
     label: Évaluation de rapprochement
@@ -205,7 +205,7 @@ concepts:
     description: Comparaison explicable entre une offre et les connaissances validées de la personne.
     privacy: private
     storage: embedded:job-offer.assessment
-    key_attributes: [method, score, matches, gaps, criterion_results, hard_constraint_failures]
+    key_attributes: [method, score, matches, gaps, criterion_results, application_barriers, recommendation_band, hard_constraint_failures]
 
   - id: document-template
     label: Template documentaire

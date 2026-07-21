@@ -15,6 +15,12 @@ from .storage import atomic_write_bytes_group
 
 MAX_OFFERS_PER_EMAIL = 50
 DEFAULT_FEEDBACK_BCC = "laurent.sintes74@gmail.com"
+SECTION_DEFINITIONS = (
+    ("priority", "Il faut répondre, ça matche et tu as des chances d’un retour positif"),
+    ("possible", "Tu peux répondre, on ne sait jamais"),
+    ("informational", "Je te les mets pour info, mais il y a peu de chances"),
+)
+SECTION_ORDER = {identifier: index for index, (identifier, _) in enumerate(SECTION_DEFINITIONS)}
 
 
 def _text(value: Any) -> str:
@@ -101,21 +107,51 @@ def _offer_lines(offer: dict[str, Any]) -> tuple[str, str]:
         vigilance_items = [item for item in vigilance_items if item != "rémunération non précisée"]
     if offer.get("full_time") is True:
         vigilance_items = [item for item in vigilance_items if item != "temps plein à confirmer"]
-    if offer.get("conditions", {}).get("insurance_experience_required") is True:
-        vigilance_items.insert(0, "expérience assurantielle demandée")
-    vigilance = "; ".join(dict.fromkeys(vigilance_items)) or "aucun point bloquant identifié dans l’annonce"
+    vigilance = "; ".join(dict.fromkeys(vigilance_items))
+    prerequisite_alerts = (
+        assessment.get("prerequisite_alerts", [])
+        if isinstance(assessment.get("prerequisite_alerts"), list)
+        else []
+    )
+    if not prerequisite_alerts and offer.get("conditions", {}).get("insurance_experience_required") is True:
+        prerequisite_alerts = [
+            {
+                "description": "Expérience préalable dans le domaine assurantiel",
+                "message": "non démontré dans les connaissances validées",
+            }
+        ]
+    prerequisite_items = [
+        f"{_text(item.get('description'))} ({_text(item.get('message'))})"
+        for item in prerequisite_alerts
+        if isinstance(item, dict) and _text(item.get("description"))
+    ]
+    prerequisite_text = "; ".join(dict.fromkeys(prerequisite_items))
+    if not vigilance:
+        vigilance = (
+            "aucun autre point de vigilance identifié dans l’annonce"
+            if prerequisite_text
+            else "aucun point bloquant identifié dans l’annonce"
+        )
+    text_prerequisite = f"\n⚠ PRÉREQUIS : {prerequisite_text}" if prerequisite_text else ""
     text_line = (
         f"Secteur d’activité : {sector}\n"
         f"Mission / poste : {title} — {employer}\n"
         f"Salaire proposé : {compensation}\n"
         f"Pertinence : {relevance}\n"
         f"Contrat et lieu : {contract}, {location}\n"
-        f"{link or 'Lien de l’annonce non disponible'}\nPourquoi : {reasons_text}\nPoint de vigilance : {vigilance}"
+        f"{link or 'Lien de l’annonce non disponible'}\nPourquoi : {reasons_text}"
+        f"{text_prerequisite}\nPoint de vigilance : {vigilance}"
     )
     html_link = (
         f'<a href="{html.escape(link, quote=True)}">Voir l’annonce</a>'
         if link is not None
         else "Lien de l’annonce non disponible"
+    )
+    html_prerequisite = (
+        f'<span style="color: #b42318;"><strong>⚠ Prérequis :</strong> '
+        f"{html.escape(prerequisite_text)}</span><br>"
+        if prerequisite_text
+        else ""
     )
     html_line = (
         f"<strong>Secteur d’activité :</strong> {html.escape(sector)}<br>"
@@ -125,6 +161,7 @@ def _offer_lines(offer: dict[str, Any]) -> tuple[str, str]:
         f"<strong>Contrat et lieu :</strong> {html.escape(contract)}, {html.escape(location)}<br>"
         f"{html_link}<br>"
         f"Pourquoi : {html.escape(reasons_text)}<br>"
+        f"{html_prerequisite}"
         f'<span style="color: #b85c20;"><strong>Point de vigilance :</strong> {html.escape(vigilance)}</span>'
     )
     return text_line, html_line
@@ -137,13 +174,29 @@ def _validate_email_address(address: str, label: str) -> str:
     return value
 
 
-def _offer_relevance_key(offer: dict[str, Any]) -> tuple[float, int, str]:
+def _offer_band(offer: dict[str, Any]) -> str:
+    assessment = offer.get("assessment")
+    declared = offer.get("recommendation_band")
+    if not isinstance(declared, str) and isinstance(assessment, dict):
+        declared = assessment.get("recommendation_band")
+    if declared in SECTION_ORDER:
+        return str(declared)
+    score = assessment.get("score") if isinstance(assessment, dict) else 0
+    numeric_score = float(score) if isinstance(score, (int, float)) else 0.0
+    if numeric_score >= 75:
+        return "priority"
+    if numeric_score >= 50:
+        return "possible"
+    return "informational"
+
+
+def _offer_relevance_key(offer: dict[str, Any]) -> tuple[int, float, int, str]:
     assessment = offer.get("assessment")
     score = assessment.get("score") if isinstance(assessment, dict) else 0
     numeric_score = float(score) if isinstance(score, (int, float)) else 0.0
     rank = offer.get("rank")
     numeric_rank = rank if isinstance(rank, int) else 2**31 - 1
-    return (-numeric_score, numeric_rank, _text(offer.get("id")))
+    return (SECTION_ORDER[_offer_band(offer)], -numeric_score, numeric_rank, _text(offer.get("id")))
 
 
 @dataclass(frozen=True)
@@ -204,7 +257,8 @@ def _select_offers(
         missing = [identifier for identifier in offer_ids if identifier not in offers_by_id]
         if missing:
             raise ValueError("report does not contain selected offer ids: " + ", ".join(missing))
-        selected = tuple(offers_by_id[identifier] for identifier in offer_ids)
+        editorial_selection = [offers_by_id[identifier] for identifier in offer_ids]
+        selected = tuple(sorted(editorial_selection, key=_offer_relevance_key))
     else:
         selected = tuple(sorted(offers, key=_offer_relevance_key)[:limit])
     if not selected:
@@ -247,7 +301,29 @@ def _visited_source_notes(visited_sources: tuple[str, ...]) -> tuple[str, str]:
 
 
 def _render_email_content(selection: FeedbackEmailSelection) -> FeedbackEmailContent:
-    text_offers, html_offers = zip(*(_offer_lines(offer) for offer in selection.offers), strict=True)
+    rendered_offers = [
+        (index, offer, *_offer_lines(offer))
+        for index, offer in enumerate(selection.offers, start=1)
+    ]
+    text_sections: list[str] = []
+    html_sections: list[str] = []
+    for band, title in SECTION_DEFINITIONS:
+        section_offers = [item for item in rendered_offers if _offer_band(item[1]) == band]
+        if not section_offers:
+            continue
+        text_sections.append(
+            title + "\n\n" + "\n\n".join(f"{index}. {text_line}" for index, _, text_line, _ in section_offers)
+        )
+        first_index = section_offers[0][0]
+        html_sections.append(
+            f'<section data-recommendation-band="{band}"><h2>{html.escape(title)}</h2>'
+            f'<ol start="{first_index}">'
+            + "".join(
+                f'<li style="margin: 0 0 18px 0; padding: 0;">{html_line}</li>'
+                for _, _, _, html_line in section_offers
+            )
+            + "</ol></section>"
+        )
     visited_sources_text, visited_sources_html = _visited_source_notes(selection.visited_sources)
     offer_word = "offre" if len(selection.offers) == 1 else "offres"
     subject = f"Sélection de {len(selection.offers)} {offer_word} — ton avis"
@@ -259,7 +335,7 @@ def _render_email_content(selection: FeedbackEmailSelection) -> FeedbackEmailCon
             "Tu peux retrouver ton dossier professionnel ici : " + selection.site_url,
             "Ton CV actuel est joint à ce message.",
             feedback_prompt,
-            "\n\n".join(f"{index}. {line}" for index, line in enumerate(text_offers, start=1)),
+            "\n\n".join(text_sections),
             visited_sources_text,
             "À bientôt,",
         ]
@@ -270,10 +346,10 @@ def _render_email_content(selection: FeedbackEmailSelection) -> FeedbackEmailCon
             "<p>Voici une sélection d’offres préparée pour toi. Le classement est une aide à la décision : ton regard reste déterminant.</p>",
             f'<p>Tu peux retrouver ton dossier professionnel ici : <a href="{html.escape(selection.site_url, quote=True)}">{html.escape(selection.site_url)}</a>.</p>',
             "<p>Ton CV actuel est joint à ce message.</p>",
-            f"<p>{html.escape(feedback_prompt)}</p><ol>",
-            "".join(f'<li style="margin: 0 0 18px 0; padding: 0;">{line}</li>' for line in html_offers),
+            f"<p>{html.escape(feedback_prompt)}</p>",
+            "".join(html_sections),
             visited_sources_html,
-            "</ol><p>À bientôt,</p>",
+            "<p>À bientôt,</p>",
         ]
     ) + "</body></html>"
     return FeedbackEmailContent(subject=subject, text_body=text_body, html_body=html_body)
@@ -305,6 +381,10 @@ def _build_manifest(selection: FeedbackEmailSelection, content: FeedbackEmailCon
         "site_url": selection.site_url,
         "offer_count": len(selection.offers),
         "offer_ids": [_text(offer.get("id")) for offer in selection.offers],
+        "section_counts": {
+            band: sum(_offer_band(offer) == band for offer in selection.offers)
+            for band, _ in SECTION_DEFINITIONS
+        },
         "visited_sources": list(selection.visited_sources),
         "attachment": {"path": str(selection.cv_pdf), "sha256": sha256_file(selection.cv_pdf)},
         "send_authorization": "required",

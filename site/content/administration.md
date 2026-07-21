@@ -16,6 +16,6 @@ Utiliser `$track-delia-applications` pour noter les envois, les entretiens et le
 
 ### Prévisualiser et publier le site
 
-Après une modification visible, exécuter `python scripts/repo_flow.py review-content` pour ouvrir l’aperçu local. Dire `commit` pour préparer un commit, puis `publish` pour envoyer les changements sur GitHub.
+Après une modification visible, exécuter `python scripts/repo_flow.py review-content` pour ouvrir l’aperçu local. Dire `commit` pour lancer les tests et builds puis créer le commit local. Dire `push` ou `publish` pour envoyer ce commit sur GitHub et suivre la CI jusqu’à son résultat final.
 
 Ne jamais ajouter de mot de passe, jeton, clé privée, cookie d’authentification ou fichier `.env` au dépôt.

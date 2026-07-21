@@ -22,6 +22,7 @@ from delia_life.repo_workflow import (
 class RepositoryWorkflowTests(unittest.TestCase):
     def test_current_repository_snapshot_is_structured(self) -> None:
         config = load_repository_config(ROOT)
+        self.assertEqual(config["ci_workflow"], "pages.yml")
         snapshot = git_snapshot(ROOT, config["expected_remote"], config["publish_branch"])
         self.assertTrue(snapshot["branch"])
         self.assertIn("is_clean", snapshot)

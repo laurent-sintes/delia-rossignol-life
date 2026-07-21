@@ -16,7 +16,22 @@
   "compensation": {"minimum": 38500, "currency": "EUR", "period": "year"},
   "required_skills": ["animation d'équipe", "pilotage d'activité", "développement de portefeuille", "relation client", "expérience assurantielle"],
   "preferred_skills": ["accompagnement individuel", "analyse quantitative et qualitative", "gestion de carrière"],
-  "conditions": {"work_mode": "onsite", "hours": "unknown", "insurance_experience_required": true},
+  "conditions": {"work_mode": "onsite", "hours": "unknown"},
+  "prerequisites": [
+    {
+      "id": "experience-assurantielle",
+      "kind": "sector_experience",
+      "description": "Expérience préalable dans le domaine assurantiel",
+      "mandatory": true,
+      "profile_status": "not_demonstrated",
+      "profile_evidence_ids": [],
+      "assessment_note": "Aucune expérience assurantielle n’est démontrée dans les connaissances validées ; cela ne prouve pas qu’elle est absente.",
+      "evidence": {
+        "locator": "recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx#profil",
+        "excerpt": "Expérience dans le domaine assurantiel et aptitudes managériales et commerciales demandées."
+      }
+    }
+  ],
   "evidence": [
     {"field": "mission", "locator": "recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx#description", "excerpt": "Animer une équipe de conseillers, assurer le développement et la performance du portefeuille de l'agence."},
     {"field": "compensation", "locator": "recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx#salaire", "excerpt": "Salaire à partir de 38 500 euros brut annuel."},
