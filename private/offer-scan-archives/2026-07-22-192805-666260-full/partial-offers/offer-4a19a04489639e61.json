@@ -1,0 +1,58 @@
+{
+  "canonical_offer_id": "recrutement.bpce.fr:BPCE_INFO01789",
+  "captured_at": "2026-07-22T19:28:05.695914+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "BPCE Solutions Informatiques",
+  "evidence": [
+    {
+      "excerpt": "Chef de projet SI - Obsolescence technique (F/H)",
+      "field": "title",
+      "locator": "BPCE API item.title"
+    },
+    {
+      "excerpt": "Aix-en-provence, BALMA, Bruges, Dijon, Montigny-le-Bretonneux, Paris, Saint-Herblain, Saint-Jacques-de-la-Lande, Villeneuve-d'Ascq, Villeurbanne",
+      "field": "location_label",
+      "locator": "BPCE API item.localisation"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-api",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-192805-666260-full/recrutement.bpce.fr/be6d155f633bb7d00d88.html",
+    "source_sha256": "22ee6ac5d82fc5e1b0830aa463d950adcc6c3c3d68728e5e123194c783034501"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-4a19a04489639e61",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T19:28:05.695914+02:00",
+  "location_label": "Aix-en-provence, BALMA, Bruges, Dijon, Montigny-le-Bretonneux, Paris, Saint-Herblain, Saint-Jacques-de-la-Lande, Villeneuve-d'Ascq, Villeurbanne",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-07-16",
+  "required_skills": [
+    "vente",
+    "chef de projet"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrutement.bpce.fr",
+  "source_url": "https://recrutement.bpce.fr/job/chef-de-projet-si-obsolescence-technique-f-h",
+  "summary": "Poste de Chef de projet SI - Obsolescence technique (F/H) proposé par BPCE Solutions Informatiques à Aix-en-provence, BALMA, Bruges, Dijon, Montigny-le-Bretonneux, Paris, Saint-Herblain, Saint-Jacques-de-la-Lande, Villeneuve-d'Ascq, Villeurbanne. Revue sémantique requise avant recommandation.",
+  "title": "Chef de projet SI - Obsolescence technique (F/H)",
+  "verification_status": "active"
+}

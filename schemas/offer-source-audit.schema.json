@@ -34,6 +34,7 @@
           "career_url": {"type": "string", "format": "uri", "pattern": "^https://"},
           "scan_domain": {"type": "string", "minLength": 1, "pattern": "^[a-z0-9.-]+$"},
           "scan_priority": {"enum": ["core", "complementary"]},
+          "automated_collection": {"type": "boolean"},
           "sectors": {
             "type": "array",
             "minItems": 1,

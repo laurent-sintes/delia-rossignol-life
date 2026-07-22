@@ -69,7 +69,7 @@ class OfferScanTests(unittest.TestCase):
         self.assertTrue(Path(result["offer_output_directory"]).exists())
         self.assertTrue(Path(result["manifest_path"]).exists())
 
-    def test_full_scan_manifest_queues_active_and_pending_history_for_revalidation(self) -> None:
+    def test_full_scan_manifest_does_not_import_history_into_revalidation(self) -> None:
         history = self.offers / "2026-07-20"
         history.mkdir(parents=True)
         (history / "active.json").write_text(
@@ -99,9 +99,11 @@ class OfferScanTests(unittest.TestCase):
             now=self.now,
         )
 
-        self.assertEqual(result["revalidation_count"], 2)
-        self.assertEqual({item["id"] for item in result["revalidation_queue"]}, {"active", "pending"})
+        self.assertEqual(result["revalidation_count"], 0)
+        self.assertEqual(result["revalidation_queue"], [])
         self.assertTrue(result["requirements"]["required_source_domains"])
+        self.assertIn("u-bordeaux.fr", result["requirements"]["manual_source_domains"])
+        self.assertNotIn("u-bordeaux.fr", result["requirements"]["required_source_domains"])
         self.assertTrue(result["requirements"]["required_query_families"])
         self.assertTrue(result["requirements"]["required_priority_sectors"])
 
@@ -122,6 +124,32 @@ class OfferScanTests(unittest.TestCase):
         self.assertEqual(result["history_policy"], "cumulative-history")
         self.assertEqual(result["rank_inputs"], [str(self.offers)])
         self.assertTrue(cached.exists())
+
+    def test_delta_scan_queues_pending_and_stale_active_history(self) -> None:
+        history = self.offers / "2026-07-01"
+        history.mkdir(parents=True)
+        (history / "active.json").write_text(
+            '{"id":"active","title":"Poste actif","employer":"A",'
+            '"source_url":"https://example.test/active","verification_status":"active",'
+            '"last_verified_at":"2026-07-01T10:00:00+02:00"}',
+            encoding="utf-8",
+        )
+        (history / "pending.json").write_text(
+            '{"id":"pending","title":"Poste pending","employer":"B",'
+            '"source_url":"https://example.test/pending","verification_status":"pending",'
+            '"last_verified_at":"2026-07-20T10:00:00+02:00"}',
+            encoding="utf-8",
+        )
+
+        result = prepare_offer_scan(
+            "delta",
+            runtime_root=self.runtime,
+            offers_root=self.offers,
+            reports_root=self.reports,
+            now=self.now,
+        )
+
+        self.assertEqual({item["id"] for item in result["revalidation_queue"]}, {"active", "pending"})
 
     def test_send_action_is_a_full_scan_with_delivery_requested(self) -> None:
         result = prepare_offer_scan(

@@ -1,0 +1,57 @@
+{
+  "canonical_offer_id": "canonical-offer-5dec41710b39ec11",
+  "captured_at": "2026-07-22T19:49:57.972385+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "Préfecture et services de l'État en Gironde",
+  "evidence": [
+    {
+      "excerpt": "Recrutement de policiers adjoints zone sud-ouest 2ème session 2024 Paramètres d’affichage",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Préfecture et services de l'État en Gironde",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-194957-946319-full/gironde.gouv.fr/99a3d1a5f59ecfa37d34.html",
+    "source_sha256": "7f158b296be5420ae8fcd699b0c1ea562e9401a910c25259a17264f6c851e253"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative"
+  ],
+  "id": "offer-86f0ae74e765532b",
+  "industry_sector_ids": [
+    "services-publics"
+  ],
+  "last_verified_at": "2026-07-22T19:49:57.972385+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [
+    "commerce"
+  ],
+  "sector_labels": [
+    "services publics"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "gironde.gouv.fr",
+  "source_url": "https://www.gironde.gouv.fr/Publications/Concours-administratif-Examen-professionnel-Recrutement/Recrutement-de-policiers-adjoints-zone-sud-ouest-2eme-session-2024",
+  "summary": "Poste de Recrutement de policiers adjoints zone sud-ouest 2ème session 2024 Paramètres d’affichage proposé par Préfecture et services de l'État en Gironde à Bordeaux. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Recrutement de policiers adjoints zone sud-ouest 2ème session 2024 Paramètres d’affichage",
+  "verification_status": "active"
+}

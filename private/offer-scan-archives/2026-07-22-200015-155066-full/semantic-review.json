@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "scan_id": "2026-07-22-200015-155066-full",
+  "reviewed_at": "2026-07-22T20:20:00+02:00",
+  "review_method": "LLM semantic review of archived employer evidence",
+  "reviews": [
+    {
+      "offer_id": "offer-c8e612be71e04ace",
+      "updates": {
+        "summary": "Pilotage de projets d’études commerciales fondés sur la Data Analyse et la Data Science, avec Power BI et SQL.",
+        "required_skills": ["gestion de projet", "data analyse", "data science", "Power BI", "SQL"],
+        "prerequisites": [
+          {"id":"bac5-valide","kind":"qualification","description":"Bac+5 validé","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"Le diplôme validé de Délia est de niveau bac+4.","evidence":{"locator":"BPCE API item.description — Profil et compétences requises","excerpt":"Vous êtes titulaire d’un Bac +5 validé."}},
+          {"id":"experience-data","kind":"prior_role","description":"Première expérience en Data Analyse ou Data Science","mandatory":true,"profile_status":"unmet","profile_evidence_ids":[],"assessment_note":"Délia n’a pas de profil spécialiste Data.","evidence":{"locator":"BPCE API item.description — Profil et compétences requises","excerpt":"une 1ère expérience réussie sur des fonctions en Data Analyse ou Data Science"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-9384e9443a7b01ea",
+      "updates": {
+        "summary": "Relation client multicanale à distance, vente de financements, après-vente et recouvrement amiable ; formation prévue pour les débutants.",
+        "required_skills": ["relation client", "vente", "écoute", "travail en équipe"],
+        "prerequisites": [
+          {"id":"bac2-valide","kind":"qualification","description":"Bac+2 validé","mandatory":true,"profile_status":"met","profile_evidence_ids":["esgci-marketing-commerce-2003"],"assessment_note":"Le bac+4 Marketing & Commerce validé couvre le niveau demandé.","evidence":{"locator":"BPCE API item.description — Profil et compétences requises","excerpt":"Votre personnalité avant tout et un Bac+2 validé."}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-a48e90fc8b5b8602",
+      "updates": {
+        "summary": "Gestion et développement d’un portefeuille de particuliers Premium, conseil commercial et maîtrise des risques et produits bancaires.",
+        "required_skills": ["relation client", "vente", "gestion de portefeuille", "gestion du risque", "produits bancaires"],
+        "prerequisites": [
+          {"id":"bac23-banque-commercial","kind":"qualification","description":"Bac+2/3 bancaire ou commercial, ou expérience équivalente","mandatory":true,"profile_status":"met","profile_evidence_ids":["esgci-marketing-commerce-2003"],"assessment_note":"Le bac+4 Marketing & Commerce couvre l’alternative commerciale.","evidence":{"locator":"BPCE API item.description — Profil et compétences requises","excerpt":"formation bancaire et/ou commerciale ou d’une expérience équivalente"}},
+          {"id":"maitrise-produits-risque","kind":"other","description":"Maîtrise de la gestion du risque et des produits bancaires","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"Cette maîtrise bancaire n’est pas démontrée dans le profil validé.","evidence":{"locator":"BPCE API item.description — Profil et compétences requises","excerpt":"maîtrise de la gestion du risque, des produits et services"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-f18b64a839c7dee5",
+      "updates": {
+        "summary": "Développement et gestion d’un portefeuille d’entreprises du BTP, montage de financements et maîtrise des risques bancaires.",
+        "required_skills": ["développement commercial", "gestion de portefeuille", "finance", "gestion du risque"],
+        "prerequisites": [
+          {"id":"bac45-banque-finance","kind":"qualification","description":"Bac+4/5 Banque, Finance ou Gestion","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"Le diplôme complet de Délia n’est pas spécialisé en banque, finance ou gestion.","evidence":{"locator":"BPCE API item.description — Profil et compétences requises","excerpt":"Bac +4/5 (Banque, Finance, Gestion…)"}},
+          {"id":"experience-clientele-entreprises","kind":"sector_experience","description":"Trois à cinq ans auprès d’une clientèle entreprises similaire","mandatory":true,"minimum_years":3,"industry_sector_ids":["banque-et-assurance"],"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"L’absence validée d’expérience banque-assurance rend ce prérequis non satisfait.","evidence":{"locator":"BPCE API item.description — Profil et compétences requises","excerpt":"expérience confirmée de minimum 3/5 ans auprès d’une clientèle similaire"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-7dfeaabff1262191",
+      "updates": {
+        "summary": "Planification des ressources, pilotage des flux et indicateurs de qualité, coordination opérationnelle et analyse Power BI/Excel.",
+        "required_skills": ["planification", "coordination", "pilotage opérationnel", "Excel", "Power BI"],
+        "prerequisites": []
+      }
+    },
+    {
+      "offer_id": "offer-ce34bf567fce4ba0",
+      "updates": {
+        "summary": "Développement commercial en protection sociale assurance, nécessitant la maîtrise des garanties santé, prévoyance et retraite.",
+        "required_skills": ["vente", "relation client", "garanties santé", "prévoyance", "retraite"],
+        "prerequisites": [
+          {"id":"garanties-protection-sociale","kind":"other","description":"Maîtrise des garanties et de l’environnement juridique de la protection sociale","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"Cette expertise assurance n’est pas démontrée.","evidence":{"locator":"HTML — Profil","excerpt":"Vous maîtrisez les garanties principales de votre branche"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-1d3d65f9375666c2",
+      "updates": {
+        "summary": "Direction de clientèle en protection sociale assurance, avec expertise des garanties santé, prévoyance et retraite.",
+        "required_skills": ["développement commercial", "gestion de portefeuille", "garanties santé", "prévoyance", "retraite"],
+        "prerequisites": [
+          {"id":"expertise-protection-sociale","kind":"other","description":"Maîtrise des garanties et de l’environnement juridique de la protection sociale","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"Cette expertise assurance n’est pas démontrée.","evidence":{"locator":"HTML — Profil","excerpt":"Vous maîtrisez les garanties principales de votre branche"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-f3fdca554c07852f",
+      "updates": {
+        "summary": "Conseil et vente à distance de contrats IARD après neuf semaines de formation ; l’employeur accepte les profils débutants.",
+        "required_skills": ["relation client", "conseil", "vente", "écoute"],
+        "prerequisites": [
+          {"id":"experience-relation-client-ideale","kind":"sector_experience","description":"Six mois en assurance, banque ou relation clientèle sont souhaités, mais les débutants sont acceptés","mandatory":false,"minimum_years":0.5,"industry_sector_ids":["banque-et-assurance"],"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"Le texte rend cette expérience souhaitable et non éliminatoire.","evidence":{"locator":"BPCE API item.description — Profil","excerpt":"Nous sommes toutefois ouverts aux profils débutants !"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-8554749a0da39a72",
+      "updates": {
+        "summary": "Développement régional auprès d’établissements publics : animation de partenaires, événements, formation, coordination et suivi des actions.",
+        "required_skills": ["relation partenaires", "organisation d'événements", "formation", "coordination de projet", "développement commercial"],
+        "prerequisites": []
+      }
+    },
+    {
+      "offer_id": "offer-ea8fc19a15625c0d",
+      "updates": {
+        "summary": "Gestion et développement d’un portefeuille de personnes morales, analyse financière et montage de prêts.",
+        "required_skills": ["gestion de portefeuille", "analyse financière", "développement commercial", "crédit"],
+        "prerequisites": [
+          {"id":"bac45-banque-gestion-finance","kind":"qualification","description":"Bac+4/5 Banque, Gestion ou Finance","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"Le diplôme complet de Délia n’a pas cette spécialisation.","evidence":{"locator":"BPCE API item.description — Profil et compétences requises","excerpt":"Bac +4/5 (Banque, Gestion, Finance)"}},
+          {"id":"experience-bancaire-deux-ans","kind":"sector_experience","description":"Deux à cinq ans d’expérience bancaire sur un poste équivalent","mandatory":true,"minimum_years":2,"industry_sector_ids":["banque-et-assurance"],"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"L’absence validée d’expérience bancaire rend ce prérequis non satisfait.","evidence":{"locator":"BPCE API item.description — Profil et compétences requises","excerpt":"expérience bancaire de 2 à 5 ans sur un poste équivalent"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-63f7415fcc8e1acd",
+      "updates": {
+        "summary": "Gestion d’un portefeuille d’entreprises, prospection, montage de crédits et analyse du risque financier.",
+        "required_skills": ["gestion de portefeuille", "crédit", "analyse financière", "prospection"],
+        "prerequisites": [
+          {"id":"experience-corporate-confirmee","kind":"sector_experience","description":"Expérience confirmée sur un métier corporate et bonne culture financière","mandatory":true,"industry_sector_ids":["banque-et-assurance"],"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"L’absence validée d’expérience banque-finance rend ce prérequis non satisfait.","evidence":{"locator":"BPCE API item.description — Profil et compétences requises","excerpt":"expérience confirmée et réussie sur un métier lié au corporate"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-a7273aed84416f0e",
+      "updates": {
+        "summary": "Technico-commercial spécialiste de la protection sociale assurance et de ses garanties santé, prévoyance et épargne.",
+        "required_skills": ["vente", "négociation", "garanties santé", "prévoyance", "épargne"],
+        "prerequisites": [
+          {"id":"bac2-assurances","kind":"qualification","description":"Bac+2 minimum dans le domaine des assurances","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"L’inventaire complet des diplômes ne contient pas de formation assurance.","evidence":{"locator":"HTML — Profil","excerpt":"BAC+2 minimum dans le domaine des Assurances"}},
+          {"id":"experience-similaire-assurance","kind":"sector_experience","description":"Expérience significative sur un poste similaire en assurance","mandatory":true,"industry_sector_ids":["banque-et-assurance"],"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"L’absence validée d’expérience assurance rend ce prérequis non satisfait.","evidence":{"locator":"HTML — Profil","excerpt":"expérience significative sur un poste similaire"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-4ec0692e5af06db7",
+      "updates": {
+        "summary": "Coordination internationale de programmes d’assurance, reporting client et suivi des contrats et primes.",
+        "required_skills": ["coordination internationale", "assurance", "anglais C1", "reporting"],
+        "prerequisites": [
+          {"id":"diplome-juridique-assurance","kind":"qualification","description":"Bac+3 ou Master juridique ou droit des assurances","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"L’inventaire complet des diplômes ne contient pas cette formation.","evidence":{"locator":"HTML — Profil","excerpt":"formation supérieure juridique et/ou droit des Assurances"}},
+          {"id":"cinq-ans-courtage-international","kind":"sector_experience","description":"Cinq ans en coordination internationale en courtage ou compagnie","mandatory":true,"minimum_years":5,"industry_sector_ids":["banque-et-assurance"],"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"L’absence validée d’expérience assurance rend ce prérequis non satisfait.","evidence":{"locator":"HTML — Profil","excerpt":"5 ans minimum d'expérience dans le secteur de la coordination internationale"}},
+          {"id":"anglais-c1","kind":"language","description":"Anglais courant niveau C1","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":["delia-english"],"assessment_note":"L’usage professionnel est validé, mais le niveau écrit C1 n’est pas démontré.","evidence":{"locator":"HTML — Profil","excerpt":"pratique fluide de l’anglais (niveau C1 attendu)"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-ba0c88260e8f5e5a",
+      "updates": {
+        "summary": "Gestion des affiliations en protection sociale dans le cadre d’un CDD, avec expérience similaire demandée.",
+        "contract_type": "CDD",
+        "required_skills": ["gestion administrative", "service client", "outils informatiques"],
+        "prerequisites": [
+          {"id":"experience-affiliations","kind":"prior_role","description":"Expérience réussie sur un poste similaire","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"Une expérience d’affiliations en protection sociale n’est pas démontrée.","evidence":{"locator":"HTML — Profil","excerpt":"expérience réussie sur un poste similaire"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-d44abbb25db2b58b",
+      "updates": {
+        "summary": "Assistance à un chargé d’affaires entreprises : gestion administrative, comptable et juridique d’un portefeuille bancaire.",
+        "required_skills": ["gestion administrative", "comptabilité", "banque", "Excel"],
+        "prerequisites": [
+          {"id":"bac34-banque-finance","kind":"qualification","description":"Bac+3/4 minimum Banque, Gestion ou Finance","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"Le diplôme complet de Délia n’a pas cette spécialisation.","evidence":{"locator":"BPCE API item.description — Profil et compétences requises","excerpt":"formation supérieure Bac+3/4 minimum (Banque, Gestion, Finance)"}},
+          {"id":"experience-bancaire-imperative","kind":"sector_experience","description":"Expérience bancaire réussie impérative","mandatory":true,"industry_sector_ids":["banque-et-assurance"],"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"L’absence validée d’expérience bancaire rend ce prérequis non satisfait.","evidence":{"locator":"BPCE API item.description — Profil et compétences requises","excerpt":"vous justifiez impérativement d’une expérience bancaire réussie"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-91ffd29047c1675e",
+      "updates": {
+        "summary": "Accueil et suivi de clientèle dans un palace, réception, facturation, vente de prestations et traitement des litiges.",
+        "location_label": "Bordeaux-Martillac",
+        "required_skills": ["accueil", "relation client", "vente", "facturation", "gestion des litiges"],
+        "prerequisites": [
+          {"id":"experience-reception-45-etoiles","kind":"prior_role","description":"Expérience réussie et significative de réceptionniste en hôtel 4 ou 5 étoiles","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"Cette expérience hôtelière spécialisée n’est pas démontrée.","evidence":{"locator":"JobAffinity — Profil","excerpt":"expérience réussie et significative dans un hôtel 4 ou 5*"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-7acfeaf68c2b7ed7",
+      "updates": {
+        "summary": "Back-office maritime international, déclarations mensuelles, Excel expert et échanges professionnels en anglais.",
+        "required_skills": ["back-office", "Excel expert", "anglais B2", "assurance"],
+        "prerequisites": [
+          {"id":"bac2-banque-assurance-finance","kind":"qualification","description":"Bac+2 Banque, Assurance ou Finance","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"L’inventaire complet des diplômes ne contient pas cette formation.","evidence":{"locator":"HTML — Profil","excerpt":"Titulaire d'un Bac+2 Banque, Assurance ou finance"}},
+          {"id":"premiere-experience-assurance","kind":"sector_experience","description":"Première expérience réussie dans ce domaine","mandatory":true,"industry_sector_ids":["banque-et-assurance"],"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"L’absence validée d’expérience assurance rend ce prérequis non satisfait.","evidence":{"locator":"HTML — Profil","excerpt":"vous justifiez d'une première expérience réussie"}},
+          {"id":"excel-expert","kind":"other","description":"Niveau expert sur Excel","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"Le niveau expert Excel n’est pas démontré.","evidence":{"locator":"HTML — Profil","excerpt":"un niveau expert sur Excel"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-0d3e4f483f5d2fa0",
+      "updates": {
+        "summary": "Back-office de production maritime : gestion administrative internationale, anglais B2 et Excel avancé.",
+        "required_skills": ["gestion administrative", "anglais B2", "Excel", "commerce international"],
+        "prerequisites": [
+          {"id":"experience-gestion-internationale","kind":"prior_role","description":"Expérience de gestionnaire ou assistant en transport, commerce international, tourisme ou hôtellerie","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"Une expérience dans l’un de ces domaines précis n’est pas démontrée.","evidence":{"locator":"HTML — Profil","excerpt":"expériences sur des postes de gestionnaire/d'assistant dans les domaines transport, commerce international, tourisme, hôtellerie"}},
+          {"id":"anglais-b2","kind":"language","description":"Anglais B2","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":["delia-english"],"assessment_note":"L’usage professionnel est validé, mais le niveau écrit B2 exact reste à vérifier.","evidence":{"locator":"HTML — Profil","excerpt":"un bon niveau d'anglais (B2 requis)"}},
+          {"id":"excel-avance","kind":"other","description":"Excel avancé, formules conditionnelles et tableaux croisés dynamiques","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"Ce niveau Excel n’est pas démontré.","evidence":{"locator":"HTML — Profil","excerpt":"formules conditionnelles, Tableaux croisés dynamique"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-4720792923bab4e4",
+      "updates": {
+        "summary": "Support technique anti-fraude en assurance habitation, nécessitant une forte expérience de gestion de sinistres.",
+        "required_skills": ["assurance", "anti-fraude", "sinistres MRH", "transmission"],
+        "prerequisites": [
+          {"id":"formation-assurances","kind":"qualification","description":"Formation en assurances","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"L’inventaire complet des diplômes ne contient pas de formation assurance.","evidence":{"locator":"BPCE API item.description — Profil et compétences requises","excerpt":"De formation en assurances"}},
+          {"id":"cinq-ans-sinistres-fraude","kind":"sector_experience","description":"Au moins cinq ans en gestion de sinistres fraude MRH","mandatory":true,"minimum_years":5,"industry_sector_ids":["banque-et-assurance"],"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"L’absence validée d’expérience assurance rend ce prérequis non satisfait.","evidence":{"locator":"BPCE API item.description — Profil et compétences requises","excerpt":"expérience professionnelle d'au moins 5 ans"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-08c33b1094397f63",
+      "updates": {
+        "summary": "Management d’une équipe d’entrepôt logistique à Vémars (95), hors de la zone de recherche.",
+        "location_label": "Vémars (95)",
+        "required_skills": ["management logistique", "pilotage d'indicateurs", "sécurité"],
+        "prerequisites": [
+          {"id":"trois-ans-chef-equipe-logistique","kind":"prior_role","description":"Au moins trois ans comme chef d’équipe en entrepôt logistique","mandatory":true,"minimum_years":3,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"Cette expérience spécialisée n’est pas démontrée.","evidence":{"locator":"HTML — Profil","excerpt":"au moins 3 ans en tant que Chef d’équipe dans un entrepôt logistique"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-ad768c31977fac1f",
+      "updates": {
+        "summary": "Pilotage de campagnes d’influence et de partenariats sociaux, nécessitant trois ans d’expérience spécialisée.",
+        "required_skills": ["marketing d'influence", "influenceurs", "social partnerships", "Kolsquare", "Reech"],
+        "prerequisites": [
+          {"id":"trois-ans-influence","kind":"prior_role","description":"Au moins trois ans en influence et social partnerships","mandatory":true,"minimum_years":3,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"Cette expérience marketing spécialisée n’est pas démontrée.","evidence":{"locator":"HTML — Profil","excerpt":"au moins 3 ans d'expérience en influence et social partnerships"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-1b9fecf8e7a8435d",
+      "updates": {
+        "summary": "Customer engagement marketing, CRM et automation dans le cadre d’un CDD à Bordeaux.",
+        "contract_type": "CDD",
+        "required_skills": ["marketing", "CRM Salesforce", "marketing automation", "Excel", "Power BI", "anglais"],
+        "prerequisites": [
+          {"id":"formation-marketing","kind":"qualification","description":"Formation supérieure en marketing","mandatory":true,"profile_status":"met","profile_evidence_ids":["esgci-marketing-commerce-2003"],"assessment_note":"Le bac+4 Marketing & Commerce couvre la formation demandée.","evidence":{"locator":"HTML — Profil","excerpt":"formation supérieure en marketing"}},
+          {"id":"premiere-experience-crm","kind":"prior_role","description":"Première expérience en customer engagement avec CRM et marketing automation","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"Cette expérience technique n’est pas démontrée.","evidence":{"locator":"HTML — Profil","excerpt":"une première expérience"}}
+        ]
+      }
+    },
+    {
+      "offer_id": "offer-88f97ef257956ad7",
+      "updates": {
+        "summary": "Gestion de stocks sur un site logistique à Vémars (95), hors de la zone de recherche.",
+        "location_label": "Vémars (95)",
+        "required_skills": ["gestion de stocks", "Excel", "procédures logistiques", "formation"],
+        "prerequisites": [
+          {"id":"bac2-logistique-gestion","kind":"qualification","description":"Bac+2 en logistique ou gestion","mandatory":true,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"L’inventaire complet des diplômes ne contient pas cette formation.","evidence":{"locator":"HTML — Profil","excerpt":"De niveau BAC+2 en logistique/gestion"}},
+          {"id":"deux-ans-gestion-stocks","kind":"prior_role","description":"Deux ans minimum sur un poste similaire","mandatory":true,"minimum_years":2,"profile_status":"not_demonstrated","profile_evidence_ids":[],"assessment_note":"Deux ans sur un poste similaire ne sont pas démontrés.","evidence":{"locator":"HTML — Profil","excerpt":"expérience de minimum 2 ans sur un poste similaire"}}
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "skills-assistante-administrative-juillet-2026",
+  "title": "Assistante administrative H/F",
+  "employer": "Skills Bordeaux",
+  "source_url": "https://www.hellowork.com/fr-fr/emploi/metier_assistant-administratif-ville_bordeaux-33000.html",
+  "source_site": "hellowork.com",
+  "source_kind": "aggregator",
+  "verification_status": "active",
+  "published_at": "2026-07-12",
+  "captured_at": "2026-07-22T16:18:00+02:00",
+  "last_verified_at": "2026-07-22T16:18:00+02:00",
+  "summary": "Prendre en charge une activité administrative polyvalente pour une entreprise bordelaise accompagnée par le cabinet Skills.",
+  "location_label": "Bordeaux",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": [
+    "services aux entreprises"
+  ],
+  "functional_domains": [
+    "gestion administrative"
+  ],
+  "required_skills": [
+    "organisation",
+    "bureautique",
+    "suivi administratif"
+  ],
+  "preferred_skills": [],
+  "conditions": {},
+  "prerequisites": [],
+  "compensation": {
+    "minimum": 25000,
+    "maximum": 28000,
+    "currency": "EUR",
+    "period": "year"
+  },
+  "source_warning": "L'offre est identifiable sur la liste Hellowork du jour, mais l'employeur final et la fiche détaillée restent à confirmer.",
+  "canonical_offer_id": "skills-assistante-administrative-juillet-2026"
+}

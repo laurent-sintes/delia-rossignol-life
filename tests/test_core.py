@@ -442,6 +442,7 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(parser.links, ["/about", "/logo.png"])
 
     def test_website_fetch_retries_once_then_returns_traceable_error(self) -> None:
+        import http.client
         import urllib.error
         from unittest.mock import patch
 
@@ -449,6 +450,14 @@ class CoreTests(unittest.TestCase):
             result = _fetch_url("https://example.com/", "test", 1, 1, 0)
         self.assertEqual(result["attempts"], 2)
         self.assertEqual(result["error"], "<urlopen error offline>")
+
+        with patch(
+            "delia_life.website.urllib.request.urlopen",
+            side_effect=http.client.IncompleteRead(b"partial"),
+        ):
+            incomplete = _fetch_url("https://example.com/", "test", 1, 1, 0)
+        self.assertEqual(incomplete["attempts"], 2)
+        self.assertIn("IncompleteRead", incomplete["error"])
 
     def test_website_fetch_rejects_large_responses_and_cross_origin_redirects(self) -> None:
         from email.message import Message
@@ -498,12 +507,19 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(redirected["error_type"], "cross-origin-redirect")
 
     def test_website_network_policy_and_robots_fail_closed(self) -> None:
+        import http.client
         import urllib.error
         from unittest.mock import patch
 
         with self.assertRaisesRegex(ValueError, "private or non-global"):
             validate_network_url("http://127.0.0.1/")
         with patch("delia_life.website.urllib.request.urlopen", side_effect=urllib.error.URLError("offline")):
+            robots = _robot_parser("https://example.com/", "test")
+        self.assertFalse(robots.can_fetch("test", "https://example.com/page"))
+        with patch(
+            "delia_life.website.urllib.request.urlopen",
+            side_effect=http.client.RemoteDisconnected("remote disconnected"),
+        ):
             robots = _robot_parser("https://example.com/", "test")
         self.assertFalse(robots.can_fetch("test", "https://example.com/page"))
 

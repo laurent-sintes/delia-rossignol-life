@@ -1,0 +1,56 @@
+{
+  "canonical_offer_id": "canonical-offer-3806197b67ebcd30",
+  "captured_at": "2026-07-22T19:56:06.775708+02:00",
+  "conditions": {},
+  "contract_type": "CDD",
+  "employer": "Ville de Mérignac",
+  "evidence": [
+    {
+      "excerpt": "Chargé de mission Résilience et adaptation au changement climatique H/F Détail de l'offre",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Ville de Mérignac",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-195606-747817-full/merignac-career.talent-soft.com/3806197b67ebcd305d63.html",
+    "source_sha256": "cb8baa5b017efdc8f471a5e77d2ee4c940ff5d7fd0c293800f02cc37ad32d679"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-f807d8486fc5544c",
+  "industry_sector_ids": [
+    "services-publics"
+  ],
+  "last_verified_at": "2026-07-22T19:56:06.775708+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [],
+  "sector_labels": [
+    "services publics"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "merignac-career.talent-soft.com",
+  "source_url": "https://merignac-career.talent-soft.com/offre-de-emploi/emploi-charge-de-mission-resilience-et-adaptation-au-changement-climatique-h-f_7186.aspx",
+  "summary": "Poste de Chargé de mission Résilience et adaptation au changement climatique H/F Détail de l'offre proposé par Ville de Mérignac à Bordeaux. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Chargé de mission Résilience et adaptation au changement climatique H/F Détail de l'offre",
+  "verification_status": "active"
+}

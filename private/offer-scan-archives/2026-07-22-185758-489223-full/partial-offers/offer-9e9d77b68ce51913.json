@@ -1,0 +1,56 @@
+{
+  "canonical_offer_id": "canonical-offer-99f40a537c89bd4e",
+  "captured_at": "2026-07-22T18:57:58.517400+02:00",
+  "conditions": {},
+  "contract_type": "temps plein - contrat non communiqué",
+  "employer": "Betclic Group",
+  "evidence": [
+    {
+      "excerpt": "Games Delivery Expert F/M",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "Betclic Group",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-185758-489223-full/betclic-group.breezy.hr/1ccfb8a84ee915b907f7.html",
+    "source_sha256": "6741a396af4ad868570a1b6a1d3af6d4b4c9e9d9d69fc14fc094c98ea6cc5b3b"
+  },
+  "full_time": true,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-9e9d77b68ce51913",
+  "industry_sector_ids": [
+    "numerique-et-services"
+  ],
+  "last_verified_at": "2026-07-22T18:57:58.517400+02:00",
+  "location_label": "Sliema, MT",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2025-10-31",
+  "required_skills": [
+    "back-office"
+  ],
+  "sector_labels": [
+    "numerique et services"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "betclic-group.breezy.hr",
+  "source_url": "https://betclic-group.breezy.hr/p/3b7a54d714a001-games-delivery-expert-f-m?source=GoogleJobs",
+  "summary": "Poste de Games Delivery Expert F/M proposé par Betclic Group à Sliema, MT. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "Games Delivery Expert F/M",
+  "verification_status": "active"
+}

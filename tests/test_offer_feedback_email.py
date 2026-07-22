@@ -40,7 +40,7 @@ class OfferFeedbackEmailTests(unittest.TestCase):
                     "compensation": {"minimum": 32000, "maximum": 36000, "currency": "EUR", "period": "year"},
                     "full_time": True,
                     "source_url": "https://jobs.example/offers/1",
-                    "assessment": {"score": 91, "reasons": ["secteur très recherché : luxe"], "unknowns": ["rémunération non précisée", "temps plein à confirmer"]},
+                    "assessment": {"score": 91, "reasons": ["secteur prioritaire : luxe"], "unknowns": ["rémunération non précisée", "temps plein à confirmer"]},
                 }
             ]
         }
@@ -138,9 +138,13 @@ class OfferFeedbackEmailTests(unittest.TestCase):
         text_body = (self.work / "draft" / "offer-selection.txt").read_text(encoding="utf-8")
         html_body = (self.work / "draft" / "offer-selection.html").read_text(encoding="utf-8")
         self.assertIn("Offres probablement actives à revérifier", text_body)
+        self.assertIn("Cela ne signifie ni qu’elles sont fermées ni qu’elles sont incompatibles", text_body)
+        self.assertIn("Le motif propre à chaque offre est indiqué ci-dessous", text_body)
+        self.assertIn("restent, elles, dans le classement avec un point de vigilance", text_body)
         self.assertIn("Hermès — Chargé SAV H/F — Magasin de Bordeaux", text_body)
         self.assertIn("page employeur exacte non vérifiée", text_body)
         self.assertIn('data-verification-status="pending"', html_body)
+        self.assertIn("Cela ne signifie ni qu’elles sont fermées ni qu’elles sont incompatibles", html_body)
         self.assertNotIn("Pertinence : non calculée", text_body)
         self.assertEqual(result["offer_count"], 1)
         self.assertEqual(result["pending_offer_count"], 1)

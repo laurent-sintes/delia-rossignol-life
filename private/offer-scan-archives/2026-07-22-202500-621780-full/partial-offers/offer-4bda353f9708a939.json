@@ -1,0 +1,56 @@
+{
+  "canonical_offer_id": "canonical-offer-cd6bdfc077e39a81",
+  "captured_at": "2026-07-22T20:25:00.641368+02:00",
+  "conditions": {},
+  "contract_type": "CDD",
+  "employer": "Ville de Mérignac",
+  "evidence": [
+    {
+      "excerpt": "Officier d'état civil - élections H/F Détail de l'offre",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Ville de Mérignac",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-202500-621780-full/merignac-career.talent-soft.com/cd6bdfc077e39a81d597.html",
+    "source_sha256": "940450db933389e361517e7e9c972c2464414ed64ba203ac097eaec0372922e9"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-4bda353f9708a939",
+  "industry_sector_ids": [
+    "services-publics"
+  ],
+  "last_verified_at": "2026-07-22T20:25:00.641368+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [],
+  "sector_labels": [
+    "services publics"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "merignac-career.talent-soft.com",
+  "source_url": "https://merignac-career.talent-soft.com/offre-de-emploi/emploi-officier-d-etat-civil-elections-h-f_7203.aspx",
+  "summary": "Poste de Officier d'état civil - élections H/F Détail de l'offre proposé par Ville de Mérignac à Bordeaux. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Officier d'état civil - élections H/F Détail de l'offre",
+  "verification_status": "active"
+}

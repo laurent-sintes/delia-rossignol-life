@@ -1,0 +1,57 @@
+{
+  "canonical_offer_id": "canonical-offer-a77e604588b375d9",
+  "captured_at": "2026-07-22T20:00:15.182633+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "Préfecture et services de l'État en Gironde",
+  "evidence": [
+    {
+      "excerpt": "Recrutement d'adjoint administratif du ministère de l'Intérieur pour la région Nouvelle-Aquitaine Paramètres d’affichage",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Préfecture et services de l'État en Gironde",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-200015-155066-full/gironde.gouv.fr/c021a47e082e98d1fc6c.html",
+    "source_sha256": "412110ce9f46e29035c32b1620793aab80776753480f5449f394b27972608e0a"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative"
+  ],
+  "id": "offer-f2c4de92f4c32e53",
+  "industry_sector_ids": [
+    "services-publics"
+  ],
+  "last_verified_at": "2026-07-22T20:00:15.182633+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [
+    "commerce"
+  ],
+  "sector_labels": [
+    "services publics"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "gironde.gouv.fr",
+  "source_url": "https://www.gironde.gouv.fr/Publications/Concours-administratif-Examen-professionnel-Recrutement/Recrutement-d-adjoint-administratif-du-ministere-de-l-Interieur-pour-la-region-Nouvelle-Aquitaine",
+  "summary": "Poste de Recrutement d'adjoint administratif du ministère de l'Intérieur pour la région Nouvelle-Aquitaine Paramètres d’affichage proposé par Préfecture et services de l'État en Gironde à Bordeaux. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Recrutement d'adjoint administratif du ministère de l'Intérieur pour la région Nouvelle-Aquitaine Paramètres d’affichage",
+  "verification_status": "active"
+}

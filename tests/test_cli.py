@@ -26,10 +26,12 @@ class CliTests(unittest.TestCase):
             set(command_registry.choices),
             {
                 "apply-proposal",
+                "apply-offer-semantic-reviews",
                 "build-documents",
                 "build-site",
                 "check",
                 "check-documents",
+                "collect-offers",
                 "crawl-site",
                 "create-review-batch",
                 "hash",
@@ -44,6 +46,7 @@ class CliTests(unittest.TestCase):
                 "rank-offers",
                 "review",
                 "review-batch",
+                "run-offer-scan",
                 "select-template",
                 "site-audit",
                 "track-event",
@@ -57,6 +60,7 @@ class CliTests(unittest.TestCase):
             "build-documents",
             "check-documents",
             "rank-offers",
+            "apply-offer-semantic-reviews",
             "offer-scan",
             "prepare-offer-feedback-email",
             "build-site",
@@ -105,7 +109,7 @@ class CliTests(unittest.TestCase):
         self.assertTrue(report["ok"])
         self.assertGreaterEqual(report["checked_files"], 146)
 
-    def test_rank_offers_strict_mode_blocks_an_incomplete_pool(self) -> None:
+    def test_rank_offers_strict_mode_blocks_missing_scan_coverage(self) -> None:
         test_temp_root = ROOT / "tests" / ".tmp"
         test_temp_root.mkdir(exist_ok=True)
         directory = test_temp_root / "cli-strict-incomplete-pool"
@@ -146,6 +150,72 @@ class CliTests(unittest.TestCase):
         report = json.loads(stdout.getvalue())
         self.assertFalse(report["pool_complete"])
         self.assertFalse(report["finalization_allowed"])
+
+    def test_rank_offers_uses_collection_receipts_from_scan_manifest(self) -> None:
+        directory = ROOT / "tests" / ".tmp" / "cli-collection-coverage"
+        remove_tree(directory, ignore_errors=True)
+        directory.mkdir(parents=True)
+        try:
+            offer_path = directory / "offer.json"
+            offer_path.write_text(
+                json.dumps(
+                    {
+                        "id": "offer-covered",
+                        "title": "Gestionnaire relation client",
+                        "employer": "Employeur Test",
+                        "source_url": "https://jobs.example/offers/covered",
+                        "source_site": "jobs.example",
+                        "source_kind": "direct_employer",
+                        "verification_status": "active",
+                        "last_verified_at": datetime.now().astimezone().isoformat(),
+                        "published_at": None,
+                        "contract_type": "CDI",
+                        "full_time": True,
+                        "location_label": "Bordeaux",
+                        "summary": "Gestion administrative et relation client.",
+                        "required_skills": ["relation client"],
+                        "preferred_skills": [],
+                        "conditions": {},
+                    }
+                ),
+                encoding="utf-8",
+            )
+            manifest_path = directory / "manifest.json"
+            manifest_path.write_text(
+                json.dumps(
+                    {
+                        "requirements": {
+                            "required_source_domains": ["jobs.example"],
+                            "required_query_families": ["gestion-administrative"],
+                            "required_priority_sectors": ["commerce-et-distribution"],
+                        },
+                        "collection": {
+                            "visited_sources": ["https://jobs.example/carrieres"],
+                            "covered_query_families": ["gestion-administrative"],
+                            "covered_priority_sectors": ["commerce-et-distribution"],
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            stdout = io.StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(
+                    [
+                        "rank-offers",
+                        str(offer_path),
+                        "--scan-manifest",
+                        str(manifest_path),
+                        "--require-complete-pool",
+                    ]
+                )
+        finally:
+            remove_tree(directory, ignore_errors=True)
+
+        self.assertEqual(exit_code, 0)
+        report = json.loads(stdout.getvalue())
+        self.assertTrue(report["pool_complete"])
+        self.assertEqual(report["scan_coverage"]["missing_source_domains"], [])
 
 
 if __name__ == "__main__":

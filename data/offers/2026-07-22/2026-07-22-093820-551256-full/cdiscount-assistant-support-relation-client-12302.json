@@ -1,0 +1,51 @@
+{
+  "id": "cdiscount-assistant-support-relation-client-12302",
+  "title": "Assistant Support Relation Client F/H",
+  "employer": "Cdiscount",
+  "source_url": "https://emploi.cdiscount.com/nos-offres-demploi/12302",
+  "source_site": "emploi.cdiscount.com",
+  "source_kind": "direct_employer",
+  "verification_status": "active",
+  "verification_note": "Page exacte ou portail direct revérifié pendant le scan full du 22 juillet 2026.",
+  "published_at": "2026-07-10",
+  "captured_at": "2026-07-22T09:45:53+02:00",
+  "last_verified_at": "2026-07-22T09:45:53+02:00",
+  "summary": "Assurer un support opérationnel à la relation client au sein de l’écosystème Cdiscount à Bordeaux. Le portail employeur confirme un CDD dans la famille Relation client ; le détail des missions et les conditions d’accès restent à vérifier sur la fiche lorsqu’elle redeviendra accessible.",
+  "location_label": "Bordeaux",
+  "industry_sector_ids": [
+    "commerce-et-distribution"
+  ],
+  "contract_type": "CDD",
+  "full_time": true,
+  "sector_labels": [
+    "commerce et distribution"
+  ],
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative"
+  ],
+  "compensation": {},
+  "required_skills": [
+    "relation client",
+    "support administratif"
+  ],
+  "preferred_skills": [],
+  "conditions": {
+    "details_access": "fiche détaillée temporairement inaccessible"
+  },
+  "prerequisites": [
+    {
+      "id": "conditions-acces-cdiscount-support",
+      "kind": "other",
+      "description": "Conditions d’accès au poste à vérifier",
+      "mandatory": true,
+      "profile_status": "unknown",
+      "profile_evidence_ids": [],
+      "assessment_note": "La fiche détaillée n’était pas exploitable ; les conditions d’accès doivent être vérifiées avant candidature.",
+      "evidence": {
+        "locator": "portail Cdiscount, offre 12302",
+        "excerpt": "ASSISTANT SUPPORT RELATION CLIENT F/H — Bordeaux — CDD — Relation client"
+      }
+    }
+  ]
+}

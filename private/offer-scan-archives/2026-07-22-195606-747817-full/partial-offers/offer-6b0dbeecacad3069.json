@@ -1,0 +1,58 @@
+{
+  "canonical_offer_id": "canonical-offer-7a3da465890ca1d8",
+  "captured_at": "2026-07-22T19:56:06.775708+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "Groupe Filhet-Allard",
+  "evidence": [
+    {
+      "excerpt": "Manager Expert Indemnisation Immobilier H/F Détail de l'offre",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Groupe Filhet-Allard",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-195606-747817-full/groupefilhet-allard-career.talent-soft.com/7a3da465890ca1d8fc45.html",
+    "source_sha256": "eb239908fc1d4ad626a5bb4c0d9cd1229a4032e8e632b38f49f4af646c462d3c"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-6b0dbeecacad3069",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T19:56:06.775708+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [
+    "commerce"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "groupefilhet-allard-career.talent-soft.com",
+  "source_url": "https://groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-manager-expert-indemnisation-immobilier-h-f_1733.aspx",
+  "summary": "Poste de Manager Expert Indemnisation Immobilier H/F Détail de l'offre proposé par Groupe Filhet-Allard à Bordeaux. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Manager Expert Indemnisation Immobilier H/F Détail de l'offre",
+  "verification_status": "active"
+}

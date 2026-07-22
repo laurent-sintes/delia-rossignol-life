@@ -1,0 +1,71 @@
+{
+  "id": "courreges-conseiller-vente-11767683",
+  "title": "Conseiller·ère de vente",
+  "employer": "Courrèges",
+  "source_url": "https://fr.fashionjobs.com/emploi/groupe-courreges/Conseiller-de-vente%2C11767683.html",
+  "source_site": "fr.fashionjobs.com",
+  "source_kind": "specialized",
+  "verification_status": "active",
+  "verification_note": "Page exacte revérifiée pendant le scan full du 22 juillet 2026.",
+  "published_at": "2026-06-17",
+  "captured_at": "2026-07-22T09:45:53+02:00",
+  "last_verified_at": "2026-07-22T09:45:53+02:00",
+  "summary": "Ouvrir et animer en autonomie le corner Courrèges des Galeries Lafayette Bordeaux, conseiller une clientèle locale et internationale et développer ventes, fidélisation et merchandising.",
+  "location_label": "Bordeaux",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": [
+    "luxe",
+    "mode et prêt-à-porter"
+  ],
+  "functional_domains": [
+    "commerce et vente",
+    "conseil et relation client"
+  ],
+  "compensation": {},
+  "required_skills": [
+    "vente luxe",
+    "conseil personnalisé",
+    "fidélisation",
+    "anglais courant"
+  ],
+  "preferred_skills": [],
+  "conditions": {},
+  "prerequisites": [
+    {
+      "id": "experience-mode-trois-ans",
+      "kind": "sector_experience",
+      "description": "Trois ans minimum de vente dans une maison de mode",
+      "mandatory": true,
+      "profile_status": "not_demonstrated",
+      "profile_evidence_ids": [],
+      "assessment_note": "L'expérience mode et luxe est validée, mais la durée précise démontrée ne permet pas de confirmer trois années complètes.",
+      "evidence": {
+        "locator": "profil de l'annonce",
+        "excerpt": "Expérience en vente dans une Maison de mode de minimum 3 ans."
+      },
+      "minimum_years": 3,
+      "industry_sector_ids": [
+        "mode-et-pret-a-porter",
+        "luxe"
+      ]
+    },
+    {
+      "id": "anglais-courant-courreges",
+      "kind": "language",
+      "description": "Anglais courant",
+      "mandatory": true,
+      "profile_status": "not_demonstrated",
+      "profile_evidence_ids": [],
+      "assessment_note": "Le niveau courant complet, notamment à l'écrit, n'est pas démontré.",
+      "evidence": {
+        "locator": "profil de l'annonce",
+        "excerpt": "Maîtrise courante de l'anglais."
+      }
+    }
+  ],
+  "industry_sector_ids": [
+    "luxe",
+    "mode-et-pret-a-porter"
+  ]
+}

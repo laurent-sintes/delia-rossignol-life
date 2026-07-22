@@ -1,0 +1,52 @@
+{
+  "id": "begles-chargee-communication-journaliste-2026",
+  "title": "Chargé·e de communication — journaliste territorial·e F/H",
+  "employer": "Ville de Bègles",
+  "source_url": "https://www.mairie-begles.fr/emplois/charge%C2%B7e-de-communication-journaliste-territorial%C2%B7e-f-h/",
+  "source_site": "mairie-begles.fr",
+  "source_kind": "direct_employer",
+  "verification_status": "pending",
+  "verification_note": "Page exacte non confirmée pendant le scan full du 22 juillet 2026 ; offre conservée pour traçabilité et revérification.",
+  "published_at": "2026-07-08",
+  "captured_at": "2026-07-22T09:45:53+02:00",
+  "last_verified_at": "2026-07-21T23:58:00+02:00",
+  "summary": "Contribuer à la communication de la Ville de Bègles dans un emploi permanent, à temps complet et de catégorie B. La liste publique confirme une date limite au 7 août 2026 ; le détail des missions, les exigences de diplôme et l’expérience attendue doivent être revérifiés.",
+  "location_label": "Bègles",
+  "contract_type": "Emploi permanent",
+  "full_time": true,
+  "sector_labels": [
+    "service public"
+  ],
+  "functional_domains": [
+    "gestion et coordination de projets",
+    "gestion administrative"
+  ],
+  "compensation": {},
+  "required_skills": [
+    "communication",
+    "rédaction",
+    "coordination éditoriale"
+  ],
+  "preferred_skills": [
+    "journalisme territorial"
+  ],
+  "conditions": {
+    "work_mode": "onsite",
+    "details_access": "fiche détaillée temporairement inaccessible"
+  },
+  "prerequisites": [
+    {
+      "id": "conditions-acces-begles-communication",
+      "kind": "other",
+      "description": "Conditions d’accès au poste à vérifier",
+      "mandatory": true,
+      "profile_status": "unknown",
+      "profile_evidence_ids": [],
+      "assessment_note": "La fiche détaillée n’était pas exploitable ; les conditions d’accès doivent être vérifiées avant candidature.",
+      "evidence": {
+        "locator": "liste des offres Ville de Bègles",
+        "excerpt": "Chargé·e de communication – journaliste territorial·e — Catégorie B — emploi permanent — temps complet"
+      }
+    }
+  ]
+}

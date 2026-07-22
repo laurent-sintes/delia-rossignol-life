@@ -1,0 +1,55 @@
+{
+  "canonical_offer_id": "canonical-offer-7d0b894f468efbf4",
+  "captured_at": "2026-07-22T19:28:05.695914+02:00",
+  "conditions": {},
+  "contract_type": "alternance",
+  "employer": "Centre de gestion de la Gironde",
+  "evidence": [
+    {
+      "excerpt": "Licence professionnelle “Métiers de l’administration territoriale”",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Centre de gestion de la Gironde",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-192805-666260-full/cdg33.fr/7d0b894f468efbf43b14.html",
+    "source_sha256": "4965bd84bf9c6ddf6230972479061ec4ded632cceff1071a88e862c5252007f9"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-cbdb6678ef1374dd",
+  "industry_sector_ids": [
+    "services-publics"
+  ],
+  "last_verified_at": "2026-07-22T19:28:05.695914+02:00",
+  "location_label": "Gironde",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [],
+  "sector_labels": [
+    "services publics"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "cdg33.fr",
+  "source_url": "https://www.cdg33.fr/emploi/formations/licence-professionnelle-metiers-de-ladministration-des-collectivites-territoriales/",
+  "summary": "Poste de Licence professionnelle “Métiers de l’administration territoriale” proposé par Centre de gestion de la Gironde à Gironde. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Licence professionnelle “Métiers de l’administration territoriale”",
+  "verification_status": "active"
+}

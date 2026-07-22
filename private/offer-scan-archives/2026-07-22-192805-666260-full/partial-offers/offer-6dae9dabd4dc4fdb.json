@@ -1,0 +1,54 @@
+{
+  "canonical_offer_id": "canonical-offer-e825ff7e6dc94592",
+  "captured_at": "2026-07-22T19:28:05.695914+02:00",
+  "conditions": {},
+  "contract_type": "temps plein - contrat non communiqué",
+  "employer": "Betclic Group",
+  "evidence": [
+    {
+      "excerpt": "Casino Business Development Expert F/M",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "Betclic Group",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-192805-666260-full/betclic-group.breezy.hr/14ec7bffde0fd832e1cb.html",
+    "source_sha256": "24b178608f642ae6f28fd9fe799efcd54e3af1fae5271baacb71250a94fa46e7"
+  },
+  "full_time": true,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-6dae9dabd4dc4fdb",
+  "industry_sector_ids": [
+    "numerique-et-services"
+  ],
+  "last_verified_at": "2026-07-22T19:28:05.695914+02:00",
+  "location_label": "Sliema, MT",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2025-10-28",
+  "required_skills": [],
+  "sector_labels": [
+    "numerique et services"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "betclic-group.breezy.hr",
+  "source_url": "https://betclic-group.breezy.hr/p/13a5c2a261e601-casino-business-development-expert-f-m?source=GoogleJobs",
+  "summary": "Poste de Casino Business Development Expert F/M proposé par Betclic Group à Sliema, MT. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "Casino Business Development Expert F/M",
+  "verification_status": "active"
+}

@@ -1,0 +1,146 @@
+{
+  "active_count": 0,
+  "active_overflow_count": 0,
+  "candidate_count": 0,
+  "candidate_pool_maximum": 100,
+  "eligible_count": 0,
+  "excluded": [],
+  "excluded_count": 0,
+  "finalization_allowed": false,
+  "offers": [],
+  "pending_offer_count": 0,
+  "pending_offers": [],
+  "policy_excluded_count": 0,
+  "policy_id": "delia-offer-search-v5",
+  "pool_complete": false,
+  "report_status": "incomplete",
+  "scan_coverage": {
+    "complete": false,
+    "covered_priority_sectors": [
+      "banque-et-assurance",
+      "bien-etre",
+      "cosmetique"
+    ],
+    "covered_query_families": [
+      "commerce-et-vente",
+      "conseil-et-relation-client",
+      "gestion-administrative",
+      "gestion-et-coordination-de-projets"
+    ],
+    "manual_source_domains": [
+      "careers.ihg.com",
+      "gironde.gouv.fr",
+      "lasecurecrute.fr",
+      "mairie-begles.fr",
+      "offresdemploi.nouvelle-aquitaine.fr",
+      "u-bordeaux.fr"
+    ],
+    "missing_priority_sectors": [
+      "hotellerie",
+      "luxe"
+    ],
+    "missing_query_families": [],
+    "missing_source_domains": [
+      "betclic-group.breezy.hr",
+      "cdg33.fr",
+      "jobs.ikea.com",
+      "recrute.leroymerlin.fr",
+      "recrutement.bordeaux.fr",
+      "recrutement.bpce.fr",
+      "sources-hotels.com"
+    ],
+    "required": true,
+    "required_priority_sectors": [
+      "banque-et-assurance",
+      "bien-etre",
+      "cosmetique",
+      "hotellerie",
+      "luxe"
+    ],
+    "required_query_families": [
+      "commerce-et-vente",
+      "conseil-et-relation-client",
+      "gestion-administrative",
+      "gestion-et-coordination-de-projets"
+    ],
+    "required_source_domains": [
+      "ars-nouvelle-aquitaine-recrute.talent-soft.com",
+      "betclic-group.breezy.hr",
+      "careers.floa.com",
+      "caudalie.career",
+      "cdg33.fr",
+      "choisirleservicepublic.gouv.fr",
+      "chu-bordeaux.softy.pro",
+      "cultura.wd3.myworkdayjobs.com",
+      "emploi-territorial.fr",
+      "emploi.cdiscount.com",
+      "emploi.fhf.fr",
+      "gironde.fr",
+      "groupefilhet-allard-career.talent-soft.com",
+      "jobs.ikea.com",
+      "merignac-career.talent-soft.com",
+      "recrute.leroymerlin.fr",
+      "recrutement.bordeaux-metropole.fr",
+      "recrutement.bordeaux.fr",
+      "recrutement.bpce.fr",
+      "sources-hotels.com"
+    ],
+    "requirements_declared": true,
+    "visited_source_domains": [
+      "ars-nouvelle-aquitaine-recrute.talent-soft.com",
+      "careers.floa.com",
+      "caudalie.career",
+      "choisirleservicepublic.gouv.fr",
+      "chu-bordeaux.softy.pro",
+      "cultura.wd3.myworkdayjobs.com",
+      "emploi-territorial.fr",
+      "emploi.cdiscount.com",
+      "emploi.fhf.fr",
+      "gironde.fr",
+      "groupefilhet-allard-career.talent-soft.com",
+      "merignac-career.talent-soft.com",
+      "recrutement.bordeaux-metropole.fr"
+    ]
+  },
+  "section_counts": {
+    "informational": 0,
+    "possible": 0,
+    "priority": 0
+  },
+  "selected_count": 0,
+  "semantic_review": {
+    "complete": true,
+    "pending_count": 0,
+    "pending_offer_ids": []
+  },
+  "unique_count": 0,
+  "verification_counts": {
+    "active": 0,
+    "closed": 0,
+    "expired": 0,
+    "pending": 0,
+    "unreachable": 0
+  },
+  "verification_excluded_count": 0,
+  "visited_sources": [
+    "https://ars-nouvelle-aquitaine-recrute.talent-soft.com",
+    "https://careers.floa.com",
+    "https://caudalie.career",
+    "https://choisirleservicepublic.gouv.fr",
+    "https://chu-bordeaux.softy.pro",
+    "https://cultura.wd3.myworkdayjobs.com",
+    "https://www.emploi-territorial.fr",
+    "https://emploi.cdiscount.com",
+    "https://emploi.fhf.fr",
+    "https://www.gironde.fr",
+    "https://groupefilhet-allard-career.talent-soft.com",
+    "https://merignac-career.talent-soft.com",
+    "https://recrutement.bordeaux-metropole.fr"
+  ],
+  "warnings": [
+    "seulement 0 offres éligibles pour une cible de 100",
+    "sources non consultées : betclic-group.breezy.hr, cdg33.fr, jobs.ikea.com, recrute.leroymerlin.fr, recrutement.bordeaux.fr, recrutement.bpce.fr, sources-hotels.com",
+    "sources exclues de la collecte Python par leurs règles d’accès et à contrôler manuellement : careers.ihg.com, gironde.gouv.fr, lasecurecrute.fr, mairie-begles.fr, offresdemploi.nouvelle-aquitaine.fr, u-bordeaux.fr",
+    "secteurs prioritaires non couverts : hotellerie, luxe"
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "id": "matmut-directeur-agence-saint-medard-10523",
+  "title": "Directeur(trice) d'Agence - Saint-MÃ©dard-en-Jalles",
+  "employer": "Matmut",
+  "source_url": "https://recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx",
+  "source_site": "recrutement.matmut.fr",
+  "source_kind": "direct_employer",
+  "verification_status": "pending",
+  "published_at": null,
+  "captured_at": "2026-07-22T09:45:53+02:00",
+  "last_verified_at": "2026-07-21T23:58:00+02:00",
+  "summary": "Piloter une agence Matmut Ã  Saint-MÃ©dard-en-Jalles, animer et accompagner l'Ã©quipe de conseillers, suivre l'activitÃ© et la performance du portefeuille et garantir une expÃ©rience sociÃ©taire de proximitÃ©.",
+  "location_label": "Saint-MÃ©dard-en-Jalles",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "compensation": {
+    "minimum": 38500,
+    "currency": "EUR",
+    "period": "year"
+  },
+  "required_skills": [
+    "management d'Ã©quipe",
+    "pilotage d'activitÃ©",
+    "dÃ©veloppement de portefeuille",
+    "relation client",
+    "expÃ©rience assurantielle"
+  ],
+  "preferred_skills": [
+    "accompagnement individuel",
+    "analyse de performance",
+    "dÃ©veloppement commercial"
+  ],
+  "conditions": {
+    "work_mode": "onsite",
+    "hours": "unknown"
+  },
+  "prerequisites": [
+    {
+      "id": "niveau-bac3",
+      "kind": "qualification",
+      "description": "Niveau bac+3",
+      "mandatory": true,
+      "profile_status": "met",
+      "profile_evidence_ids": [
+        "credential:esgci-marketing-commerce-2003"
+      ],
+      "assessment_note": "Le diplÃ´me validÃ© de niveau bac+4 couvre le niveau demandÃ©.",
+      "evidence": {
+        "locator": "recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx#criteres",
+        "excerpt": "Niveau d'Ã©tudes minimum requis : bac+3."
+      }
+    },
+    {
+      "id": "experience-assurantielle",
+      "kind": "sector_experience",
+      "description": "ExpÃ©rience prÃ©alable dans le domaine assurantiel",
+      "mandatory": true,
+      "industry_sector_ids": [
+        "banque-et-assurance"
+      ],
+      "profile_status": "not_demonstrated",
+      "profile_evidence_ids": [],
+      "assessment_note": "Aucune expÃ©rience assurantielle n'est dÃ©montrÃ©e dans les connaissances validÃ©es ; cela ne prouve pas qu'elle est absente.",
+      "evidence": {
+        "locator": "recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx#profil",
+        "excerpt": "ExpÃ©rience dans le domaine assurantiel demandÃ©e."
+      }
+    },
+    {
+      "id": "aptitudes-manageriales-commerciales",
+      "kind": "prior_role",
+      "description": "Aptitudes managÃ©riales et commerciales",
+      "mandatory": true,
+      "profile_status": "met",
+      "profile_evidence_ids": [
+        "skill:management-equipe",
+        "skill:vente-negociation"
+      ],
+      "assessment_note": "Le management d'Ã©quipe et la vente-conseil sont dÃ©montrÃ©s dans les connaissances validÃ©es.",
+      "evidence": {
+        "locator": "recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx#profil",
+        "excerpt": "Aptitudes managÃ©riales et commerciales demandÃ©es."
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "field": "mission",
+      "locator": "recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx#description",
+      "excerpt": "Animer une Ã©quipe de conseillers et garantir le dÃ©veloppement et la performance du portefeuille de l'agence."
+    },
+    {
+      "field": "compensation",
+      "locator": "recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx#salaire",
+      "excerpt": "Salaire Ã  partir de 38 500 euros brut annuel."
+    }
+  ],
+  "verification_note": "Page exacte non confirmée pendant le scan full du 22 juillet 2026 ; offre conservée pour traçabilité et revérification."
+}

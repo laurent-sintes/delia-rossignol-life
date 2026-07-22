@@ -1,0 +1,57 @@
+{
+  "canonical_offer_id": "recrutement.bpce.fr:CASDEN01404",
+  "captured_at": "2026-07-22T19:56:06.775708+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "Casden - Banque Populaire",
+  "evidence": [
+    {
+      "excerpt": "Chargé de développement régional - H/F (Bordeaux)",
+      "field": "title",
+      "locator": "BPCE API item.title"
+    },
+    {
+      "excerpt": "Bordeaux",
+      "field": "location_label",
+      "locator": "BPCE API item.localisation"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-api",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-195606-747817-full/recrutement.bpce.fr/eb3f5b794413af93e1b6.bin",
+    "source_sha256": "45643c66589a075f782a5265e4a247fd52457e6e08a8f1569c3aa8b8f0219296"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-8554749a0da39a72",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T19:56:06.775708+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-06-15",
+  "required_skills": [
+    "planification"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrutement.bpce.fr",
+  "source_url": "https://recrutement.bpce.fr/job/charge-de-developpement-regional-h-f-bordeaux",
+  "summary": "Poste de Chargé de développement régional - H/F (Bordeaux) proposé par Casden - Banque Populaire à Bordeaux. Revue sémantique requise avant recommandation.",
+  "title": "Chargé de développement régional - H/F (Bordeaux)",
+  "verification_status": "active"
+}

@@ -1,0 +1,90 @@
+{
+  "canonical_offer_id": "recrutement.bpce.fr:BPCE_ASS02054",
+  "captured_at": "2026-07-22T20:00:15.182633+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "BPCE Assurances IARD",
+  "evidence": [
+    {
+      "excerpt": "Chargé de Support Assurances Département Anti Fraude Investigation - F/H",
+      "field": "title",
+      "locator": "BPCE API item.title"
+    },
+    {
+      "excerpt": "Mérignac",
+      "field": "location_label",
+      "locator": "BPCE API item.localisation"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [],
+    "extractor_version": 1,
+    "method": "deterministic-api",
+    "review_method": "LLM semantic review of archived employer evidence",
+    "review_status": "completed",
+    "reviewed_at": "2026-07-22T20:20:00+02:00",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-200015-155066-full/recrutement.bpce.fr/eb3f5b794413af93e1b6.bin",
+    "source_sha256": "45643c66589a075f782a5265e4a247fd52457e6e08a8f1569c3aa8b8f0219296"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-4720792923bab4e4",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T20:00:15.182633+02:00",
+  "location_label": "Mérignac",
+  "preferred_skills": [],
+  "prerequisites": [
+    {
+      "assessment_note": "L’inventaire complet des diplômes ne contient pas de formation assurance.",
+      "description": "Formation en assurances",
+      "evidence": {
+        "excerpt": "De formation en assurances",
+        "locator": "BPCE API item.description — Profil et compétences requises"
+      },
+      "id": "formation-assurances",
+      "kind": "qualification",
+      "mandatory": true,
+      "profile_evidence_ids": [],
+      "profile_status": "not_demonstrated"
+    },
+    {
+      "assessment_note": "L’absence validée d’expérience assurance rend ce prérequis non satisfait.",
+      "description": "Au moins cinq ans en gestion de sinistres fraude MRH",
+      "evidence": {
+        "excerpt": "expérience professionnelle d'au moins 5 ans",
+        "locator": "BPCE API item.description — Profil et compétences requises"
+      },
+      "id": "cinq-ans-sinistres-fraude",
+      "industry_sector_ids": [
+        "banque-et-assurance"
+      ],
+      "kind": "sector_experience",
+      "mandatory": true,
+      "minimum_years": 5,
+      "profile_evidence_ids": [],
+      "profile_status": "not_demonstrated"
+    }
+  ],
+  "published_at": "2026-05-31",
+  "required_skills": [
+    "assurance",
+    "anti-fraude",
+    "sinistres MRH",
+    "transmission"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrutement.bpce.fr",
+  "source_url": "https://recrutement.bpce.fr/job/charge-de-support-assurances-departement-anti-fraude-investigation-f-h",
+  "summary": "Support technique anti-fraude en assurance habitation, nécessitant une forte expérience de gestion de sinistres.",
+  "title": "Chargé de Support Assurances Département Anti Fraude Investigation - F/H",
+  "verification_status": "active"
+}

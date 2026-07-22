@@ -1,11 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
-  "required": ["id", "result_limit", "candidate_pool_minimum", "candidate_pool_maximum", "active_verification_max_age_days", "freshness_days", "contracts", "diversity", "recommendation_bands", "functional_query_families", "profile_family_filters", "location_queries", "regional_source_audit", "source_domains", "priority_sector_coverage", "source_strategy", "weights"],
+  "required": ["id", "result_limit", "candidate_pool_maximum", "active_verification_max_age_days", "freshness_days", "contracts", "diversity", "recommendation_bands", "functional_query_families", "profile_family_filters", "location_queries", "collector", "regional_source_audit", "source_domains", "priority_sector_coverage", "source_strategy", "weights"],
   "properties": {
     "id": {"type": "string", "minLength": 1},
     "result_limit": {"type": "integer", "minimum": 1, "maximum": 100},
-    "candidate_pool_minimum": {"type": "integer", "minimum": 10},
     "candidate_pool_maximum": {"type": "integer", "minimum": 10, "maximum": 100},
     "active_verification_max_age_days": {"type": "integer", "minimum": 1, "maximum": 30},
     "freshness_days": {"type": "integer", "minimum": 1},
@@ -34,6 +33,35 @@
       "properties": {
         "priority_minimum_score": {"type": "number", "minimum": 0, "maximum": 100},
         "possible_minimum_score": {"type": "number", "minimum": 0, "maximum": 100}
+      },
+      "additionalProperties": false
+    },
+    "collector": {
+      "type": "object",
+      "required": ["user_agent", "timeout_seconds", "retries", "delay_seconds", "max_response_bytes", "max_concurrent_sources", "location_markers", "adapter_domains"],
+      "properties": {
+        "user_agent": {"type": "string", "minLength": 1},
+        "timeout_seconds": {"type": "number", "exclusiveMinimum": 0, "maximum": 120},
+        "retries": {"type": "integer", "minimum": 0, "maximum": 5},
+        "delay_seconds": {"type": "number", "minimum": 0, "maximum": 10},
+        "max_response_bytes": {"type": "integer", "minimum": 1024, "maximum": 52428800},
+        "max_concurrent_sources": {"type": "integer", "minimum": 1, "maximum": 12},
+        "location_markers": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "adapter_domains": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {"type": "string", "minLength": 1}
+          }
+        }
       },
       "additionalProperties": false
     },
@@ -67,15 +95,6 @@
         "additionalProperties": false
       }
     },
-    "sector_emphasis": {
-      "type": "object",
-      "required": ["labels", "multiplier"],
-      "properties": {
-        "labels": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
-        "multiplier": {"type": "number", "minimum": 1}
-      },
-      "additionalProperties": false
-    },
     "source_domains": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
     "priority_sector_coverage": {
       "type": "object",
@@ -89,7 +108,7 @@
     },
     "source_strategy": {
       "type": "object",
-      "required": ["priority_order", "direct_employer_domains", "specialized_domains", "require_direct_offer_verification"],
+      "required": ["priority_order", "direct_employer_domains", "specialized_domains", "warn_on_missing_employer_page"],
       "properties": {
         "priority_order": {
           "type": "array",
@@ -97,7 +116,7 @@
         },
         "direct_employer_domains": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
         "specialized_domains": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
-        "require_direct_offer_verification": {"type": "boolean", "const": true}
+        "warn_on_missing_employer_page": {"type": "boolean", "const": true}
       },
       "additionalProperties": false
     },

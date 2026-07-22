@@ -1,0 +1,54 @@
+{
+  "id": "societe-generale-conseiller-clientele-260006HF",
+  "title": "Conseiller Clientèle Essentiel",
+  "employer": "Société Générale",
+  "source_url": "https://careers.societegenerale.com/offres-d-emploi/conseiller-clientele-essentiel-260006HF-fr",
+  "source_site": "careers.societegenerale.com",
+  "source_kind": "direct_employer",
+  "verification_status": "active",
+  "verification_note": "Page exacte revérifiée pendant le scan full du 22 juillet 2026.",
+  "published_at": "2026-06-02",
+  "captured_at": "2026-07-22T09:45:53+02:00",
+  "last_verified_at": "2026-07-22T09:45:53+02:00",
+  "summary": "Accompagner les clients dans leurs projets, proposer des solutions de banque et d'assurance, développer le portefeuille et promouvoir les services digitaux de l'agence.",
+  "location_label": "Bordeaux",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente"
+  ],
+  "compensation": {},
+  "required_skills": [
+    "relation client",
+    "conseil",
+    "vente",
+    "analyse de risque"
+  ],
+  "preferred_skills": [],
+  "conditions": {},
+  "prerequisites": [
+    {
+      "id": "certification-amf",
+      "kind": "certification",
+      "description": "Certification AMF",
+      "mandatory": true,
+      "profile_status": "unmet",
+      "profile_evidence_ids": [
+        "knowledge-fact:delia-amf-certification-absent"
+      ],
+      "assessment_note": "L'absence de certification AMF est un fait négatif validé dans le profil complet de Délia.",
+      "evidence": {
+        "locator": "profil de l'annonce",
+        "excerpt": "Poste nécessitant la certification AMF."
+      },
+      "credential_id": "certification-amf"
+    }
+  ],
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ]
+}

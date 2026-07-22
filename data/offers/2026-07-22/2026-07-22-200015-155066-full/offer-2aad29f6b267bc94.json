@@ -1,0 +1,54 @@
+{
+  "canonical_offer_id": "canonical-offer-68110156a2404def",
+  "captured_at": "2026-07-22T20:00:15.182633+02:00",
+  "conditions": {},
+  "contract_type": "temps plein - contrat non communiqué",
+  "employer": "Betclic Group",
+  "evidence": [
+    {
+      "excerpt": "Design Systems - AI & Design Ops F/M",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "Betclic Group",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-200015-155066-full/betclic-group.breezy.hr/2586be6aefa0078eb039.html",
+    "source_sha256": "184076eb81b7178a61e642d5f9ceea88027282bd7d8218bfbb69c2f85758e943"
+  },
+  "full_time": true,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-2aad29f6b267bc94",
+  "industry_sector_ids": [
+    "numerique-et-services"
+  ],
+  "last_verified_at": "2026-07-22T20:00:15.182633+02:00",
+  "location_label": "Bordeaux, FR",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-04-23",
+  "required_skills": [],
+  "sector_labels": [
+    "numerique et services"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "betclic-group.breezy.hr",
+  "source_url": "https://betclic-group.breezy.hr/p/9c9d1df056c501-design-systems-ai-design-ops-f-m?source=GoogleJobs",
+  "summary": "Poste de Design Systems - AI & Design Ops F/M proposé par Betclic Group à Bordeaux, FR. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "Design Systems - AI & Design Ops F/M",
+  "verification_status": "active"
+}

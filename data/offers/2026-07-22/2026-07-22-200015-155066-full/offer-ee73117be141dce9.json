@@ -1,0 +1,56 @@
+{
+  "canonical_offer_id": "canonical-offer-46534238e1a06c08",
+  "captured_at": "2026-07-22T20:00:15.182633+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "Betclic Group",
+  "evidence": [
+    {
+      "excerpt": "Betclic Group Open Application - Poland F/M",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Betclic Group",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-200015-155066-full/betclic-group.breezy.hr/46534238e1a06c08a705.html",
+    "source_sha256": "41d5bbb1d4f760ea114cfd521346b1cf5411f19c7f7a9fcf843496f3e39d7368"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-ee73117be141dce9",
+  "industry_sector_ids": [
+    "numerique-et-services"
+  ],
+  "last_verified_at": "2026-07-22T20:00:15.182633+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [],
+  "sector_labels": [
+    "numerique et services"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "betclic-group.breezy.hr",
+  "source_url": "https://betclic-group.breezy.hr/p/fda46db474f401-open-application-poland-f-m",
+  "summary": "Poste de Betclic Group Open Application - Poland F/M proposé par Betclic Group à Bordeaux. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Betclic Group Open Application - Poland F/M",
+  "verification_status": "active"
+}

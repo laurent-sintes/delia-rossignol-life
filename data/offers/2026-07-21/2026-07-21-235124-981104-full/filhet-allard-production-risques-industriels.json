@@ -1,0 +1,115 @@
+{
+  "id": "filhet-allard-production-risques-industriels-1706",
+  "title": "Gestionnaire Production Risques Industriels / Dommages aux Biens H/F",
+  "employer": "Filhet-Allard",
+  "source_url": "https://groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-production-risques-industriels-dommages-aux-biens-h-f_1706.aspx",
+  "source_site": "groupefilhet-allard-career.talent-soft.com",
+  "source_kind": "direct_employer",
+  "verification_status": "pending",
+  "published_at": "2026-03-31",
+  "captured_at": "2026-07-21T23:58:00+02:00",
+  "last_verified_at": "2026-07-21T23:58:00+02:00",
+  "summary": "GÃ©rer Ã  MÃ©rignac un portefeuille d'assurances dommages aux biens pour des entreprises : traiter les demandes administratives et clients, rÃ©diger et contrÃ´ler contrats et renouvellements, puis nÃ©gocier les conditions avec les assureurs.",
+  "location_label": "MÃ©rignac",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "functional_domains": [
+    "gestion administrative",
+    "conseil et relation client"
+  ],
+  "compensation": {},
+  "required_skills": [
+    "gestion de portefeuille",
+    "relation client",
+    "rÃ©daction de contrats",
+    "nÃ©gociation",
+    "assurance dommages aux biens",
+    "anglais B1"
+  ],
+  "preferred_skills": [
+    "analyse de risques industriels",
+    "renouvellement de contrats"
+  ],
+  "conditions": {
+    "work_mode": "unknown",
+    "hours": "unknown"
+  },
+  "prerequisites": [
+    {
+      "id": "formation-juridique-assurance",
+      "kind": "qualification",
+      "description": "Formation juridique et/ou en droit des assurances",
+      "mandatory": true,
+      "profile_status": "not_demonstrated",
+      "profile_evidence_ids": [],
+      "assessment_note": "Aucune formation juridique ou en droit des assurances n'est dÃ©montrÃ©e.",
+      "evidence": {
+        "locator": "groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-production-risques-industriels-dommages-aux-biens-h-f_1706.aspx#profil",
+        "excerpt": "Formation juridique et/ou en droit des assurances."
+      }
+    },
+    {
+      "id": "maitrise-garanties-dommages",
+      "kind": "other",
+      "description": "MaÃ®trise des garanties dommages aux biens des entreprises",
+      "mandatory": true,
+      "profile_status": "not_demonstrated",
+      "profile_evidence_ids": [],
+      "assessment_note": "Cette expertise assurantielle spÃ©cialisÃ©e n'est pas dÃ©montrÃ©e.",
+      "evidence": {
+        "locator": "groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-production-risques-industriels-dommages-aux-biens-h-f_1706.aspx#profil",
+        "excerpt": "MaÃ®trise des garanties dommages aux biens des entreprises."
+      }
+    },
+    {
+      "id": "experience-assureur-courtage-deux-ans",
+      "kind": "sector_experience",
+      "description": "Au moins deux ans d'expÃ©rience chez un assureur ou un courtier",
+      "mandatory": true,
+      "industry_sector_ids": [
+        "banque-et-assurance"
+      ],
+      "minimum_years": 2,
+      "profile_status": "unmet",
+      "profile_evidence_ids": [
+        "knowledge-fact:delia-bank-insurance-finance-experience-absent"
+      ],
+      "assessment_note": "L'absence d'expÃ©rience en banque, assurance ou finance est explicitement validÃ©e ; les deux annÃ©es obligatoires chez un assureur ou un courtier ne sont donc pas satisfaites.",
+      "evidence": {
+        "locator": "groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-production-risques-industriels-dommages-aux-biens-h-f_1706.aspx#profil",
+        "excerpt": "ExpÃ©rience d'au moins deux ans en compagnie ou en cabinet de courtage."
+      }
+    },
+    {
+      "id": "anglais-b1",
+      "kind": "language",
+      "description": "Anglais de niveau B1",
+      "mandatory": true,
+      "profile_status": "met",
+      "profile_evidence_ids": [
+        "language-proficiency:delia-english"
+      ],
+      "assessment_note": "L'anglais courant Ã  l'oral et en lecture est validÃ©, avec un niveau Ã©crit intermÃ©diaire.",
+      "evidence": {
+        "locator": "groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-production-risques-industriels-dommages-aux-biens-h-f_1706.aspx#profil",
+        "excerpt": "Anglais niveau B1 demandÃ©."
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "field": "mission",
+      "locator": "groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-production-risques-industriels-dommages-aux-biens-h-f_1706.aspx#description",
+      "excerpt": "GÃ©rer un portefeuille entreprises, rÃ©diger et contrÃ´ler les contrats et nÃ©gocier les renouvellements."
+    },
+    {
+      "field": "contract",
+      "locator": "groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-production-risques-industriels-dommages-aux-biens-h-f_1706.aspx",
+      "excerpt": "CDI Ã  MÃ©rignac."
+    }
+  ],
+  "verification_note": "La source a été revue pendant le scan full, mais la fiche détaillée exacte n’a pas pu être confirmée comme active."
+}

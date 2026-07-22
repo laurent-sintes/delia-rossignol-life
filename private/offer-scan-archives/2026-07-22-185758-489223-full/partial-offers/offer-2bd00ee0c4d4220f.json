@@ -1,0 +1,59 @@
+{
+  "canonical_offer_id": "recrute.leroymerlin.fr:841916",
+  "captured_at": "2026-07-22T18:57:58.517400+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "La Réunion - Le Port",
+  "evidence": [
+    {
+      "excerpt": "Hôte(sse) Service et Relation Client magasin (H/F)",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "La Réunion - Le Port",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-185758-489223-full/recrute.leroymerlin.fr/a2d29d420a3443298a80.html",
+    "source_sha256": "540de8a1a144db47b41b96c50acd08b2587d6518025b368331b210fc968be9ef"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-2bd00ee0c4d4220f",
+  "industry_sector_ids": [
+    "agencement-et-amenagement-interieur",
+    "commerce-et-distribution"
+  ],
+  "last_verified_at": "2026-07-22T18:57:58.517400+02:00",
+  "location_label": "Le Port (97420), FR",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-07-22",
+  "required_skills": [
+    "relation client",
+    "service client"
+  ],
+  "sector_labels": [
+    "agencement et amenagement interieur",
+    "commerce et distribution"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrute.leroymerlin.fr",
+  "source_url": "https://recrute.leroymerlin.fr/jobs/841916",
+  "summary": "Poste de Hôte(sse) Service et Relation Client magasin (H/F) proposé par La Réunion - Le Port à Le Port (97420), FR. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "Hôte(sse) Service et Relation Client magasin (H/F)",
+  "verification_status": "active"
+}

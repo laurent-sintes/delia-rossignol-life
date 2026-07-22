@@ -1,0 +1,54 @@
+{
+  "canonical_offer_id": "canonical-offer-05f002666ea7913d",
+  "captured_at": "2026-07-22T19:28:05.695914+02:00",
+  "conditions": {},
+  "contract_type": "temps plein - contrat non communiqué",
+  "employer": "Betclic Group",
+  "evidence": [
+    {
+      "excerpt": "Chief of Staff to CTO F/M",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "Betclic Group",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-192805-666260-full/betclic-group.breezy.hr/01a81b135eca47fbd011.html",
+    "source_sha256": "1e2bb8453fda331cecbea3cbcdb21b630352325f9fb4a2ad2d807f01e58b260b"
+  },
+  "full_time": true,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-eac4162cdfd8ce7a",
+  "industry_sector_ids": [
+    "numerique-et-services"
+  ],
+  "last_verified_at": "2026-07-22T19:28:05.695914+02:00",
+  "location_label": "Bordeaux, FR",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-06-16",
+  "required_skills": [],
+  "sector_labels": [
+    "numerique et services"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "betclic-group.breezy.hr",
+  "source_url": "https://betclic-group.breezy.hr/p/950379c446ce01-chief-of-staff-to-cto-f-m?source=GoogleJobs",
+  "summary": "Poste de Chief of Staff to CTO F/M proposé par Betclic Group à Bordeaux, FR. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "Chief of Staff to CTO F/M",
+  "verification_status": "active"
+}

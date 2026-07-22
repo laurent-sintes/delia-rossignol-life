@@ -1,0 +1,57 @@
+{
+  "canonical_offer_id": "careers.floa.com:7730853",
+  "captured_at": "2026-07-22T19:28:05.695914+02:00",
+  "conditions": {},
+  "contract_type": "alternance",
+  "employer": "FLOA",
+  "evidence": [
+    {
+      "excerpt": "ALTERNANT(E) DEVELOPPEUR(SE) - ALT35",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "FLOA",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-192805-666260-full/careers.floa.com/c191aaaae80d83965c9d.html",
+    "source_sha256": "3ab43da086f838795541d3fde62e3a2adbf12d61fbf12a641ad2da0d6cc3ea90"
+  },
+  "full_time": true,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-c89121cbe14d84ce",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T19:28:05.695914+02:00",
+  "location_label": "Bordeaux, FR",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-05-13",
+  "required_skills": [
+    "expérience client",
+    "vente"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "careers.floa.com",
+  "source_url": "https://careers.floa.com/jobs/7730853-alternant-e-developpeur-se-alt35",
+  "summary": "Poste de ALTERNANT(E) DEVELOPPEUR(SE) - ALT35 proposé par FLOA à Bordeaux, FR. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "ALTERNANT(E) DEVELOPPEUR(SE) - ALT35",
+  "verification_status": "active"
+}

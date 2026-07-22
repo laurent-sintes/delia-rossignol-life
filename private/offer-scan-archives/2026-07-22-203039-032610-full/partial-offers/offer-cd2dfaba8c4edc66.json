@@ -1,0 +1,58 @@
+{
+  "canonical_offer_id": "canonical-offer-4ade4d77e415fdd5",
+  "captured_at": "2026-07-22T20:30:39.053765+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "Département de la Gironde",
+  "evidence": [
+    {
+      "excerpt": "Offres d'emploi",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Département de la Gironde",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-203039-032610-full/gironde.fr/4ade4d77e415fdd597c3.html",
+    "source_sha256": "d027b7e4a367b994e19e4f67b9a957523b3d35fc7976b9f8478ede12cdcb0081"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-cd2dfaba8c4edc66",
+  "industry_sector_ids": [
+    "services-publics"
+  ],
+  "last_verified_at": "2026-07-22T20:30:39.053765+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [
+    "vente"
+  ],
+  "sector_labels": [
+    "services publics"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "gironde.fr",
+  "source_url": "https://www.gironde.fr/offres-d-emploi",
+  "summary": "Poste de Offres d'emploi proposé par Département de la Gironde à Bordeaux. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Offres d'emploi",
+  "verification_status": "active"
+}

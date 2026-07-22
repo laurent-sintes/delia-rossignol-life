@@ -17,6 +17,7 @@
     "employer_source_url": {"type": "string", "format": "uri", "minLength": 1},
     "verification_status": {"type": "string", "enum": ["active", "closed", "expired", "pending", "unreachable"]},
     "verification_note": {"type": "string", "minLength": 1},
+    "source_warning": {"type": "string", "minLength": 1},
     "published_at": {"type": ["string", "null"], "format": "date"},
     "captured_at": {"type": "string", "format": "date-time"},
     "last_verified_at": {"type": "string", "format": "date-time"},
@@ -97,6 +98,31 @@
         },
         "additionalProperties": false
       }
+    },
+    "extraction": {
+      "type": "object",
+      "required": ["method", "extractor_version", "review_status", "ambiguous_fields"],
+      "properties": {
+        "method": {"type": "string", "enum": ["deterministic-json-ld", "deterministic-html", "deterministic-api"]},
+        "extractor_version": {"type": "integer", "minimum": 1},
+        "review_status": {"type": "string", "enum": ["required", "completed"]},
+        "ambiguous_fields": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "source_archive_path": {"type": "string", "minLength": 1},
+        "source_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "reviewed_at": {"type": "string", "format": "date-time"},
+        "review_method": {"type": "string", "minLength": 1}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"review_status": {"const": "completed"}}},
+          "then": {"required": ["reviewed_at", "review_method"]}
+        }
+      ],
+      "additionalProperties": false
     }
   }
 }

@@ -1,0 +1,59 @@
+{
+  "canonical_offer_id": "canonical-offer-5121b87820d339d0",
+  "captured_at": "2026-07-22T19:46:34.164692+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "Groupe Filhet-Allard",
+  "evidence": [
+    {
+      "excerpt": "Chargé(e) de Clientèle Assurance de Personnes H/F Détail de l'offre",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Groupe Filhet-Allard",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-194634-136072-full/groupefilhet-allard-career.talent-soft.com/5121b87820d339d0fdd4.html",
+    "source_sha256": "fad29fc7edaedd514c048d479e15669201e9681fc8a9a40c78a3e26d2afa180d"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-ce34bf567fce4ba0",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T19:46:34.164692+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [
+    "service client",
+    "commerce"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "groupefilhet-allard-career.talent-soft.com",
+  "source_url": "https://groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-charge-e-de-clientele-assurance-de-personnes-h-f_1697.aspx",
+  "summary": "Poste de Chargé(e) de Clientèle Assurance de Personnes H/F Détail de l'offre proposé par Groupe Filhet-Allard à Bordeaux. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Chargé(e) de Clientèle Assurance de Personnes H/F Détail de l'offre",
+  "verification_status": "active"
+}

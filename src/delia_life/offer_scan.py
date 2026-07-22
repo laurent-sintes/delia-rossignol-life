@@ -71,6 +71,8 @@ def _revalidation_queue(
     today: date,
     maximum_age_days: int,
 ) -> list[dict[str, Any]]:
+    if scan_mode == "full":
+        return []
     queue: list[dict[str, Any]] = []
     for offer in _latest_historical_offers(offers_root):
         status = str(offer.get("verification_status") or "pending")
@@ -79,8 +81,6 @@ def _revalidation_queue(
         reason: str | None = None
         if status == "pending":
             reason = "annonce en attente de revérification"
-        elif status == "active" and scan_mode == "full":
-            reason = "revérification complète de l’annonce active"
         elif status == "active" and (age is None or age > maximum_age_days):
             reason = "date de vérification absente" if age is None else f"contrôle datant de {age} jours"
         if reason is None:
@@ -107,11 +107,25 @@ def _scan_requirements(policy: dict[str, Any], source_audit: dict[str, Any], sca
         {
             str(source.get("scan_domain") or "").casefold().removeprefix("www.")
             for source in source_audit.get("sources", [])
-            if isinstance(source, dict) and source.get("scan_priority") in priorities and source.get("scan_domain")
+            if isinstance(source, dict)
+            and source.get("scan_priority") in priorities
+            and source.get("automated_collection", True)
+            and source.get("scan_domain")
+        }
+    )
+    manual_sources = sorted(
+        {
+            str(source.get("scan_domain") or "").casefold().removeprefix("www.")
+            for source in source_audit.get("sources", [])
+            if isinstance(source, dict)
+            and source.get("scan_priority") in priorities
+            and not source.get("automated_collection", True)
+            and source.get("scan_domain")
         }
     )
     return {
         "required_source_domains": required_sources,
+        "manual_source_domains": manual_sources,
         "required_query_families": sorted(str(value) for value in policy.get("functional_query_families", {})),
         "required_priority_sectors": sorted(str(value) for value in policy.get("priority_sector_coverage", {})),
     }
@@ -163,7 +177,7 @@ def prepare_offer_scan(
     offer_directory.mkdir(parents=True, exist_ok=True)
 
     manifest = {
-        "schema_version": 1,
+        "schema_version": 2,
         "action": action,
         "scan_id": session_id,
         "scan_mode": scan_mode,
@@ -175,9 +189,109 @@ def prepare_offer_scan(
         "report_output_path": str(report_path),
         "delivery_requested": action == "send",
         "requirements": requirements,
+        "collection": None,
         "revalidation_queue": revalidation_queue,
         "revalidation_count": len(revalidation_queue),
         "status": "collecting",
     }
     write_json(manifest_path, manifest)
     return {**manifest, "manifest_path": str(manifest_path)}
+
+
+def run_offer_scan(
+    action: str,
+    *,
+    runtime_root: Path = Path(".runtime/offer-search"),
+    offers_root: Path = Path("data/offers"),
+    reports_root: Path = Path("generated/offer-search"),
+    policy_path: Path = Path("config/offer-search.json"),
+    source_audit_path: Path | None = None,
+    archive_root: Path = Path("private/offer-scan-archives"),
+    career_project_path: Path = Path("private/career-project/delia-next-role-2026.json"),
+    knowledge_root: Path = Path("data/knowledge"),
+    limit: int | None = None,
+) -> dict[str, Any]:
+    """Prepare, collect and rank an offer scan without manual coverage declarations."""
+    if action not in {"full", "delta"}:
+        raise ValueError("run-offer-scan only supports full or delta; sending remains a separate authorized action")
+    from .offer_collection import collect_offers
+    from .offer_search import (
+        collect_validated_absent_certifications,
+        collect_validated_absent_sector_experience_ids,
+        collect_validated_knowledge_tokens,
+        collect_validated_profile_completeness,
+        collect_validated_sector_experience_months,
+        rank_offers,
+    )
+
+    prepared = prepare_offer_scan(
+        action,
+        runtime_root=runtime_root,
+        offers_root=offers_root,
+        reports_root=reports_root,
+        policy_path=policy_path,
+        source_audit_path=source_audit_path,
+    )
+    manifest_path = Path(str(prepared["manifest_path"]))
+    collection = collect_offers(
+        manifest_path,
+        policy_path=policy_path,
+        source_audit_path=source_audit_path,
+        archive_root=archive_root,
+    )
+    manifest = load_json(manifest_path)
+    offers = [offer for path in manifest["rank_inputs"] for offer in load_offer_files(Path(str(path)))]
+    policy = load_json(policy_path)
+    report = rank_offers(
+        offers,
+        load_json(career_project_path),
+        policy,
+        collect_validated_knowledge_tokens(knowledge_root),
+        limit,
+        visited_sources=list(collection["visited_sources"]),
+        complete_profile_dimensions=collect_validated_profile_completeness(knowledge_root),
+        sector_experience_months=collect_validated_sector_experience_months(knowledge_root),
+        absent_sector_experience_ids=collect_validated_absent_sector_experience_ids(knowledge_root),
+        absent_certifications=collect_validated_absent_certifications(knowledge_root),
+        scan_requirements=manifest.get("requirements"),
+        covered_query_families=set(collection["covered_query_families"]),
+        covered_priority_sectors=set(collection["covered_priority_sectors"]),
+        require_scan_coverage=True,
+    )
+    report_path = Path(str(manifest["report_output_path"]))
+    write_json(report_path, report)
+    semantic_review_pending = int(report.get("semantic_review", {}).get("pending_count", 0))
+    scan_status = (
+        "semantic-review-required"
+        if semantic_review_pending
+        else "complete" if report["finalization_allowed"] else "incomplete"
+    )
+    final_manifest = {
+        **manifest,
+        "status": scan_status,
+        "completed_at": datetime.now().astimezone().isoformat(),
+        "report_summary": {
+            key: report[key]
+            for key in (
+                "candidate_count",
+                "unique_count",
+                "active_count",
+                "eligible_count",
+                "excluded_count",
+                "selected_count",
+                "pool_complete",
+                "finalization_allowed",
+            )
+        }
+        | {"semantic_review_pending_count": semantic_review_pending},
+    }
+    write_json(manifest_path, final_manifest)
+    return {
+        "action": action,
+        "scan_id": manifest["scan_id"],
+        "manifest_path": str(manifest_path),
+        "report_output_path": str(report_path),
+        "collection": collection,
+        "report_summary": final_manifest["report_summary"],
+        "status": final_manifest["status"],
+    }

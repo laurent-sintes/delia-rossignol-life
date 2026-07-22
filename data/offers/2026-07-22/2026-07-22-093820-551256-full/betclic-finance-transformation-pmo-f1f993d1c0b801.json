@@ -1,0 +1,53 @@
+{
+  "id": "betclic-finance-transformation-pmo-f1f993d1c0b801",
+  "title": "Finance Transformation PMO F/M",
+  "employer": "Betclic Group",
+  "source_url": "https://betclic-group.breezy.hr/p/f1f993d1c0b801-finance-transformation-pmo-f-m",
+  "source_site": "betclic-group.breezy.hr",
+  "source_kind": "direct_employer",
+  "verification_status": "active",
+  "verification_note": "Page exacte ou portail direct revérifié pendant le scan full du 22 juillet 2026.",
+  "published_at": null,
+  "captured_at": "2026-07-22T09:45:53+02:00",
+  "last_verified_at": "2026-07-22T09:45:53+02:00",
+  "summary": "Contribuer au pilotage de la transformation de la fonction Finance de Betclic depuis Bordeaux, avec un périmètre PMO, de coordination et de suivi des initiatives. La liste employeur confirme un poste à temps plein et hybride ; les critères d’expérience et de formation doivent être vérifiés sur la fiche détaillée.",
+  "location_label": "Bordeaux",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": [
+    "services numériques",
+    "finance"
+  ],
+  "functional_domains": [
+    "gestion et coordination de projets",
+    "gestion administrative"
+  ],
+  "compensation": {},
+  "required_skills": [
+    "PMO",
+    "coordination de projets",
+    "suivi de transformation"
+  ],
+  "preferred_skills": [
+    "finance"
+  ],
+  "conditions": {
+    "work_mode": "hybrid",
+    "details_access": "fiche détaillée temporairement inaccessible"
+  },
+  "prerequisites": [
+    {
+      "id": "conditions-acces-betclic-pmo",
+      "kind": "other",
+      "description": "Conditions d’accès au poste à vérifier",
+      "mandatory": true,
+      "profile_status": "unknown",
+      "profile_evidence_ids": [],
+      "assessment_note": "La fiche détaillée n’était pas exploitable ; les conditions d’accès doivent être vérifiées avant candidature.",
+      "evidence": {
+        "locator": "portail Betclic, offre f1f993d1c0b801",
+        "excerpt": "Finance Transformation PMO F/M — Bordeaux — full time — hybrid"
+      }
+    }
+  ]
+}

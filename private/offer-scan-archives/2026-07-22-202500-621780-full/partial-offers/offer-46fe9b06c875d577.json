@@ -1,0 +1,60 @@
+{
+  "canonical_offer_id": "canonical-offer-32f255bdf30ff921",
+  "captured_at": "2026-07-22T20:25:00.641368+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "IKEA Bordeaux",
+  "evidence": [
+    {
+      "excerpt": "0 وظائف في بوردو",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "IKEA Bordeaux",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-202500-621780-full/jobs.ikea.com/20333b8aa53fbd7261de.html",
+    "source_sha256": "0e19c91c353491b52f0aa197910a903950a6cdd105abed8bf91ead69a87be25c"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-46fe9b06c875d577",
+  "industry_sector_ids": [
+    "agencement-et-amenagement-interieur",
+    "commerce-et-distribution"
+  ],
+  "last_verified_at": "2026-07-22T20:25:00.641368+02:00",
+  "location_label": "Lieu non communiqué",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [
+    "vente"
+  ],
+  "sector_labels": [
+    "agencement et amenagement interieur",
+    "commerce et distribution"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "jobs.ikea.com",
+  "source_url": "https://jobs.ikea.com/ar/%D8%A7%D9%84%D9%85%D9%88%D9%82%D8%B9/jobs/22908/3017382-11071620-3031582/4",
+  "summary": "Poste de 0 وظائف في بوردو proposé par IKEA Bordeaux à Lieu non communiqué. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "0 وظائف في بوردو",
+  "verification_status": "active"
+}

@@ -1,0 +1,48 @@
+{
+  "id": "bnp-hello-bank-conseiller-bancaire-ligne-2602",
+  "title": "Conseiller Bancaire en ligne H/F",
+  "employer": "Hello bank! - BNP Paribas",
+  "source_url": "https://group.bnpparibas/emploi-carriere/offre-emploi/conseiller-bancaire-en-ligne-hello-bank-h-f-8",
+  "source_site": "group.bnpparibas",
+  "source_kind": "direct_employer",
+  "verification_status": "pending",
+  "published_at": "2026-06-01",
+  "captured_at": "2026-07-22T09:45:53+02:00",
+  "last_verified_at": "2026-07-21T17:15:00+02:00",
+  "summary": "En CDI à temps plein à Mérignac, accueillir, conseiller et fidéliser les clients par chat, visio et téléphone, suivre l'activité et travailler dans une équipe de conseillers avec un parcours de formation. L'amplitude annoncée va jusqu'à 20 heures et comprend des samedis selon le roulement.",
+  "location_label": "Mérignac",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "functional_domains": [
+    "relation client",
+    "gestion administrative"
+  ],
+  "required_skills": [
+    "relation client omnicanale",
+    "conseil",
+    "fidélisation",
+    "outils digitaux",
+    "suivi d'activité"
+  ],
+  "preferred_skills": [
+    "travail en équipe",
+    "formation"
+  ],
+  "conditions": {
+    "work_mode": "hybrid",
+    "evening_work": true,
+    "saturday_work": true,
+    "hours_range": "08:00-20:00"
+  },
+  "evidence": [
+    {
+      "field": "conditions",
+      "locator": "group.bnpparibas/emploi-carriere/offre-emploi/conseiller-bancaire-en-ligne-hello-bank-h-f-8",
+      "excerpt": "Amplitude lundi-vendredi 8h-20h et samedi 8h-18h, selon un rythme fixé à l'avance."
+    }
+  ],
+  "verification_note": "Page exacte non confirmée pendant le scan full du 22 juillet 2026 ; offre conservée pour traçabilité et revérification."
+}

@@ -1,0 +1,58 @@
+{
+  "canonical_offer_id": "recrutement.bpce.fr:BPCE_INFO01873",
+  "captured_at": "2026-07-22T20:00:15.182633+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "BPCE Solutions Informatiques",
+  "evidence": [
+    {
+      "excerpt": "Expert Méthode et Qualité SI - Coach Testing (F/H)",
+      "field": "title",
+      "locator": "BPCE API item.title"
+    },
+    {
+      "excerpt": "Aix-en-provence, BALMA, Bruges, Montigny-le-Bretonneux, Paris, Saint-Herblain, Saint-Jacques-de-la-Lande, Villeneuve-d'Ascq, Villeurbanne",
+      "field": "location_label",
+      "locator": "BPCE API item.localisation"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-api",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-200015-155066-full/recrutement.bpce.fr/eb3f5b794413af93e1b6.bin",
+    "source_sha256": "45643c66589a075f782a5265e4a247fd52457e6e08a8f1569c3aa8b8f0219296"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-f731d1584df0fc6a",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T20:00:15.182633+02:00",
+  "location_label": "Aix-en-provence, BALMA, Bruges, Montigny-le-Bretonneux, Paris, Saint-Herblain, Saint-Jacques-de-la-Lande, Villeneuve-d'Ascq, Villeurbanne",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-07-15",
+  "required_skills": [
+    "vente",
+    "gestion de projet"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrutement.bpce.fr",
+  "source_url": "https://recrutement.bpce.fr/job/expert-methode-et-qualite-si-coach-testing-f-h",
+  "summary": "Poste de Expert Méthode et Qualité SI - Coach Testing (F/H) proposé par BPCE Solutions Informatiques à Aix-en-provence, BALMA, Bruges, Montigny-le-Bretonneux, Paris, Saint-Herblain, Saint-Jacques-de-la-Lande, Villeneuve-d'Ascq, Villeurbanne. Revue sémantique requise avant recommandation.",
+  "title": "Expert Méthode et Qualité SI - Coach Testing (F/H)",
+  "verification_status": "active"
+}

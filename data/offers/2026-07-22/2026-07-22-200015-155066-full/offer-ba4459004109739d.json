@@ -1,0 +1,60 @@
+{
+  "canonical_offer_id": "canonical-offer-ce0ced2f9a3ac218",
+  "captured_at": "2026-07-22T20:00:15.182633+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "IKEA Bordeaux",
+  "evidence": [
+    {
+      "excerpt": "0 posturi vacante în Bordeaux",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "IKEA Bordeaux",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-200015-155066-full/jobs.ikea.com/ce0ced2f9a3ac2184de9.html",
+    "source_sha256": "26af4c7bfd1bee564fa2020031e2bce145b375eae9d94426c336403c9c89fc95"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-ba4459004109739d",
+  "industry_sector_ids": [
+    "agencement-et-amenagement-interieur",
+    "commerce-et-distribution"
+  ],
+  "last_verified_at": "2026-07-22T20:00:15.182633+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [
+    "vente"
+  ],
+  "sector_labels": [
+    "agencement et amenagement interieur",
+    "commerce et distribution"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "jobs.ikea.com",
+  "source_url": "https://jobs.ikea.com/ro/loc/jobs/22908/3017382-11071620-3031582/4",
+  "summary": "Poste de 0 posturi vacante în Bordeaux proposé par IKEA Bordeaux à Bordeaux. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "0 posturi vacante în Bordeaux",
+  "verification_status": "active"
+}

@@ -1,0 +1,58 @@
+{
+  "canonical_offer_id": "recrutement.bpce.fr:BPCE_ASS02089",
+  "captured_at": "2026-07-22T20:00:15.182633+02:00",
+  "conditions": {},
+  "contract_type": "CDD",
+  "employer": "BPCE Assurances IARD",
+  "evidence": [
+    {
+      "excerpt": "Chargé d'Indemnisation en Portefeuille Recours MRH Matériel - Martillac",
+      "field": "title",
+      "locator": "BPCE API item.title"
+    },
+    {
+      "excerpt": "Martillac",
+      "field": "location_label",
+      "locator": "BPCE API item.localisation"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-api",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-200015-155066-full/recrutement.bpce.fr/eb3f5b794413af93e1b6.bin",
+    "source_sha256": "45643c66589a075f782a5265e4a247fd52457e6e08a8f1569c3aa8b8f0219296"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-ee1b34b04677a4f8",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T20:00:15.182633+02:00",
+  "location_label": "Martillac",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-06-25",
+  "required_skills": [
+    "relation client",
+    "service client"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrutement.bpce.fr",
+  "source_url": "https://recrutement.bpce.fr/job/charge-dindemnisation-en-portefeuille-recours-mrh-materiel-martillac",
+  "summary": "Poste de Chargé d'Indemnisation en Portefeuille Recours MRH Matériel - Martillac proposé par BPCE Assurances IARD à Martillac. Revue sémantique requise avant recommandation.",
+  "title": "Chargé d'Indemnisation en Portefeuille Recours MRH Matériel - Martillac",
+  "verification_status": "active"
+}

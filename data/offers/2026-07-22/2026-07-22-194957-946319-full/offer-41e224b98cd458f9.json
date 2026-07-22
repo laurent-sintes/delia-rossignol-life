@@ -1,0 +1,57 @@
+{
+  "canonical_offer_id": "canonical-offer-bb2d69224e87e430",
+  "captured_at": "2026-07-22T19:49:57.972385+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "Préfecture et services de l'État en Gironde",
+  "evidence": [
+    {
+      "excerpt": "Recrutement de travailleur handicapé par la voie contractuelle pour l’accès au grade de secrétaire administratif de l’Intérieur – session 2025 Paramètres d’affichage",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Préfecture et services de l'État en Gironde",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-194957-946319-full/gironde.gouv.fr/d2e969221b4808f4f120.html",
+    "source_sha256": "10b83ab346bdd53d7df23525c310987f7620ccea116ff30ec3c773366347d908"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative"
+  ],
+  "id": "offer-41e224b98cd458f9",
+  "industry_sector_ids": [
+    "services-publics"
+  ],
+  "last_verified_at": "2026-07-22T19:49:57.972385+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [
+    "commerce"
+  ],
+  "sector_labels": [
+    "services publics"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "gironde.gouv.fr",
+  "source_url": "https://www.gironde.gouv.fr/Publications/Concours-administratif-Examen-professionnel-Recrutement/Recrutement-de-travailleur-handicape-par-la-voie-contractuelle-pour-l-acces-au-grade-de-SAI",
+  "summary": "Poste de Recrutement de travailleur handicapé par la voie contractuelle pour l’accès au grade de secrétaire administratif de l’Intérieur – session 2025 Paramètres d’affichage proposé par Préfecture et services de l'État en Gironde à Bordeaux. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Recrutement de travailleur handicapé par la voie contractuelle pour l’accès au grade de secrétaire administratif de l’Intérieur – session 2025 Paramètres d’affichage",
+  "verification_status": "active"
+}

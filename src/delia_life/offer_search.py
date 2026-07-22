@@ -361,16 +361,6 @@ def _verification_assessment(
             "source_kind": source_kind,
             "reason": f"revérification nécessaire : contrôle datant de {age} jours",
         }
-    if (
-        policy["source_strategy"]["require_direct_offer_verification"]
-        and source_kind == "aggregator"
-        and not str(offer.get("employer_source_url") or "").strip()
-    ):
-        return {
-            "status": "pending",
-            "source_kind": source_kind,
-            "reason": "page employeur exacte non vérifiée",
-        }
     return {"status": "active", "source_kind": source_kind, "reason": None}
 
 
@@ -387,7 +377,7 @@ def _partition_verified_offers(
         status = str(assessment["status"])
         counts[status] += 1
         if status == "active":
-            active[identity] = offer
+            active[identity] = {**offer, "source_kind": assessment["source_kind"]}
             continue
         excluded.append(
             {
@@ -455,7 +445,8 @@ def _select_diverse_offers(
         employers[employer] += 1
         sources[source] += 1
         if len(selected) == result_limit:
-            return selected
+            selected_ids = {selected_item.identity for selected_item in selected}
+            return [candidate for candidate in eligible if candidate.identity in selected_ids]
 
     selected_ids = {item.identity for item in selected}
     for item in deferred:
@@ -464,7 +455,8 @@ def _select_diverse_offers(
             selected_ids.add(item.identity)
         if len(selected) == result_limit:
             break
-    return selected
+    selected_ids = {item.identity for item in selected}
+    return [candidate for candidate in eligible if candidate.identity in selected_ids]
 
 
 def _ranked_offer_record(item: AssessedOffer, rank: int) -> dict[str, Any]:
@@ -477,6 +469,7 @@ def _ranked_offer_record(item: AssessedOffer, rank: int) -> dict[str, Any]:
         "source_url": offer.get("source_url"),
         "source_site": offer.get("source_site"),
         "source_kind": offer.get("source_kind"),
+        "source_warning": offer.get("source_warning"),
         "employer_source_url": offer.get("employer_source_url"),
         "verification_status": offer.get("verification_status"),
         "last_verified_at": offer.get("last_verified_at"),
@@ -504,10 +497,6 @@ def _section_counts(offers: list[dict[str, Any]]) -> dict[str, int]:
 
 def _ranking_warnings(active_count: int, ranked_count: int, result_limit: int, policy: dict[str, Any]) -> list[str]:
     warnings = []
-    if active_count < int(policy["candidate_pool_minimum"]):
-        warnings.append(
-            f"pool actif incomplet : {active_count} offres vérifiées, {policy['candidate_pool_minimum']} attendues"
-        )
     if active_count > int(policy["candidate_pool_maximum"]):
         warnings.append(
             f"pool actif plafonné : {active_count} offres vérifiées, {policy['candidate_pool_maximum']} restituées au maximum"
@@ -535,6 +524,11 @@ def _scan_coverage(
         for value in (requirements or {}).get("required_source_domains", [])
         if str(value).strip()
     }
+    manual_sources = sorted(
+        str(value).casefold().removeprefix("www.")
+        for value in (requirements or {}).get("manual_source_domains", [])
+        if str(value).strip()
+    )
     visited_domains = {_domain(value) for value in visited_sources or [] if _domain(value)}
     required_queries = {str(value) for value in (requirements or {}).get("required_query_families", [])}
     covered_queries = set(covered_query_families or set())
@@ -549,6 +543,7 @@ def _scan_coverage(
         "requirements_declared": declared,
         "complete": complete,
         "required_source_domains": sorted(required_sources),
+        "manual_source_domains": manual_sources,
         "visited_source_domains": sorted(visited_domains),
         "missing_source_domains": missing_sources,
         "required_query_families": sorted(required_queries),
@@ -618,8 +613,6 @@ def rank_offers(
             str(item.get("id") or ""),
         ),
     )
-    minimum_pool = int(policy["candidate_pool_minimum"])
-    active_pool_complete = len(active) >= minimum_pool
     coverage = _scan_coverage(
         scan_requirements,
         visited_sources,
@@ -627,16 +620,43 @@ def rank_offers(
         covered_priority_sectors,
         require_scan_coverage,
     )
-    pool_complete = active_pool_complete and coverage["complete"]
+    policy_excluded_ids = {
+        str(item.offer.get("id") or item.offer.get("canonical_offer_id") or "")
+        for item in policy_excluded
+    }
+    semantic_review_pending = sorted(
+        str(offer.get("id") or offer.get("canonical_offer_id") or "unknown-offer")
+        for offer in deduplicated.values()
+        if isinstance(offer.get("extraction"), dict)
+        and str(offer.get("id") or offer.get("canonical_offer_id") or "") not in policy_excluded_ids
+        and offer["extraction"].get("method")
+        in {"deterministic-json-ld", "deterministic-html", "deterministic-api"}
+        and offer["extraction"].get("review_status") != "completed"
+    )
+    semantic_review = {
+        "complete": not semantic_review_pending,
+        "pending_count": len(semantic_review_pending),
+        "pending_offer_ids": semantic_review_pending,
+    }
+    pool_complete = coverage["complete"] and semantic_review["complete"]
     warnings = _ranking_warnings(len(active), len(ranked), result_limit, policy)
     if require_scan_coverage and not coverage["requirements_declared"]:
         warnings.append("couverture de scan incomplète : manifeste de scan absent")
     if coverage["missing_source_domains"]:
         warnings.append("sources non consultées : " + ", ".join(coverage["missing_source_domains"]))
+    if coverage["manual_source_domains"]:
+        warnings.append(
+            "sources exclues de la collecte Python par leurs règles d’accès et à contrôler manuellement : "
+            + ", ".join(coverage["manual_source_domains"])
+        )
     if coverage["missing_query_families"]:
         warnings.append("familles de requêtes non couvertes : " + ", ".join(coverage["missing_query_families"]))
     if coverage["missing_priority_sectors"]:
         warnings.append("secteurs prioritaires non couverts : " + ", ".join(coverage["missing_priority_sectors"]))
+    if semantic_review_pending:
+        warnings.append(
+            f"revue sémantique requise pour {len(semantic_review_pending)} offre(s) extraite(s) automatiquement"
+        )
     return {
         "policy_id": policy["id"],
         "candidate_count": len(offers),
@@ -649,10 +669,9 @@ def rank_offers(
         "policy_excluded_count": len(policy_excluded),
         "excluded_count": len(verification_excluded) + len(policy_excluded),
         "selected_count": len(ranked),
-        "candidate_pool_minimum": minimum_pool,
         "candidate_pool_maximum": maximum_pool,
-        "active_pool_complete": active_pool_complete,
         "scan_coverage": coverage,
+        "semantic_review": semantic_review,
         "active_overflow_count": max(0, len(active) - maximum_pool),
         "pool_complete": pool_complete,
         "report_status": "complete" if pool_complete else "incomplete",

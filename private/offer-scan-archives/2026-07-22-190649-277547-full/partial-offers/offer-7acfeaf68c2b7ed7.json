@@ -1,0 +1,59 @@
+{
+  "canonical_offer_id": "canonical-offer-3ea67487fe5b84e5",
+  "captured_at": "2026-07-22T19:06:49.303633+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "Groupe Filhet-Allard",
+  "evidence": [
+    {
+      "excerpt": "Gestionnaire Back Office Déclarations Mensuelles H/F Détail de l'offre",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Groupe Filhet-Allard",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-190649-277547-full/groupefilhet-allard-career.talent-soft.com/3ea67487fe5b84e5e481.html",
+    "source_sha256": "67f90cf0a8a0cc084bce2256604df41af27f13ece78e752e2022e1e02c3312fc"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-7acfeaf68c2b7ed7",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T19:06:49.303633+02:00",
+  "location_label": "Mérignac",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [
+    "commerce",
+    "back-office"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "groupefilhet-allard-career.talent-soft.com",
+  "source_url": "https://groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-back-office-declarations-mensuelles-h-f_1759.aspx",
+  "summary": "Poste de Gestionnaire Back Office Déclarations Mensuelles H/F Détail de l'offre proposé par Groupe Filhet-Allard à Mérignac. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Gestionnaire Back Office Déclarations Mensuelles H/F Détail de l'offre",
+  "verification_status": "active"
+}

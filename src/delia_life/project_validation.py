@@ -71,12 +71,9 @@ def invalid_recommendation_band_thresholds(policy: dict[str, Any]) -> list[str]:
 
 
 def invalid_offer_pool_limits(policy: dict[str, Any]) -> list[str]:
-    minimum = policy.get("candidate_pool_minimum")
     maximum = policy.get("candidate_pool_maximum")
     result_limit = policy.get("result_limit")
     errors: list[str] = []
-    if isinstance(minimum, int) and isinstance(maximum, int) and minimum > maximum:
-        errors.append("offer search policy: candidate pool minimum cannot exceed maximum")
     if isinstance(result_limit, int) and isinstance(maximum, int) and result_limit > maximum:
         errors.append("offer search policy: result limit cannot exceed candidate pool maximum")
     return errors
@@ -88,12 +85,25 @@ def invalid_offer_source_audit(policy: dict[str, Any], audit: dict[str, Any]) ->
     direct_domains = set(strategy.get("direct_employer_domains", []))
     specialized_domains = set(strategy.get("specialized_domains", []))
     audited_domains = [str(source.get("scan_domain", "")) for source in audit.get("sources", [])]
+    adapter_domains = policy.get("collector", {}).get("adapter_domains", {})
+    configured_adapter_domains = [
+        str(domain)
+        for domains in adapter_domains.values()
+        if isinstance(domains, list)
+        for domain in domains
+    ] if isinstance(adapter_domains, dict) else []
     errors: list[str] = []
     duplicates = sorted({domain for domain in audited_domains if domain and audited_domains.count(domain) > 1})
     if duplicates:
         errors.append(f"offer source audit: duplicate scan domains: {', '.join(duplicates)}")
     if undeclared := sorted(set(audited_domains) - source_domains):
         errors.append(f"offer source audit: domains missing from offer search policy: {', '.join(undeclared)}")
+    if missing_adapters := sorted(set(audited_domains) - set(configured_adapter_domains)):
+        errors.append(f"offer source audit: domains missing from collector adapters: {', '.join(missing_adapters)}")
+    if duplicate_adapters := sorted(
+        {domain for domain in configured_adapter_domains if configured_adapter_domains.count(domain) > 1}
+    ):
+        errors.append(f"offer source audit: domains assigned to multiple collector adapters: {', '.join(duplicate_adapters)}")
     for source in audit.get("sources", []):
         domain = str(source.get("scan_domain", ""))
         source_type = source.get("organization_type")

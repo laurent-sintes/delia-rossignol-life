@@ -1,0 +1,60 @@
+{
+  "canonical_offer_id": "recrute.leroymerlin.fr:825406",
+  "captured_at": "2026-07-22T18:57:58.517400+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "Lezennes - Siège Social",
+  "evidence": [
+    {
+      "excerpt": "Responsable Opérations Immobilières - Facility Management H/F",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "Lezennes - Siège Social",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-185758-489223-full/recrute.leroymerlin.fr/ab4474997285cd4b571b.html",
+    "source_sha256": "5dba4de5eef99a38cf9b8642ab28a845eddc1d11f6dfb8ae8af0c5684b946c8b"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-2095c3a62b71c17a",
+  "industry_sector_ids": [
+    "agencement-et-amenagement-interieur",
+    "commerce-et-distribution"
+  ],
+  "last_verified_at": "2026-07-22T18:57:58.517400+02:00",
+  "location_label": "Lezennes (59260), FR",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-06-11",
+  "required_skills": [
+    "commerce",
+    "développement commercial",
+    "gestion de projet"
+  ],
+  "sector_labels": [
+    "agencement et amenagement interieur",
+    "commerce et distribution"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrute.leroymerlin.fr",
+  "source_url": "https://recrute.leroymerlin.fr/jobs/825406",
+  "summary": "Poste de Responsable Opérations Immobilières - Facility Management H/F proposé par Lezennes - Siège Social à Lezennes (59260), FR. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "Responsable Opérations Immobilières - Facility Management H/F",
+  "verification_status": "active"
+}

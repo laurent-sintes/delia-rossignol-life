@@ -1,0 +1,56 @@
+{
+  "canonical_offer_id": "canonical-offer-f9851ef8bb18542e",
+  "captured_at": "2026-07-22T19:06:49.303633+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "Fédération Hospitalière de France Emploi",
+  "evidence": [
+    {
+      "excerpt": "AIDE SOIGNANTS (ES)",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Fédération Hospitalière de France Emploi",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-190649-277547-full/emploi.fhf.fr/f9851ef8bb18542e865f.html",
+    "source_sha256": "c55e574f7e6f51386bb333fcdd323b68bd36422d04c5f69b2c9b822de4032df3"
+  },
+  "full_time": false,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-f094634a514d0853",
+  "industry_sector_ids": [
+    "sante-et-services-publics"
+  ],
+  "last_verified_at": "2026-07-22T19:06:49.303633+02:00",
+  "location_label": "Gironde",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [],
+  "sector_labels": [
+    "sante et services publics"
+  ],
+  "source_kind": "specialized",
+  "source_site": "emploi.fhf.fr",
+  "source_url": "https://emploi.fhf.fr/emploi/482625",
+  "summary": "Poste de AIDE SOIGNANTS (ES) proposé par Fédération Hospitalière de France Emploi à Gironde. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "AIDE SOIGNANTS (ES)",
+  "verification_status": "active"
+}

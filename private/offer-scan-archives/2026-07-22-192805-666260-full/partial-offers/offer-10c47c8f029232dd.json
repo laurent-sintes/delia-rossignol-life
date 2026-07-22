@@ -1,0 +1,56 @@
+{
+  "canonical_offer_id": "canonical-offer-af332af0fe6d2037",
+  "captured_at": "2026-07-22T19:28:05.695914+02:00",
+  "conditions": {},
+  "contract_type": "alternance",
+  "employer": "Emploi Territorial",
+  "evidence": [
+    {
+      "excerpt": "Assistant administratif à la DGST (h/f)",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Emploi Territorial",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-192805-666260-full/emploi-territorial.fr/af332af0fe6d20379f14.html",
+    "source_sha256": "7d9f79aaefadd7d29948a2f94ac9087716ed553b7f0c0d065b2a0506dea178f6"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-10c47c8f029232dd",
+  "industry_sector_ids": [
+    "services-publics"
+  ],
+  "last_verified_at": "2026-07-22T19:28:05.695914+02:00",
+  "location_label": "Lieu non communiqué",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [],
+  "sector_labels": [
+    "services publics"
+  ],
+  "source_kind": "specialized",
+  "source_site": "emploi-territorial.fr",
+  "source_url": "https://www.emploi-territorial.fr/offre/o092260722002013-assistant-administratif-dgst",
+  "summary": "Poste de Assistant administratif à la DGST (h/f) proposé par Emploi Territorial à Lieu non communiqué. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Assistant administratif à la DGST (h/f)",
+  "verification_status": "active"
+}

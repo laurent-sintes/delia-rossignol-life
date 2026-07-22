@@ -1,0 +1,60 @@
+{
+  "canonical_offer_id": "recrute.leroymerlin.fr:818655",
+  "captured_at": "2026-07-22T18:57:58.517400+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "Orléans - Ingré",
+  "evidence": [
+    {
+      "excerpt": "Employé logistique - Cour des matériaux (H/F)",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "Orléans - Ingré",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-185758-489223-full/recrute.leroymerlin.fr/d93f683068b4912d2a15.html",
+    "source_sha256": "d64eb3e3c235650c3ef99c21f8e5515893885306d8ff22b2f19f0f35b8e5edf3"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-88b59221ec464d0d",
+  "industry_sector_ids": [
+    "agencement-et-amenagement-interieur",
+    "commerce-et-distribution"
+  ],
+  "last_verified_at": "2026-07-22T18:57:58.517400+02:00",
+  "location_label": "Ingré (45140), FR",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-05-28",
+  "required_skills": [
+    "relation client",
+    "vente",
+    "commerce"
+  ],
+  "sector_labels": [
+    "agencement et amenagement interieur",
+    "commerce et distribution"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrute.leroymerlin.fr",
+  "source_url": "https://recrute.leroymerlin.fr/jobs/818655",
+  "summary": "Poste de Employé logistique - Cour des matériaux (H/F) proposé par Orléans - Ingré à Ingré (45140), FR. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "Employé logistique - Cour des matériaux (H/F)",
+  "verification_status": "active"
+}

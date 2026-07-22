@@ -1,0 +1,57 @@
+{
+  "canonical_offer_id": "recrutement.bpce.fr:BPCE_INFO01861",
+  "captured_at": "2026-07-22T20:00:15.182633+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "BPCE Solutions Informatiques",
+  "evidence": [
+    {
+      "excerpt": "Business Analyste technique – Assurance non vie (F/H)",
+      "field": "title",
+      "locator": "BPCE API item.title"
+    },
+    {
+      "excerpt": "BALMA, Dijon, Mérignac, Paris, Villeneuve-d'Ascq",
+      "field": "location_label",
+      "locator": "BPCE API item.localisation"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-api",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-200015-155066-full/recrutement.bpce.fr/eb3f5b794413af93e1b6.bin",
+    "source_sha256": "45643c66589a075f782a5265e4a247fd52457e6e08a8f1569c3aa8b8f0219296"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-ae129202143e77f2",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T20:00:15.182633+02:00",
+  "location_label": "BALMA, Dijon, Mérignac, Paris, Villeneuve-d'Ascq",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-06-18",
+  "required_skills": [
+    "vente"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrutement.bpce.fr",
+  "source_url": "https://recrutement.bpce.fr/job/business-analyste-technique-assurance-non-vie-f-h",
+  "summary": "Poste de Business Analyste technique – Assurance non vie (F/H) proposé par BPCE Solutions Informatiques à BALMA, Dijon, Mérignac, Paris, Villeneuve-d'Ascq. Revue sémantique requise avant recommandation.",
+  "title": "Business Analyste technique – Assurance non vie (F/H)",
+  "verification_status": "active"
+}

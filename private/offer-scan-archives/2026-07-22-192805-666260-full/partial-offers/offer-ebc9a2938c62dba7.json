@@ -1,0 +1,58 @@
+{
+  "canonical_offer_id": "canonical-offer-3707cbbb09dc2df4",
+  "captured_at": "2026-07-22T19:28:05.695914+02:00",
+  "conditions": {},
+  "contract_type": "intérim",
+  "employer": "Ville de Mérignac",
+  "evidence": [
+    {
+      "excerpt": "Directeur Général Adjoint en charge du pôle Dynamiques et Transitions territoriales H/F Détail de l'offre",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Ville de Mérignac",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-192805-666260-full/merignac-career.talent-soft.com/3707cbbb09dc2df40083.html",
+    "source_sha256": "a05c74a6ea551faba9f28e0bd996a0c5abd72794ba2ca060be12513515caae15"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-ebc9a2938c62dba7",
+  "industry_sector_ids": [
+    "services-publics"
+  ],
+  "last_verified_at": "2026-07-22T19:28:05.695914+02:00",
+  "location_label": "Mérignac",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [
+    "commerce"
+  ],
+  "sector_labels": [
+    "services publics"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "merignac-career.talent-soft.com",
+  "source_url": "https://merignac-career.talent-soft.com/offre-de-emploi/emploi-directeur-general-adjoint-en-charge-du-pole-dynamiques-et-transitions-territoriales-h-f_7185.aspx",
+  "summary": "Poste de Directeur Général Adjoint en charge du pôle Dynamiques et Transitions territoriales H/F Détail de l'offre proposé par Ville de Mérignac à Mérignac. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Directeur Général Adjoint en charge du pôle Dynamiques et Transitions territoriales H/F Détail de l'offre",
+  "verification_status": "active"
+}

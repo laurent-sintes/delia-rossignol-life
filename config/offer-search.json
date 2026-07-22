@@ -1,5 +1,4 @@
 {
-  "candidate_pool_minimum": 30,
   "candidate_pool_maximum": 100,
   "active_verification_max_age_days": 7,
   "contracts": {
@@ -74,6 +73,7 @@
         "directrice data",
         "head of data",
         "data engineer",
+        "data analyst",
         "data scientist",
         "machine learning engineer"
       ],
@@ -94,6 +94,133 @@
         "sql"
       ],
       "minimum_technical_markers": 2
+    },
+    {
+      "id": "specialist-software-infrastructure",
+      "label": "profil spécialiste développement, infrastructure ou cybersécurité",
+      "decision": "exclude",
+      "strong_title_markers": [
+        "développeur",
+        "developer",
+        "tech lead",
+        "devops",
+        "dba",
+        "ingénieur support applicatif",
+        "expert sécurité technologie",
+        "expert méthode et qualité si",
+        "chef de projet si"
+      ],
+      "family_markers": ["développement logiciel", "infrastructure informatique", "cybersécurité"],
+      "technical_markers": [".net", "devops", "postgresql", "mysql", "scrum", "testing"],
+      "minimum_technical_markers": 2
+    },
+    {
+      "id": "specialist-legal-compliance",
+      "label": "profil spécialiste juridique ou conformité",
+      "decision": "exclude",
+      "strong_title_markers": ["juriste", "chargé de conformité"],
+      "family_markers": ["droit des affaires", "conformité réglementaire"],
+      "technical_markers": ["rgpd", "droit", "réglementation"],
+      "minimum_technical_markers": 2
+    },
+    {
+      "id": "specialist-insurance-claims",
+      "label": "profil spécialiste indemnisation ou technique assurance",
+      "decision": "exclude",
+      "strong_title_markers": [
+        "chargé d'indemnisation",
+        "gestionnaire indemnisation",
+        "manager indemnisation",
+        "responsable technique corporel",
+        "responsable technique mrh",
+        "responsable régional assurances iard"
+      ],
+      "family_markers": ["indemnisation assurance", "assurance iard"],
+      "technical_markers": ["mrh", "corporel", "sinistre", "iard"],
+      "minimum_technical_markers": 2
+    },
+    {
+      "id": "specialist-payroll",
+      "label": "profil spécialiste paie",
+      "decision": "exclude",
+      "strong_title_markers": ["gestionnaire paie"],
+      "family_markers": ["gestion de la paie"],
+      "technical_markers": ["paie", "dsn", "silae"],
+      "minimum_technical_markers": 2
+    },
+    {
+      "id": "specialist-hospitality-craft",
+      "label": "métier technique spécialisé de l’hôtellerie-restauration",
+      "decision": "exclude",
+      "strong_title_markers": ["sommelier", "chef de rang", "demi-chef de partie", "commis de rang"],
+      "family_markers": ["restauration gastronomique"],
+      "technical_markers": ["sommellerie", "service en salle", "cuisine"],
+      "minimum_technical_markers": 2
+    },
+    {
+      "id": "regulated-early-childhood",
+      "label": "direction réglementée d’établissement petite enfance",
+      "decision": "exclude",
+      "strong_title_markers": ["directeur d'établissement d'accueil du jeune enfant", "directrice d'établissement d'accueil du jeune enfant"],
+      "family_markers": ["petite enfance"],
+      "technical_markers": ["eaje", "puéricultrice", "éducateur de jeunes enfants"],
+      "minimum_technical_markers": 1
+    },
+    {
+      "id": "senior-public-executive",
+      "label": "direction générale de collectivité territoriale",
+      "decision": "exclude",
+      "strong_title_markers": ["directeur général adjoint", "directrice générale adjointe"],
+      "family_markers": ["direction générale de collectivité"],
+      "technical_markers": ["collectivité territoriale", "emploi fonctionnel"],
+      "minimum_technical_markers": 1
+    },
+    {
+      "id": "non-job-listing",
+      "label": "page générique ou candidature spontanée, sans poste précis",
+      "decision": "exclude",
+      "strong_title_markers": ["candidature spontanée", "candidatures spontanées", "accéder sans concours"],
+      "family_markers": ["candidature spontanée"],
+      "technical_markers": ["poste non précisé"],
+      "minimum_technical_markers": 1
+    },
+    {
+      "id": "specialist-banking-business-analysis",
+      "label": "profil Business Analyst spécialisé systèmes bancaires ou risques",
+      "decision": "exclude",
+      "strong_title_markers": [
+        "business analyst risques",
+        "business analyste technique – assurance non vie",
+        "business analyst - crédit consommation"
+      ],
+      "family_markers": ["business analysis bancaire"],
+      "technical_markers": ["risques bancaires", "crédit consommation", "assurance non vie"],
+      "minimum_technical_markers": 1
+    },
+    {
+      "id": "specialist-influencer-marketing",
+      "label": "profil spécialiste influence et partenariats sociaux",
+      "decision": "exclude",
+      "strong_title_markers": ["chef de projet influence"],
+      "family_markers": ["marketing d'influence"],
+      "technical_markers": ["influenceurs", "social partnerships", "kolsquare", "reech"],
+      "minimum_technical_markers": 2
+    },
+    {
+      "id": "specialist-insurance-commercial",
+      "label": "profil commercial spécialiste des garanties d’assurance",
+      "decision": "exclude",
+      "strong_title_markers": [
+        "chargé de clientèle assurance de personnes",
+        "chargé(e) de clientèle assurance de personnes",
+        "directeur de clientèle assurance de personnes",
+        "directrice de clientèle assurance de personnes",
+        "directeur(rice) de clientèle assurance de personnes",
+        "technico commercial assurance de personnes"
+      ],
+      "family_markers": ["protection sociale assurance"],
+      "technical_markers": ["santé", "prévoyance", "retraite", "garanties"],
+      "minimum_technical_markers": 2
     }
   ],
   "result_limit": 100,
@@ -101,13 +228,87 @@
     "priority_minimum_score": 75,
     "possible_minimum_score": 50
   },
-  "regional_source_audit": "config/offer-source-audit.json",
-  "sector_emphasis": {
-    "labels": [
-      "luxe"
+  "collector": {
+    "user_agent": "DeliaOfferScanner/0.1",
+    "timeout_seconds": 30,
+    "retries": 1,
+    "delay_seconds": 0.5,
+    "max_response_bytes": 5242880,
+    "max_concurrent_sources": 6,
+    "location_markers": [
+      "Ambarès-et-Lagrave",
+      "Ambès",
+      "Artigues-près-Bordeaux",
+      "Bassens",
+      "Bègles",
+      "Blanquefort",
+      "Bordeaux",
+      "Bouliac",
+      "Bruges",
+      "Carbon-Blanc",
+      "Cenon",
+      "Eysines",
+      "Floirac",
+      "Gradignan",
+      "Le Bouscat",
+      "Le Haillan",
+      "Lormont",
+      "Mérignac",
+      "Parempuyre",
+      "Pessac",
+      "Saint-Aubin-de-Médoc",
+      "Saint-Médard-en-Jalles",
+      "Talence",
+      "Villenave-d'Ornon",
+      "Gironde",
+      "Martillac"
     ],
-    "multiplier": 1.35
+    "adapter_domains": {
+      "breezy": [
+        "betclic-group.breezy.hr"
+      ],
+      "talentsoft": [
+        "ars-nouvelle-aquitaine-recrute.talent-soft.com",
+        "groupefilhet-allard-career.talent-soft.com",
+        "merignac-career.talent-soft.com",
+        "recrutement.bordeaux-metropole.fr",
+        "recrutement.bordeaux.fr"
+      ],
+      "softy": [
+        "chu-bordeaux.softy.pro"
+      ],
+      "workday": [
+        "cultura.wd3.myworkdayjobs.com"
+      ],
+      "bpce": [
+        "recrutement.bpce.fr"
+      ],
+      "jobaffinity": [
+        "sources-hotels.com"
+      ],
+      "specialized": [
+        "choisirleservicepublic.gouv.fr",
+        "emploi-territorial.fr",
+        "emploi.fhf.fr",
+        "lasecurecrute.fr"
+      ],
+      "static-listing": [
+        "careers.floa.com",
+        "careers.ihg.com",
+        "caudalie.career",
+        "cdg33.fr",
+        "emploi.cdiscount.com",
+        "gironde.fr",
+        "gironde.gouv.fr",
+        "jobs.ikea.com",
+        "mairie-begles.fr",
+        "offresdemploi.nouvelle-aquitaine.fr",
+        "recrute.leroymerlin.fr",
+        "u-bordeaux.fr"
+      ]
+    }
   },
+  "regional_source_audit": "config/offer-source-audit.json",
   "source_domains": [
     "francetravail.fr",
     "apec.fr",
@@ -265,7 +466,7 @@
       "emploi.fhf.fr",
       "lasecurecrute.fr"
     ],
-    "require_direct_offer_verification": true
+    "warn_on_missing_employer_page": true
   },
   "weights": {
     "constraints": 5,

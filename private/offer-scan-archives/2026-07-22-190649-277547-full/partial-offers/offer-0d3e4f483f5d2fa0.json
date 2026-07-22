@@ -1,0 +1,59 @@
+{
+  "canonical_offer_id": "canonical-offer-84392d8d5852ecbc",
+  "captured_at": "2026-07-22T19:06:49.303633+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "Groupe Filhet-Allard",
+  "evidence": [
+    {
+      "excerpt": "Gestionnaire Back Office Production H/F Détail de l'offre",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Groupe Filhet-Allard",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-190649-277547-full/groupefilhet-allard-career.talent-soft.com/84392d8d5852ecbcecd5.html",
+    "source_sha256": "211b0e69d0d97368dccc618c09bb5f99ab115d14030b0d8497be412d50fcbcc3"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-0d3e4f483f5d2fa0",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T19:06:49.303633+02:00",
+  "location_label": "Mérignac",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [
+    "commerce",
+    "back-office"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "groupefilhet-allard-career.talent-soft.com",
+  "source_url": "https://groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-back-office-production-h-f_1760.aspx",
+  "summary": "Poste de Gestionnaire Back Office Production H/F Détail de l'offre proposé par Groupe Filhet-Allard à Mérignac. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Gestionnaire Back Office Production H/F Détail de l'offre",
+  "verification_status": "active"
+}

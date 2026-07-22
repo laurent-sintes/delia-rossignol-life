@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import http.client
 import ipaddress
 import mimetypes
 import socket
@@ -149,7 +150,7 @@ def _robot_parser(
         if error.code not in {401, 403, 404}:
             raise
         parser.parse(["User-agent: *", "Disallow: /" if error.code in {401, 403} else "Disallow:"])
-    except (urllib.error.URLError, TimeoutError):
+    except (urllib.error.URLError, TimeoutError, ConnectionError, http.client.HTTPException):
         parser.parse(["User-agent: *", "Disallow: /"])
     return parser
 
@@ -188,7 +189,12 @@ def _fetch_url(
                     "status": response.status,
                     "attempts": attempt + 1,
                 }
-        except (urllib.error.URLError, TimeoutError) as error:
+        except (
+            urllib.error.URLError,
+            TimeoutError,
+            ConnectionError,
+            http.client.HTTPException,
+        ) as error:
             if attempt == retries:
                 return {"error": str(error), "attempts": attempt + 1}
             if retry_delay_seconds:

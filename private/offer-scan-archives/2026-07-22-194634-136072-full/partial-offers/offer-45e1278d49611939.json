@@ -1,0 +1,57 @@
+{
+  "canonical_offer_id": "canonical-offer-1c11c16abc01ba05",
+  "captured_at": "2026-07-22T19:46:34.164692+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "Préfecture et services de l'État en Gironde",
+  "evidence": [
+    {
+      "excerpt": "Economie - Travail et emploi - Finances publiques Paramètres d’affichage",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Préfecture et services de l'État en Gironde",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-194634-136072-full/gironde.gouv.fr/acdf90a7976413104290.html",
+    "source_sha256": "1138d9324f817b78a2cd32fba0df5275a464032cb1a424f319fe60ac4052a4c4"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative"
+  ],
+  "id": "offer-45e1278d49611939",
+  "industry_sector_ids": [
+    "services-publics"
+  ],
+  "last_verified_at": "2026-07-22T19:46:34.164692+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [
+    "commerce"
+  ],
+  "sector_labels": [
+    "services publics"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "gironde.gouv.fr",
+  "source_url": "https://www.gironde.gouv.fr/Services-de-l-Etat/Economie-Travail-et-emploi-Finances-publiques",
+  "summary": "Poste de Economie - Travail et emploi - Finances publiques Paramètres d’affichage proposé par Préfecture et services de l'État en Gironde à Bordeaux. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Economie - Travail et emploi - Finances publiques Paramètres d’affichage",
+  "verification_status": "active"
+}

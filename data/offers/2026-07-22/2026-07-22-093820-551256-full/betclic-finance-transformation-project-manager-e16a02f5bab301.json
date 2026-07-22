@@ -1,0 +1,52 @@
+{
+  "id": "betclic-finance-transformation-project-manager-e16a02f5bab301",
+  "title": "Finance Transformation Project Manager F/M",
+  "employer": "Betclic Group",
+  "source_url": "https://betclic-group.breezy.hr/p/e16a02f5bab301-finance-transformation-project-manager-f-m",
+  "source_site": "betclic-group.breezy.hr",
+  "source_kind": "direct_employer",
+  "verification_status": "active",
+  "verification_note": "Page exacte ou portail direct revérifié pendant le scan full du 22 juillet 2026.",
+  "published_at": null,
+  "captured_at": "2026-07-22T09:45:53+02:00",
+  "last_verified_at": "2026-07-22T09:45:53+02:00",
+  "summary": "Piloter des projets de transformation de la fonction Finance au sein de Betclic, dans un contexte international et multisite. Le portail employeur confirme un poste à temps plein accessible depuis Bordeaux ; la formation, l’ancienneté et l’expertise finance requises restent à vérifier.",
+  "location_label": "Bordeaux",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": [
+    "services numériques",
+    "finance"
+  ],
+  "functional_domains": [
+    "gestion et coordination de projets"
+  ],
+  "compensation": {},
+  "required_skills": [
+    "gestion de projet",
+    "transformation",
+    "coordination"
+  ],
+  "preferred_skills": [
+    "finance"
+  ],
+  "conditions": {
+    "work_mode": "hybrid",
+    "details_access": "fiche détaillée temporairement inaccessible"
+  },
+  "prerequisites": [
+    {
+      "id": "conditions-acces-betclic-project-manager",
+      "kind": "other",
+      "description": "Conditions d’accès au poste à vérifier",
+      "mandatory": true,
+      "profile_status": "unknown",
+      "profile_evidence_ids": [],
+      "assessment_note": "La fiche détaillée n’était pas exploitable ; les conditions d’accès doivent être vérifiées avant candidature.",
+      "evidence": {
+        "locator": "portail Betclic, offre e16a02f5bab301",
+        "excerpt": "Finance Transformation Project Manager F/M — Bordeaux — full time"
+      }
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "canonical_offer_id": "canonical-offer-a3a0af3522b7b4ef",
+  "captured_at": "2026-07-22T19:46:34.164692+02:00",
+  "conditions": {},
+  "contract_type": "alternance",
+  "employer": "Emploi Territorial",
+  "evidence": [
+    {
+      "excerpt": "Secrétaire général de mairie (h/f)",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Emploi Territorial",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-194634-136072-full/emploi-territorial.fr/a3a0af3522b7b4ef60fa.html",
+    "source_sha256": "a977c8291c90fd47149a39a12123aa710ad0068f39e423f0dbc932015f019403"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-5d377e949012ae14",
+  "industry_sector_ids": [
+    "services-publics"
+  ],
+  "last_verified_at": "2026-07-22T19:46:34.164692+02:00",
+  "location_label": "Lieu non communiqué",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [],
+  "sector_labels": [
+    "services publics"
+  ],
+  "source_kind": "specialized",
+  "source_site": "emploi-territorial.fr",
+  "source_url": "https://www.emploi-territorial.fr/offre/o017260722001910-secretaire-general-mairie",
+  "summary": "Poste de Secrétaire général de mairie (h/f) proposé par Emploi Territorial à Lieu non communiqué. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Secrétaire général de mairie (h/f)",
+  "verification_status": "active"
+}

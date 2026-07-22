@@ -1,0 +1,56 @@
+{
+  "canonical_offer_id": "canonical-offer-515f536d7eab0952",
+  "captured_at": "2026-07-22T20:25:00.641368+02:00",
+  "conditions": {},
+  "contract_type": "CDD",
+  "employer": "Ville de Bordeaux et CCAS",
+  "evidence": [
+    {
+      "excerpt": "DGA Solidarités et Citoyenneté - DG du CCAS H/F Détail de l'offre",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Ville de Bordeaux et CCAS",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-202500-621780-full/recrutement.bordeaux.fr/515f536d7eab09521f83.html",
+    "source_sha256": "7d0e1f234deacadd2682869eb4fbd6cba0fac2a5f6874b87a89ba6549bc6baa0"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-f227ac7ade455363",
+  "industry_sector_ids": [
+    "services-publics"
+  ],
+  "last_verified_at": "2026-07-22T20:25:00.641368+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [],
+  "sector_labels": [
+    "services publics"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrutement.bordeaux.fr",
+  "source_url": "https://www.recrutement.bordeaux.fr/offre-de-emploi/emploi-dga-solidarites-et-citoyennete-dg-du-ccas-h-f_7188.aspx",
+  "summary": "Poste de DGA Solidarités et Citoyenneté - DG du CCAS H/F Détail de l'offre proposé par Ville de Bordeaux et CCAS à Bordeaux. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "DGA Solidarités et Citoyenneté - DG du CCAS H/F Détail de l'offre",
+  "verification_status": "active"
+}

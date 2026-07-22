@@ -1,0 +1,58 @@
+{
+  "canonical_offer_id": "canonical-offer-6970daf319232175",
+  "captured_at": "2026-07-22T19:46:34.164692+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "Groupe Filhet-Allard",
+  "evidence": [
+    {
+      "excerpt": "Gestionnaire Indemnisation Flotte Auto H/F Détail de l'offre",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Groupe Filhet-Allard",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-194634-136072-full/groupefilhet-allard-career.talent-soft.com/6970daf319232175a319.html",
+    "source_sha256": "c620566e4bc2ed44d0dec3ad0a6655a0655dba8dc4a255de1c4d6b2f7beee1c0"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-c4dfa61f88eb58e4",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T19:46:34.164692+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [
+    "commerce"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "groupefilhet-allard-career.talent-soft.com",
+  "source_url": "https://groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-indemnisation-flotte-auto-h-f_1758.aspx",
+  "summary": "Poste de Gestionnaire Indemnisation Flotte Auto H/F Détail de l'offre proposé par Groupe Filhet-Allard à Bordeaux. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Gestionnaire Indemnisation Flotte Auto H/F Détail de l'offre",
+  "verification_status": "active"
+}

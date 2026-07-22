@@ -1,0 +1,57 @@
+{
+  "canonical_offer_id": "canonical-offer-c184d22fbe556ca1",
+  "captured_at": "2026-07-22T19:06:49.303633+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "Préfecture et services de l'État en Gironde",
+  "evidence": [
+    {
+      "excerpt": "Insertion par le logement et par l’emploi Paramètres d’affichage",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Préfecture et services de l'État en Gironde",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-190649-277547-full/gironde.gouv.fr/1d4eec0b1454e204b442.html",
+    "source_sha256": "ff9ef329e91d5697b3d10907530efb1b10c4af26fe5edbbcd16ff77d64a51a9d"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative"
+  ],
+  "id": "offer-0964cee38bb5756e",
+  "industry_sector_ids": [
+    "services-publics"
+  ],
+  "last_verified_at": "2026-07-22T19:06:49.303633+02:00",
+  "location_label": "Gironde",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [
+    "commerce"
+  ],
+  "sector_labels": [
+    "services publics"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "gironde.gouv.fr",
+  "source_url": "https://www.gironde.gouv.fr/Actions-de-l-Etat/Insertion-par-le-logement-et-par-l-emploi",
+  "summary": "Poste de Insertion par le logement et par l’emploi Paramètres d’affichage proposé par Préfecture et services de l'État en Gironde à Gironde. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Insertion par le logement et par l’emploi Paramètres d’affichage",
+  "verification_status": "active"
+}

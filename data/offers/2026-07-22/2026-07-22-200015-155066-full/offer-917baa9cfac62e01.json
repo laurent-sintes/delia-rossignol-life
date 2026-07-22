@@ -1,0 +1,58 @@
+{
+  "canonical_offer_id": "canonical-offer-3179b29ce4d9848c",
+  "captured_at": "2026-07-22T20:00:15.182633+02:00",
+  "conditions": {},
+  "contract_type": "alternance",
+  "employer": "Betclic Group",
+  "evidence": [
+    {
+      "excerpt": "Stage (6 mois) - Chef de projet growth marketing F/M",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "Betclic Group",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-200015-155066-full/betclic-group.breezy.hr/8d92c6a447ba93ea1aa2.html",
+    "source_sha256": "47075f24f6e9edd7fe9c589a4cd052b1bc18806a0ef71476a8c8af6fa550ac60"
+  },
+  "full_time": true,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-917baa9cfac62e01",
+  "industry_sector_ids": [
+    "numerique-et-services"
+  ],
+  "last_verified_at": "2026-07-22T20:00:15.182633+02:00",
+  "location_label": "Bordeaux, FR",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2025-09-17",
+  "required_skills": [
+    "commerce",
+    "chef de projet",
+    "planification"
+  ],
+  "sector_labels": [
+    "numerique et services"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "betclic-group.breezy.hr",
+  "source_url": "https://betclic-group.breezy.hr/p/36b0f26ca8e801-stage-6-mois-chef-de-projet-growth-marketing-f-m?source=GoogleJobs",
+  "summary": "Poste de Stage (6 mois) - Chef de projet growth marketing F/M proposé par Betclic Group à Bordeaux, FR. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "Stage (6 mois) - Chef de projet growth marketing F/M",
+  "verification_status": "active"
+}

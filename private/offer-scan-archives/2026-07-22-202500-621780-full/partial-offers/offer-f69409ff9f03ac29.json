@@ -1,0 +1,60 @@
+{
+  "canonical_offer_id": "canonical-offer-843ee28a86493a90",
+  "captured_at": "2026-07-22T20:25:00.641368+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "Les Sources de Caudalie",
+  "evidence": [
+    {
+      "excerpt": "Commis de rang - La Grand'Vigne**",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Les Sources de Caudalie",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-202500-621780-full/sources-hotels.com/341dabb94e941770b66d.bin",
+    "source_sha256": "3dd52b679cd853ace2dc918fa605cce31b91a487e7fe13860e8e4d81d9f6ef12"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-f69409ff9f03ac29",
+  "industry_sector_ids": [
+    "luxe",
+    "hotellerie",
+    "bien-etre"
+  ],
+  "last_verified_at": "2026-07-22T20:25:00.641368+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [],
+  "sector_labels": [
+    "luxe",
+    "hotellerie",
+    "bien etre"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "sources-hotels.com",
+  "source_url": "https://www.sources-hotels.com/bordeaux/recrutement/?intuition_id=1073260&intuition_source_id=10382",
+  "summary": "Poste de Commis de rang - La Grand'Vigne** proposé par Les Sources de Caudalie à Bordeaux. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Commis de rang - La Grand'Vigne**",
+  "verification_status": "active"
+}

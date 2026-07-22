@@ -1,0 +1,60 @@
+{
+  "canonical_offer_id": "canonical-offer-4c1b6622142cc6f1",
+  "captured_at": "2026-07-22T19:06:49.303633+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "IKEA Bordeaux",
+  "evidence": [
+    {
+      "excerpt": "0 ボルドーの求人",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "IKEA Bordeaux",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-190649-277547-full/jobs.ikea.com/3a9fe790e293f9942031.html",
+    "source_sha256": "0858185f43bc9f44fd32090f9e64d4e53448d841490b01c4bd7f42e194f3b941"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-67b9aa3bebf53c91",
+  "industry_sector_ids": [
+    "agencement-et-amenagement-interieur",
+    "commerce-et-distribution"
+  ],
+  "last_verified_at": "2026-07-22T19:06:49.303633+02:00",
+  "location_label": "Lieu non communiqué",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [
+    "vente"
+  ],
+  "sector_labels": [
+    "agencement et amenagement interieur",
+    "commerce et distribution"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "jobs.ikea.com",
+  "source_url": "https://jobs.ikea.com/ja/%E3%83%AD%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3/jobs/22908/3017382-11071620-3031582/4",
+  "summary": "Poste de 0 ボルドーの求人 proposé par IKEA Bordeaux à Lieu non communiqué. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "0 ボルドーの求人",
+  "verification_status": "active"
+}

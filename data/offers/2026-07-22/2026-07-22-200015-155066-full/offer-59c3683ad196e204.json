@@ -1,0 +1,57 @@
+{
+  "canonical_offer_id": "recrutement.bpce.fr:BPCE_INFO01724",
+  "captured_at": "2026-07-22T20:00:15.182633+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "BPCE Solutions Informatiques",
+  "evidence": [
+    {
+      "excerpt": "Tech Lead Front End / Design System (F/H)",
+      "field": "title",
+      "locator": "BPCE API item.title"
+    },
+    {
+      "excerpt": "Aix-en-provence, BALMA, Bois-Guillaume, Bruges, Dijon, Paris, Saint-Herblain, Saint-Jacques-de-la-Lande, Saint-Jean-de-la-Ruelle, Strasbourg, Villeneuve-d'Ascq, Villeurbanne",
+      "field": "location_label",
+      "locator": "BPCE API item.localisation"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-api",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-200015-155066-full/recrutement.bpce.fr/80d9dce360bf75f791a2.bin",
+    "source_sha256": "a4d0b01cd7d523997e413002e338824cb3fd349eb135be9ee388d2025ff69e0c"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-59c3683ad196e204",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T20:00:15.182633+02:00",
+  "location_label": "Aix-en-provence, BALMA, Bois-Guillaume, Bruges, Dijon, Paris, Saint-Herblain, Saint-Jacques-de-la-Lande, Saint-Jean-de-la-Ruelle, Strasbourg, Villeneuve-d'Ascq, Villeurbanne",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-03-03",
+  "required_skills": [
+    "vente"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrutement.bpce.fr",
+  "source_url": "https://recrutement.bpce.fr/job/tech-lead-front-end-design-system-f-h",
+  "summary": "Poste de Tech Lead Front End / Design System (F/H) proposé par BPCE Solutions Informatiques à Aix-en-provence, BALMA, Bois-Guillaume, Bruges, Dijon, Paris, Saint-Herblain, Saint-Jacques-de-la-Lande, Saint-Jean-de-la-Ruelle, Strasbourg, Villeneuve-d'Ascq, Villeurbanne. Revue sémantique requise avant recommandation.",
+  "title": "Tech Lead Front End / Design System (F/H)",
+  "verification_status": "active"
+}

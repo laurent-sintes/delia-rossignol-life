@@ -1,0 +1,78 @@
+{
+  "id": "cdiscount-directeur-data-12303",
+  "title": "Directeur Data F/H",
+  "employer": "Cdiscount",
+  "source_url": "https://emploi.cdiscount.com/nos-offres-demploi/12303",
+  "source_site": "emploi.cdiscount.com",
+  "source_kind": "direct_employer",
+  "verification_status": "active",
+  "published_at": "2026-07-10",
+  "captured_at": "2026-07-22T09:45:53+02:00",
+  "last_verified_at": "2026-07-22T09:45:53+02:00",
+  "summary": "Diriger Ã  Bordeaux la fonction Data de Cdiscount, structurer sa transformation, dÃ©finir la gouvernance et la feuille de route, manager les Ã©quipes et dÃ©velopper les usages analytiques au service de la performance de l'entreprise.",
+  "location_label": "Bordeaux",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": [
+    "commerce et distribution"
+  ],
+  "functional_domains": [],
+  "compensation": {},
+  "required_skills": [
+    "direction data",
+    "gouvernance des donnÃ©es",
+    "SQL",
+    "Power BI",
+    "Snowflake",
+    "management d'Ã©quipe"
+  ],
+  "preferred_skills": [
+    "transformation d'une fonction data",
+    "pilotage stratÃ©gique"
+  ],
+  "conditions": {
+    "work_mode": "unknown",
+    "hours": "unknown"
+  },
+  "prerequisites": [
+    {
+      "id": "experience-direction-data",
+      "kind": "minimum_experience",
+      "description": "ExpÃ©rience significative de direction et de transformation d'une fonction Data",
+      "mandatory": true,
+      "profile_status": "not_demonstrated",
+      "profile_evidence_ids": [],
+      "assessment_note": "Aucune expÃ©rience de direction Data n'est dÃ©montrÃ©e dans les connaissances validÃ©es.",
+      "evidence": {
+        "locator": "emploi.cdiscount.com/nos-offres-demploi/12303#profil",
+        "excerpt": "ExpÃ©rience significative dans la Data et transformation d'une fonction Data."
+      }
+    },
+    {
+      "id": "stack-data",
+      "kind": "other",
+      "description": "MaÃ®trise de SQL, Power BI et Snowflake",
+      "mandatory": true,
+      "profile_status": "not_demonstrated",
+      "profile_evidence_ids": [],
+      "assessment_note": "Ces technologies ne figurent pas dans les connaissances validÃ©es.",
+      "evidence": {
+        "locator": "emploi.cdiscount.com/nos-offres-demploi/12303#profil",
+        "excerpt": "MaÃ®trise de SQL, Power BI et Snowflake."
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "field": "mission",
+      "locator": "emploi.cdiscount.com/nos-offres-demploi/12303#missions",
+      "excerpt": "Structurer la fonction Data, sa gouvernance, sa feuille de route et ses Ã©quipes."
+    },
+    {
+      "field": "contract",
+      "locator": "emploi.cdiscount.com/nos-offres-demploi/12303",
+      "excerpt": "CDI - Bordeaux - publiÃ©e le 10 juillet 2026."
+    }
+  ],
+  "verification_note": "Page exacte ou portail direct revérifié pendant le scan full du 22 juillet 2026."
+}

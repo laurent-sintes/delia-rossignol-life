@@ -1,0 +1,60 @@
+{
+  "canonical_offer_id": "canonical-offer-78e54350ea5f9e17",
+  "captured_at": "2026-07-22T19:49:57.972385+02:00",
+  "conditions": {},
+  "contract_type": "stage",
+  "employer": "Les Sources de Caudalie",
+  "evidence": [
+    {
+      "excerpt": "Stagiaire Guest Services Agent - Réservation (H/F)",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Les Sources de Caudalie",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-194957-946319-full/sources-hotels.com/81c7ab57ea9ef2d64c4e.html",
+    "source_sha256": "b0c465d39fb6bde8c0720af46337c3dc4656eea18c692a13d4d1ffdc82f38a32"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-8094b637c5bbdfa3",
+  "industry_sector_ids": [
+    "luxe",
+    "hotellerie",
+    "bien-etre"
+  ],
+  "last_verified_at": "2026-07-22T19:49:57.972385+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [],
+  "sector_labels": [
+    "luxe",
+    "hotellerie",
+    "bien etre"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "sources-hotels.com",
+  "source_url": "https://www.sources-hotels.com/bordeaux/recrutement/?intuition_id=1033225&intuition_source_id=10382",
+  "summary": "Poste de Stagiaire Guest Services Agent - Réservation (H/F) proposé par Les Sources de Caudalie à Bordeaux. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Stagiaire Guest Services Agent - Réservation (H/F)",
+  "verification_status": "active"
+}

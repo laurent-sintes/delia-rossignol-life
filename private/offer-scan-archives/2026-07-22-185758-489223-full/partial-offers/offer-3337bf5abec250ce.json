@@ -1,0 +1,59 @@
+{
+  "canonical_offer_id": "recrute.leroymerlin.fr:829198",
+  "captured_at": "2026-07-22T18:57:58.517400+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "Montpellier - Saint-Aunès",
+  "evidence": [
+    {
+      "excerpt": "Conseillère/Conseiller en vente et en aménagement",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "Montpellier - Saint-Aunès",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-185758-489223-full/recrute.leroymerlin.fr/a34d98f7835e88fbb355.html",
+    "source_sha256": "f1441ee9abd5cb4ad0abba86c7bc63324aea50a0bc675a1f7b3dceacec99fae6"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-3337bf5abec250ce",
+  "industry_sector_ids": [
+    "agencement-et-amenagement-interieur",
+    "commerce-et-distribution"
+  ],
+  "last_verified_at": "2026-07-22T18:57:58.517400+02:00",
+  "location_label": "Saint-Aunès (34130), FR",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-06-22",
+  "required_skills": [
+    "relation client",
+    "vente"
+  ],
+  "sector_labels": [
+    "agencement et amenagement interieur",
+    "commerce et distribution"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrute.leroymerlin.fr",
+  "source_url": "https://recrute.leroymerlin.fr/jobs/829198",
+  "summary": "Poste de Conseillère/Conseiller en vente et en aménagement proposé par Montpellier - Saint-Aunès à Saint-Aunès (34130), FR. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "Conseillère/Conseiller en vente et en aménagement",
+  "verification_status": "active"
+}

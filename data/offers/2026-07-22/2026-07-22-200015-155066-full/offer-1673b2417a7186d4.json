@@ -1,0 +1,54 @@
+{
+  "canonical_offer_id": "canonical-offer-351787371137b3e4",
+  "captured_at": "2026-07-22T20:00:15.182633+02:00",
+  "conditions": {},
+  "contract_type": "stage",
+  "employer": "Betclic Group",
+  "evidence": [
+    {
+      "excerpt": "User Acquisition - International F/M",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "Betclic Group",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-200015-155066-full/betclic-group.breezy.hr/4f9ba7ee80cdddc8f9aa.html",
+    "source_sha256": "973930c677fdf3d5cb460d9f0c63352a059939595d6f064beaed07ff37f19060"
+  },
+  "full_time": true,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-1673b2417a7186d4",
+  "industry_sector_ids": [
+    "numerique-et-services"
+  ],
+  "last_verified_at": "2026-07-22T20:00:15.182633+02:00",
+  "location_label": "Bordeaux, FR",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2025-08-29",
+  "required_skills": [],
+  "sector_labels": [
+    "numerique et services"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "betclic-group.breezy.hr",
+  "source_url": "https://betclic-group.breezy.hr/p/09c7b3d3a1ba01-user-acquisition-international-f-m?source=GoogleJobs",
+  "summary": "Poste de User Acquisition - International F/M proposé par Betclic Group à Bordeaux, FR. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "User Acquisition - International F/M",
+  "verification_status": "active"
+}

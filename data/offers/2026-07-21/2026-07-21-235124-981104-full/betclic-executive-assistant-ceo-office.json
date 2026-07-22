@@ -1,0 +1,46 @@
+{
+  "id": "betclic-executive-assistant-ceo-office-f32da0c6c7c501",
+  "title": "Executive Assistant - CEO Office F/M",
+  "employer": "Betclic Group",
+  "source_url": "https://betclic-group.breezy.hr/p/f32da0c6c7c501-executive-assistant-ceo-office-f-m",
+  "source_site": "betclic-group.breezy.hr",
+  "source_kind": "direct_employer",
+  "verification_status": "active",
+  "verification_note": "Fiche détaillée du portail employeur revérifiée pendant le scan full.",
+  "published_at": null,
+  "captured_at": "2026-07-21T23:58:00+02:00",
+  "last_verified_at": "2026-07-21T23:58:00+02:00",
+  "summary": "Soutenir le CEO et le comité exécutif dans un environnement international : agenda complexe, réunions de gouvernance, suivi des décisions, coordination des parties prenantes, déplacements, événements, factures et documentation. Le rôle exige une forte discrétion, une excellente organisation et une pratique courante de l’anglais.",
+  "location_label": "Bordeaux",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": ["services numériques"],
+  "functional_domains": ["gestion administrative", "gestion et coordination de projets"],
+  "compensation": {},
+  "required_skills": ["assistanat de direction", "coordination", "gestion d’agenda", "anglais courant"],
+  "preferred_skills": ["environnement international", "Google Workspace"],
+  "conditions": {"work_mode": "hybrid"},
+  "prerequisites": [
+    {
+      "id": "experience-executive-assistant",
+      "kind": "prior_role",
+      "description": "Expérience prouvée de 5 à 10 ans comme Executive Assistant ou Senior Administrative Assistant",
+      "mandatory": true,
+      "minimum_years": 5,
+      "profile_status": "not_demonstrated",
+      "profile_evidence_ids": [],
+      "assessment_note": "Aucune expérience validée avec cet intitulé ou un périmètre équivalent auprès d’un dirigeant n’est démontrée.",
+      "evidence": {"locator": "fiche Betclic, WHO ARE WE LOOKING FOR", "excerpt": "You have proven experience of 5 to 10 years as an Executive Assistant or Senior Administrative Assistant."}
+    },
+    {
+      "id": "anglais-courant-betclic",
+      "kind": "language",
+      "description": "Anglais courant",
+      "mandatory": true,
+      "profile_status": "not_demonstrated",
+      "profile_evidence_ids": [],
+      "assessment_note": "Le niveau courant n’est pas démontré dans les connaissances validées.",
+      "evidence": {"locator": "fiche Betclic, WHO ARE WE LOOKING FOR", "excerpt": "You are fluent in English."}
+    }
+  ]
+}

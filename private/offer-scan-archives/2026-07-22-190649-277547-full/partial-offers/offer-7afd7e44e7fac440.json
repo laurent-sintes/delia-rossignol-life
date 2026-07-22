@@ -1,0 +1,58 @@
+{
+  "canonical_offer_id": "canonical-offer-f7bf535a30df5f20",
+  "captured_at": "2026-07-22T19:06:49.303633+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "Caudalie",
+  "evidence": [
+    {
+      "excerpt": "Join us",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Caudalie",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-190649-277547-full/caudalie.career/f7bf535a30df5f206887.html",
+    "source_sha256": "0bdc03da94ca57ca8d1f18673644121818c3a9a6636d4dc9185f5a817f96b02f"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-7afd7e44e7fac440",
+  "industry_sector_ids": [
+    "cosmetique",
+    "bien-etre"
+  ],
+  "last_verified_at": "2026-07-22T19:06:49.303633+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [],
+  "sector_labels": [
+    "cosmetique",
+    "bien etre"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "caudalie.career",
+  "source_url": "https://caudalie.career/home/our-jobs",
+  "summary": "Poste de Join us proposé par Caudalie à Bordeaux. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Join us",
+  "verification_status": "active"
+}

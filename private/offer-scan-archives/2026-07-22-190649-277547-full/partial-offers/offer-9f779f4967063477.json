@@ -1,0 +1,65 @@
+{
+  "canonical_offer_id": "canonical-offer-f29e46201327f931",
+  "captured_at": "2026-07-22T19:06:49.303633+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "Leroy Merlin Bordeaux",
+  "evidence": [
+    {
+      "excerpt": "Importez votre CV et découvrez les offres correspondantes",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Leroy Merlin Bordeaux",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-190649-277547-full/recrute.leroymerlin.fr/f29e46201327f93180e4.html",
+    "source_sha256": "a6877702dd636edc76f14540d095bfe476a792bff99faa0c3839b07b786fe6f9"
+  },
+  "full_time": false,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-9f779f4967063477",
+  "industry_sector_ids": [
+    "agencement-et-amenagement-interieur",
+    "commerce-et-distribution"
+  ],
+  "last_verified_at": "2026-07-22T19:06:49.303633+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [
+    "relation client",
+    "service client",
+    "vente",
+    "commerce",
+    "conseiller de vente",
+    "chef de projet"
+  ],
+  "sector_labels": [
+    "agencement et amenagement interieur",
+    "commerce et distribution"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrute.leroymerlin.fr",
+  "source_url": "https://recrute.leroymerlin.fr/jobs?page=2",
+  "summary": "Poste de Importez votre CV et découvrez les offres correspondantes proposé par Leroy Merlin Bordeaux à Bordeaux. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Importez votre CV et découvrez les offres correspondantes",
+  "verification_status": "active"
+}

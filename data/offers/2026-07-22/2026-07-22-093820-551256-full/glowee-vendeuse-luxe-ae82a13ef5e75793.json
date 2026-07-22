@@ -1,0 +1,42 @@
+{
+  "id": "glowee-vendeuse-luxe-ae82a13ef5e75793",
+  "title": "Vendeuse luxe H/F",
+  "employer": "Glowee",
+  "source_url": "https://fr.indeed.com/viewjob?jk=ae82a13ef5e75793",
+  "source_site": "indeed.com",
+  "published_at": "2026-05-19",
+  "captured_at": "2026-07-22T09:45:53+02:00",
+  "last_verified_at": "2026-07-19T19:00:00+02:00",
+  "summary": "Accueillir et conseiller une clientèle dans un environnement haut de gamme, assurer la présentation des produits, gérer les stocks et mettre en avant les nouveautés.",
+  "location_label": "Bordeaux",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": [
+    "luxe",
+    "commerce et distribution"
+  ],
+  "functional_domains": [
+    "relation client",
+    "vente"
+  ],
+  "required_skills": [
+    "vente luxe",
+    "service client",
+    "stocks",
+    "présentation produits"
+  ],
+  "preferred_skills": [
+    "mode"
+  ],
+  "conditions": {
+    "work_mode": "hybrid"
+  },
+  "compensation": {
+    "minimum": 30000,
+    "maximum": 30000,
+    "currency": "EUR",
+    "period": "year"
+  },
+  "verification_status": "pending",
+  "verification_note": "Page exacte non confirmée pendant le scan full du 22 juillet 2026 ; offre conservée pour traçabilité et revérification."
+}

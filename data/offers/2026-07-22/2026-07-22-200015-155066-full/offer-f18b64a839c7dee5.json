@@ -1,0 +1,90 @@
+{
+  "canonical_offer_id": "recrutement.bpce.fr:CCOOP07036",
+  "captured_at": "2026-07-22T20:00:15.182633+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "Groupe Crédit Coopératif",
+  "evidence": [
+    {
+      "excerpt": "Chargé d'Affaires Entreprises F/H - CDI - BTP Banque Bordeaux",
+      "field": "title",
+      "locator": "BPCE API item.title"
+    },
+    {
+      "excerpt": "Bruges",
+      "field": "location_label",
+      "locator": "BPCE API item.localisation"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [],
+    "extractor_version": 1,
+    "method": "deterministic-api",
+    "review_method": "LLM semantic review of archived employer evidence",
+    "review_status": "completed",
+    "reviewed_at": "2026-07-22T20:20:00+02:00",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-200015-155066-full/recrutement.bpce.fr/eb3f5b794413af93e1b6.bin",
+    "source_sha256": "45643c66589a075f782a5265e4a247fd52457e6e08a8f1569c3aa8b8f0219296"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-f18b64a839c7dee5",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T20:00:15.182633+02:00",
+  "location_label": "Bruges",
+  "preferred_skills": [],
+  "prerequisites": [
+    {
+      "assessment_note": "Le diplôme complet de Délia n’est pas spécialisé en banque, finance ou gestion.",
+      "description": "Bac+4/5 Banque, Finance ou Gestion",
+      "evidence": {
+        "excerpt": "Bac +4/5 (Banque, Finance, Gestion…)",
+        "locator": "BPCE API item.description — Profil et compétences requises"
+      },
+      "id": "bac45-banque-finance",
+      "kind": "qualification",
+      "mandatory": true,
+      "profile_evidence_ids": [],
+      "profile_status": "not_demonstrated"
+    },
+    {
+      "assessment_note": "L’absence validée d’expérience banque-assurance rend ce prérequis non satisfait.",
+      "description": "Trois à cinq ans auprès d’une clientèle entreprises similaire",
+      "evidence": {
+        "excerpt": "expérience confirmée de minimum 3/5 ans auprès d’une clientèle similaire",
+        "locator": "BPCE API item.description — Profil et compétences requises"
+      },
+      "id": "experience-clientele-entreprises",
+      "industry_sector_ids": [
+        "banque-et-assurance"
+      ],
+      "kind": "sector_experience",
+      "mandatory": true,
+      "minimum_years": 3,
+      "profile_evidence_ids": [],
+      "profile_status": "not_demonstrated"
+    }
+  ],
+  "published_at": "2026-07-08",
+  "required_skills": [
+    "développement commercial",
+    "gestion de portefeuille",
+    "finance",
+    "gestion du risque"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrutement.bpce.fr",
+  "source_url": "https://recrutement.bpce.fr/job/charge-daffaires-entreprises-f-h-cdi-btp-banque-bordeaux-2",
+  "summary": "Développement et gestion d’un portefeuille d’entreprises du BTP, montage de financements et maîtrise des risques bancaires.",
+  "title": "Chargé d'Affaires Entreprises F/H - CDI - BTP Banque Bordeaux",
+  "verification_status": "active"
+}

@@ -1,0 +1,56 @@
+{
+  "canonical_offer_id": "canonical-offer-5ae7b5b921cf0a46",
+  "captured_at": "2026-07-22T19:46:34.164692+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "Fédération Hospitalière de France Emploi",
+  "evidence": [
+    {
+      "excerpt": "Les offres d'emploi : Soignant / médico technique",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Fédération Hospitalière de France Emploi",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-194634-136072-full/emploi.fhf.fr/87dc28b0cbfebf232e7a.html",
+    "source_sha256": "de07560913bdedb7622b2c4f5f4103457d1b6d4d7a595092ba0d636115444d7f"
+  },
+  "full_time": false,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-b97ed48fd5a911de",
+  "industry_sector_ids": [
+    "sante-et-services-publics"
+  ],
+  "last_verified_at": "2026-07-22T19:46:34.164692+02:00",
+  "location_label": "Gironde",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [],
+  "sector_labels": [
+    "sante et services publics"
+  ],
+  "source_kind": "specialized",
+  "source_site": "emploi.fhf.fr",
+  "source_url": "https://emploi.fhf.fr/emploi/search?type=SOI",
+  "summary": "Poste de Les offres d'emploi : Soignant / médico technique proposé par Fédération Hospitalière de France Emploi à Gironde. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Les offres d'emploi : Soignant / médico technique",
+  "verification_status": "active"
+}

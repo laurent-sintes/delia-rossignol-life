@@ -1,0 +1,60 @@
+{
+  "canonical_offer_id": "canonical-offer-5e6a479e417a8bea",
+  "captured_at": "2026-07-22T19:28:05.695914+02:00",
+  "compensation": {
+    "currency": "EUR",
+    "maximum": 12000,
+    "minimum": 10000,
+    "period": "year"
+  },
+  "conditions": {},
+  "contract_type": "stage",
+  "employer": "Betclic Group",
+  "evidence": [
+    {
+      "excerpt": "Data Protection Internship F/M",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "Betclic Group",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-192805-666260-full/betclic-group.breezy.hr/5b82ba222880635a38db.html",
+    "source_sha256": "d7f6a7e018c0895509ea3f553fbd86db90328a930fa3a4a2a88b3e3ad646a0c1"
+  },
+  "full_time": true,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-ea377980b80e5103",
+  "industry_sector_ids": [
+    "numerique-et-services"
+  ],
+  "last_verified_at": "2026-07-22T19:28:05.695914+02:00",
+  "location_label": "Bordeaux, FR",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-07-21",
+  "required_skills": [],
+  "sector_labels": [
+    "numerique et services"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "betclic-group.breezy.hr",
+  "source_url": "https://betclic-group.breezy.hr/p/ffe71350755801-data-protection-internship-f-m?source=GoogleJobs",
+  "summary": "Poste de Data Protection Internship F/M proposé par Betclic Group à Bordeaux, FR. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "Data Protection Internship F/M",
+  "verification_status": "active"
+}

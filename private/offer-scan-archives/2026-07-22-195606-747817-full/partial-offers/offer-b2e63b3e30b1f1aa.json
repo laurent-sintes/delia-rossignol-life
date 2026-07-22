@@ -1,0 +1,57 @@
+{
+  "canonical_offer_id": "recrutement.bpce.fr:BPCE_ASS02077",
+  "captured_at": "2026-07-22T19:56:06.775708+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "BPCE Assurances IARD",
+  "evidence": [
+    {
+      "excerpt": "Chargé de conformité protection des données personnelles (F/H)",
+      "field": "title",
+      "locator": "BPCE API item.title"
+    },
+    {
+      "excerpt": "Mérignac",
+      "field": "location_label",
+      "locator": "BPCE API item.localisation"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-api",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-195606-747817-full/recrutement.bpce.fr/eb3f5b794413af93e1b6.bin",
+    "source_sha256": "45643c66589a075f782a5265e4a247fd52457e6e08a8f1569c3aa8b8f0219296"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-b2e63b3e30b1f1aa",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T19:56:06.775708+02:00",
+  "location_label": "Mérignac",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-07-14",
+  "required_skills": [
+    "commerce"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrutement.bpce.fr",
+  "source_url": "https://recrutement.bpce.fr/job/charge-de-conformite-protection-des-donnees-personnelles-f-h",
+  "summary": "Poste de Chargé de conformité protection des données personnelles (F/H) proposé par BPCE Assurances IARD à Mérignac. Revue sémantique requise avant recommandation.",
+  "title": "Chargé de conformité protection des données personnelles (F/H)",
+  "verification_status": "active"
+}

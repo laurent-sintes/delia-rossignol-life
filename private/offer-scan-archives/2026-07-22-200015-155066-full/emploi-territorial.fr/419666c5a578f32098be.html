@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="fr">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>SUNI Chef-fe de programme SI MOA F/H - Ville de Paris | emploi-territorial.fr</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="og:title" content="www.emploi-territorial.fr">
+    <meta property="og:url" content="https://www.emploi-territorial.fr/">
+    <meta property="og:description" content="Le portail de l'emploi dans la fonction publique territoriale : les employeurs territoriaux recrutent !">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/port/img/logo/logo-emploi-territorial_ft.png?v=5.3.1.1">
+    <meta property="og:image:width" content="300">
+    <meta property="og:image:height" content="115">
+    <meta property="og:locale" content="fr_FR">    <link rel="apple-touch-icon" sizes="180x180" href="/port/img/logo/apple-touch-icon.png?v=5.3.1.1">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/port/img/logo/android-chrome-512x512.png?v=5.3.1.1">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/port/img/logo/android-chrome-192x192.png?v=5.3.1.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/port/img/logo/favicon-32x32.png?v=5.3.1.1">
+    <link rel="icon" type="image/png" sizes="16x16" href="/port/img/logo/favicon-16x16.png?v=5.3.1.1">
+        <script nonce="99nyFVfLTvwqli7ninLJBPAuNyhb2hb/v7yNCPjyHV4=" src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
+    <script nonce="99nyFVfLTvwqli7ninLJBPAuNyhb2hb/v7yNCPjyHV4=" src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <link nonce="99nyFVfLTvwqli7ninLJBPAuNyhb2hb/v7yNCPjyHV4=" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script nonce="99nyFVfLTvwqli7ninLJBPAuNyhb2hb/v7yNCPjyHV4=" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js" integrity="sha384-HCjW0//bc6Gu9bS3OISjenLhzVqjRipLVVj9LZtzKu+FYXXOZVCN7WDv2TYxCfmo" crossorigin="anonymous"></script>
+    <link nonce="99nyFVfLTvwqli7ninLJBPAuNyhb2hb/v7yNCPjyHV4=" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" integrity="sha384-KZO2FRYNmIHerhfYMjCIUaJeGBRXP7CN24SiNSG+wdDzgwvxWbl16wMVtWiJTcMt" crossorigin="anonymous">
+    <link nonce="99nyFVfLTvwqli7ninLJBPAuNyhb2hb/v7yNCPjyHV4=" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H" crossorigin="anonymous"/>
+    <script nonce="99nyFVfLTvwqli7ninLJBPAuNyhb2hb/v7yNCPjyHV4=" src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/vendor/fonts/icomoon/icomoon.css?v=5.3.1.1">
+    <link rel="stylesheet" href="/port/style/style.css?v=5.3.1.1">
+    <link rel="stylesheet" type="text/css" href="/port/style/print.css?v=5.3.1.1" media="print">
+    <script nonce="99nyFVfLTvwqli7ninLJBPAuNyhb2hb/v7yNCPjyHV4=" src="/port/js/functions.js?v=5.3.1.1"></script>
+    </head>
+<body class="prod">
+        <header id="HeaderCommun" role="banner">
+            <div id="Niveau0"><div class="container-fluid set-background-gray pt-2 d-none d-lg-block ">
+    <nav aria-labelledby="SkipLink"><a href="#MainContent" class="sr-only sr-only-focusable" id="SkipLink">Aller au contenu</a></nav>
+    <!-- Desktop -->
+    <div class="container">
+        <a href="https://www.concours-territorial.fr" class="text-lowercase concours d-inline-block set-button-co-emp set-header-top-button-concours set-w-190px set-border-dark" data-tooltip="Inscrivez-vous aux concours de la Fonction Publique Territoriale sur concours-territorial.fr">
+            <span class="icon icon-charte-pin pr-1" aria-hidden="true"></span> concours
+        </a>
+        <a href="/" class="text-lowercase emploi d-inline-block set-button-co-emp set-w-190px set-border-dark set-header-top-button-active" data-tooltip="Trouvez un emploi dans la Fonction Publique Territoriale sur emploi-territorial.fr">
+            <span class="icon-charte-pin pr-1" aria-hidden="true"></span> emploi
+        </a>
+            </div>
+    <!-- Tablet / Mobile -->
+</div>
+<div class="d-lg-none row no-gutters">
+    <div class="col-4">
+        <a href="https://www.concours-territorial.fr" class="text-lowercase d-block set-header-top-button-concours set-border-dark w-100" data-tooltip="Inscrivez-vous aux concours de la Fonction Publique Territoriale sur concours-territorial.fr">
+            <span class="icon icon-charte-pin pr-1" aria-hidden="true"></span> concours
+        </a>
+    </div>
+    <div class="col-4">
+        <a href="/" class="text-lowercase d-block  set-border-dark w-100 set-header-top-button-emploi" data-tooltip="Trouvez un emploi dans la Fonction Publique Territoriale sur emploi-territorial.fr">
+            <span class="icon-charte-pin pr-1" aria-hidden="true"></span> emploi
+        </a>
+    </div>
+    </div>
+</div>
+                            <div class="container-fluid set-background-dark-blue" id="Niveau1">
+    <div class="container">
+        <div class="row pt-2 pb-2 pt-sm-3 pb-sm-3 align-items-lg-end" role="navigation">
+            <div class="col-4 set-bloc-header-logo pr-0 pl-0 pr-sm-3 pl-sm-3">
+                <h1 class="set-header-logo-h1">
+                    <a href="/" title="Emploi-Territorial.fr | aller à l'accueil"><img src="/port/img/logo/logo_emploi.png?v=5.3.1.1" alt="Emploi-Territorial.fr | aller à l'accueil" id="set-header-logo"></a>
+                </h1>
+            </div>
+            <div class="col-8 text-right set-header-menu pr-0 pl-0">
+                                    <a href="/panier/" class="set-header-menuicon animation-rotate rounded-circle" data-tooltip="Consultez votre sélection d'offres d'emplois">
+                        <span class="icon-charte-favori-default-2" aria-hidden="true"></span>
+                        <span class="sr-only">Favoris</span>
+                    </a>
+                    <a href="/faq" class="ml-0 ml-md-2 ml-lg-2 ml-xl-2 set-header-menuicon animation-zoom rounded-circle" data-tooltip="Questions / réponses sur l'emploi territorial">
+                        <span class="icon-help" aria-hidden="true"></span>
+                        <span class="sr-only">Aide</span>
+                    </a>
+                    <span class="d-lg-none">
+                        <a href="/demandeur/login" class="ml-0 ml-md-2 ml-lg-2 ml-xl-2 rounded-circle set-header-menuicon set-color-white set-button set-background-green set-transition-bg" data-tooltip="Connectez-vous à votre compte personnel">
+                            <span class="icon-charte-id" aria-hidden="true"></span>
+                            <span class="sr-only">Mon espace demandeur</span>
+                        </a>
+                    </span>
+                    <span class="d-lg-none">
+                        <a href="https://www.emploi-territorial.fr/col" class="ml-0 ml-md-2 ml-lg-2 ml-xl-2 rounded-circle set-header-menuicon set-color-white set-button set-background-green set-transition-bg" data-tooltip="Se connecter au compte de votre collectivité">
+                            <span class="icon-charte-lock"></span>
+                            <span class="sr-only">Mon espace employeur</span>
+                        </a>
+                    </span>
+                    <a href="/demandeur/login" class="ml-0 ml-md-2 ml-lg-2 ml-xl-2 d-none d-lg-inline rounded-pill text-decoration-none mx-auto set-button set-background-green"><span class="icon-charte-id pr-1"></span> mon espace demandeur</a>
+                    <a href="https://www.emploi-territorial.fr/col" class="ml-0 ml-md-2 ml-lg-2 ml-xl-2 d-none d-lg-inline rounded-pill text-decoration-none mx-auto set-button set-background-green"><span class="icon-charte-lock pr-1"></span> mon espace employeur</a>
+                            </div>
+        </div>
+    </div>
+</div>                    </header>
+                    <header id="HeaderLocal">
+    <div class="container-fluid set-background-gray ">
+        <div class="container" id="breadcrumb">
+            <div class="row">
+                <div class="mt-sm-4 col-sm-2 col-md-4 col-xl-3"></div>
+                <div class="col-12 col-sm-10 col-md-8 col-xl-9 mt-2">
+                    <nav aria-label="Fil d'Ariane">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+                                                                                                                                        <li class="breadcrumb-item"><a href="/emploi-mobilite/">Offres d&#039;emploi</a></li>
+                                                                                                    <li class="breadcrumb-item active" aria-current="page">SUNI Chef-fe de programme SI MOA F/H - Ville de Paris</li>
+                                                    </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>                <main class="container" id="MainContent">
+            
+            <div class="set-background-light-gray">
+    <div class="mx-auto py-2">
+                    <div class="row mb-2 mb-lg-0">
+                <div class="col-12 col-md">
+                    <a rel="search" href="/emploi-mobilite/#O075260722002103" id="backButton" class="btn-icon font-weight-bold text-decoration-none set-color-dark-blue">
+                        <span class="icon icon-arrow-left pl-2 set-color-green set-font-size-30px set-link-green-hover"></span>
+                        <span class="set-align-super">Retour recherche</span>
+                    </a>
+                </div>
+                <div class="col col-lg-5 text-left my-2"></div>
+                <div class="col col-lg-5 text-right my-2"></div>
+            </div>
+            </div>
+    <div class="row px-3">
+        <h2 class="mx-auto text-center set-line-emploi set-font-size-1-5rem set-font-weight-bold">SUNI Chef-fe de programme SI MOA F/H</h2>
+    </div>
+    <div class="alert alert-success mx-auto set-d-none" id="success"></div>
+        
+    <div class="form-row mt-2 mt-lg-0">
+        <div class="col-12 col-lg-6 pl-2 mb-2 text-left">
+            <div class="row px-3">Offre n° <span class="pl-1 set-color-green">O075260722002103</span></div>
+            <div class="row px-3">Publiée le <span class="pl-1 set-color-green">22/07/2026</span></div>
+        </div>
+
+                    <ul class="col-12 col-lg-6 text-right pr-2 list-unstyled list-inline" id="BoutonsOffre">
+                                <li class="list-inline-item">
+                    <a href="/exportoffres/pdf/o075260722002103-suni-chef-fe-programme-si-moa-h" class="btn btn-icon py-0 px-1 set-color-dark-blue" data-tooltip="Exporter en PDF">
+                    <span class="icon icon-file-pdf-o set-font-size-24px set-link-green-hover font-weight-bold" aria-hidden="true"></span>
+                    <span class="sr-only">Exporter en PDF</span>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <button type="button" class="btn btn-icon px-1 py-0 set-font-size-24px set-link-green-hover js-print" data-tooltip="Imprimer">
+                        <span class="icon-printer" aria-hidden="true"></span>
+                        <span class="sr-only">Imprimer cette offre</span>
+                    </button>
+                </li>
+                <li class="list-inline-item">
+                    <button class="btn btn-icon px-1 py-0 set-color-dark-blue" type="button" id="lien_panier" data-tooltip="Ajouter au panier des offres" data-numOf="O075260722002103">
+                        <span class="set-font-size-24px set-link-green-hover icon-charte-favori-default-2" id="img_panier" aria-hidden="true"></span>
+                        <span class="sr-only">Ajouter au panier des offres</span>
+                    </button></li>
+                                                <li class="list-inline-item"><a href="http://www.facebook.com/share.php?u=https://www.emploi-territorial.fr/details_offre/o075260722002103-suni-chef-fe-programme-si-moa-h" target="rezosocio" class="btn btn-icon p-0 set-color-dark-blue" data-tooltip="Partager sur Facebook">
+                    <span class="icon-facebook set-font-size-24px set-link-green-hover" aria-hidden="true"></span>
+                    <span class="sr-only">Partager sur Facebook</span>
+                    </a></li>
+                <li class="list-inline-item"><a href="http://www.linkedin.com/shareArticle?mini=true&url=https://www.emploi-territorial.fr/details_offre/o075260722002103-suni-chef-fe-programme-si-moa-h" target="rezosocio" class="btn btn-icon px-1 py-0 set-color-dark-blue" data-tooltip="Partager sur LinkedIn">
+                    <span class="icon-linkedin set-font-size-24px set-link-green-hover" aria-hidden="true"></span>
+                    <span class="sr-only">Partager sur LinkedIn</span>
+                    </a>
+                </li>
+                <li class="list-inline-item"><a href="http://twitter.com/intent/tweet?url=https://www.emploi-territorial.fr/details_offre/o075260722002103-suni-chef-fe-programme-si-moa-h" target="rezosocio" class="btn btn-icon px-1 py-0 set-color-dark-blue" data-tooltip="Partager sur Twitter">
+                    <span class="icon-twitter set-font-size-24px set-link-green-hover" aria-hidden="true"></span>
+                    <span class="sr-only">Partager sur Twitter</span>
+                    </a>
+                </li>
+            </ul>
+            </div>
+</div>
+    <div class="set-background-light-gray">
+    <div class="mx-auto">
+        <div class="row justify-content-between">
+            <div class="col-xl-6 my-2" id="SyntheseOffre">
+                <div class="p-3 set-background-white border-radius">
+                    <h3 class="offre-category text-center set-line-emploi">Synthèse de l'offre</h3>
+                    <div class="offre-item row p-2">
+                        <div class="offre-item-label col-4 font-weight-bold">Employeur
+                                                    </div>
+                        <div class="offre-item-value col-8 set-font-size-1-2em">
+                                                            <strong>
+                                    <a href="/emploi-mobilite/?search-col=101619" title="Voir toutes les offres de cette collectivité"
+                                       data-tooltip="Voir toutes les offres de cette collectivité">Ville de Paris</a>
+                                </strong>
+                                                    </div>
+                    </div>
+                                                                                    <div class="offre-item row p-2">
+                            <div class="offre-item-label col-12 col-sm-4 font-weight-bold">Lieu de travail</div>
+                            <div class="offre-item-value col-12 col-sm-8">
+                                                                    <span class="icon-map-pin mr-2 set-color-grey"></span>
+                                        75012 PARIS, Paris                                                                                                                                            </div>
+                        </div>
+                                        <div class="offre-item row p-2">
+                        <div class="offre-item-label col-12 col-sm-4 font-weight-bold">Poste à pourvoir le</div>
+                        <div class="offre-item-value col-12 col-sm-8">
+                                                            Dès que possible
+                                                    </div>
+                    </div>
+                                                                <div class="offre-item row p-2">
+                            <div class="offre-item-label col-12 col-sm-4 font-weight-bold">Type d'emploi</div>
+                            <div class="offre-item-value col-12 col-sm-8">Emploi permanent - vacance d&#039;emploi</div>
+                        </div>
+                                                                                                </div>
+            </div>
+                        <div class="col-xl-6 my-2" id="LocalisationOffre">
+                <div class="row h-100 mx-0 p-3 set-background-white border-radius">
+                    <h3 class="offre-category text-center w-100 set-line-emploi">Localisation du lieu de travail</h3>
+                        <div id="map"><!-- Ici s'affichera la carte --></div>
+    <script type="text/javascript" nonce="99nyFVfLTvwqli7ninLJBPAuNyhb2hb/v7yNCPjyHV4=">
+                let lat = '48.8564';
+        let lon = '2.3525';
+        let macarte = L.map('map').setView([lat, lon], 12);
+        let icon = { icon: L.icon({ iconUrl: '/port/img/logo/favicon-32x32.png', iconSize: [48, 48], iconAnchor: [24, 48], popupAnchor: [0, -38] }) };
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+            minZoom: 1,
+            maxZoom: 20
+        }).addTo(macarte);
+        macarte.attributionControl.setPrefix('');
+                let contour = {"type":"Polygon","coordinates":[[[2.351984,48.901485],[2.355239,48.901548],[2.36562,48.901758],[2.367964,48.90181],[2.369103,48.901823],[2.370302,48.901848],[2.372017,48.901885],[2.383566,48.902126],[2.38453,48.902148],[2.385582,48.901931],[2.388185,48.901382],[2.389332,48.901161],[2.390649,48.900927],[2.390837,48.900907],[2.391772,48.900383],[2.392379,48.900033],[2.39279,48.899812],[2.393434,48.899438],[2.395518,48.898265],[2.395613,48.898166],[2.396919,48.895861],[2.397609,48.894722],[2.397668,48.894606],[2.397882,48.893873],[2.397999,48.893529],[2.398236,48.89264],[2.398903,48.889681],[2.398942,48.889532],[2.399136,48.888532],[2.399252,48.885362],[2.400107,48.883821],[2.400582,48.883411],[2.401507,48.882631],[2.404576,48.881269],[2.405612,48.881007],[2.408068,48.88051],[2.40936,48.880256],[2.410682,48.878593],[2.41082,48.878436],[2.412453,48.876443],[2.413431,48.87314],[2.413646,48.872438],[2.41372,48.871558],[2.413812,48.870744],[2.413956,48.869216],[2.413961,48.867513],[2.414012,48.866486],[2.413979,48.865384],[2.413976,48.864978],[2.413951,48.864712],[2.414137,48.863373],[2.414266,48.862099],[2.41437,48.860649],[2.41442,48.860242],[2.414702,48.858704],[2.414947,48.857272],[2.415121,48.856157],[2.415286,48.855178],[2.415476,48.854165],[2.415986,48.85136],[2.416326,48.849371],[2.416341,48.849234],[2.41635,48.8487],[2.416083,48.847258],[2.415971,48.846623],[2.415768,48.845445],[2.415664,48.844996],[2.415299,48.84385],[2.41485,48.842379],[2.414248,48.840488],[2.414047,48.83976],[2.413577,48.838278],[2.412852,48.836217],[2.412246,48.834539],[2.411472,48.833929],[2.412587,48.833779],[2.413505,48.833723],[2.413921,48.833712],[2.414633,48.833728],[2.41547,48.833794],[2.415968,48.833864],[2.416608,48.833997],[2.417338,48.834189],[2.41935,48.834832],[2.421016,48.835398],[2.422139,48.835798],[2.421801,48.836348],[2.421586,48.836756],[2.421447,48.837219],[2.421254,48.838161],[2.421062,48.838891],[2.42093,48.839329],[2.420719,48.839806],[2.420475,48.840314],[2.420304,48.840564],[2.420133,48.840753],[2.419776,48.841082],[2.419539,48.841449],[2.419394,48.841997],[2.419357,48.842498],[2.419469,48.842692],[2.419735,48.84294],[2.419849,48.843102],[2.41986,48.843456],[2.420115,48.843601],[2.421848,48.844437],[2.422225,48.84423],[2.422435,48.844058],[2.422653,48.843837],[2.422966,48.843417],[2.423283,48.842912],[2.423492,48.842656],[2.423948,48.842196],[2.424347,48.84195],[2.424535,48.841886],[2.42492,48.841808],[2.425819,48.841715],[2.427575,48.841571],[2.42813,48.841528],[2.43064,48.841299],[2.431533,48.841228],[2.432249,48.841161],[2.432916,48.841114],[2.433545,48.841046],[2.43367,48.841198],[2.435777,48.84102],[2.437184,48.840893],[2.437282,48.841326],[2.437958,48.844664],[2.439489,48.844521],[2.44052,48.84444],[2.440616,48.844892],[2.440801,48.844879],[2.440864,48.845252],[2.440681,48.845247],[2.440758,48.845964],[2.441832,48.845916],[2.444136,48.845878],[2.444921,48.845869],[2.446646,48.845802],[2.446497,48.844968],[2.446969,48.84494],[2.447853,48.844863],[2.448654,48.844781],[2.449527,48.844677],[2.450814,48.844502],[2.451866,48.844329],[2.452621,48.844217],[2.453503,48.844101],[2.455169,48.843919],[2.456779,48.843708],[2.458615,48.843428],[2.459873,48.843181],[2.461008,48.842938],[2.461794,48.842731],[2.462446,48.842532],[2.462848,48.84239],[2.463741,48.842023],[2.464181,48.841809],[2.464903,48.841406],[2.465411,48.841066],[2.465699,48.840836],[2.466164,48.840423],[2.466639,48.839925],[2.466929,48.839596],[2.467319,48.839099],[2.467787,48.838577],[2.468076,48.838303],[2.468547,48.837902],[2.469236,48.837289],[2.469473,48.837048],[2.469662,48.836788],[2.469803,48.836547],[2.469851,48.836399],[2.469834,48.835798],[2.469724,48.835195],[2.469483,48.834547],[2.469197,48.83412],[2.468891,48.833797],[2.468485,48.833507],[2.467882,48.833204],[2.467329,48.832952],[2.466939,48.832749],[2.466569,48.832521],[2.466273,48.832296],[2.465823,48.83187],[2.465575,48.831555],[2.465584,48.831471],[2.465426,48.83132],[2.465273,48.831018],[2.465077,48.830568],[2.464806,48.829684],[2.464702,48.829277],[2.46465,48.828956],[2.464608,48.828535],[2.464662,48.827623],[2.465095,48.827541],[2.465232,48.827667],[2.465434,48.827567],[2.466178,48.827328],[2.465731,48.826226],[2.465503,48.825586],[2.46532,48.824979],[2.465189,48.824957],[2.465299,48.824705],[2.465044,48.824084],[2.464026,48.822303],[2.463725,48.821678],[2.463403,48.821149],[2.462867,48.820178],[2.462697,48.819369],[2.462529,48.819246],[2.462696,48.81906],[2.461205,48.818355],[2.46053,48.818027],[2.459541,48.817571],[2.459115,48.817365],[2.459414,48.816848],[2.459119,48.816997],[2.458717,48.817034],[2.458054,48.81702],[2.455919,48.817082],[2.455102,48.817076],[2.453452,48.817149],[2.452526,48.817317],[2.451315,48.817619],[2.450558,48.817773],[2.449671,48.817893],[2.448935,48.81793],[2.447786,48.817966],[2.446618,48.81793],[2.445958,48.817928],[2.444713,48.817897],[2.444181,48.817875],[2.443731,48.817892],[2.442326,48.817904],[2.441855,48.817944],[2.441012,48.818093],[2.440137,48.818259],[2.439854,48.818291],[2.4394,48.81828],[2.437329,48.818177],[2.437442,48.819111],[2.437345,48.819187],[2.436925,48.819365],[2.436332,48.819543],[2.436028,48.819593],[2.434902,48.819669],[2.434655,48.819557],[2.434144,48.819216],[2.434262,48.819911],[2.434288,48.820158],[2.434108,48.820297],[2.433094,48.820991],[2.43248,48.821426],[2.43289,48.821693],[2.432634,48.821901],[2.432195,48.82162],[2.430371,48.822877],[2.430628,48.823157],[2.429861,48.823432],[2.429227,48.823622],[2.428768,48.823733],[2.427958,48.8239],[2.427421,48.823987],[2.426575,48.824097],[2.425481,48.824176],[2.424654,48.824191],[2.42345,48.824158],[2.422878,48.82413],[2.421826,48.824059],[2.420678,48.824048],[2.419963,48.82408],[2.419387,48.824156],[2.418603,48.824312],[2.417763,48.824531],[2.417131,48.824649],[2.416513,48.824736],[2.415976,48.824777],[2.415083,48.824782],[2.413785,48.824723],[2.413111,48.824718],[2.412623,48.824737],[2.411757,48.824803],[2.410907,48.82494],[2.41027,48.825087],[2.409955,48.825183],[2.409175,48.825502],[2.408675,48.825767],[2.408085,48.826112],[2.407589,48.82643],[2.40655,48.827191],[2.405816,48.827797],[2.405376,48.828134],[2.404994,48.828403],[2.403814,48.82906],[2.403551,48.829175],[2.402871,48.829415],[2.402237,48.82959],[2.400679,48.829095],[2.399775,48.828791],[2.399205,48.828626],[2.397894,48.828329],[2.396843,48.828054],[2.395707,48.827727],[2.395179,48.827645],[2.39434,48.827539],[2.393993,48.827401],[2.392762,48.826855],[2.391022,48.826117],[2.390072,48.825692],[2.389445,48.825345],[2.3888,48.825106],[2.387894,48.824805],[2.386941,48.824463],[2.385226,48.823729],[2.383142,48.82299],[2.381524,48.822411],[2.380767,48.821701],[2.379478,48.821273],[2.379083,48.821158],[2.377884,48.82078],[2.376526,48.820319],[2.376077,48.820156],[2.375597,48.82001],[2.374589,48.819681],[2.373978,48.819506],[2.373705,48.819413],[2.372608,48.819074],[2.371497,48.818702],[2.370643,48.818433],[2.369484,48.81808],[2.367102,48.817301],[2.365641,48.816849],[2.365029,48.816671],[2.364204,48.816398],[2.363329,48.816148],[2.360158,48.816057],[2.356895,48.815972],[2.356232,48.815943],[2.355852,48.815923],[2.354735,48.816813],[2.353049,48.818034],[2.352392,48.818551],[2.351254,48.817962],[2.350489,48.817614],[2.34903,48.816964],[2.348763,48.816855],[2.347178,48.816102],[2.34692,48.816018],[2.346633,48.815986],[2.346371,48.815994],[2.345544,48.816078],[2.345191,48.816092],[2.344755,48.816073],[2.344356,48.816016],[2.344464,48.815611],[2.344448,48.815562],[2.343903,48.815767],[2.343157,48.816045],[2.342877,48.816116],[2.342186,48.81625],[2.341684,48.81633],[2.340512,48.816372],[2.339543,48.816436],[2.338007,48.816515],[2.335581,48.816655],[2.333711,48.816771],[2.331898,48.817011],[2.332461,48.818247],[2.330414,48.818704],[2.325562,48.819774],[2.321661,48.820629],[2.320597,48.820867],[2.314146,48.822291],[2.306959,48.823868],[2.303185,48.824727],[2.301866,48.825002],[2.301315,48.825126],[2.300177,48.825375],[2.292192,48.827142],[2.290235,48.827989],[2.289408,48.828334],[2.286694,48.829452],[2.284719,48.830291],[2.283586,48.830796],[2.282671,48.831153],[2.279945,48.832141],[2.279052,48.83249],[2.278827,48.832293],[2.276297,48.830232],[2.275304,48.829435],[2.275276,48.829446],[2.272928,48.828039],[2.272793,48.82792],[2.267826,48.827836],[2.267626,48.827969],[2.267339,48.831532],[2.269645,48.832857],[2.269931,48.833011],[2.268102,48.834428],[2.267789,48.834585],[2.267475,48.834593],[2.262792,48.833923],[2.261492,48.83407],[2.258503,48.834419],[2.256995,48.834601],[2.256538,48.834643],[2.255144,48.83481],[2.254831,48.835184],[2.253547,48.836676],[2.25239,48.838036],[2.252011,48.838493],[2.251915,48.838641],[2.251709,48.838822],[2.251309,48.84206],[2.251216,48.84289],[2.251735,48.843974],[2.251909,48.844291],[2.252347,48.845191],[2.252478,48.845486],[2.250767,48.845531],[2.250516,48.845555],[2.249867,48.84573],[2.245935,48.846745],[2.245515,48.846856],[2.243235,48.847431],[2.242362,48.847658],[2.241761,48.848135],[2.241516,48.848408],[2.2405,48.849316],[2.240184,48.849571],[2.23977,48.849832],[2.23918,48.850042],[2.238966,48.850094],[2.237379,48.850435],[2.235663,48.850818],[2.233576,48.851304],[2.233194,48.85138],[2.232297,48.851587],[2.231537,48.85174],[2.230011,48.852065],[2.229228,48.852224],[2.226594,48.852812],[2.226233,48.852962],[2.225912,48.853035],[2.224219,48.853517],[2.224269,48.855088],[2.224315,48.855696],[2.224407,48.856154],[2.224518,48.856538],[2.22532,48.858516],[2.22567,48.859405],[2.225968,48.860015],[2.226992,48.862],[2.227181,48.862385],[2.227361,48.862829],[2.227749,48.863844],[2.228139,48.864922],[2.228377,48.86538],[2.229797,48.867072],[2.230181,48.867504],[2.230659,48.86808],[2.231376,48.868728],[2.231736,48.869069],[2.232175,48.869285],[2.232868,48.869585],[2.233702,48.869898],[2.235576,48.870523],[2.236657,48.870821],[2.237436,48.871022],[2.238434,48.871311],[2.239593,48.871705],[2.24035,48.872033],[2.240945,48.872342],[2.241237,48.87251],[2.241856,48.872901],[2.242723,48.873543],[2.243269,48.874017],[2.243948,48.874712],[2.245157,48.875904],[2.245704,48.876459],[2.24625,48.876228],[2.246533,48.876142],[2.254817,48.874081],[2.25541,48.874264],[2.258467,48.880387],[2.258861,48.880333],[2.264611,48.879622],[2.277487,48.877968],[2.27947,48.878532],[2.279949,48.878573],[2.280536,48.881107],[2.280632,48.8816],[2.280897,48.882792],[2.281014,48.882971],[2.284538,48.885574],[2.28446,48.885639],[2.285642,48.886555],[2.290529,48.888956],[2.291148,48.889302],[2.291634,48.889456],[2.292941,48.889619],[2.294041,48.889744],[2.295013,48.889875],[2.295475,48.890096],[2.297327,48.891054],[2.29811,48.891444],[2.298628,48.891717],[2.300588,48.892629],[2.301836,48.89324],[2.303319,48.893934],[2.303774,48.894154],[2.305715,48.89509],[2.307687,48.89601],[2.310673,48.897131],[2.312319,48.897725],[2.312451,48.897782],[2.31852,48.899638],[2.319887,48.90046],[2.320434,48.900776],[2.322073,48.900828],[2.322174,48.900794],[2.32327,48.900813],[2.325836,48.900954],[2.326534,48.900977],[2.330147,48.901044],[2.331996,48.901078],[2.337938,48.901208],[2.339771,48.901245],[2.344985,48.901345],[2.351984,48.901485]]]};
+        if (contour.type === 'MultiPolygon') {
+            contour.coordinates.forEach((pg) => { pg.forEach((coords) => {
+                L.polygon([coords.map((x) => x.reverse())]).addTo(macarte);
+            })});
+        } else {
+            contour.coordinates.forEach((coords) => {
+                L.polygon([coords.map((x) => x.reverse())]).addTo(macarte);
+            });
+        }
+            </script>
+                </div>
+            </div>
+                    </div>
+    </div>
+</div>
+<div class="set-button-go-top"></div>
+<div class="set-background-light-gray">
+    <div class="mx-auto px-3 py-4">
+        <div class="row">
+            <div class="col p-3 set-background-white border-radius">
+                <h3 class="offre-category text-center set-line-emploi">Détails de l'offre</h3>
+                                <div class="row p-2">
+                    <div class="col-12 col-sm-6 ">
+                        <div class="offre-item row">
+                            <div class="offre-item-label col-4 font-weight-bold">Famille de métiers</div>
+                            <div class="offre-item-value col-8">
+                                                                    Informatique et système d&#039;information >
+                                                                                                    Architecture, développement  et administration des systèmes d&#039;information
+                                                            </div>
+                        </div>
+                    </div>
+                                            <div class="col-12 col-sm-6 set-border-left-light-gray mt-2 mt-sm-0">
+                            <div class="offre-item row">
+                                <div class="offre-item-label col-4 font-weight-bold">Grade(s) recherché(s)</div>
+                                <div class="offre-item-value col-8">
+                                    Attaché
+                                    <br />
+                                                                            Attaché principal<br />
+                                                                                                                Ingénieur principal<br />
+                                                                                                                Ingénieur<br />
+                                                                                                                                                                                                                                                                                            </div>
+                            </div>
+                        </div>
+                                    </div>
+                <div class="offre-item row p-2">
+                    <div class="offre-item-label col-12 col-sm-2 font-weight-bold">Métier(s)</div>
+                    <div class="offre-item-value col-12 col-sm-10">
+                                                                                    <a href="/fichemetier/A70108" title="Consulter la fiche métier"><span class="icon-arrow-right"></span> Chef ou cheffe de projet études et développement des systèmes d&#039;information</a>
+                                                                                                                                                                        </div>
+                </div>
+
+                                <div class="offre-item row p-2">
+                    <div class="offre-item-label col-12 col-sm-2 font-weight-bold">Ouvert aux contractuels</div>
+                    <div class="offre-item-value col-12 col-sm-8">
+                                                                                    Oui, à titre dérogatoire par rapport aux candidatures de fonctionnaires
+                                                        (<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000044426684" target="fjref">Art. L332-14 du code général de la fonction publique</a>)
+                            <br />Un contractuel peut être recruté sur ce poste dans l&#039;attente de recrutement d&#039;un fonctionnaire. Le contrat proposé ne peut excéder un an, renouvelable dans la limite d&#039;une durée totale de 2 ans.
+                                                                    </div>
+                </div>
+                
+                <div class="row">
+                                            <div class="col-12 col-sm-6">
+                            <div class="offre-item row p-2">
+                                <div class="offre-item-label col-12 col-sm-4 font-weight-bold">Temps de travail</div>
+                                <div class="offre-item-value col-12 col-sm-8">Temps complet                                </div>
+                            </div>
+                        </div>
+                    
+                    
+                    
+                                    </div>
+
+                
+                
+                <div class="offre-item row p-2 font-weight-bold"><div class="offre-item-label col">Descriptif de l'emploi</div></div>
+                <div class="offre-item-text row px-3 mb-3">
+                    <div class="px-3 set-border-left-blue">Direction : Au sein de la Direction des Solidarités, le service des usages numériques et de l&#039;innovation assure le développement des usages numériques tant pour les agents que pour les usagers.<br />
+Service : Dans ce cadre, le SUNI recrute son/sa chef de programme Maîtrise d&#039;ouvrage SI au sein du domaine autonomie. Ce domaine assure le pilotage des projets et la maintenance des systèmes d&#039;information pour les services de la sous-direction de l&#039;Autonomie travaillant en lien avec les Personnes en perte d&#039;autonomie</div>
+                </div>
+                <div class="offre-item row p-2 font-weight-bold"><div class="offre-item-label col">Missions / conditions d'exercice</div></div>
+                <div class="offre-item-text row px-3 mb-3">
+                    <div class="px-3 set-border-left-yellow">Le-la chef-fe de programme prend en charge un programme ou plusieurs projets clés / stratégiques / complexes. <br />
+Les enjeux se situent dans l&#039;accompagnement aux changements des utilisateurs ayant des profils sociaux ou administratifs, la reprise des données, la mise en place d&#039;un référentiel usager unique, la dématérialisation des procédures et le développement des services numériques aux usagers. <br />
+De par le positionnement du domaine, le chef de programme contribue à la démarche d&#039;urbanisation des SI sociaux et assure un pilotage transversal des projets sur plusieurs domaines.<br />
+ <br />
+Le chef de programme est amené à s&#039;appuyer sur le responsable de domaine. Selon la vie des projets, il peut potentiellement intervenir sur les programmes ou projets des autres domaines.<br />
+- Travaille en relation avec la MOE et éditeurs/intégrateurs <br />
+- Participe aux réunions avec la Sous-direction métier porteuse du projet<br />
+- Intervient auprès des partenaires extérieurs  <br />
+- Ponctuellement, il-elle pourra être amené-e à représenter le responsable de domaine<br />
+<br />
+ <br />
+Les principales missions sont :<br />
+- Conduite du projet<br />
+- Cadrage du contenu fonctionnel du projet<br />
+- Recette,<br />
+- Accompagnement et conduite du changement<br />
+- Maintenance corrective et évolutive<br />
+- Assistance<br />
+- Administration fonctionnelle - Paramétrage<br />
+<br />
+<br />
+La Ville de Paris et le CASVP compensent le handicap de leurs agents par des aménagements raisonnables et vous accompagnent à toutes les étapes de votre carrière<br />
+- Temps complet<br />
+- Télétravaillable<br />
+- Pas d&#039;astreinte<br />
+- Horaire variable<br />
+<br />
+<br />
+- Modalités de travail facilitant l&#039;équilibre vie privée/vie pro : 1 à 2 jours télétravail possibles- Horaires flexibles<br />
+- 25 jours de congés annuels (+2 jours de fractionnement possible) + 27 jours de RTT (au prorata de la présence et de la quotité de travail)<br />
+- Œuvres sociales, accès aux structures sportives et culturelles de la Ville<br />
+- Versement forfaitaire destiné à couvrir une partie des cotisations complémentaires de santé<br />
+- Possibilité d&#039;ouvrir un Compte Épargne-Temps<br />
+- Restauration collective <br />
+<br />
+<br />
+-</div>
+                </div>
+                <div class="offre-item row p-2 font-weight-bold"><div class="offre-item-label col">Profils recherchés</div></div>
+                <div class="offre-item-text row px-3 mb-3">
+                    <div class="px-3 set-border-left-orange">Savoir-faire : <br />
+N°1 : Aisance informatique, rédaction et synthèse<br />
+N°2 : Sens de la planification et de l&#039;organisation<br />
+N°3 : Savoir coordonner les équipes hétérogènes, capacité à gérer les responsabilités<br />
+ <br />
+Connaissances professionnelles<br />
+N°1 : Méthode de gestion de projet<br />
+N°2 : Connaissance de l&#039;outil SI<br />
+N°3 : Connaissance des métiers du social<br />
+ <br />
+Qualités requises :<br />
+N°1 : Rigueur, fiabilité, méthode, esprit d&#039;initiative, autonomie<br />
+N°2 : Qualités relationnelles, capacité d&#039;écoute et sens pédagogique, de négociation<br />
+N°3 : Goût pour le travail collectif<br />
+ <br />
+Formation et / ou expérience professionnelle souhaitée(s) : <br />
+ <br />
+<br />
+Envoyer CV et lettre de motivation à Agnès LUTIN</div>
+                </div>
+                            </div>
+        </div>
+    </div>
+</div>
+<div class="set-background-light-gray mb-5">
+    <div class="mx-auto">
+        <div class="row justify-content-between">
+            <div class="card col-xl-12 my-2 set-card-white">
+                <div class="card-header">
+                    <h3 class="offre-category text-center set-line-emploi">Contact et modalités de candidature</h3>
+                </div>
+                <div class="p-3 card-body">
+                    
+                                            <div class="offre-item row p-2">
+                            <div class="offre-item-label col-12 col-sm-4 font-weight-bold">Informations complémentaires</div>
+                            <div class="offre-item-text col-12 col-sm-8">Agnès LUTIN, Responsable du domaine Autonomie (DA)<br />
+Email : agnes.lutin@paris.fr<br />
+Tél. : 01 43 47 67 83</div>
+                        </div>
+                                                                <div class="offre-item row p-2">
+                            <div class="offre-item-label col-12 col-sm-4 font-weight-bold">Lien de candidature</div>
+                            <div class="offre-item-value col-12 col-sm-8"><a href="https://jobstats.robopost.com/count/clic.php?v=2500894&j=2849&external_ats_id=15961" target="lien_externe_set" rel="noopener">https://jobstats.robopost.com/count/clic.php?v=2500894&j=2849&external_ats_id=15961</a></div>
+                        </div>
+                                    </div>
+            </div>
+            <div class="col-xl-12 my-2 card">
+                <div class="offre-item-text px-3 card-body" id="div_trav_handicap">
+                    <h3 class="offre-category text-left mb-2"><span class="icon-check"></span> Travailleurs handicapés</h3>
+                    <p>Conformément au principe d&#039;égalité d&#039;accès à l&#039;emploi public, cet emploi est ouvert à tous les candidats remplissant les conditions statutaires requises, définies par le code général de la fonction publique. À titre dérogatoire, les candidats bénéficiant d&#039;une reconnaissance de qualité de travailleur handicapé peuvent accéder à cet emploi par voie contractuelle.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </main>
+                    <footer class="container-fluid mt-auto set-background-dark-blue" id="footer" role="contentinfo">
+	<div class="mx-auto container pt-4">
+		<div class="row pt-3 pb-2 text-center">
+			<div class="col-md-6 col-xl-3 pb-4 footer-margin">
+				<h2 class="set-line-footer">Espace demandeur</h2>
+				<div class="text-center py-2 set-font-weight-300 set-color-white">Recevez des alertes sur les nouvelles offres d'emploi et diffusez votre CV auprès des employeurs territoriaux</div>
+				<ul class="set-footer-buttons list-unstyled mb-0">
+					<li class="py-4"><a href="/demandeur/inscription" class="rounded-pill mx-auto set-button set-background-green"><span class="icon-user-plus pr-1"></span> m'inscrire</a></li>
+					<li><a href="/demandeur/login"><span class="icon-user pr-1"></span> j'ai déjà un compte</a></li>
+				</ul>
+			</div>
+			<div class="col-md-6 col-xl-3 pb-4 footer-margin">
+				<h2 class="set-line-footer">Espace employeur</h2>
+				<div class="text-center py-2 set-font-weight-300 set-color-white">Déclarez vos vacances d'emploi, diffusez vos offres et consultez les CV des demandeurs</div>
+				<div class="py-4 set-footer-buttons"><a href="https://www.emploi-territorial.fr/col" class="rounded-pill mx-auto set-button set-background-green"><span class="icon-charte-lock pr-1"></span> me connecter</a></div>
+			</div>
+			<div class="col-md-6 col-xl-3 pb-4 footer-margin">
+				<h2 class="set-line-footer">Contact</h2>
+				<div class="text-center py-2 set-font-weight-300 set-color-white">Demandez des renseignements ou obtenez de l'assistance sur l'utilisation de ce site</div>
+				<div class="py-4 set-footer-buttons"><a href="/contact/" class="rounded-pill mx-auto set-button set-transition-bg set-background-dark">contactez-nous</a></div>
+			</div>
+			<div class="col-md-6 col-xl-3 pb-4 footer-margin">
+				<h2 class="set-line-footer">Emploi territorial</h2>
+				<ul class="text-center mt-3 list-unstyled">
+					<li class="pb-1"><a href="/emploi-mobilite/">Rechercher des offres</a></li>
+					<li class="pb-1">
+						<a href="/publicite-legale/">Publicités des vacances d'emploi</a>
+						<a href="/faq/#Faq_COLDEC" role="button" data-faq="COLDEC" data-toggle="modal" data-target="#ModalFAQ" class="text-decoration-none" data-tooltip="Qu'est-ce que la publicité des vacances d'emploi ?">
+							<span class="icon-help-circle set-link-green-hover"></span>
+							<span class="sr-only">Aide contextuelle</span>
+						</a>
+					</li>
+					<li class="pb-1"><a href="/faq">Foire aux questions</a></li>
+					<li class="pb-1"><a href="/mentions-legales/">Protection des données personnelles</a></li>
+					<li class="pb-1"><a href="/accessibilite/">Accessibilité : partiellement conforme</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="row pb-2 mt-0 text-center flex-row-reverse align-items-center">
+			<div class="col-md-6 col-xl-3 pb-3 footer-margin">
+				<div>
+					<h2 class="set-line-footer">Liens utiles</h2>
+					<ul class="text-center mt-3 list-unstyled">
+						<li class="pb-1"><a href="https://metiersterritoriaux.fr" data-tooltip="Les métiers territoriaux, pourquoi pas vous ?">Métiers-territoriaux.fr</a></li>
+						<li class="pb-1"><a href="https://choisirleservicepublic.gouv.fr" data-tooltip="Retrouvez les offres de la fonction publique d'État, hospitalière et territoriale sur Choisir le Service Public">Choisir le Service Public</a></li>
+						<li class="pb-1"><a href="https://www.pass.fonction-publique.gouv.fr/" data-tooltip="Retrouvez les offres d'apprentissage et de stage de la Fonction Publique">Place de l'Apprentissage et des Stages</a></li>
+						<li class="pb-1"><a href="https://www.emploi-store.fr" data-tooltip="Retrouvez sur le site Emploi-Store de France Travail une sélection de sites web et applications mobiles dédiées à votre projet professionnel et à votre recherche d'emploi">Emploi-Store France Travail</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-12 col-lg-9 mx-auto text-center d-none d-md-block">
+				<img class="logo-france-relance img-fluid set-background-white rounded-lg p-2" src="/port/img/france-relance-EU.png?v=5.3.1.1" alt="Site financé par l'Union Européenne dans le cadre du programme France Relance">
+			</div>
+		</div>
+		<div class="row pb-3 mt-0 d-md-none">
+			<img class="mw-100 logo-france-relance set-background-white rounded p-2" src="/port/img/france-relance-EU.png?v=5.3.1.1" alt="Site financé par l'Union Européenne dans le cadre du programme France Relance">
+		</div>
+		<div class="row pb-3 mt-0 copyright">
+			<span class="mx-auto small text-center set-color-white set-font-size-0-9em">Site développé et maintenu par le <a href="https://www.gipcdg.fr">GIP Informatique des Centres de Gestion</a>
+				- <a href="/api">Données accessibles par API</a>
+				- Version 5.3.1.1
+						</span>
+		</div>
+	</div>
+</footer>
+                <div id="FooterModals">
+    <div class="modal fade" id="ModalFAQ" tabindex="-1" data-backdrop="static" data-keyboard="true" aria-labelledby="titleFaqModal">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title set-font-size-1-5rem font-weight-bold set-line-emploi" id="titleFaqModal">Aide contextuelle</h2>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <a href="#" class="rounded-pill mx-auto set-button set-background-green" data-dismiss="modal">Fermer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>        <nav class="set-button-go-top" aria-labelledby="TopLinkLabel">
+            <a href="#Niveau0" class="sr-only">
+                <span class="icon-arrow-up" aria-hidden="true"></span><span class="sr-only" id="TopLinkLabel">Retour en haut de page</span>
+            </a>
+        </nav>
+            <script type="text/javascript" nonce="99nyFVfLTvwqli7ninLJBPAuNyhb2hb/v7yNCPjyHV4=">
+        let detailOffre = {
+            init: function () {
+                detailOffre.ajoutOffrePanier();
+            },
+            ajoutOffrePanier: function () {
+                let $panier = $("#lien_panier");
+                let numOf = $panier.data('numof');
+                $panier.click(function () {$.ajax({
+                    url: '/ajoutoffrepanier/' + numOf,
+                    type: 'POST',
+                    success: function (tableau) {
+                        $("#success").text(tableau["message"]).show('fast');
+                        let $img = $("#img_panier");
+                        if ($img.hasClass('icon-charte-favori-default-2')) {
+                            $img.addClass('icon-charte-favori-active-2').removeClass('icon-charte-favori-default-2');
+                            $panier.tooltip('dispose').attr('title', 'Retirer de ma sélection d\'offres').tooltip();
+                        } else {
+                            $img.removeClass('icon-charte-favori-active-2').addClass('icon-charte-favori-default-2');
+                            $panier.tooltip('dispose').attr('title', 'Ajouter à ma sélection d\'offres').tooltip();
+                        }
+                    }
+                }); });
+            },
+        };
+        $(detailOffre.init);
+    </script>
+                    <script type="application/javascript" nonce="99nyFVfLTvwqli7ninLJBPAuNyhb2hb/v7yNCPjyHV4=">
+    var _paq = _paq || [];
+    _paq.push(["setCustomDimension", 1, "portail"]);
+    _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+    _paq.push(["setCookieDomain", "*.emploi-territorial.fr"]);
+    _paq.push(["setDomains", ["*.www.emploi-territorial.fr"]]);
+    _paq.push([function () {
+        var self = this;
+
+        function getOriginalVisitorCookieTimeout() {
+            var now = new Date(), nowTs = Math.round(now.getTime() / 1000), visitorInfo = self.getVisitorInfo();
+            var createTs = parseInt(visitorInfo[2]);
+            var cookieTimeout = 33696000;
+            var originalTimeout = createTs + cookieTimeout - nowTs;
+            return originalTimeout;
+        }
+
+        this.setVisitorCookieTimeout(getOriginalVisitorCookieTimeout());
+    }]);
+    _paq.push(["trackPageView"]);
+    _paq.push(["enableLinkTracking"]);
+    (function () {
+        var u = "https://support.gipcdg.fr/stats/";
+        _paq.push(["setTrackerUrl", u + "matomo.php"]);
+        _paq.push(["setSiteId", "5"]);
+        var d = document, g = d.createElement("script"), s = d.getElementsByTagName("script")[0];
+        g.type = "text/javascript";
+        g.async = true;
+        g.defer = true;
+        g.src = u + "matomo.js";
+        s.parentNode.insertBefore(g, s);
+    })();
+</script>                        <script nonce="99nyFVfLTvwqli7ninLJBPAuNyhb2hb/v7yNCPjyHV4=">
+            if (window.jQuery === undefined) { document.cookie = 'nocdn=1;path=/;samesite=strict'; location.reload(); }
+        </script>
+        </body>
+</html>

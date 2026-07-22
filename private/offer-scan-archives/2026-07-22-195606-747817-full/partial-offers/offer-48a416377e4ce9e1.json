@@ -1,0 +1,58 @@
+{
+  "canonical_offer_id": "canonical-offer-b44d49ec15b74eee",
+  "captured_at": "2026-07-22T19:56:06.775708+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "IKEA Bordeaux",
+  "evidence": [
+    {
+      "excerpt": "0 Вакансії у Бордо",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "IKEA Bordeaux",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-195606-747817-full/jobs.ikea.com/fb5b1c47a1fb52e8f9b3.html",
+    "source_sha256": "d2367b64af42551f2716021aa5560aa0661625e57a15ce47c14ae163c3e6cec7"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-48a416377e4ce9e1",
+  "industry_sector_ids": [
+    "agencement-et-amenagement-interieur",
+    "commerce-et-distribution"
+  ],
+  "last_verified_at": "2026-07-22T19:56:06.775708+02:00",
+  "location_label": "Lieu non communiqué",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [],
+  "sector_labels": [
+    "agencement et amenagement interieur",
+    "commerce et distribution"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "jobs.ikea.com",
+  "source_url": "https://jobs.ikea.com/uk/%D0%BC%D1%96%D1%81%D1%86%D0%B5%D0%B7%D0%BD%D0%B0%D1%85%D0%BE%D0%B4%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F/jobs/22908/3017382-11071620-3031582/4",
+  "summary": "Poste de 0 Вакансії у Бордо proposé par IKEA Bordeaux à Lieu non communiqué. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "0 Вакансії у Бордо",
+  "verification_status": "active"
+}

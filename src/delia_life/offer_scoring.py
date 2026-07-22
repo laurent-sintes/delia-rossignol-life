@@ -149,11 +149,10 @@ class ScoringContext:
     preferred_contracts: frozenset[str]
     acceptable_contracts: frozenset[str]
     excluded_contracts: frozenset[str]
+    location_markers: tuple[str, ...]
     priority_sectors: tuple[str, ...]
     acceptable_sectors: tuple[str, ...]
     excluded_sectors: tuple[str, ...]
-    emphasized_sectors: frozenset[str]
-    sector_multiplier: float
     priority_domains: tuple[tuple[str, tuple[str, ...]], ...]
     acceptable_domains: tuple[tuple[str, tuple[str, ...]], ...]
     profile_family_filters: tuple[dict[str, Any], ...]
@@ -168,6 +167,7 @@ class ScoringContext:
     expected_compensation: dict[str, Any]
     priority_minimum_score: float
     possible_minimum_score: float
+    warn_on_missing_employer_page: bool
 
 
 @dataclass
@@ -217,7 +217,6 @@ def _build_scoring_context(
     sectors = targets.get("industry_sectors", {})
     domains = targets.get("functional_domains", {})
     query_families = policy.get("functional_query_families", {})
-    emphasis = policy.get("sector_emphasis", {})
     boundaries = _criterion(career_project, "criterion-activity-boundaries") or {}
     activity_exclusions = tuple((plain(str(value)), str(value)) for value in boundaries.get("excluded", []))
     recommendation_policy = policy.get("recommendation_bands", {})
@@ -231,11 +230,12 @@ def _build_scoring_context(
         preferred_contracts=frozenset(_contract(value) for value in policy["contracts"]["preferred"]),
         acceptable_contracts=frozenset(_contract(value) for value in policy["contracts"]["acceptable"]),
         excluded_contracts=frozenset(_contract(value) for value in policy["contracts"]["excluded"]),
+        location_markers=tuple(
+            plain(str(value)) for value in policy.get("collector", {}).get("location_markers", [])
+        ),
         priority_sectors=tuple(plain(value) for value in sectors.get("priority", [])),
         acceptable_sectors=tuple(plain(value) for value in sectors.get("acceptable", [])),
         excluded_sectors=tuple(plain(value) for value in sectors.get("excluded", [])),
-        emphasized_sectors=frozenset(plain(value) for value in emphasis.get("labels", [])),
-        sector_multiplier=float(emphasis.get("multiplier", 1.0)),
         priority_domains=_domain_matchers(domains.get("priority", []), query_families),
         acceptable_domains=_domain_matchers(domains.get("acceptable", []), query_families),
         profile_family_filters=tuple(
@@ -255,6 +255,9 @@ def _build_scoring_context(
         expected_compensation=_criterion(career_project, "criterion-compensation") or {},
         priority_minimum_score=priority_minimum_score,
         possible_minimum_score=possible_minimum_score,
+        warn_on_missing_employer_page=bool(
+            policy.get("source_strategy", {}).get("warn_on_missing_employer_page", True)
+        ),
     )
 
 
@@ -274,6 +277,14 @@ def _apply_contract_rules(offer: dict[str, Any], context: ScoringContext, state:
         state.failures.append(f"contrat hors politique de recherche : {offer.get('contract_type')}")
 
 
+def _apply_location_rules(offer: dict[str, Any], context: ScoringContext, state: ScoreState) -> None:
+    location = plain(str(offer.get("location_label") or ""))
+    if not location or location in {"lieu non communique", "non communique"}:
+        return
+    if context.location_markers and not any(marker in location for marker in context.location_markers):
+        state.failures.append(f"localisation hors zone de recherche : {offer.get('location_label')}")
+
+
 def _apply_work_time_rules(offer: dict[str, Any], conditions: dict[str, Any], state: ScoreState) -> None:
     if offer.get("full_time") is False or conditions.get("full_time") is False:
         state.failures.append("offre à temps partiel")
@@ -288,10 +299,8 @@ def _apply_sector_rules(text: str, context: ScoringContext, state: ScoreState) -
     if matched_excluded:
         state.failures.append(f"secteur exclu : {matched_excluded}")
     elif matched_priority:
-        multiplier = context.sector_multiplier if matched_priority in context.emphasized_sectors else 1.0
-        state.score += float(context.weights["sector"]) * multiplier
-        label = "secteur très recherché" if multiplier > 1 else "secteur prioritaire"
-        state.reasons.append(f"{label} : {matched_priority}")
+        state.score += float(context.weights["sector"])
+        state.reasons.append(f"secteur prioritaire : {matched_priority}")
     elif matched_acceptable:
         state.score += float(context.weights["sector"]) * 0.55
         state.reasons.append(f"secteur acceptable : {matched_acceptable}")
@@ -420,6 +429,23 @@ def _apply_activity_rules(text: str, context: ScoringContext, state: ScoreState)
         state.reasons.append("dimension collective explicite")
     else:
         state.unknowns.append("travail en équipe à confirmer")
+
+
+def _apply_source_quality_rules(offer: dict[str, Any], context: ScoringContext, state: ScoreState) -> None:
+    warnings: list[str] = []
+    custom_warning = str(offer.get("source_warning") or "").strip()
+    if custom_warning:
+        warnings.append(custom_warning)
+    if (
+        context.warn_on_missing_employer_page
+        and str(offer.get("source_kind") or "").strip() == "aggregator"
+        and not str(offer.get("employer_source_url") or "").strip()
+    ):
+        warnings.append(
+            "annonce accessible sur un site tiers, mais non retrouvée sur le site de l’employeur ; "
+            "vérifier sa disponibilité avant de candidater"
+        )
+    state.unknowns.extend(warning for warning in warnings if warning not in state.unknowns)
 
 
 def _apply_arrangement_and_compensation_rules(
@@ -585,6 +611,7 @@ def _score_offer_with_context(offer: dict[str, Any], context: ScoringContext) ->
     functional_text = plain(_functional_offer_text(offer))
     conditions = offer.get("conditions", {}) if isinstance(offer.get("conditions"), dict) else {}
     _apply_contract_rules(offer, context, state)
+    _apply_location_rules(offer, context, state)
     _apply_work_time_rules(offer, conditions, state)
     _apply_sector_rules(text, context, state)
     _apply_functional_domain_rules(functional_text, context, state)
@@ -592,6 +619,7 @@ def _score_offer_with_context(offer: dict[str, Any], context: ScoringContext) ->
     _apply_knowledge_overlap(offer, context, state)
     _apply_freshness_rules(offer, context, state)
     _apply_activity_rules(text, context, state)
+    _apply_source_quality_rules(offer, context, state)
     _apply_arrangement_and_compensation_rules(offer, conditions, context, state)
     _apply_prerequisite_rules(offer, context, state)
     _finalize_recommendation(context, state)

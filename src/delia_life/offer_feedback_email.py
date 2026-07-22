@@ -435,8 +435,11 @@ def _pending_offer_notes(selection: FeedbackEmailSelection) -> tuple[str, str]:
         return "", ""
     displayed = len(selection.pending_offers)
     explanation = (
-        "Ces annonces ne sont pas intégrées au classement tant que leur activité ou leur page employeur exacte "
-        "n’est pas confirmée."
+        "Ces annonces ont été repérées pendant la recherche actuelle, mais leur lien détaillé a renvoyé une erreur "
+        "ou a bloqué l’accès à leur contenu. Elles restent donc hors classement tant que leur contenu actuel ne peut "
+        "pas être contrôlé. Cela ne signifie ni qu’elles sont fermées ni qu’elles sont incompatibles. Le motif propre "
+        "à chaque offre est indiqué ci-dessous. Les annonces uniquement disponibles sur LinkedIn, Indeed, Hellowork "
+        "ou une page listant plusieurs offres restent, elles, dans le classement avec un point de vigilance."
     )
     omitted = selection.pending_offer_count - displayed
     omitted_text = f"\n{omitted} autre(s) annonce(s) pending restent consultables dans le rapport complet." if omitted else ""

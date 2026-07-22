@@ -1,0 +1,62 @@
+{
+  "canonical_offer_id": "recrute.leroymerlin.fr:829518",
+  "captured_at": "2026-07-22T18:57:58.517400+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "Annecy - Epagny",
+  "evidence": [
+    {
+      "excerpt": "Hôte service client magasin (H/F) CDI",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "Annecy - Epagny",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-185758-489223-full/recrute.leroymerlin.fr/c38d9550eedc9124469a.html",
+    "source_sha256": "4351d3c92f11cf0a68d164b98972adc9d0cc2e84e88c0ef5ecdc212364c32f20"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-9402cf24c3178421",
+  "industry_sector_ids": [
+    "agencement-et-amenagement-interieur",
+    "commerce-et-distribution"
+  ],
+  "last_verified_at": "2026-07-22T18:57:58.517400+02:00",
+  "location_label": "Epagny Metz-Tessy (74960), FR",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-06-22",
+  "required_skills": [
+    "relation client",
+    "service client",
+    "expérience client",
+    "vente",
+    "fidélisation client"
+  ],
+  "sector_labels": [
+    "agencement et amenagement interieur",
+    "commerce et distribution"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrute.leroymerlin.fr",
+  "source_url": "https://recrute.leroymerlin.fr/jobs/829518",
+  "summary": "Poste de Hôte service client magasin (H/F) CDI proposé par Annecy - Epagny à Epagny Metz-Tessy (74960), FR. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "Hôte service client magasin (H/F) CDI",
+  "verification_status": "active"
+}

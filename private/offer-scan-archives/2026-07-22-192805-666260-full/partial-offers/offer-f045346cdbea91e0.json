@@ -1,0 +1,61 @@
+{
+  "canonical_offer_id": "recrute.leroymerlin.fr:812054",
+  "captured_at": "2026-07-22T19:28:05.695914+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "Marseille - Aubagne",
+  "evidence": [
+    {
+      "excerpt": "Responsable service et relation client magasin (H/F)",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "Marseille - Aubagne",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-192805-666260-full/recrute.leroymerlin.fr/5ce26e5b211f2acd9ae6.html",
+    "source_sha256": "6aeda57059bc81d5136731d8cd0a8b6713e5187e8f154e03882952c2c600295c"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-f045346cdbea91e0",
+  "industry_sector_ids": [
+    "agencement-et-amenagement-interieur",
+    "commerce-et-distribution"
+  ],
+  "last_verified_at": "2026-07-22T19:28:05.695914+02:00",
+  "location_label": "Aubagne (13400), FR",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-05-11",
+  "required_skills": [
+    "relation client",
+    "service client",
+    "expérience client",
+    "commerce"
+  ],
+  "sector_labels": [
+    "agencement et amenagement interieur",
+    "commerce et distribution"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrute.leroymerlin.fr",
+  "source_url": "https://recrute.leroymerlin.fr/jobs/812054",
+  "summary": "Poste de Responsable service et relation client magasin (H/F) proposé par Marseille - Aubagne à Aubagne (13400), FR. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "Responsable service et relation client magasin (H/F)",
+  "verification_status": "active"
+}

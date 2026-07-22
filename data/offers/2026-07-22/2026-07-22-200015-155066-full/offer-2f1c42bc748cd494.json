@@ -1,0 +1,60 @@
+{
+  "canonical_offer_id": "canonical-offer-1441f9aefcb8c08d",
+  "captured_at": "2026-07-22T20:00:15.182633+02:00",
+  "conditions": {},
+  "contract_type": "stage",
+  "employer": "Caudalie",
+  "evidence": [
+    {
+      "excerpt": "Join us",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Caudalie",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-200015-155066-full/caudalie.career/1441f9aefcb8c08d53ca.html",
+    "source_sha256": "aa1a3d9a0fced80c0b12e3d9b8484503cf0456f79d9ddd491142c00f6336b040"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-2f1c42bc748cd494",
+  "industry_sector_ids": [
+    "cosmetique",
+    "bien-etre"
+  ],
+  "last_verified_at": "2026-07-22T20:00:15.182633+02:00",
+  "location_label": "Lieu non communiqué",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [
+    "commerce"
+  ],
+  "sector_labels": [
+    "cosmetique",
+    "bien etre"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "caudalie.career",
+  "source_url": "https://caudalie.career/home/our-job-offers",
+  "summary": "Poste de Join us proposé par Caudalie à Lieu non communiqué. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Join us",
+  "verification_status": "active"
+}

@@ -1,0 +1,62 @@
+{
+  "canonical_offer_id": "recrute.leroymerlin.fr:841914",
+  "captured_at": "2026-07-22T19:28:05.695914+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "Mundolsheim",
+  "evidence": [
+    {
+      "excerpt": "Hôte service client magasin (H/F) - CDI temps partiel 17h30/semaine",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "Mundolsheim",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-192805-666260-full/recrute.leroymerlin.fr/4b5285db48a071e3259d.html",
+    "source_sha256": "54615d6db3dc472eee9a0f842c9cdd7add76fce7cf1dfe8c706fb70f961e168b"
+  },
+  "full_time": false,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-2f8414f9cc4089ca",
+  "industry_sector_ids": [
+    "agencement-et-amenagement-interieur",
+    "commerce-et-distribution"
+  ],
+  "last_verified_at": "2026-07-22T19:28:05.695914+02:00",
+  "location_label": "Mundolsheim (67450), FR",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-07-22",
+  "required_skills": [
+    "relation client",
+    "service client",
+    "expérience client",
+    "vente",
+    "fidélisation client"
+  ],
+  "sector_labels": [
+    "agencement et amenagement interieur",
+    "commerce et distribution"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrute.leroymerlin.fr",
+  "source_url": "https://recrute.leroymerlin.fr/jobs/841914",
+  "summary": "Poste de Hôte service client magasin (H/F) - CDI temps partiel 17h30/semaine proposé par Mundolsheim à Mundolsheim (67450), FR. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "Hôte service client magasin (H/F) - CDI temps partiel 17h30/semaine",
+  "verification_status": "active"
+}

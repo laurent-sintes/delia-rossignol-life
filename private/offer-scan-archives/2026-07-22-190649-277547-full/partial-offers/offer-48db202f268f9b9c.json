@@ -1,0 +1,62 @@
+{
+  "canonical_offer_id": "recrute.leroymerlin.fr:806596",
+  "captured_at": "2026-07-22T19:06:49.303633+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "Amiens Sud - Longueau",
+  "evidence": [
+    {
+      "excerpt": "Hôte service client magasin CDD (H/F)",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "Amiens Sud - Longueau",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-190649-277547-full/recrute.leroymerlin.fr/c4c25942ccb2cb03f1d3.html",
+    "source_sha256": "22fd978bb82c4075238b4698fc22908b6e726d33fe2e18cc8d4c05e242e0b6ba"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-48db202f268f9b9c",
+  "industry_sector_ids": [
+    "agencement-et-amenagement-interieur",
+    "commerce-et-distribution"
+  ],
+  "last_verified_at": "2026-07-22T19:06:49.303633+02:00",
+  "location_label": "Longueau (80330), FR",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-05-05",
+  "required_skills": [
+    "relation client",
+    "service client",
+    "expérience client",
+    "vente",
+    "fidélisation client"
+  ],
+  "sector_labels": [
+    "agencement et amenagement interieur",
+    "commerce et distribution"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrute.leroymerlin.fr",
+  "source_url": "https://recrute.leroymerlin.fr/jobs/806596",
+  "summary": "Poste de Hôte service client magasin CDD (H/F) proposé par Amiens Sud - Longueau à Longueau (80330), FR. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "Hôte service client magasin CDD (H/F)",
+  "verification_status": "active"
+}

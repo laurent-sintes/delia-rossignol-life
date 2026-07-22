@@ -1,0 +1,57 @@
+{
+  "canonical_offer_id": "recrutement.bpce.fr:BPCE_INFO01783",
+  "captured_at": "2026-07-22T20:25:00.641368+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "BPCE Solutions Informatiques",
+  "evidence": [
+    {
+      "excerpt": "Expert Sécurité Technologie (F/H)",
+      "field": "title",
+      "locator": "BPCE API item.title"
+    },
+    {
+      "excerpt": "Aix-en-provence, BALMA, Bruges, Paris, Saint-Jacques-de-la-Lande, Villeneuve-d'Ascq, Villeurbanne",
+      "field": "location_label",
+      "locator": "BPCE API item.localisation"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-api",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-202500-621780-full/recrutement.bpce.fr/eb3f5b794413af93e1b6.bin",
+    "source_sha256": "45643c66589a075f782a5265e4a247fd52457e6e08a8f1569c3aa8b8f0219296"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-ca1c3935f83aae23",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T20:25:00.641368+02:00",
+  "location_label": "Aix-en-provence, BALMA, Bruges, Paris, Saint-Jacques-de-la-Lande, Villeneuve-d'Ascq, Villeurbanne",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-07-20",
+  "required_skills": [
+    "vente"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrutement.bpce.fr",
+  "source_url": "https://recrutement.bpce.fr/job/expert-securite-technologie-f-h-2",
+  "summary": "Poste de Expert Sécurité Technologie (F/H) proposé par BPCE Solutions Informatiques à Aix-en-provence, BALMA, Bruges, Paris, Saint-Jacques-de-la-Lande, Villeneuve-d'Ascq, Villeurbanne. Revue sémantique requise avant recommandation.",
+  "title": "Expert Sécurité Technologie (F/H)",
+  "verification_status": "active"
+}

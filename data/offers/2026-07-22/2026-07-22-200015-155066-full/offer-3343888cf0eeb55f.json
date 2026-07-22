@@ -1,0 +1,58 @@
+{
+  "canonical_offer_id": "recrutement.bpce.fr:BPCE_INFO01700",
+  "captured_at": "2026-07-22T20:00:15.182633+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "BPCE Solutions Informatiques",
+  "evidence": [
+    {
+      "excerpt": "Chef de projet SI / Scrum - F/H",
+      "field": "title",
+      "locator": "BPCE API item.title"
+    },
+    {
+      "excerpt": "BALMA, Bois-Guillaume, Bruges, Charenton-le-Pont, Dijon, Montigny-le-Bretonneux, Paris, Saint-Estève, Saint-Herblain, Villeneuve-d'Ascq",
+      "field": "location_label",
+      "locator": "BPCE API item.localisation"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-api",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-200015-155066-full/recrutement.bpce.fr/80d9dce360bf75f791a2.bin",
+    "source_sha256": "a4d0b01cd7d523997e413002e338824cb3fd349eb135be9ee388d2025ff69e0c"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-3343888cf0eeb55f",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T20:00:15.182633+02:00",
+  "location_label": "BALMA, Bois-Guillaume, Bruges, Charenton-le-Pont, Dijon, Montigny-le-Bretonneux, Paris, Saint-Estève, Saint-Herblain, Villeneuve-d'Ascq",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-04-28",
+  "required_skills": [
+    "vente",
+    "chef de projet"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrutement.bpce.fr",
+  "source_url": "https://recrutement.bpce.fr/job/chef-de-projet-si-scrum-f-h",
+  "summary": "Poste de Chef de projet SI / Scrum - F/H proposé par BPCE Solutions Informatiques à BALMA, Bois-Guillaume, Bruges, Charenton-le-Pont, Dijon, Montigny-le-Bretonneux, Paris, Saint-Estève, Saint-Herblain, Villeneuve-d'Ascq. Revue sémantique requise avant recommandation.",
+  "title": "Chef de projet SI / Scrum - F/H",
+  "verification_status": "active"
+}

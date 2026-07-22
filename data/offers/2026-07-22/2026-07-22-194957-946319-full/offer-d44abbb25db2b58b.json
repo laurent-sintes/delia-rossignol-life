@@ -1,0 +1,57 @@
+{
+  "canonical_offer_id": "recrutement.bpce.fr:CCOOP07162",
+  "captured_at": "2026-07-22T19:49:57.972385+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "Groupe Crédit Coopératif",
+  "evidence": [
+    {
+      "excerpt": "Assistant Chargé d'affaires entreprises f/h - BTP Banque Bordeaux- CDI",
+      "field": "title",
+      "locator": "BPCE API item.title"
+    },
+    {
+      "excerpt": "Bruges",
+      "field": "location_label",
+      "locator": "BPCE API item.localisation"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-api",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-194957-946319-full/recrutement.bpce.fr/be6d155f633bb7d00d88.html",
+    "source_sha256": "22ee6ac5d82fc5e1b0830aa463d950adcc6c3c3d68728e5e123194c783034501"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-d44abbb25db2b58b",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T19:49:57.972385+02:00",
+  "location_label": "Bruges",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-05-28",
+  "required_skills": [
+    "service client"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrutement.bpce.fr",
+  "source_url": "https://recrutement.bpce.fr/job/assistant-charge-daffaires-entreprises-f-h-btp-banque-bordeaux-cdi",
+  "summary": "Poste de Assistant Chargé d'affaires entreprises f/h - BTP Banque Bordeaux- CDI proposé par Groupe Crédit Coopératif à Bruges. Revue sémantique requise avant recommandation.",
+  "title": "Assistant Chargé d'affaires entreprises f/h - BTP Banque Bordeaux- CDI",
+  "verification_status": "active"
+}

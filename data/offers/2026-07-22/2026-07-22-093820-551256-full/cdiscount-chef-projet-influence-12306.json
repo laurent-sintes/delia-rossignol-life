@@ -1,0 +1,96 @@
+{
+  "id": "cdiscount-chef-projet-influence-12306",
+  "title": "Chef de projet Influence F/H",
+  "employer": "Cdiscount",
+  "source_url": "https://emploi.cdiscount.com/nos-offres-demploi/12306",
+  "source_site": "emploi.cdiscount.com",
+  "source_kind": "direct_employer",
+  "verification_status": "active",
+  "published_at": "2026-07-16",
+  "captured_at": "2026-07-22T09:45:53+02:00",
+  "last_verified_at": "2026-07-22T09:45:53+02:00",
+  "summary": "Piloter Ã  Bordeaux la stratÃ©gie et les campagnes d'influence de Cdiscount : sÃ©lectionner les crÃ©ateurs et agences, rÃ©diger les briefs, nÃ©gocier les budgets et contrats, coordonner plusieurs activations simultanÃ©es et analyser leurs performances.",
+  "location_label": "Bordeaux",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": [
+    "commerce et distribution"
+  ],
+  "functional_domains": [
+    "gestion et coordination de projets"
+  ],
+  "compensation": {},
+  "required_skills": [
+    "gestion de projet",
+    "stratÃ©gie d'influence",
+    "nÃ©gociation",
+    "analyse de performance",
+    "Excel",
+    "PowerPoint"
+  ],
+  "preferred_skills": [
+    "rÃ©seaux sociaux",
+    "marketing digital",
+    "coordination d'agences"
+  ],
+  "conditions": {
+    "work_mode": "unknown",
+    "hours": "unknown"
+  },
+  "prerequisites": [
+    {
+      "id": "formation-commerce-communication",
+      "kind": "qualification",
+      "description": "Formation supÃ©rieure en commerce, communication ou Ã©quivalent",
+      "mandatory": true,
+      "profile_status": "met",
+      "profile_evidence_ids": [
+        "credential:esgci-marketing-commerce-2003"
+      ],
+      "assessment_note": "Le diplÃ´me validÃ© de niveau bac+4 en Marketing & Commerce couvre ce prÃ©requis.",
+      "evidence": {
+        "locator": "emploi.cdiscount.com/nos-offres-demploi/12306#profil",
+        "excerpt": "Formation supÃ©rieure en commerce, communication ou Ã©quivalent."
+      }
+    },
+    {
+      "id": "experience-influence-trois-ans",
+      "kind": "minimum_experience",
+      "description": "Au moins trois ans d'expÃ©rience en influence ou partenariats sociaux",
+      "mandatory": true,
+      "profile_status": "not_demonstrated",
+      "profile_evidence_ids": [],
+      "assessment_note": "Aucune durÃ©e d'expÃ©rience en influence n'est dÃ©montrÃ©e dans les connaissances validÃ©es ; cela ne prouve pas qu'elle est absente.",
+      "evidence": {
+        "locator": "emploi.cdiscount.com/nos-offres-demploi/12306#profil",
+        "excerpt": "3 ans d'expÃ©rience en influence, social media ou partenariats."
+      }
+    },
+    {
+      "id": "maitrise-excel-powerpoint",
+      "kind": "other",
+      "description": "MaÃ®trise indispensable d'Excel et PowerPoint",
+      "mandatory": true,
+      "profile_status": "not_demonstrated",
+      "profile_evidence_ids": [],
+      "assessment_note": "Le niveau de maÃ®trise de ces deux outils n'est pas documentÃ© dans les connaissances validÃ©es.",
+      "evidence": {
+        "locator": "emploi.cdiscount.com/nos-offres-demploi/12306#profil",
+        "excerpt": "Excel et PowerPoint indispensables."
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "field": "mission",
+      "locator": "emploi.cdiscount.com/nos-offres-demploi/12306#missions",
+      "excerpt": "DÃ©finir et piloter des campagnes d'influence, coordonner les partenaires et mesurer les performances."
+    },
+    {
+      "field": "contract",
+      "locator": "emploi.cdiscount.com/nos-offres-demploi/12306",
+      "excerpt": "CDI - Bordeaux - publiÃ©e le 16 juillet 2026."
+    }
+  ],
+  "verification_note": "Page exacte ou portail direct revérifié pendant le scan full du 22 juillet 2026."
+}

@@ -11,6 +11,8 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from delia_life.core import load_json
 from delia_life.offer_search import (
+    AssessedOffer,
+    _select_diverse_offers,
     canonical_offer_url,
     collect_validated_absent_sector_experience_ids,
     collect_validated_profile_completeness,
@@ -60,6 +62,14 @@ class OfferSearchTests(unittest.TestCase):
         self.assertEqual(result["offers"][0]["id"], "offer-1")
         self.assertGreater(result["offers"][0]["assessment"]["score"], result["offers"][1]["assessment"]["score"])
 
+    def test_offer_outside_configured_search_area_is_excluded(self) -> None:
+        offer = {**self.base, "location_label": "Vémars (95)"}
+
+        assessment = score_offer(offer, self.project, self.policy, set(), self.today)
+
+        self.assertFalse(assessment["eligible"])
+        self.assertIn("localisation hors zone de recherche : Vémars (95)", assessment["hard_constraint_failures"])
+
     def test_score_offer_characterization_preserves_the_complete_assessment(self) -> None:
         self.assertEqual(
             score_offer(
@@ -71,10 +81,10 @@ class OfferSearchTests(unittest.TestCase):
             ),
             {
                 "eligible": True,
-                "score": 94.5,
+                "score": 87.5,
                 "reasons": [
                     "CDI, contrat prioritaire",
-                    "secteur très recherché : luxe",
+                    "secteur prioritaire : luxe",
                     "activité prioritaire : conseil et relation client",
                     "expérience transférable : administration, client, relation",
                     "offre publiée depuis moins de 8 jours",
@@ -114,7 +124,7 @@ class OfferSearchTests(unittest.TestCase):
             self.today,
         )
         self.assertTrue(assessment["eligible"])
-        self.assertEqual(assessment["score"], 94.5)
+        self.assertEqual(assessment["score"], 87.5)
         self.assertEqual(assessment["recommendation_band"], "possible")
         self.assertFalse(assessment["forced_to_end"])
         self.assertEqual(
@@ -165,7 +175,7 @@ class OfferSearchTests(unittest.TestCase):
         }
         assessment = score_offer(offer, self.project, self.policy, set(), self.today)
         self.assertTrue(assessment["eligible"])
-        self.assertEqual(assessment["score"], 87.0)
+        self.assertEqual(assessment["score"], 80.0)
         self.assertEqual(assessment["recommendation_band"], "informational")
         self.assertTrue(assessment["forced_to_end"])
         self.assertEqual(assessment["hard_constraint_failures"], [])
@@ -202,7 +212,7 @@ class OfferSearchTests(unittest.TestCase):
         )
 
         self.assertFalse(assessment["eligible"])
-        self.assertEqual(assessment["score"], 87.0)
+        self.assertEqual(assessment["score"], 80.0)
         self.assertEqual(assessment["recommendation_band"], "excluded")
         self.assertFalse(assessment["forced_to_end"])
         self.assertIn(
@@ -421,7 +431,7 @@ class OfferSearchTests(unittest.TestCase):
             self.today,
         )
         self.assertTrue(assessment["eligible"])
-        self.assertEqual(assessment["score"], 94.5)
+        self.assertEqual(assessment["score"], 87.5)
         self.assertEqual(assessment["recommendation_band"], "possible")
 
     def test_rank_offers_compiles_the_scoring_context_once(self) -> None:
@@ -487,7 +497,7 @@ class OfferSearchTests(unittest.TestCase):
                 "eligible_count": 2,
                 "excluded_count": 1,
                 "ranked_ids": ["offer-1", "offer-interim"],
-                "ranked_scores": [94.5, 76.5],
+                "ranked_scores": [87.5, 69.5],
                 "excluded": [
                     {
                         "id": "offer-excluded",
@@ -499,7 +509,7 @@ class OfferSearchTests(unittest.TestCase):
                         "location_label": "Bordeaux",
                         "sector_labels": [],
                         "phase": "policy",
-                        "score": 87.5,
+                        "score": 80.5,
                         "failures": [
                             "activité exclue : démarchage téléphonique",
                             "activité exclue : prospection physique",
@@ -552,12 +562,13 @@ class OfferSearchTests(unittest.TestCase):
         self.assertEqual(result["unique_count"], 1)
         self.assertEqual(result["offers"][0]["source_url"], "https://employer.example/jobs/123")
 
-    def test_incomplete_pool_and_unknown_conditions_are_explicit(self) -> None:
+    def test_unknown_conditions_are_explicit_without_a_volume_minimum(self) -> None:
         offer = {**self.base, "published_at": None, "conditions": {}, "summary": "Administration dans le luxe."}
         offer.pop("contract_type")
         result = rank_offers([offer], self.project, self.policy, set(), today=self.today)
         self.assertEqual(result["eligible_count"], 1)
-        self.assertTrue(any("pool actif incomplet" in warning for warning in result["warnings"]))
+        self.assertFalse(any("pool actif incomplet" in warning for warning in result["warnings"]))
+        self.assertTrue(result["pool_complete"])
         self.assertIn("type de contrat non précisé", result["offers"][0]["assessment"]["unknowns"])
 
     def test_unverified_legacy_offers_are_queued_instead_of_ranked(self) -> None:
@@ -602,19 +613,56 @@ class OfferSearchTests(unittest.TestCase):
         self.assertEqual(result["active_count"], 0)
         self.assertIn("revérification nécessaire", result["excluded"][0]["failures"][0])
 
-    def test_aggregator_offer_requires_an_exact_employer_page(self) -> None:
+    def test_current_aggregator_offer_stays_ranked_with_a_source_warning(self) -> None:
         aggregator = {**self.base, "source_kind": "aggregator"}
         verified = {
             **aggregator,
             "employer_source_url": "https://employer.example/jobs/offer-1",
         }
 
-        pending_result = rank_offers([aggregator], self.project, self.policy, set(), today=self.today)
+        aggregator_result = rank_offers([aggregator], self.project, self.policy, set(), today=self.today)
         verified_result = rank_offers([verified], self.project, self.policy, set(), today=self.today)
 
-        self.assertEqual(pending_result["active_count"], 0)
-        self.assertIn("page employeur exacte", pending_result["excluded"][0]["failures"][0])
+        self.assertEqual(aggregator_result["active_count"], 1)
+        self.assertEqual(aggregator_result["pending_offer_count"], 0)
+        self.assertTrue(
+            any("site tiers" in warning for warning in aggregator_result["offers"][0]["assessment"]["unknowns"])
+        )
         self.assertEqual(verified_result["active_count"], 1)
+        self.assertFalse(
+            any("site tiers" in warning for warning in verified_result["offers"][0]["assessment"]["unknowns"])
+        )
+
+    def test_inferred_aggregator_kind_also_receives_the_source_warning(self) -> None:
+        aggregator = {**self.base, "source_site": "unknown-aggregator.example"}
+        aggregator.pop("source_kind")
+
+        result = rank_offers([aggregator], self.project, self.policy, set(), today=self.today)
+
+        self.assertEqual(result["offers"][0]["source_kind"], "aggregator")
+        self.assertTrue(
+            any("site tiers" in warning for warning in result["offers"][0]["assessment"]["unknowns"])
+        )
+
+    def test_current_listing_page_offer_stays_ranked_with_an_explicit_warning(self) -> None:
+        listing = {
+            **self.base,
+            "source_warning": (
+                "lien vers une page qui affiche plusieurs offres ; la fiche détaillée propre à cette annonce "
+                "n’est pas disponible"
+            ),
+        }
+
+        result = rank_offers([listing], self.project, self.policy, set(), today=self.today)
+
+        self.assertEqual(result["active_count"], 1)
+        self.assertEqual(result["pending_offer_count"], 0)
+        self.assertTrue(
+            any(
+                "affiche plusieurs offres" in warning
+                for warning in result["offers"][0]["assessment"]["unknowns"]
+            )
+        )
 
     def test_report_separates_pool_eligibility_and_selection_metrics(self) -> None:
         result = rank_offers([self.base], self.project, self.policy, set(), today=self.today)
@@ -624,19 +672,14 @@ class OfferSearchTests(unittest.TestCase):
         self.assertEqual(result["active_count"], 1)
         self.assertEqual(result["eligible_count"], 1)
         self.assertEqual(result["selected_count"], 1)
-        self.assertFalse(result["pool_complete"])
-        self.assertEqual(result["report_status"], "incomplete")
-        self.assertFalse(result["finalization_allowed"])
+        self.assertTrue(result["pool_complete"])
+        self.assertEqual(result["report_status"], "complete")
+        self.assertTrue(result["finalization_allowed"])
+        self.assertNotIn("candidate_pool_minimum", result)
+        self.assertNotIn("active_pool_complete", result)
 
     def test_strict_pool_completeness_requires_declared_scan_coverage(self) -> None:
-        offers = [
-            {
-                **self.base,
-                "id": f"offer-{index}",
-                "source_url": f"https://jobs.example/offers/{index}",
-            }
-            for index in range(30)
-        ]
+        offers = [self.base]
         requirements = {
             "required_source_domains": ["jobs.example"],
             "required_query_families": ["relation-client"],
@@ -665,11 +708,74 @@ class OfferSearchTests(unittest.TestCase):
             require_scan_coverage=True,
         )
 
-        self.assertTrue(incomplete["active_pool_complete"])
         self.assertFalse(incomplete["pool_complete"])
+        self.assertNotIn("active_pool_complete", incomplete)
         self.assertEqual(incomplete["scan_coverage"]["missing_source_domains"], ["jobs.example"])
         self.assertTrue(complete["pool_complete"])
         self.assertTrue(complete["finalization_allowed"])
+
+    def test_deterministic_extraction_requires_semantic_review_before_finalization(self) -> None:
+        pending = rank_offers(
+            [
+                {
+                    **self.base,
+                    "extraction": {
+                        "method": "deterministic-json-ld",
+                        "review_status": "required",
+                        "ambiguous_fields": ["prerequisites"],
+                    },
+                }
+            ],
+            self.project,
+            self.policy,
+            set(),
+            today=self.today,
+        )
+        completed = rank_offers(
+            [
+                {
+                    **self.base,
+                    "extraction": {
+                        "method": "deterministic-json-ld",
+                        "review_status": "completed",
+                        "ambiguous_fields": [],
+                    },
+                }
+            ],
+            self.project,
+            self.policy,
+            set(),
+            today=self.today,
+        )
+
+        self.assertFalse(pending["pool_complete"])
+        self.assertFalse(pending["finalization_allowed"])
+        self.assertEqual(pending["semantic_review"]["pending_offer_ids"], ["offer-1"])
+        self.assertTrue(completed["semantic_review"]["complete"])
+        self.assertTrue(completed["finalization_allowed"])
+
+    def test_certain_policy_exclusion_does_not_require_semantic_review(self) -> None:
+        result = rank_offers(
+            [
+                {
+                    **self.base,
+                    "contract_type": "freelance",
+                    "extraction": {
+                        "method": "deterministic-html",
+                        "review_status": "required",
+                        "ambiguous_fields": ["prerequisites"],
+                    },
+                }
+            ],
+            self.project,
+            self.policy,
+            set(),
+            today=self.today,
+        )
+
+        self.assertEqual(result["policy_excluded_count"], 1)
+        self.assertTrue(result["semantic_review"]["complete"])
+        self.assertTrue(result["finalization_allowed"])
 
     def test_monthly_compensation_is_compared_as_an_annual_amount(self) -> None:
         eligible = {
@@ -687,7 +793,7 @@ class OfferSearchTests(unittest.TestCase):
         self.assertFalse(assessment["eligible"])
         self.assertIn("rémunération maximale sous le minimum validé", assessment["hard_constraint_failures"])
 
-    def test_luxury_emphasis_breaks_a_tie_between_priority_sectors(self) -> None:
+    def test_all_priority_sectors_have_equal_weight(self) -> None:
         common = {**self.base, "title": "Responsable relation client", "summary": "Relation client et coordination avec une équipe."}
         luxury = {**common, "sector_labels": ["luxe"]}
         cosmetics = {
@@ -699,7 +805,28 @@ class OfferSearchTests(unittest.TestCase):
         }
         luxury_score = score_offer(luxury, self.project, self.policy, set(), self.today)["score"]
         cosmetics_score = score_offer(cosmetics, self.project, self.policy, set(), self.today)["score"]
-        self.assertGreater(luxury_score, cosmetics_score)
+        self.assertEqual(luxury_score, cosmetics_score)
+
+    def test_all_priority_functional_domains_have_equal_weight(self) -> None:
+        common = {
+            **self.base,
+            "title": "Responsable",
+            "summary": "Travail en équipe.",
+            "required_skills": [],
+            "preferred_skills": [],
+        }
+        relation_client = {**common, "functional_domains": ["conseil et relation client"]}
+        administration = {
+            **common,
+            "id": "offer-administration",
+            "source_url": "https://jobs.example/offers/administration",
+            "functional_domains": ["gestion administrative"],
+        }
+
+        relation_score = score_offer(relation_client, self.project, self.policy, set(), self.today)["score"]
+        administration_score = score_offer(administration, self.project, self.policy, set(), self.today)["score"]
+
+        self.assertEqual(relation_score, administration_score)
 
     def test_ranked_report_keeps_email_header_fields(self) -> None:
         offer = {
@@ -731,7 +858,7 @@ class OfferSearchTests(unittest.TestCase):
             today=self.today,
         )
         self.assertEqual(result["offers"][0]["prerequisites"], [prerequisite])
-        self.assertEqual(result["offers"][0]["assessment"]["score"], 87.0)
+        self.assertEqual(result["offers"][0]["assessment"]["score"], 80.0)
         self.assertEqual(result["offers"][0]["recommendation_band"], "possible")
 
     def test_ranking_groups_sections_before_sorting_by_score(self) -> None:
@@ -774,6 +901,24 @@ class OfferSearchTests(unittest.TestCase):
         )
         self.assertEqual(result["section_counts"], {"priority": 1, "possible": 1, "informational": 1})
 
+    def test_diversity_selection_never_changes_relevance_order(self) -> None:
+        eligible = [
+            AssessedOffer(
+                offer={"id": offer_id, "employer": employer, "source_site": source},
+                identity=offer_id,
+                assessment={"recommendation_band": "possible", "score": score},
+            )
+            for offer_id, employer, source, score in (
+                ("best", "Same", "same.example", 90.0),
+                ("second", "Same", "same.example", 80.0),
+                ("third", "Other", "other.example", 70.0),
+            )
+        ]
+
+        selected = _select_diverse_offers(eligible, 3, 1, 1)
+
+        self.assertEqual([item.identity for item in selected], ["best", "second", "third"])
+
     def test_recommendation_thresholds_must_be_ordered(self) -> None:
         invalid_policy = {**self.policy, "recommendation_bands": {"priority_minimum_score": 60, "possible_minimum_score": 70}}
         self.assertEqual(
@@ -783,27 +928,23 @@ class OfferSearchTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "possible recommendation score"):
             score_offer(self.base, self.project, invalid_policy, set(), self.today)
 
-    def test_offer_pool_limits_distinguish_minimum_and_maximum(self) -> None:
+    def test_offer_pool_limit_is_only_the_one_hundred_result_maximum(self) -> None:
         self.assertEqual(invalid_offer_pool_limits(self.policy), [])
         invalid_policy = {
             **self.policy,
-            "candidate_pool_minimum": 101,
             "candidate_pool_maximum": 100,
             "result_limit": 101,
         }
         self.assertEqual(
             invalid_offer_pool_limits(invalid_policy),
-            [
-                "offer search policy: candidate pool minimum cannot exceed maximum",
-                "offer search policy: result limit cannot exceed candidate pool maximum",
-            ],
+            ["offer search policy: result limit cannot exceed candidate pool maximum"],
         )
         with self.assertRaisesRegex(ValueError, "offer result limit must be between 1 and 100"):
             rank_offers([self.base], self.project, self.policy, set(), limit=101, today=self.today)
         with self.assertRaisesRegex(ValueError, "offer result limit must be between 1 and 100"):
             rank_offers([self.base], self.project, self.policy, set(), limit=0, today=self.today)
 
-    def test_ranking_keeps_more_than_thirty_active_offers_and_returns_up_to_one_hundred(self) -> None:
+    def test_ranking_keeps_all_active_offers_and_returns_up_to_one_hundred(self) -> None:
         offers = [
             {
                 **self.base,
@@ -872,6 +1013,21 @@ class OfferSearchTests(unittest.TestCase):
         self.assertIn(
             "offer source audit: specialized portal not categorized as specialized: emploi-territorial.fr",
             invalid_offer_source_audit(miscategorizated_policy, self.source_audit),
+        )
+
+        missing_adapter_policy = {
+            **self.policy,
+            "collector": {
+                **self.policy["collector"],
+                "adapter_domains": {
+                    adapter: [domain for domain in domains if domain != "emploi.cdiscount.com"]
+                    for adapter, domains in self.policy["collector"]["adapter_domains"].items()
+                },
+            },
+        }
+        self.assertIn(
+            "offer source audit: domains missing from collector adapters: emploi.cdiscount.com",
+            invalid_offer_source_audit(missing_adapter_policy, self.source_audit),
         )
 
     def test_functional_domain_aliases_respect_the_validated_priority_order(self) -> None:

@@ -1,0 +1,56 @@
+{
+  "canonical_offer_id": "canonical-offer-c0e2223ca79b644a",
+  "captured_at": "2026-07-22T20:25:00.641368+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "Fédération Hospitalière de France Emploi",
+  "evidence": [
+    {
+      "excerpt": "psychomotricien",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Fédération Hospitalière de France Emploi",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-202500-621780-full/emploi.fhf.fr/c0e2223ca79b644adc69.html",
+    "source_sha256": "2b5300d41379d4e07e3013171efee3baa33713bdc06ff4e5db37eb754810d980"
+  },
+  "full_time": false,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-a438a0d5a0a13a7f",
+  "industry_sector_ids": [
+    "sante-et-services-publics"
+  ],
+  "last_verified_at": "2026-07-22T20:25:00.641368+02:00",
+  "location_label": "Gironde",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [],
+  "sector_labels": [
+    "sante et services publics"
+  ],
+  "source_kind": "specialized",
+  "source_site": "emploi.fhf.fr",
+  "source_url": "https://emploi.fhf.fr/emploi/298720",
+  "summary": "Poste de psychomotricien proposé par Fédération Hospitalière de France Emploi à Gironde. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "psychomotricien",
+  "verification_status": "active"
+}

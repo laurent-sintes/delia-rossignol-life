@@ -1,0 +1,57 @@
+{
+  "canonical_offer_id": "careers.floa.com:7988683",
+  "captured_at": "2026-07-22T19:56:06.775708+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "FLOA",
+  "evidence": [
+    {
+      "excerpt": "JURISTE DROIT DES AFFAIRES SENIOR (H/F) - R012",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "FLOA",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-195606-747817-full/careers.floa.com/b2a99fe4cbf950b14cb6.html",
+    "source_sha256": "b436154691e10cad0a88b4937dddd2b4fe6cb1c0ad384ccfb12de1b76036c003"
+  },
+  "full_time": true,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-25622ae685f360a0",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T19:56:06.775708+02:00",
+  "location_label": "Bordeaux, FR",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-06-29",
+  "required_skills": [
+    "expérience client",
+    "vente"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "careers.floa.com",
+  "source_url": "https://careers.floa.com/jobs/7988683-juriste-droit-des-affaires-senior-h-f-r012",
+  "summary": "Poste de JURISTE DROIT DES AFFAIRES SENIOR (H/F) - R012 proposé par FLOA à Bordeaux, FR. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "JURISTE DROIT DES AFFAIRES SENIOR (H/F) - R012",
+  "verification_status": "active"
+}

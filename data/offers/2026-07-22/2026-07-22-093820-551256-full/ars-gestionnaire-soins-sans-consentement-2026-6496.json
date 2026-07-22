@@ -1,0 +1,50 @@
+{
+  "id": "ars-gestionnaire-soins-sans-consentement-2026-6496",
+  "canonical_offer_id": "2026-6496",
+  "title": "Gestionnaire instructeur·trice soins sans consentement",
+  "employer": "ARS Nouvelle-Aquitaine",
+  "source_url": "https://ars-nouvelle-aquitaine-recrute.talent-soft.com/offre-de-emploi/emploi-dpsa-33-gestionnaire-instructeur-trice-soins-sans-consentement-h-f_6496.aspx",
+  "source_site": "ars-nouvelle-aquitaine-recrute.talent-soft.com",
+  "source_kind": "direct_employer",
+  "verification_status": "active",
+  "verification_note": "Page exacte ou portail direct revérifié pendant le scan full du 22 juillet 2026.",
+  "published_at": "2026-07-07",
+  "captured_at": "2026-07-22T09:45:53+02:00",
+  "last_verified_at": "2026-07-22T09:45:53+02:00",
+  "summary": "Instruire et gérer des dossiers de soins sans consentement au sein de l’ARS Nouvelle-Aquitaine à Bordeaux. Le portail employeur confirme un poste vacant relevant du statut titulaire fonction publique ou UCANSS ; le contenu détaillé et les conditions statutaires restent à contrôler.",
+  "location_label": "Bordeaux",
+  "contract_type": "Titulaire fonction publique / UCANSS",
+  "full_time": true,
+  "sector_labels": [
+    "santé publique"
+  ],
+  "functional_domains": [
+    "gestion administrative"
+  ],
+  "compensation": {},
+  "required_skills": [
+    "instruction de dossiers",
+    "gestion administrative"
+  ],
+  "preferred_skills": [
+    "santé publique"
+  ],
+  "conditions": {
+    "details_access": "fiche détaillée temporairement inaccessible"
+  },
+  "prerequisites": [
+    {
+      "id": "conditions-acces-ars-gestionnaire",
+      "kind": "other",
+      "description": "Conditions statutaires et d’accès au poste à vérifier",
+      "mandatory": true,
+      "profile_status": "unknown",
+      "profile_evidence_ids": [],
+      "assessment_note": "La fiche détaillée n’était pas exploitable ; les conditions statutaires doivent être vérifiées avant candidature.",
+      "evidence": {
+        "locator": "portail ARS, référence 2026-6496",
+        "excerpt": "DPSA 33 - GESTIONNAIRE INSTRUCTEUR-TRICE SOINS SANS CONSENTEMENT — Bordeaux"
+      }
+    }
+  ]
+}

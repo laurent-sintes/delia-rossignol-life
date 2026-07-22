@@ -1,0 +1,54 @@
+{
+  "canonical_offer_id": "canonical-offer-c9e6bca83ec1d687",
+  "captured_at": "2026-07-22T18:57:58.517400+02:00",
+  "conditions": {},
+  "contract_type": "stage",
+  "employer": "Betclic Group",
+  "evidence": [
+    {
+      "excerpt": "IT Workplace Internship F/M",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "Betclic Group",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-185758-489223-full/betclic-group.breezy.hr/73630a585629e82b5522.html",
+    "source_sha256": "c19abe1dd604783367aeedd27e1a0b42a9798fec27937cde90bee2636008c4e3"
+  },
+  "full_time": true,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-b319249b740cc355",
+  "industry_sector_ids": [
+    "numerique-et-services"
+  ],
+  "last_verified_at": "2026-07-22T18:57:58.517400+02:00",
+  "location_label": "Sliema, MT",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2025-08-01",
+  "required_skills": [],
+  "sector_labels": [
+    "numerique et services"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "betclic-group.breezy.hr",
+  "source_url": "https://betclic-group.breezy.hr/p/a42a4b40d0ab01-it-workplace-internship-f-m?source=GoogleJobs",
+  "summary": "Poste de IT Workplace Internship F/M proposé par Betclic Group à Sliema, MT. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "IT Workplace Internship F/M",
+  "verification_status": "active"
+}

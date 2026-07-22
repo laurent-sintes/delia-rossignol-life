@@ -1,0 +1,62 @@
+{
+  "canonical_offer_id": "recrute.leroymerlin.fr:827995",
+  "captured_at": "2026-07-22T19:06:49.303633+02:00",
+  "conditions": {},
+  "contract_type": "contrat non communiqué",
+  "employer": "Nanterre",
+  "evidence": [
+    {
+      "excerpt": "CDI - Hôte Services Clients - Nanterre - H/F",
+      "field": "title",
+      "locator": "JSON-LD JobPosting.title"
+    },
+    {
+      "excerpt": "Nanterre",
+      "field": "employer",
+      "locator": "JSON-LD JobPosting.hiringOrganization"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-json-ld",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-190649-277547-full/recrute.leroymerlin.fr/f30fca4c88d586a299a1.html",
+    "source_sha256": "dd856d32b7015c09affdc40e2ec7ec29a47d6f2ede26fa7278e5cdadae4d0ac9"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-504118fa6a12d7cc",
+  "industry_sector_ids": [
+    "agencement-et-amenagement-interieur",
+    "commerce-et-distribution"
+  ],
+  "last_verified_at": "2026-07-22T19:06:49.303633+02:00",
+  "location_label": "Nanterre (92000), FR",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-06-18",
+  "required_skills": [
+    "relation client",
+    "service client",
+    "expérience client",
+    "vente",
+    "fidélisation client"
+  ],
+  "sector_labels": [
+    "agencement et amenagement interieur",
+    "commerce et distribution"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrute.leroymerlin.fr",
+  "source_url": "https://recrute.leroymerlin.fr/jobs/827995",
+  "summary": "Poste de CDI - Hôte Services Clients - Nanterre - H/F proposé par Nanterre à Nanterre (92000), FR. Les missions et conditions détaillées figurent sur la page source vérifiée.",
+  "title": "CDI - Hôte Services Clients - Nanterre - H/F",
+  "verification_status": "active"
+}

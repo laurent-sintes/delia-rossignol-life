@@ -116,26 +116,55 @@ def command_rank_offers(args: argparse.Namespace) -> int:
     offers = [offer for path in args.offers for offer in load_offer_files(path)]
     scan_manifest = load_json(args.scan_manifest) if args.scan_manifest is not None and args.scan_manifest.is_file() else None
     scan_requirements = scan_manifest.get("requirements") if isinstance(scan_manifest, dict) else None
+    collection = scan_manifest.get("collection") if isinstance(scan_manifest, dict) else None
+    collection = collection if isinstance(collection, dict) else {}
+    visited_sources = list(dict.fromkeys([*collection.get("visited_sources", []), *(args.visited_sources or [])]))
+    covered_query_families = set(collection.get("covered_query_families", [])) | set(args.covered_query_families)
+    covered_priority_sectors = set(collection.get("covered_priority_sectors", [])) | set(args.covered_priority_sectors)
     result = rank_offers(
         offers,
         load_json(args.career_project),
         load_json(args.policy),
         collect_validated_knowledge_tokens(args.knowledge_root),
         args.limit,
-        visited_sources=args.visited_sources,
+        visited_sources=visited_sources,
         complete_profile_dimensions=collect_validated_profile_completeness(args.knowledge_root),
         sector_experience_months=collect_validated_sector_experience_months(args.knowledge_root),
         absent_sector_experience_ids=collect_validated_absent_sector_experience_ids(args.knowledge_root),
         absent_certifications=collect_validated_absent_certifications(args.knowledge_root),
         scan_requirements=scan_requirements,
-        covered_query_families=set(args.covered_query_families),
-        covered_priority_sectors=set(args.covered_priority_sectors),
+        covered_query_families=covered_query_families,
+        covered_priority_sectors=covered_priority_sectors,
         require_scan_coverage=args.require_complete_pool,
     )
     if args.output:
         write_json(args.output, result)
+    if isinstance(scan_manifest, dict) and args.scan_manifest is not None:
+        semantic_pending = int(result.get("semantic_review", {}).get("pending_count", 0))
+        status = (
+            "semantic-review-required"
+            if semantic_pending
+            else "complete" if result["finalization_allowed"] else "incomplete"
+        )
+        write_json(
+            args.scan_manifest,
+            {
+                **scan_manifest,
+                "status": status,
+                "report_summary": {
+                    "candidate_count": result["candidate_count"],
+                    "unique_count": result["unique_count"],
+                    "eligible_count": result["eligible_count"],
+                    "excluded_count": result["excluded_count"],
+                    "selected_count": result["selected_count"],
+                    "pool_complete": result["pool_complete"],
+                    "finalization_allowed": result["finalization_allowed"],
+                    "semantic_review_pending_count": semantic_pending,
+                },
+            },
+        )
     _print(result)
-    return 3 if args.require_complete_pool and not result["pool_complete"] else 0
+    return 3 if args.require_complete_pool and not result["finalization_allowed"] else 0
 
 
 def command_offer_scan(args: argparse.Namespace) -> int:
@@ -153,6 +182,38 @@ def command_offer_scan(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_collect_offers(args: argparse.Namespace) -> int:
+    from .offer_collection import collect_offers
+
+    result = collect_offers(
+        args.scan_manifest,
+        policy_path=args.policy,
+        source_audit_path=args.source_audit,
+        archive_root=args.archive_root,
+    )
+    _print(result)
+    return 0 if result["complete"] else 3
+
+
+def command_run_offer_scan(args: argparse.Namespace) -> int:
+    from .offer_scan import run_offer_scan
+
+    result = run_offer_scan(
+        args.action,
+        runtime_root=args.runtime_root,
+        offers_root=args.offers_root,
+        reports_root=args.reports_root,
+        policy_path=args.policy,
+        source_audit_path=args.source_audit,
+        archive_root=args.archive_root,
+        career_project_path=args.career_project,
+        knowledge_root=args.knowledge_root,
+        limit=args.limit,
+    )
+    _print(result)
+    return 0 if result["status"] == "complete" else 3
+
+
 def command_prepare_offer_feedback_email(args: argparse.Namespace) -> int:
     from .offer_feedback_email import prepare_offer_feedback_email
 
@@ -167,6 +228,13 @@ def command_prepare_offer_feedback_email(args: argparse.Namespace) -> int:
         bcc=args.bcc,
     )
     _print(result)
+    return 0
+
+
+def command_apply_offer_semantic_reviews(args: argparse.Namespace) -> int:
+    from .offer_review import apply_offer_semantic_reviews
+
+    _print(apply_offer_semantic_reviews(args.offers_directory, args.review_batch))
     return 0
 
 
@@ -340,6 +408,36 @@ def _add_offer_commands(subparsers: SubparserRegistry) -> None:
     offer_scan.add_argument("--source-audit", type=Path)
     offer_scan.set_defaults(func=command_offer_scan)
 
+    collect = subparsers.add_parser(
+        "collect-offers",
+        help="collect current offers from every source required by a prepared scan manifest",
+    )
+    collect.add_argument("--scan-manifest", type=Path, default=Path(".runtime/offer-search/current.json"))
+    collect.add_argument("--policy", type=Path, default=Path("config/offer-search.json"))
+    collect.add_argument("--source-audit", type=Path)
+    collect.add_argument("--archive-root", type=Path, default=Path("private/offer-scan-archives"))
+    collect.set_defaults(func=command_collect_offers)
+
+    run_scan = subparsers.add_parser(
+        "run-offer-scan",
+        help="prepare, collect and strictly rank a full or delta offer scan",
+    )
+    run_scan.add_argument("action", choices=["full", "delta"])
+    run_scan.add_argument("--runtime-root", type=Path, default=Path(".runtime/offer-search"))
+    run_scan.add_argument("--offers-root", type=Path, default=Path("data/offers"))
+    run_scan.add_argument("--reports-root", type=Path, default=Path("generated/offer-search"))
+    run_scan.add_argument("--policy", type=Path, default=Path("config/offer-search.json"))
+    run_scan.add_argument("--source-audit", type=Path)
+    run_scan.add_argument("--archive-root", type=Path, default=Path("private/offer-scan-archives"))
+    run_scan.add_argument(
+        "--career-project",
+        type=Path,
+        default=Path("private/career-project/delia-next-role-2026.json"),
+    )
+    run_scan.add_argument("--knowledge-root", type=Path, default=Path("data/knowledge"))
+    run_scan.add_argument("--limit", type=int, choices=range(1, 101))
+    run_scan.set_defaults(func=command_run_offer_scan)
+
     rank = subparsers.add_parser("rank-offers", help="rank a collected offer pool against Delia's validated career project")
     rank.add_argument("offers", type=Path, nargs="+", help="one or more job-offer JSON files or directories")
     rank.add_argument("--career-project", type=Path, default=Path("private/career-project/delia-next-role-2026.json"))
@@ -352,7 +450,7 @@ def _add_offer_commands(subparsers: SubparserRegistry) -> None:
     rank.add_argument(
         "--require-complete-pool",
         action="store_true",
-        help="return exit code 3 when the verified active pool is below candidate_pool_minimum",
+        help="return exit code 3 when the scan manifest coverage is incomplete",
     )
     rank.add_argument(
         "--visited-source",
@@ -362,6 +460,14 @@ def _add_offer_commands(subparsers: SubparserRegistry) -> None:
     )
     rank.add_argument("--output", type=Path)
     rank.set_defaults(func=command_rank_offers)
+
+    semantic_review = subparsers.add_parser(
+        "apply-offer-semantic-reviews",
+        help="apply a traceable LLM semantic review batch to collected offers",
+    )
+    semantic_review.add_argument("offers_directory", type=Path)
+    semantic_review.add_argument("review_batch", type=Path)
+    semantic_review.set_defaults(func=command_apply_offer_semantic_reviews)
 
     feedback_email = subparsers.add_parser(
         "prepare-offer-feedback-email",

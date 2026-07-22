@@ -1,0 +1,79 @@
+{
+  "id": "matmut-gestionnaire-technique-fraude-10633",
+  "title": "Gestionnaire Technique FRAUDE F/H",
+  "employer": "Matmut",
+  "source_url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-gestionnaire-technique-fraude-f-h_10633.aspx",
+  "source_site": "recrutement.matmut.fr",
+  "source_kind": "direct_employer",
+  "verification_status": "pending",
+  "published_at": "2026-06-29",
+  "captured_at": "2026-07-21T23:58:00+02:00",
+  "last_verified_at": "2026-07-21T23:58:00+02:00",
+  "summary": "Au sein du pÃ´le Lutte Anti-Fraude santÃ© Ã  Bordeaux, contrÃ´ler les remboursements, analyser les anomalies, instruire les dossiers, conduire des vÃ©rifications auprÃ¨s des adhÃ©rents et professionnels, formaliser les conclusions et proposer les dÃ©cisions adaptÃ©es.",
+  "location_label": "Bordeaux",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": [
+    "banque et assurance",
+    "bien-Ãªtre"
+  ],
+  "functional_domains": [
+    "gestion administrative"
+  ],
+  "compensation": {
+    "minimum": 31000,
+    "maximum": 31000,
+    "currency": "EUR",
+    "period": "year"
+  },
+  "required_skills": [
+    "analyse de dossiers",
+    "gestion administrative",
+    "contrÃ´le",
+    "rÃ©daction de synthÃ¨ses",
+    "confidentialitÃ©",
+    "travail en Ã©quipe"
+  ],
+  "preferred_skills": [
+    "prestations santÃ©",
+    "lutte anti-fraude",
+    "investigation"
+  ],
+  "conditions": {
+    "work_mode": "onsite",
+    "hours": "unknown"
+  },
+  "prerequisites": [
+    {
+      "id": "formation-bac2-bac3-gestion-assurance",
+      "kind": "qualification",
+      "description": "Bac+2 Ã  bac+3 en assurance, gestion des entreprises et administrations ou domaine Ã©quivalent centrÃ© sur l'analyse et les rÃ¨gles",
+      "mandatory": true,
+      "profile_status": "not_demonstrated",
+      "profile_evidence_ids": [],
+      "assessment_note": "Le niveau bac+4 est dÃ©montrÃ©, mais pas l'adÃ©quation prÃ©cise du domaine demandÃ©.",
+      "evidence": {
+        "locator": "matmut-recrute.talent-soft.com/offre-de-emploi/emploi-gestionnaire-technique-fraude-f-h_10633.aspx#profil",
+        "excerpt": "Formation Bac+2 Ã  Bac+3 en assurance, gestion des entreprises et administrations ou Ã©quivalent."
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "field": "mission",
+      "locator": "matmut-recrute.talent-soft.com/offre-de-emploi/emploi-gestionnaire-technique-fraude-f-h_10633.aspx#description",
+      "excerpt": "ContrÃ´ler les remboursements santÃ©, instruire les suspicions de fraude, formaliser les constats et proposer une dÃ©cision."
+    },
+    {
+      "field": "profile",
+      "locator": "matmut-recrute.talent-soft.com/offre-de-emploi/emploi-gestionnaire-technique-fraude-f-h_10633.aspx#profil",
+      "excerpt": "Une premiÃ¨re expÃ©rience en prestations santÃ©, contrÃ´le ou lutte anti-fraude est un plus."
+    },
+    {
+      "field": "compensation",
+      "locator": "matmut-recrute.talent-soft.com/offre-de-emploi/emploi-gestionnaire-technique-fraude-f-h_10633.aspx#salaire",
+      "excerpt": "31 000 euros bruts fixes garantis, Ã©volutifs selon profil."
+    }
+  ],
+  "verification_note": "La source a été revue pendant le scan full, mais la fiche détaillée exacte n’a pas pu être confirmée comme active."
+}

@@ -1,0 +1,56 @@
+{
+  "id": "csp-assistant-administratif-pui-2026-2150723",
+  "title": "Assistant administratif F/H",
+  "employer": "Université de Bordeaux",
+  "source_url": "https://choisirleservicepublic.gouv.fr/offre-emploi/assistant-administratif-fh-reference-2026-2150723/",
+  "source_site": "choisirleservicepublic.gouv.fr",
+  "source_kind": "specialized",
+  "verification_status": "active",
+  "published_at": "2026-01-05",
+  "captured_at": "2026-07-22T16:18:00+02:00",
+  "last_verified_at": "2026-07-22T16:18:00+02:00",
+  "summary": "Assister deux cheffes de projet dans la planification, l'organisation de comités, la coordination des partenaires, le suivi des tableaux de bord et la rédaction des rapports.",
+  "location_label": "Talence",
+  "contract_type": "CDD de projet 30 mois",
+  "full_time": true,
+  "sector_labels": [
+    "enseignement supérieur et recherche"
+  ],
+  "functional_domains": [
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "required_skills": [
+    "coordination de projets",
+    "comptes rendus",
+    "tableaux de bord",
+    "bureautique",
+    "anglais"
+  ],
+  "preferred_skills": [
+    "enseignement supérieur"
+  ],
+  "conditions": {},
+  "prerequisites": [
+    {
+      "id": "anglais-c1",
+      "kind": "language",
+      "description": "Anglais écrit et oral de niveau C1 à C2",
+      "mandatory": true,
+      "profile_status": "not_demonstrated",
+      "profile_evidence_ids": [],
+      "assessment_note": "Le niveau C1-C2 n'est pas démontré dans les connaissances validées.",
+      "evidence": {
+        "locator": "page de l'offre",
+        "excerpt": "Communication orale et écrite en anglais, niveau C1 à C2."
+      }
+    }
+  ],
+  "compensation": {
+    "minimum": 25580,
+    "maximum": 28560,
+    "currency": "EUR",
+    "period": "year"
+  },
+  "canonical_offer_id": "csp-assistant-administratif-pui-2026-2150723"
+}

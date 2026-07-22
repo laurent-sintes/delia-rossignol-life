@@ -1,0 +1,59 @@
+{
+  "id": "cdiscount-charge-customer-engagement-12218",
+  "title": "Chargé Customer Engagement F/H",
+  "employer": "Cdiscount / Octopia",
+  "source_url": "https://emploi.cdiscount.com/nos-offres-demploi/12218",
+  "source_site": "emploi.cdiscount.com",
+  "source_kind": "direct_employer",
+  "verification_status": "active",
+  "verification_note": "Page exacte ou portail direct revérifié pendant le scan full du 22 juillet 2026.",
+  "published_at": "2026-05-06",
+  "captured_at": "2026-07-22T09:45:53+02:00",
+  "last_verified_at": "2026-07-22T09:45:53+02:00",
+  "summary": "Piloter la relation et l’animation des vendeurs utilisant la solution logistique Octopia, concevoir des campagnes multicanales, suivre leur performance et réduire l’attrition. Le rôle associe engagement client, analyse des parcours, coordination Produit/Ops/Tech et amélioration continue dans un environnement bordelais hybride.",
+  "location_label": "Bordeaux",
+  "industry_sector_ids": [
+    "commerce-et-distribution"
+  ],
+  "contract_type": "CDD",
+  "full_time": true,
+  "sector_labels": [
+    "commerce et distribution"
+  ],
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion et coordination de projets"
+  ],
+  "compensation": {},
+  "required_skills": [
+    "relation client",
+    "campagnes multicanales",
+    "analyse de performance",
+    "Excel",
+    "Power BI",
+    "CRM"
+  ],
+  "preferred_skills": [
+    "Salesforce",
+    "marketing automation"
+  ],
+  "conditions": {
+    "work_mode": "hybrid",
+    "remote_days_per_week": 2
+  },
+  "prerequisites": [
+    {
+      "id": "formation-marketing-customer-engagement",
+      "kind": "qualification",
+      "description": "Formation supérieure en marketing, idéalement spécialisée en data",
+      "mandatory": true,
+      "profile_status": "not_demonstrated",
+      "profile_evidence_ids": [],
+      "assessment_note": "Le diplôme demandé n’apparaît pas dans l’inventaire complet des diplômes validés de Délia.",
+      "evidence": {
+        "locator": "fiche Cdiscount 12218, profil",
+        "excerpt": "Diplômé d’une formation supérieure en marketing (idéalement avec une spécialisation en data) et une première expérience"
+      }
+    }
+  ]
+}

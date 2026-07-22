@@ -1,0 +1,3990 @@
+{
+  "active_count": 27,
+  "active_overflow_count": 0,
+  "candidate_count": 88,
+  "candidate_pool_maximum": 100,
+  "eligible_count": 12,
+  "excluded": [
+    {
+      "contract_type": "CDI",
+      "employer": "PME d’agencement via Actual Talent",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "actual-talent-coordinateur-travaux-79587618",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux rive droite",
+      "phase": "verification",
+      "published_at": "2026-05-29",
+      "source_kind": "aggregator",
+      "source_site": "bordeaux-emplois.com",
+      "source_url": "https://www.bordeaux-emplois.com/emplois/79587618.html",
+      "summary": "Coordonner des projets de rénovation et d’agencement de salles de bains sur mesure, avec responsabilité sur l’organisation, le respect des engagements de budget et de délai et la relation client.",
+      "title": "Coordinateur Travaux H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Cabinet d’avocats via Adsearch",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "adsearch-office-manager-144781",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-19",
+      "source_kind": "aggregator",
+      "source_site": "adsearch.fr",
+      "source_url": "https://www.adsearch.fr/emplois/144781-assistant-de-direction-office-manager-h-f/",
+      "summary": "Assurer l’administration générale et la coordination quotidienne d’un cabinet d’avocats, fluidifier les processus internes et suivre les prestataires informatiques, comptables et fournisseurs.",
+      "title": "Assistant de direction / Office Manager H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Aigle",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "aigle-responsable-adjoint-11837775",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-20",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/aigle/Responsable-adjoint-f-h-cdi%2C11837775.html",
+      "summary": "Seconder la direction de la boutique Aigle de Bordeaux, offrir une expÃ©rience client premium, contribuer aux objectifs de chiffre d'affaires et aux indicateurs, soutenir et motiver l'Ã©quipe, appliquer le merchandising et assurer une exÃ©cution opÃ©rationnelle conforme aux standards de la marque.",
+      "title": "Responsable Adjoint F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "AMI Paris",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "ami-client-advisor-4409991302",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-28",
+      "source_kind": "aggregator",
+      "source_site": "linkedin.com",
+      "source_url": "https://fr.linkedin.com/jobs/view/cdi-client-advisor-galeries-lafayette-bordeaux-temps-plein-at-ami-paris-4409991302",
+      "summary": "Participer à l’ouverture d’un corner, accueillir une clientèle locale et internationale, conseiller, fidéliser, valoriser le savoir-faire de la Maison et contribuer au merchandising et au suivi des stocks.",
+      "title": "Client Advisor — Galeries Lafayette Bordeaux",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Maison Aurian via Arobase Emploi",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "arobase-boutique-vins-7fb0ca299f0b76a1",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-14",
+      "source_kind": "aggregator",
+      "source_site": "indeed.com",
+      "source_url": "https://fr.indeed.com/viewjob?jk=7fb0ca299f0b76a1",
+      "summary": "Ouvrir et développer une boutique de spiritueux d’exception : expérience client, stocks, événements, communication locale et développement d’un réseau de clients particuliers et professionnels avec prospection commerciale.",
+      "title": "Responsable de Boutique vins & spiritueux H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Aroma-Zone",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "aroma-zone-adjoint-responsable-80798774",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-30",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/80798774.html",
+      "summary": "Copiloter la boutique et l’expérience client, animer les équipes terrain, garantir merchandising, stocks, caisse et procédures, puis analyser les indicateurs pour proposer des améliorations.",
+      "title": "Adjoint Responsable Boutique H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Groupe international via Atlantis RH",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "atlantis-coordinateur-pmo-alt231124-1",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-28",
+      "source_kind": "aggregator",
+      "source_site": "atlantis-rh.fr",
+      "source_url": "https://www.atlantis-rh.fr/annonce/coordinateur-de-projet-pmo-h-f/",
+      "summary": "Analyser de grands projets internationaux de construction, diffuser les bonnes pratiques, détecter risques et opportunités et faire évoluer méthodes et outils selon qualité, coûts et délais.",
+      "title": "Coordinateur de Projet — PMO H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Aubade",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "aubade-responsable-boutique-begles-11591757",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "BÃ¨gles",
+      "phase": "verification",
+      "published_at": "2026-05-01",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/aubade/Responsable-de-boutique%2C11591757.html",
+      "summary": "Piloter la boutique Aubade de BÃ¨gles, dÃ©velopper le chiffre d'affaires et la qualitÃ© du service, animer et accompagner l'Ã©quipe, organiser l'activitÃ©, suivre les indicateurs commerciaux et garantir le merchandising, la gestion des stocks et la bonne application des procÃ©dures de l'enseigne.",
+      "title": "Responsable de Boutique H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Aubade",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "aubade-vendeuse-grands-magasins-11806898",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-19",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/aubade/Vendeuse-en-grands-magasins-cdi-35h%2C11806898.html",
+      "summary": "ReprÃ©senter Aubade aux Galeries Lafayette de Bordeaux, accueillir et conseiller la clientÃ¨le, fidÃ©liser par une qualitÃ© de service personnalisÃ©e, dÃ©velopper les ventes, participer au merchandising et prendre part Ã  la gestion quotidienne du corner, notamment l'entretien et la rÃ©ception des marchandises.",
+      "title": "Vendeuse en Grands Magasins H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Avril Cosmétiques",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "avril-responsable-boutique-80016111",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-10",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/80016111.html",
+      "summary": "Piloter une boutique de cosmétique bio : expérience client, animation de quatre conseillers, stocks et inventaires, suivi des résultats et initiatives locales pour développer chiffre d’affaires et notoriété.",
+      "title": "Responsable Boutique H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "Emploi permanent",
+      "employer": "Ville de Bègles",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "begles-chargee-communication-journaliste-2026",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bègles",
+      "phase": "verification",
+      "published_at": "2026-07-08",
+      "source_kind": "direct_employer",
+      "source_site": "mairie-begles.fr",
+      "source_url": "https://www.mairie-begles.fr/emplois/charge%C2%B7e-de-communication-journaliste-territorial%C2%B7e-f-h/",
+      "summary": "Contribuer à la communication de la Ville de Bègles dans un emploi permanent, à temps complet et de catégorie B. La liste publique confirme une date limite au 7 août 2026 ; le détail des missions, les exigences de diplôme et l’expérience attendue doivent être revérifiés.",
+      "title": "Chargé·e de communication — journaliste territorial·e F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "Emploi permanent / contractuel",
+      "employer": "Ville de Bègles",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "begles-collaboratrice-cabinet-033260709002258",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bègles",
+      "phase": "verification",
+      "published_at": "2026-07-09",
+      "source_kind": "direct_employer",
+      "source_site": "mairie-begles.fr",
+      "source_url": "https://www.mairie-begles.fr/emplois/un%C2%B7e-collaborateur%C2%B7trice-de-cabinet-f-h/",
+      "summary": "Appuyer la direction de cabinet sur les dossiers politiques et stratégiques, conseiller les élus, rédiger notes, discours et contenus, assurer la communication numérique et coordonner réunions, déplacements et relations avec l’administration, les habitants et les partenaires. Poste permanent ouvert aux contractuels.",
+      "title": "Collaborateur·trice de cabinet F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Hello bank! - BNP Paribas",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "bnp-hello-bank-conseiller-bancaire-ligne-2602",
+      "last_verified_at": "2026-07-21T17:15:00+02:00",
+      "location_label": "Mérignac",
+      "phase": "verification",
+      "published_at": "2026-06-01",
+      "source_kind": "direct_employer",
+      "source_site": "group.bnpparibas",
+      "source_url": "https://group.bnpparibas/emploi-carriere/offre-emploi/conseiller-bancaire-en-ligne-hello-bank-h-f-8",
+      "summary": "En CDI à temps plein à Mérignac, accueillir, conseiller et fidéliser les clients par chat, visio et téléphone, suivre l'activité et travailler dans une équipe de conseillers avec un parcours de formation. L'amplitude annoncée va jusqu'à 20 heures et comprend des samedis selon le roulement.",
+      "title": "Conseiller Bancaire en ligne H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Bolia",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "bolia-store-manager-new-store-146272",
+      "last_verified_at": "2026-07-20T00:24:58+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": null,
+      "source_kind": "aggregator",
+      "source_site": "candidate.hr-manager.net",
+      "source_url": "https://candidate.hr-manager.net/ApplicationInit.aspx?DepartmentId=19145&MediaId=5&ProjectId=146272&cid=1091",
+      "summary": "Pour l'ouverture d'un concept store de design scandinave à Bordeaux en novembre, piloter ventes, budget, planning et équipe, recruter et former les collaborateurs, et garantir une expérience client et une identité visuelle de haut niveau.",
+      "title": "Store Manager - New Store",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "intérim",
+      "employer": "Acteur de l’énergie via Capactuel",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "capactuel-conseiller-clientele-81239276",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-11",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81239276.html",
+      "summary": "Mission longue de réception d’appels : mise à jour des données clients, explication des factures, gestion des abonnements et travaux administratifs de back-office, sans prospection annoncée.",
+      "title": "Conseiller clientèle en réception d’appels H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Devred",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "devred-vendeur-bordeaux-lac-2026",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux Lac",
+      "phase": "verification",
+      "published_at": "2026-07-15",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/fr/s/emploi/mode-emploi%2C2.html",
+      "summary": "Accueillir et accompagner les clients du magasin Devred de Bordeaux Lac, apporter un conseil personnalisÃ©, valoriser la marque et ses produits, fidÃ©liser la clientÃ¨le, suivre les indicateurs de performance, rÃ©ceptionner les marchandises, assurer le rÃ©assort et appliquer les recommandations de merchandising.",
+      "title": "Vendeur H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Lunettes Pour Tous",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "france-travail-210HHDT",
+      "last_verified_at": "2026-07-20T20:55:35+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-25",
+      "source_kind": "aggregator",
+      "source_site": "candidat.francetravail.fr",
+      "source_url": "https://candidat.francetravail.fr/offres/recherche/detail/210HHDT",
+      "summary": "Contribuer à la gestion administrative d'une enseigne d'optique, organiser son activité selon les priorités et proposer des améliorations pour optimiser les processus.",
+      "title": "Gestionnaire Administratif Santé H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Galeries Lafayette",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "galeries-lafayette-conseiller-personnel-espace-luxe-78207309",
+      "last_verified_at": "2026-07-20T00:24:58+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-04-21",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/78207309.html",
+      "summary": "En CDI 35 heures à partir de septembre, construire une relation personnalisée avec les clients de l'espace luxe, animer et enrichir le fichier clients et proposer un accompagnement de shopping sur mesure avec des outils digitaux.",
+      "title": "Conseiller Personnel Espace Luxe H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Galeries Lafayette Bordeaux",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "galeries-lafayette-conseiller-personnel-luxe-juillet-2026",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-08",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/recrutement/groupe-galeries-lafayette.html",
+      "summary": "DÃ©velopper une relation privilÃ©giÃ©e avec la clientÃ¨le de l'espace Luxe des Galeries Lafayette, animer et enrichir le fichier clients, proposer un accompagnement shopping sur mesure en fonction des envies et budgets, utiliser les outils digitaux et contribuer au chiffre d'affaires en CDI 35 heures.",
+      "title": "Conseiller Personnel Espace Luxe F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Galeries Lafayette",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "galeries-lafayette-manager-vente-78207316",
+      "last_verified_at": "2026-07-20T00:24:58+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-16",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/78207316.html",
+      "summary": "En CDI à partir de septembre, animer et développer une équipe de vente sur le terrain, organiser la satisfaction client et piloter le chiffre d'affaires ainsi que les objectifs budgétaires individuels et collectifs.",
+      "title": "Manager de Vente H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Galeries Lafayette Bordeaux",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "galeries-lafayette-service-client-4401091856",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-12",
+      "source_kind": "aggregator",
+      "source_site": "linkedin.com",
+      "source_url": "https://fr.linkedin.com/jobs/view/employ%C3%A9-service-client-f-h-cdi-at-galeries-lafayette-4401091856",
+      "summary": "Garantir un parcours client fluide de l’accueil à l’encaissement : remboursements, services magasin, fidélité, constitution de dossiers et résolution des litiges dans un univers lifestyle premium.",
+      "title": "Employé Service Client F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Client de Geco Recrutement",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "geco-assistant-direction-79800391",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-04",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/79800391.html",
+      "summary": "Soutenir la direction et l’équipe : documents, agendas, échéances, événements, suivi des dossiers et circulation de l’information, dans un rôle autonome et polyvalent.",
+      "title": "Assistant de Direction H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Gerard Darel",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "gerard-darel-conseillere-vente-bordeaux-2026",
+      "last_verified_at": "2026-07-21T17:15:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-29",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/fr/s/emploi/vendeur-vendeuse-bordeaux.html",
+      "summary": "Accueillir chaleureusement la clientèle du point de vente Gerard Darel de Bordeaux, conseiller et vendre les collections, développer une relation personnalisée et durable, fidéliser les clientes et participer aux réassorts ainsi qu'à la bonne présentation de la boutique en CDI à temps plein.",
+      "title": "Conseillère de Vente H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Glowee",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "glowee-vendeuse-luxe-ae82a13ef5e75793",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-05-19",
+      "source_kind": "aggregator",
+      "source_site": "indeed.com",
+      "source_url": "https://fr.indeed.com/viewjob?jk=ae82a13ef5e75793",
+      "summary": "Accueillir et conseiller une clientèle dans un environnement haut de gamme, assurer la présentation des produits, gérer les stocks et mettre en avant les nouveautés.",
+      "title": "Vendeuse luxe H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Hermès",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "hermes-charge-sav-4423205937",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-16",
+      "source_kind": "aggregator",
+      "source_site": "linkedin.com",
+      "source_url": "https://fr.linkedin.com/jobs/view/cdi-charg%C3%A9-sav-h-f-magasin-de-bordeaux-at-herm%C3%A8s-4423205937",
+      "summary": "Prendre en charge les demandes après-vente en boutique, maintenir une relation personnalisée, informer les clients du suivi des réparations, gérer les litiges et garantir le niveau de service de la Maison.",
+      "title": "Chargé SAV H/F — Magasin de Bordeaux",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "IRO",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "iro-premier-vendeur-11837295",
+      "last_verified_at": "2026-07-21T17:15:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-07",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/iro/Premier-vendeur%2C11837295.html",
+      "summary": "En CDI à temps plein aux Galeries Lafayette de Bordeaux dès le 1er septembre, assurer l'excellence de la relation client, servir de référente sur le floor, accompagner l'intégration de l'équipe, suivre les KPI, le merchandising et les stocks.",
+      "title": "Premier Vendeur H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "IZAC",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "izac-responsable-adjoint-11866581",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-16",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/izac/Responsable-adjoint-de-magasin-h-f-bordeaux%2C11866581.html",
+      "summary": "Assister le responsable du magasin IZAC de Bordeaux dans le pilotage quotidien, l'animation de l'Ã©quipe, le dÃ©veloppement des ventes, le suivi des objectifs et des indicateurs, la qualitÃ© de l'expÃ©rience client ainsi que la bonne exÃ©cution des opÃ©rations et standards de la boutique.",
+      "title": "Responsable Adjoint de Magasin H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "IZI by EDF",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "izi-conseiller-relation-client-8056920",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Le Haillan (Bordeaux)",
+      "phase": "verification",
+      "published_at": "2026-07-13",
+      "source_kind": "aggregator",
+      "source_site": "recrutement.izi-by-edf.fr",
+      "source_url": "https://recrutement.izi-by-edf.fr/jobs/8056920-conseiller-relation-client-f-h",
+      "summary": "Au sein de l’agence du Haillan, assurer la satisfaction client, comprendre les besoins et proposer des solutions adaptées en coordination avec le responsable d’agence et l’équipe.",
+      "title": "Conseiller Relation Client F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "K-Way",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "kway-responsable-adjoint-begles-11467770",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "BÃ¨gles",
+      "phase": "verification",
+      "published_at": "2026-04-01",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/Responsable-adjoint-k-way-begles%2C11467770.html",
+      "summary": "Seconder le responsable de la boutique K-Way de BÃ¨gles dans l'animation de l'Ã©quipe, le suivi des ventes et indicateurs, la qualitÃ© du conseil client, les opÃ©rations commerciales, la gestion des stocks et l'application des procÃ©dures et standards visuels de la marque.",
+      "title": "Responsable Adjoint H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "La Poste Groupe",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "la-poste-relation-client-80563709",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-24",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/80563709.html",
+      "summary": "Gérer une relation commerciale à distance multicanale et proposer des solutions financières. Les campagnes d’appels sortants constituent une part explicite du poste et relèvent du démarchage téléphonique exclu.",
+      "title": "Conseiller en Service Relation Client H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Lacoste",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "lacoste-vendeur-4417486234",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-28",
+      "source_kind": "aggregator",
+      "source_site": "linkedin.com",
+      "source_url": "https://fr.linkedin.com/jobs/view/vendeur-euse-cdi-f-h-at-lacoste-4417486234",
+      "summary": "Offrir un conseil et un service premium, fidéliser les clients, contribuer aux ventes, respecter les standards de merchandising et incarner la marque dans une organisation omnicanale.",
+      "title": "Vendeur CDI F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Leroy Merlin Bordeaux Lac",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "leroy-merlin-conseiller-vente-amenagement-838552",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux Lac",
+      "phase": "verification",
+      "published_at": "2026-07-21",
+      "source_kind": "direct_employer",
+      "source_site": "recrute.leroymerlin.fr",
+      "source_url": "https://recrute.leroymerlin.fr/jobs/838552",
+      "summary": "Conseiller les clients du magasin Bordeaux-Lac et les accompagner dans leurs projets d'amÃ©nagement, de la comprÃ©hension du besoin Ã  la conception de solutions sur mesure. Le poste combine vente directe, suivi de projets, choix des produits et services, tenue du rayon et coopÃ©ration avec une Ã©quipe de proximitÃ©.",
+      "title": "Conseiller en vente et en amÃ©nagement H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Centre médical via LIP Tertiaire",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "lip-responsable-administratif-80751400",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-29",
+      "source_kind": "aggregator",
+      "source_site": "bordeaux-emplois.com",
+      "source_url": "https://www.bordeaux-emplois.com/emplois/80751400.html",
+      "summary": "Manager 18 assistants médicaux répartis sur huit sites, animer les réunions, accompagner l’intégration et la montée en compétences, puis assurer le lien entre administration, opérations et direction.",
+      "title": "Responsable Administratif H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "MAIF",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "maif-conseiller-societaires-10301",
+      "last_verified_at": "2026-07-20T20:55:35+02:00",
+      "location_label": "Saint-Médard-en-Jalles / Mérignac",
+      "phase": "verification",
+      "published_at": "2026-06-12",
+      "source_kind": "direct_employer",
+      "source_site": "recrutement.maif.fr",
+      "source_url": "https://recrutement.maif.fr/offre-de-emploi/emploi-conseiller-societaires-en-face-a-face-f-h_10301.aspx",
+      "summary": "Conseiller les sociétaires et prospects en agence, par téléphone ou par mail, analyser leurs besoins, proposer les produits adaptés et fidéliser la clientèle dans une relation de confiance.",
+      "title": "Conseiller sociétaires en face à face F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Mat de Misaine",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "mat-de-misaine-conseil-vente-81195709",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-10",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81195709.html",
+      "summary": "Accueillir, conseiller et servir une clientèle fidèle pour une marque française de mode casual chic, en équipe, avec participation à la tenue et à la valorisation de l’espace de vente.",
+      "title": "Conseiller de Vente H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Matmut",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "matmut-directeur-agence-saint-medard-10523",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Saint-MÃ©dard-en-Jalles",
+      "phase": "verification",
+      "published_at": null,
+      "source_kind": "direct_employer",
+      "source_site": "recrutement.matmut.fr",
+      "source_url": "https://recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx",
+      "summary": "Piloter une agence Matmut Ã  Saint-MÃ©dard-en-Jalles, animer et accompagner l'Ã©quipe de conseillers, suivre l'activitÃ© et la performance du portefeuille et garantir une expÃ©rience sociÃ©taire de proximitÃ©.",
+      "title": "Directeur(trice) d'Agence - Saint-MÃ©dard-en-Jalles",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Matmut",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "matmut-gestionnaire-technique-fraude-10633",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-29",
+      "source_kind": "direct_employer",
+      "source_site": "recrutement.matmut.fr",
+      "source_url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-gestionnaire-technique-fraude-f-h_10633.aspx",
+      "summary": "Au sein du pÃ´le Lutte Anti-Fraude santÃ© Ã  Bordeaux, contrÃ´ler les remboursements, analyser les anomalies, instruire les dossiers, conduire des vÃ©rifications auprÃ¨s des adhÃ©rents et professionnels, formaliser les conclusions et proposer les dÃ©cisions adaptÃ©es.",
+      "title": "Gestionnaire Technique FRAUDE F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "NocibÃ©",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "nocibe-estheticienne-bordeaux-intendance-2026",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux Intendance",
+      "phase": "verification",
+      "published_at": "2026-07-17",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/s/emploi/Estheticienne.html",
+      "summary": "RÃ©aliser des soins visage et corps dans le magasin NocibÃ© Bordeaux Intendance, conseiller les clients sur leurs routines beautÃ© et bien-Ãªtre, dÃ©velopper la vente en cabine, fidÃ©liser la clientÃ¨le et participer activement Ã  la vie du magasin et Ã  l'image premium de l'enseigne.",
+      "title": "EsthÃ©ticienne F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Entreprise de négoce et distribution viti-vini via Page Personnel",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "page-personnel-gestionnaire-adv-france-79782528",
+      "last_verified_at": "2026-07-20T20:55:35+02:00",
+      "location_label": "Nord de Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-04",
+      "source_kind": "aggregator",
+      "source_site": "bordeaux-emplois.com",
+      "source_url": "https://www.bordeaux-emplois.com/emplois/79782528.html",
+      "summary": "Assurer la gestion administrative des ventes en France et le suivi complet des dossiers clients, de la saisie des commandes à la facturation, en coordonnant les équipes commerciales et logistiques.",
+      "title": "Gestionnaire ADV France H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "freelance",
+      "employer": "Startup via Perles Office",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "perles-office-manager-freelance",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-16",
+      "source_kind": "aggregator",
+      "source_site": "lesbonsfreelances.com",
+      "source_url": "https://www.lesbonsfreelances.com/mission/office-manager-responsable-freelance-bordeaux",
+      "summary": "Mission de deux jours par semaine mêlant office management, administration RH et pré-comptabilité dans une startup internationale, avec forte autonomie.",
+      "title": "Office Manager / Responsable RH freelance H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "intérim",
+      "employer": "Établissement de santé via Randstad",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "randstad-assistant-direction-81225620",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-11",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81225620.html",
+      "summary": "Assistanat de direction dans un établissement de santé : accueil, planification, rédaction autonome, priorisation, fournitures et parc informatique, avec coordination interprofessionnelle et travail en équipe.",
+      "title": "Assistant de Direction F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Sunglass Hut France",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "rayban-store-manager-80023286",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-10",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/80023286.html",
+      "summary": "Piloter un point de vente Ray-Ban, les indicateurs, stocks et reportings ; animer, coacher et recruter l’équipe ; suivre l’administration RH, le merchandising et la fidélisation client.",
+      "title": "Store Manager — Ray-Ban H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDD",
+      "employer": "Rectorat de Bordeaux",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "rectorat-gestionnaire-81317593",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-15",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81317593.html",
+      "summary": "Gérer un portefeuille de dossiers RH et de paie : fiabilisation des données, contrôle des pièces, saisie, anomalies et régularisations, au sein d’une équipe de service public.",
+      "title": "Gestionnaire Administratif et Financier H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Enseigne mode confidentielle",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "responsable-magasin-confidentiel-11863859",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-14",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/Responsable-de-magasin-35h%2C11863859.html",
+      "summary": "Diriger une boutique de mode Ã  Bordeaux, dÃ©velopper les ventes et la satisfaction client, suivre les indicateurs et plans d'action, recruter et accompagner l'Ã©quipe, maÃ®triser les approvisionnements, les stocks et la dÃ©marque, puis garantir le respect des standards de merchandising.",
+      "title": "Responsable de Magasin H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Rituals Cosmetics",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "rituals-adjoint-merignac-79481939",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Mérignac",
+      "phase": "verification",
+      "published_at": "2026-06-27",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/79481939.html",
+      "summary": "Accompagner et fédérer l’équipe, garantir l’expérience client, développer les indicateurs, coacher les collaborateurs, gérer stocks et inventaires et soutenir l’administration de l’équipe.",
+      "title": "Responsable Adjoint — CDI 35H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Rouje",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "rouje-vendeur-bordeaux-11750320",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-19",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/rouje/Vendeur-h-f%2C11750320.html",
+      "summary": "Accueillir et conseiller de faÃ§on personnalisÃ©e la clientÃ¨le de la boutique Rouje de Bordeaux, proposer des silhouettes adaptÃ©es, fidÃ©liser et enrichir la base clients, finaliser les ventes, suivre les indicateurs commerciaux et garantir une prÃ©sentation soignÃ©e de la boutique et des collections.",
+      "title": "Vendeur H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "fonction publique territoriale",
+      "employer": "Centre de gestion départemental de la Gironde",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "service-public-O033260630000048",
+      "last_verified_at": "2026-07-20T20:55:35+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-30",
+      "source_kind": "specialized",
+      "source_site": "choisirleservicepublic.gouv.fr",
+      "source_url": "https://choisirleservicepublic.gouv.fr/offre-emploi/gestionnaires-des-operations-hf---1-poste---centre-de-gestion-departemental-de-la-gironde-fpt-reference-O033260630000048/",
+      "summary": "Assurer la gestion et le suivi d'opérations de concours et d'examens professionnels en collaboration avec le chargé d'opérations, le référent et l'équipe, dans le respect des procédures et des délais.",
+      "title": "Gestionnaire des opérations H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Groupe SII",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "sii-office-manager-80832913",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-05",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/80832913.html",
+      "summary": "Pilier du fonctionnement quotidien du site : accueil, administration du personnel, support transverse, achats, fournisseurs, contrats de prestations, flotte et services généraux, avec de nombreux interlocuteurs internes et externes.",
+      "title": "Office Manager H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Client de Skills Bordeaux",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "skills-adv-export-81285221",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Blanquefort",
+      "phase": "verification",
+      "published_at": "2026-07-14",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81285221.html",
+      "summary": "Gérer l’administration des ventes export, la relation client internationale et les flux commerciaux, en lien avec les équipes ; les incoterms, documents douaniers et procédures export sont particulièrement appréciés.",
+      "title": "Gestionnaire ADV Export H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Entreprise historique via Skills Bordeaux",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "skills-adv-relation-clients-79735460",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Cestas",
+      "phase": "verification",
+      "published_at": "2026-06-03",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/79735460.html",
+      "summary": "Prendre en charge l’administration des ventes, le suivi des commandes et la relation client, produire des statistiques fiables et participer à un projet de structuration avec proactivité et coordination des équipes.",
+      "title": "ADV & Relation Clients H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Société Générale",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "societe-generale-conseiller-clientele-260003XR",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux Chartrons",
+      "phase": "verification",
+      "published_at": "2026-03-31",
+      "source_kind": "direct_employer",
+      "source_site": "societegenerale.com",
+      "source_url": "https://careers.societegenerale.com/offres-d-emploi/conseiller-clientele-essentiel-260003XR-fr",
+      "summary": "Accompagner les clients de l'agence Bordeaux Chartrons dans leurs projets, conseiller des solutions bancaires et d'assurance, fidéliser et développer le portefeuille, analyser les situations financières et les risques, promouvoir les usages digitaux et travailler en synergie avec les experts de la banque.",
+      "title": "Conseiller Clientèle Essentiel H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Soeur",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "soeur-responsable-corner-bordeaux-2026",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-01",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/ville/Bordeaux.html",
+      "summary": "Piloter un corner Soeur Ã  Bordeaux, animer l'Ã©quipe de vente, dÃ©velopper le chiffre d'affaires, accueillir et fidÃ©liser la clientÃ¨le, faire respecter l'identitÃ© visuelle et les procÃ©dures merchandising, puis garantir l'organisation quotidienne et la bonne gestion des stocks du point de vente.",
+      "title": "Responsable de Corner H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Sunglass Hut France",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "sunglass-hut-conseiller-vente-11878891",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-21",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/sunglass-hut-france/Conseiller-de-vente-sunglass-hut-galeries-lafayette%2C11878891.html",
+      "summary": "Conseiller une clientÃ¨le franÃ§aise et internationale au corner Sunglass Hut des Galeries Lafayette de Bordeaux, personnaliser l'expÃ©rience de vente, dÃ©velopper le chiffre d'affaires et les indicateurs, participer aux formations produits, garantir le merchandising et contribuer au suivi rigoureux des stocks.",
+      "title": "Conseiller de Vente - Sunglass Hut Galeries Lafayette H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Tara Jarmon",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "tara-jarmon-responsable-corner-75434413",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-02-05",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/75434413.html",
+      "summary": "Développer les ventes et l’expérience client, recruter, former et coacher l’équipe, piloter les indicateurs, le merchandising, les flux financiers, les procédures RH et les stocks d’un corner mode.",
+      "title": "Responsable Corner — Galeries Lafayette Bordeaux H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "TCS — Groupe Sterne",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "tcs-conseiller-service-clients-79173745",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-19",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/79173745.html",
+      "summary": "Dans une équipe de dix personnes, gérer les réclamations par mail et téléphone, coordonner les services concernés et résoudre les problèmes avec autonomie dans un environnement de transport premium.",
+      "title": "Conseiller Service Clients H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Maison de luxe via Theodore Search",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "theodore-responsable-boutique-luxe",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-11",
+      "source_kind": "aggregator",
+      "source_site": "theodore-search.com",
+      "source_url": "https://www.theodore-search.com/en/our-offers/",
+      "summary": "Opportunité actuelle de responsable de boutique dans le luxe à Bordeaux. Le détail des missions et des conditions doit être confirmé sur la fiche complète du cabinet avant toute candidature.",
+      "title": "Responsable de Boutique Luxe F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Tommy Hilfiger - PVH",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "tommy-hilfiger-conseiller-vente-11490388",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-04-13",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/Conseiller-ere-de-vente-tommy-hilfiger-bordeaux-cdi-35h%2C11490388.html",
+      "summary": "Faire vivre une expÃ©rience personnalisÃ©e aux clients de la boutique Tommy Hilfiger de Bordeaux, dÃ©velopper les ventes, garantir la prÃ©sentation du point de vente, rÃ©ceptionner les livraisons, gÃ©rer les stocks et les encaissements et transmettre une connaissance enthousiaste de la mode et des produits.",
+      "title": "Conseiller de Vente H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Client de Transicia",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "transicia-relation-client-77838923",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-04-10",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/77838923.html",
+      "summary": "Relation client B2B à distance dans un environnement technique, avec support, vulgarisation, appels sortants et objectifs commerciaux ; le poste comporte du démarchage téléphonique.",
+      "title": "Chargé de Relation Client B to B H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDD",
+      "employer": "Université de Bordeaux",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "universite-gestionnaire-labos-81311925",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-15",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81311925.html",
+      "summary": "Assurer la gestion administrative et financière courante de deux laboratoires : déplacements, courriers, bases de données, information des interlocuteurs et soutien logistique aux équipes.",
+      "title": "Gestionnaire Administratif et Financier de laboratoires H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "temps partiel",
+      "employer": "Entreprise Vince",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "vince-assistant-direction-78115070",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-04-17",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/78115070.html",
+      "summary": "Assistanat de direction et gestion administrative générale : courrier, devis, facturation, fournisseurs, petite comptabilité, planning et réunions, sur un contrat de quinze heures hebdomadaires.",
+      "title": "Assistant de Direction polyvalent H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Zadig & Voltaire",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "zadig-voltaire-conseiller-vente-11878511",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-21",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/zadig-voltaire/Conseiller-de-vente-cdi-35h-bordeaux%2C11878511.html",
+      "summary": "Accueillir et fidÃ©liser une clientÃ¨le exigeante dans la boutique bordelaise Zadig & Voltaire, participer activement aux ventes et aux indicateurs, rÃ©aliser les encaissements, garantir les standards de merchandising, gÃ©rer rÃ©assorts et stocks et assurer le suivi qualitatif du service client.",
+      "title": "Conseiller de Vente H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDD",
+      "employer": "ARS Nouvelle-Aquitaine",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : CDD"
+      ],
+      "id": "ars-chef-projet-segur-2026-6502",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 27.0,
+      "sector_labels": [
+        "santé publique"
+      ],
+      "source_url": "https://ars-nouvelle-aquitaine-recrute.talent-soft.com/offre-de-emploi/emploi-dd33-chef-fe-de-projet-territorial-e-declinaison-du-segur-investissement-dans-les-territoires-h-f_6502.aspx",
+      "title": "Chef·fe de projet territorial·e — Ségur investissement"
+    },
+    {
+      "contract_type": "Titulaire fonction publique / UCANSS",
+      "employer": "ARS Nouvelle-Aquitaine",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : Titulaire fonction publique / UCANSS"
+      ],
+      "id": "ars-gestionnaire-soins-sans-consentement-2026-6496",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 29.0,
+      "sector_labels": [
+        "santé publique"
+      ],
+      "source_url": "https://ars-nouvelle-aquitaine-recrute.talent-soft.com/offre-de-emploi/emploi-dpsa-33-gestionnaire-instructeur-trice-soins-sans-consentement-h-f_6496.aspx",
+      "title": "Gestionnaire instructeur·trice soins sans consentement"
+    },
+    {
+      "contract_type": "CDD",
+      "employer": "Cdiscount",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : CDD"
+      ],
+      "id": "cdiscount-assistant-relation-clients-vendeurs-12298",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 39.0,
+      "sector_labels": [
+        "commerce et distribution"
+      ],
+      "source_url": "https://emploi.cdiscount.com/nos-offres-demploi/12298",
+      "title": "Assistant Relation Clients et Vendeurs F/H"
+    },
+    {
+      "contract_type": "CDD",
+      "employer": "Cdiscount",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : CDD"
+      ],
+      "id": "cdiscount-assistant-support-relation-client-12302",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 41.0,
+      "sector_labels": [
+        "commerce et distribution"
+      ],
+      "source_url": "https://emploi.cdiscount.com/nos-offres-demploi/12302",
+      "title": "Assistant Support Relation Client F/H"
+    },
+    {
+      "contract_type": "CDD",
+      "employer": "Cdiscount / Octopia",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : CDD",
+        "diplôme obligatoire non satisfait : Formation supérieure en marketing, idéalement spécialisée en data"
+      ],
+      "id": "cdiscount-charge-customer-engagement-12218",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 39.0,
+      "sector_labels": [
+        "commerce et distribution"
+      ],
+      "source_url": "https://emploi.cdiscount.com/nos-offres-demploi/12218",
+      "title": "Chargé Customer Engagement F/H"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Cdiscount",
+      "employer_source_url": null,
+      "failures": [
+        "famille de profil exclue : profil spécialiste Data"
+      ],
+      "id": "cdiscount-directeur-data-12303",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 58.0,
+      "sector_labels": [
+        "commerce et distribution"
+      ],
+      "source_url": "https://emploi.cdiscount.com/nos-offres-demploi/12303",
+      "title": "Directeur Data F/H"
+    },
+    {
+      "contract_type": "CDD jusqu'au 31 août 2029",
+      "employer": "DRFIP Gironde",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : CDD jusqu'au 31 août 2029",
+        "rémunération maximale sous le minimum validé"
+      ],
+      "id": "drfip-assistant-administratif-2026-31706",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 24.0,
+      "sector_labels": [
+        "service public",
+        "finances publiques"
+      ],
+      "source_url": "https://choisirleservicepublic.gouv.fr/offre-emploi/MEF_2026-31706/",
+      "title": "Assistant administratif au service des impôts des particuliers"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Filhet-Allard",
+      "employer_source_url": null,
+      "failures": [
+        "diplôme obligatoire non satisfait : Bac+2 en banque, assurance ou finance"
+      ],
+      "id": "filhet-allard-back-office-declarations-1759",
+      "location_label": "MÃ©rignac",
+      "phase": "policy",
+      "score": 83.0,
+      "sector_labels": [
+        "banque et assurance"
+      ],
+      "source_url": "https://groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-back-office-declarations-mensuelles-h-f_1759.aspx",
+      "title": "Gestionnaire Back Office DÃ©clarations Mensuelles H/F"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Filhet-Allard",
+      "employer_source_url": null,
+      "failures": [
+        "diplôme obligatoire non satisfait : Formation juridique et/ou en droit des assurances",
+        "expérience sectorielle obligatoire non satisfaite : Au moins deux ans d'expÃ©rience chez un assureur ou un courtier"
+      ],
+      "id": "filhet-allard-production-risques-industriels-1706",
+      "location_label": "MÃ©rignac",
+      "phase": "policy",
+      "score": 77.0,
+      "sector_labels": [
+        "banque et assurance"
+      ],
+      "source_url": "https://groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-production-risques-industriels-dommages-aux-biens-h-f_1706.aspx",
+      "title": "Gestionnaire Production Risques Industriels / Dommages aux Biens H/F"
+    },
+    {
+      "contract_type": "Emploi permanent / contractuel",
+      "employer": "Département de la Gironde",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : Emploi permanent / contractuel"
+      ],
+      "id": "gironde-coordination-qualite-comptable-i857",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 20.0,
+      "sector_labels": [
+        "service public"
+      ],
+      "source_url": "https://www.gironde.fr/offres-d-emploi/chargee-de-coordination-qualite-comptable-et-outils-metiers",
+      "title": "Chargé·e de coordination qualité comptable et outils métiers"
+    },
+    {
+      "contract_type": "Emploi public contractuel",
+      "employer": "Rectorat de Bordeaux",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : Emploi public contractuel"
+      ],
+      "id": "rectorat-bordeaux-gestionnaire-administratif-financier-43336",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 23.9,
+      "sector_labels": [
+        "service public",
+        "éducation"
+      ],
+      "source_url": "https://choisirleservicepublic.gouv.fr/offre-emploi/MENJ-04-2026-43336/",
+      "title": "Gestionnaire administratif et financier"
+    },
+    {
+      "contract_type": "Emploi public ouvert aux titulaires et contractuels",
+      "employer": "Préfecture de la Gironde — SGAR",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : Emploi public ouvert aux titulaires et contractuels"
+      ],
+      "id": "sgar-assistante-charges-mission-120787",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 26.0,
+      "sector_labels": [
+        "service public"
+      ],
+      "source_url": "https://choisirleservicepublic.gouv.fr/offre-emploi/sgar-33--assistante-charges-de-mission-et-de-la-secretaire-generale-de-la-conference-des-parties-reference-MINT_BA033ATC-120787/",
+      "title": "Assistant·e des chargés de mission et de la secrétaire générale"
+    },
+    {
+      "contract_type": "Emploi public ouvert aux titulaires et contractuels",
+      "employer": "Préfecture de la Gironde — SGAR",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : Emploi public ouvert aux titulaires et contractuels"
+      ],
+      "id": "sgar-assistante-secretaire-general-119744",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 20.0,
+      "sector_labels": [
+        "service public"
+      ],
+      "source_url": "https://choisirleservicepublic.gouv.fr/offre-emploi/sgar-33--assistante-du-secretaire-general-pour-les-affaires-regionales-et-des-deux-adjoints-reference-MINT_BA033ATB-119744/",
+      "title": "Assistant·e du Secrétaire Général et de ses adjoints"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Société Générale",
+      "employer_source_url": null,
+      "failures": [
+        "certification obligatoire non satisfaite : Certification AMF"
+      ],
+      "id": "societe-generale-conseiller-clientele-260006HF",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 82.0,
+      "sector_labels": [
+        "banque et assurance"
+      ],
+      "source_url": "https://careers.societegenerale.com/offres-d-emploi/conseiller-clientele-essentiel-260006HF-fr",
+      "title": "Conseiller Clientèle Essentiel"
+    },
+    {
+      "contract_type": "CDD 12 mois",
+      "employer": "Université de Bordeaux",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : CDD 12 mois",
+        "rémunération maximale sous le minimum validé"
+      ],
+      "id": "universite-bordeaux-assistant-administratif-financier-2352279",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 24.0,
+      "sector_labels": [
+        "enseignement supérieur",
+        "service public"
+      ],
+      "source_url": "https://choisirleservicepublic.gouv.fr/offre-emploi/assistant-administratif-et-financier---pole-pe-fh-reference-2026-2352279/",
+      "title": "Assistant administratif et financier — Pôle PE F/H"
+    }
+  ],
+  "excluded_count": 76,
+  "finalization_allowed": true,
+  "offers": [
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [
+          "offre ancienne : 82 jours"
+        ],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "bordeaux",
+          "client",
+          "clients",
+          "conseiller",
+          "contribuer",
+          "corner",
+          "entretenir",
+          "galeries",
+          "lafayette",
+          "lors",
+          "luxe",
+          "mode",
+          "ouverture",
+          "porter",
+          "relation",
+          "vente"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur prioritaire : luxe",
+          "activité prioritaire : conseil et relation client",
+          "expérience transférable : bordeaux, client, clients, conseiller, contribuer"
+        ],
+        "recommendation_band": "priority",
+        "recommendation_reasons": [
+          "forte correspondance sans prérequis obligatoire incertain"
+        ],
+        "score": 81.0,
+        "unknowns": [
+          "travail en équipe à confirmer",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": {},
+      "conditions": {
+        "hours": "unknown",
+        "work_mode": "onsite"
+      },
+      "contract_type": "CDI",
+      "employer": "AMI Paris",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "ami-client-advisor-fashionjobs-11596170",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T09:45:53+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [
+        {
+          "assessment_note": "Les expÃ©riences validÃ©es couvrent la vente dans la mode et le luxe ; 23 mois prÃ©cis sont documentÃ©s chez Sergio Rossi et 9 mois chez Promod.",
+          "description": "ExpÃ©rience significative dans la vente et sensibilitÃ© au prÃªt-Ã -porter de luxe",
+          "evidence": {
+            "excerpt": "ExpÃ©rience significative dans la vente et forte sensibilitÃ© pour la mode et le prÃªt-Ã -porter de luxe.",
+            "locator": "fashionjobs.com/emploi/ami-paris/11596170#profil"
+          },
+          "id": "experience-vente-luxe-significative",
+          "industry_sector_ids": [
+            "mode-et-pret-a-porter",
+            "luxe"
+          ],
+          "kind": "sector_experience",
+          "mandatory": true,
+          "profile_evidence_ids": [
+            "experience:sergio-rossi-paris",
+            "experience:prada-paris",
+            "experience:promod-bordeaux"
+          ],
+          "profile_status": "met"
+        }
+      ],
+      "published_at": "2026-05-01",
+      "rank": 1,
+      "recommendation_band": "priority",
+      "sector_labels": [
+        "luxe",
+        "commerce et distribution"
+      ],
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/ami-paris/Cdi-client-advisor-galeries-lafayette-bordeaux%2C11596170.html",
+      "summary": "ReprÃ©senter AMI lors de l'ouverture de son corner homme aux Galeries Lafayette de Bordeaux, accueillir et conseiller une clientÃ¨le premium, dÃ©velopper les ventes et la fidÃ©lisation, entretenir le fichier clients et contribuer Ã  la tenue, au merchandising et au fonctionnement quotidien du point de vente.",
+      "title": "Client Advisor - Galeries Lafayette Bordeaux",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [
+          "offre ancienne : 77 jours"
+        ],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "anglais",
+          "bordeaux",
+          "client",
+          "conseiller",
+          "contribuer",
+          "corner",
+          "galeries",
+          "indicateurs",
+          "lafayette",
+          "marque",
+          "mode",
+          "relation",
+          "service",
+          "suivre",
+          "vente"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur prioritaire : luxe",
+          "activité prioritaire : conseil et relation client",
+          "expérience transférable : anglais, bordeaux, client, conseiller, contribuer"
+        ],
+        "recommendation_band": "priority",
+        "recommendation_reasons": [
+          "forte correspondance sans prérequis obligatoire incertain"
+        ],
+        "score": 80.0,
+        "unknowns": [
+          "travail en équipe à confirmer",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": {},
+      "conditions": {
+        "hours_per_week": 35,
+        "work_mode": "onsite"
+      },
+      "contract_type": "CDI",
+      "employer": "Hugo Boss",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "hugoboss-conseiller-vente-bordeaux-11588832",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T09:45:53+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-05-06",
+      "rank": 2,
+      "recommendation_band": "priority",
+      "sector_labels": [
+        "luxe",
+        "commerce et distribution"
+      ],
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/hugo-boss-france/Conseiller-de-vente-cdi-35h-galeries-lafayette-bordeaux%2C11588832.html",
+      "summary": "Conseiller une clientÃ¨le premium au corner Hugo Boss des Galeries Lafayette de Bordeaux, dÃ©velopper les ventes et la fidÃ©lisation, incarner les standards de service de la marque, suivre les indicateurs et contribuer au merchandising, aux stocks et au bon fonctionnement quotidien du point de vente.",
+      "title": "Conseiller de Vente - Galeries Lafayette Bordeaux H/F",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "bordeaux",
+          "client",
+          "clientele",
+          "commerciaux",
+          "conseil",
+          "conseiller",
+          "contribuer",
+          "fidelisation",
+          "haut",
+          "indicateurs",
+          "maison",
+          "organisation",
+          "porter",
+          "pret",
+          "suivi",
+          "vente"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur acceptable : commerce et distribution",
+          "activité prioritaire : conseil et relation client",
+          "expérience transférable : bordeaux, client, clientele, commerciaux, conseil",
+          "offre publiée il y a 21 jours"
+        ],
+        "recommendation_band": "priority",
+        "recommendation_reasons": [
+          "forte correspondance sans prérequis obligatoire incertain"
+        ],
+        "score": 78.0,
+        "unknowns": [
+          "travail en équipe à confirmer",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": null,
+      "conditions": {
+        "work_mode": "onsite"
+      },
+      "contract_type": "CDI",
+      "employer": "Figaret",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "figaret-conseiller-vente-11810346",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T09:45:53+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-07-01",
+      "rank": 3,
+      "recommendation_band": "priority",
+      "sector_labels": [
+        "mode premium",
+        "commerce et distribution"
+      ],
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/figaret/Conseiller-de-vente-bordeaux-cdi-35h%2C11810346.html",
+      "summary": "En CDI à temps plein à Bordeaux, représenter une maison de prêt-à-porter haut de gamme, conseiller et fidéliser la clientèle, contribuer aux ventes, au merchandising, aux encaissements, aux réceptions et au suivi des indicateurs commerciaux.",
+      "title": "Conseiller de Vente H/F",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [
+          "offre ancienne : 35 jours"
+        ],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "anglais",
+          "autonomie",
+          "bordeaux",
+          "clientele",
+          "conseil",
+          "conseiller",
+          "corner",
+          "courant",
+          "developper",
+          "fidelisation",
+          "galeries",
+          "internationale",
+          "lafayette",
+          "luxe",
+          "ouvrir",
+          "personnalise",
+          "vente"
+        ],
+        "prerequisite_alerts": [
+          {
+            "description": "Trois ans minimum de vente dans une maison de mode",
+            "id": "experience-mode-trois-ans",
+            "kind": "sector_experience",
+            "mandatory": true,
+            "message": "non démontré dans les connaissances validées",
+            "status": "not_demonstrated"
+          },
+          {
+            "description": "Anglais courant",
+            "id": "anglais-courant-courreges",
+            "kind": "language",
+            "mandatory": true,
+            "message": "non démontré dans les connaissances validées",
+            "status": "not_demonstrated"
+          }
+        ],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur prioritaire : luxe",
+          "activité prioritaire : conseil et relation client",
+          "expérience transférable : anglais, autonomie, bordeaux, clientele, conseil"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "prérequis obligatoire non démontré ou à vérifier"
+        ],
+        "score": 82.0,
+        "unknowns": [
+          "travail en équipe à confirmer",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": {},
+      "conditions": {},
+      "contract_type": "CDI",
+      "employer": "Courrèges",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "courreges-conseiller-vente-11767683",
+      "industry_sector_ids": [
+        "luxe",
+        "mode-et-pret-a-porter"
+      ],
+      "last_verified_at": "2026-07-22T09:45:53+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [
+        {
+          "assessment_note": "L'expérience mode et luxe est validée, mais la durée précise démontrée ne permet pas de confirmer trois années complètes.",
+          "description": "Trois ans minimum de vente dans une maison de mode",
+          "evidence": {
+            "excerpt": "Expérience en vente dans une Maison de mode de minimum 3 ans.",
+            "locator": "profil de l'annonce"
+          },
+          "id": "experience-mode-trois-ans",
+          "industry_sector_ids": [
+            "mode-et-pret-a-porter",
+            "luxe"
+          ],
+          "kind": "sector_experience",
+          "mandatory": true,
+          "minimum_years": 3,
+          "profile_evidence_ids": [],
+          "profile_status": "not_demonstrated"
+        },
+        {
+          "assessment_note": "Le niveau courant complet, notamment à l'écrit, n'est pas démontré.",
+          "description": "Anglais courant",
+          "evidence": {
+            "excerpt": "Maîtrise courante de l'anglais.",
+            "locator": "profil de l'annonce"
+          },
+          "id": "anglais-courant-courreges",
+          "kind": "language",
+          "mandatory": true,
+          "profile_evidence_ids": [],
+          "profile_status": "not_demonstrated"
+        }
+      ],
+      "published_at": "2026-06-17",
+      "rank": 4,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "luxe",
+        "mode et prêt-à-porter"
+      ],
+      "source_kind": "specialized",
+      "source_site": "fr.fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/groupe-courreges/Conseiller-de-vente%2C11767683.html",
+      "summary": "Ouvrir et animer en autonomie le corner Courrèges des Galeries Lafayette Bordeaux, conseiller une clientèle locale et internationale et développer ventes, fidélisation et merchandising.",
+      "title": "Conseiller·ère de vente",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "analyse",
+          "analyser",
+          "bordeaux",
+          "contrats",
+          "coordination",
+          "coordonner",
+          "digital",
+          "gestion",
+          "marketing",
+          "performance",
+          "piloter",
+          "plusieurs",
+          "projet"
+        ],
+        "prerequisite_alerts": [
+          {
+            "description": "Au moins trois ans d'expÃ©rience en influence ou partenariats sociaux",
+            "id": "experience-influence-trois-ans",
+            "kind": "minimum_experience",
+            "mandatory": true,
+            "message": "non démontré dans les connaissances validées",
+            "status": "not_demonstrated"
+          },
+          {
+            "description": "MaÃ®trise indispensable d'Excel et PowerPoint",
+            "id": "maitrise-excel-powerpoint",
+            "kind": "other",
+            "mandatory": true,
+            "message": "non démontré dans les connaissances validées",
+            "status": "not_demonstrated"
+          }
+        ],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur acceptable : commerce et distribution",
+          "activité prioritaire : gestion et coordination de projets",
+          "expérience transférable : analyse, analyser, bordeaux, contrats, coordination",
+          "offre publiée depuis moins de 8 jours"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "prérequis obligatoire non démontré ou à vérifier"
+        ],
+        "score": 79.0,
+        "unknowns": [
+          "travail en équipe à confirmer",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": {},
+      "conditions": {
+        "hours": "unknown",
+        "work_mode": "unknown"
+      },
+      "contract_type": "CDI",
+      "employer": "Cdiscount",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "cdiscount-chef-projet-influence-12306",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T09:45:53+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [
+        {
+          "assessment_note": "Le diplÃ´me validÃ© de niveau bac+4 en Marketing & Commerce couvre ce prÃ©requis.",
+          "description": "Formation supÃ©rieure en commerce, communication ou Ã©quivalent",
+          "evidence": {
+            "excerpt": "Formation supÃ©rieure en commerce, communication ou Ã©quivalent.",
+            "locator": "emploi.cdiscount.com/nos-offres-demploi/12306#profil"
+          },
+          "id": "formation-commerce-communication",
+          "kind": "qualification",
+          "mandatory": true,
+          "profile_evidence_ids": [
+            "credential:esgci-marketing-commerce-2003"
+          ],
+          "profile_status": "met"
+        },
+        {
+          "assessment_note": "Aucune durÃ©e d'expÃ©rience en influence n'est dÃ©montrÃ©e dans les connaissances validÃ©es ; cela ne prouve pas qu'elle est absente.",
+          "description": "Au moins trois ans d'expÃ©rience en influence ou partenariats sociaux",
+          "evidence": {
+            "excerpt": "3 ans d'expÃ©rience en influence, social media ou partenariats.",
+            "locator": "emploi.cdiscount.com/nos-offres-demploi/12306#profil"
+          },
+          "id": "experience-influence-trois-ans",
+          "kind": "minimum_experience",
+          "mandatory": true,
+          "profile_evidence_ids": [],
+          "profile_status": "not_demonstrated"
+        },
+        {
+          "assessment_note": "Le niveau de maÃ®trise de ces deux outils n'est pas documentÃ© dans les connaissances validÃ©es.",
+          "description": "MaÃ®trise indispensable d'Excel et PowerPoint",
+          "evidence": {
+            "excerpt": "Excel et PowerPoint indispensables.",
+            "locator": "emploi.cdiscount.com/nos-offres-demploi/12306#profil"
+          },
+          "id": "maitrise-excel-powerpoint",
+          "kind": "other",
+          "mandatory": true,
+          "profile_evidence_ids": [],
+          "profile_status": "not_demonstrated"
+        }
+      ],
+      "published_at": "2026-07-16",
+      "rank": 5,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "commerce et distribution"
+      ],
+      "source_kind": "direct_employer",
+      "source_site": "emploi.cdiscount.com",
+      "source_url": "https://emploi.cdiscount.com/nos-offres-demploi/12306",
+      "summary": "Piloter Ã  Bordeaux la stratÃ©gie et les campagnes d'influence de Cdiscount : sÃ©lectionner les crÃ©ateurs et agences, rÃ©diger les briefs, nÃ©gocier les budgets et contrats, coordonner plusieurs activations simultanÃ©es et analyser leurs performances.",
+      "title": "Chef de projet Influence F/H",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [
+          "offre ancienne : 54 jours"
+        ],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "administrative",
+          "anglais",
+          "assurance",
+          "commerce",
+          "donnees",
+          "factures",
+          "gerer",
+          "gestion",
+          "internationale",
+          "suivre"
+        ],
+        "prerequisite_alerts": [
+          {
+            "description": "Expérience de gestionnaire ou d'assistant dans le transport, le commerce international, le tourisme ou l'hôtellerie",
+            "id": "experience-gestion-secteur-international",
+            "kind": "sector_experience",
+            "mandatory": true,
+            "message": "non démontré dans les connaissances validées",
+            "status": "not_demonstrated"
+          },
+          {
+            "description": "Anglais B2 requis",
+            "id": "anglais-b2",
+            "kind": "language",
+            "mandatory": true,
+            "message": "non démontré dans les connaissances validées",
+            "status": "not_demonstrated"
+          }
+        ],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur prioritaire : hotellerie",
+          "activité prioritaire : conseil et relation client",
+          "expérience transférable : administrative, anglais, assurance, commerce, donnees"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "prérequis obligatoire non démontré ou à vérifier"
+        ],
+        "score": 75.0,
+        "unknowns": [
+          "travail en équipe à confirmer",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": {},
+      "conditions": {},
+      "contract_type": "CDI",
+      "employer": "Filhet-Allard",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "filhet-allard-back-office-international-1730",
+      "industry_sector_ids": [
+        "banque-et-assurance"
+      ],
+      "last_verified_at": "2026-07-22T09:45:53+02:00",
+      "location_label": "Mérignac",
+      "prerequisites": [
+        {
+          "assessment_note": "Des expériences d'assistanat et d'hôtellerie sont validées, mais leur équivalence exacte avec le périmètre de gestion demandé reste à confirmer.",
+          "description": "Expérience de gestionnaire ou d'assistant dans le transport, le commerce international, le tourisme ou l'hôtellerie",
+          "evidence": {
+            "excerpt": "Une ou plusieurs expériences de gestionnaire/assistant dans le transport, commerce international, tourisme ou hôtellerie.",
+            "locator": "profil de l'annonce"
+          },
+          "id": "experience-gestion-secteur-international",
+          "kind": "sector_experience",
+          "mandatory": true,
+          "profile_evidence_ids": [],
+          "profile_status": "not_demonstrated"
+        },
+        {
+          "assessment_note": "L'anglais est validé, mais pas par une attestation structurée de niveau B2 couvrant toutes les dimensions.",
+          "description": "Anglais B2 requis",
+          "evidence": {
+            "excerpt": "Anglais B2 requis.",
+            "locator": "profil de l'annonce"
+          },
+          "id": "anglais-b2",
+          "kind": "language",
+          "mandatory": true,
+          "profile_evidence_ids": [],
+          "profile_status": "not_demonstrated"
+        }
+      ],
+      "published_at": "2026-05-29",
+      "rank": 6,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "banque et assurance",
+        "commerce international"
+      ],
+      "source_kind": "direct_employer",
+      "source_site": "groupefilhet-allard-career.talent-soft.com",
+      "source_url": "https://groupefilhet-allard-career.talent-soft.com/job/job-gestionnaire-back-office-international-h-f-h-f_1730.aspx",
+      "summary": "Gérer les déclarations et documents d'assurance maritime et transport, contrôler leur conformité internationale, émettre certificats et factures et suivre les données sous Excel.",
+      "title": "Gestionnaire Back Office International H/F",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "accueil",
+          "ainsi",
+          "bordeaux",
+          "boutique",
+          "conseil",
+          "conseiller",
+          "durable",
+          "participer",
+          "porter",
+          "relation",
+          "vendre",
+          "vente"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur acceptable : commerce et distribution",
+          "activité prioritaire : conseil et relation client",
+          "expérience transférable : accueil, ainsi, bordeaux, boutique, conseil",
+          "offre publiée il y a 23 jours"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "score compris entre 50 et 75"
+        ],
+        "score": 74.0,
+        "unknowns": [
+          "travail en équipe à confirmer",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": {},
+      "conditions": {
+        "hours_per_week": 35,
+        "work_mode": "onsite"
+      },
+      "contract_type": "CDI",
+      "employer": "Gerard Darel",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "gerard-darel-conseillere-vente-11608545",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T09:45:53+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-06-29",
+      "rank": 7,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "mode premium",
+        "commerce et distribution"
+      ],
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/gerard-darel/Conseillere-de-vente-h-f-gerard-darel-gl-bordeaux%2C11608545.html",
+      "summary": "Accueillir chaleureusement la clientÃ¨le du point de vente Gerard Darel de Bordeaux, conseiller et vendre les collections, dÃ©velopper une relation personnalisÃ©e et durable, fidÃ©liser les clientes et participer aux rÃ©assorts ainsi qu'Ã  la bonne prÃ©sentation de la boutique en CDI Ã  temps plein.",
+      "title": "ConseillÃ¨re de Vente H/F",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [
+          "offre ancienne : 72 jours"
+        ],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "affaires",
+          "assurer",
+          "bordeaux",
+          "boutique",
+          "chiffre",
+          "client",
+          "commerciale",
+          "conseiller",
+          "performance",
+          "porter",
+          "relation",
+          "sein",
+          "service",
+          "valoriser",
+          "vente"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur acceptable : commerce et distribution",
+          "activité prioritaire : conseil et relation client",
+          "expérience transférable : affaires, assurer, bordeaux, boutique, chiffre"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "score compris entre 50 et 75"
+        ],
+        "score": 71.0,
+        "unknowns": [
+          "travail en équipe à confirmer",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": {},
+      "conditions": {
+        "hours_per_week": 35,
+        "work_mode": "onsite"
+      },
+      "contract_type": "CDI",
+      "employer": "From Future",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "from-future-conseiller-vente-11609532",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T09:45:53+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [
+        {
+          "assessment_note": "Les pÃ©riodes prÃ©cises validÃ©es totalisent 32 mois dans la mode et le prÃªt-Ã -porter.",
+          "description": "ExpÃ©rience significative dans le prÃªt-Ã -porter",
+          "evidence": {
+            "excerpt": "ExpÃ©rience significative dans le domaine du prÃªt-Ã -porter.",
+            "locator": "fashionjobs.com/emploi/from-future/11609532#profil"
+          },
+          "id": "experience-pret-a-porter-significative",
+          "industry_sector_ids": [
+            "mode-et-pret-a-porter"
+          ],
+          "kind": "sector_experience",
+          "mandatory": true,
+          "profile_evidence_ids": [
+            "experience:sergio-rossi-paris",
+            "experience:promod-bordeaux"
+          ],
+          "profile_status": "met"
+        }
+      ],
+      "published_at": "2026-05-11",
+      "rank": 8,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "mode premium",
+        "commerce et distribution"
+      ],
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/from-future/Conseiller-de-vente-cdi-35h-bordeaux%2C11609532.html",
+      "summary": "Accueillir, conseiller et fidÃ©liser la clientÃ¨le de From Future Ã  Bordeaux, dÃ©velopper le chiffre d'affaires, valoriser les collections, maintenir le merchandising, assurer les encaissements et le service aprÃ¨s-vente, au sein d'une Ã©quipe de boutique orientÃ©e qualitÃ© de service et performance commerciale.",
+      "title": "Conseiller de Vente H/F",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "accueil",
+          "administrative",
+          "animation",
+          "assurer",
+          "coordination",
+          "deux",
+          "direction",
+          "gestion",
+          "organisation"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "activité prioritaire : gestion administrative",
+          "expérience transférable : accueil, administrative, animation, assurer, coordination",
+          "offre publiée depuis moins de 8 jours"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "score compris entre 50 et 75"
+        ],
+        "score": 64.0,
+        "unknowns": [
+          "adéquation sectorielle à confirmer",
+          "travail en équipe à confirmer",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": {},
+      "conditions": {
+        "hours": "unknown",
+        "work_mode": "onsite"
+      },
+      "contract_type": "CDI",
+      "employer": "CHU de Bordeaux",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "chu-bordeaux-assistante-direction-poles-215034",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T09:45:53+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-07-20",
+      "rank": 9,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "santÃ© publique"
+      ],
+      "source_kind": "direct_employer",
+      "source_site": "chu-bordeaux.softy.pro",
+      "source_url": "https://chu-bordeaux.softy.pro/offers/215034",
+      "summary": "Assurer le secrÃ©tariat de direction de deux pÃ´les hospitaliers : agendas, rÃ©unions, dossiers et conventions, logistique Ã©vÃ©nementielle, tableaux de bord, accueil et coordination avec de nombreux interlocuteurs internes et externes.",
+      "title": "Assistant(e) de Direction - PÃ´les Femme MÃ¨re Enfant et AnesthÃ©sie-RÃ©animation",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "accessible",
+          "bordeaux",
+          "confirme",
+          "contexte",
+          "coordination",
+          "finance",
+          "gestion",
+          "manager",
+          "piloter",
+          "projet",
+          "projets",
+          "sein",
+          "transformation"
+        ],
+        "prerequisite_alerts": [
+          {
+            "description": "Conditions d’accès au poste à vérifier",
+            "id": "conditions-acces-betclic-project-manager",
+            "kind": "other",
+            "mandatory": true,
+            "message": "correspondance avec le profil à vérifier",
+            "status": "unknown"
+          }
+        ],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "activité prioritaire : gestion et coordination de projets",
+          "expérience transférable : accessible, bordeaux, confirme, contexte, coordination"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "prérequis obligatoire non démontré ou à vérifier"
+        ],
+        "score": 58.0,
+        "unknowns": [
+          "adéquation sectorielle à confirmer",
+          "date de publication inconnue",
+          "travail en équipe à confirmer",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": {},
+      "conditions": {
+        "details_access": "fiche détaillée temporairement inaccessible",
+        "work_mode": "hybrid"
+      },
+      "contract_type": "CDI",
+      "employer": "Betclic Group",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "betclic-finance-transformation-project-manager-e16a02f5bab301",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T09:45:53+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [
+        {
+          "assessment_note": "La fiche détaillée n’était pas exploitable ; les conditions d’accès doivent être vérifiées avant candidature.",
+          "description": "Conditions d’accès au poste à vérifier",
+          "evidence": {
+            "excerpt": "Finance Transformation Project Manager F/M — Bordeaux — full time",
+            "locator": "portail Betclic, offre e16a02f5bab301"
+          },
+          "id": "conditions-acces-betclic-project-manager",
+          "kind": "other",
+          "mandatory": true,
+          "profile_evidence_ids": [],
+          "profile_status": "unknown"
+        }
+      ],
+      "published_at": null,
+      "rank": 10,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "services numériques",
+        "finance"
+      ],
+      "source_kind": "direct_employer",
+      "source_site": "betclic-group.breezy.hr",
+      "source_url": "https://betclic-group.breezy.hr/p/e16a02f5bab301-finance-transformation-project-manager-f-m",
+      "summary": "Piloter des projets de transformation de la fonction Finance au sein de Betclic, dans un contexte international et multisite. Le portail employeur confirme un poste à temps plein accessible depuis Bordeaux ; la formation, l’ancienneté et l’expertise finance requises restent à vérifier.",
+      "title": "Finance Transformation Project Manager F/M",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "anglais",
+          "coordination",
+          "courant",
+          "direction",
+          "factures",
+          "gestion",
+          "google",
+          "gouvernance",
+          "organisation",
+          "soutenir",
+          "suivi"
+        ],
+        "prerequisite_alerts": [
+          {
+            "description": "Expérience prouvée de 5 à 10 ans comme Executive Assistant ou Senior Administrative Assistant",
+            "id": "experience-executive-assistant",
+            "kind": "prior_role",
+            "mandatory": true,
+            "message": "non démontré dans les connaissances validées",
+            "status": "not_demonstrated"
+          },
+          {
+            "description": "Anglais courant",
+            "id": "anglais-courant-betclic",
+            "kind": "language",
+            "mandatory": true,
+            "message": "non démontré dans les connaissances validées",
+            "status": "not_demonstrated"
+          }
+        ],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "activité prioritaire : gestion administrative",
+          "expérience transférable : anglais, coordination, courant, direction, factures"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "prérequis obligatoire non démontré ou à vérifier"
+        ],
+        "score": 56.0,
+        "unknowns": [
+          "adéquation sectorielle à confirmer",
+          "date de publication inconnue",
+          "travail en équipe à confirmer",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": {},
+      "conditions": {
+        "work_mode": "hybrid"
+      },
+      "contract_type": "CDI",
+      "employer": "Betclic Group",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "betclic-executive-assistant-ceo-office-f32da0c6c7c501",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T09:45:53+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [
+        {
+          "assessment_note": "Aucune expérience validée avec cet intitulé ou un périmètre équivalent auprès d’un dirigeant n’est démontrée.",
+          "description": "Expérience prouvée de 5 à 10 ans comme Executive Assistant ou Senior Administrative Assistant",
+          "evidence": {
+            "excerpt": "You have proven experience of 5 to 10 years as an Executive Assistant or Senior Administrative Assistant.",
+            "locator": "fiche Betclic, WHO ARE WE LOOKING FOR"
+          },
+          "id": "experience-executive-assistant",
+          "kind": "prior_role",
+          "mandatory": true,
+          "minimum_years": 5,
+          "profile_evidence_ids": [],
+          "profile_status": "not_demonstrated"
+        },
+        {
+          "assessment_note": "Le niveau courant n’est pas démontré dans les connaissances validées.",
+          "description": "Anglais courant",
+          "evidence": {
+            "excerpt": "You are fluent in English.",
+            "locator": "fiche Betclic, WHO ARE WE LOOKING FOR"
+          },
+          "id": "anglais-courant-betclic",
+          "kind": "language",
+          "mandatory": true,
+          "profile_evidence_ids": [],
+          "profile_status": "not_demonstrated"
+        }
+      ],
+      "published_at": null,
+      "rank": 11,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "services numériques"
+      ],
+      "source_kind": "direct_employer",
+      "source_site": "betclic-group.breezy.hr",
+      "source_url": "https://betclic-group.breezy.hr/p/f32da0c6c7c501-executive-assistant-ceo-office-f-m",
+      "summary": "Soutenir le CEO et le comité exécutif dans un environnement international : agenda complexe, réunions de gouvernance, suivi des décisions, coordination des parties prenantes, déplacements, événements, factures et documentation. Le rôle exige une forte discrétion, une excellente organisation et une pratique courante de l’anglais.",
+      "title": "Executive Assistant - CEO Office F/M",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "bordeaux",
+          "confirme",
+          "contribuer",
+          "coordination",
+          "experience",
+          "finance",
+          "pilotage",
+          "projets",
+          "suivi",
+          "transformation"
+        ],
+        "prerequisite_alerts": [
+          {
+            "description": "Conditions d’accès au poste à vérifier",
+            "id": "conditions-acces-betclic-pmo",
+            "kind": "other",
+            "mandatory": true,
+            "message": "correspondance avec le profil à vérifier",
+            "status": "unknown"
+          }
+        ],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "activité prioritaire : gestion administrative",
+          "expérience transférable : bordeaux, confirme, contribuer, coordination, experience"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "prérequis obligatoire non démontré ou à vérifier"
+        ],
+        "score": 55.0,
+        "unknowns": [
+          "adéquation sectorielle à confirmer",
+          "date de publication inconnue",
+          "travail en équipe à confirmer",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": {},
+      "conditions": {
+        "details_access": "fiche détaillée temporairement inaccessible",
+        "work_mode": "hybrid"
+      },
+      "contract_type": "CDI",
+      "employer": "Betclic Group",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "betclic-finance-transformation-pmo-f1f993d1c0b801",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T09:45:53+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [
+        {
+          "assessment_note": "La fiche détaillée n’était pas exploitable ; les conditions d’accès doivent être vérifiées avant candidature.",
+          "description": "Conditions d’accès au poste à vérifier",
+          "evidence": {
+            "excerpt": "Finance Transformation PMO F/M — Bordeaux — full time — hybrid",
+            "locator": "portail Betclic, offre f1f993d1c0b801"
+          },
+          "id": "conditions-acces-betclic-pmo",
+          "kind": "other",
+          "mandatory": true,
+          "profile_evidence_ids": [],
+          "profile_status": "unknown"
+        }
+      ],
+      "published_at": null,
+      "rank": 12,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "services numériques",
+        "finance"
+      ],
+      "source_kind": "direct_employer",
+      "source_site": "betclic-group.breezy.hr",
+      "source_url": "https://betclic-group.breezy.hr/p/f1f993d1c0b801-finance-transformation-pmo-f-m",
+      "summary": "Contribuer au pilotage de la transformation de la fonction Finance de Betclic depuis Bordeaux, avec un périmètre PMO, de coordination et de suivi des initiatives. La liste employeur confirme un poste à temps plein et hybride ; les critères d’expérience et de formation doivent être vérifiés sur la fiche détaillée.",
+      "title": "Finance Transformation PMO F/M",
+      "verification_status": "active"
+    }
+  ],
+  "pending_offer_count": 61,
+  "pending_offers": [
+    {
+      "contract_type": "intérim",
+      "employer": "Acteur de l’énergie via Capactuel",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "capactuel-conseiller-clientele-81239276",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-11",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81239276.html",
+      "summary": "Mission longue de réception d’appels : mise à jour des données clients, explication des factures, gestion des abonnements et travaux administratifs de back-office, sans prospection annoncée.",
+      "title": "Conseiller clientèle en réception d’appels H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Aigle",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "aigle-responsable-adjoint-11837775",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-20",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/aigle/Responsable-adjoint-f-h-cdi%2C11837775.html",
+      "summary": "Seconder la direction de la boutique Aigle de Bordeaux, offrir une expÃ©rience client premium, contribuer aux objectifs de chiffre d'affaires et aux indicateurs, soutenir et motiver l'Ã©quipe, appliquer le merchandising et assurer une exÃ©cution opÃ©rationnelle conforme aux standards de la marque.",
+      "title": "Responsable Adjoint F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "AMI Paris",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "ami-client-advisor-4409991302",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-28",
+      "source_kind": "aggregator",
+      "source_site": "linkedin.com",
+      "source_url": "https://fr.linkedin.com/jobs/view/cdi-client-advisor-galeries-lafayette-bordeaux-temps-plein-at-ami-paris-4409991302",
+      "summary": "Participer à l’ouverture d’un corner, accueillir une clientèle locale et internationale, conseiller, fidéliser, valoriser le savoir-faire de la Maison et contribuer au merchandising et au suivi des stocks.",
+      "title": "Client Advisor — Galeries Lafayette Bordeaux",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Aroma-Zone",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "aroma-zone-adjoint-responsable-80798774",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-30",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/80798774.html",
+      "summary": "Copiloter la boutique et l’expérience client, animer les équipes terrain, garantir merchandising, stocks, caisse et procédures, puis analyser les indicateurs pour proposer des améliorations.",
+      "title": "Adjoint Responsable Boutique H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Aubade",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "aubade-responsable-boutique-begles-11591757",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "BÃ¨gles",
+      "phase": "verification",
+      "published_at": "2026-05-01",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/aubade/Responsable-de-boutique%2C11591757.html",
+      "summary": "Piloter la boutique Aubade de BÃ¨gles, dÃ©velopper le chiffre d'affaires et la qualitÃ© du service, animer et accompagner l'Ã©quipe, organiser l'activitÃ©, suivre les indicateurs commerciaux et garantir le merchandising, la gestion des stocks et la bonne application des procÃ©dures de l'enseigne.",
+      "title": "Responsable de Boutique H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Aubade",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "aubade-vendeuse-grands-magasins-11806898",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-19",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/aubade/Vendeuse-en-grands-magasins-cdi-35h%2C11806898.html",
+      "summary": "ReprÃ©senter Aubade aux Galeries Lafayette de Bordeaux, accueillir et conseiller la clientÃ¨le, fidÃ©liser par une qualitÃ© de service personnalisÃ©e, dÃ©velopper les ventes, participer au merchandising et prendre part Ã  la gestion quotidienne du corner, notamment l'entretien et la rÃ©ception des marchandises.",
+      "title": "Vendeuse en Grands Magasins H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Avril Cosmétiques",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "avril-responsable-boutique-80016111",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-10",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/80016111.html",
+      "summary": "Piloter une boutique de cosmétique bio : expérience client, animation de quatre conseillers, stocks et inventaires, suivi des résultats et initiatives locales pour développer chiffre d’affaires et notoriété.",
+      "title": "Responsable Boutique H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Bolia",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "bolia-store-manager-new-store-146272",
+      "last_verified_at": "2026-07-20T00:24:58+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": null,
+      "source_kind": "aggregator",
+      "source_site": "candidate.hr-manager.net",
+      "source_url": "https://candidate.hr-manager.net/ApplicationInit.aspx?DepartmentId=19145&MediaId=5&ProjectId=146272&cid=1091",
+      "summary": "Pour l'ouverture d'un concept store de design scandinave à Bordeaux en novembre, piloter ventes, budget, planning et équipe, recruter et former les collaborateurs, et garantir une expérience client et une identité visuelle de haut niveau.",
+      "title": "Store Manager - New Store",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Cabinet d’avocats via Adsearch",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "adsearch-office-manager-144781",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-19",
+      "source_kind": "aggregator",
+      "source_site": "adsearch.fr",
+      "source_url": "https://www.adsearch.fr/emplois/144781-assistant-de-direction-office-manager-h-f/",
+      "summary": "Assurer l’administration générale et la coordination quotidienne d’un cabinet d’avocats, fluidifier les processus internes et suivre les prestataires informatiques, comptables et fournisseurs.",
+      "title": "Assistant de direction / Office Manager H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "fonction publique territoriale",
+      "employer": "Centre de gestion départemental de la Gironde",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "service-public-O033260630000048",
+      "last_verified_at": "2026-07-20T20:55:35+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-30",
+      "source_kind": "specialized",
+      "source_site": "choisirleservicepublic.gouv.fr",
+      "source_url": "https://choisirleservicepublic.gouv.fr/offre-emploi/gestionnaires-des-operations-hf---1-poste---centre-de-gestion-departemental-de-la-gironde-fpt-reference-O033260630000048/",
+      "summary": "Assurer la gestion et le suivi d'opérations de concours et d'examens professionnels en collaboration avec le chargé d'opérations, le référent et l'équipe, dans le respect des procédures et des délais.",
+      "title": "Gestionnaire des opérations H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Centre médical via LIP Tertiaire",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "lip-responsable-administratif-80751400",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-29",
+      "source_kind": "aggregator",
+      "source_site": "bordeaux-emplois.com",
+      "source_url": "https://www.bordeaux-emplois.com/emplois/80751400.html",
+      "summary": "Manager 18 assistants médicaux répartis sur huit sites, animer les réunions, accompagner l’intégration et la montée en compétences, puis assurer le lien entre administration, opérations et direction.",
+      "title": "Responsable Administratif H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Client de Geco Recrutement",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "geco-assistant-direction-79800391",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-04",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/79800391.html",
+      "summary": "Soutenir la direction et l’équipe : documents, agendas, échéances, événements, suivi des dossiers et circulation de l’information, dans un rôle autonome et polyvalent.",
+      "title": "Assistant de Direction H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Client de Skills Bordeaux",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "skills-adv-export-81285221",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Blanquefort",
+      "phase": "verification",
+      "published_at": "2026-07-14",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81285221.html",
+      "summary": "Gérer l’administration des ventes export, la relation client internationale et les flux commerciaux, en lien avec les équipes ; les incoterms, documents douaniers et procédures export sont particulièrement appréciés.",
+      "title": "Gestionnaire ADV Export H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Client de Transicia",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "transicia-relation-client-77838923",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-04-10",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/77838923.html",
+      "summary": "Relation client B2B à distance dans un environnement technique, avec support, vulgarisation, appels sortants et objectifs commerciaux ; le poste comporte du démarchage téléphonique.",
+      "title": "Chargé de Relation Client B to B H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Devred",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "devred-vendeur-bordeaux-lac-2026",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux Lac",
+      "phase": "verification",
+      "published_at": "2026-07-15",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/fr/s/emploi/mode-emploi%2C2.html",
+      "summary": "Accueillir et accompagner les clients du magasin Devred de Bordeaux Lac, apporter un conseil personnalisÃ©, valoriser la marque et ses produits, fidÃ©liser la clientÃ¨le, suivre les indicateurs de performance, rÃ©ceptionner les marchandises, assurer le rÃ©assort et appliquer les recommandations de merchandising.",
+      "title": "Vendeur H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Enseigne mode confidentielle",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "responsable-magasin-confidentiel-11863859",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-14",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/Responsable-de-magasin-35h%2C11863859.html",
+      "summary": "Diriger une boutique de mode Ã  Bordeaux, dÃ©velopper les ventes et la satisfaction client, suivre les indicateurs et plans d'action, recruter et accompagner l'Ã©quipe, maÃ®triser les approvisionnements, les stocks et la dÃ©marque, puis garantir le respect des standards de merchandising.",
+      "title": "Responsable de Magasin H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Entreprise de négoce et distribution viti-vini via Page Personnel",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "page-personnel-gestionnaire-adv-france-79782528",
+      "last_verified_at": "2026-07-20T20:55:35+02:00",
+      "location_label": "Nord de Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-04",
+      "source_kind": "aggregator",
+      "source_site": "bordeaux-emplois.com",
+      "source_url": "https://www.bordeaux-emplois.com/emplois/79782528.html",
+      "summary": "Assurer la gestion administrative des ventes en France et le suivi complet des dossiers clients, de la saisie des commandes à la facturation, en coordonnant les équipes commerciales et logistiques.",
+      "title": "Gestionnaire ADV France H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Entreprise historique via Skills Bordeaux",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "skills-adv-relation-clients-79735460",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Cestas",
+      "phase": "verification",
+      "published_at": "2026-06-03",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/79735460.html",
+      "summary": "Prendre en charge l’administration des ventes, le suivi des commandes et la relation client, produire des statistiques fiables et participer à un projet de structuration avec proactivité et coordination des équipes.",
+      "title": "ADV & Relation Clients H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "temps partiel",
+      "employer": "Entreprise Vince",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "vince-assistant-direction-78115070",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-04-17",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/78115070.html",
+      "summary": "Assistanat de direction et gestion administrative générale : courrier, devis, facturation, fournisseurs, petite comptabilité, planning et réunions, sur un contrat de quinze heures hebdomadaires.",
+      "title": "Assistant de Direction polyvalent H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "intérim",
+      "employer": "Établissement de santé via Randstad",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "randstad-assistant-direction-81225620",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-11",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81225620.html",
+      "summary": "Assistanat de direction dans un établissement de santé : accueil, planification, rédaction autonome, priorisation, fournitures et parc informatique, avec coordination interprofessionnelle et travail en équipe.",
+      "title": "Assistant de Direction F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Galeries Lafayette",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "galeries-lafayette-conseiller-personnel-espace-luxe-78207309",
+      "last_verified_at": "2026-07-20T00:24:58+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-04-21",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/78207309.html",
+      "summary": "En CDI 35 heures à partir de septembre, construire une relation personnalisée avec les clients de l'espace luxe, animer et enrichir le fichier clients et proposer un accompagnement de shopping sur mesure avec des outils digitaux.",
+      "title": "Conseiller Personnel Espace Luxe H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Galeries Lafayette",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "galeries-lafayette-manager-vente-78207316",
+      "last_verified_at": "2026-07-20T00:24:58+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-16",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/78207316.html",
+      "summary": "En CDI à partir de septembre, animer et développer une équipe de vente sur le terrain, organiser la satisfaction client et piloter le chiffre d'affaires ainsi que les objectifs budgétaires individuels et collectifs.",
+      "title": "Manager de Vente H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Galeries Lafayette Bordeaux",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "galeries-lafayette-conseiller-personnel-luxe-juillet-2026",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-08",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/recrutement/groupe-galeries-lafayette.html",
+      "summary": "DÃ©velopper une relation privilÃ©giÃ©e avec la clientÃ¨le de l'espace Luxe des Galeries Lafayette, animer et enrichir le fichier clients, proposer un accompagnement shopping sur mesure en fonction des envies et budgets, utiliser les outils digitaux et contribuer au chiffre d'affaires en CDI 35 heures.",
+      "title": "Conseiller Personnel Espace Luxe F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Galeries Lafayette Bordeaux",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "galeries-lafayette-service-client-4401091856",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-12",
+      "source_kind": "aggregator",
+      "source_site": "linkedin.com",
+      "source_url": "https://fr.linkedin.com/jobs/view/employ%C3%A9-service-client-f-h-cdi-at-galeries-lafayette-4401091856",
+      "summary": "Garantir un parcours client fluide de l’accueil à l’encaissement : remboursements, services magasin, fidélité, constitution de dossiers et résolution des litiges dans un univers lifestyle premium.",
+      "title": "Employé Service Client F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Gerard Darel",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "gerard-darel-conseillere-vente-bordeaux-2026",
+      "last_verified_at": "2026-07-21T17:15:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-29",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/fr/s/emploi/vendeur-vendeuse-bordeaux.html",
+      "summary": "Accueillir chaleureusement la clientèle du point de vente Gerard Darel de Bordeaux, conseiller et vendre les collections, développer une relation personnalisée et durable, fidéliser les clientes et participer aux réassorts ainsi qu'à la bonne présentation de la boutique en CDI à temps plein.",
+      "title": "Conseillère de Vente H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Glowee",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "glowee-vendeuse-luxe-ae82a13ef5e75793",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-05-19",
+      "source_kind": "aggregator",
+      "source_site": "indeed.com",
+      "source_url": "https://fr.indeed.com/viewjob?jk=ae82a13ef5e75793",
+      "summary": "Accueillir et conseiller une clientèle dans un environnement haut de gamme, assurer la présentation des produits, gérer les stocks et mettre en avant les nouveautés.",
+      "title": "Vendeuse luxe H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Groupe international via Atlantis RH",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "atlantis-coordinateur-pmo-alt231124-1",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-28",
+      "source_kind": "aggregator",
+      "source_site": "atlantis-rh.fr",
+      "source_url": "https://www.atlantis-rh.fr/annonce/coordinateur-de-projet-pmo-h-f/",
+      "summary": "Analyser de grands projets internationaux de construction, diffuser les bonnes pratiques, détecter risques et opportunités et faire évoluer méthodes et outils selon qualité, coûts et délais.",
+      "title": "Coordinateur de Projet — PMO H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Groupe SII",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "sii-office-manager-80832913",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-05",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/80832913.html",
+      "summary": "Pilier du fonctionnement quotidien du site : accueil, administration du personnel, support transverse, achats, fournisseurs, contrats de prestations, flotte et services généraux, avec de nombreux interlocuteurs internes et externes.",
+      "title": "Office Manager H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Hello bank! - BNP Paribas",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "bnp-hello-bank-conseiller-bancaire-ligne-2602",
+      "last_verified_at": "2026-07-21T17:15:00+02:00",
+      "location_label": "Mérignac",
+      "phase": "verification",
+      "published_at": "2026-06-01",
+      "source_kind": "direct_employer",
+      "source_site": "group.bnpparibas",
+      "source_url": "https://group.bnpparibas/emploi-carriere/offre-emploi/conseiller-bancaire-en-ligne-hello-bank-h-f-8",
+      "summary": "En CDI à temps plein à Mérignac, accueillir, conseiller et fidéliser les clients par chat, visio et téléphone, suivre l'activité et travailler dans une équipe de conseillers avec un parcours de formation. L'amplitude annoncée va jusqu'à 20 heures et comprend des samedis selon le roulement.",
+      "title": "Conseiller Bancaire en ligne H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Hermès",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "hermes-charge-sav-4423205937",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-16",
+      "source_kind": "aggregator",
+      "source_site": "linkedin.com",
+      "source_url": "https://fr.linkedin.com/jobs/view/cdi-charg%C3%A9-sav-h-f-magasin-de-bordeaux-at-herm%C3%A8s-4423205937",
+      "summary": "Prendre en charge les demandes après-vente en boutique, maintenir une relation personnalisée, informer les clients du suivi des réparations, gérer les litiges et garantir le niveau de service de la Maison.",
+      "title": "Chargé SAV H/F — Magasin de Bordeaux",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "IRO",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "iro-premier-vendeur-11837295",
+      "last_verified_at": "2026-07-21T17:15:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-07",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/iro/Premier-vendeur%2C11837295.html",
+      "summary": "En CDI à temps plein aux Galeries Lafayette de Bordeaux dès le 1er septembre, assurer l'excellence de la relation client, servir de référente sur le floor, accompagner l'intégration de l'équipe, suivre les KPI, le merchandising et les stocks.",
+      "title": "Premier Vendeur H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "IZAC",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "izac-responsable-adjoint-11866581",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-16",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/izac/Responsable-adjoint-de-magasin-h-f-bordeaux%2C11866581.html",
+      "summary": "Assister le responsable du magasin IZAC de Bordeaux dans le pilotage quotidien, l'animation de l'Ã©quipe, le dÃ©veloppement des ventes, le suivi des objectifs et des indicateurs, la qualitÃ© de l'expÃ©rience client ainsi que la bonne exÃ©cution des opÃ©rations et standards de la boutique.",
+      "title": "Responsable Adjoint de Magasin H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "IZI by EDF",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "izi-conseiller-relation-client-8056920",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Le Haillan (Bordeaux)",
+      "phase": "verification",
+      "published_at": "2026-07-13",
+      "source_kind": "aggregator",
+      "source_site": "recrutement.izi-by-edf.fr",
+      "source_url": "https://recrutement.izi-by-edf.fr/jobs/8056920-conseiller-relation-client-f-h",
+      "summary": "Au sein de l’agence du Haillan, assurer la satisfaction client, comprendre les besoins et proposer des solutions adaptées en coordination avec le responsable d’agence et l’équipe.",
+      "title": "Conseiller Relation Client F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "K-Way",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "kway-responsable-adjoint-begles-11467770",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "BÃ¨gles",
+      "phase": "verification",
+      "published_at": "2026-04-01",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/Responsable-adjoint-k-way-begles%2C11467770.html",
+      "summary": "Seconder le responsable de la boutique K-Way de BÃ¨gles dans l'animation de l'Ã©quipe, le suivi des ventes et indicateurs, la qualitÃ© du conseil client, les opÃ©rations commerciales, la gestion des stocks et l'application des procÃ©dures et standards visuels de la marque.",
+      "title": "Responsable Adjoint H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "La Poste Groupe",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "la-poste-relation-client-80563709",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-24",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/80563709.html",
+      "summary": "Gérer une relation commerciale à distance multicanale et proposer des solutions financières. Les campagnes d’appels sortants constituent une part explicite du poste et relèvent du démarchage téléphonique exclu.",
+      "title": "Conseiller en Service Relation Client H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Lacoste",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "lacoste-vendeur-4417486234",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-28",
+      "source_kind": "aggregator",
+      "source_site": "linkedin.com",
+      "source_url": "https://fr.linkedin.com/jobs/view/vendeur-euse-cdi-f-h-at-lacoste-4417486234",
+      "summary": "Offrir un conseil et un service premium, fidéliser les clients, contribuer aux ventes, respecter les standards de merchandising et incarner la marque dans une organisation omnicanale.",
+      "title": "Vendeur CDI F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Leroy Merlin Bordeaux Lac",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "leroy-merlin-conseiller-vente-amenagement-838552",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux Lac",
+      "phase": "verification",
+      "published_at": "2026-07-21",
+      "source_kind": "direct_employer",
+      "source_site": "recrute.leroymerlin.fr",
+      "source_url": "https://recrute.leroymerlin.fr/jobs/838552",
+      "summary": "Conseiller les clients du magasin Bordeaux-Lac et les accompagner dans leurs projets d'amÃ©nagement, de la comprÃ©hension du besoin Ã  la conception de solutions sur mesure. Le poste combine vente directe, suivi de projets, choix des produits et services, tenue du rayon et coopÃ©ration avec une Ã©quipe de proximitÃ©.",
+      "title": "Conseiller en vente et en amÃ©nagement H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Lunettes Pour Tous",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "france-travail-210HHDT",
+      "last_verified_at": "2026-07-20T20:55:35+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-25",
+      "source_kind": "aggregator",
+      "source_site": "candidat.francetravail.fr",
+      "source_url": "https://candidat.francetravail.fr/offres/recherche/detail/210HHDT",
+      "summary": "Contribuer à la gestion administrative d'une enseigne d'optique, organiser son activité selon les priorités et proposer des améliorations pour optimiser les processus.",
+      "title": "Gestionnaire Administratif Santé H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "MAIF",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "maif-conseiller-societaires-10301",
+      "last_verified_at": "2026-07-20T20:55:35+02:00",
+      "location_label": "Saint-Médard-en-Jalles / Mérignac",
+      "phase": "verification",
+      "published_at": "2026-06-12",
+      "source_kind": "direct_employer",
+      "source_site": "recrutement.maif.fr",
+      "source_url": "https://recrutement.maif.fr/offre-de-emploi/emploi-conseiller-societaires-en-face-a-face-f-h_10301.aspx",
+      "summary": "Conseiller les sociétaires et prospects en agence, par téléphone ou par mail, analyser leurs besoins, proposer les produits adaptés et fidéliser la clientèle dans une relation de confiance.",
+      "title": "Conseiller sociétaires en face à face F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Maison Aurian via Arobase Emploi",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "arobase-boutique-vins-7fb0ca299f0b76a1",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-14",
+      "source_kind": "aggregator",
+      "source_site": "indeed.com",
+      "source_url": "https://fr.indeed.com/viewjob?jk=7fb0ca299f0b76a1",
+      "summary": "Ouvrir et développer une boutique de spiritueux d’exception : expérience client, stocks, événements, communication locale et développement d’un réseau de clients particuliers et professionnels avec prospection commerciale.",
+      "title": "Responsable de Boutique vins & spiritueux H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Maison de luxe via Theodore Search",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "theodore-responsable-boutique-luxe",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-11",
+      "source_kind": "aggregator",
+      "source_site": "theodore-search.com",
+      "source_url": "https://www.theodore-search.com/en/our-offers/",
+      "summary": "Opportunité actuelle de responsable de boutique dans le luxe à Bordeaux. Le détail des missions et des conditions doit être confirmé sur la fiche complète du cabinet avant toute candidature.",
+      "title": "Responsable de Boutique Luxe F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Mat de Misaine",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "mat-de-misaine-conseil-vente-81195709",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-10",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81195709.html",
+      "summary": "Accueillir, conseiller et servir une clientèle fidèle pour une marque française de mode casual chic, en équipe, avec participation à la tenue et à la valorisation de l’espace de vente.",
+      "title": "Conseiller de Vente H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Matmut",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "matmut-directeur-agence-saint-medard-10523",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Saint-MÃ©dard-en-Jalles",
+      "phase": "verification",
+      "published_at": null,
+      "source_kind": "direct_employer",
+      "source_site": "recrutement.matmut.fr",
+      "source_url": "https://recrutement.matmut.fr/offre-de-emploi/emploi-directeur-trice-d-agence-st-medard-en-jalles_10523.aspx",
+      "summary": "Piloter une agence Matmut Ã  Saint-MÃ©dard-en-Jalles, animer et accompagner l'Ã©quipe de conseillers, suivre l'activitÃ© et la performance du portefeuille et garantir une expÃ©rience sociÃ©taire de proximitÃ©.",
+      "title": "Directeur(trice) d'Agence - Saint-MÃ©dard-en-Jalles",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Matmut",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "matmut-gestionnaire-technique-fraude-10633",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-29",
+      "source_kind": "direct_employer",
+      "source_site": "recrutement.matmut.fr",
+      "source_url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-gestionnaire-technique-fraude-f-h_10633.aspx",
+      "summary": "Au sein du pÃ´le Lutte Anti-Fraude santÃ© Ã  Bordeaux, contrÃ´ler les remboursements, analyser les anomalies, instruire les dossiers, conduire des vÃ©rifications auprÃ¨s des adhÃ©rents et professionnels, formaliser les conclusions et proposer les dÃ©cisions adaptÃ©es.",
+      "title": "Gestionnaire Technique FRAUDE F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "NocibÃ©",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "nocibe-estheticienne-bordeaux-intendance-2026",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux Intendance",
+      "phase": "verification",
+      "published_at": "2026-07-17",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/s/emploi/Estheticienne.html",
+      "summary": "RÃ©aliser des soins visage et corps dans le magasin NocibÃ© Bordeaux Intendance, conseiller les clients sur leurs routines beautÃ© et bien-Ãªtre, dÃ©velopper la vente en cabine, fidÃ©liser la clientÃ¨le et participer activement Ã  la vie du magasin et Ã  l'image premium de l'enseigne.",
+      "title": "EsthÃ©ticienne F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "PME d’agencement via Actual Talent",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "actual-talent-coordinateur-travaux-79587618",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux rive droite",
+      "phase": "verification",
+      "published_at": "2026-05-29",
+      "source_kind": "aggregator",
+      "source_site": "bordeaux-emplois.com",
+      "source_url": "https://www.bordeaux-emplois.com/emplois/79587618.html",
+      "summary": "Coordonner des projets de rénovation et d’agencement de salles de bains sur mesure, avec responsabilité sur l’organisation, le respect des engagements de budget et de délai et la relation client.",
+      "title": "Coordinateur Travaux H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDD",
+      "employer": "Rectorat de Bordeaux",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "rectorat-gestionnaire-81317593",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-15",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81317593.html",
+      "summary": "Gérer un portefeuille de dossiers RH et de paie : fiabilisation des données, contrôle des pièces, saisie, anomalies et régularisations, au sein d’une équipe de service public.",
+      "title": "Gestionnaire Administratif et Financier H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Rituals Cosmetics",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "rituals-adjoint-merignac-79481939",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Mérignac",
+      "phase": "verification",
+      "published_at": "2026-06-27",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/79481939.html",
+      "summary": "Accompagner et fédérer l’équipe, garantir l’expérience client, développer les indicateurs, coacher les collaborateurs, gérer stocks et inventaires et soutenir l’administration de l’équipe.",
+      "title": "Responsable Adjoint — CDI 35H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Rouje",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "rouje-vendeur-bordeaux-11750320",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-19",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/rouje/Vendeur-h-f%2C11750320.html",
+      "summary": "Accueillir et conseiller de faÃ§on personnalisÃ©e la clientÃ¨le de la boutique Rouje de Bordeaux, proposer des silhouettes adaptÃ©es, fidÃ©liser et enrichir la base clients, finaliser les ventes, suivre les indicateurs commerciaux et garantir une prÃ©sentation soignÃ©e de la boutique et des collections.",
+      "title": "Vendeur H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Société Générale",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "societe-generale-conseiller-clientele-260003XR",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux Chartrons",
+      "phase": "verification",
+      "published_at": "2026-03-31",
+      "source_kind": "direct_employer",
+      "source_site": "societegenerale.com",
+      "source_url": "https://careers.societegenerale.com/offres-d-emploi/conseiller-clientele-essentiel-260003XR-fr",
+      "summary": "Accompagner les clients de l'agence Bordeaux Chartrons dans leurs projets, conseiller des solutions bancaires et d'assurance, fidéliser et développer le portefeuille, analyser les situations financières et les risques, promouvoir les usages digitaux et travailler en synergie avec les experts de la banque.",
+      "title": "Conseiller Clientèle Essentiel H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Soeur",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "soeur-responsable-corner-bordeaux-2026",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-01",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/ville/Bordeaux.html",
+      "summary": "Piloter un corner Soeur Ã  Bordeaux, animer l'Ã©quipe de vente, dÃ©velopper le chiffre d'affaires, accueillir et fidÃ©liser la clientÃ¨le, faire respecter l'identitÃ© visuelle et les procÃ©dures merchandising, puis garantir l'organisation quotidienne et la bonne gestion des stocks du point de vente.",
+      "title": "Responsable de Corner H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "freelance",
+      "employer": "Startup via Perles Office",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "perles-office-manager-freelance",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-16",
+      "source_kind": "aggregator",
+      "source_site": "lesbonsfreelances.com",
+      "source_url": "https://www.lesbonsfreelances.com/mission/office-manager-responsable-freelance-bordeaux",
+      "summary": "Mission de deux jours par semaine mêlant office management, administration RH et pré-comptabilité dans une startup internationale, avec forte autonomie.",
+      "title": "Office Manager / Responsable RH freelance H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Sunglass Hut France",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "sunglass-hut-conseiller-vente-11878891",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-21",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/sunglass-hut-france/Conseiller-de-vente-sunglass-hut-galeries-lafayette%2C11878891.html",
+      "summary": "Conseiller une clientÃ¨le franÃ§aise et internationale au corner Sunglass Hut des Galeries Lafayette de Bordeaux, personnaliser l'expÃ©rience de vente, dÃ©velopper le chiffre d'affaires et les indicateurs, participer aux formations produits, garantir le merchandising et contribuer au suivi rigoureux des stocks.",
+      "title": "Conseiller de Vente - Sunglass Hut Galeries Lafayette H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Sunglass Hut France",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "rayban-store-manager-80023286",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-10",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/80023286.html",
+      "summary": "Piloter un point de vente Ray-Ban, les indicateurs, stocks et reportings ; animer, coacher et recruter l’équipe ; suivre l’administration RH, le merchandising et la fidélisation client.",
+      "title": "Store Manager — Ray-Ban H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Tara Jarmon",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "tara-jarmon-responsable-corner-75434413",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-02-05",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/75434413.html",
+      "summary": "Développer les ventes et l’expérience client, recruter, former et coacher l’équipe, piloter les indicateurs, le merchandising, les flux financiers, les procédures RH et les stocks d’un corner mode.",
+      "title": "Responsable Corner — Galeries Lafayette Bordeaux H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "TCS — Groupe Sterne",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "tcs-conseiller-service-clients-79173745",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-06-19",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/79173745.html",
+      "summary": "Dans une équipe de dix personnes, gérer les réclamations par mail et téléphone, coordonner les services concernés et résoudre les problèmes avec autonomie dans un environnement de transport premium.",
+      "title": "Conseiller Service Clients H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Tommy Hilfiger - PVH",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "tommy-hilfiger-conseiller-vente-11490388",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-04-13",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/Conseiller-ere-de-vente-tommy-hilfiger-bordeaux-cdi-35h%2C11490388.html",
+      "summary": "Faire vivre une expÃ©rience personnalisÃ©e aux clients de la boutique Tommy Hilfiger de Bordeaux, dÃ©velopper les ventes, garantir la prÃ©sentation du point de vente, rÃ©ceptionner les livraisons, gÃ©rer les stocks et les encaissements et transmettre une connaissance enthousiaste de la mode et des produits.",
+      "title": "Conseiller de Vente H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDD",
+      "employer": "Université de Bordeaux",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "universite-gestionnaire-labos-81311925",
+      "last_verified_at": "2026-07-19T19:00:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-15",
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81311925.html",
+      "summary": "Assurer la gestion administrative et financière courante de deux laboratoires : déplacements, courriers, bases de données, information des interlocuteurs et soutien logistique aux équipes.",
+      "title": "Gestionnaire Administratif et Financier de laboratoires H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "Emploi permanent",
+      "employer": "Ville de Bègles",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "begles-chargee-communication-journaliste-2026",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bègles",
+      "phase": "verification",
+      "published_at": "2026-07-08",
+      "source_kind": "direct_employer",
+      "source_site": "mairie-begles.fr",
+      "source_url": "https://www.mairie-begles.fr/emplois/charge%C2%B7e-de-communication-journaliste-territorial%C2%B7e-f-h/",
+      "summary": "Contribuer à la communication de la Ville de Bègles dans un emploi permanent, à temps complet et de catégorie B. La liste publique confirme une date limite au 7 août 2026 ; le détail des missions, les exigences de diplôme et l’expérience attendue doivent être revérifiés.",
+      "title": "Chargé·e de communication — journaliste territorial·e F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "Emploi permanent / contractuel",
+      "employer": "Ville de Bègles",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "begles-collaboratrice-cabinet-033260709002258",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bègles",
+      "phase": "verification",
+      "published_at": "2026-07-09",
+      "source_kind": "direct_employer",
+      "source_site": "mairie-begles.fr",
+      "source_url": "https://www.mairie-begles.fr/emplois/un%C2%B7e-collaborateur%C2%B7trice-de-cabinet-f-h/",
+      "summary": "Appuyer la direction de cabinet sur les dossiers politiques et stratégiques, conseiller les élus, rédiger notes, discours et contenus, assurer la communication numérique et coordonner réunions, déplacements et relations avec l’administration, les habitants et les partenaires. Poste permanent ouvert aux contractuels.",
+      "title": "Collaborateur·trice de cabinet F/H",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Zadig & Voltaire",
+      "employer_source_url": null,
+      "failures": [
+        "annonce en attente de revérification"
+      ],
+      "id": "zadig-voltaire-conseiller-vente-11878511",
+      "last_verified_at": "2026-07-21T23:58:00+02:00",
+      "location_label": "Bordeaux",
+      "phase": "verification",
+      "published_at": "2026-07-21",
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/zadig-voltaire/Conseiller-de-vente-cdi-35h-bordeaux%2C11878511.html",
+      "summary": "Accueillir et fidÃ©liser une clientÃ¨le exigeante dans la boutique bordelaise Zadig & Voltaire, participer activement aux ventes et aux indicateurs, rÃ©aliser les encaissements, garantir les standards de merchandising, gÃ©rer rÃ©assorts et stocks et assurer le suivi qualitatif du service client.",
+      "title": "Conseiller de Vente H/F",
+      "verification_reason": "annonce en attente de revérification",
+      "verification_status": "pending"
+    }
+  ],
+  "policy_excluded_count": 15,
+  "policy_id": "delia-offer-search-v5",
+  "pool_complete": true,
+  "report_status": "complete",
+  "scan_coverage": {
+    "complete": true,
+    "covered_priority_sectors": [
+      "banque-et-assurance",
+      "bien-etre",
+      "cosmetique",
+      "hotellerie",
+      "luxe"
+    ],
+    "covered_query_families": [
+      "commerce-et-vente",
+      "conseil-et-relation-client",
+      "gestion-administrative",
+      "gestion-et-coordination-de-projets"
+    ],
+    "missing_priority_sectors": [],
+    "missing_query_families": [],
+    "missing_source_domains": [],
+    "required": true,
+    "required_priority_sectors": [
+      "banque-et-assurance",
+      "bien-etre",
+      "cosmetique",
+      "hotellerie",
+      "luxe"
+    ],
+    "required_query_families": [
+      "commerce-et-vente",
+      "conseil-et-relation-client",
+      "gestion-administrative",
+      "gestion-et-coordination-de-projets"
+    ],
+    "required_source_domains": [
+      "ars-nouvelle-aquitaine-recrute.talent-soft.com",
+      "betclic-group.breezy.hr",
+      "careers.floa.com",
+      "careers.ihg.com",
+      "caudalie.career",
+      "cdg33.fr",
+      "choisirleservicepublic.gouv.fr",
+      "chu-bordeaux.softy.pro",
+      "cultura.wd3.myworkdayjobs.com",
+      "emploi-territorial.fr",
+      "emploi.cdiscount.com",
+      "emploi.fhf.fr",
+      "gironde.fr",
+      "gironde.gouv.fr",
+      "groupefilhet-allard-career.talent-soft.com",
+      "jobs.ikea.com",
+      "lasecurecrute.fr",
+      "mairie-begles.fr",
+      "merignac-career.talent-soft.com",
+      "offresdemploi.nouvelle-aquitaine.fr",
+      "recrute.leroymerlin.fr",
+      "recrutement.bordeaux-metropole.fr",
+      "recrutement.bordeaux.fr",
+      "recrutement.bpce.fr",
+      "sources-hotels.com",
+      "u-bordeaux.fr"
+    ],
+    "requirements_declared": true,
+    "visited_source_domains": [
+      "ars-nouvelle-aquitaine-recrute.talent-soft.com",
+      "betclic-group.breezy.hr",
+      "careers.floa.com",
+      "careers.ihg.com",
+      "caudalie.career",
+      "cdg33.fr",
+      "choisirleservicepublic.gouv.fr",
+      "chu-bordeaux.softy.pro",
+      "cultura.wd3.myworkdayjobs.com",
+      "emploi-territorial.fr",
+      "emploi.cdiscount.com",
+      "emploi.fhf.fr",
+      "gironde.fr",
+      "gironde.gouv.fr",
+      "groupefilhet-allard-career.talent-soft.com",
+      "jobs.ikea.com",
+      "lasecurecrute.fr",
+      "mairie-begles.fr",
+      "merignac-career.talent-soft.com",
+      "offresdemploi.nouvelle-aquitaine.fr",
+      "recrute.leroymerlin.fr",
+      "recrutement.bordeaux-metropole.fr",
+      "recrutement.bordeaux.fr",
+      "recrutement.bpce.fr",
+      "sources-hotels.com",
+      "u-bordeaux.fr"
+    ]
+  },
+  "section_counts": {
+    "informational": 0,
+    "possible": 9,
+    "priority": 3
+  },
+  "selected_count": 12,
+  "unique_count": 88,
+  "verification_counts": {
+    "active": 27,
+    "closed": 0,
+    "expired": 0,
+    "pending": 61,
+    "unreachable": 0
+  },
+  "verification_excluded_count": 61,
+  "visited_sources": [
+    "https://ars-nouvelle-aquitaine-recrute.talent-soft.com",
+    "https://betclic-group.breezy.hr",
+    "https://careers.floa.com",
+    "https://careers.ihg.com",
+    "https://caudalie.career",
+    "https://cdg33.fr",
+    "https://choisirleservicepublic.gouv.fr",
+    "https://chu-bordeaux.softy.pro",
+    "https://cultura.wd3.myworkdayjobs.com",
+    "https://emploi-territorial.fr",
+    "https://emploi.cdiscount.com",
+    "https://emploi.fhf.fr",
+    "https://gironde.fr",
+    "https://gironde.gouv.fr",
+    "https://groupefilhet-allard-career.talent-soft.com",
+    "https://jobs.ikea.com",
+    "https://lasecurecrute.fr",
+    "https://mairie-begles.fr",
+    "https://merignac-career.talent-soft.com",
+    "https://offresdemploi.nouvelle-aquitaine.fr",
+    "https://recrute.leroymerlin.fr",
+    "https://recrutement.bordeaux-metropole.fr",
+    "https://recrutement.bordeaux.fr",
+    "https://recrutement.bpce.fr",
+    "https://sources-hotels.com",
+    "https://u-bordeaux.fr",
+    "https://www.bordeaux-emplois.com",
+    "https://www.adsearch.fr",
+    "https://fr.fashionjobs.com",
+    "https://fr.linkedin.com",
+    "https://fr.indeed.com",
+    "https://www.hellowork.com",
+    "https://www.atlantis-rh.fr",
+    "https://www.mairie-begles.fr",
+    "https://group.bnpparibas",
+    "https://candidate.hr-manager.net",
+    "https://candidat.francetravail.fr",
+    "https://www.gironde.fr",
+    "https://recrutement.izi-by-edf.fr",
+    "https://recrutement.maif.fr",
+    "https://recrutement.matmut.fr",
+    "https://matmut-recrute.talent-soft.com",
+    "https://www.lesbonsfreelances.com",
+    "https://careers.societegenerale.com",
+    "https://www.theodore-search.com"
+  ],
+  "warnings": [
+    "seulement 12 offres éligibles pour une cible de 100"
+  ]
+}

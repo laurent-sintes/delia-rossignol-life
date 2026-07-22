@@ -1,0 +1,1978 @@
+{
+  "active_count": 46,
+  "active_overflow_count": 0,
+  "candidate_count": 46,
+  "candidate_pool_maximum": 100,
+  "eligible_count": 20,
+  "excluded": [
+    {
+      "contract_type": "emploi permanent / contractuel",
+      "employer": "Mairie d'Andernos-les-Bains",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : emploi permanent / contractuel"
+      ],
+      "id": "andernos-assistant-projets-evenementiels-o033260630002669",
+      "location_label": "Andernos-les-Bains",
+      "phase": "policy",
+      "score": 30.4,
+      "sector_labels": [
+        "services publics"
+      ],
+      "source_url": "https://www.emploi-territorial.fr/offre/o033260630002669-assistant-e-projets-evenementiels",
+      "title": "Assistant de projets événementiels"
+    },
+    {
+      "contract_type": "CDD 2 ans",
+      "employer": "ARS Nouvelle-Aquitaine",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : CDD 2 ans"
+      ],
+      "id": "ars-chef-projet-segur-2026-6502",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 34.0,
+      "sector_labels": [
+        "santé et services publics"
+      ],
+      "source_url": "https://ars-nouvelle-aquitaine-recrute.talent-soft.com/offre-de-emploi/emploi-dd33-chef-fe-de-projet-territorial-e-declinaison-du-segur-investissement-dans-les-territoires-h-f_6502.aspx",
+      "title": "Chef de projet territorial - Ségur investissement"
+    },
+    {
+      "contract_type": "intérim",
+      "employer": "Azur Intérim",
+      "employer_source_url": null,
+      "failures": [
+        "rémunération maximale sous le minimum validé"
+      ],
+      "id": "azur-interim-assistante-81536862",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 47.8,
+      "sector_labels": [
+        "services aux entreprises"
+      ],
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81536862.html",
+      "title": "Assistante administrative H/F"
+    },
+    {
+      "contract_type": "emploi permanent / contractuel",
+      "employer": "Ville de Bègles",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : emploi permanent / contractuel"
+      ],
+      "id": "begles-charge-communication-033260708000468",
+      "location_label": "Bègles",
+      "phase": "policy",
+      "score": 29.0,
+      "sector_labels": [
+        "services publics"
+      ],
+      "source_url": "https://www.mairie-begles.fr/emplois/charge%C2%B7e-de-communication-journaliste-territorial%C2%B7e-f-h/",
+      "title": "Chargé de communication - journaliste territorial F/H"
+    },
+    {
+      "contract_type": "emploi permanent / contractuel",
+      "employer": "Ville de Bègles",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : emploi permanent / contractuel"
+      ],
+      "id": "begles-collaborateur-cabinet-033260709000510",
+      "location_label": "Bègles",
+      "phase": "policy",
+      "score": 31.6,
+      "sector_labels": [
+        "services publics"
+      ],
+      "source_url": "https://www.mairie-begles.fr/emplois/un%C2%B7e-collaborateur%C2%B7trice-de-cabinet-f-h/",
+      "title": "Collaborateur de cabinet F/H"
+    },
+    {
+      "contract_type": "emploi public",
+      "employer": "Centre de gestion de la Gironde",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : emploi public"
+      ],
+      "id": "cdg33-gestionnaire-operations-juillet-2026",
+      "location_label": "Gironde",
+      "phase": "policy",
+      "score": 31.8,
+      "sector_labels": [
+        "services publics"
+      ],
+      "source_url": "https://www.cdg33.fr/cdg-33/actualites/nous-recrutons-3/",
+      "title": "Gestionnaire des opérations H/F"
+    },
+    {
+      "contract_type": "emploi public",
+      "employer": "Centre de gestion de la Gironde",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : emploi public"
+      ],
+      "id": "cdg33-gestionnaire-paies-juillet-2026",
+      "location_label": "Gironde",
+      "phase": "policy",
+      "score": 26.9,
+      "sector_labels": [
+        "services publics"
+      ],
+      "source_url": "https://www.cdg33.fr/cdg-33/actualites/nous-recrutons-3/",
+      "title": "Gestionnaire paies H/F"
+    },
+    {
+      "contract_type": "CDD",
+      "employer": "Cdiscount",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : CDD"
+      ],
+      "id": "cdiscount-assistant-relation-clients-vendeurs-juillet-2026",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 47.0,
+      "sector_labels": [
+        "commerce et distribution"
+      ],
+      "source_url": "https://emploi.cdiscount.com/nos-offres-demploi",
+      "title": "Assistant relation clients et vendeurs F/H"
+    },
+    {
+      "contract_type": "CDD",
+      "employer": "Cdiscount",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : CDD"
+      ],
+      "id": "cdiscount-assistant-support-relation-client-juillet-2026",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 49.5,
+      "sector_labels": [
+        "commerce et distribution"
+      ],
+      "source_url": "https://emploi.cdiscount.com/nos-offres-demploi",
+      "title": "Assistant support relation client F/H"
+    },
+    {
+      "contract_type": "CDD",
+      "employer": "Cdiscount",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : CDD"
+      ],
+      "id": "cdiscount-charge-customer-engagement-juillet-2026",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 48.0,
+      "sector_labels": [
+        "commerce et distribution"
+      ],
+      "source_url": "https://emploi.cdiscount.com/nos-offres-demploi",
+      "title": "Chargé customer engagement F/H"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Cdiscount",
+      "employer_source_url": null,
+      "failures": [
+        "famille de profil exclue : profil spécialiste Data"
+      ],
+      "id": "cdiscount-directeur-data-juillet-2026",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 72.0,
+      "sector_labels": [
+        "commerce et distribution"
+      ],
+      "source_url": "https://emploi.cdiscount.com/nos-offres-demploi",
+      "title": "Directeur Data F/H"
+    },
+    {
+      "contract_type": "CDD",
+      "employer": "Centre hospitalier de la Haute Gironde",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : CDD"
+      ],
+      "id": "ch-haute-gironde-gestionnaire-finances-436971",
+      "location_label": "Blaye",
+      "phase": "policy",
+      "score": 22.1,
+      "sector_labels": [
+        "santé et services publics"
+      ],
+      "source_url": "https://emploi.fhf.fr/emploi/436971",
+      "title": "Adjoint administratif - gestionnaire finances, trésorerie"
+    },
+    {
+      "contract_type": "CDD 6 mois",
+      "employer": "CHU de Bordeaux",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : CDD 6 mois"
+      ],
+      "id": "chu-assistante-administrative-dpvdpe-207578",
+      "location_label": "Talence",
+      "phase": "policy",
+      "score": 34.0,
+      "sector_labels": [
+        "santé et services publics"
+      ],
+      "source_url": "https://chu-bordeaux.softy.pro/offre/207578-assistante-administrative-mutualisee-departement-partenariats-et-valorisation-et-departement-promotion-externe-h-f",
+      "title": "Assistante administrative mutualisée partenariats et valorisation H/F"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Les Compagnons du Devoir",
+      "employer_source_url": null,
+      "failures": [
+        "rémunération maximale sous le minimum validé"
+      ],
+      "id": "compagnons-assistant-administratif-juillet-2026",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 65.0,
+      "sector_labels": [
+        "education et vie associative"
+      ],
+      "source_url": "https://www.hellowork.com/fr-fr/emploi/metier_assistant-administratif-ville_bordeaux-33000.html",
+      "title": "Assistant administratif H/F"
+    },
+    {
+      "contract_type": "CDD de projet 30 mois",
+      "employer": "Université de Bordeaux",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : CDD de projet 30 mois"
+      ],
+      "id": "csp-assistant-administratif-pui-2026-2150723",
+      "location_label": "Talence",
+      "phase": "policy",
+      "score": 26.0,
+      "sector_labels": [
+        "enseignement supérieur et recherche"
+      ],
+      "source_url": "https://choisirleservicepublic.gouv.fr/offre-emploi/assistant-administratif-fh-reference-2026-2150723/",
+      "title": "Assistant administratif F/H"
+    },
+    {
+      "contract_type": "CDD ou mobilité publique",
+      "employer": "Direction nationale de la sécurité publique",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : CDD ou mobilité publique"
+      ],
+      "id": "csp-chef-bureau-gestion-117278",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 25.0,
+      "sector_labels": [
+        "services publics"
+      ],
+      "source_url": "https://choisirleservicepublic.gouv.fr/offre-emploi/chef-du-bureau-de-gestion--secretariat--assistant-maitrise-d-ouvrage-en-appui-du-pole-projets-reference-MINT_BA033ACB-117278/",
+      "title": "Chef du bureau de gestion / assistant maîtrise d'ouvrage"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "FLOA",
+      "employer_source_url": null,
+      "failures": [
+        "activité exclue : démarchage téléphonique"
+      ],
+      "id": "floa-pilotage-flux-fc001-2026",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 73.0,
+      "sector_labels": [
+        "banque et assurance"
+      ],
+      "source_url": "https://careers.floa.com/jobs/7288784-charge-e-de-pilotage-des-flux-et-des-campagnes-sortantes-h-f-fc001-2026",
+      "title": "Chargé de pilotage des flux et des campagnes sortantes H/F"
+    },
+    {
+      "contract_type": "emploi permanent",
+      "employer": "Département de la Gironde",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : emploi permanent"
+      ],
+      "id": "gironde-coordination-qualite-comptable-i857",
+      "location_label": "Gironde",
+      "phase": "policy",
+      "score": 32.5,
+      "sector_labels": [
+        "services publics"
+      ],
+      "source_url": "https://www.gironde.fr/offres-d-emploi/chargee-de-coordination-qualite-comptable-et-outils-metiers",
+      "title": "Chargé de coordination qualité comptable et outils métiers"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "LR Conseil / Dometvie Bordeaux et Bassin",
+      "employer_source_url": null,
+      "failures": [
+        "rémunération maximale sous le minimum validé"
+      ],
+      "id": "lr-conseil-assistant-administratif-81201933",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 63.9,
+      "sector_labels": [
+        "services aux particuliers"
+      ],
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81201933.html",
+      "title": "Assistant administratif H/F"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Structure de santé via Manpower",
+      "employer_source_url": null,
+      "failures": [
+        "rémunération maximale sous le minimum validé"
+      ],
+      "id": "manpower-assistant-administratif-80135487",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 51.3,
+      "sector_labels": [
+        "santé"
+      ],
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/80135487.html",
+      "title": "Assistant administratif en CDI H/F"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Mesolia Habitat",
+      "employer_source_url": null,
+      "failures": [
+        "secteur exclu : immobilier",
+        "rémunération maximale sous le minimum validé"
+      ],
+      "id": "mesolia-assistant-promotion-81214082",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 60.3,
+      "sector_labels": [
+        "immobilier"
+      ],
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81214082.html",
+      "title": "Assistant administratif promotion H/F"
+    },
+    {
+      "contract_type": "CDI",
+      "employer": "Nocibé",
+      "employer_source_url": null,
+      "failures": [
+        "diplôme obligatoire non satisfait : CAP, BP ou BTS Esthétique"
+      ],
+      "id": "nocibe-estheticienne-bordeaux-juillet-2026",
+      "location_label": "Bordeaux Intendance",
+      "phase": "policy",
+      "score": 89.3,
+      "sector_labels": [
+        "cosmétique",
+        "bien-être",
+        "luxe"
+      ],
+      "source_url": "https://fr.fashionjobs.com/ville/Bordeaux.html",
+      "title": "Esthéticienne F/H"
+    },
+    {
+      "contract_type": "CDI temps partiel",
+      "employer": "Rituals",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : CDI temps partiel",
+        "offre à temps partiel"
+      ],
+      "id": "rituals-conseiller-vente-bordeaux-lac-juillet-2026",
+      "location_label": "Bordeaux Lac",
+      "phase": "policy",
+      "score": 57.0,
+      "sector_labels": [
+        "bien-être",
+        "cosmétique"
+      ],
+      "source_url": "https://fr.fashionjobs.com/ville/Bordeaux.html",
+      "title": "Conseiller de vente H/F"
+    },
+    {
+      "contract_type": "CDD",
+      "employer": "Les Sources de Caudalie",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : CDD"
+      ],
+      "id": "sources-caudalie-guest-relation-juillet-2026",
+      "location_label": "Bordeaux-Martillac",
+      "phase": "policy",
+      "score": 54.0,
+      "sector_labels": [
+        "luxe",
+        "hôtellerie",
+        "bien-être"
+      ],
+      "source_url": "https://www.sources-hotels.com/bordeaux/en/job/",
+      "title": "Guest Relation Agent - Réceptionniste H/F"
+    },
+    {
+      "contract_type": "CDD 11,5 mois",
+      "employer": "Université de Bordeaux",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : CDD 11,5 mois"
+      ],
+      "id": "universite-bordeaux-assistant-iae-juillet-2026",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 33.0,
+      "sector_labels": [
+        "enseignement supérieur et recherche"
+      ],
+      "source_url": "https://www.u-bordeaux.fr/universite/travailler-a-l-universite/offres-demploi/assistant-administratif-et-de-gestion-iae-fh",
+      "title": "Assistant administratif et de gestion - IAE F/H"
+    },
+    {
+      "contract_type": "CDD",
+      "employer": "Université de Bordeaux",
+      "employer_source_url": null,
+      "failures": [
+        "contrat hors politique de recherche : CDD"
+      ],
+      "id": "universite-bordeaux-charge-projets-innovations-juillet-2026",
+      "location_label": "Bordeaux",
+      "phase": "policy",
+      "score": 31.0,
+      "sector_labels": [
+        "enseignement supérieur et recherche"
+      ],
+      "source_url": "https://www.u-bordeaux.fr/universite/travailler-a-l-universite/offres-demploi/charge-de-projets-innovations-fh",
+      "title": "Chargé de projets InnovationS F/H"
+    }
+  ],
+  "excluded_count": 26,
+  "finalization_allowed": true,
+  "offers": [
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "anglais",
+          "bordeaux",
+          "client",
+          "clientele",
+          "conseiller",
+          "contribuer",
+          "faire",
+          "fidelisation",
+          "galeries",
+          "internationale",
+          "lafayette",
+          "luxe",
+          "maison",
+          "service",
+          "suivi",
+          "valoriser",
+          "vente"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur prioritaire : luxe",
+          "activité prioritaire : conseil et relation client",
+          "expérience transférable : anglais, bordeaux, client, clientele, conseiller",
+          "offre publiée depuis moins de 8 jours"
+        ],
+        "recommendation_band": "priority",
+        "recommendation_reasons": [
+          "forte correspondance sans prérequis obligatoire incertain"
+        ],
+        "score": 92.0,
+        "unknowns": [
+          "travail en équipe à confirmer",
+          "La page FashionJobs du jour identifie l'offre à temps plein ; aucune page employeur distincte n'a été retrouvée pendant ce scan.",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": null,
+      "conditions": {},
+      "contract_type": "CDI",
+      "employer": "AMI Paris",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "ami-client-advisor-bordeaux-juillet-2026",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-07-22",
+      "rank": 1,
+      "recommendation_band": "priority",
+      "sector_labels": [
+        "luxe",
+        "mode et prêt-à-porter"
+      ],
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/mode/",
+      "source_warning": "La page FashionJobs du jour identifie l'offre à temps plein ; aucune page employeur distincte n'a été retrouvée pendant ce scan.",
+      "summary": "Conseiller une clientèle locale et internationale, fidéliser, valoriser le savoir-faire de la maison et contribuer au merchandising et au suivi des stocks.",
+      "title": "Client Advisor - Galeries Lafayette Bordeaux",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "accompagnement",
+          "accompagner",
+          "boutique",
+          "cliente",
+          "commerciaux",
+          "conseil",
+          "fidelisation",
+          "indicateurs",
+          "mode",
+          "personnalise",
+          "style",
+          "suivre",
+          "vendeur",
+          "vente"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur prioritaire : luxe",
+          "activité prioritaire : conseil et relation client",
+          "expérience transférable : accompagnement, accompagner, boutique, cliente, commerciaux",
+          "offre publiée depuis moins de 8 jours",
+          "prérequis sectoriel couvert : 32 mois validés pour 12 requis"
+        ],
+        "recommendation_band": "priority",
+        "recommendation_reasons": [
+          "forte correspondance sans prérequis obligatoire incertain"
+        ],
+        "score": 89.0,
+        "unknowns": [
+          "travail en équipe à confirmer",
+          "La page Bordeaux de FashionJobs identifie clairement l'offre actuelle ; aucune page employeur distincte n'a été retrouvée pendant ce scan.",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": null,
+      "conditions": {
+        "hours_per_week": 35,
+        "start_period": "mi-fin juillet 2026"
+      },
+      "contract_type": "CDI",
+      "employer": "Rouje",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "rouje-vendeur-bordeaux-juillet-2026",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [
+        {
+          "assessment_note": "L'expérience validée dans la mode couvre automatiquement la durée demandée ; l'accompagnement personnalisé est également documenté.",
+          "description": "Au moins un an dans la mode et l'accompagnement personnalisé",
+          "evidence": {
+            "excerpt": "Au moins un an dans la mode et l'accompagnement personnalisé.",
+            "locator": "page de l'offre"
+          },
+          "id": "experience-mode-un-an",
+          "industry_sector_ids": [
+            "mode-et-pret-a-porter"
+          ],
+          "kind": "sector_experience",
+          "mandatory": true,
+          "minimum_years": 1,
+          "profile_evidence_ids": [],
+          "profile_status": "not_demonstrated"
+        }
+      ],
+      "published_at": "2026-07-22",
+      "rank": 2,
+      "recommendation_band": "priority",
+      "sector_labels": [
+        "luxe",
+        "mode et prêt-à-porter"
+      ],
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/ville/Bordeaux.html",
+      "source_warning": "La page Bordeaux de FashionJobs identifie clairement l'offre actuelle ; aucune page employeur distincte n'a été retrouvée pendant ce scan.",
+      "summary": "Accueillir et accompagner chaque cliente en boutique et en salon d'essayage, apporter des conseils de style et de morphologie, fidéliser et suivre les indicateurs commerciaux.",
+      "title": "Vendeur H/F",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "accompagner",
+          "assurer",
+          "client",
+          "clients",
+          "conseiller",
+          "developper",
+          "espace",
+          "fidelisation",
+          "luxe",
+          "relation",
+          "vente"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur prioritaire : luxe",
+          "activité prioritaire : conseil et relation client",
+          "expérience transférable : accompagner, assurer, client, clients, conseiller",
+          "offre publiée depuis moins de 8 jours"
+        ],
+        "recommendation_band": "priority",
+        "recommendation_reasons": [
+          "forte correspondance sans prérequis obligatoire incertain"
+        ],
+        "score": 87.2,
+        "unknowns": [
+          "travail en équipe à confirmer",
+          "La page Bordeaux de FashionJobs identifie clairement l'offre actuelle ; aucune page employeur distincte n'a été retrouvée pendant ce scan.",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": null,
+      "conditions": {
+        "hours_per_week": 35,
+        "start_date": "2026-09-01"
+      },
+      "contract_type": "CDI",
+      "employer": "Galeries Lafayette Bordeaux",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "galeries-lafayette-conseiller-vente-luxe-juillet-2026",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-07-22",
+      "rank": 3,
+      "recommendation_band": "priority",
+      "sector_labels": [
+        "luxe",
+        "commerce et distribution"
+      ],
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/ville/Bordeaux.html",
+      "source_warning": "La page Bordeaux de FashionJobs identifie clairement l'offre actuelle ; aucune page employeur distincte n'a été retrouvée pendant ce scan.",
+      "summary": "Accueillir et accompagner les clients du nouvel espace Luxe, développer les ventes, encaisser, assurer le merchandising, le réassort et la fidélisation.",
+      "title": "Conseiller de vente Espace Luxe F/H",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "apres",
+          "clientele",
+          "conseil",
+          "conseiller",
+          "developper",
+          "fidelisation",
+          "gerer",
+          "personnalise",
+          "service",
+          "vente"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur prioritaire : luxe",
+          "activité prioritaire : conseil et relation client",
+          "expérience transférable : apres, clientele, conseil, conseiller, developper",
+          "offre publiée depuis moins de 8 jours"
+        ],
+        "recommendation_band": "priority",
+        "recommendation_reasons": [
+          "forte correspondance sans prérequis obligatoire incertain"
+        ],
+        "score": 86.1,
+        "unknowns": [
+          "travail en équipe à confirmer",
+          "L'offre est actuelle sur FashionJobs ; aucune page employeur distincte n'a été retrouvée pendant ce scan.",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": null,
+      "conditions": {
+        "hours_per_week": 35
+      },
+      "contract_type": "CDI",
+      "employer": "Zadig & Voltaire",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "zadig-voltaire-conseiller-vente-11878511",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-07-22",
+      "rank": 4,
+      "recommendation_band": "priority",
+      "sector_labels": [
+        "luxe",
+        "mode et prêt-à-porter"
+      ],
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/zadig-voltaire/Conseiller-de-vente-cdi-35h-bordeaux%2C11878511.html",
+      "source_warning": "L'offre est actuelle sur FashionJobs ; aucune page employeur distincte n'a été retrouvée pendant ce scan.",
+      "summary": "Accueillir une clientèle exigeante, apporter un conseil personnalisé, développer les ventes, gérer les transactions, les stocks, le merchandising et le service après-vente.",
+      "title": "Conseiller de vente H/F",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "actions",
+          "analyse",
+          "analyser",
+          "communication",
+          "coordination",
+          "coordonner",
+          "gestion",
+          "marketing",
+          "partenaires",
+          "performance",
+          "piloter",
+          "projet",
+          "suivre"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur acceptable : commerce et distribution",
+          "activité prioritaire : gestion et coordination de projets",
+          "expérience transférable : actions, analyse, analyser, communication, coordination",
+          "offre publiée depuis moins de 8 jours",
+          "dimension collective explicite"
+        ],
+        "recommendation_band": "priority",
+        "recommendation_reasons": [
+          "forte correspondance sans prérequis obligatoire incertain"
+        ],
+        "score": 84.7,
+        "unknowns": [
+          "La liste employeur du jour confirme l'offre ; le lien pointe vers cette liste, qui contient les informations essentielles mais pas une URL de fiche stable.",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": null,
+      "conditions": {},
+      "contract_type": "CDI",
+      "employer": "Cdiscount",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "cdiscount-chef-projet-influence-juillet-2026",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-07-16",
+      "rank": 5,
+      "recommendation_band": "priority",
+      "sector_labels": [
+        "commerce et distribution"
+      ],
+      "source_kind": "direct_employer",
+      "source_site": "emploi.cdiscount.com",
+      "source_url": "https://emploi.cdiscount.com/nos-offres-demploi",
+      "source_warning": "La liste employeur du jour confirme l'offre ; le lien pointe vers cette liste, qui contient les informations essentielles mais pas une URL de fiche stable.",
+      "summary": "Piloter les campagnes d'influence, coordonner les partenaires et équipes internes, suivre les livrables et analyser la performance des actions de communication.",
+      "title": "Chef de projet influence F/H",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "bordeaux",
+          "client",
+          "clientele",
+          "conseiller",
+          "fidelisation",
+          "participer",
+          "relation",
+          "vendre",
+          "vente"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur prioritaire : luxe",
+          "activité prioritaire : conseil et relation client",
+          "expérience transférable : bordeaux, client, clientele, conseiller, fidelisation",
+          "offre publiée il y a 23 jours"
+        ],
+        "recommendation_band": "priority",
+        "recommendation_reasons": [
+          "forte correspondance sans prérequis obligatoire incertain"
+        ],
+        "score": 82.2,
+        "unknowns": [
+          "travail en équipe à confirmer",
+          "La page métier de FashionJobs identifie clairement l'offre actuelle ; aucune page employeur distincte n'a été retrouvée pendant ce scan.",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": null,
+      "conditions": {
+        "hours_per_week": 35
+      },
+      "contract_type": "CDI",
+      "employer": "Gerard Darel",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "gerard-darel-conseillere-vente-juillet-2026",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-06-29",
+      "rank": 6,
+      "recommendation_band": "priority",
+      "sector_labels": [
+        "luxe",
+        "mode et prêt-à-porter"
+      ],
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/fr/s/emploi/vendeur-vendeuse-bordeaux.html",
+      "source_warning": "La page métier de FashionJobs identifie clairement l'offre actuelle ; aucune page employeur distincte n'a été retrouvée pendant ce scan.",
+      "summary": "Accueillir, conseiller et vendre, fidéliser la clientèle et participer au réassort du point de vente Gerard Darel de Bordeaux.",
+      "title": "Conseillère de vente H/F",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "commerciale",
+          "coordination",
+          "design",
+          "equipe",
+          "espace",
+          "magasin",
+          "management",
+          "piloter",
+          "responsable",
+          "retail",
+          "service"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur acceptable : agencement et amenagement interieur",
+          "activité prioritaire : commerce et vente",
+          "expérience transférable : commerciale, coordination, design, equipe, espace",
+          "offre publiée depuis moins de 8 jours",
+          "dimension collective explicite"
+        ],
+        "recommendation_band": "priority",
+        "recommendation_reasons": [
+          "forte correspondance sans prérequis obligatoire incertain"
+        ],
+        "score": 82.0,
+        "unknowns": [
+          "La page régionale IKEA du jour confirme le poste, mais le lien fourni est la liste régionale plutôt qu'une fiche détaillée stable.",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": null,
+      "conditions": {},
+      "contract_type": "CDI",
+      "employer": "IKEA Bordeaux-Lac",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "ikea-responsable-visuel-merchandiser-juillet-2026",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux Lac",
+      "prerequisites": [],
+      "published_at": "2026-07-15",
+      "rank": 7,
+      "recommendation_band": "priority",
+      "sector_labels": [
+        "agencement et aménagement intérieur",
+        "commerce et distribution"
+      ],
+      "source_kind": "direct_employer",
+      "source_site": "jobs.ikea.com",
+      "source_url": "https://jobs.ikea.com/fr/lieu/nouvelle-aquitaine-france-jobs/22908/3017382-11071620/3",
+      "source_warning": "La page régionale IKEA du jour confirme le poste, mais le lien fourni est la liste régionale plutôt qu'une fiche détaillée stable.",
+      "summary": "Piloter le merchandising visuel du magasin, animer l'équipe et garantir une présentation inspirante et commerciale des espaces.",
+      "title": "Responsable de service Visuel Merchandiser F/H",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [
+          "offre ancienne : 77 jours"
+        ],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "bordeaux",
+          "client",
+          "clientele",
+          "conseiller",
+          "contribuer",
+          "developper",
+          "fidelisation",
+          "galeries",
+          "lafayette",
+          "produits",
+          "relation",
+          "suivi",
+          "vente"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur prioritaire : luxe",
+          "activité prioritaire : conseil et relation client",
+          "expérience transférable : bordeaux, client, clientele, conseiller, contribuer"
+        ],
+        "recommendation_band": "priority",
+        "recommendation_reasons": [
+          "forte correspondance sans prérequis obligatoire incertain"
+        ],
+        "score": 79.4,
+        "unknowns": [
+          "travail en équipe à confirmer",
+          "L'offre est publiée sur FashionJobs ; aucune page employeur distincte n'a été retrouvée pendant ce scan.",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": null,
+      "conditions": {
+        "hours_per_week": 35
+      },
+      "contract_type": "CDI",
+      "employer": "Hugo Boss",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "hugo-boss-conseiller-vente-11588832",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-05-06",
+      "rank": 8,
+      "recommendation_band": "priority",
+      "sector_labels": [
+        "luxe",
+        "mode et prêt-à-porter"
+      ],
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/emploi/hugo-boss-france/Conseiller-de-vente-cdi-35h-galeries-lafayette-bordeaux%2C11588832.html",
+      "source_warning": "L'offre est publiée sur FashionJobs ; aucune page employeur distincte n'a été retrouvée pendant ce scan.",
+      "summary": "Accueillir et conseiller une clientèle premium, développer les ventes, fidéliser et contribuer au merchandising et au suivi des produits.",
+      "title": "Conseiller de vente - Galeries Lafayette Bordeaux H/F",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "activite",
+          "controle",
+          "coordination",
+          "coordonner",
+          "equipe",
+          "haut",
+          "organisation"
+        ],
+        "prerequisite_alerts": [
+          {
+            "description": "Expérience préalable en gouvernance hôtelière",
+            "id": "experience-gouvernante-hotellerie",
+            "kind": "prior_role",
+            "mandatory": true,
+            "message": "non démontré dans les connaissances validées",
+            "status": "not_demonstrated"
+          }
+        ],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "secteur prioritaire : luxe",
+          "activité prioritaire : gestion administrative",
+          "expérience transférable : activite, controle, coordination, coordonner, equipe",
+          "offre publiée il y a 30 jours",
+          "dimension collective explicite"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "prérequis obligatoire non démontré ou à vérifier"
+        ],
+        "score": 83.8,
+        "unknowns": [
+          "La page recrutement de l'employeur confirme l'offre ; elle regroupe plusieurs postes sur une même page.",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": null,
+      "conditions": {},
+      "contract_type": "CDI",
+      "employer": "Les Sources de Caudalie",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "sources-caudalie-gouvernante-juillet-2026",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux-Martillac",
+      "prerequisites": [
+        {
+          "assessment_note": "Aucune expérience de gouvernante hôtelière n'est démontrée dans les connaissances validées.",
+          "description": "Expérience préalable en gouvernance hôtelière",
+          "evidence": {
+            "excerpt": "Expérience en gouvernance d'étages attendue.",
+            "locator": "page de l'offre"
+          },
+          "id": "experience-gouvernante-hotellerie",
+          "kind": "prior_role",
+          "mandatory": true,
+          "profile_evidence_ids": [],
+          "profile_status": "not_demonstrated"
+        }
+      ],
+      "published_at": "2026-06-22",
+      "rank": 9,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "luxe",
+        "hôtellerie",
+        "bien-être"
+      ],
+      "source_kind": "direct_employer",
+      "source_site": "sources-hotels.com",
+      "source_url": "https://www.sources-hotels.com/bordeaux/en/job/",
+      "source_warning": "La page recrutement de l'employeur confirme l'offre ; elle regroupe plusieurs postes sur une même page.",
+      "summary": "Organiser et contrôler l'activité des étages, coordonner l'équipe et garantir les standards de qualité d'un hôtel haut de gamme.",
+      "title": "Gouvernante H/F",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "actions",
+          "anglais",
+          "aupres",
+          "communication",
+          "coordination",
+          "coordonner",
+          "organisation",
+          "suivre"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "activité prioritaire : gestion administrative",
+          "expérience transférable : actions, anglais, aupres, communication, coordination",
+          "offre publiée depuis moins de 8 jours",
+          "dimension collective explicite"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "score compris entre 50 et 75"
+        ],
+        "score": 68.4,
+        "unknowns": [
+          "adéquation sectorielle à confirmer",
+          "Le portail Betclic du jour confirme l'offre, mais le lien fourni est la liste des postes plutôt qu'une fiche stable.",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": null,
+      "conditions": {},
+      "contract_type": "CDI",
+      "employer": "Betclic Group",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "betclic-security-awareness-communications-assistant-juillet-2026",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-07-22",
+      "rank": 10,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "numérique et services"
+      ],
+      "source_kind": "direct_employer",
+      "source_site": "betclic-group.breezy.hr",
+      "source_url": "https://betclic-group.breezy.hr/",
+      "source_warning": "Le portail Betclic du jour confirme l'offre, mais le lien fourni est la liste des postes plutôt qu'une fiche stable.",
+      "summary": "Coordonner les actions de sensibilisation à la sécurité, préparer les communications et supports et suivre les campagnes auprès des équipes.",
+      "title": "Security Awareness & Communications Assistant F/M",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "accompagner",
+          "boutique",
+          "client",
+          "clients",
+          "conseiller",
+          "contribuer",
+          "fidelisation",
+          "produits",
+          "relation",
+          "vente"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "activité prioritaire : conseil et relation client",
+          "expérience transférable : accompagner, boutique, client, clients, conseiller",
+          "offre publiée depuis moins de 8 jours"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "score compris entre 50 et 75"
+        ],
+        "score": 66.8,
+        "unknowns": [
+          "adéquation sectorielle à confirmer",
+          "travail en équipe à confirmer",
+          "La page Bordeaux de FashionJobs identifie clairement l'offre actuelle ; aucune page employeur distincte n'a été retrouvée pendant ce scan.",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": null,
+      "conditions": {
+        "hours_per_week": 35
+      },
+      "contract_type": "CDI",
+      "employer": "Intimissimi",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "intimissimi-conseiller-vente-bordeaux-juillet-2026",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-07-22",
+      "rank": 11,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "mode et prêt-à-porter"
+      ],
+      "source_kind": "specialized",
+      "source_site": "fashionjobs.com",
+      "source_url": "https://fr.fashionjobs.com/ville/Bordeaux.html",
+      "source_warning": "La page Bordeaux de FashionJobs identifie clairement l'offre actuelle ; aucune page employeur distincte n'a été retrouvée pendant ce scan.",
+      "summary": "Conseiller, accompagner et fidéliser les clients, atteindre les objectifs de vente et contribuer à la mise en valeur des produits et à la tenue de la boutique.",
+      "title": "Conseiller de vente H/F",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "coordination",
+          "coordonner",
+          "finance",
+          "gestion",
+          "manager",
+          "piloter",
+          "projet",
+          "projets",
+          "resultats",
+          "transformation"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "activité prioritaire : gestion et coordination de projets",
+          "expérience transférable : coordination, coordonner, finance, gestion, manager",
+          "offre publiée depuis moins de 8 jours"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "score compris entre 50 et 75"
+        ],
+        "score": 65.5,
+        "unknowns": [
+          "adéquation sectorielle à confirmer",
+          "travail en équipe à confirmer",
+          "Le portail Betclic du jour confirme l'offre, mais le lien fourni est la liste des postes plutôt qu'une fiche stable.",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": null,
+      "conditions": {},
+      "contract_type": "CDI",
+      "employer": "Betclic Group",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "betclic-finance-transformation-project-manager-juillet-2026",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-07-22",
+      "rank": 12,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "numérique et services"
+      ],
+      "source_kind": "direct_employer",
+      "source_site": "betclic-group.breezy.hr",
+      "source_url": "https://betclic-group.breezy.hr/",
+      "source_warning": "Le portail Betclic du jour confirme l'offre, mais le lien fourni est la liste des postes plutôt qu'une fiche stable.",
+      "summary": "Piloter des projets de transformation de la fonction finance, coordonner les parties prenantes et sécuriser la mise en œuvre et les résultats.",
+      "title": "Finance Transformation Project Manager F/M",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "assurer",
+          "autonomie",
+          "coordination",
+          "coordonner",
+          "equipe",
+          "organisation",
+          "suivi"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "activité prioritaire : gestion administrative",
+          "expérience transférable : assurer, autonomie, coordination, coordonner, equipe",
+          "offre publiée il y a 29 jours",
+          "dimension collective explicite"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "score compris entre 50 et 75"
+        ],
+        "score": 65.3,
+        "unknowns": [
+          "adéquation sectorielle à confirmer",
+          "annonce accessible sur un site tiers, mais non retrouvée sur le site de l’employeur ; vérifier sa disponibilité avant de candidater"
+        ]
+      },
+      "compensation": {
+        "currency": "EUR",
+        "maximum": 35000,
+        "minimum": 31000,
+        "period": "year"
+      },
+      "conditions": {},
+      "contract_type": "CDI",
+      "employer": "Mentory",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "mentory-assistant-operationnel-80479482",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-06-23",
+      "rank": 13,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "services aux entreprises"
+      ],
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/80479482.html",
+      "source_warning": null,
+      "summary": "Assurer l'appui opérationnel et administratif d'une équipe, coordonner les priorités et fiabiliser les outils de suivi.",
+      "title": "Assistant opérationnel H/F",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "coordination",
+          "coordonner",
+          "finance",
+          "gestion",
+          "plans",
+          "portefeuille",
+          "transformation"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "activité prioritaire : gestion administrative",
+          "expérience transférable : coordination, coordonner, finance, gestion, plans",
+          "offre publiée depuis moins de 8 jours"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "score compris entre 50 et 75"
+        ],
+        "score": 64.3,
+        "unknowns": [
+          "adéquation sectorielle à confirmer",
+          "travail en équipe à confirmer",
+          "Le portail Betclic du jour confirme l'offre, mais le lien fourni est la liste des postes plutôt qu'une fiche stable.",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": null,
+      "conditions": {},
+      "contract_type": "CDI",
+      "employer": "Betclic Group",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "betclic-finance-transformation-pmo-juillet-2026",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-07-22",
+      "rank": 14,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "numérique et services"
+      ],
+      "source_kind": "direct_employer",
+      "source_site": "betclic-group.breezy.hr",
+      "source_url": "https://betclic-group.breezy.hr/",
+      "source_warning": "Le portail Betclic du jour confirme l'offre, mais le lien fourni est la liste des postes plutôt qu'une fiche stable.",
+      "summary": "Structurer le portefeuille de transformation finance, coordonner les chantiers, consolider les plans d'action, risques, budgets et reportings.",
+      "title": "Finance Transformation PMO F/M",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "contribuer",
+          "coordination",
+          "coordonner",
+          "gestion",
+          "suivi",
+          "suivre"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "activité prioritaire : gestion administrative",
+          "expérience transférable : contribuer, coordination, coordonner, gestion, suivi",
+          "offre publiée depuis moins de 8 jours"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "score compris entre 50 et 75"
+        ],
+        "score": 62.5,
+        "unknowns": [
+          "adéquation sectorielle à confirmer",
+          "travail en équipe à confirmer",
+          "annonce accessible sur un site tiers, mais non retrouvée sur le site de l’employeur ; vérifier sa disponibilité avant de candidater"
+        ]
+      },
+      "compensation": {
+        "currency": "EUR",
+        "maximum": 32000,
+        "minimum": 31000,
+        "period": "year"
+      },
+      "conditions": {},
+      "contract_type": "CDI",
+      "employer": "Grafton",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "grafton-assistant-travaux-81564182",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Pessac",
+      "prerequisites": [],
+      "published_at": "2026-07-22",
+      "rank": 15,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "construction"
+      ],
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81564182.html",
+      "source_warning": null,
+      "summary": "Suivre les dossiers administratifs de travaux, coordonner les documents et contribuer au respect des échéances des opérations.",
+      "title": "Assistant administratif travaux H/F",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "administrative",
+          "assurer",
+          "chantier",
+          "coordination",
+          "gestion",
+          "suivi"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "activité prioritaire : gestion administrative",
+          "expérience transférable : administrative, assurer, chantier, coordination, gestion",
+          "offre publiée depuis moins de 8 jours"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "score compris entre 50 et 75"
+        ],
+        "score": 62.5,
+        "unknowns": [
+          "adéquation sectorielle à confirmer",
+          "travail en équipe à confirmer",
+          "annonce accessible sur un site tiers, mais non retrouvée sur le site de l’employeur ; vérifier sa disponibilité avant de candidater"
+        ]
+      },
+      "compensation": {
+        "currency": "EUR",
+        "maximum": 35000,
+        "minimum": 30000,
+        "period": "year"
+      },
+      "conditions": {},
+      "contract_type": "CDI",
+      "employer": "LTD",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "ltd-assistant-administratif-81507674",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-07-21",
+      "rank": 16,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "construction"
+      ],
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81507674.html",
+      "source_warning": null,
+      "summary": "Assurer le suivi administratif de dossiers de chantier, la préparation des documents, la coordination des interlocuteurs et la tenue des bases de suivi.",
+      "title": "Assistant administratif H/F",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "anglais",
+          "assister",
+          "coordination",
+          "coordonner",
+          "direction"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "activité prioritaire : gestion administrative",
+          "expérience transférable : anglais, assister, coordination, coordonner, direction",
+          "offre publiée depuis moins de 8 jours"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "score compris entre 50 et 75"
+        ],
+        "score": 60.9,
+        "unknowns": [
+          "adéquation sectorielle à confirmer",
+          "travail en équipe à confirmer",
+          "Le portail Betclic du jour confirme l'offre, mais le lien fourni est la liste des postes plutôt qu'une fiche stable.",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": null,
+      "conditions": {},
+      "contract_type": "CDI",
+      "employer": "Betclic Group",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "betclic-executive-assistant-ceo-juillet-2026",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-07-22",
+      "rank": 17,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "numérique et services"
+      ],
+      "source_kind": "direct_employer",
+      "source_site": "betclic-group.breezy.hr",
+      "source_url": "https://betclic-group.breezy.hr/",
+      "source_warning": "Le portail Betclic du jour confirme l'offre, mais le lien fourni est la liste des postes plutôt qu'une fiche stable.",
+      "summary": "Assister le CEO Office, coordonner les agendas, réunions, informations et priorités de la direction générale dans un environnement international.",
+      "title": "Executive Assistant - CEO Office F/M",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "administrative",
+          "autonomie",
+          "client",
+          "clients",
+          "devis",
+          "facturation",
+          "gerer",
+          "responsable",
+          "suivi"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "activité prioritaire : conseil et relation client",
+          "expérience transférable : administrative, autonomie, client, clients, devis",
+          "offre publiée il y a 15 jours"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "score compris entre 50 et 75"
+        ],
+        "score": 60.0,
+        "unknowns": [
+          "adéquation sectorielle à confirmer",
+          "travail en équipe à confirmer",
+          "annonce accessible sur un site tiers, mais non retrouvée sur le site de l’employeur ; vérifier sa disponibilité avant de candidater"
+        ]
+      },
+      "compensation": {
+        "currency": "EUR",
+        "maximum": 18,
+        "minimum": 15,
+        "period": "hour"
+      },
+      "conditions": {},
+      "contract_type": "CDI",
+      "employer": "Entreprise Vince",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "vince-assistant-administratif-btp-81037660",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [
+        {
+          "assessment_note": "La durée d'expérience administrative validée couvre ce seuil.",
+          "description": "Trois ans d'expérience administrative",
+          "evidence": {
+            "excerpt": "Expérience : 3 ans minimum.",
+            "locator": "page de l'offre"
+          },
+          "id": "experience-administrative-trois-ans",
+          "kind": "minimum_experience",
+          "mandatory": true,
+          "minimum_years": 3,
+          "profile_evidence_ids": [],
+          "profile_status": "met"
+        }
+      ],
+      "published_at": "2026-07-07",
+      "rank": 18,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "construction"
+      ],
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emplois/81037660.html",
+      "source_warning": null,
+      "summary": "Gérer devis, facturation, situations de travaux, dossiers clients, agendas et base documentaire en lien direct avec le gérant et la responsable administrative.",
+      "title": "Assistant administratif BTP H/F",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "activite",
+          "administrative",
+          "assistante",
+          "entreprise",
+          "organisation",
+          "suivi"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "activité prioritaire : gestion administrative",
+          "expérience transférable : activite, administrative, assistante, entreprise, organisation",
+          "offre publiée il y a 10 jours"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "score compris entre 50 et 75"
+        ],
+        "score": 59.0,
+        "unknowns": [
+          "adéquation sectorielle à confirmer",
+          "travail en équipe à confirmer",
+          "L'offre est identifiable sur la liste Hellowork du jour, mais l'employeur final et la fiche détaillée restent à confirmer.",
+          "annonce accessible sur un site tiers, mais non retrouvée sur le site de l’employeur ; vérifier sa disponibilité avant de candidater"
+        ]
+      },
+      "compensation": {
+        "currency": "EUR",
+        "maximum": 28000,
+        "minimum": 25000,
+        "period": "year"
+      },
+      "conditions": {},
+      "contract_type": "CDI",
+      "employer": "Skills Bordeaux",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "skills-assistante-administrative-juillet-2026",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-07-12",
+      "rank": 19,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "services aux entreprises"
+      ],
+      "source_kind": "aggregator",
+      "source_site": "hellowork.com",
+      "source_url": "https://www.hellowork.com/fr-fr/emploi/metier_assistant-administratif-ville_bordeaux-33000.html",
+      "source_warning": "L'offre est identifiable sur la liste Hellowork du jour, mais l'employeur final et la fiche détaillée restent à confirmer.",
+      "summary": "Prendre en charge une activité administrative polyvalente pour une entreprise bordelaise accompagnée par le cabinet Skills.",
+      "title": "Assistante administrative H/F",
+      "verification_status": "active"
+    },
+    {
+      "assessment": {
+        "application_barriers": [],
+        "eligible": true,
+        "forced_to_end": false,
+        "gaps": [
+          "offre ancienne : 93 jours"
+        ],
+        "hard_constraint_failures": [],
+        "knowledge_keyword_matches": [
+          "controle",
+          "direction",
+          "gestion",
+          "organisation",
+          "traiter"
+        ],
+        "prerequisite_alerts": [],
+        "profile_family_matches": [],
+        "reasons": [
+          "CDI, contrat prioritaire",
+          "activité prioritaire : gestion administrative",
+          "expérience transférable : controle, direction, gestion, organisation, traiter"
+        ],
+        "recommendation_band": "possible",
+        "recommendation_reasons": [
+          "score compris entre 50 et 75"
+        ],
+        "score": 50.6,
+        "unknowns": [
+          "adéquation sectorielle à confirmer",
+          "travail en équipe à confirmer",
+          "rémunération non précisée"
+        ]
+      },
+      "compensation": null,
+      "conditions": {},
+      "contract_type": "CDI",
+      "employer": "Centre hospitalier Charles Perrens",
+      "employer_source_url": null,
+      "full_time": true,
+      "id": "charles-perrens-assistant-direction-finances-469093",
+      "industry_sector_ids": [],
+      "last_verified_at": "2026-07-22T16:18:00+02:00",
+      "location_label": "Bordeaux",
+      "prerequisites": [],
+      "published_at": "2026-04-20",
+      "rank": 20,
+      "recommendation_band": "possible",
+      "sector_labels": [
+        "santé et services publics"
+      ],
+      "source_kind": "specialized",
+      "source_site": "emploi.fhf.fr",
+      "source_url": "https://emploi.fhf.fr/emploi/469093",
+      "source_warning": null,
+      "summary": "Recueillir et traiter les informations nécessaires au fonctionnement administratif de la direction des finances, du contrôle de gestion, des travaux et du patrimoine.",
+      "title": "Assistant de direction - Direction des finances H/F",
+      "verification_status": "active"
+    }
+  ],
+  "pending_offer_count": 0,
+  "pending_offers": [],
+  "policy_excluded_count": 26,
+  "policy_id": "delia-offer-search-v5",
+  "pool_complete": true,
+  "report_status": "complete",
+  "scan_coverage": {
+    "complete": true,
+    "covered_priority_sectors": [
+      "banque-et-assurance",
+      "bien-etre",
+      "cosmetique",
+      "hotellerie",
+      "luxe"
+    ],
+    "covered_query_families": [
+      "commerce-et-vente",
+      "conseil-et-relation-client",
+      "gestion-administrative",
+      "gestion-et-coordination-de-projets"
+    ],
+    "missing_priority_sectors": [],
+    "missing_query_families": [],
+    "missing_source_domains": [],
+    "required": true,
+    "required_priority_sectors": [
+      "banque-et-assurance",
+      "bien-etre",
+      "cosmetique",
+      "hotellerie",
+      "luxe"
+    ],
+    "required_query_families": [
+      "commerce-et-vente",
+      "conseil-et-relation-client",
+      "gestion-administrative",
+      "gestion-et-coordination-de-projets"
+    ],
+    "required_source_domains": [
+      "ars-nouvelle-aquitaine-recrute.talent-soft.com",
+      "betclic-group.breezy.hr",
+      "careers.floa.com",
+      "careers.ihg.com",
+      "caudalie.career",
+      "cdg33.fr",
+      "choisirleservicepublic.gouv.fr",
+      "chu-bordeaux.softy.pro",
+      "cultura.wd3.myworkdayjobs.com",
+      "emploi-territorial.fr",
+      "emploi.cdiscount.com",
+      "emploi.fhf.fr",
+      "gironde.fr",
+      "gironde.gouv.fr",
+      "groupefilhet-allard-career.talent-soft.com",
+      "jobs.ikea.com",
+      "lasecurecrute.fr",
+      "mairie-begles.fr",
+      "merignac-career.talent-soft.com",
+      "offresdemploi.nouvelle-aquitaine.fr",
+      "recrute.leroymerlin.fr",
+      "recrutement.bordeaux-metropole.fr",
+      "recrutement.bordeaux.fr",
+      "recrutement.bpce.fr",
+      "sources-hotels.com",
+      "u-bordeaux.fr"
+    ],
+    "requirements_declared": true,
+    "visited_source_domains": [
+      "ars-nouvelle-aquitaine-recrute.talent-soft.com",
+      "betclic-group.breezy.hr",
+      "careers.floa.com",
+      "careers.ihg.com",
+      "caudalie.career",
+      "cdg33.fr",
+      "choisirleservicepublic.gouv.fr",
+      "chu-bordeaux.softy.pro",
+      "cultura.wd3.myworkdayjobs.com",
+      "emploi-territorial.fr",
+      "emploi.cdiscount.com",
+      "emploi.fhf.fr",
+      "gironde.fr",
+      "gironde.gouv.fr",
+      "groupefilhet-allard-career.talent-soft.com",
+      "jobs.ikea.com",
+      "lasecurecrute.fr",
+      "mairie-begles.fr",
+      "merignac-career.talent-soft.com",
+      "offresdemploi.nouvelle-aquitaine.fr",
+      "recrute.leroymerlin.fr",
+      "recrutement.bordeaux-metropole.fr",
+      "recrutement.bordeaux.fr",
+      "recrutement.bpce.fr",
+      "sources-hotels.com",
+      "u-bordeaux.fr"
+    ]
+  },
+  "section_counts": {
+    "informational": 0,
+    "possible": 12,
+    "priority": 8
+  },
+  "selected_count": 20,
+  "unique_count": 46,
+  "verification_counts": {
+    "active": 46,
+    "closed": 0,
+    "expired": 0,
+    "pending": 0,
+    "unreachable": 0
+  },
+  "verification_excluded_count": 0,
+  "visited_sources": [
+    "https://ars-nouvelle-aquitaine-recrute.talent-soft.com",
+    "https://betclic-group.breezy.hr",
+    "https://careers.floa.com",
+    "https://careers.ihg.com",
+    "https://caudalie.career",
+    "https://cdg33.fr",
+    "https://choisirleservicepublic.gouv.fr",
+    "https://chu-bordeaux.softy.pro",
+    "https://cultura.wd3.myworkdayjobs.com",
+    "https://emploi-territorial.fr",
+    "https://emploi.cdiscount.com",
+    "https://emploi.fhf.fr",
+    "https://gironde.fr",
+    "https://gironde.gouv.fr",
+    "https://groupefilhet-allard-career.talent-soft.com",
+    "https://jobs.ikea.com",
+    "https://lasecurecrute.fr",
+    "https://mairie-begles.fr",
+    "https://merignac-career.talent-soft.com",
+    "https://offresdemploi.nouvelle-aquitaine.fr",
+    "https://recrute.leroymerlin.fr",
+    "https://recrutement.bordeaux-metropole.fr",
+    "https://recrutement.bordeaux.fr",
+    "https://recrutement.bpce.fr",
+    "https://sources-hotels.com",
+    "https://u-bordeaux.fr",
+    "https://fr.fashionjobs.com",
+    "https://www.emploi-territorial.fr",
+    "https://www.hellowork.com",
+    "https://www.mairie-begles.fr",
+    "https://www.cdg33.fr",
+    "https://www.gironde.fr",
+    "https://www.sources-hotels.com",
+    "https://www.u-bordeaux.fr"
+  ],
+  "warnings": [
+    "seulement 20 offres éligibles pour une cible de 100"
+  ]
+}

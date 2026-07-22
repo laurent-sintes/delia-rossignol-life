@@ -1,0 +1,60 @@
+{
+  "canonical_offer_id": "canonical-offer-ee74834fee0898c6",
+  "captured_at": "2026-07-22T20:25:00.641368+02:00",
+  "conditions": {},
+  "contract_type": "stage",
+  "employer": "Les Sources de Caudalie",
+  "evidence": [
+    {
+      "excerpt": "Stagiaire Gouvernant(e) d'étages (H/F)",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Les Sources de Caudalie",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-202500-621780-full/sources-hotels.com/f7009bdd17530049d4e6.bin",
+    "source_sha256": "ea3b9ea5b2a709141f35d1f45944d44afad1df404ed4517d2f7f95744fbc24c3"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-f556666f786ff9ab",
+  "industry_sector_ids": [
+    "luxe",
+    "hotellerie",
+    "bien-etre"
+  ],
+  "last_verified_at": "2026-07-22T20:25:00.641368+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [],
+  "sector_labels": [
+    "luxe",
+    "hotellerie",
+    "bien etre"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "sources-hotels.com",
+  "source_url": "https://www.sources-hotels.com/bordeaux/recrutement/?intuition_id=1033222&intuition_source_id=10382",
+  "summary": "Poste de Stagiaire Gouvernant(e) d'étages (H/F) proposé par Les Sources de Caudalie à Bordeaux. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Stagiaire Gouvernant(e) d'étages (H/F)",
+  "verification_status": "active"
+}

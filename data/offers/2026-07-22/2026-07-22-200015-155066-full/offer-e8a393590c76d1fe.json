@@ -1,0 +1,58 @@
+{
+  "canonical_offer_id": "recrutement.bpce.fr:CCOOP07041",
+  "captured_at": "2026-07-22T20:00:15.182633+02:00",
+  "conditions": {},
+  "contract_type": "CDD",
+  "employer": "Groupe Crédit Coopératif",
+  "evidence": [
+    {
+      "excerpt": "Conseiller Clientèle Particuliers Banque à distance F/H Bordeaux - CDD",
+      "field": "title",
+      "locator": "BPCE API item.title"
+    },
+    {
+      "excerpt": "Bordeaux",
+      "field": "location_label",
+      "locator": "BPCE API item.localisation"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-api",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-200015-155066-full/recrutement.bpce.fr/eb3f5b794413af93e1b6.bin",
+    "source_sha256": "45643c66589a075f782a5265e4a247fd52457e6e08a8f1569c3aa8b8f0219296"
+  },
+  "full_time": null,
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente",
+    "gestion administrative"
+  ],
+  "id": "offer-e8a393590c76d1fe",
+  "industry_sector_ids": [
+    "banque-et-assurance"
+  ],
+  "last_verified_at": "2026-07-22T20:00:15.182633+02:00",
+  "location_label": "Bordeaux",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": "2026-03-21",
+  "required_skills": [
+    "relation client",
+    "commerce"
+  ],
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "source_kind": "direct_employer",
+  "source_site": "recrutement.bpce.fr",
+  "source_url": "https://recrutement.bpce.fr/job/conseiller-clientele-particuliers-banque-a-distance-f-h-bordeaux-cdd",
+  "summary": "Poste de Conseiller Clientèle Particuliers Banque à distance F/H Bordeaux - CDD proposé par Groupe Crédit Coopératif à Bordeaux. Revue sémantique requise avant recommandation.",
+  "title": "Conseiller Clientèle Particuliers Banque à distance F/H Bordeaux - CDD",
+  "verification_status": "active"
+}

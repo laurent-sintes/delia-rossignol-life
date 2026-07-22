@@ -1,0 +1,56 @@
+{
+  "id": "nocibe-estheticienne-bordeaux-intendance-2026",
+  "title": "EsthÃ©ticienne F/H",
+  "employer": "NocibÃ©",
+  "source_url": "https://fr.fashionjobs.com/s/emploi/Estheticienne.html",
+  "source_site": "fashionjobs.com",
+  "source_kind": "specialized",
+  "verification_status": "pending",
+  "published_at": "2026-07-17",
+  "captured_at": "2026-07-22T09:45:53+02:00",
+  "last_verified_at": "2026-07-21T23:58:00+02:00",
+  "summary": "RÃ©aliser des soins visage et corps dans le magasin NocibÃ© Bordeaux Intendance, conseiller les clients sur leurs routines beautÃ© et bien-Ãªtre, dÃ©velopper la vente en cabine, fidÃ©liser la clientÃ¨le et participer activement Ã  la vie du magasin et Ã  l'image premium de l'enseigne.",
+  "location_label": "Bordeaux Intendance",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": [
+    "cosmÃ©tique",
+    "bien-Ãªtre",
+    "luxe"
+  ],
+  "functional_domains": [
+    "conseil et relation client",
+    "commerce et vente"
+  ],
+  "compensation": {},
+  "required_skills": [
+    "soins esthÃ©tiques",
+    "conseil beautÃ©",
+    "vente",
+    "fidÃ©lisation"
+  ],
+  "preferred_skills": [
+    "cosmÃ©tique",
+    "luxe"
+  ],
+  "conditions": {
+    "work_mode": "onsite",
+    "hours_per_week": 35
+  },
+  "prerequisites": [
+    {
+      "id": "diplome-esthetique",
+      "kind": "qualification",
+      "description": "CAP, BP ou BTS EsthÃ©tique",
+      "mandatory": true,
+      "profile_status": "unmet",
+      "profile_evidence_ids": [],
+      "assessment_note": "Les diplÃ´mes validÃ©s de DÃ©lia ne comprennent pas de diplÃ´me d'esthÃ©tique.",
+      "evidence": {
+        "locator": "fashionjobs.com/s/emploi/Estheticienne.html#nocibe-bordeaux",
+        "excerpt": "CAP EsthÃ©tique, BP ou BTS en EsthÃ©tique nÃ©cessaire."
+      }
+    }
+  ],
+  "verification_note": "Page exacte non confirmée pendant le scan full du 22 juillet 2026 ; offre conservée pour traçabilité et revérification."
+}

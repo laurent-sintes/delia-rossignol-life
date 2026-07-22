@@ -1,0 +1,56 @@
+{
+  "canonical_offer_id": "canonical-offer-37a13e1f07a79cfa",
+  "captured_at": "2026-07-22T20:30:39.053765+02:00",
+  "conditions": {},
+  "contract_type": "CDI",
+  "employer": "Fédération Hospitalière de France Emploi",
+  "evidence": [
+    {
+      "excerpt": "Aide-soignante 100 % jour - EHPAD Jardin de Cybèle",
+      "field": "title",
+      "locator": "HTML h1 or listing link"
+    },
+    {
+      "excerpt": "Fédération Hospitalière de France Emploi",
+      "field": "employer",
+      "locator": "regional source audit"
+    }
+  ],
+  "extraction": {
+    "ambiguous_fields": [
+      "summary",
+      "prerequisites",
+      "location_label"
+    ],
+    "extractor_version": 1,
+    "method": "deterministic-html",
+    "review_status": "required",
+    "source_archive_path": "private/offer-scan-archives/2026-07-22-203039-032610-full/emploi.fhf.fr/37a13e1f07a79cfa60a8.html",
+    "source_sha256": "5a46ea63863aab907e38094d37598bdd9dc80be35e8a496eb6599b05abf8a964"
+  },
+  "full_time": false,
+  "functional_domains": [
+    "conseil et relation client",
+    "gestion administrative",
+    "gestion et coordination de projets"
+  ],
+  "id": "offer-a226f831682c5ff9",
+  "industry_sector_ids": [
+    "sante-et-services-publics"
+  ],
+  "last_verified_at": "2026-07-22T20:30:39.053765+02:00",
+  "location_label": "Gironde",
+  "preferred_skills": [],
+  "prerequisites": [],
+  "published_at": null,
+  "required_skills": [],
+  "sector_labels": [
+    "sante et services publics"
+  ],
+  "source_kind": "specialized",
+  "source_site": "emploi.fhf.fr",
+  "source_url": "https://emploi.fhf.fr/emploi/452283",
+  "summary": "Poste de Aide-soignante 100 % jour - EHPAD Jardin de Cybèle proposé par Fédération Hospitalière de France Emploi à Gironde. La page source a été archivée et doit faire l’objet d’une revue sémantique avant recommandation.",
+  "title": "Aide-soignante 100 % jour - EHPAD Jardin de Cybèle",
+  "verification_status": "active"
+}

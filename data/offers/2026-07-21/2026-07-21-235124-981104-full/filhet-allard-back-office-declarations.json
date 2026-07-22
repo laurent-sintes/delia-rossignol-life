@@ -1,0 +1,115 @@
+{
+  "id": "filhet-allard-back-office-declarations-1759",
+  "title": "Gestionnaire Back Office DÃ©clarations Mensuelles H/F",
+  "employer": "Filhet-Allard",
+  "source_url": "https://groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-back-office-declarations-mensuelles-h-f_1759.aspx",
+  "source_site": "groupefilhet-allard-career.talent-soft.com",
+  "source_kind": "direct_employer",
+  "verification_status": "active",
+  "published_at": "2026-07-13",
+  "captured_at": "2026-07-21T23:58:00+02:00",
+  "last_verified_at": "2026-07-21T23:58:00+02:00",
+  "summary": "GÃ©rer Ã  MÃ©rignac les dÃ©clarations mensuelles de clients assurÃ©s en transport : contrÃ´ler leur conformitÃ© aux contrats, calculer les primes, rÃ©diger avenants et certificats, coordonner la comptabilitÃ© et produire exports, statistiques et procÃ©dures.",
+  "location_label": "MÃ©rignac",
+  "contract_type": "CDI",
+  "full_time": true,
+  "sector_labels": [
+    "banque et assurance"
+  ],
+  "functional_domains": [
+    "gestion administrative",
+    "conseil et relation client"
+  ],
+  "compensation": {},
+  "required_skills": [
+    "gestion administrative",
+    "analyse contractuelle",
+    "relation client",
+    "calcul de primes",
+    "Excel",
+    "anglais professionnel"
+  ],
+  "preferred_skills": [
+    "assurance transport",
+    "reporting",
+    "coordination comptable"
+  ],
+  "conditions": {
+    "work_mode": "unknown",
+    "hours": "unknown"
+  },
+  "prerequisites": [
+    {
+      "id": "formation-bac2-finance-assurance",
+      "kind": "qualification",
+      "description": "Bac+2 en banque, assurance ou finance",
+      "mandatory": true,
+      "profile_status": "not_demonstrated",
+      "profile_evidence_ids": [],
+      "assessment_note": "Un bac+4 Marketing & Commerce est validÃ©, mais pas une formation banque, assurance ou finance.",
+      "evidence": {
+        "locator": "groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-back-office-declarations-mensuelles-h-f_1759.aspx#profil",
+        "excerpt": "Formation Bac+2 en banque, assurance ou finance."
+      }
+    },
+    {
+      "id": "premiere-experience-reussie",
+      "kind": "minimum_experience",
+      "description": "PremiÃ¨re expÃ©rience rÃ©ussie sur une activitÃ© comparable",
+      "mandatory": true,
+      "industry_sector_ids": [
+        "banque-et-assurance"
+      ],
+      "profile_status": "unmet",
+      "profile_evidence_ids": [
+        "knowledge-fact:delia-bank-insurance-finance-experience-absent"
+      ],
+      "assessment_note": "L'absence d'une premiÃ¨re expÃ©rience comparable en banque, assurance ou finance a Ã©tÃ© explicitement validÃ©e le 21 juillet 2026.",
+      "evidence": {
+        "locator": "groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-back-office-declarations-mensuelles-h-f_1759.aspx#profil",
+        "excerpt": "Vous justifiez d'une premiÃ¨re expÃ©rience rÃ©ussie."
+      }
+    },
+    {
+      "id": "excel-expert",
+      "kind": "other",
+      "description": "MaÃ®trise experte d'Excel et des outils bureautiques",
+      "mandatory": true,
+      "profile_status": "not_demonstrated",
+      "profile_evidence_ids": [],
+      "assessment_note": "Le niveau expert sur Excel n'est pas documentÃ©.",
+      "evidence": {
+        "locator": "groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-back-office-declarations-mensuelles-h-f_1759.aspx#profil",
+        "excerpt": "Excellente maÃ®trise des outils bureautiques, avec un niveau expert sur Excel."
+      }
+    },
+    {
+      "id": "anglais-indispensable",
+      "kind": "language",
+      "description": "Anglais indispensable",
+      "mandatory": true,
+      "profile_status": "met",
+      "profile_evidence_ids": [
+        "language-proficiency:delia-english"
+      ],
+      "assessment_note": "L'anglais courant Ã  l'oral et en lecture est validÃ©, avec un niveau Ã©crit intermÃ©diaire.",
+      "evidence": {
+        "locator": "groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-back-office-declarations-mensuelles-h-f_1759.aspx#profil",
+        "excerpt": "Anglais indispensable."
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "field": "mission",
+      "locator": "groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-back-office-declarations-mensuelles-h-f_1759.aspx#description",
+      "excerpt": "Analyser les dÃ©clarations, calculer les primes, rÃ©diger avenants et certificats et coordonner la comptabilitÃ©."
+    },
+    {
+      "field": "contract",
+      "locator": "groupefilhet-allard-career.talent-soft.com/offre-de-emploi/emploi-gestionnaire-back-office-declarations-mensuelles-h-f_1759.aspx",
+      "excerpt": "CDI Ã  MÃ©rignac, publiÃ©e le 13 juillet 2026."
+    }
+  ],
+  "verification_note": "Annonce revérifiée pendant le scan full du 21 juillet 2026."
+}
