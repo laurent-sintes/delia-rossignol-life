@@ -197,15 +197,15 @@ concepts:
     description: Opportunité structurée avec contexte, exigences obligatoires et préférences employeur.
     privacy: private
     storage: data/offers
-    key_attributes: [employer, role, sectors, location, contract_type, work_mode, schedule, compensation, required_skills, preferred_skills, prerequisites, source_url, verification_status, last_verified_at]
+    key_attributes: [employer, role, sectors, location, contract_type, work_mode, schedule, compensation, required_skills, preferred_skills, prerequisites, semantic_requirements, semantic_matches, source_url, verification_status, last_verified_at]
 
   - id: match-assessment
     label: Évaluation de rapprochement
     kind: assessment
-    description: Comparaison explicable entre une offre et les connaissances validées de la personne.
+    description: Comparaison explicable entre une offre et les connaissances validées de la personne, caractérisée sémantiquement par IA puis scorée de façon déterministe.
     privacy: private
     storage: embedded:job-offer.assessment
-    key_attributes: [method, score, matches, gaps, criterion_results, application_barriers, recommendation_band, hard_constraint_failures]
+    key_attributes: [method, matching_method, score, semantic_matches, scoring_confidence, gaps, criterion_results, application_barriers, recommendation_band, hard_constraint_failures]
 
   - id: document-template
     label: Template documentaire

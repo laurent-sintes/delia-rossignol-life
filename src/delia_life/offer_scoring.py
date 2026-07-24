@@ -161,9 +161,14 @@ class ScoringContext:
     absent_sector_experience_ids: frozenset[str]
     absent_certifications: dict[str, frozenset[str]]
     knowledge_tokens: frozenset[str]
+    knowledge_evidence_catalog: dict[str, frozenset[str]]
+    semantic_importance_weights: dict[str, float]
+    semantic_match_factors: dict[str, float]
     freshness_days: int
     activity_exclusions: tuple[tuple[str, str], ...]
     work_arrangement: dict[str, Any]
+    initial_search_schedule_preference: dict[str, Any]
+    target_job_roles: dict[str, Any]
     expected_compensation: dict[str, Any]
     priority_minimum_score: float
     possible_minimum_score: float
@@ -178,11 +183,16 @@ class ScoreState:
     unknowns: list[str] = field(default_factory=list)
     failures: list[str] = field(default_factory=list)
     knowledge_keyword_matches: list[str] = field(default_factory=list)
+    semantic_matches: list[dict[str, Any]] = field(default_factory=list)
+    semantic_required_uncertainties: list[str] = field(default_factory=list)
+    matching_method: str = "lexical_fallback"
     prerequisite_alerts: list[dict[str, Any]] = field(default_factory=list)
     application_barriers: list[str] = field(default_factory=list)
     profile_family_matches: list[dict[str, Any]] = field(default_factory=list)
     recommendation_band: str = "possible"
     recommendation_reasons: list[str] = field(default_factory=list)
+    preference_alerts: list[str] = field(default_factory=list)
+    maximum_recommendation_band: str | None = None
     forced_to_end: bool = False
 
     def as_dict(self) -> dict[str, Any]:
@@ -194,11 +204,16 @@ class ScoreState:
             "unknowns": self.unknowns,
             "hard_constraint_failures": self.failures,
             "knowledge_keyword_matches": self.knowledge_keyword_matches,
+            "semantic_matches": self.semantic_matches,
+            "semantic_required_uncertainties": self.semantic_required_uncertainties,
+            "matching_method": self.matching_method,
             "prerequisite_alerts": self.prerequisite_alerts,
             "application_barriers": self.application_barriers,
             "profile_family_matches": self.profile_family_matches,
             "recommendation_band": self.recommendation_band,
             "recommendation_reasons": self.recommendation_reasons,
+            "preference_alerts": self.preference_alerts,
+            "maximum_recommendation_band": self.maximum_recommendation_band,
             "forced_to_end": self.forced_to_end,
         }
 
@@ -212,6 +227,7 @@ def _build_scoring_context(
     sector_experience_months: dict[str, int] | None = None,
     absent_sector_experience_ids: set[str] | None = None,
     absent_certifications: dict[str, set[str]] | None = None,
+    knowledge_evidence_catalog: dict[str, frozenset[str]] | None = None,
 ) -> ScoringContext:
     targets = career_project.get("target_preferences", {})
     sectors = targets.get("industry_sectors", {})
@@ -249,9 +265,22 @@ def _build_scoring_context(
             for identifier, evidence_ids in (absent_certifications or {}).items()
         },
         knowledge_tokens=frozenset(knowledge_tokens),
+        knowledge_evidence_catalog=dict(knowledge_evidence_catalog or {}),
+        semantic_importance_weights={
+            key: float(value)
+            for key, value in policy["semantic_matching"]["importance_weights"].items()
+        },
+        semantic_match_factors={
+            key: float(value)
+            for key, value in policy["semantic_matching"]["match_factors"].items()
+        },
         freshness_days=int(policy["freshness_days"]),
         activity_exclusions=activity_exclusions,
         work_arrangement=_criterion(career_project, "criterion-work-arrangement") or {},
+        initial_search_schedule_preference=(
+            _criterion(career_project, "criterion-initial-search-schedule-preference") or {}
+        ),
+        target_job_roles=_criterion(career_project, "criterion-target-job-roles") or {},
         expected_compensation=_criterion(career_project, "criterion-compensation") or {},
         priority_minimum_score=priority_minimum_score,
         possible_minimum_score=possible_minimum_score,
@@ -327,7 +356,7 @@ def _apply_functional_domain_rules(text: str, context: ScoringContext, state: Sc
         state.gaps.append("domaine fonctionnel peu explicite")
 
 
-def _apply_knowledge_overlap(offer: dict[str, Any], context: ScoringContext, state: ScoreState) -> None:
+def _apply_lexical_fallback(offer: dict[str, Any], context: ScoringContext, state: ScoreState) -> None:
     offer_tokens = tokens(
         {
             "title": offer.get("title"),
@@ -340,10 +369,98 @@ def _apply_knowledge_overlap(offer: dict[str, Any], context: ScoringContext, sta
     state.knowledge_keyword_matches = overlap
     if overlap:
         ratio = min(1.0, len(overlap) / max(5, min(20, len(offer_tokens))))
-        state.score += float(context.weights["knowledge_overlap"]) * ratio
+        state.score += float(context.weights["semantic_match"]) * ratio
         state.reasons.append("expérience transférable : " + ", ".join(overlap[:5]))
     else:
         state.gaps.append("aucun recouvrement littéral démontré avec la base validée")
+
+
+def _apply_semantic_matches(offer: dict[str, Any], context: ScoringContext, state: ScoreState) -> None:
+    requirements = offer.get("semantic_requirements")
+    matches = offer.get("semantic_matches")
+    if not isinstance(requirements, list) or not requirements or not isinstance(matches, list) or not matches:
+        _apply_lexical_fallback(offer, context, state)
+        return
+
+    state.matching_method = "llm_semantic_evidence"
+    requirement_by_id = {
+        str(requirement.get("id") or ""): requirement
+        for requirement in requirements
+        if isinstance(requirement, dict) and str(requirement.get("id") or "")
+    }
+    match_by_requirement = {
+        str(match.get("requirement_id") or ""): match
+        for match in matches
+        if isinstance(match, dict) and str(match.get("requirement_id") or "")
+    }
+    earned = 0.0
+    possible = 0.0
+    supported_count = 0
+    for requirement_id, requirement in requirement_by_id.items():
+        match = match_by_requirement.get(requirement_id, {})
+        importance = str(requirement.get("importance") or "required")
+        weight = context.semantic_importance_weights.get(importance, 0.0)
+        if weight == 0:
+            continue
+        possible += weight
+        match_type = str(match.get("match_type") or "unknown")
+        refs = match.get("profile_evidence_refs", [])
+        valid_refs: list[dict[str, str]] = []
+        invalid_evidence: list[str] = []
+        if isinstance(refs, list):
+            for ref in refs:
+                if not isinstance(ref, dict):
+                    invalid_evidence.append("<référence invalide>")
+                    continue
+                evidence_id = str(ref.get("id") or "").strip()
+                field = str(ref.get("field") or "").strip()
+                if field not in context.knowledge_evidence_catalog.get(evidence_id, frozenset()):
+                    invalid_evidence.append(f"{evidence_id}#{field}")
+                else:
+                    valid_refs.append({"id": evidence_id, "field": field})
+        supported = match_type in {"exact", "transferable"} and bool(valid_refs) and not invalid_evidence
+        effective_type = match_type if supported or match_type in {"gap", "unknown"} else "unknown"
+        scoring_confidence = {
+            "exact": "high",
+            "transferable": "medium",
+            "gap": "high",
+            "unknown": "low",
+        }[effective_type]
+        if supported:
+            earned += weight * context.semantic_match_factors[effective_type]
+            supported_count += 1
+        elif invalid_evidence:
+            state.unknowns.append(
+                "preuve de rapprochement sémantique inconnue : " + ", ".join(invalid_evidence)
+            )
+        elif effective_type == "gap":
+            description = str(requirement.get("description") or "exigence non couverte")
+            state.gaps.append("écart sémantique : " + description)
+            if importance == "required":
+                state.application_barriers.append(f"exigence obligatoire non couverte : {description}")
+        elif effective_type == "unknown":
+            description = str(requirement.get("description") or "exigence ambiguë")
+            state.unknowns.append(
+                "rapprochement sémantique à confirmer : " + description
+            )
+            if importance == "required":
+                state.semantic_required_uncertainties.append(description)
+        state.semantic_matches.append(
+            {
+                **match,
+                "requirement": requirement,
+                "effective_match_type": effective_type,
+                "scoring_confidence": scoring_confidence,
+                "validated_profile_evidence_refs": valid_refs,
+            }
+        )
+
+    if possible:
+        state.score += float(context.weights["semantic_match"]) * min(1.0, earned / possible)
+    if supported_count:
+        state.reasons.append(f"rapprochement sémantique sourcé : {supported_count} exigence(s) couverte(s)")
+    elif possible:
+        state.gaps.append("aucun rapprochement sémantique sourcé avec le profil validé")
 
 
 def _normalized_markers(rule: dict[str, Any], field_name: str) -> tuple[str, ...]:
@@ -470,6 +587,98 @@ def _apply_arrangement_and_compensation_rules(
         state.unknowns.append("rémunération non précisée")
 
 
+def _title_markers(items: Any) -> tuple[str, ...]:
+    if not isinstance(items, list):
+        return ()
+    return tuple(
+        plain(str(marker))
+        for item in items
+        if isinstance(item, dict)
+        for marker in item.get("title_markers", [])
+        if str(marker).strip()
+    )
+
+
+def _semantic_condition_requires_regular_saturday(offer: dict[str, Any]) -> bool:
+    requirements = offer.get("semantic_requirements")
+    if not isinstance(requirements, list):
+        return False
+    for requirement in requirements:
+        if not isinstance(requirement, dict):
+            continue
+        if requirement.get("importance") != "required" or requirement.get("kind") != "condition":
+            continue
+        evidence = requirement.get("offer_evidence")
+        evidence_text = evidence if isinstance(evidence, dict) else {}
+        text = plain(
+            " ".join(
+                (
+                    str(requirement.get("description") or ""),
+                    str(evidence_text.get("excerpt") or ""),
+                )
+            )
+        )
+        if any(
+            marker in text
+            for marker in (
+                "tous les samedis",
+                "chaque samedi",
+                "du lundi au samedi",
+                "samedi obligatoire",
+                "samedis obligatoires",
+                "every saturday",
+            )
+        ):
+            return True
+    return False
+
+
+def _apply_initial_search_preferences(
+    offer: dict[str, Any],
+    conditions: dict[str, Any],
+    context: ScoringContext,
+    state: ScoreState,
+) -> None:
+    schedule_preference = context.initial_search_schedule_preference
+    if (
+        schedule_preference.get("phase") == "initial"
+        and schedule_preference.get("regular_saturday_work") == "strongly_avoid"
+    ):
+        raw_schedule = offer.get("schedule")
+        schedule = raw_schedule if isinstance(raw_schedule, dict) else {}
+        saturday_frequency = plain(
+            str(
+                conditions.get("saturday_work_frequency")
+                or schedule.get("saturday_work_frequency")
+                or ""
+            )
+        )
+        saturday_required = (
+            saturday_frequency in {"regular", "weekly", "every saturday", "tous les samedis"}
+            or _semantic_condition_requires_regular_saturday(offer)
+        )
+        if saturday_required:
+            state.preference_alerts.append(
+                "travail régulier le samedi à éviter pendant la première phase de recherche"
+            )
+            state.application_barriers.append(
+                "préférence de première phase non satisfaite : travail régulier le samedi"
+            )
+
+    title = plain(str(offer.get("title") or ""))
+    deprioritized = _title_markers(context.target_job_roles.get("deprioritized"))
+    priority = _title_markers(context.target_job_roles.get("priority"))
+    if (
+        deprioritized
+        and any(_contains_marker(title, marker) for marker in deprioritized)
+        and not any(_contains_marker(title, marker) for marker in priority)
+    ):
+        state.preference_alerts.append(
+            "poste de vente sans responsabilité élargie, dépriorisé dans la recherche actuelle"
+        )
+        state.maximum_recommendation_band = "possible"
+
+
 def _apply_prerequisite_rules(offer: dict[str, Any], context: ScoringContext, state: ScoreState) -> None:
     prerequisites = offer.get("prerequisites")
     if not isinstance(prerequisites, list):
@@ -592,9 +801,9 @@ def _finalize_recommendation(context: ScoringContext, state: ScoreState) -> None
         state.recommendation_reasons = [
             f"score inférieur au seuil de candidature possible ({context.possible_minimum_score:g})"
         ]
-    elif mandatory_uncertainties:
+    elif mandatory_uncertainties or state.semantic_required_uncertainties:
         state.recommendation_band = "possible"
-        state.recommendation_reasons = ["prérequis obligatoire non démontré ou à vérifier"]
+        state.recommendation_reasons = ["exigence ou prérequis obligatoire non démontré ou à vérifier"]
     elif bounded_score >= context.priority_minimum_score:
         state.recommendation_band = "priority"
         state.recommendation_reasons = ["forte correspondance sans prérequis obligatoire incertain"]
@@ -603,6 +812,9 @@ def _finalize_recommendation(context: ScoringContext, state: ScoreState) -> None
         state.recommendation_reasons = [
             f"score compris entre {context.possible_minimum_score:g} et {context.priority_minimum_score:g}"
         ]
+    if state.maximum_recommendation_band == "possible" and state.recommendation_band == "priority":
+        state.recommendation_band = "possible"
+        state.recommendation_reasons = list(state.preference_alerts)
 
 
 def _score_offer_with_context(offer: dict[str, Any], context: ScoringContext) -> dict[str, Any]:
@@ -616,11 +828,12 @@ def _score_offer_with_context(offer: dict[str, Any], context: ScoringContext) ->
     _apply_sector_rules(text, context, state)
     _apply_functional_domain_rules(functional_text, context, state)
     _apply_profile_family_rules(offer, context, state)
-    _apply_knowledge_overlap(offer, context, state)
+    _apply_semantic_matches(offer, context, state)
     _apply_freshness_rules(offer, context, state)
     _apply_activity_rules(text, context, state)
     _apply_source_quality_rules(offer, context, state)
     _apply_arrangement_and_compensation_rules(offer, conditions, context, state)
+    _apply_initial_search_preferences(offer, conditions, context, state)
     _apply_prerequisite_rules(offer, context, state)
     _finalize_recommendation(context, state)
     return state.as_dict()
@@ -636,6 +849,7 @@ def score_offer(
     sector_experience_months: dict[str, int] | None = None,
     absent_sector_experience_ids: set[str] | None = None,
     absent_certifications: dict[str, set[str]] | None = None,
+    knowledge_evidence_catalog: dict[str, frozenset[str]] | None = None,
 ) -> dict[str, Any]:
     return _score_offer_with_context(
         offer,
@@ -648,5 +862,6 @@ def score_offer(
             sector_experience_months,
             absent_sector_experience_ids,
             absent_certifications,
+            knowledge_evidence_catalog,
         ),
     )

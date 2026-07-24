@@ -1,0 +1,45 @@
+{
+  "application": {
+    "applied_at": "2026-07-24T07:56:01+00:00",
+    "knowledge_path": "data/knowledge/reference/job-role/premiere-vendeuse.json"
+  },
+  "classification": "claim",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-24T07:56:01+00:00",
+      "from": "pending",
+      "note": "Appellation normalisée couverte par la validation explicite des quatre décisions le 24 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-job-role-premiere-vendeuse-2026-07-24",
+  "proposed_value": {
+    "aliases": [
+      "premier vendeur"
+    ],
+    "job_family": "commerce et relation client",
+    "name": "Première vendeuse",
+    "source_label": "première vendeuse"
+  },
+  "source": {
+    "evidence": "Viser notamment un poste de première vendeuse.",
+    "id": "src-a24fabefcdee7c13",
+    "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-2"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "premiere-vendeuse",
+    "entity_type": "job-role",
+    "field": "details"
+  },
+  "validated_value": {
+    "aliases": [
+      "premier vendeur"
+    ],
+    "job_family": "commerce et relation client",
+    "name": "Première vendeuse",
+    "source_label": "première vendeuse"
+  }
+}

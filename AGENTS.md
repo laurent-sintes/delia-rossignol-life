@@ -14,7 +14,7 @@ Construire un dossier de carrière fiable et traçable pour Délia Rossignol, pu
 6. Préserver l'historique des décisions de validation. Ne pas réécrire silencieusement un événement passé.
 7. Signaler les doublons et contradictions au lieu de choisir arbitrairement.
 8. Séparer le contenu validé, la stratégie éditoriale et le rendu graphique.
-9. Versionner dans Git les originaux, données de travail, productions documentaires et historiques métier. Garder uniquement les secrets techniques, caches et fichiers temporaires hors de Git.
+9. Versionner dans Git le code, les configurations, schémas, templates, originaux et connaissances validées nécessaires à la reproductibilité. Garder hors de Git les secrets techniques, caches, fichiers temporaires et artefacts opérationnels régénérables de recherche d'offres : captures sous `private/offer-scan-archives/`, annonces collectées sous `data/offers/`, rapports sous `generated/offer-search/`, brouillons sous `generated/offer-feedback/` et cache sémantique sous `generated/offer-semantic-cache/`.
 10. Favoriser le français pour les contenus destinés à Délia; conserver les identifiants et interfaces techniques en anglais.
 11. Considérer que tout fichier committé est lisible dans le dépôt GitHub public. La visibilité sur GitHub Pages reste une décision distincte, contrôlée par `site/publication.json`.
 12. Toute expérience validée doit comporter une `mission` explicite, courte et sourcée. Si elle manque, la signaler; ne jamais la déduire des responsabilités ou de l'intitulé.
@@ -22,7 +22,7 @@ Construire un dossier de carrière fiable et traçable pour Délia Rossignol, pu
 
 ## Répartition IA / Python
 
-Utiliser l'IA pour les tâches qui demandent du jugement : extraction sémantique, rapprochement non littéral, reformulation, synthèse, analyse du ton et explication d'une recommandation.
+Utiliser l'IA pour les tâches qui demandent du jugement : extraction sémantique, rapprochement non littéral, reformulation, synthèse, analyse du ton et explication d'une recommandation. Pour une offre, l’IA caractérise chaque exigence par un rapprochement `exact`, `transferable`, `gap` ou `unknown`, mais ne produit jamais le score final.
 
 Utiliser le paquet Python `delia_life` pour toute opération déterministe :
 
@@ -32,18 +32,21 @@ Utiliser le paquet Python `delia_life` pour toute opération déterministe :
 - validation de structures JSON;
 - transitions et journal d'audit des propositions;
 - détection littérale de doublons;
-- score explicable d'une offre;
+- validation des preuves de rapprochement et calcul explicable du score d'une offre;
 - classement des templates;
 - enregistrement chronologique des événements de candidature.
 
 Ne pas recalculer manuellement ce que la CLI sait calculer. Cela réduit le coût en tokens et garantit la reproductibilité.
 
 Pour la recherche d’offres, la stratégie de sourcing vit dans `config/offer-search.json` : privilégier les portails directs des grandes enseignes et des maisons, puis les sites spécialisés, puis les agrégateurs. Rechercher la page exacte de l’employeur lorsqu’elle est disponible, mais ne pas écarter une annonce actuellement accessible sur LinkedIn, Indeed, Hellowork ou un autre agrégateur lorsqu’elle ne l’est pas : conserver l’annonce dans son classement avec un point de vigilance sur la source. La configuration doit déclarer au moins une source pour chaque secteur prioritaire du projet de carrière ; le contrôle Python bloque un scan si cette couverture est incomplète.
+Chaque domaine de `source_domains` doit avoir exactement un mode de contrôle : collecte automatisée auditée ou contrôle manuel `core` / `complementary`. Un contrôle manuel doit produire un reçu rattaché au `scan_id`, avec URL, horodatage, statut et nombre d’offres observées. Seul un statut `success` couvre la source ; `no_access`, `skipped` ou l’absence de reçu interdit de finaliser le scan.
+
+Toute offre extraite automatiquement et non déjà exclue par une règle certaine doit recevoir une revue LLM v3. Le LLM inventorie d'abord toutes les exigences significatives dans `semantic_requirements`, puis produit exactement un `semantic_match` par exigence. Chaque exigence cite un extrait réellement présent dans l'archive contrôlée; chaque correspondance positive cite au moins un champ précis d'une preuve validée du profil. Python rejette les couvertures incomplètes, les extraits absents et les références ou champs inconnus. Il dérive seul la confiance utilisée pour la pondération et calcule seul le score; `llm_confidence` reste explicative et ne modifie jamais la note. Un `gap` sur une exigence obligatoire place l'offre dans la section `informational` sans soustraire de points. Le rapprochement lexical reste uniquement un mode de compatibilité explicite pour les offres historiques ou manuelles sans revue sémantique. Une revue est réutilisable uniquement si les empreintes de la source et du profil, la version du prompt et la version du schéma sont identiques.
 
 Associer chaque expérience validée à un ou plusieurs `industry_sector_ids` du référentiel normalisé. Tout prérequis d’expérience sectorielle d’une offre doit utiliser ces mêmes identifiants et une durée structurée lorsqu’elle est explicite. Le moteur résout la couverture à partir des périodes précises validées, en fusionnant les chevauchements ; les périodes connues seulement à l’année ne prouvent pas automatiquement une durée en mois. Une absence sectorielle ne peut être conclue qu’à partir d’un fait négatif validé. Lorsqu’une offre impose une durée minimale chiffrée dans un secteur dont l’absence d’expérience est validée, cette incompatibilité certaine exclut l’offre sans modifier son score.
 
 Le périmètre de classement dépend du mode préparé par `python scripts/delia_life.py offer-scan` : un `full` ou `send` classe uniquement le répertoire isolé indiqué dans `rank_inputs`, tandis qu’un `delta` classe `data/offers` dans son ensemble. Un `full` ou `send` ne charge aucune annonce d’une recherche précédente et sa `revalidation_queue` doit être vide; seules les annonces rencontrées pendant la session courante alimentent son rapport. Un `delta` conserve l’historique et traite sa `revalidation_queue`. Chaque annonce repérée conserve un `verification_status` et sa dernière date de contrôle ; une annonce dont le lien détaillé actuel renvoie une erreur ou bloque l’accès reste traçable mais ne participe pas au classement actif. Transmettre `--scan-manifest`, chaque `--visited-source`, `--covered-query-family` et `--covered-priority-sector` au classement strict. Utiliser `--require-complete-pool` et ne jamais présenter comme finale une recherche dont `pool_complete`, `scan_coverage.complete` ou `finalization_allowed` est faux.
-La complétude d’un scan ne dépend d’aucun volume minimal d’offres. Conserver et classer toutes les offres actives et éligibles, puis en restituer jusqu’à 100 conformément à `candidate_pool_maximum`. Tous les secteurs prioritaires et tous les domaines fonctionnels prioritaires ont le même poids dans le score ; aucun bonus propre à un secteur ou domaine n’est autorisé.
+La complétude d’un scan ne dépend d’aucun volume minimal d’offres. Conserver, classer et restituer toutes les offres actives et éligibles, sans plafond de volume. Tous les secteurs prioritaires et tous les domaines fonctionnels prioritaires ont le même poids dans le score ; aucun bonus propre à un secteur ou domaine n’est autorisé.
 
 ## Modèle mental
 
@@ -65,7 +68,7 @@ Ne jamais modifier une cardinalité ou un identifiant silencieusement. Conserver
 
 Pour un site, rester sur le même domaine, respecter `robots.txt`, limiter le débit et le nombre de pages, dater la capture et exclure les scripts de suivi. Archiver le brut dans `private/website-archives/`.
 
-Versionner les originaux, archives, offres, candidatures, feedbacks, manifestes, propositions et décisions de revue afin qu'un clone du dépôt suffise à poursuivre le travail. Le nom `private/` signifie « exclu de GitHub Pages et des documents publics par défaut », pas « exclu de Git ». Ne jamais y stocker de mot de passe, jeton, clé privée, cookie d'authentification ou fichier `.env`.
+Versionner les originaux, archives d'ingestion, candidatures, feedbacks, manifestes, propositions et décisions de revue afin qu'un clone du dépôt suffise à poursuivre le dossier de carrière. Les artefacts d'un scan d'offres restent locaux et régénérables dans les quatre répertoires exclus ci-dessus. Le nom `private/` signifie « exclu de GitHub Pages et des documents publics par défaut », pas automatiquement « exclu de Git » ; seule `private/offer-scan-archives/` est exclue en tant qu'artefact de scan. Ne jamais y stocker de mot de passe, jeton, clé privée, cookie d'authentification ou fichier `.env`.
 
 ## Workflow de candidature
 
@@ -85,7 +88,7 @@ Un template ne contient aucune donnée personnelle. Son fichier `template.json` 
 
 Un retour employeur est une observation rattachée à une candidature, pas une vérité universelle. Ne pas modifier automatiquement le profil ou les règles de génération. Produire une proposition d'amélioration, puis la soumettre à validation.
 
-Pour un email de revue d’offres à Délia, partir du rapport complet et appliquer le plafond général de la recherche, soit 100 éléments affichés, sans limite propre à l’email. Regrouper les offres classées dans trois sections ordonnées : « Il faut répondre, ça matche et tu as des chances d’un retour positif », « Tu peux répondre, on ne sait jamais », puis « Je te les mets pour info, mais il y a peu de chances ». Trier chaque section par pertinence décroissante et conserver une numérotation globale. Chaque offre doit présenter secteur, mission / poste, salaire proposé ou non communiqué, pertinence sur 100, puis un point de vigilance factuel visuellement signalé. Afficher les prérequis contraignants en rouge sans les soustraire du score ; ne jamais révéler les contraintes personnelles utilisées pour le classement. Ajouter ensuite une annexe non classée « Offres probablement actives à revérifier » pour les annonces `pending`, avec leur lien et leur motif de revérification, sans rang ni score. Introduire cette annexe en précisant que les annonces concernées ont été rencontrées dans la recherche actuelle, mais que leur lien détaillé a renvoyé une erreur ou bloqué l’accès; cela ne signifie ni qu’elles sont fermées ni qu’elles sont incompatibles. Les annonces accessibles sur un agrégateur ou sur une page listant plusieurs offres restent classées avec un point de vigilance et ne sont pas placées dans cette annexe. Terminer la liste par « Offres exclues et pourquoi », sans rang, avec le score calculé lorsqu’il existe et tous les motifs d’exclusion ; ne pas y répéter les annonces `pending`. Réserver de la place aux exclusions avant de remplir l’annexe `pending` et indiquer les annonces omises lorsque le plafond de 100 est atteint.
+Pour un email de revue d’offres à Délia, partir du rapport complet et afficher toutes les offres sans plafond de volume ni limite propre à l’email. Regrouper les offres classées dans trois sections ordonnées : « Il faut répondre, ça matche et tu as des chances d’un retour positif », « Tu peux répondre, on ne sait jamais », puis « Je te les mets pour info, mais il y a peu de chances ». Trier chaque section par pertinence décroissante et conserver une numérotation globale. Chaque offre doit présenter secteur, mission / poste, salaire proposé ou non communiqué, pertinence sur 100, puis un point de vigilance factuel visuellement signalé. Afficher les prérequis contraignants en rouge sans les soustraire du score ; ne jamais révéler les contraintes personnelles utilisées pour le classement. Ajouter ensuite une annexe non classée « Offres probablement actives à revérifier » pour les annonces `pending`, avec leur lien et leur motif de revérification, sans rang ni score. Introduire cette annexe en précisant que les annonces concernées ont été rencontrées dans la recherche actuelle, mais que leur lien détaillé a renvoyé une erreur ou bloqué l’accès; cela ne signifie ni qu’elles sont fermées ni qu’elles sont incompatibles. Les annonces accessibles sur un agrégateur ou sur une page listant plusieurs offres restent classées avec un point de vigilance et ne sont pas placées dans cette annexe. Terminer la liste par « Offres exclues et pourquoi », sans rang, avec le score calculé lorsqu’il existe et tous les motifs d’exclusion ; ne pas y répéter les annonces `pending`.
 
 ## Publication GitHub Pages
 
@@ -97,7 +100,7 @@ Générer et contrôler les documents avec `python scripts/delia_life.py build-d
 
 Utiliser `$manage-delia-git` pour les commandes utilisateur `commit`, `push` et `publish`.
 
-Pour `commit`, inspecter le diff, exécuter `python scripts/repo_flow.py prepare-commit`, puis, si tous les tests, validations et builds réussissent, mettre en index les fichiers concernés, inspecter le diff indexé et créer le commit local dans la même action. La demande explicite `commit` autorise ce commit local sans validation intermédiaire; elle n'autorise aucun push. Inclure les données métier utiles à la reproductibilité et exclure tout secret technique ou fichier temporaire.
+Pour `commit`, inspecter le diff, exécuter `python scripts/repo_flow.py prepare-commit`, puis, si tous les tests, validations et builds réussissent, mettre en index les fichiers concernés, inspecter le diff indexé et créer le commit local dans la même action. La demande explicite `commit` autorise ce commit local sans validation intermédiaire; elle n'autorise aucun push. Inclure les sources et données métier utiles à la reproductibilité, mais exclure tout secret technique, fichier temporaire et artefact opérationnel de recherche listé par `.gitignore`.
 
 `push` et `publish` sont synonymes. Vérifier `config/repository.json`, exécuter `python scripts/repo_flow.py publish-check`, puis pousser uniquement le commit local courant vers le remote et la branche configurés. Suivre ensuite le workflow GitHub Actions configuré pour le SHA poussé jusqu'à son résultat final. Ne jamais forcer un push, fusionner, réécrire l'historique, corriger un échec de CI ou créer implicitement un commit local.
 
@@ -136,4 +139,4 @@ Avant de terminer une modification :
 6. exécuter `python scripts/delia_life.py build-documents` puis `python scripts/delia_life.py check-documents`;
 7. pour une modification publiable, exécuter `python scripts/delia_life.py build-site --output _site`;
 8. valider toute skill modifiée avec `quick_validate.py`;
-9. inspecter `git diff`, vérifier que les sources et données métier attendues sont incluses et qu'aucun secret technique ne l'est.
+9. inspecter `git diff`, vérifier que les sources et données métier attendues sont incluses, que les artefacts de recherche régénérables restent exclus et qu'aucun secret technique ne l'est.

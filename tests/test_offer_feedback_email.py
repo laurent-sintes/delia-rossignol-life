@@ -81,6 +81,40 @@ class OfferFeedbackEmailTests(unittest.TestCase):
         self.assertIn('style="color: #b85c20;"', html_body)
         self.assertIn('<li style="margin: 0 0 18px 0; padding: 0;">', html_body)
 
+    def test_preference_alert_is_visible_in_email_vigilance(self) -> None:
+        report = {
+            "offers": [
+                {
+                    "id": "offer-1",
+                    "title": "Conseillère de vente",
+                    "employer": "Maison Exemple",
+                    "source_url": "https://jobs.example/offers/1",
+                    "assessment": {
+                        "score": 82,
+                        "preference_alerts": [
+                            "poste de vente sans responsabilité élargie, dépriorisé dans la recherche actuelle"
+                        ],
+                    },
+                }
+            ]
+        }
+        cv = self.work / "cv.pdf"
+        cv.write_bytes(b"%PDF-1.4\nexample")
+
+        prepare_offer_feedback_email(
+            report,
+            "delia@example.test",
+            "https://example.test",
+            cv,
+            self.work / "draft",
+        )
+
+        draft_text = (self.work / "draft" / "offer-selection.txt").read_text(encoding="utf-8")
+        self.assertIn(
+            "Point de vigilance : poste de vente sans responsabilité élargie",
+            draft_text,
+        )
+
     def test_legacy_report_derives_consulted_sites_from_offer_links(self) -> None:
         report = {
             "offers": [
@@ -98,6 +132,54 @@ class OfferFeedbackEmailTests(unittest.TestCase):
         prepare_offer_feedback_email(report, "delia@example.test", "https://example.test", cv, self.work / "draft")
         draft_text = (self.work / "draft" / "offer-selection.txt").read_text(encoding="utf-8")
         self.assertIn("- https://jobs.example", draft_text)
+
+    def test_grouped_quasi_duplicates_keep_every_publication_link(self) -> None:
+        report = {
+            "offers": [
+                {
+                    "id": "mango-latest",
+                    "title": "Multifunctional Sales Associate",
+                    "employer": "Mango",
+                    "source_url": "https://fr.fashionjobs.com/emploi/mango/latest.html",
+                    "assessment": {"score": 91, "reasons": ["forte correspondance"]},
+                    "represented_offer_count": 3,
+                    "similar_publications": [
+                        {
+                            "id": "mango-older-1",
+                            "source_url": "https://fr.fashionjobs.com/emploi/mango/older-1.html",
+                            "published_at": "2026-07-09",
+                        },
+                        {
+                            "id": "mango-older-2",
+                            "source_url": "https://fr.fashionjobs.com/emploi/mango/older-2.html",
+                            "published_at": "2026-07-04",
+                        },
+                    ],
+                }
+            ]
+        }
+        cv = self.work / "cv.pdf"
+        cv.write_bytes(b"%PDF-1.4\nexample")
+
+        prepare_offer_feedback_email(
+            report,
+            "delia@example.test",
+            "https://example.test",
+            cv,
+            self.work / "draft",
+        )
+
+        text_body = (self.work / "draft" / "offer-selection.txt").read_text(encoding="utf-8")
+        html_body = (self.work / "draft" / "offer-selection.html").read_text(encoding="utf-8")
+        for link in (
+            "https://fr.fashionjobs.com/emploi/mango/latest.html",
+            "https://fr.fashionjobs.com/emploi/mango/older-1.html",
+            "https://fr.fashionjobs.com/emploi/mango/older-2.html",
+        ):
+            self.assertIn(link, text_body)
+            self.assertIn(link, html_body)
+        self.assertIn("2 autre(s) publication(s) très similaire(s) regroupée(s)", text_body)
+        self.assertIn("Voir la publication similaire du 2026-07-09", html_body)
 
     def test_pending_offers_are_rendered_in_a_separate_unranked_section(self) -> None:
         report = {
@@ -278,16 +360,14 @@ class OfferFeedbackEmailTests(unittest.TestCase):
         self.assertIn('style="color: #b42318;"', html_body)
         self.assertIn("Expérience préalable dans le domaine assurantiel", html_body)
 
-    def test_result_display_limit_is_one_hundred_without_an_email_specific_cap(self) -> None:
+    def test_all_ranked_results_are_displayed_without_a_cap(self) -> None:
         report = {"offers": [{"id": f"offer-{index}", "title": "Poste", "employer": "Employeur", "source_url": "https://jobs.example/offers", "assessment": {}} for index in range(105)]}
         cv = self.work / "cv.pdf"
         cv.write_bytes(b"%PDF-1.4\nexample")
         result = prepare_offer_feedback_email(report, "delia@example.test", "https://example.test", cv, self.work / "draft")
-        self.assertEqual(result["offer_count"], 100)
-        with self.assertRaises(ValueError):
-            prepare_offer_feedback_email(report, "delia@example.test", "https://example.test", cv, self.work / "too-many", limit=101)
+        self.assertEqual(result["offer_count"], 105)
 
-    def test_display_limit_applies_to_ranked_pending_and_excluded_offers_together(self) -> None:
+    def test_all_ranked_pending_and_excluded_offers_are_displayed(self) -> None:
         report = {
             "offers": [
                 {
@@ -328,13 +408,54 @@ class OfferFeedbackEmailTests(unittest.TestCase):
             "https://example.test",
             cv,
             self.work / "draft",
-            limit=10,
         )
 
-        self.assertEqual(result["displayed_item_count"], 10)
-        self.assertEqual(result["offer_count"], 7)
+        self.assertEqual(result["displayed_item_count"], 18)
+        self.assertEqual(result["offer_count"], 12)
         self.assertEqual(result["excluded_offer_displayed_count"], 3)
-        self.assertEqual(result["pending_offer_displayed_count"], 0)
+        self.assertEqual(result["pending_offer_displayed_count"], 3)
+
+    def test_large_excluded_pool_does_not_erase_ranked_sections(self) -> None:
+        report = {
+            "offers": [
+                {
+                    "id": f"ranked-{index}",
+                    "title": "Poste classÃ©",
+                    "employer": "Employeur",
+                    "source_url": f"https://jobs.example/ranked/{index}",
+                    "recommendation_band": band,
+                    "assessment": {"score": 90 - index},
+                }
+                for index, band in enumerate(
+                    ["priority", "possible", "possible", "possible", "informational"]
+                )
+            ],
+            "excluded": [
+                {
+                    "id": f"excluded-{index}",
+                    "title": "Poste exclu",
+                    "employer": "Employeur",
+                    "source_url": f"https://jobs.example/excluded/{index}",
+                    "failures": ["prÃ©requis obligatoire non satisfait"],
+                }
+                for index in range(260)
+            ],
+        }
+        cv = self.work / "cv.pdf"
+        cv.write_bytes(b"%PDF-1.4\nexample")
+
+        result = prepare_offer_feedback_email(
+            report,
+            "delia@example.test",
+            "https://example.test",
+            cv,
+            self.work / "draft",
+        )
+
+        self.assertEqual(result["offer_count"], 5)
+        self.assertEqual(result["section_counts"], {"priority": 1, "possible": 3, "informational": 1})
+        self.assertEqual(result["excluded_offer_displayed_count"], 260)
+        self.assertEqual(result["displayed_item_count"], 265)
 
     def test_incomplete_report_cannot_be_prepared_for_delivery(self) -> None:
         cv = self.work / "cv.pdf"

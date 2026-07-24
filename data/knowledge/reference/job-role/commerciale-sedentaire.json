@@ -1,0 +1,25 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-24T07:56:00+00:00",
+          "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-3",
+          "proposal_id": "proposal-job-role-commerciale-sedentaire-2026-07-24",
+          "source_id": "src-a24fabefcdee7c13"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "commercial sédentaire"
+        ],
+        "job_family": "commerce et relation client",
+        "name": "Commerciale sédentaire",
+        "source_label": "commerciale sédentaire"
+      }
+    }
+  },
+  "id": "commerciale-sedentaire",
+  "type": "job-role",
+  "updated_at": "2026-07-24T07:56:00+00:00"
+}

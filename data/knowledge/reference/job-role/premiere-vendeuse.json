@@ -1,0 +1,25 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-24T07:56:01+00:00",
+          "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-2",
+          "proposal_id": "proposal-job-role-premiere-vendeuse-2026-07-24",
+          "source_id": "src-a24fabefcdee7c13"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "premier vendeur"
+        ],
+        "job_family": "commerce et relation client",
+        "name": "Première vendeuse",
+        "source_label": "première vendeuse"
+      }
+    }
+  },
+  "id": "premiere-vendeuse",
+  "type": "job-role",
+  "updated_at": "2026-07-24T07:56:01+00:00"
+}

@@ -228,7 +228,50 @@ def migrate_career_project_entity(
     fields = dict(entity.get("fields", {}))
     target_preferences = dict(fields.get("targets", {}).get("value", {}))
     sectors = dict(target_preferences.get("industry_sectors", {}))
+    industry_diversification = dict(
+        fields.get("target_industry_diversification", {}).get("value", {})
+    )
+    added_sector_labels = [
+        str(value)
+        for value in industry_diversification.get("priority_sector_labels", [])
+        if str(value).strip()
+    ]
+    sector_priority = list(sectors.get("priority", []))
+    for label in added_sector_labels:
+        if label not in sector_priority:
+            sector_priority.append(label)
+    sectors["priority"] = sector_priority
+    target_preferences["industry_sectors"] = sectors
+
+    target_job_roles = dict(fields.get("target_job_roles", {}).get("value", {}))
+    if target_job_roles:
+        target_preferences["job_roles"] = target_job_roles
+        target_preferences["job_roles_status"] = "defined"
+        if target_job_roles.get("minimum_responsibility_level"):
+            target_preferences["minimum_responsibility_level"] = target_job_roles[
+                "minimum_responsibility_level"
+            ]
+    target_commercial_channels = dict(
+        fields.get("target_commercial_channels", {}).get("value", {})
+    )
+    if target_commercial_channels:
+        target_preferences["commercial_channels"] = target_commercial_channels
+
     selected_sectors = list(sectors.get("priority", [])) + list(sectors.get("acceptable", []))
+    selected_sector_ids = [_reference_id(str(value)) for value in selected_sectors]
+    for sector_id in industry_diversification.get("priority_sector_ids", []):
+        normalized_id = _reference_id(str(sector_id))
+        if normalized_id and normalized_id not in selected_sector_ids:
+            selected_sector_ids.append(normalized_id)
+
+    selected_job_role_ids = [
+        _reference_id(str(item.get("id") if isinstance(item, dict) else item))
+        for item in target_job_roles.get("priority", [])
+    ]
+    for role_id in target_commercial_channels.get("priority_role_ids", []):
+        normalized_id = _reference_id(str(role_id))
+        if normalized_id and normalized_id not in selected_job_role_ids:
+            selected_job_role_ids.append(normalized_id)
 
     criterion_rules = {
         "activity_boundaries": ("other", 5, True),
@@ -239,6 +282,10 @@ def migrate_career_project_entity(
         "work_arrangement": ("work_mode", 4, False),
         "compensation": ("compensation", 5, True),
         "work_environment": ("work_environment", 4, False),
+        "initial_search_schedule_preference": ("schedule", 5, False),
+        "target_job_roles": ("job_role", 4, False),
+        "target_commercial_channels": ("job_role", 4, False),
+        "target_industry_diversification": ("industry_sector", 4, False),
     }
     criteria: list[dict[str, Any]] = []
     for field_name, (dimension, priority, hard_constraint) in criterion_rules.items():
@@ -279,13 +326,13 @@ def migrate_career_project_entity(
             "person_id": person_id,
             "status": "active",
             "targets": {
-                "industry_sector_ids": [_reference_id(str(value)) for value in selected_sectors],
-                "job_role_ids": [],
+                "industry_sector_ids": selected_sector_ids,
+                "job_role_ids": selected_job_role_ids,
                 "location_ids": [],
             },
             "criteria": criteria,
             "target_preferences": target_preferences,
-            "migration": "generic-entity-to-career-project-v1",
+            "migration": "generic-entity-to-career-project-v2",
         }
     )
     availability = fields.get("availability", {}).get("value")

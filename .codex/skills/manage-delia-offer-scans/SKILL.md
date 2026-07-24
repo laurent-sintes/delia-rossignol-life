@@ -9,7 +9,7 @@ description: "Orchestrer les recherches d’offres de Délia avec quatre command
 
 Interpréter exactement les quatre intentions suivantes :
 
-- `clean cache` : supprimer uniquement l’état technique jetable du scanner. Conserver tous les fichiers versionnés sous `data/offers/` et `generated/`.
+- `clean cache` : supprimer uniquement l’état technique jetable du scanner. Conserver les résultats locaux sous `data/offers/` et `generated/`; ces artefacts régénérables ne sont pas versionnés. Le cache sémantique adressé par contenu sous `generated/offer-semantic-cache/` peut être conservé : il ne sera réutilisé que si les empreintes de la source et du profil ainsi que les versions du prompt et du schéma sont identiques.
 - `scan full` : exécuter `clean cache`, repartir d’une session de collecte isolée, consulter toutes les sources prévues et classer uniquement les annonces observées ou revérifiées pendant cette session.
 - `scan delta` : conserver l’historique, rechercher les nouvelles annonces et revérifier les offres devenues anciennes, incertaines ou modifiées depuis le dernier rapport complet.
 - `envoi à Délia` : exécuter un `scan full`, préparer le paquet de revue, le contrôler puis envoyer effectivement le message à l’adresse validée de Délia. Cette formulation explicite autorise l’envoi pour cette exécution seulement.
@@ -24,6 +24,7 @@ Interpréter exactement les quatre intentions suivantes :
    - `rank_inputs` comme seules entrées du classement ;
    - `report_output_path` pour le rapport final ;
    - `requirements` comme checklist des sources, familles de requêtes et secteurs à couvrir ;
+   - `manual_source_receipts` comme preuves des contrôles de portails sans collecteur Python ;
    - `revalidation_queue` comme liste prioritaire des annonces historiques à rouvrir en mode `delta`; elle doit être vide en mode `full` ou `send`.
 
 Ne jamais remplacer `rank_inputs` par `data/offers` lors d’un scan `full` ou `send`. L’isolation de cette entrée garantit que les anciennes annonces ne réapparaissent pas comme si elles avaient été contrôlées aujourd’hui.
@@ -37,8 +38,10 @@ Utiliser `$search-delia-offers` pour la collecte, la vérification, la normalisa
 - En mode `delta`, partir du dernier rapport complet, interroger les sources modifiées ou tournantes, rechercher les nouveautés et revérifier les annonces `pending` ainsi que les annonces actives au-delà de l’âge maximal autorisé.
 - Enregistrer aussi les annonces fermées, expirées, inaccessibles ou exclues observées pendant la session.
 - Laisser `run-offer-scan` produire les reçus de collecte, archiver les pages, extraire les annonces structurées et transmettre automatiquement au classement les sources, familles de requêtes et secteurs effectivement couverts. Ne jamais déclarer cette couverture manuellement.
+- Après la collecte Python, consulter chaque domaine de `scan_coverage.missing_manual_source_domains` avec un navigateur ou un connecteur conforme. Enregistrer les annonces actuelles trouvées dans `offer_output_directory`, sans recopier d’offre historique. Produire un lot JSON rattaché au `scan_id`, avec pour chaque domaine `status`, `source_url`, `checked_at`, `offers_found` et une note factuelle, puis exécuter `python scripts/delia_life.py record-offer-source-receipts <lot.json> --scan-manifest .runtime/offer-search/current.json`. Utiliser `success` seulement si la page ou la recherche actuelle a réellement été contrôlée ; `no_access` et `skipped` restent incomplets.
+- Un scan full recharge toujours les pages actuelles. La réutilisation éventuelle d’une revue depuis le cache sémantique ne réintroduit aucune ancienne annonce : elle s’applique seulement à une source nouvellement collectée dont l’empreinte est strictement identique, avec le même profil, le même prompt et le même schéma.
 - Si le manifeste contient une `semantic_review_queue`, utiliser `$search-delia-offers` pour relire chaque archive indiquée, compléter uniquement les faits démontrés de l’offre et passer `extraction.review_status` à `completed` avec la date et la méthode de revue. Relancer ensuite `rank-offers <rank_inputs...> --require-complete-pool --scan-manifest .runtime/offer-search/current.json --output <report_output_path>`. Tant qu’une revue reste requise, `finalization_allowed` doit rester faux.
-- Pour diagnostiquer une étape séparément, utiliser `offer-scan full|delta`, puis `collect-offers --scan-manifest .runtime/offer-search/current.json`, puis `rank-offers <rank_inputs...> --require-complete-pool --scan-manifest .runtime/offer-search/current.json --output <report_output_path>`.
+- Pour diagnostiquer une étape séparément, utiliser `offer-scan full|delta`, puis `collect-offers --scan-manifest .runtime/offer-search/current.json`, enregistrer les reçus manuels, puis `rank-offers <rank_inputs...> --require-complete-pool --scan-manifest .runtime/offer-search/current.json --output <report_output_path>`.
 - Ne jamais qualifier de complet un rapport dont `pool_complete` ou `finalization_allowed` est faux.
 
 Un `scan full` peut retrouver moins d’annonces qu’un delta : ce résultat est acceptable s’il reflète uniquement des pages revérifiées et si toutes les sources prévues ont été consultées. Ne jamais compléter artificiellement avec une ancienne annonce non contrôlée pendant la session.
@@ -46,6 +49,6 @@ Un `scan full` peut retrouver moins d’annonces qu’un delta : ce résultat es
 ## Restitution et envoi
 
 - Pour `scan full` et `scan delta`, restituer le rapport en conversation ou dans le format demandé. Ne produire ni brouillon ni envoi sans demande de partage.
-- Pour `envoi à Délia`, utiliser `$share-delia-offer-selection` avec le rapport complet produit par la session. Appliquer le plafond général de 100 résultats, sans limite propre à l’email, puis contrôler le destinataire validé, le Bcc, les liens et le CV avant d’utiliser le connecteur de messagerie pour envoyer le message.
+- Pour `envoi à Délia`, utiliser `$share-delia-offer-selection` avec le rapport complet produit par la session. Afficher toutes les offres du rapport sans plafond, puis contrôler le destinataire validé, le Bcc, les liens et le CV avant d’utiliser le connecteur de messagerie pour envoyer le message.
 - Si le rapport full est incomplet, ne pas envoyer : expliquer les sources ou vérifications manquantes.
 - Après toute modification de données, de rapport ou de paquet d’email, exécuter `python scripts/repo_flow.py review-operational`.

@@ -44,6 +44,7 @@ class CliTests(unittest.TestCase):
                 "plan-personal-response",
                 "prepare-offer-feedback-email",
                 "rank-offers",
+                "record-offer-source-receipts",
                 "review",
                 "review-batch",
                 "run-offer-scan",
@@ -62,6 +63,7 @@ class CliTests(unittest.TestCase):
             "rank-offers",
             "apply-offer-semantic-reviews",
             "offer-scan",
+            "record-offer-source-receipts",
             "prepare-offer-feedback-email",
             "build-site",
             "model-impact",
@@ -84,7 +86,7 @@ class CliTests(unittest.TestCase):
         self.assertEqual(ranked.visited_sources, ["https://careers.example/jobs"])
         self.assertTrue(ranked.require_complete_pool)
         feedback = parser.parse_args(["prepare-offer-feedback-email", "report.json", "--recipient", "delia@example.test", "--site-url", "https://example.test", "--output", "draft"])
-        self.assertEqual(feedback.limit, 100)
+        self.assertFalse(hasattr(feedback, "limit"))
         self.assertEqual(feedback.bcc, "laurent.sintes74@gmail.com")
         full_scan = parser.parse_args(["offer-scan", "full"])
         self.assertEqual(full_scan.action, "full")

@@ -141,6 +141,43 @@ class OfferCollectionTests(unittest.TestCase):
         self.assertEqual(offer["extraction"]["method"], "deterministic-html")
         self.assertEqual(offer["extraction"]["review_status"], "required")
 
+    def test_html_detail_prefers_contract_prefix_in_listing_title(self) -> None:
+        offer = parse_html_offer_page(
+            b"<html><body><h1>Responsable qualite F/H</h1>"
+            b"<p>Collaboration avec l'equipe alternance et les stagiaires.</p></body></html>",
+            "https://jobs.example/offre/qualite-42",
+            "CDI - Responsable qualite F/H",
+            self.audit["sources"][0],
+            self.policy,
+            datetime(2026, 7, 22, 9, 0, tzinfo=UTC),
+        )
+
+        self.assertIsNotNone(offer)
+        assert offer is not None
+        self.assertEqual(offer["contract_type"], "CDI")
+
+    def test_navigation_pages_are_not_extracted_as_offers(self) -> None:
+        captured_at = datetime(2026, 7, 22, 9, 0, tzinfo=UTC)
+        for title in (
+            "Bourse de l'emploi",
+            "Nos ressources",
+            "Accompagnements",
+            "Accéder par concours",
+            "Formations",
+            "Les offres d'emploi : Administratif / technique",
+            "Observatoire régional de l'emploi",
+        ):
+            with self.subTest(title=title):
+                offer = parse_html_offer_page(
+                    f"<html><body><h1>{title}</h1></body></html>".encode(),
+                    "https://jobs.example/offre/navigation",
+                    title,
+                    self.audit["sources"][0],
+                    self.policy,
+                    captured_at,
+                )
+                self.assertIsNone(offer)
+
     def test_collect_offers_writes_offer_archive_and_machine_proof_of_coverage(self) -> None:
         fetched_urls: list[str] = []
 
@@ -176,6 +213,36 @@ class OfferCollectionTests(unittest.TestCase):
         updated_manifest = load_json(self.manifest_path)
         self.assertEqual(updated_manifest["status"], "collected")
         self.assertEqual(updated_manifest["collection"]["source_receipts"][0]["records"][0]["http_status"], 200)
+
+    def test_collect_offers_proves_required_sector_functional_intersection(self) -> None:
+        manifest = load_json(self.manifest_path)
+        manifest["requirements"]["required_sector_functional_pairs"] = [
+            "commerce-et-distribution::gestion-administrative"
+        ]
+        self.manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+        result = collect_offers(
+            self.manifest_path,
+            policy_path=self.policy_path,
+            source_audit_path=self.audit_path,
+            archive_root=self.archive_root,
+            fetch_page=lambda url, _settings: {
+                "capture_status": "captured",
+                "url": url,
+                "final_url": url,
+                "status": 200,
+                "media_type": "text/html",
+                "body": JOB_POSTING_HTML,
+            },
+            now=datetime(2026, 7, 22, 9, 0, tzinfo=UTC),
+        )
+
+        self.assertTrue(result["complete"], result)
+        self.assertEqual(
+            result["covered_sector_functional_pairs"],
+            ["commerce-et-distribution::gestion-administrative"],
+        )
+        self.assertEqual(result["missing_sector_functional_pairs"], [])
 
     def test_collect_offers_marks_scan_incomplete_when_a_required_source_fails(self) -> None:
         def fetch_page(url: str, _settings: CollectorSettings) -> dict[str, object]:
@@ -440,6 +507,138 @@ class OfferCollectionTests(unittest.TestCase):
         self.assertEqual(offer["title"], "Guest Relation Agent")
         self.assertEqual(offer["contract_type"], "CDI")
         self.assertEqual(offer["location_label"], "Bordeaux")
+
+    def test_fashionjobs_adapter_paginates_listing_and_extracts_only_offer_details(self) -> None:
+        self.policy["collector"]["adapter_domains"] = {"fashionjobs": ["fr.fashionjobs.com"]}
+        self.audit["sources"][0].update(
+            {
+                "organization": "FashionJobs Bordeaux",
+                "career_url": "https://fr.fashionjobs.com/s/emploi/vendeur-vendeuse-bordeaux.html",
+                "scan_domain": "fr.fashionjobs.com",
+                "sectors": ["luxe", "mode-et-pret-a-porter"],
+            }
+        )
+        self.manifest["requirements"].update(
+            {
+                "required_source_domains": ["fr.fashionjobs.com"],
+                "required_priority_sectors": ["mode-et-pret-a-porter"],
+            }
+        )
+        self.policy_path.write_text(json.dumps(self.policy), encoding="utf-8")
+        self.audit_path.write_text(json.dumps(self.audit), encoding="utf-8")
+        self.manifest_path.write_text(json.dumps(self.manifest), encoding="utf-8")
+
+        listing_url = "https://fr.fashionjobs.com/s/emploi/vendeur-vendeuse-bordeaux.html"
+        second_page_url = "https://fr.fashionjobs.com/s/emploi/vendeur-vendeuse-bordeaux,2.html"
+        first_offer_url = "https://fr.fashionjobs.com/emploi/maison-a/conseiller-de-vente,11880001.html"
+        second_offer_url = "https://fr.fashionjobs.com/emploi/maison-b/vendeur,11880002.html"
+
+        def detail(reference: str, title: str, url: str) -> bytes:
+            posting = {
+                "@context": "https://schema.org",
+                "@type": "JobPosting",
+                "title": title,
+                "identifier": {"value": reference},
+                "hiringOrganization": {"name": "Maison de mode"},
+                "url": url,
+                "datePosted": "2026-07-22",
+                "employmentType": "FULL_TIME",
+                "description": "Conseil et relation client en boutique.",
+                "jobLocation": {"address": {"addressLocality": "Bordeaux", "addressCountry": "FR"}},
+            }
+            return (
+                "<html><head><script type='application/ld+json'>"
+                + json.dumps(posting)
+                + "</script></head><body><p><span>Type de contrat :</span><b>CDI</b></p>"
+                + "<p><span>Type d'emploi :</span><b>Plein temps</b></p></body></html>"
+            ).encode()
+
+        fetched_urls: list[str] = []
+
+        def fetch_page(url: str, _settings: CollectorSettings) -> dict[str, object]:
+            fetched_urls.append(url)
+            bodies = {
+                listing_url: (
+                    f'<a class="tw-relative extended-link" href="{first_offer_url}">Conseiller</a>'
+                    f'<a href="{second_page_url}">2</a>'
+                    '<a href="/s/emploi/vendeur-vendeuse-paris.html">Paris</a>'
+                ).encode(),
+                second_page_url: (
+                    f'<a class="tw-relative extended-link" href="{second_offer_url}">Vendeur</a>'
+                    f'<a href="{listing_url}">1</a>'
+                ).encode(),
+                first_offer_url: detail("FJ-1", "Conseiller de vente", first_offer_url),
+                second_offer_url: detail("FJ-2", "Vendeur", second_offer_url),
+            }
+            return {
+                "capture_status": "captured",
+                "url": url,
+                "final_url": url,
+                "status": 200,
+                "media_type": "text/html",
+                "body": bodies[url],
+            }
+
+        result = collect_offers(
+            self.manifest_path,
+            policy_path=self.policy_path,
+            source_audit_path=self.audit_path,
+            archive_root=self.archive_root,
+            fetch_page=fetch_page,
+            now=datetime(2026, 7, 22, 9, 0, tzinfo=UTC),
+        )
+
+        self.assertTrue(result["complete"], result)
+        self.assertEqual(result["offer_count"], 2)
+        self.assertEqual(result["covered_priority_sectors"], ["mode-et-pret-a-porter"])
+        self.assertEqual(result["source_receipts"][0]["pages_fetched"], 4)
+        self.assertEqual(result["source_receipts"][0]["offers_discovered"], 2)
+        self.assertEqual(set(fetched_urls), {listing_url, second_page_url, first_offer_url, second_offer_url})
+        contracts = {load_json(path)["contract_type"] for path in self.output_directory.glob("*.json")}
+        self.assertEqual(contracts, {"CDI"})
+
+    def test_ikea_zero_postes_page_does_not_turn_location_links_into_offers(self) -> None:
+        self.policy["collector"]["adapter_domains"] = {"ikea": ["jobs.ikea.com"]}
+        self.audit["sources"][0].update(
+            {
+                "organization": "IKEA Bordeaux",
+                "career_url": "https://jobs.ikea.com/fr/lieu/jobs/22908/3017382-11071620-3031582/4",
+                "scan_domain": "jobs.ikea.com",
+            }
+        )
+        self.manifest["requirements"]["required_source_domains"] = ["jobs.ikea.com"]
+        self.policy_path.write_text(json.dumps(self.policy), encoding="utf-8")
+        self.audit_path.write_text(json.dumps(self.audit), encoding="utf-8")
+        self.manifest_path.write_text(json.dumps(self.manifest), encoding="utf-8")
+
+        def fetch_page(url: str, _settings: CollectorSettings) -> dict[str, object]:
+            return {
+                "capture_status": "captured",
+                "url": url,
+                "final_url": url,
+                "status": 200,
+                "media_type": "text/html",
+                "body": (
+                    b"<html><body><h1>0 Postes a Bordeaux</h1>"
+                    b'<a href="/de/standort/bordeaux-jobs/22908/3017382-11071620-3031582/4">Deutsch</a>'
+                    b"</body></html>"
+                ),
+            }
+
+        result = collect_offers(
+            self.manifest_path,
+            policy_path=self.policy_path,
+            source_audit_path=self.audit_path,
+            archive_root=self.archive_root,
+            fetch_page=fetch_page,
+            now=datetime(2026, 7, 22, 9, 0, tzinfo=UTC),
+        )
+
+        self.assertTrue(result["complete"], result)
+        self.assertEqual(result["offer_count"], 0)
+        self.assertEqual(result["source_receipts"][0]["status"], "success")
+        self.assertEqual(result["source_receipts"][0]["pages_fetched"], 1)
+        self.assertEqual(result["source_receipts"][0]["offers_discovered"], 0)
 
 
 if __name__ == "__main__":

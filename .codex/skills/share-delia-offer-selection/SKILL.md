@@ -9,13 +9,13 @@ Préparer un paquet de brouillon traçable : texte, HTML, fichier `.eml`, manife
 
 ## Workflow
 
-1. Utiliser le rapport complet explicitement demandé ou, pour la commande « envoi à Délia », le `report_output_path` de la session full courante. Ne jamais substituer un ancien rapport si la session courante est incomplète. Appliquer le plafond général de la recherche, soit 100 éléments affichés, sans règle de capacité propre à l’email. Regrouper les offres pertinentes dans l’ordre `priority`, `possible`, `informational`, puis les trier par pertinence décroissante dans chaque section ; ne pas réduire silencieusement à un top 10. Réserver ensuite de la place aux offres exclues, utiliser la capacité restante pour l’annexe non classée `pending_offers` et indiquer combien d’annonces supplémentaires restent dans le rapport complet si le plafond général est atteint.
-   Refuser tout rapport portant `finalization_allowed: false`. Appliquer `--limit` au total des offres classées, exclusions et annonces pending affichées.
+1. Utiliser le rapport complet explicitement demandé ou, pour la commande « envoi à Délia », le `report_output_path` de la session full courante. Ne jamais substituer un ancien rapport si la session courante est incomplète. Afficher sans plafond toutes les offres classées, toutes les exclusions et toutes les annonces `pending_offers`. Regrouper les offres pertinentes dans l’ordre `priority`, `possible`, `informational`, puis les trier par pertinence décroissante dans chaque section.
+   Refuser tout rapport portant `finalization_allowed: false`.
 2. Vérifier le CV généré dans `site/assets/downloads/` avec `python scripts/delia_life.py check-documents`.
 3. Préparer le brouillon, avec une adresse de destinataire explicitement fournie. Pour une sélection éditoriale, ajouter les identifiants des offres retenues ; le moteur les regroupe ensuite par section et les trie par score :
 
    ```powershell
-   python scripts/delia_life.py prepare-offer-feedback-email generated/offer-search/YYYY-MM-DD-full.json --recipient "adresse-de-delia@example.com" --bcc "laurent.sintes74@gmail.com" --site-url "https://laurent-sintes.github.io/delia-rossignol-life/" --limit 100 --output generated/offer-feedback/YYYY-MM-DD
+   python scripts/delia_life.py prepare-offer-feedback-email generated/offer-search/YYYY-MM-DD-full.json --recipient "adresse-de-delia@example.com" --bcc "laurent.sintes74@gmail.com" --site-url "https://laurent-sintes.github.io/delia-rossignol-life/" --output generated/offer-feedback/YYYY-MM-DD
    ```
 
 4. Ouvrir `offer-selection.txt`, `offer-selection.eml` et `manifest.json`, puis contrôler le destinataire, la copie cachée, les liens, le nombre d’offres et le PDF joint avant toute création de brouillon distant.
@@ -33,5 +33,5 @@ Préparer un paquet de brouillon traçable : texte, HTML, fichier `.eml`, manife
 - Terminer le message par une section informative « Sites consultés » provenant de `visited_sources` dans le rapport complet. Elle doit inclure tous les sites visités pendant la recherche, même ceux qui n'ont fourni aucune offre retenue.
 - Mettre systématiquement `laurent.sintes74@gmail.com` en copie cachée. La CLI l’utilise par défaut et le fichier `.eml` ainsi que le manifeste doivent contenir cette adresse dans leur champ `Bcc` / `bcc`.
 - Ne joindre que le CV PDF validé et généré localement.
-- Garder les paquets de communication sous `generated/offer-feedback/` : ils sont versionnés mais exclus de GitHub Pages.
+- Garder les paquets de communication sous `generated/offer-feedback/` : ils restent locaux, sont ignorés par Git et exclus de GitHub Pages.
 - Un message préparé a le statut `draft_prepared`; seul un connecteur de messagerie peut créer ou envoyer un brouillon distant.

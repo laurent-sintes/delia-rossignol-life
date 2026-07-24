@@ -1,0 +1,39 @@
+{
+  "application": {
+    "applied_at": "2026-07-24T07:50:07+00:00",
+    "knowledge_path": "private/career-project/delia-next-role-2026.json"
+  },
+  "classification": "claim",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-24T07:50:07+00:00",
+      "from": "pending",
+      "note": "Validation explicite des quatre décisions dans Codex le 24 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-initial-search-saturday-preference-2026-07-24",
+  "proposed_value": {
+    "fallback_allowed": true,
+    "phase": "initial",
+    "regular_saturday_work": "strongly_avoid"
+  },
+  "source": {
+    "evidence": "Pendant la première phase de recherche, éviter fortement les postes imposant un travail régulier le samedi, sans en faire une exclusion définitive.",
+    "id": "src-a24fabefcdee7c13",
+    "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-1"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-next-role-2026",
+    "entity_type": "career-project",
+    "field": "initial_search_schedule_preference"
+  },
+  "validated_value": {
+    "fallback_allowed": true,
+    "phase": "initial",
+    "regular_saturday_work": "strongly_avoid"
+  }
+}

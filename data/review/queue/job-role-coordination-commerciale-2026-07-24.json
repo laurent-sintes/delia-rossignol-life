@@ -1,0 +1,47 @@
+{
+  "application": {
+    "applied_at": "2026-07-24T07:56:00+00:00",
+    "knowledge_path": "data/knowledge/reference/job-role/coordination-commerciale.json"
+  },
+  "classification": "claim",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-24T07:56:00+00:00",
+      "from": "pending",
+      "note": "Appellation normalisée couverte par la validation explicite des quatre décisions le 24 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-job-role-coordination-commerciale-2026-07-24",
+  "proposed_value": {
+    "aliases": [
+      "coordinateur commercial",
+      "coordinatrice commerciale"
+    ],
+    "job_family": "commerce et relation client",
+    "name": "Coordination commerciale",
+    "source_label": "coordination commerciale"
+  },
+  "source": {
+    "evidence": "Viser notamment une fonction de coordination commerciale.",
+    "id": "src-a24fabefcdee7c13",
+    "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-2"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "coordination-commerciale",
+    "entity_type": "job-role",
+    "field": "details"
+  },
+  "validated_value": {
+    "aliases": [
+      "coordinateur commercial",
+      "coordinatrice commerciale"
+    ],
+    "job_family": "commerce et relation client",
+    "name": "Coordination commerciale",
+    "source_label": "coordination commerciale"
+  }
+}

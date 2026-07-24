@@ -43,9 +43,10 @@ python scripts/delia_life.py offer-scan clean-cache
 python scripts/delia_life.py offer-scan full
 python scripts/delia_life.py offer-scan delta
 python scripts/delia_life.py offer-scan send
+python scripts/delia_life.py record-offer-source-receipts generated/manual-source-receipts.json
 ```
 
-`full` et `send` nettoient l’état technique puis isolent la collecte dans un nouveau répertoire ; le classement ne lit que les observations fraîches de cette session. `delta` conserve le pool historique et le dédoublonne. `send` prépare un full destiné au workflow d’envoi à Délia, sans déléguer l’envoi à la CLI.
+`full` et `send` nettoient l’état technique puis isolent la collecte dans un nouveau répertoire ; le classement ne lit que les observations fraîches de cette session. Chaque domaine déclaré est classé comme automatisé ou manuel. Les portails manuels doivent recevoir, pour la session courante, un reçu `success`, `no_access` ou `skipped` contenant l’URL contrôlée, la date et le nombre d’offres observées ; seul `success` satisfait la couverture stricte. `delta` conserve le pool historique et le dédoublonne. Pour la restitution, les republications quasi identiques d’un même portail spécialisé ou agrégateur sont regroupées dans une fiche unique qui conserve tous leurs liens ; les offres directes employeur restent distinctes. `send` prépare un full destiné au workflow d’envoi à Délia, sans déléguer l’envoi à la CLI.
 
 Les originaux sont déposés dans `private/originals/` et versionnés avec les manifestes, propositions, décisions et connaissances produites. Le nom `private/` indique une exclusion de GitHub Pages et des candidatures par défaut; il ne constitue pas une protection contre la lecture du dépôt public.
 
@@ -61,7 +62,7 @@ python scripts/delia_life.py build-site --output _site
 
 `build-documents` régénère le CV standard dans `output/pdf/` et dans les téléchargements publics. `check-documents` vérifie sa reproductibilité, son format A4, son contenu obligatoire, l'absence de champs interdits et la fraîcheur du PDF publié. Le build du site régénère également le PDF dans l'artefact Pages.
 
-Le dépôt versionne l'ensemble du dossier métier : sources, archives, offres, candidatures, preuves, manifestes, files de revue, connaissances et documents générés. Ces fichiers sont donc lisibles dans le dépôt public. GitHub Pages n'en publie qu'une projection choisie par `site/publication.json`; `_site/` est régénéré et n'est pas versionné. Un push sur `main` déclenche `.github/workflows/pages.yml`, puisque la source Pages du dépôt est configurée sur GitHub Actions.
+Le dépôt versionne les sources du dossier de carrière, les configurations, preuves, manifestes, files de revue, connaissances et documents publiables. Les artefacts opérationnels d'une recherche d'offres sont régénérables et restent locaux : captures, annonces collectées, rapports et brouillons d'email. GitHub Pages ne publie qu'une projection choisie par `site/publication.json`; `_site/` est lui aussi régénéré et n'est pas versionné. Un push sur `main` déclenche `.github/workflows/pages.yml`, puisque la source Pages du dépôt est configurée sur GitHub Actions.
 
 ## Workflow Git assisté
 

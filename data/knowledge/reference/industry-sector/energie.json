@@ -1,0 +1,27 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-24T07:55:55+00:00",
+          "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-3",
+          "proposal_id": "proposal-industry-sector-energie-2026-07-24",
+          "source_id": "src-a24fabefcdee7c13"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "secteur énergétique"
+        ],
+        "classification": "delia-career-v1",
+        "code": "energie",
+        "name": "Énergie",
+        "parent_id": null,
+        "source_label": "énergie"
+      }
+    }
+  },
+  "id": "energie",
+  "type": "industry-sector",
+  "updated_at": "2026-07-24T07:55:55+00:00"
+}

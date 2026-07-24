@@ -19,6 +19,7 @@ from typing import Any
 
 from .core import load_json, stable_id, write_json
 from .errors import ValidationError
+from .offer_coverage import covered_sector_functional_pairs
 from .website import (
     SameOriginRedirectHandler,
     _fetch_url,
@@ -29,7 +30,20 @@ from .website import (
 
 DEFAULT_COLLECTOR_USER_AGENT = "DeliaOfferScanner/0.1"
 EMPTY_RESULT_PATTERN = re.compile(
-    r"\b(?:aucune\s+offre|0\s+offres?|no\s+(?:open\s+)?(?:jobs?|positions?|vacancies))\b",
+    r"\b(?:aucune\s+offre|0\s+(?:offres?|postes?)|no\s+(?:open\s+)?(?:jobs?|positions?|vacancies))\b",
+    re.IGNORECASE,
+)
+FASHIONJOBS_DETAIL_PATH = re.compile(r"^/emploi/[^/]+/[^/]+,\d+\.html$", re.IGNORECASE)
+FASHIONJOBS_LISTING_PAGE_PATH = re.compile(
+    r"^(?P<base>/s/emploi/[^,]+?)(?:,(?P<page>\d+))?\.html$",
+    re.IGNORECASE,
+)
+FASHIONJOBS_CONTRACT_PATTERN = re.compile(
+    r"Type\s+de\s+contrat\s*:</span>\s*<b>\s*(CDI|CDD|Stage|Alternance|Int[ée]rim)",
+    re.IGNORECASE,
+)
+FASHIONJOBS_EMPLOYMENT_PATTERN = re.compile(
+    r"Type\s+d['’]emploi\s*:</span>\s*<b>\s*(Plein\s+temps|Temps\s+partiel)",
     re.IGNORECASE,
 )
 CONTRACT_PATTERNS = (
@@ -225,6 +239,14 @@ def _contract(posting: dict[str, Any], description: str) -> str:
     return "contrat non communiqué"
 
 
+def _contract_from_title(title: str) -> str | None:
+    normalized = " ".join(title.split())
+    for pattern, contract in CONTRACT_PATTERNS:
+        if pattern.match(normalized):
+            return contract
+    return None
+
+
 def _full_time(posting: dict[str, Any], description: str) -> bool | None:
     normalized = {value.casefold().replace("_", "-") for value in _employment_values(posting)}
     plain_description = description.casefold()
@@ -300,6 +322,28 @@ def _matched_query_terms(description: str, query_families: dict[str, Any]) -> li
     return matches[:12]
 
 
+def _is_non_offer_title(title: str) -> bool:
+    normalized = " ".join(re.sub(r"[^a-z0-9]+", " ", _plain_search_text(title)).split())
+    exact_titles = {
+        "accompagnements",
+        "bourse de l emploi",
+        "candidature spontanee",
+        "candidatures spontanees",
+        "formations",
+        "nos ressources",
+        "offre d emploi",
+        "offres d emploi",
+        "observatoire regional de l emploi",
+    }
+    non_offer_prefixes = (
+        "acceder par concours",
+        "accompagnement a la gestion des archives",
+        "bourse de l",
+        "les offres d emploi",
+    )
+    return normalized in exact_titles or normalized.startswith(non_offer_prefixes)
+
+
 def _job_offer(
     posting: dict[str, Any],
     page_url: str,
@@ -309,7 +353,7 @@ def _job_offer(
 ) -> dict[str, Any] | None:
     title = _plain_html(posting.get("title") or posting.get("name"))
     employer = _organization_name(posting, str(source.get("organization") or "Employeur non communiqué"))
-    if not title:
+    if not title or _is_non_offer_title(title):
         return None
     description = _plain_html(posting.get("description"))
     location = _location(posting)
@@ -385,16 +429,7 @@ def _html_offer(
     heading = _clean_page_label(parser.heading_text)
     page_title = _clean_page_label(parser.title_text).split(" | ", 1)[0].strip()
     title = heading or reference_label.strip() or page_title
-    non_offer_titles = {
-        "offre d'emploi",
-        "nos offres",
-        "emploi",
-        "job",
-        "candidature spontanée",
-        "candidatures spontanées",
-        "accéder sans concours",
-    }
-    if not title or _plain_search_text(title) in {_plain_search_text(value) for value in non_offer_titles}:
+    if not title or _is_non_offer_title(title):
         return None
     title = title[:240]
     employer = str(source.get("organization") or "Employeur non communiqué")
@@ -421,7 +456,7 @@ def _html_offer(
         "summary": summary,
         "location_label": location,
         "industry_sector_ids": [str(value) for value in source.get("sectors", [])],
-        "contract_type": _contract({}, page_text),
+        "contract_type": _contract_from_title(reference_label) or _contract({}, page_text),
         "full_time": _full_time({}, page_text),
         "sector_labels": _normalized_labels(source.get("sectors")),
         "functional_domains": _normalized_labels(source.get("functional_domains")),
@@ -471,16 +506,21 @@ def _reference_allowed(adapter: str, url: str, label: str) -> bool:
     target = f"{parsed.path} {parsed.query}".casefold()
     normalized_label = " ".join(label.casefold().split())
     generic_markers = {"emploi", "emplois", "job", "jobs", "offre", "offres", "recrutement"}
-    non_offer_labels = {
-        "accéder sans concours",
-        "candidature spontanée",
-        "candidatures spontanées",
-    }
     final_path_segment = parsed.path.rstrip("/").rsplit("/", 1)[-1].casefold()
-    if normalized_label in generic_markers | non_offer_labels or (
+    if normalized_label in generic_markers or _is_non_offer_title(label) or (
         final_path_segment in generic_markers and not urllib.parse.parse_qs(parsed.query)
     ):
         return False
+    if adapter == "fashionjobs":
+        return bool(FASHIONJOBS_DETAIL_PATH.fullmatch(parsed.path)) and bool(label.strip())
+    if adapter == "ikea":
+        return bool(
+            re.fullmatch(
+                r"/(?:[a-z]{2}(?:-[a-z]{2})?/)?job/[^/]+/\d+/\d+/?",
+                parsed.path,
+                re.IGNORECASE,
+            )
+        ) and bool(label.strip())
     rules = {
         "breezy": ("/p/",),
         "talentsoft": ("offre-de-emploi/emploi-", "detailoffre"),
@@ -505,15 +545,24 @@ def parse_offer_page(
     policy: dict[str, Any],
     captured_at: datetime,
 ) -> tuple[list[dict[str, Any]], list[OfferReference]]:
+    adapter = adapter_for_domain(urllib.parse.urlsplit(page_url).netloc, policy)
+    decoded_body = body.decode("utf-8", errors="replace")
     parser = _OfferPageParser()
-    parser.feed(body.decode("utf-8", errors="replace"))
+    parser.feed(decoded_body)
     offers = [
         offer
         for posting in _job_postings(parser)
         for offer in [_job_offer(posting, page_url, source, policy.get("functional_query_families", {}), captured_at)]
         if offer is not None
     ]
-    adapter = adapter_for_domain(urllib.parse.urlsplit(page_url).netloc, policy)
+    if adapter == "fashionjobs":
+        contract_match = FASHIONJOBS_CONTRACT_PATTERN.search(decoded_body)
+        employment_match = FASHIONJOBS_EMPLOYMENT_PATTERN.search(decoded_body)
+        for offer in offers:
+            if contract_match:
+                offer["contract_type"] = contract_match.group(1).upper()
+            if employment_match:
+                offer["full_time"] = _plain_search_text(employment_match.group(1)) == "plein temps"
     references: list[OfferReference] = []
     seen: set[str] = set()
     for href, label in parser.references:
@@ -535,6 +584,80 @@ def parse_offer_page(
 
 def _explicit_empty_result(body: bytes) -> bool:
     return bool(EMPTY_RESULT_PATTERN.search(_plain_html(body.decode("utf-8", errors="replace"))))
+
+
+def _fashionjobs_listing_links(
+    body: bytes,
+    page_url: str,
+) -> tuple[list[OfferReference], list[str]]:
+    parser = _OfferPageParser()
+    parser.feed(body.decode("utf-8", errors="replace"))
+    origin = urllib.parse.urlsplit(page_url)
+    current_listing = FASHIONJOBS_LISTING_PAGE_PATH.fullmatch(origin.path)
+    listing_base = current_listing.group("base") if current_listing else None
+    references: list[OfferReference] = []
+    pagination: list[str] = []
+    seen_references: set[str] = set()
+    seen_pages: set[str] = set()
+    for href, label in parser.references:
+        joined = normalize_url(urllib.parse.urljoin(page_url, href))
+        parsed = urllib.parse.urlsplit(joined)
+        if parsed.scheme.casefold() not in {"http", "https"}:
+            continue
+        if parsed.netloc.casefold().removeprefix("www.") != origin.netloc.casefold().removeprefix("www."):
+            continue
+        if FASHIONJOBS_DETAIL_PATH.fullmatch(parsed.path):
+            if joined not in seen_references:
+                seen_references.add(joined)
+                references.append(OfferReference(joined, " ".join(label.split())))
+            continue
+        page_match = FASHIONJOBS_LISTING_PAGE_PATH.fullmatch(parsed.path)
+        if (
+            page_match
+            and listing_base
+            and page_match.group("base") == listing_base
+            and page_match.group("page")
+            and joined not in seen_pages
+        ):
+            seen_pages.add(joined)
+            pagination.append(joined)
+    return references, pagination
+
+
+def _fashionjobs_references(
+    start_url: str,
+    landing_body: bytes,
+    settings: CollectorSettings,
+    fetch_page: PageFetcher,
+    archive_directory: Path,
+) -> tuple[list[OfferReference], list[dict[str, Any]], str | None]:
+    references, pending_pages = _fashionjobs_listing_links(landing_body, start_url)
+    records: list[dict[str, Any]] = []
+    seen_references = {reference.url for reference in references}
+    seen_pages = {normalize_url(start_url)}
+    maximum_pages = 5
+    while pending_pages and len(seen_pages) < maximum_pages:
+        page_url = pending_pages.pop(0)
+        if page_url in seen_pages:
+            continue
+        seen_pages.add(page_url)
+        fetched = fetch_page(page_url, settings)
+        if fetched.get("capture_status") != "captured":
+            return references, records, str(fetched.get("error") or fetched.get("capture_status"))
+        record = _archive_page(archive_directory, page_url, fetched)
+        records.append(record)
+        page_references, more_pages = _fashionjobs_listing_links(
+            bytes(fetched["body"]),
+            str(fetched.get("final_url") or page_url),
+        )
+        for reference in page_references:
+            if reference.url not in seen_references:
+                seen_references.add(reference.url)
+                references.append(reference)
+        for discovered_page in more_pages:
+            if discovered_page not in seen_pages and discovered_page not in pending_pages:
+                pending_pages.append(discovered_page)
+    return references, records, None
 
 
 def fetch_public_page(url: str, settings: CollectorSettings) -> dict[str, Any]:
@@ -992,6 +1115,20 @@ def _collect_source(
         effective_now,
     )
     explicit_empty = _explicit_empty_result(bytes(fetched["body"]))
+    if receipt["adapter"] == "fashionjobs":
+        fashionjobs_references, fashionjobs_records, fashionjobs_error = _fashionjobs_references(
+            start_url,
+            bytes(fetched["body"]),
+            settings,
+            fetch_page,
+            archive_directory / domain,
+        )
+        receipt["records"].extend(fashionjobs_records)
+        receipt["pages_fetched"] = int(receipt["pages_fetched"]) + len(fashionjobs_records)
+        if fashionjobs_error:
+            receipt.update({"status": "partial", "error": fashionjobs_error})
+            return receipt, local_collected
+        references = fashionjobs_references
     if receipt["adapter"] == "workday" and not references:
         workday_references, workday_records, workday_error = _workday_references(
             start_url,
@@ -1155,6 +1292,12 @@ def collect_offers(
     visited_sources: list[str] = []
     covered_queries: set[str] = set()
     covered_sectors: set[str] = set()
+    required_sector_functional_pairs = {
+        str(value)
+        for value in required.get("required_sector_functional_pairs", [])
+        if str(value).strip()
+    }
+    covered_sector_functional_pair_ids: set[str] = set()
 
     with ThreadPoolExecutor(max_workers=settings.max_concurrent_sources) as executor:
         futures = {
@@ -1181,6 +1324,13 @@ def collect_offers(
             visited_sources.append(str(receipt["start_url"]))
             covered_queries.update(receipt.get("query_families", []))
             covered_sectors.update(receipt.get("priority_sectors", []))
+            covered_sector_functional_pair_ids.update(
+                covered_sector_functional_pairs(
+                    receipt.get("priority_sectors", []),
+                    receipt.get("query_families", []),
+                    required_sector_functional_pairs,
+                )
+            )
         receipts.append(receipt)
 
     failed_domains = sorted(str(item["domain"]) for item in receipts if item.get("status") != "success")
@@ -1190,7 +1340,15 @@ def collect_offers(
     missing_priority_sectors = sorted(
         set(str(value) for value in required.get("required_priority_sectors", [])) - covered_sectors
     )
-    collection_complete = not failed_domains and not missing_query_families and not missing_priority_sectors
+    missing_sector_functional_pairs = sorted(
+        required_sector_functional_pairs - covered_sector_functional_pair_ids
+    )
+    collection_complete = (
+        not failed_domains
+        and not missing_query_families
+        and not missing_priority_sectors
+        and not missing_sector_functional_pairs
+    )
     collected_output_directory = output_directory if collection_complete else archive_directory / "partial-offers"
     _write_collected_offers(collected, collected_output_directory)
     semantic_review_queue = [
@@ -1212,12 +1370,16 @@ def collect_offers(
         "visited_sources": visited_sources,
         "covered_query_families": sorted(covered_queries),
         "covered_priority_sectors": sorted(covered_sectors),
+        "covered_sector_functional_pairs": sorted(
+            covered_sector_functional_pair_ids
+        ),
         "manual_source_domains": sorted(
             str(value) for value in required.get("manual_source_domains", [])
         ),
         "failed_source_domains": failed_domains,
         "missing_query_families": missing_query_families,
         "missing_priority_sectors": missing_priority_sectors,
+        "missing_sector_functional_pairs": missing_sector_functional_pairs,
         "offer_count": len(collected),
         "semantic_review_queue": semantic_review_queue,
         "semantic_review_required_count": len(semantic_review_queue),

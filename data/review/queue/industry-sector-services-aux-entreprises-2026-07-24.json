@@ -1,0 +1,49 @@
+{
+  "application": {
+    "applied_at": "2026-07-24T07:55:57+00:00",
+    "knowledge_path": "data/knowledge/reference/industry-sector/services-aux-entreprises.json"
+  },
+  "classification": "claim",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-24T07:55:56+00:00",
+      "from": "pending",
+      "note": "Appellation normalisée couverte par la validation explicite des quatre décisions le 24 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-industry-sector-services-aux-entreprises-2026-07-24",
+  "proposed_value": {
+    "aliases": [
+      "services B2B"
+    ],
+    "classification": "delia-career-v1",
+    "code": "services-aux-entreprises",
+    "name": "Services aux entreprises",
+    "parent_id": null,
+    "source_label": "services aux entreprises"
+  },
+  "source": {
+    "evidence": "Diversifier les secteurs recherchés vers les services aux entreprises.",
+    "id": "src-a24fabefcdee7c13",
+    "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-4"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "services-aux-entreprises",
+    "entity_type": "industry-sector",
+    "field": "details"
+  },
+  "validated_value": {
+    "aliases": [
+      "services B2B"
+    ],
+    "classification": "delia-career-v1",
+    "code": "services-aux-entreprises",
+    "name": "Services aux entreprises",
+    "parent_id": null,
+    "source_label": "services aux entreprises"
+  }
+}

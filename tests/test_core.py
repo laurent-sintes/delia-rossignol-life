@@ -328,6 +328,19 @@ class CoreTests(unittest.TestCase):
                     "value": {"excluded": ["freelance"]},
                     "provenance": [{"proposal_id": "contracts-1"}],
                 },
+                "target_job_roles": {
+                    "value": {
+                        "priority": [{"id": "commerciale-sedentaire", "label": "Commerciale sédentaire"}]
+                    },
+                    "provenance": [{"proposal_id": "roles-1"}],
+                },
+                "target_industry_diversification": {
+                    "value": {
+                        "priority_sector_ids": ["industrie"],
+                        "priority_sector_labels": ["industrie"],
+                    },
+                    "provenance": [{"proposal_id": "sectors-1"}],
+                },
             },
         }
         criterion = {
@@ -348,7 +361,8 @@ class CoreTests(unittest.TestCase):
         migrated = migrate_career_project_entity(entity, "delia-rossignol", criterion)
         schema = json.loads((ROOT / "schemas" / "career-project.schema.json").read_text(encoding="utf-8"))
         self.assertEqual(validate(migrated, schema), [])
-        self.assertEqual(migrated["targets"]["industry_sector_ids"], ["luxe", "bien-etre"])
+        self.assertEqual(migrated["targets"]["industry_sector_ids"], ["luxe", "industrie", "bien-etre"])
+        self.assertEqual(migrated["targets"]["job_role_ids"], ["commerciale-sedentaire"])
         self.assertEqual(migrated["availability"], "2026-09-01")
         self.assertEqual(migrated["fields"], entity["fields"])
         self.assertTrue(any(item["id"] == "alternating-week" for item in migrated["criteria"]))

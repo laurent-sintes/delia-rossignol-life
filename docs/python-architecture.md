@@ -20,6 +20,8 @@ Le paquet `delia_life` transforme des données validées en connaissances, docum
 - Le build du site préserve la version servie tant que le nouvel artefact n'est pas complet.
 - Le crawl web refuse les réseaux privés, les redirections inter-domaines et les réponses hors limite; une indisponibilité de `robots.txt` bloque l'ingestion.
 - Un PDF publié est reproductible à partir des connaissances, de la stratégie éditoriale et du template versionnés.
+- Une revue sémantique d'offre inventorie toutes les exigences significatives et les couvre exactement une fois. Python vérifie que chaque extrait existe dans l'archive, que chaque preuve positive vise un champ du profil validé, puis calcule le score avec les coefficients versionnés de la politique; la confiance déclarée par le LLM n'influence pas la note.
+- Le cache sémantique est adressé par les empreintes de la source et du profil ainsi que par les versions du prompt et du schéma. Un scan full recharge toujours les sources actuelles et ne réutilise une revue que si ces quatre clés sont strictement identiques.
 
 ## Qualité automatisée
 

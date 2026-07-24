@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "description": "Cas réels corrigés et figés pour prévenir les régressions du moteur d'évaluation.",
+  "cases": [
+    {
+      "id": "specialist-data-director",
+      "offer": {
+        "title": "Directeur Data F/H",
+        "summary": "Diriger la fonction Data, sa gouvernance et ses équipes techniques.",
+        "required_skills": ["SQL", "Power BI", "Snowflake"],
+        "preferred_skills": ["transformation d'une fonction Data"]
+      },
+      "context": {},
+      "expected": {
+        "eligible": false,
+        "recommendation_band": "excluded",
+        "failure_contains": "famille de profil exclue"
+      }
+    },
+    {
+      "id": "mandatory-esthetics-diploma",
+      "offer": {
+        "prerequisites": [
+          {
+            "id": "diplome-esthetique",
+            "kind": "qualification",
+            "description": "CAP, BP ou BTS Esthétique",
+            "mandatory": true,
+            "profile_status": "not_demonstrated"
+          }
+        ]
+      },
+      "context": {
+        "complete_profile_dimensions": ["credentials"]
+      },
+      "expected": {
+        "eligible": false,
+        "recommendation_band": "excluded",
+        "failure_contains": "diplôme obligatoire non satisfait"
+      }
+    },
+    {
+      "id": "mandatory-amf-certification",
+      "offer": {
+        "prerequisites": [
+          {
+            "id": "certification-amf",
+            "kind": "certification",
+            "credential_id": "certification-amf",
+            "description": "Certification AMF",
+            "mandatory": true,
+            "profile_status": "unmet",
+            "profile_evidence_ids": ["knowledge-fact:delia-amf-certification-absent"]
+          }
+        ]
+      },
+      "context": {
+        "absent_certifications": {
+          "certification-amf": ["knowledge-fact:delia-amf-certification-absent"]
+        }
+      },
+      "expected": {
+        "eligible": false,
+        "recommendation_band": "excluded",
+        "failure_contains": "certification obligatoire non satisfaite"
+      }
+    },
+    {
+      "id": "two-years-insurance-absent",
+      "offer": {
+        "prerequisites": [
+          {
+            "id": "experience-assurance-deux-ans",
+            "kind": "sector_experience",
+            "description": "Deux ans chez un assureur ou un courtier",
+            "mandatory": true,
+            "industry_sector_ids": ["banque-et-assurance"],
+            "minimum_years": 2,
+            "profile_status": "not_demonstrated"
+          }
+        ]
+      },
+      "context": {
+        "absent_sector_experience_ids": ["banque-et-assurance"]
+      },
+      "expected": {
+        "eligible": false,
+        "recommendation_band": "excluded",
+        "failure_contains": "expérience sectorielle obligatoire"
+      }
+    },
+    {
+      "id": "required-semantic-gap",
+      "offer": {
+        "semantic_requirements": [
+          {
+            "id": "specialized-experience",
+            "description": "Expérience spécialisée obligatoire",
+            "importance": "required",
+            "kind": "experience",
+            "offer_evidence": {
+              "locator": "annonce#profil",
+              "excerpt": "Expérience spécialisée obligatoire."
+            }
+          }
+        ],
+        "semantic_matches": [
+          {
+            "requirement_id": "specialized-experience",
+            "match_type": "gap",
+            "llm_confidence": "high",
+            "profile_evidence_refs": [],
+            "rationale": "Le profil validé ne couvre pas cette spécialité."
+          }
+        ]
+      },
+      "context": {},
+      "expected": {
+        "eligible": true,
+        "recommendation_band": "informational",
+        "application_barrier_contains": "exigence obligatoire non couverte"
+      }
+    },
+    {
+      "id": "fashion-experience-transferable",
+      "offer": {
+        "semantic_requirements": [
+          {
+            "id": "ready-to-wear-experience",
+            "description": "Expérience significative dans le prêt-à-porter",
+            "importance": "required",
+            "kind": "experience",
+            "offer_evidence": {
+              "locator": "annonce#profil",
+              "excerpt": "Expérience significative dans le prêt-à-porter."
+            }
+          }
+        ],
+        "semantic_matches": [
+          {
+            "requirement_id": "ready-to-wear-experience",
+            "match_type": "exact",
+            "llm_confidence": "high",
+            "profile_evidence_refs": [
+              {
+                "id": "experience:promod-bordeaux",
+                "field": "industry_sector_ids"
+              }
+            ],
+            "rationale": "L'expérience Promod appartient au secteur normalisé mode et prêt-à-porter."
+          }
+        ]
+      },
+      "context": {
+        "knowledge_evidence_catalog": {
+          "experience:promod-bordeaux": ["industry_sector_ids"]
+        }
+      },
+      "expected": {
+        "eligible": true,
+        "matching_method": "llm_semantic_evidence",
+        "semantic_effective_match": "exact"
+      }
+    }
+  ]
+}

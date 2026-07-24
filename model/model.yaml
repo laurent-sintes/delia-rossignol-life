@@ -1,4 +1,4 @@
-model_version: "1.1.7"
+model_version: "1.1.9"
 namespace: delia-career
 description: >-
   Modèle conceptuel du dossier professionnel, de l'ingestion des preuves,
@@ -44,6 +44,8 @@ invariants:
     rule: Un critère bloquant du projet professionnel et un obstacle de candidature sont évalués séparément du score; leur effet sur l'exclusion ou la section de recommandation est expliqué.
   - id: normalized-label-retains-source
     rule: Toute normalisation vers un secteur, un type de poste ou un lieu conserve le libellé source et sa preuve.
+  - id: semantic-match-is-evidence-backed
+    rule: Toute exigence significative d'une offre revue par IA possède exactement un rapprochement sémantique; un rapprochement exact ou transférable cite un champ précis du profil validé et chaque exigence cite un extrait présent dans l'archive contrôlée. Python valide la couverture et les preuves, dérive la confiance de scoring et calcule seul le score final.
 
 refactor_policy:
   compatibility: Conserver un identifiant ou déclarer explicitement son remplacement.

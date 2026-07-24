@@ -1,0 +1,27 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-24T07:55:57+00:00",
+          "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-4",
+          "proposal_id": "proposal-industry-sector-services-aux-entreprises-2026-07-24",
+          "source_id": "src-a24fabefcdee7c13"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "services B2B"
+        ],
+        "classification": "delia-career-v1",
+        "code": "services-aux-entreprises",
+        "name": "Services aux entreprises",
+        "parent_id": null,
+        "source_label": "services aux entreprises"
+      }
+    }
+  },
+  "id": "services-aux-entreprises",
+  "type": "industry-sector",
+  "updated_at": "2026-07-24T07:55:57+00:00"
+}

@@ -1,0 +1,49 @@
+{
+  "application": {
+    "applied_at": "2026-07-24T07:56:02+00:00",
+    "knowledge_path": "data/knowledge/reference/job-role/teleconseil-relation-client-distance.json"
+  },
+  "classification": "claim",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-24T07:56:01+00:00",
+      "from": "pending",
+      "note": "Appellation normalisée couverte par la validation explicite des quatre décisions le 24 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-job-role-teleconseil-relation-client-distance-2026-07-24",
+  "proposed_value": {
+    "aliases": [
+      "téléconseiller",
+      "téléconseillère",
+      "relation client à distance"
+    ],
+    "job_family": "commerce et relation client",
+    "name": "Téléconseil et relation client à distance",
+    "source_label": "relation client à distance et téléconseil"
+  },
+  "source": {
+    "evidence": "Renforcer la recherche de fonctions de relation client à distance et de téléconseil.",
+    "id": "src-a24fabefcdee7c13",
+    "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-3"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "teleconseil-relation-client-distance",
+    "entity_type": "job-role",
+    "field": "details"
+  },
+  "validated_value": {
+    "aliases": [
+      "téléconseiller",
+      "téléconseillère",
+      "relation client à distance"
+    ],
+    "job_family": "commerce et relation client",
+    "name": "Téléconseil et relation client à distance",
+    "source_label": "relation client à distance et téléconseil"
+  }
+}

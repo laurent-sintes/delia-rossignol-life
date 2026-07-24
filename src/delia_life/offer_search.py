@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 from collections import Counter
 from dataclasses import dataclass
@@ -9,6 +10,13 @@ from typing import Any
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 from .core import load_json
+from .offer_review import (
+    EvidenceCatalog,
+    collect_validated_knowledge_evidence_catalog,  # noqa: F401 - public compatibility export
+    collect_validated_knowledge_evidence_ids,  # noqa: F401 - public compatibility export
+    semantic_profile_sha256,  # noqa: F401 - public compatibility export
+    semantic_review_errors,
+)
 from .offer_scoring import (
     RECOMMENDATION_BAND_ORDER,
     ScoringContext,
@@ -36,6 +44,7 @@ def score_offer(
     sector_experience_months: dict[str, int] | None = None,
     absent_sector_experience_ids: set[str] | None = None,
     absent_certifications: dict[str, set[str]] | None = None,
+    knowledge_evidence_catalog: EvidenceCatalog | None = None,
 ) -> dict[str, Any]:
     """Preserve the public scoring API while delegating to the focused engine."""
     return _score_offer(
@@ -48,6 +57,7 @@ def score_offer(
         sector_experience_months,
         absent_sector_experience_ids,
         absent_certifications,
+        knowledge_evidence_catalog,
     )
 
 
@@ -266,6 +276,12 @@ class AssessedOffer:
     assessment: dict[str, Any]
 
 
+@dataclass(frozen=True)
+class PresentationGroup:
+    representative: AssessedOffer
+    similar_publications: tuple[dict[str, Any], ...]
+
+
 def _deduplicate_offers(offers: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
     deduplicated: dict[str, dict[str, Any]] = {}
     for offer in offers:
@@ -316,6 +332,140 @@ def _verified_datetime(value: Any) -> datetime | None:
 def _verified_date(value: Any) -> date | None:
     verified_at = _verified_datetime(value)
     return verified_at.date() if verified_at is not None else None
+
+
+def _publication_date(value: Any) -> date | None:
+    if not isinstance(value, str) or not value.strip():
+        return None
+    try:
+        return date.fromisoformat(value.strip()[:10])
+    except ValueError:
+        return None
+
+
+def _stable_signature_value(value: Any) -> str:
+    if value in (None, {}, []):
+        return ""
+    return plain(json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"), default=str))
+
+
+def _quasi_duplicate_signature(item: AssessedOffer, policy: dict[str, Any]) -> tuple[Any, ...] | None:
+    offer = item.offer
+    source_kind = _source_kind(offer, policy)
+    if source_kind not in {"specialized", "aggregator"}:
+        return None
+    identifying_values = tuple(
+        plain(str(offer.get(field) or ""))
+        for field in ("employer", "title", "location_label", "contract_type")
+    )
+    source_domain = _source_domain(offer)
+    if not source_domain or any(not value for value in identifying_values):
+        return None
+    prerequisites = tuple(
+        sorted(
+            (
+                plain(str(prerequisite.get("id") or "")),
+                plain(str(prerequisite.get("kind") or "")),
+                plain(str(prerequisite.get("description") or "")),
+                bool(prerequisite.get("mandatory")),
+                plain(str(prerequisite.get("profile_status") or "")),
+            )
+            for prerequisite in offer.get("prerequisites", [])
+            if isinstance(prerequisite, dict)
+        )
+    )
+    return (
+        source_kind,
+        source_domain,
+        *identifying_values,
+        offer.get("full_time"),
+        tuple(sorted(plain(str(value)) for value in offer.get("industry_sector_ids", []) if str(value).strip())),
+        tuple(sorted(plain(str(value)) for value in offer.get("functional_domains", []) if str(value).strip())),
+        prerequisites,
+        _stable_signature_value(offer.get("compensation")),
+        _stable_signature_value(offer.get("conditions")),
+        item.assessment.get("recommendation_band"),
+        round(float(item.assessment.get("score") or 0), 1),
+    )
+
+
+def _similar_publication_record(item: AssessedOffer) -> dict[str, Any]:
+    offer = item.offer
+    return {
+        "id": offer.get("id"),
+        "canonical_offer_id": offer.get("canonical_offer_id"),
+        "title": offer.get("title"),
+        "source_url": offer.get("source_url"),
+        "source_site": offer.get("source_site"),
+        "source_kind": offer.get("source_kind"),
+        "published_at": offer.get("published_at"),
+        "last_verified_at": offer.get("last_verified_at"),
+    }
+
+
+def _presentation_groups(
+    eligible: list[AssessedOffer],
+    policy: dict[str, Any],
+) -> list[PresentationGroup]:
+    maximum_gap_days = int(policy.get("freshness_days", 7))
+    grouped_candidates: list[tuple[int, list[AssessedOffer]]] = []
+    groups_by_signature: dict[tuple[Any, ...], list[int]] = {}
+    for index, item in enumerate(eligible):
+        signature = _quasi_duplicate_signature(item, policy)
+        published_at = _publication_date(item.offer.get("published_at"))
+        if signature is None or published_at is None:
+            grouped_candidates.append((index, [item]))
+            continue
+        target_group_index: int | None = None
+        for group_index in groups_by_signature.get(signature, []):
+            member_dates = [
+                value
+                for member in grouped_candidates[group_index][1]
+                for value in [_publication_date(member.offer.get("published_at"))]
+                if value is not None
+            ]
+            if member_dates and max(abs((published_at - value).days) for value in member_dates) <= maximum_gap_days:
+                target_group_index = group_index
+                break
+        if target_group_index is None:
+            target_group_index = len(grouped_candidates)
+            grouped_candidates.append((index, [item]))
+            groups_by_signature.setdefault(signature, []).append(target_group_index)
+        else:
+            grouped_candidates[target_group_index][1].append(item)
+
+    presentations: list[PresentationGroup] = []
+    for _, members in sorted(grouped_candidates, key=lambda group: group[0]):
+        representative = max(
+            members,
+            key=lambda member: (
+                _publication_date(member.offer.get("published_at")) or date.min,
+                _verified_datetime(member.offer.get("last_verified_at"))
+                or datetime.min.replace(tzinfo=UTC),
+                len(strings(member.offer)),
+                member.identity,
+            ),
+        )
+        alternatives = tuple(
+            _similar_publication_record(member)
+            for member in sorted(
+                (candidate for candidate in members if candidate is not representative),
+                key=lambda candidate: (
+                    _publication_date(candidate.offer.get("published_at")) or date.min,
+                    _verified_datetime(candidate.offer.get("last_verified_at"))
+                    or datetime.min.replace(tzinfo=UTC),
+                    candidate.identity,
+                ),
+                reverse=True,
+            )
+        )
+        presentations.append(
+            PresentationGroup(
+                representative=representative,
+                similar_publications=alternatives,
+            )
+        )
+    return presentations
 
 
 def _verification_assessment(
@@ -423,43 +573,11 @@ def _assess_offers(
     return eligible, excluded
 
 
-def _select_diverse_offers(
-    eligible: list[AssessedOffer],
-    result_limit: int,
-    employer_limit: int,
-    source_limit: int,
-) -> list[AssessedOffer]:
-    selected: list[AssessedOffer] = []
-    deferred: list[AssessedOffer] = []
-    employers: Counter[str] = Counter()
-    sources: Counter[str] = Counter()
-    for item in eligible:
-        employer = plain(str(item.offer.get("employer", "unknown")))
-        source = plain(
-            str(item.offer.get("source_site", urlsplit(str(item.offer.get("source_url", ""))).netloc or "unknown"))
-        )
-        if employers[employer] >= employer_limit or sources[source] >= source_limit:
-            deferred.append(item)
-            continue
-        selected.append(item)
-        employers[employer] += 1
-        sources[source] += 1
-        if len(selected) == result_limit:
-            selected_ids = {selected_item.identity for selected_item in selected}
-            return [candidate for candidate in eligible if candidate.identity in selected_ids]
-
-    selected_ids = {item.identity for item in selected}
-    for item in deferred:
-        if item.identity not in selected_ids:
-            selected.append(item)
-            selected_ids.add(item.identity)
-        if len(selected) == result_limit:
-            break
-    selected_ids = {item.identity for item in selected}
-    return [candidate for candidate in eligible if candidate.identity in selected_ids]
-
-
-def _ranked_offer_record(item: AssessedOffer, rank: int) -> dict[str, Any]:
+def _ranked_offer_record(
+    item: AssessedOffer,
+    rank: int,
+    similar_publications: tuple[dict[str, Any], ...] = (),
+) -> dict[str, Any]:
     offer = item.offer
     return {
         "rank": rank,
@@ -485,6 +603,8 @@ def _ranked_offer_record(item: AssessedOffer, rank: int) -> dict[str, Any]:
         "summary": offer.get("summary"),
         "recommendation_band": item.assessment["recommendation_band"],
         "assessment": item.assessment,
+        "represented_offer_count": 1 + len(similar_publications),
+        "similar_publications": list(similar_publications),
     }
 
 
@@ -493,17 +613,6 @@ def _section_counts(offers: list[dict[str, Any]]) -> dict[str, int]:
         band: sum(offer.get("recommendation_band") == band for offer in offers)
         for band in ("priority", "possible", "informational")
     }
-
-
-def _ranking_warnings(active_count: int, ranked_count: int, result_limit: int, policy: dict[str, Any]) -> list[str]:
-    warnings = []
-    if active_count > int(policy["candidate_pool_maximum"]):
-        warnings.append(
-            f"pool actif plafonné : {active_count} offres vérifiées, {policy['candidate_pool_maximum']} restituées au maximum"
-        )
-    if ranked_count < result_limit:
-        warnings.append(f"seulement {ranked_count} offres éligibles pour une cible de {result_limit}")
-    return warnings
 
 
 def _domain(value: str) -> str:
@@ -516,6 +625,8 @@ def _scan_coverage(
     visited_sources: list[str] | None,
     covered_query_families: set[str] | None,
     covered_priority_sectors: set[str] | None,
+    covered_sector_functional_pairs: set[str] | None,
+    manual_source_receipts: list[dict[str, Any]] | None,
     required: bool,
 ) -> dict[str, Any]:
     declared = isinstance(requirements, dict) and bool(requirements)
@@ -529,6 +640,19 @@ def _scan_coverage(
         for value in (requirements or {}).get("manual_source_domains", [])
         if str(value).strip()
     )
+    successful_manual_sources = {
+        str(receipt.get("domain") or "").casefold().removeprefix("www.")
+        for receipt in manual_source_receipts or []
+        if isinstance(receipt, dict) and receipt.get("status") == "success"
+    }
+    missing_manual_sources = sorted(set(manual_sources) - successful_manual_sources)
+    unsuccessful_manual_receipts = sorted(
+        str(receipt.get("domain") or "").casefold().removeprefix("www.")
+        for receipt in manual_source_receipts or []
+        if isinstance(receipt, dict)
+        and receipt.get("status") != "success"
+        and str(receipt.get("domain") or "").strip()
+    )
     visited_domains = {_domain(value) for value in visited_sources or [] if _domain(value)}
     required_queries = {str(value) for value in (requirements or {}).get("required_query_families", [])}
     covered_queries = set(covered_query_families or set())
@@ -537,13 +661,29 @@ def _scan_coverage(
     missing_sources = sorted(required_sources - visited_domains)
     missing_queries = sorted(required_queries - covered_queries)
     missing_sectors = sorted(required_sectors - covered_sectors)
-    complete = (not required) or (declared and not missing_sources and not missing_queries and not missing_sectors)
+    required_pairs = {
+        str(value)
+        for value in (requirements or {}).get("required_sector_functional_pairs", [])
+    }
+    covered_pairs = set(covered_sector_functional_pairs or set())
+    missing_pairs = sorted(required_pairs - covered_pairs)
+    complete = (not required) or (
+        declared
+        and not missing_sources
+        and not missing_manual_sources
+        and not missing_queries
+        and not missing_sectors
+        and not missing_pairs
+    )
     return {
         "required": required,
         "requirements_declared": declared,
         "complete": complete,
         "required_source_domains": sorted(required_sources),
         "manual_source_domains": manual_sources,
+        "successful_manual_source_domains": sorted(successful_manual_sources),
+        "missing_manual_source_domains": missing_manual_sources,
+        "unsuccessful_manual_source_domains": unsuccessful_manual_receipts,
         "visited_source_domains": sorted(visited_domains),
         "missing_source_domains": missing_sources,
         "required_query_families": sorted(required_queries),
@@ -552,6 +692,9 @@ def _scan_coverage(
         "required_priority_sectors": sorted(required_sectors),
         "covered_priority_sectors": sorted(covered_sectors),
         "missing_priority_sectors": missing_sectors,
+        "required_sector_functional_pairs": sorted(required_pairs),
+        "covered_sector_functional_pairs": sorted(covered_pairs),
+        "missing_sector_functional_pairs": missing_pairs,
     }
 
 
@@ -560,16 +703,19 @@ def rank_offers(
     career_project: dict[str, Any],
     policy: dict[str, Any],
     knowledge_tokens: set[str],
-    limit: int | None = None,
     today: date | None = None,
     visited_sources: list[str] | None = None,
     complete_profile_dimensions: set[str] | None = None,
     sector_experience_months: dict[str, int] | None = None,
     absent_sector_experience_ids: set[str] | None = None,
     absent_certifications: dict[str, set[str]] | None = None,
+    knowledge_evidence_catalog: EvidenceCatalog | None = None,
+    semantic_profile_fingerprint: str | None = None,
     scan_requirements: dict[str, Any] | None = None,
     covered_query_families: set[str] | None = None,
     covered_priority_sectors: set[str] | None = None,
+    covered_sector_functional_pairs: set[str] | None = None,
+    manual_source_receipts: list[dict[str, Any]] | None = None,
     require_scan_coverage: bool = False,
 ) -> dict[str, Any]:
     deduplicated = _deduplicate_offers(offers)
@@ -588,19 +734,20 @@ def rank_offers(
         sector_experience_months,
         absent_sector_experience_ids,
         absent_certifications,
+        knowledge_evidence_catalog,
     )
     eligible, policy_excluded = _assess_offers(active, context)
-    maximum_pool = int(policy["candidate_pool_maximum"])
-    result_limit = int(policy["result_limit"]) if limit is None else limit
-    if result_limit < 1 or result_limit > maximum_pool:
-        raise ValueError(f"offer result limit must be between 1 and {maximum_pool}")
-    selected = _select_diverse_offers(
-        eligible,
-        result_limit,
-        int(policy["diversity"]["max_per_employer"]),
-        int(policy["diversity"]["max_per_source"]),
+    presentation_groups = _presentation_groups(eligible, policy)
+    ranked = [
+        _ranked_offer_record(group.representative, index, group.similar_publications)
+        for index, group in enumerate(presentation_groups, start=1)
+    ]
+    quasi_duplicate_groups = [
+        group for group in presentation_groups if group.similar_publications
+    ]
+    quasi_duplicate_offer_count = sum(
+        len(group.similar_publications) for group in quasi_duplicate_groups
     )
-    ranked = [_ranked_offer_record(item, index) for index, item in enumerate(selected, start=1)]
     pending_offers = sorted(
         (
             item
@@ -618,45 +765,93 @@ def rank_offers(
         visited_sources,
         covered_query_families,
         covered_priority_sectors,
+        covered_sector_functional_pairs,
+        manual_source_receipts,
         require_scan_coverage,
     )
     policy_excluded_ids = {
         str(item.offer.get("id") or item.offer.get("canonical_offer_id") or "")
         for item in policy_excluded
     }
-    semantic_review_pending = sorted(
-        str(offer.get("id") or offer.get("canonical_offer_id") or "unknown-offer")
-        for offer in deduplicated.values()
-        if isinstance(offer.get("extraction"), dict)
-        and str(offer.get("id") or offer.get("canonical_offer_id") or "") not in policy_excluded_ids
-        and offer["extraction"].get("method")
-        in {"deterministic-json-ld", "deterministic-html", "deterministic-api"}
-        and offer["extraction"].get("review_status") != "completed"
-    )
+    verification_excluded_ids = {
+        str(item.get("id") or item.get("canonical_offer_id") or "")
+        for item in verification_excluded
+    }
+    semantic_policy = policy["semantic_matching"]
+    semantic_review_errors_by_offer: dict[str, list[str]] = {}
+    for offer in deduplicated.values():
+        extraction = offer.get("extraction")
+        offer_id = str(offer.get("id") or offer.get("canonical_offer_id") or "unknown-offer")
+        if (
+            not isinstance(extraction, dict)
+            or offer_id in policy_excluded_ids
+            or offer_id in verification_excluded_ids
+            or extraction.get("method")
+            not in {"deterministic-json-ld", "deterministic-html", "deterministic-api"}
+        ):
+            continue
+        errors = semantic_review_errors(
+            offer,
+            knowledge_evidence_catalog or {},
+            semantic_profile_fingerprint or "",
+            str(semantic_policy["prompt_version"]),
+            int(semantic_policy["review_schema_version"]),
+        )
+        if errors:
+            semantic_review_errors_by_offer[offer_id] = errors
+    semantic_review_pending = sorted(semantic_review_errors_by_offer)
     semantic_review = {
         "complete": not semantic_review_pending,
         "pending_count": len(semantic_review_pending),
         "pending_offer_ids": semantic_review_pending,
+        "errors_by_offer": semantic_review_errors_by_offer,
     }
+    matching_method_counts = dict(
+        sorted(Counter(str(item.assessment.get("matching_method")) for item in eligible).items())
+    )
     pool_complete = coverage["complete"] and semantic_review["complete"]
-    warnings = _ranking_warnings(len(active), len(ranked), result_limit, policy)
+    warnings: list[str] = []
     if require_scan_coverage and not coverage["requirements_declared"]:
         warnings.append("couverture de scan incomplète : manifeste de scan absent")
     if coverage["missing_source_domains"]:
         warnings.append("sources non consultées : " + ", ".join(coverage["missing_source_domains"]))
-    if coverage["manual_source_domains"]:
+    if coverage["missing_manual_source_domains"]:
         warnings.append(
-            "sources exclues de la collecte Python par leurs règles d’accès et à contrôler manuellement : "
-            + ", ".join(coverage["manual_source_domains"])
+            "sources sans collecte Python encore à contrôler manuellement : "
+            + ", ".join(coverage["missing_manual_source_domains"])
+        )
+    if coverage["unsuccessful_manual_source_domains"]:
+        warnings.append(
+            "contrôles manuels non concluants : "
+            + ", ".join(coverage["unsuccessful_manual_source_domains"])
         )
     if coverage["missing_query_families"]:
         warnings.append("familles de requêtes non couvertes : " + ", ".join(coverage["missing_query_families"]))
     if coverage["missing_priority_sectors"]:
         warnings.append("secteurs prioritaires non couverts : " + ", ".join(coverage["missing_priority_sectors"]))
+    if coverage["missing_sector_functional_pairs"]:
+        warnings.append(
+            "croisements secteur × fonction non couverts : "
+            + ", ".join(coverage["missing_sector_functional_pairs"])
+        )
     if semantic_review_pending:
         warnings.append(
             f"revue sémantique requise pour {len(semantic_review_pending)} offre(s) extraite(s) automatiquement"
         )
+    if lexical_fallback_count := matching_method_counts.get("lexical_fallback", 0):
+        warnings.append(
+            f"rapprochement lexical de compatibilité utilisé pour {lexical_fallback_count} offre(s) historique(s) ou manuelle(s)"
+        )
+    if quasi_duplicate_offer_count:
+        warnings.append(
+            f"{quasi_duplicate_offer_count} republication(s) très similaire(s) regroupée(s) "
+            f"dans {len(quasi_duplicate_groups)} fiche(s) ; tous les liens sont conservés"
+        )
+    manually_visited_sources = [
+        str(receipt.get("source_url") or "")
+        for receipt in manual_source_receipts or []
+        if isinstance(receipt, dict) and receipt.get("status") == "success"
+    ]
     return {
         "policy_id": policy["id"],
         "candidate_count": len(offers),
@@ -668,18 +863,31 @@ def rank_offers(
         "eligible_count": len(eligible),
         "policy_excluded_count": len(policy_excluded),
         "excluded_count": len(verification_excluded) + len(policy_excluded),
-        "selected_count": len(ranked),
-        "candidate_pool_maximum": maximum_pool,
+        "selected_count": len(eligible),
+        "presentation_count": len(ranked),
+        "quasi_duplicate_group_count": len(quasi_duplicate_groups),
+        "quasi_duplicate_offer_count": quasi_duplicate_offer_count,
         "scan_coverage": coverage,
         "semantic_review": semantic_review,
-        "active_overflow_count": max(0, len(active) - maximum_pool),
+        "matching_method_counts": matching_method_counts,
         "pool_complete": pool_complete,
         "report_status": "complete" if pool_complete else "incomplete",
         "finalization_allowed": pool_complete,
-        "visited_sources": consulted_source_origins(offers, visited_sources),
+        "visited_sources": consulted_source_origins(
+            offers,
+            [*(visited_sources or []), *manually_visited_sources],
+        ),
         "warnings": warnings,
         "offers": ranked,
         "section_counts": _section_counts(ranked),
+        "represented_section_counts": {
+            band: sum(
+                int(offer.get("represented_offer_count") or 1)
+                for offer in ranked
+                if offer.get("recommendation_band") == band
+            )
+            for band in ("priority", "possible", "informational")
+        },
         "pending_offers": pending_offers,
         "excluded": verification_excluded + [
             {

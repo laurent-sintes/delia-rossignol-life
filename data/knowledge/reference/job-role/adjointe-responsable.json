@@ -1,0 +1,25 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-24T07:55:57+00:00",
+          "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-2",
+          "proposal_id": "proposal-job-role-adjointe-responsable-2026-07-24",
+          "source_id": "src-a24fabefcdee7c13"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "adjoint responsable"
+        ],
+        "job_family": "commerce et relation client",
+        "name": "Adjointe responsable",
+        "source_label": "adjointe responsable"
+      }
+    }
+  },
+  "id": "adjointe-responsable",
+  "type": "job-role",
+  "updated_at": "2026-07-24T07:55:57+00:00"
+}

@@ -17,4 +17,4 @@ description: Construire, contrôler et publier le site GitHub Pages de Délia Ro
 8. Inspecter toutes les pages générées et rechercher les coordonnées, feedbacks, offres, preuves ou données inattendues.
 9. Ne pousser sur la branche configurée qu'après validation humaine du contenu public. GitHub Actions effectuera le déploiement Pages.
 
-Les dossiers `private/`, `generated/`, `data/applications/`, `data/offers/`, `data/review/` et `data/sources/` peuvent être versionnés dans Git, mais restent interdits comme sources de Pages. Ne jamais contourner la liste blanche en copiant leur contenu dans `site/` ou dans `_site/`.
+Les dossiers `private/`, `generated/`, `data/applications/`, `data/review/` et `data/sources/` restent interdits comme sources de Pages, qu'ils soient versionnés ou non. Les artefacts de recherche sous `private/offer-scan-archives/`, `data/offers/`, `generated/offer-search/` et `generated/offer-feedback/` sont en plus ignorés par Git. Ne jamais contourner la liste blanche en copiant leur contenu dans `site/` ou dans `_site/`.

@@ -1,0 +1,26 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-24T07:55:58+00:00",
+          "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-2",
+          "proposal_id": "proposal-job-role-chargee-clientele-ou-compte-2026-07-24",
+          "source_id": "src-a24fabefcdee7c13"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "chargée de clientèle",
+          "chargée de compte"
+        ],
+        "job_family": "commerce et relation client",
+        "name": "Chargée de clientèle ou de compte",
+        "source_label": "chargée de compte ou de clientèle"
+      }
+    }
+  },
+  "id": "chargee-clientele-ou-compte",
+  "type": "job-role",
+  "updated_at": "2026-07-24T07:55:58+00:00"
+}

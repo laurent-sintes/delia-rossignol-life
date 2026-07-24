@@ -1,0 +1,55 @@
+{
+  "application": {
+    "applied_at": "2026-07-24T07:50:09+00:00",
+    "knowledge_path": "private/career-project/delia-next-role-2026.json"
+  },
+  "classification": "claim",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-24T07:50:09+00:00",
+      "from": "pending",
+      "note": "Validation explicite des quatre décisions dans Codex le 24 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-target-industry-diversification-2026-07-24",
+  "proposed_value": {
+    "equal_scoring_weight": true,
+    "priority_sector_ids": [
+      "industrie",
+      "services-aux-entreprises",
+      "energie"
+    ],
+    "priority_sector_labels": [
+      "industrie",
+      "services aux entreprises",
+      "énergie"
+    ]
+  },
+  "source": {
+    "evidence": "Diversifier les secteurs recherchés vers l'industrie et les services aux entreprises, sans donner à ces secteurs un poids de score supérieur aux autres.",
+    "id": "src-a24fabefcdee7c13",
+    "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-4"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-next-role-2026",
+    "entity_type": "career-project",
+    "field": "target_industry_diversification"
+  },
+  "validated_value": {
+    "equal_scoring_weight": true,
+    "priority_sector_ids": [
+      "industrie",
+      "services-aux-entreprises",
+      "energie"
+    ],
+    "priority_sector_labels": [
+      "industrie",
+      "services aux entreprises",
+      "énergie"
+    ]
+  }
+}

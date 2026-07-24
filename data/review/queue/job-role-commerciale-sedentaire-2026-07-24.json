@@ -1,0 +1,45 @@
+{
+  "application": {
+    "applied_at": "2026-07-24T07:56:00+00:00",
+    "knowledge_path": "data/knowledge/reference/job-role/commerciale-sedentaire.json"
+  },
+  "classification": "claim",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-24T07:55:59+00:00",
+      "from": "pending",
+      "note": "Appellation normalisée couverte par la validation explicite des quatre décisions le 24 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-job-role-commerciale-sedentaire-2026-07-24",
+  "proposed_value": {
+    "aliases": [
+      "commercial sédentaire"
+    ],
+    "job_family": "commerce et relation client",
+    "name": "Commerciale sédentaire",
+    "source_label": "commerciale sédentaire"
+  },
+  "source": {
+    "evidence": "Renforcer la recherche de fonctions de commerce sédentaire.",
+    "id": "src-a24fabefcdee7c13",
+    "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-3"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "commerciale-sedentaire",
+    "entity_type": "job-role",
+    "field": "details"
+  },
+  "validated_value": {
+    "aliases": [
+      "commercial sédentaire"
+    ],
+    "job_family": "commerce et relation client",
+    "name": "Commerciale sédentaire",
+    "source_label": "commerciale sédentaire"
+  }
+}

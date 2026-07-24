@@ -1,0 +1,49 @@
+{
+  "application": {
+    "applied_at": "2026-07-24T07:55:56+00:00",
+    "knowledge_path": "data/knowledge/reference/industry-sector/industrie.json"
+  },
+  "classification": "claim",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-24T07:55:56+00:00",
+      "from": "pending",
+      "note": "Appellation normalisée couverte par la validation explicite des quatre décisions le 24 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-industry-sector-industrie-2026-07-24",
+  "proposed_value": {
+    "aliases": [
+      "secteur industriel"
+    ],
+    "classification": "delia-career-v1",
+    "code": "industrie",
+    "name": "Industrie",
+    "parent_id": null,
+    "source_label": "industrie"
+  },
+  "source": {
+    "evidence": "Diversifier les secteurs recherchés vers l'industrie.",
+    "id": "src-a24fabefcdee7c13",
+    "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-4"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "industrie",
+    "entity_type": "industry-sector",
+    "field": "details"
+  },
+  "validated_value": {
+    "aliases": [
+      "secteur industriel"
+    ],
+    "classification": "delia-career-v1",
+    "code": "industrie",
+    "name": "Industrie",
+    "parent_id": null,
+    "source_label": "industrie"
+  }
+}

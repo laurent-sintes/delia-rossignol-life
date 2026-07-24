@@ -30,7 +30,11 @@ build/
 *.pfx
 secrets/
 
-# Toutes les données métier et leurs sources sont versionnées, y compris
-# private/, generated/, les offres, candidatures et files de revue.
-# Seuls les secrets techniques, caches, temporaires et le site régénéré
-# restent exclus de Git.
+# Artefacts opérationnels régénérables de la recherche d'offres.
+# Le code, la configuration des sources et les règles d'évaluation restent
+# versionnés ; les captures, offres collectées, rapports et brouillons restent locaux.
+/private/offer-scan-archives/
+/data/offers/
+/generated/offer-search/
+/generated/offer-feedback/
+/generated/offer-semantic-cache/

@@ -1,11 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
-  "required": ["id", "result_limit", "candidate_pool_maximum", "active_verification_max_age_days", "freshness_days", "contracts", "diversity", "recommendation_bands", "functional_query_families", "profile_family_filters", "location_queries", "collector", "regional_source_audit", "source_domains", "priority_sector_coverage", "source_strategy", "weights"],
+  "required": ["id", "active_verification_max_age_days", "freshness_days", "contracts", "recommendation_bands", "semantic_matching", "functional_query_families", "sector_functional_coverage", "profile_family_filters", "location_queries", "collector", "regional_source_audit", "source_domains", "manual_source_domains", "priority_sector_coverage", "source_strategy", "weights"],
   "properties": {
     "id": {"type": "string", "minLength": 1},
-    "result_limit": {"type": "integer", "minimum": 1, "maximum": 100},
-    "candidate_pool_maximum": {"type": "integer", "minimum": 10, "maximum": 100},
     "active_verification_max_age_days": {"type": "integer", "minimum": 1, "maximum": 30},
     "freshness_days": {"type": "integer", "minimum": 1},
     "contracts": {
@@ -18,21 +16,78 @@
       },
       "additionalProperties": false
     },
-    "diversity": {
-      "type": "object",
-      "required": ["max_per_employer", "max_per_source"],
-      "properties": {
-        "max_per_employer": {"type": "integer", "minimum": 1},
-        "max_per_source": {"type": "integer", "minimum": 1}
-      },
-      "additionalProperties": false
-    },
     "recommendation_bands": {
       "type": "object",
       "required": ["priority_minimum_score", "possible_minimum_score"],
       "properties": {
         "priority_minimum_score": {"type": "number", "minimum": 0, "maximum": 100},
         "possible_minimum_score": {"type": "number", "minimum": 0, "maximum": 100}
+      },
+      "additionalProperties": false
+    },
+    "semantic_matching": {
+      "type": "object",
+      "required": ["review_schema_version", "prompt_version", "importance_weights", "match_factors", "transferability_guidance"],
+      "properties": {
+        "review_schema_version": {"type": "integer", "const": 3},
+        "prompt_version": {"type": "string", "minLength": 1},
+        "importance_weights": {
+          "type": "object",
+          "required": ["required", "preferred"],
+          "properties": {
+            "required": {"type": "number", "exclusiveMinimum": 0},
+            "preferred": {"type": "number", "exclusiveMinimum": 0}
+          },
+          "additionalProperties": false
+        },
+        "match_factors": {
+          "type": "object",
+          "required": ["exact", "transferable", "gap", "unknown"],
+          "properties": {
+            "exact": {"type": "number", "minimum": 0, "maximum": 1},
+            "transferable": {"type": "number", "minimum": 0, "maximum": 1},
+            "gap": {"type": "number", "const": 0},
+            "unknown": {"type": "number", "const": 0}
+          },
+          "additionalProperties": false
+        },
+        "transferability_guidance": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["target_sector_id", "source_sector_ids", "applicable_query_family_ids", "profile_evidence_ids", "rationale", "non_transferable_activities"],
+            "properties": {
+              "target_sector_id": {"type": "string", "minLength": 1},
+              "source_sector_ids": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {"type": "string", "minLength": 1}
+              },
+              "applicable_query_family_ids": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {"type": "string", "minLength": 1}
+              },
+              "profile_evidence_ids": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {"type": "string", "minLength": 1}
+              },
+              "rationale": {"type": "string", "minLength": 1},
+              "non_transferable_activities": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {"type": "string", "minLength": 1}
+              }
+            },
+            "additionalProperties": false
+          }
+        }
       },
       "additionalProperties": false
     },
@@ -77,6 +132,16 @@
         "items": {"type": "string", "minLength": 1}
       }
     },
+    "sector_functional_coverage": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {"type": "string", "minLength": 1}
+      }
+    },
     "profile_family_filters": {
       "type": "array",
       "minItems": 1,
@@ -96,6 +161,23 @@
       }
     },
     "source_domains": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "manual_source_domains": {
+      "type": "object",
+      "required": ["core", "complementary"],
+      "properties": {
+        "core": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "complementary": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      },
+      "additionalProperties": false
+    },
     "priority_sector_coverage": {
       "type": "object",
       "minProperties": 1,
@@ -122,12 +204,12 @@
     },
     "weights": {
       "type": "object",
-      "required": ["contract", "sector", "functional_domain", "knowledge_overlap", "freshness", "constraints"],
+      "required": ["contract", "sector", "functional_domain", "semantic_match", "freshness", "constraints"],
       "properties": {
         "contract": {"type": "number", "minimum": 0},
         "sector": {"type": "number", "minimum": 0},
         "functional_domain": {"type": "number", "minimum": 0},
-        "knowledge_overlap": {"type": "number", "minimum": 0},
+        "semantic_match": {"type": "number", "minimum": 0},
         "freshness": {"type": "number", "minimum": 0},
         "constraints": {"type": "number", "minimum": 0}
       },

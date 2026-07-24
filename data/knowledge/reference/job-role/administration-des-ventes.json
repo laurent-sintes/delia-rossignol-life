@@ -1,0 +1,25 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-24T07:55:58+00:00",
+          "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-2",
+          "proposal_id": "proposal-job-role-administration-des-ventes-2026-07-24",
+          "source_id": "src-a24fabefcdee7c13"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "ADV"
+        ],
+        "job_family": "commerce et relation client",
+        "name": "Administration des ventes",
+        "source_label": "administration des ventes"
+      }
+    }
+  },
+  "id": "administration-des-ventes",
+  "type": "job-role",
+  "updated_at": "2026-07-24T07:55:58+00:00"
+}

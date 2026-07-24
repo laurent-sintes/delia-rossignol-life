@@ -12,7 +12,7 @@ SKILL_REFERENCE_PATTERN = re.compile(r"\$([a-z][a-z0-9-]+)")
 REQUIRED_SKILL_SNIPPETS = {
     "ingest-delia-knowledge": ("review-content",),
     "manage-delia-templates": ("review-content",),
-    "match-delia-offers": ("review-operational",),
+    "match-delia-offers": ("semantic_matches", "lexical_fallback", "review-operational"),
     "manage-delia-offer-scans": (
         "revalidation_queue",
         "--scan-manifest",
@@ -25,9 +25,10 @@ REQUIRED_SKILL_SNIPPETS = {
         "--scan-manifest",
         "run-offer-scan",
         "semantic_review_queue",
+        "semantic_matches",
         "review-operational",
     ),
-    "share-delia-offer-selection": ("finalization_allowed: false", "--limit", "100", "review-operational"),
+    "share-delia-offer-selection": ("finalization_allowed: false", "sans plafond", "review-operational"),
 }
 
 

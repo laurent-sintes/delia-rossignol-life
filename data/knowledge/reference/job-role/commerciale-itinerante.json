@@ -1,0 +1,25 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-24T07:55:59+00:00",
+          "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-3",
+          "proposal_id": "proposal-job-role-commerciale-itinerante-2026-07-24",
+          "source_id": "src-a24fabefcdee7c13"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "commercial itinérant"
+        ],
+        "job_family": "commerce et relation client",
+        "name": "Commerciale itinérante",
+        "source_label": "commerciale itinérante"
+      }
+    }
+  },
+  "id": "commerciale-itinerante",
+  "type": "job-role",
+  "updated_at": "2026-07-24T07:55:59+00:00"
+}

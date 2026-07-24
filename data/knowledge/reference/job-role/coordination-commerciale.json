@@ -1,0 +1,26 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-24T07:56:00+00:00",
+          "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-2",
+          "proposal_id": "proposal-job-role-coordination-commerciale-2026-07-24",
+          "source_id": "src-a24fabefcdee7c13"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "coordinateur commercial",
+          "coordinatrice commerciale"
+        ],
+        "job_family": "commerce et relation client",
+        "name": "Coordination commerciale",
+        "source_label": "coordination commerciale"
+      }
+    }
+  },
+  "id": "coordination-commerciale",
+  "type": "job-role",
+  "updated_at": "2026-07-24T07:56:00+00:00"
+}

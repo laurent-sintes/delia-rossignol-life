@@ -14,9 +14,9 @@ description: Tester, construire et committer localement les changements du dép�
 
 ## Action `commit`
 
-1. Lire `AGENTS.md` puis inspecter `git status --short` et les diffs. Inclure les originaux, archives, données de travail et productions métier concernés; exclure uniquement les secrets techniques, caches, temporaires et `_site/`.
+1. Lire `AGENTS.md` puis inspecter `git status --short` et les diffs. Inclure les sources, configurations, originaux, données validées et productions publiables concernés. Exclure les secrets techniques, caches, temporaires, `_site/` et tous les artefacts opérationnels de recherche d'offres listés dans `.gitignore`.
 2. Exécuter `python scripts/repo_flow.py prepare-commit`. Cette commande réalise les tests, validations et builds déterministes et maintient l'aperçu local; ne pas reproduire manuellement ces opérations.
-3. Si les contrôles réussissent, sélectionner explicitement les fichiers concernés avec `git add`; vérifier que les données métier nécessaires à un clone autonome sont présentes et qu'aucun secret technique n'est inclus.
+3. Si les contrôles réussissent, sélectionner explicitement les fichiers concernés avec `git add`; vérifier que les sources nécessaires à un clone autonome sont présentes, qu'aucun artefact régénérable de recherche n'est inclus et qu'aucun secret technique n'est inclus.
 4. Inspecter `git diff --cached`, choisir un message concis si aucun n'est fourni, puis exécuter `git commit` dans la même action utilisateur. La commande `commit` vaut autorisation du commit local après réussite des contrôles; elle n'autorise aucun push.
 5. Communiquer le SHA créé, le résumé des contrôles et l'URL locale. Conserver l'aperçu actif; ne jamais exécuter `python scripts/repo_flow.py preview-stop` sans demande explicite.
 

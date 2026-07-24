@@ -1,6 +1,6 @@
 {
-  "id": "bordeaux-offer-source-audit-2026-07-21",
-  "audited_at": "2026-07-21",
+  "id": "bordeaux-offer-source-audit-2026-07-24",
+  "audited_at": "2026-07-24",
   "scope": {
     "area": "Bordeaux Métropole et Gironde",
     "method": "Vérification de la présence locale et d'un moteur d'annonces officiel ou institutionnel, puis qualification au regard des secteurs et fonctions du projet professionnel validé de Délia.",
@@ -90,15 +90,15 @@
       "rationale": "Moteur local Bordeaux-Lac avec des métiers de vente, relation client et aménagement intérieur."
     },
     {
-      "organization": "Leroy Merlin Bordeaux",
-      "organization_type": "private_employer",
-      "career_url": "https://recrute.leroymerlin.fr/jobs",
-      "scan_domain": "recrute.leroymerlin.fr",
+      "organization": "FashionJobs Bordeaux",
+      "organization_type": "private_specialized_portal",
+      "career_url": "https://fr.fashionjobs.com/s/emploi/vendeur-vendeuse-bordeaux.html",
+      "scan_domain": "fr.fashionjobs.com",
       "scan_priority": "core",
-      "sectors": ["agencement-et-amenagement-interieur", "commerce-et-distribution"],
-      "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-et-coordination-de-projets"],
-      "evidence_urls": ["https://recrute.leroymerlin.fr/jobs/838552"],
-      "rationale": "Offres locales vérifiées à Bordeaux-Lac et Mérignac en conseil, vente et accompagnement de projets d'aménagement."
+      "sectors": ["luxe", "mode-et-pret-a-porter", "commerce-et-distribution"],
+      "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-administrative"],
+      "evidence_urls": ["https://fr.fashionjobs.com/s/emploi/vendeur-vendeuse-bordeaux.html"],
+      "rationale": "Portail spécialisé mode et luxe avec une recherche locale Bordeaux paginée et des liens vers chaque annonce détaillée."
     },
     {
       "organization": "Caudalie",
@@ -121,18 +121,6 @@
       "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-administrative"],
       "evidence_urls": ["https://www.sources-hotels.com/bordeaux/recrutement/"],
       "rationale": "Palace et spa à Martillac publiant directement ses postes, dont accueil, réception, réservations et gouvernance."
-    },
-    {
-      "organization": "InterContinental Bordeaux - IHG",
-      "organization_type": "private_employer",
-      "career_url": "https://careers.ihg.com/fr-fr/locations/france/",
-      "scan_domain": "careers.ihg.com",
-      "scan_priority": "complementary",
-      "automated_collection": false,
-      "sectors": ["luxe", "hotellerie", "bien-etre"],
-      "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-administrative"],
-      "evidence_urls": ["https://bordeaux.intercontinental.com/en/career/", "https://careers.ihg.com/fr-fr/locations/france/"],
-      "rationale": "Le portail IHG référence explicitement l'InterContinental Bordeaux et ses métiers d'hospitalité haut de gamme."
     },
     {
       "organization": "Ville de Bordeaux et CCAS",
@@ -237,18 +225,6 @@
       "rationale": "Publie ses propres recrutements et signale des fonctions de gestion, opérations et ressources humaines."
     },
     {
-      "organization": "Préfecture et services de l'État en Gironde",
-      "organization_type": "public_employer",
-      "career_url": "https://www.gironde.gouv.fr/Publications/Concours-administratif-Examen-professionnel-Recrutement",
-      "scan_domain": "gironde.gouv.fr",
-      "scan_priority": "complementary",
-      "automated_collection": false,
-      "sectors": ["services-publics"],
-      "functional_domains": ["conseil-et-relation-client", "gestion-administrative"],
-      "evidence_urls": ["https://www.gironde.gouv.fr/Publications/Concours-administratif-Examen-professionnel-Recrutement"],
-      "rationale": "Certaines campagnes locales ou voies contractuelles sont publiées directement sur le site préfectoral."
-    },
-    {
       "organization": "ARS Nouvelle-Aquitaine",
       "organization_type": "public_employer",
       "career_url": "https://ars-nouvelle-aquitaine-recrute.talent-soft.com/offre-de-emploi/liste-offres.aspx?showSearchUrl=1",
@@ -303,6 +279,80 @@
       "functional_domains": ["conseil-et-relation-client", "gestion-administrative", "gestion-et-coordination-de-projets"],
       "evidence_urls": ["https://www.lasecurecrute.fr/cpam-gironde", "https://www.lasecurecrute.fr/caf-gironde"],
       "rationale": "Centralise les recrutements locaux CPAM, CAF, Carsat et Urssaf, avec des métiers d'accueil, de conseil et de gestion particulièrement compatibles."
+    },
+    {
+      "organization": "Thales Bordeaux",
+      "organization_type": "private_employer",
+      "career_url": "https://careers.thalesgroup.com/global/en/search-results",
+      "scan_domain": "careers.thalesgroup.com",
+      "scan_priority": "core",
+      "automated_collection": false,
+      "sectors": ["industrie"],
+      "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://careers.thalesgroup.com/global/en/search-results", "https://careers.thalesgroup.com/de/de/job/R0329093/ALTERNANCE-Talent-Acquisition-Partner-H-F"],
+      "rationale": "Le portail officiel publie des postes sur le campus bordelais de Mérignac, y compris en fonctions support, service client et coordination."
+    },
+    {
+      "organization": "Dassault Aviation Mérignac",
+      "organization_type": "private_employer",
+      "career_url": "https://www.dassault-aviation.com/fr/groupe/carrieres/",
+      "scan_domain": "www.dassault-aviation.com",
+      "scan_priority": "core",
+      "automated_collection": false,
+      "sectors": ["industrie"],
+      "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://www.dassault-aviation.com/fr/groupe/carrieres/"],
+      "rationale": "Le moteur officiel permet une recherche personnalisée et publie régulièrement des offres à Mérignac dans l'industrie aéronautique et les fonctions support."
+    },
+    {
+      "organization": "Lectra Cestas",
+      "organization_type": "private_employer",
+      "career_url": "https://careers.lectra.com/",
+      "scan_domain": "careers.lectra.com",
+      "scan_priority": "core",
+      "automated_collection": false,
+      "sectors": ["industrie", "services-aux-entreprises"],
+      "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://careers.lectra.com/", "https://www.lectra.com/en/lectra/work-at-lectra"],
+      "rationale": "Le siège de Cestas dispose d'un portail officiel mondial ; l'activité B2B associe industrie, relation client, commerce et coordination."
+    },
+    {
+      "organization": "Rexel Bordeaux",
+      "organization_type": "private_employer",
+      "career_url": "https://careers.rexel.com/jobs",
+      "scan_domain": "careers.rexel.com",
+      "scan_priority": "core",
+      "automated_collection": false,
+      "sectors": ["industrie", "energie", "services-aux-entreprises"],
+      "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-administrative"],
+      "evidence_urls": [
+        "https://careers.rexel.com/jobs",
+        "https://careers.rexel.com/job/technico-commercial-sedentaire-integrateur-bordeaux-33-h-f-in-bordeaux-france-jid-4082"
+      ],
+      "rationale": "Le portail officiel publie des postes bordelais de relation client et commerce sédentaire B2B liés aux équipements électriques, à l'énergie et aux environnements industriels."
+    },
+    {
+      "organization": "ArianeGroup Gironde",
+      "organization_type": "private_employer",
+      "career_url": "https://arianegroup.wd3.myworkdayjobs.com/fr-FR/EXTERNALALL",
+      "scan_domain": "arianegroup.wd3.myworkdayjobs.com",
+      "scan_priority": "core",
+      "sectors": ["industrie"],
+      "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://www.ariane.group/en/careers/", "https://arianegroup.wd3.myworkdayjobs.com/fr-FR/EXTERNALALL"],
+      "rationale": "Le portail Workday officiel couvre les sites industriels de Saint-Médard-en-Jalles et du Haillan, avec des offres locales structurées."
+    },
+    {
+      "organization": "Groupe EDF",
+      "organization_type": "private_employer",
+      "career_url": "https://www.edf.fr/edf-recrute",
+      "scan_domain": "www.edf.fr",
+      "scan_priority": "core",
+      "automated_collection": false,
+      "sectors": ["energie", "services-aux-entreprises"],
+      "functional_domains": ["conseil-et-relation-client", "commerce-et-vente", "gestion-administrative", "gestion-et-coordination-de-projets"],
+      "evidence_urls": ["https://www.edf.fr/edf-recrute", "https://www.edf.fr/edf-recrute/nos-metiers/decouvrez-les-metiers-du-groupe-edf/rejoignez-nos-equipes-des-fonctions-supports-et-transverses/conseillere-conseiller-commercial"],
+      "rationale": "Le portail officiel permet de filtrer la Gironde et publie des fonctions de relation client, vente à distance, administration et projets dans l'énergie."
     }
   ],
   "not_added": [

@@ -1,0 +1,27 @@
+{
+  "fields": {
+    "details": {
+      "provenance": [
+        {
+          "applied_at": "2026-07-24T07:56:02+00:00",
+          "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-3",
+          "proposal_id": "proposal-job-role-teleconseil-relation-client-distance-2026-07-24",
+          "source_id": "src-a24fabefcdee7c13"
+        }
+      ],
+      "value": {
+        "aliases": [
+          "téléconseiller",
+          "téléconseillère",
+          "relation client à distance"
+        ],
+        "job_family": "commerce et relation client",
+        "name": "Téléconseil et relation client à distance",
+        "source_label": "relation client à distance et téléconseil"
+      }
+    }
+  },
+  "id": "teleconseil-relation-client-distance",
+  "type": "job-role",
+  "updated_at": "2026-07-24T07:56:02+00:00"
+}

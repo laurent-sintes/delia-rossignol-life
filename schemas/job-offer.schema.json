@@ -43,6 +43,64 @@
     },
     "required_skills": {"type": "array", "items": {"type": "string", "minLength": 1}},
     "preferred_skills": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "semantic_requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "description", "importance", "kind", "offer_evidence"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "description": {"type": "string", "minLength": 1},
+          "importance": {"type": "string", "enum": ["required", "preferred"]},
+          "kind": {"type": "string", "enum": ["mission", "skill", "experience", "qualification", "condition", "other"]},
+          "offer_evidence": {
+            "type": "object",
+            "required": ["locator", "excerpt"],
+            "properties": {
+              "locator": {"type": "string", "minLength": 1},
+              "excerpt": {"type": "string", "minLength": 1}
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "semantic_matches": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["requirement_id", "match_type", "llm_confidence", "profile_evidence_refs", "rationale"],
+        "properties": {
+          "requirement_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "match_type": {"type": "string", "enum": ["exact", "transferable", "gap", "unknown"]},
+          "llm_confidence": {"type": "string", "enum": ["high", "medium", "low"]},
+          "profile_evidence_refs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": ["id", "field"],
+              "properties": {
+                "id": {"type": "string", "pattern": "^[a-z][a-z0-9-]*:[a-z0-9][a-z0-9-]*$"},
+                "field": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}
+              },
+              "additionalProperties": false
+            }
+          },
+          "rationale": {"type": "string", "minLength": 1}
+        },
+        "allOf": [
+          {
+            "if": {"properties": {"match_type": {"enum": ["exact", "transferable"]}}},
+            "then": {"properties": {"profile_evidence_refs": {"minItems": 1}}}
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
     "prerequisites": {
       "type": "array",
       "items": {
@@ -114,12 +172,22 @@
         "source_archive_path": {"type": "string", "minLength": 1},
         "source_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
         "reviewed_at": {"type": "string", "format": "date-time"},
-        "review_method": {"type": "string", "minLength": 1}
+        "review_method": {"type": "string", "minLength": 1},
+        "review_model": {"type": "string", "minLength": 1},
+        "review_prompt_version": {"type": "string", "minLength": 1},
+        "review_profile_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "review_schema_version": {"type": "integer", "minimum": 1},
+        "semantic_cache_key": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "semantic_cache_reused_at": {"type": "string", "format": "date-time"}
       },
       "allOf": [
         {
           "if": {"properties": {"review_status": {"const": "completed"}}},
           "then": {"required": ["reviewed_at", "review_method"]}
+        },
+        {
+          "if": {"properties": {"review_schema_version": {"const": 3}}, "required": ["review_schema_version"]},
+          "then": {"required": ["review_model", "review_prompt_version", "review_profile_sha256"]}
         }
       ],
       "additionalProperties": false

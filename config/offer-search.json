@@ -1,5 +1,4 @@
 {
-  "candidate_pool_maximum": 100,
   "active_verification_max_age_days": 7,
   "contracts": {
     "acceptable": [
@@ -13,10 +12,6 @@
       "CDI"
     ]
   },
-  "diversity": {
-    "max_per_employer": 2,
-    "max_per_source": 3
-  },
   "freshness_days": 30,
   "functional_query_families": {
     "conseil-et-relation-client": [
@@ -26,7 +21,14 @@
       "conseiller clientèle",
       "chargé de relation client",
       "expérience client",
-      "suivi client"
+      "suivi client",
+      "téléconseiller",
+      "téléconseillère",
+      "conseiller commercial à distance",
+      "conseillère commerciale à distance",
+      "centre de relation client",
+      "customer service",
+      "customer success"
     ],
     "commerce-et-vente": [
       "vente",
@@ -34,7 +36,17 @@
       "conseiller de vente",
       "développement commercial",
       "fidélisation client",
-      "gestion de portefeuille"
+      "gestion de portefeuille",
+      "commercial sédentaire",
+      "commerciale sédentaire",
+      "commercial itinérant",
+      "commerciale itinérante",
+      "inside sales",
+      "account manager",
+      "chargé d'affaires",
+      "chargée d'affaires",
+      "coordinateur commercial",
+      "coordinatrice commerciale"
     ],
     "gestion-administrative": [
       "gestionnaire administratif",
@@ -42,6 +54,9 @@
       "assistant de direction",
       "office manager",
       "gestionnaire ADV",
+      "assistant ADV",
+      "assistante ADV",
+      "administration des ventes",
       "coordination administrative",
       "back-office",
       "service client",
@@ -56,7 +71,15 @@
       "suivi de projet"
     ]
   },
-  "id": "delia-offer-search-v5",
+  "sector_functional_coverage": {
+    "industrie": [
+      "conseil-et-relation-client",
+      "commerce-et-vente",
+      "gestion-administrative",
+      "gestion-et-coordination-de-projets"
+    ]
+  },
+  "id": "delia-offer-search-v6",
   "location_queries": [
     "Bordeaux",
     "Bordeaux Métropole",
@@ -112,6 +135,33 @@
       ],
       "family_markers": ["développement logiciel", "infrastructure informatique", "cybersécurité"],
       "technical_markers": [".net", "devops", "postgresql", "mysql", "scrum", "testing"],
+      "minimum_technical_markers": 2
+    },
+    {
+      "id": "specialist-engineering",
+      "label": "profil spécialiste ingénierie technique",
+      "decision": "exclude",
+      "strong_title_markers": [
+        "ingénieur analyse mécanique",
+        "ingénieure analyse mécanique",
+        "ingénieur électronique",
+        "ingénieure électronique",
+        "ingénieur conception mécanique",
+        "ingénieure conception mécanique"
+      ],
+      "family_markers": [
+        "analyse mécanique",
+        "ingénierie mécanique",
+        "ingénierie électronique"
+      ],
+      "technical_markers": [
+        "abaqus",
+        "samcef",
+        "éléments finis",
+        "résistance des matériaux",
+        "fortran",
+        "hypermesh"
+      ],
       "minimum_technical_markers": 2
     },
     {
@@ -223,10 +273,51 @@
       "minimum_technical_markers": 2
     }
   ],
-  "result_limit": 100,
   "recommendation_bands": {
     "priority_minimum_score": 75,
     "possible_minimum_score": 50
+  },
+  "semantic_matching": {
+    "importance_weights": {
+      "preferred": 1,
+      "required": 2
+    },
+    "match_factors": {
+      "exact": 1,
+      "gap": 0,
+      "transferable": 0.8,
+      "unknown": 0
+    },
+    "prompt_version": "offer-match-v5",
+    "review_schema_version": 3,
+    "transferability_guidance": [
+      {
+        "target_sector_id": "industrie",
+        "source_sector_ids": [
+          "agencement-et-amenagement-interieur",
+          "cuisine-et-mobilier-sur-mesure"
+        ],
+        "applicable_query_family_ids": [
+          "conseil-et-relation-client",
+          "commerce-et-vente",
+          "gestion-administrative",
+          "gestion-et-coordination-de-projets"
+        ],
+        "profile_evidence_ids": [
+          "bleu-rossignol-founder",
+          "cuisinella-sainte-eulalie",
+          "raison-home-franchisee"
+        ],
+        "rationale": "Les besoins clients, devis, plans techniques, commandes fabricant, coordination d'intervenants, suivi de réalisation, réception, réclamations et facturation constituent des preuves transférables vers l'ADV, le support commercial, le SAV, la relation client et la coordination de projets en environnement industriel.",
+        "non_transferable_activities": [
+          "fabrication industrielle",
+          "usinage",
+          "maintenance industrielle",
+          "ingénierie de production",
+          "pose réalisée directement"
+        ]
+      }
+    ]
   },
   "collector": {
     "user_agent": "DeliaOfferScanner/0.1",
@@ -261,7 +352,11 @@
       "Talence",
       "Villenave-d'Ornon",
       "Gironde",
-      "Martillac"
+      "Martillac",
+      "Cestas",
+      "Canéjan",
+      "Saint-Jean-d'Illac",
+      "Le Barp"
     ],
     "adapter_domains": {
       "breezy": [
@@ -278,13 +373,20 @@
         "chu-bordeaux.softy.pro"
       ],
       "workday": [
-        "cultura.wd3.myworkdayjobs.com"
+        "cultura.wd3.myworkdayjobs.com",
+        "arianegroup.wd3.myworkdayjobs.com"
       ],
       "bpce": [
         "recrutement.bpce.fr"
       ],
       "jobaffinity": [
         "sources-hotels.com"
+      ],
+      "fashionjobs": [
+        "fr.fashionjobs.com"
+      ],
+      "ikea": [
+        "jobs.ikea.com"
       ],
       "specialized": [
         "choisirleservicepublic.gouv.fr",
@@ -299,55 +401,32 @@
         "cdg33.fr",
         "emploi.cdiscount.com",
         "gironde.fr",
-        "gironde.gouv.fr",
-        "jobs.ikea.com",
         "mairie-begles.fr",
         "offresdemploi.nouvelle-aquitaine.fr",
-        "recrute.leroymerlin.fr",
-        "u-bordeaux.fr"
+        "u-bordeaux.fr",
+        "careers.thalesgroup.com",
+        "www.dassault-aviation.com",
+        "careers.lectra.com",
+        "www.edf.fr",
+        "careers.rexel.com"
       ]
     }
   },
   "regional_source_audit": "config/offer-source-audit.json",
   "source_domains": [
     "francetravail.fr",
-    "apec.fr",
     "hellowork.com",
     "welcometothejungle.com",
-    "fashionjobs.com",
+    "fr.fashionjobs.com",
     "linkedin.com",
     "indeed.com",
     "randstad.fr",
-    "adecco.fr",
     "manpower.fr",
-    "galerieslafayette.com",
-    "printemps.com",
-    "jobs.sephora.com",
-    "nocibe.fr",
-    "swarovski.com",
-    "louis-pion.fr",
-    "careers.lvmh.com",
-    "jobs.richemont.com",
-    "group.bnpparibas",
     "recrutement.creditmutuel.fr",
-    "recrutement.credit-agricole.fr",
-    "societegenerale.com",
-    "groupama-gan-recrute.com",
+    "groupecreditagricole.jobs",
     "recrutement.maif.fr",
     "macif.fr",
     "recrutement.matmut.fr",
-    "jobs.covea.eu",
-    "allianz-recrute.fr",
-    "jobs.axa.com",
-    "jobs.generali.com",
-    "abeille-assurances.fr",
-    "swisslife.fr",
-    "labanquepostale.fr",
-    "careers.accor.com",
-    "barriere-recrute.com",
-    "careers.loreal.com",
-    "jobs.rituals.com",
-    "aroma-zone.com",
     "emploi.cdiscount.com",
     "cultura.wd3.myworkdayjobs.com",
     "betclic-group.breezy.hr",
@@ -355,10 +434,8 @@
     "careers.floa.com",
     "recrutement.bpce.fr",
     "jobs.ikea.com",
-    "recrute.leroymerlin.fr",
     "caudalie.career",
     "sources-hotels.com",
-    "careers.ihg.com",
     "recrutement.bordeaux.fr",
     "recrutement.bordeaux-metropole.fr",
     "merignac-career.talent-soft.com",
@@ -368,37 +445,76 @@
     "u-bordeaux.fr",
     "chu-bordeaux.softy.pro",
     "cdg33.fr",
-    "gironde.gouv.fr",
     "ars-nouvelle-aquitaine-recrute.talent-soft.com",
     "emploi-territorial.fr",
     "choisirleservicepublic.gouv.fr",
     "emploi.fhf.fr",
-    "lasecurecrute.fr"
+    "lasecurecrute.fr",
+    "careers.thalesgroup.com",
+    "www.dassault-aviation.com",
+    "careers.lectra.com",
+    "arianegroup.wd3.myworkdayjobs.com",
+    "www.edf.fr",
+    "careers.rexel.com"
   ],
+  "manual_source_domains": {
+    "core": [
+      "francetravail.fr",
+      "hellowork.com",
+      "welcometothejungle.com",
+      "linkedin.com",
+      "indeed.com",
+      "randstad.fr",
+      "manpower.fr",
+      "recrutement.creditmutuel.fr",
+      "groupecreditagricole.jobs",
+      "recrutement.maif.fr",
+      "recrutement.matmut.fr",
+      "offresdemploi.nouvelle-aquitaine.fr",
+      "u-bordeaux.fr",
+      "lasecurecrute.fr",
+      "careers.thalesgroup.com",
+      "www.dassault-aviation.com",
+      "careers.lectra.com",
+      "www.edf.fr",
+      "careers.rexel.com"
+    ],
+    "complementary": [
+      "macif.fr",
+      "mairie-begles.fr"
+    ]
+  },
   "priority_sector_coverage": {
-    "luxe": ["careers.lvmh.com", "jobs.richemont.com", "fashionjobs.com", "sources-hotels.com", "careers.ihg.com"],
-    "hotellerie": ["careers.accor.com", "barriere-recrute.com", "sources-hotels.com", "careers.ihg.com"],
-    "cosmetique": ["careers.loreal.com", "jobs.sephora.com", "nocibe.fr", "caudalie.career"],
-    "bien-etre": ["jobs.rituals.com", "aroma-zone.com", "caudalie.career", "sources-hotels.com"],
+    "luxe": ["fr.fashionjobs.com", "sources-hotels.com"],
+    "mode-et-pret-a-porter": ["fr.fashionjobs.com"],
+    "hotellerie": ["sources-hotels.com"],
+    "cosmetique": ["caudalie.career"],
+    "bien-etre": ["caudalie.career", "sources-hotels.com"],
     "banque-et-assurance": [
       "recrutement.maif.fr",
       "macif.fr",
       "recrutement.matmut.fr",
-      "jobs.covea.eu",
-      "groupama-gan-recrute.com",
-      "jobs.axa.com",
-      "allianz-recrute.fr",
-      "jobs.generali.com",
-      "abeille-assurances.fr",
-      "swisslife.fr",
-      "group.bnpparibas",
       "recrutement.creditmutuel.fr",
-      "recrutement.credit-agricole.fr",
-      "societegenerale.com",
-      "labanquepostale.fr",
+      "groupecreditagricole.jobs",
       "groupefilhet-allard-career.talent-soft.com",
       "careers.floa.com",
       "recrutement.bpce.fr"
+    ],
+    "industrie": [
+      "careers.thalesgroup.com",
+      "www.dassault-aviation.com",
+      "careers.lectra.com",
+      "arianegroup.wd3.myworkdayjobs.com",
+      "careers.rexel.com"
+    ],
+    "services-aux-entreprises": [
+      "careers.lectra.com",
+      "www.edf.fr",
+      "careers.rexel.com"
+    ],
+    "energie": [
+      "www.edf.fr",
+      "careers.rexel.com"
     ]
   },
   "source_strategy": {
@@ -408,34 +524,11 @@
       "generalist"
     ],
     "direct_employer_domains": [
-      "galerieslafayette.com",
-      "printemps.com",
-      "jobs.sephora.com",
-      "nocibe.fr",
-      "swarovski.com",
-      "louis-pion.fr",
-      "careers.lvmh.com",
-      "jobs.richemont.com",
-      "group.bnpparibas",
       "recrutement.creditmutuel.fr",
-      "recrutement.credit-agricole.fr",
-      "societegenerale.com",
-      "groupama-gan-recrute.com",
+      "groupecreditagricole.jobs",
       "recrutement.maif.fr",
       "macif.fr",
       "recrutement.matmut.fr",
-      "jobs.covea.eu",
-      "allianz-recrute.fr",
-      "jobs.axa.com",
-      "jobs.generali.com",
-      "abeille-assurances.fr",
-      "swisslife.fr",
-      "labanquepostale.fr",
-      "careers.accor.com",
-      "barriere-recrute.com",
-      "careers.loreal.com",
-      "jobs.rituals.com",
-      "aroma-zone.com",
       "emploi.cdiscount.com",
       "cultura.wd3.myworkdayjobs.com",
       "betclic-group.breezy.hr",
@@ -443,10 +536,8 @@
       "careers.floa.com",
       "recrutement.bpce.fr",
       "jobs.ikea.com",
-      "recrute.leroymerlin.fr",
       "caudalie.career",
       "sources-hotels.com",
-      "careers.ihg.com",
       "recrutement.bordeaux.fr",
       "recrutement.bordeaux-metropole.fr",
       "merignac-career.talent-soft.com",
@@ -456,11 +547,16 @@
       "u-bordeaux.fr",
       "chu-bordeaux.softy.pro",
       "cdg33.fr",
-      "gironde.gouv.fr",
-      "ars-nouvelle-aquitaine-recrute.talent-soft.com"
+      "ars-nouvelle-aquitaine-recrute.talent-soft.com",
+      "careers.thalesgroup.com",
+      "www.dassault-aviation.com",
+      "careers.lectra.com",
+      "arianegroup.wd3.myworkdayjobs.com",
+      "www.edf.fr",
+      "careers.rexel.com"
     ],
     "specialized_domains": [
-      "fashionjobs.com",
+      "fr.fashionjobs.com",
       "emploi-territorial.fr",
       "choisirleservicepublic.gouv.fr",
       "emploi.fhf.fr",
@@ -473,7 +569,7 @@
     "contract": 30,
     "freshness": 10,
     "functional_domain": 15,
-    "knowledge_overlap": 20,
+    "semantic_match": 20,
     "sector": 20
   }
 }

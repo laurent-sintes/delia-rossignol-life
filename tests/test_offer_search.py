@@ -4,17 +4,18 @@ import sys
 import unittest
 from datetime import date
 from pathlib import Path
+from typing import Any
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from delia_life.core import load_json
+from delia_life.core import load_json, sha256_file
 from delia_life.offer_search import (
-    AssessedOffer,
-    _select_diverse_offers,
     canonical_offer_url,
     collect_validated_absent_sector_experience_ids,
+    collect_validated_knowledge_evidence_catalog,
+    collect_validated_knowledge_evidence_ids,
     collect_validated_profile_completeness,
     collect_validated_sector_experience_months,
     offer_identity,
@@ -23,9 +24,10 @@ from delia_life.offer_search import (
     source_origin,
 )
 from delia_life.project_validation import (
-    invalid_offer_pool_limits,
     invalid_offer_source_audit,
     invalid_recommendation_band_thresholds,
+    invalid_sector_functional_coverage,
+    invalid_transferability_guidance,
     missing_priority_functional_coverage,
     missing_priority_sector_coverage,
 )
@@ -94,11 +96,16 @@ class OfferSearchTests(unittest.TestCase):
                 "unknowns": ["rémunération non précisée"],
                 "hard_constraint_failures": [],
                 "knowledge_keyword_matches": ["administration", "client", "relation"],
+                "semantic_matches": [],
+                "semantic_required_uncertainties": [],
+                "matching_method": "lexical_fallback",
                 "prerequisite_alerts": [],
                 "application_barriers": [],
                 "profile_family_matches": [],
                 "recommendation_band": "priority",
                 "recommendation_reasons": ["forte correspondance sans prérequis obligatoire incertain"],
+                "preference_alerts": [],
+                "maximum_recommendation_band": None,
                 "forced_to_end": False,
             },
         )
@@ -449,9 +456,161 @@ class OfferSearchTests(unittest.TestCase):
                 None,
                 None,
                 None,
+                None,
             )
 
-    def test_rank_offers_characterization_preserves_order_diversity_and_exclusions(self) -> None:
+    def test_semantic_matching_rewards_non_literal_evidence_without_llm_scoring(self) -> None:
+        offer = {
+            **self.base,
+            "semantic_requirements": [
+                {
+                    "id": "client-guidance",
+                    "description": "Guider une clientèle exigeante dans un parcours sur mesure",
+                    "importance": "required",
+                    "kind": "mission",
+                    "offer_evidence": {
+                        "locator": "annonce#mission",
+                        "excerpt": "Guider chaque visiteur dans un parcours sur mesure.",
+                    },
+                }
+            ],
+            "semantic_matches": [
+                {
+                    "requirement_id": "client-guidance",
+                    "requirement": "Guider une clientèle exigeante dans un parcours sur mesure",
+                    "importance": "required",
+                    "match_type": "transferable",
+                    "llm_confidence": "high",
+                    "profile_evidence_refs": [
+                        {"id": "skill:relation-client", "field": "summary"}
+                    ],
+                    "rationale": "L’accompagnement personnalisé validé couvre cette responsabilité.",
+                    "offer_evidence": {
+                        "locator": "annonce#mission",
+                        "excerpt": "Guider chaque visiteur dans un parcours sur mesure.",
+                    },
+                }
+            ],
+        }
+
+        lexical = score_offer(self.base, self.project, self.policy, set(), self.today)
+        semantic = score_offer(
+            offer,
+            self.project,
+            self.policy,
+            set(),
+            self.today,
+            knowledge_evidence_catalog={"skill:relation-client": frozenset({"summary"})},
+        )
+
+        self.assertEqual(semantic["matching_method"], "llm_semantic_evidence")
+        self.assertEqual(semantic["semantic_matches"][0]["effective_match_type"], "transferable")
+        self.assertAlmostEqual(semantic["score"] - lexical["score"], 16.0)
+        self.assertIn("rapprochement sémantique sourcé", " ".join(semantic["reasons"]))
+
+    def test_required_semantic_gap_forces_informational_without_score_penalty(self) -> None:
+        requirement = {
+            "id": "required-experience",
+            "description": "Expérience obligatoire dans le secteur",
+            "importance": "required",
+            "kind": "experience",
+            "offer_evidence": {"locator": "annonce#profil", "excerpt": "Expérience obligatoire."},
+        }
+        gap = score_offer(
+            {
+                **self.base,
+                "semantic_requirements": [requirement],
+                "semantic_matches": [
+                    {
+                        "requirement_id": "required-experience",
+                        "match_type": "gap",
+                        "llm_confidence": "high",
+                        "profile_evidence_refs": [],
+                        "rationale": "Aucune preuve validée ne couvre cette exigence.",
+                    }
+                ],
+            },
+            self.project,
+            self.policy,
+            set(),
+            self.today,
+        )
+        unknown = score_offer(
+            {
+                **self.base,
+                "semantic_requirements": [requirement],
+                "semantic_matches": [
+                    {
+                        "requirement_id": "required-experience",
+                        "match_type": "unknown",
+                        "llm_confidence": "low",
+                        "profile_evidence_refs": [],
+                        "rationale": "La couverture ne peut pas être établie.",
+                    }
+                ],
+            },
+            self.project,
+            self.policy,
+            set(),
+            self.today,
+        )
+
+        self.assertEqual(gap["score"], unknown["score"])
+        self.assertEqual(gap["recommendation_band"], "informational")
+        self.assertEqual(unknown["recommendation_band"], "possible")
+
+    def test_llm_confidence_never_changes_semantic_score(self) -> None:
+        requirement = {
+            "id": "client-guidance",
+            "description": "Accompagner les clients",
+            "importance": "required",
+            "kind": "mission",
+            "offer_evidence": {"locator": "annonce#mission", "excerpt": "Accompagner les clients."},
+        }
+
+        def assessment(confidence: str) -> dict[str, Any]:
+            return score_offer(
+                {
+                    **self.base,
+                    "semantic_requirements": [requirement],
+                    "semantic_matches": [
+                        {
+                            "requirement_id": "client-guidance",
+                            "match_type": "exact",
+                            "llm_confidence": confidence,
+                            "profile_evidence_refs": [
+                                {"id": "skill:relation-client", "field": "summary"}
+                            ],
+                            "rationale": "La compétence validée couvre cette exigence.",
+                        }
+                    ],
+                },
+                self.project,
+                self.policy,
+                set(),
+                self.today,
+                knowledge_evidence_catalog={
+                    "skill:relation-client": frozenset({"summary"})
+                },
+            )
+
+        high = assessment("high")
+        low = assessment("low")
+        self.assertEqual(high["score"], low["score"])
+        self.assertEqual(
+            high["semantic_matches"][0]["scoring_confidence"],
+            low["semantic_matches"][0]["scoring_confidence"],
+        )
+
+    def test_validated_knowledge_evidence_ids_include_entities_and_skills(self) -> None:
+        evidence_ids = collect_validated_knowledge_evidence_ids(ROOT / "data" / "knowledge")
+        evidence_catalog = collect_validated_knowledge_evidence_catalog(ROOT / "data" / "knowledge")
+
+        self.assertIn("experience:promod-bordeaux", evidence_ids)
+        self.assertIn("skill:relation-client", evidence_ids)
+        self.assertIn("mission", evidence_catalog["experience:promod-bordeaux"])
+
+    def test_rank_offers_characterization_preserves_order_and_exclusions(self) -> None:
         offers = [
             self.base,
             {**self.base, "id": "offer-copy", "source_url": "https://jobs.example/offers/1?utm_campaign=copy"},
@@ -561,6 +720,70 @@ class OfferSearchTests(unittest.TestCase):
 
         self.assertEqual(result["unique_count"], 1)
         self.assertEqual(result["offers"][0]["source_url"], "https://employer.example/jobs/123")
+
+    def test_specialized_republications_are_grouped_without_losing_links(self) -> None:
+        offers = [
+            {
+                **self.base,
+                "id": f"mango-{index}",
+                "canonical_offer_id": f"FASHION-{index}",
+                "title": "Multifunctional Sales Associate",
+                "employer": "Mango",
+                "source_url": f"https://fr.fashionjobs.com/emploi/mango/{index}.html",
+                "source_site": "fr.fashionjobs.com",
+                "source_kind": "specialized",
+                "published_at": published_at,
+            }
+            for index, published_at in enumerate(
+                ("2026-07-04", "2026-07-05", "2026-07-09", "2026-07-10"),
+                start=1,
+            )
+        ]
+
+        result = rank_offers(offers, self.project, self.policy, set(), today=self.today)
+
+        self.assertEqual(result["unique_count"], 4)
+        self.assertEqual(result["eligible_count"], 4)
+        self.assertEqual(result["selected_count"], 4)
+        self.assertEqual(result["presentation_count"], 1)
+        self.assertEqual(result["quasi_duplicate_group_count"], 1)
+        self.assertEqual(result["quasi_duplicate_offer_count"], 3)
+        self.assertEqual(len(result["offers"]), 1)
+        self.assertEqual(result["offers"][0]["represented_offer_count"], 4)
+        self.assertEqual(
+            result["offers"][0]["source_url"],
+            "https://fr.fashionjobs.com/emploi/mango/4.html",
+        )
+        self.assertEqual(
+            {
+                publication["source_url"]
+                for publication in result["offers"][0]["similar_publications"]
+            },
+            {
+                "https://fr.fashionjobs.com/emploi/mango/1.html",
+                "https://fr.fashionjobs.com/emploi/mango/2.html",
+                "https://fr.fashionjobs.com/emploi/mango/3.html",
+            },
+        )
+
+    def test_distinct_direct_employer_requisitions_remain_separate(self) -> None:
+        offers = [
+            {
+                **self.base,
+                "id": f"requisition-{index}",
+                "canonical_offer_id": f"REQ-{index}",
+                "source_url": f"https://jobs.example/offers/{index}",
+            }
+            for index in range(2)
+        ]
+
+        result = rank_offers(offers, self.project, self.policy, set(), today=self.today)
+
+        self.assertEqual(result["selected_count"], 2)
+        self.assertEqual(result["presentation_count"], 2)
+        self.assertEqual(result["quasi_duplicate_group_count"], 0)
+        self.assertEqual(result["quasi_duplicate_offer_count"], 0)
+        self.assertEqual(len(result["offers"]), 2)
 
     def test_unknown_conditions_are_explicit_without_a_volume_minimum(self) -> None:
         offer = {**self.base, "published_at": None, "conditions": {}, "summary": "Administration dans le luxe."}
@@ -675,6 +898,8 @@ class OfferSearchTests(unittest.TestCase):
         self.assertTrue(result["pool_complete"])
         self.assertEqual(result["report_status"], "complete")
         self.assertTrue(result["finalization_allowed"])
+        self.assertEqual(result["matching_method_counts"], {"lexical_fallback": 1})
+        self.assertIn("rapprochement lexical de compatibilité", " ".join(result["warnings"]))
         self.assertNotIn("candidate_pool_minimum", result)
         self.assertNotIn("active_pool_complete", result)
 
@@ -714,7 +939,111 @@ class OfferSearchTests(unittest.TestCase):
         self.assertTrue(complete["pool_complete"])
         self.assertTrue(complete["finalization_allowed"])
 
+    def test_strict_pool_requires_sector_functional_intersection_coverage(self) -> None:
+        requirements = {
+            "required_source_domains": ["jobs.example"],
+            "required_query_families": ["gestion-administrative"],
+            "required_priority_sectors": ["industrie"],
+            "required_sector_functional_pairs": [
+                "industrie::gestion-administrative"
+            ],
+        }
+        common_arguments = {
+            "today": self.today,
+            "visited_sources": ["https://jobs.example/search"],
+            "scan_requirements": requirements,
+            "covered_query_families": {"gestion-administrative"},
+            "covered_priority_sectors": {"industrie"},
+            "require_scan_coverage": True,
+        }
+
+        incomplete = rank_offers(
+            [self.base],
+            self.project,
+            self.policy,
+            set(),
+            **common_arguments,
+        )
+        complete = rank_offers(
+            [self.base],
+            self.project,
+            self.policy,
+            set(),
+            covered_sector_functional_pairs={
+                "industrie::gestion-administrative"
+            },
+            **common_arguments,
+        )
+
+        self.assertFalse(incomplete["pool_complete"])
+        self.assertEqual(
+            incomplete["scan_coverage"]["missing_sector_functional_pairs"],
+            ["industrie::gestion-administrative"],
+        )
+        self.assertTrue(complete["pool_complete"])
+
+    def test_strict_pool_requires_a_successful_receipt_for_every_manual_source(self) -> None:
+        requirements = {
+            "required_source_domains": ["jobs.example"],
+            "manual_source_domains": ["hellowork.com"],
+            "required_query_families": ["relation-client"],
+            "required_priority_sectors": ["luxe"],
+        }
+        common_arguments = {
+            "today": self.today,
+            "visited_sources": ["https://jobs.example/search"],
+            "scan_requirements": requirements,
+            "covered_query_families": {"relation-client"},
+            "covered_priority_sectors": {"luxe"},
+            "require_scan_coverage": True,
+        }
+
+        incomplete = rank_offers(
+            [self.base],
+            self.project,
+            self.policy,
+            set(),
+            manual_source_receipts=[
+                {
+                    "domain": "hellowork.com",
+                    "status": "no_access",
+                    "source_url": "https://www.hellowork.com/fr-fr/emploi/recherche.html",
+                }
+            ],
+            **common_arguments,
+        )
+        complete = rank_offers(
+            [self.base],
+            self.project,
+            self.policy,
+            set(),
+            manual_source_receipts=[
+                {
+                    "domain": "hellowork.com",
+                    "status": "success",
+                    "source_url": "https://www.hellowork.com/fr-fr/emploi/recherche.html",
+                }
+            ],
+            **common_arguments,
+        )
+
+        self.assertFalse(incomplete["pool_complete"])
+        self.assertEqual(
+            incomplete["scan_coverage"]["missing_manual_source_domains"],
+            ["hellowork.com"],
+        )
+        self.assertEqual(
+            incomplete["scan_coverage"]["unsuccessful_manual_source_domains"],
+            ["hellowork.com"],
+        )
+        self.assertTrue(complete["pool_complete"])
+        self.assertIn("https://www.hellowork.com", complete["visited_sources"])
+
     def test_deterministic_extraction_requires_semantic_review_before_finalization(self) -> None:
+        archive = ROOT / "tests" / ".tmp" / "offer-search" / "semantic-archive.html"
+        archive.parent.mkdir(parents=True, exist_ok=True)
+        archive.write_text("<p>Mission générale.</p>", encoding="utf-8")
+        profile_fingerprint = "b" * 64
         pending = rank_offers(
             [
                 {
@@ -731,7 +1060,7 @@ class OfferSearchTests(unittest.TestCase):
             set(),
             today=self.today,
         )
-        completed = rank_offers(
+        completed_without_matches = rank_offers(
             [
                 {
                     **self.base,
@@ -747,10 +1076,62 @@ class OfferSearchTests(unittest.TestCase):
             set(),
             today=self.today,
         )
+        completed = rank_offers(
+            [
+                {
+                    **self.base,
+                    "extraction": {
+                        "method": "deterministic-json-ld",
+                        "review_status": "completed",
+                        "ambiguous_fields": [],
+                        "source_archive_path": str(archive),
+                        "source_sha256": sha256_file(archive),
+                        "review_model": "test-semantic-model",
+                        "review_prompt_version": "offer-match-v5",
+                        "review_profile_sha256": profile_fingerprint,
+                        "review_schema_version": 3,
+                    },
+                    "semantic_requirements": [
+                        {
+                            "id": "mission-fit",
+                            "description": "Adéquation générale de la mission",
+                            "importance": "required",
+                            "kind": "mission",
+                            "offer_evidence": {
+                                "locator": "archive#mission",
+                                "excerpt": "Mission générale.",
+                            },
+                        }
+                    ],
+                    "semantic_matches": [
+                        {
+                            "requirement_id": "mission-fit",
+                            "requirement": "Adéquation générale de la mission",
+                            "importance": "required",
+                            "match_type": "unknown",
+                            "llm_confidence": "low",
+                            "profile_evidence_refs": [],
+                            "rationale": "Le contenu reste insuffisant pour conclure.",
+                            "offer_evidence": {
+                                "locator": "archive#mission",
+                                "excerpt": "Mission générale.",
+                            },
+                        }
+                    ],
+                }
+            ],
+            self.project,
+            self.policy,
+            set(),
+            today=self.today,
+            knowledge_evidence_catalog={},
+            semantic_profile_fingerprint=profile_fingerprint,
+        )
 
         self.assertFalse(pending["pool_complete"])
         self.assertFalse(pending["finalization_allowed"])
         self.assertEqual(pending["semantic_review"]["pending_offer_ids"], ["offer-1"])
+        self.assertFalse(completed_without_matches["semantic_review"]["complete"])
         self.assertTrue(completed["semantic_review"]["complete"])
         self.assertTrue(completed["finalization_allowed"])
 
@@ -774,6 +1155,29 @@ class OfferSearchTests(unittest.TestCase):
         )
 
         self.assertEqual(result["policy_excluded_count"], 1)
+        self.assertTrue(result["semantic_review"]["complete"])
+        self.assertTrue(result["finalization_allowed"])
+
+    def test_expired_offer_does_not_require_semantic_review(self) -> None:
+        result = rank_offers(
+            [
+                {
+                    **self.base,
+                    "verification_status": "expired",
+                    "verification_reason": "annonce expirée",
+                    "extraction": {
+                        "method": "deterministic-html",
+                        "review_status": "required",
+                    },
+                }
+            ],
+            self.project,
+            self.policy,
+            set(),
+            today=self.today,
+        )
+
+        self.assertEqual(result["verification_excluded_count"], 1)
         self.assertTrue(result["semantic_review"]["complete"])
         self.assertTrue(result["finalization_allowed"])
 
@@ -803,9 +1207,17 @@ class OfferSearchTests(unittest.TestCase):
             "source_url": "https://jobs.example/offers/cosmetics",
             "sector_labels": ["cosmétique"],
         }
+        industry = {
+            **common,
+            "id": "offer-industry",
+            "source_url": "https://jobs.example/offers/industry",
+            "sector_labels": ["industrie"],
+        }
         luxury_score = score_offer(luxury, self.project, self.policy, set(), self.today)["score"]
         cosmetics_score = score_offer(cosmetics, self.project, self.policy, set(), self.today)["score"]
+        industry_score = score_offer(industry, self.project, self.policy, set(), self.today)["score"]
         self.assertEqual(luxury_score, cosmetics_score)
+        self.assertEqual(luxury_score, industry_score)
 
     def test_all_priority_functional_domains_have_equal_weight(self) -> None:
         common = {
@@ -827,6 +1239,50 @@ class OfferSearchTests(unittest.TestCase):
         administration_score = score_offer(administration, self.project, self.policy, set(), self.today)["score"]
 
         self.assertEqual(relation_score, administration_score)
+
+    def test_regular_saturday_work_is_sent_to_informational_without_changing_score(self) -> None:
+        baseline = score_offer(self.base, self.project, self.policy, set(), self.today)
+        saturday_offer = {
+            **self.base,
+            "conditions": {"saturday_work_frequency": "weekly"},
+        }
+
+        assessment = score_offer(saturday_offer, self.project, self.policy, set(), self.today)
+
+        self.assertEqual(assessment["score"], baseline["score"])
+        self.assertEqual(assessment["recommendation_band"], "informational")
+        self.assertTrue(assessment["forced_to_end"])
+        self.assertIn("travail régulier le samedi", " ".join(assessment["preference_alerts"]))
+
+    def test_occasional_saturday_work_is_not_deprioritized_as_regular(self) -> None:
+        offer = {
+            **self.base,
+            "conditions": {"saturday_work": True, "saturday_work_frequency": "occasional"},
+        }
+
+        assessment = score_offer(offer, self.project, self.policy, set(), self.today)
+
+        self.assertEqual(assessment["recommendation_band"], "priority")
+        self.assertEqual(assessment["preference_alerts"], [])
+
+    def test_simple_sales_role_cannot_enter_priority_section_but_keeps_score(self) -> None:
+        offer = {
+            **self.base,
+            "title": "Conseillère de vente",
+        }
+        baseline = score_offer(
+            {**offer, "title": "Première vendeuse"},
+            self.project,
+            self.policy,
+            set(),
+            self.today,
+        )
+
+        assessment = score_offer(offer, self.project, self.policy, set(), self.today)
+
+        self.assertEqual(assessment["score"], baseline["score"])
+        self.assertEqual(assessment["recommendation_band"], "possible")
+        self.assertEqual(assessment["maximum_recommendation_band"], "possible")
 
     def test_ranked_report_keeps_email_header_fields(self) -> None:
         offer = {
@@ -901,24 +1357,6 @@ class OfferSearchTests(unittest.TestCase):
         )
         self.assertEqual(result["section_counts"], {"priority": 1, "possible": 1, "informational": 1})
 
-    def test_diversity_selection_never_changes_relevance_order(self) -> None:
-        eligible = [
-            AssessedOffer(
-                offer={"id": offer_id, "employer": employer, "source_site": source},
-                identity=offer_id,
-                assessment={"recommendation_band": "possible", "score": score},
-            )
-            for offer_id, employer, source, score in (
-                ("best", "Same", "same.example", 90.0),
-                ("second", "Same", "same.example", 80.0),
-                ("third", "Other", "other.example", 70.0),
-            )
-        ]
-
-        selected = _select_diverse_offers(eligible, 3, 1, 1)
-
-        self.assertEqual([item.identity for item in selected], ["best", "second", "third"])
-
     def test_recommendation_thresholds_must_be_ordered(self) -> None:
         invalid_policy = {**self.policy, "recommendation_bands": {"priority_minimum_score": 60, "possible_minimum_score": 70}}
         self.assertEqual(
@@ -928,23 +1366,7 @@ class OfferSearchTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "possible recommendation score"):
             score_offer(self.base, self.project, invalid_policy, set(), self.today)
 
-    def test_offer_pool_limit_is_only_the_one_hundred_result_maximum(self) -> None:
-        self.assertEqual(invalid_offer_pool_limits(self.policy), [])
-        invalid_policy = {
-            **self.policy,
-            "candidate_pool_maximum": 100,
-            "result_limit": 101,
-        }
-        self.assertEqual(
-            invalid_offer_pool_limits(invalid_policy),
-            ["offer search policy: result limit cannot exceed candidate pool maximum"],
-        )
-        with self.assertRaisesRegex(ValueError, "offer result limit must be between 1 and 100"):
-            rank_offers([self.base], self.project, self.policy, set(), limit=101, today=self.today)
-        with self.assertRaisesRegex(ValueError, "offer result limit must be between 1 and 100"):
-            rank_offers([self.base], self.project, self.policy, set(), limit=0, today=self.today)
-
-    def test_ranking_keeps_all_active_offers_and_returns_up_to_one_hundred(self) -> None:
+    def test_ranking_keeps_and_returns_all_active_eligible_offers(self) -> None:
         offers = [
             {
                 **self.base,
@@ -959,11 +1381,10 @@ class OfferSearchTests(unittest.TestCase):
 
         self.assertEqual(result["active_count"], 101)
         self.assertEqual(result["eligible_count"], 101)
-        self.assertEqual(result["selected_count"], 100)
-        self.assertEqual(result["active_overflow_count"], 1)
-        self.assertEqual(len(result["offers"]), 100)
+        self.assertEqual(result["selected_count"], 101)
+        self.assertEqual(len(result["offers"]), 101)
         self.assertTrue(result["pool_complete"])
-        self.assertIn("100 restituées au maximum", " ".join(result["warnings"]))
+        self.assertNotIn("plafonn", " ".join(result["warnings"]))
 
     def test_priority_sectors_must_have_declared_source_coverage(self) -> None:
         self.assertEqual(missing_priority_sector_coverage(self.project, self.policy), [])
@@ -983,6 +1404,33 @@ class OfferSearchTests(unittest.TestCase):
                 "offer search policy: missing query family for priority functional domain gestion-administrative",
                 "offer search policy: missing query family for priority functional domain gestion-et-coordination-de-projets",
             ],
+        )
+
+    def test_sector_functional_coverage_uses_declared_dimensions(self) -> None:
+        self.assertEqual(invalid_sector_functional_coverage(self.policy), [])
+        invalid_policy = {
+            **self.policy,
+            "sector_functional_coverage": {
+                "secteur-inconnu": ["famille-inconnue"],
+            },
+        }
+
+        self.assertEqual(
+            invalid_sector_functional_coverage(invalid_policy),
+            [
+                "offer search policy: sector-functional coverage uses unknown sector secteur-inconnu",
+                "offer search policy: sector-functional coverage for secteur-inconnu uses unknown query families: famille-inconnue",
+            ],
+        )
+
+    def test_transferability_guidance_references_validated_profile_evidence(self) -> None:
+        knowledge_entity_ids = {
+            str(path.stem)
+            for path in (ROOT / "data" / "knowledge" / "entities").rglob("*.json")
+        }
+        self.assertEqual(
+            invalid_transferability_guidance(self.policy, knowledge_entity_ids),
+            [],
         )
 
     def test_regional_source_audit_is_declared_and_categorized(self) -> None:
@@ -1028,6 +1476,21 @@ class OfferSearchTests(unittest.TestCase):
         self.assertIn(
             "offer source audit: domains missing from collector adapters: emploi.cdiscount.com",
             invalid_offer_source_audit(missing_adapter_policy, self.source_audit),
+        )
+        unclassified_policy = {
+            **self.policy,
+            "manual_source_domains": {
+                **self.policy["manual_source_domains"],
+                "core": [
+                    domain
+                    for domain in self.policy["manual_source_domains"]["core"]
+                    if domain != "hellowork.com"
+                ],
+            },
+        }
+        self.assertIn(
+            "offer source control: declared domains without an automated or manual mode: hellowork.com",
+            invalid_offer_source_audit(unclassified_policy, self.source_audit),
         )
 
     def test_functional_domain_aliases_respect_the_validated_priority_order(self) -> None:
@@ -1084,6 +1547,24 @@ class OfferSearchTests(unittest.TestCase):
 
         self.assertTrue(result["eligible"])
         self.assertEqual(result["profile_family_matches"], [])
+
+    def test_specialist_mechanical_engineer_is_excluded(self) -> None:
+        offer = {
+            **self.base,
+            "title": "Ingénieure Analyse Mécanique",
+            "summary": "Réaliser des calculs par éléments finis avec ABAQUS et SAMCEF.",
+            "required_skills": ["analyse mécanique", "ABAQUS", "SAMCEF"],
+            "preferred_skills": [],
+        }
+
+        result = score_offer(offer, self.project, self.policy, set(), self.today)
+
+        self.assertFalse(result["eligible"])
+        self.assertIn(
+            "famille de profil exclue : profil spécialiste ingénierie technique",
+            result["hard_constraint_failures"],
+        )
+        self.assertEqual(result["profile_family_matches"][0]["id"], "specialist-engineering")
 
     def test_profile_markers_are_matched_as_complete_terms(self) -> None:
         offer = {

@@ -1,0 +1,53 @@
+{
+  "application": {
+    "applied_at": "2026-07-24T07:50:09+00:00",
+    "knowledge_path": "private/career-project/delia-next-role-2026.json"
+  },
+  "classification": "claim",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-24T07:50:08+00:00",
+      "from": "pending",
+      "note": "Validation explicite des quatre décisions dans Codex le 24 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-target-commercial-channels-2026-07-24",
+  "proposed_value": {
+    "priority_role_ids": [
+      "commerciale-sedentaire",
+      "commerciale-itinerante",
+      "teleconseil-relation-client-distance"
+    ],
+    "priority_sector_ids": [
+      "banque-et-assurance",
+      "services-aux-entreprises",
+      "energie"
+    ]
+  },
+  "source": {
+    "evidence": "Renforcer la recherche de fonctions de relation client à distance, téléconseil et commerce sédentaire ou itinérant, notamment dans l'assurance, les services et l'énergie.",
+    "id": "src-a24fabefcdee7c13",
+    "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-3"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-next-role-2026",
+    "entity_type": "career-project",
+    "field": "target_commercial_channels"
+  },
+  "validated_value": {
+    "priority_role_ids": [
+      "commerciale-sedentaire",
+      "commerciale-itinerante",
+      "teleconseil-relation-client-distance"
+    ],
+    "priority_sector_ids": [
+      "banque-et-assurance",
+      "services-aux-entreprises",
+      "energie"
+    ]
+  }
+}

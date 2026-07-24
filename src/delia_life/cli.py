@@ -106,11 +106,13 @@ def command_rank_offers(args: argparse.Namespace) -> int:
     from .offer_search import (
         collect_validated_absent_certifications,
         collect_validated_absent_sector_experience_ids,
+        collect_validated_knowledge_evidence_catalog,
         collect_validated_knowledge_tokens,
         collect_validated_profile_completeness,
         collect_validated_sector_experience_months,
         load_offer_files,
         rank_offers,
+        semantic_profile_sha256,
     )
 
     offers = [offer for path in args.offers for offer in load_offer_files(path)]
@@ -121,20 +123,28 @@ def command_rank_offers(args: argparse.Namespace) -> int:
     visited_sources = list(dict.fromkeys([*collection.get("visited_sources", []), *(args.visited_sources or [])]))
     covered_query_families = set(collection.get("covered_query_families", [])) | set(args.covered_query_families)
     covered_priority_sectors = set(collection.get("covered_priority_sectors", [])) | set(args.covered_priority_sectors)
+    covered_sector_functional_pairs = set(
+        collection.get("covered_sector_functional_pairs", [])
+    )
     result = rank_offers(
         offers,
         load_json(args.career_project),
         load_json(args.policy),
         collect_validated_knowledge_tokens(args.knowledge_root),
-        args.limit,
         visited_sources=visited_sources,
         complete_profile_dimensions=collect_validated_profile_completeness(args.knowledge_root),
         sector_experience_months=collect_validated_sector_experience_months(args.knowledge_root),
         absent_sector_experience_ids=collect_validated_absent_sector_experience_ids(args.knowledge_root),
         absent_certifications=collect_validated_absent_certifications(args.knowledge_root),
+        knowledge_evidence_catalog=collect_validated_knowledge_evidence_catalog(args.knowledge_root),
+        semantic_profile_fingerprint=semantic_profile_sha256(args.knowledge_root),
         scan_requirements=scan_requirements,
         covered_query_families=covered_query_families,
         covered_priority_sectors=covered_priority_sectors,
+        covered_sector_functional_pairs=covered_sector_functional_pairs,
+        manual_source_receipts=scan_manifest.get("manual_source_receipts", [])
+        if isinstance(scan_manifest, dict)
+        else [],
         require_scan_coverage=args.require_complete_pool,
     )
     if args.output:
@@ -154,9 +164,13 @@ def command_rank_offers(args: argparse.Namespace) -> int:
                 "report_summary": {
                     "candidate_count": result["candidate_count"],
                     "unique_count": result["unique_count"],
+                    "active_count": result["active_count"],
                     "eligible_count": result["eligible_count"],
                     "excluded_count": result["excluded_count"],
                     "selected_count": result["selected_count"],
+                    "presentation_count": result["presentation_count"],
+                    "quasi_duplicate_group_count": result["quasi_duplicate_group_count"],
+                    "quasi_duplicate_offer_count": result["quasi_duplicate_offer_count"],
                     "pool_complete": result["pool_complete"],
                     "finalization_allowed": result["finalization_allowed"],
                     "semantic_review_pending_count": semantic_pending,
@@ -182,6 +196,14 @@ def command_offer_scan(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_record_offer_source_receipts(args: argparse.Namespace) -> int:
+    from .offer_scan import record_manual_source_receipts
+
+    result = record_manual_source_receipts(args.scan_manifest, args.receipt_batch)
+    _print(result)
+    return 0
+
+
 def command_collect_offers(args: argparse.Namespace) -> int:
     from .offer_collection import collect_offers
 
@@ -203,12 +225,12 @@ def command_run_offer_scan(args: argparse.Namespace) -> int:
         runtime_root=args.runtime_root,
         offers_root=args.offers_root,
         reports_root=args.reports_root,
+        semantic_cache_root=args.semantic_cache_root,
         policy_path=args.policy,
         source_audit_path=args.source_audit,
         archive_root=args.archive_root,
         career_project_path=args.career_project,
         knowledge_root=args.knowledge_root,
-        limit=args.limit,
     )
     _print(result)
     return 0 if result["status"] == "complete" else 3
@@ -223,7 +245,6 @@ def command_prepare_offer_feedback_email(args: argparse.Namespace) -> int:
         args.site_url,
         args.cv_pdf,
         args.output,
-        args.limit,
         args.offer_ids,
         bcc=args.bcc,
     )
@@ -234,7 +255,15 @@ def command_prepare_offer_feedback_email(args: argparse.Namespace) -> int:
 def command_apply_offer_semantic_reviews(args: argparse.Namespace) -> int:
     from .offer_review import apply_offer_semantic_reviews
 
-    _print(apply_offer_semantic_reviews(args.offers_directory, args.review_batch))
+    _print(
+        apply_offer_semantic_reviews(
+            args.offers_directory,
+            args.review_batch,
+            args.knowledge_root,
+            args.policy,
+            args.cache_root,
+        )
+    )
     return 0
 
 
@@ -408,6 +437,18 @@ def _add_offer_commands(subparsers: SubparserRegistry) -> None:
     offer_scan.add_argument("--source-audit", type=Path)
     offer_scan.set_defaults(func=command_offer_scan)
 
+    source_receipts = subparsers.add_parser(
+        "record-offer-source-receipts",
+        help="record traceable manual source controls for the current offer scan",
+    )
+    source_receipts.add_argument("receipt_batch", type=Path)
+    source_receipts.add_argument(
+        "--scan-manifest",
+        type=Path,
+        default=Path(".runtime/offer-search/current.json"),
+    )
+    source_receipts.set_defaults(func=command_record_offer_source_receipts)
+
     collect = subparsers.add_parser(
         "collect-offers",
         help="collect current offers from every source required by a prepared scan manifest",
@@ -426,6 +467,11 @@ def _add_offer_commands(subparsers: SubparserRegistry) -> None:
     run_scan.add_argument("--runtime-root", type=Path, default=Path(".runtime/offer-search"))
     run_scan.add_argument("--offers-root", type=Path, default=Path("data/offers"))
     run_scan.add_argument("--reports-root", type=Path, default=Path("generated/offer-search"))
+    run_scan.add_argument(
+        "--semantic-cache-root",
+        type=Path,
+        default=Path("generated/offer-semantic-cache"),
+    )
     run_scan.add_argument("--policy", type=Path, default=Path("config/offer-search.json"))
     run_scan.add_argument("--source-audit", type=Path)
     run_scan.add_argument("--archive-root", type=Path, default=Path("private/offer-scan-archives"))
@@ -435,7 +481,6 @@ def _add_offer_commands(subparsers: SubparserRegistry) -> None:
         default=Path("private/career-project/delia-next-role-2026.json"),
     )
     run_scan.add_argument("--knowledge-root", type=Path, default=Path("data/knowledge"))
-    run_scan.add_argument("--limit", type=int, choices=range(1, 101))
     run_scan.set_defaults(func=command_run_offer_scan)
 
     rank = subparsers.add_parser("rank-offers", help="rank a collected offer pool against Delia's validated career project")
@@ -443,7 +488,6 @@ def _add_offer_commands(subparsers: SubparserRegistry) -> None:
     rank.add_argument("--career-project", type=Path, default=Path("private/career-project/delia-next-role-2026.json"))
     rank.add_argument("--policy", type=Path, default=Path("config/offer-search.json"))
     rank.add_argument("--knowledge-root", type=Path, default=Path("data/knowledge"))
-    rank.add_argument("--limit", type=int)
     rank.add_argument("--scan-manifest", type=Path)
     rank.add_argument("--covered-query-family", dest="covered_query_families", action="append", default=[])
     rank.add_argument("--covered-priority-sector", dest="covered_priority_sectors", action="append", default=[])
@@ -467,6 +511,13 @@ def _add_offer_commands(subparsers: SubparserRegistry) -> None:
     )
     semantic_review.add_argument("offers_directory", type=Path)
     semantic_review.add_argument("review_batch", type=Path)
+    semantic_review.add_argument("--knowledge-root", type=Path, default=Path("data/knowledge"))
+    semantic_review.add_argument("--policy", type=Path, default=Path("config/offer-search.json"))
+    semantic_review.add_argument(
+        "--cache-root",
+        type=Path,
+        default=Path("generated/offer-semantic-cache"),
+    )
     semantic_review.set_defaults(func=command_apply_offer_semantic_reviews)
 
     feedback_email = subparsers.add_parser(
@@ -479,7 +530,6 @@ def _add_offer_commands(subparsers: SubparserRegistry) -> None:
     feedback_email.add_argument("--site-url", required=True)
     feedback_email.add_argument("--cv-pdf", type=Path, default=Path("site/assets/downloads/cv-delia-rossignol-signature.pdf"))
     feedback_email.add_argument("--output", type=Path, required=True)
-    feedback_email.add_argument("--limit", type=int, choices=range(1, 101), default=100)
     feedback_email.add_argument("--offer-id", dest="offer_ids", action="append")
     feedback_email.set_defaults(func=command_prepare_offer_feedback_email)
 

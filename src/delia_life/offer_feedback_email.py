@@ -13,7 +13,6 @@ from urllib.parse import urlsplit
 from .core import sha256_file
 from .storage import atomic_write_bytes_group
 
-MAX_RESULT_ITEMS = 100
 DEFAULT_FEEDBACK_BCC = "laurent.sintes74@gmail.com"
 SECTION_DEFINITIONS = (
     ("priority", "Il faut répondre, ça matche et tu as des chances d’un retour positif"),
@@ -97,6 +96,16 @@ def _offer_lines(offer: dict[str, Any]) -> tuple[str, str]:
     contract = _text(offer.get("contract_type")) or "contrat à confirmer"
     location = _text(offer.get("location_label")) or "lieu à confirmer"
     link = _safe_http_url(offer.get("source_url"))
+    raw_similar_publications = offer.get("similar_publications")
+    similar_publications = [
+        publication
+        for publication in raw_similar_publications
+        if isinstance(publication, dict) and _safe_http_url(publication.get("source_url"))
+    ] if isinstance(raw_similar_publications, list) else []
+    similar_links = [
+        (_safe_http_url(publication.get("source_url")), _text(publication.get("published_at")))
+        for publication in similar_publications
+    ]
     sectors = offer.get("sector_labels")
     sector = " / ".join(_text(label) for label in sectors if _text(label)) if isinstance(sectors, list) else ""
     sector = sector or "à confirmer"
@@ -104,11 +113,24 @@ def _offer_lines(offer: dict[str, Any]) -> tuple[str, str]:
     relevance = _relevance_label(assessment)
     gaps = assessment.get("gaps", []) if isinstance(assessment.get("gaps"), list) else []
     unknowns = assessment.get("unknowns", []) if isinstance(assessment.get("unknowns"), list) else []
-    vigilance_items = [_text(item) for item in [*gaps, *unknowns] if _text(item)]
+    preference_alerts = (
+        assessment.get("preference_alerts", [])
+        if isinstance(assessment.get("preference_alerts"), list)
+        else []
+    )
+    vigilance_items = [
+        _text(item)
+        for item in [*preference_alerts, *gaps, *unknowns]
+        if _text(item)
+    ]
     if compensation != "non communiquée":
         vigilance_items = [item for item in vigilance_items if item != "rémunération non précisée"]
     if offer.get("full_time") is True:
         vigilance_items = [item for item in vigilance_items if item != "temps plein à confirmer"]
+    if similar_links:
+        vigilance_items.append(
+            f"{len(similar_links)} autre(s) publication(s) très similaire(s) regroupée(s), liens conservés"
+        )
     vigilance = "; ".join(dict.fromkeys(vigilance_items))
     prerequisite_alerts = (
         assessment.get("prerequisite_alerts", [])
@@ -135,19 +157,32 @@ def _offer_lines(offer: dict[str, Any]) -> tuple[str, str]:
             else "aucun point bloquant identifié dans l’annonce"
         )
     text_prerequisite = f"\n⚠ PRÉREQUIS : {prerequisite_text}" if prerequisite_text else ""
+    text_similar_links = "".join(
+        f"\nPublication similaire{f' du {published_at}' if published_at else ''} : {alternative_link}"
+        for alternative_link, published_at in similar_links
+        if alternative_link is not None
+    )
     text_line = (
         f"Secteur d’activité : {sector}\n"
         f"Mission / poste : {title} — {employer}\n"
         f"Salaire proposé : {compensation}\n"
         f"Pertinence : {relevance}\n"
         f"Contrat et lieu : {contract}, {location}\n"
-        f"{link or 'Lien de l’annonce non disponible'}\nPourquoi : {reasons_text}"
+        f"{link or 'Lien de l’annonce non disponible'}{text_similar_links}\nPourquoi : {reasons_text}"
         f"{text_prerequisite}\nPoint de vigilance : {vigilance}"
     )
     html_link = (
         f'<a href="{html.escape(link, quote=True)}">Voir l’annonce</a>'
         if link is not None
         else "Lien de l’annonce non disponible"
+    )
+    html_similar_links = "".join(
+        "<br>"
+        f'<a href="{html.escape(alternative_link, quote=True)}">'
+        f"Voir la publication similaire{f' du {html.escape(published_at)}' if published_at else ''}"
+        "</a>"
+        for alternative_link, published_at in similar_links
+        if alternative_link is not None
     )
     html_prerequisite = (
         f'<span style="color: #b42318;"><strong>⚠ Prérequis :</strong> '
@@ -161,7 +196,7 @@ def _offer_lines(offer: dict[str, Any]) -> tuple[str, str]:
         f"<strong>Salaire proposé :</strong> {html.escape(compensation)}<br>"
         f"<strong>Pertinence :</strong> {html.escape(relevance)}<br>"
         f"<strong>Contrat et lieu :</strong> {html.escape(contract)}, {html.escape(location)}<br>"
-        f"{html_link}<br>"
+        f"{html_link}{html_similar_links}<br>"
         f"Pourquoi : {html.escape(reasons_text)}<br>"
         f"{html_prerequisite}"
         f'<span style="color: #b85c20;"><strong>Point de vigilance :</strong> {html.escape(vigilance)}</span>'
@@ -294,7 +329,6 @@ class FeedbackEmailRequest:
     site_url: str
     cv_pdf: Path
     output_dir: Path
-    limit: int
     offer_ids: tuple[str, ...] | None
 
 
@@ -354,14 +388,9 @@ def _usable_excluded_offers(report: dict[str, Any]) -> list[dict[str, Any]]:
 
 def _select_offers(
     offers: list[dict[str, Any]],
-    limit: int,
     offer_ids: tuple[str, ...] | None,
 ) -> tuple[dict[str, Any], ...]:
-    if not 1 <= limit <= MAX_RESULT_ITEMS:
-        raise ValueError(f"limit must be between 1 and {MAX_RESULT_ITEMS}")
     if offer_ids:
-        if len(offer_ids) > limit:
-            raise ValueError(f"at most {limit} selected offers can be included")
         offers_by_id = {_text(offer.get("id")): offer for offer in offers}
         missing = [identifier for identifier in offer_ids if identifier not in offers_by_id]
         if missing:
@@ -369,7 +398,7 @@ def _select_offers(
         editorial_selection = [offers_by_id[identifier] for identifier in offer_ids]
         selected = tuple(sorted(editorial_selection, key=_offer_relevance_key))
     else:
-        selected = tuple(sorted(offers, key=_offer_relevance_key)[:limit])
+        selected = tuple(sorted(offers, key=_offer_relevance_key))
     if not selected:
         raise ValueError("report does not contain usable offers")
     return selected
@@ -383,23 +412,12 @@ def _prepare_selection(request: FeedbackEmailRequest) -> FeedbackEmailSelection:
         raise ValueError("cv_pdf must be an existing PDF file")
     if request.report.get("finalization_allowed") is False:
         raise ValueError("an incomplete offer report cannot be prepared for delivery")
-    if not 1 <= request.limit <= MAX_RESULT_ITEMS:
-        raise ValueError(f"limit must be between 1 and {MAX_RESULT_ITEMS}")
     usable_offers = _usable_offers(request.report)
     usable_excluded_offers = sorted(_usable_excluded_offers(request.report), key=_excluded_offer_key)
-    ranked_limit = request.limit
-    if request.offer_ids is None and usable_excluded_offers:
-        excluded_reserve = min(len(usable_excluded_offers), request.limit - 1)
-        ranked_limit = min(ranked_limit, request.limit - excluded_reserve)
-    selected_offers = _select_offers(usable_offers, ranked_limit, request.offer_ids)
-    excluded_capacity = max(0, request.limit - len(selected_offers))
-    selected_excluded_offers = tuple(usable_excluded_offers[:excluded_capacity])
+    selected_offers = _select_offers(usable_offers, request.offer_ids)
+    selected_excluded_offers = tuple(usable_excluded_offers)
     usable_pending_offers = sorted(_usable_pending_offers(request.report), key=_pending_offer_key)
-    pending_capacity = max(
-        0,
-        request.limit - len(selected_offers) - len(selected_excluded_offers),
-    )
-    selected_pending_offers = tuple(usable_pending_offers[:pending_capacity])
+    selected_pending_offers = tuple(usable_pending_offers)
     return FeedbackEmailSelection(
         recipient=recipient,
         bcc=bcc,
@@ -627,7 +645,6 @@ def prepare_offer_feedback_email(
     site_url: str,
     cv_pdf: Path,
     output_dir: Path,
-    limit: int = MAX_RESULT_ITEMS,
     offer_ids: list[str] | None = None,
     bcc: str = DEFAULT_FEEDBACK_BCC,
 ) -> dict[str, Any]:
@@ -639,7 +656,6 @@ def prepare_offer_feedback_email(
         site_url=site_url,
         cv_pdf=cv_pdf,
         output_dir=output_dir,
-        limit=limit,
         offer_ids=tuple(offer_ids) if offer_ids is not None else None,
     )
     selection = _prepare_selection(request)

@@ -28,6 +28,20 @@ class RepositoryWorkflowTests(unittest.TestCase):
         self.assertIn("is_clean", snapshot)
         self.assertIn("changes", snapshot)
 
+    def test_generated_offer_artifacts_are_ignored_by_git(self) -> None:
+        ignored_roots = {
+            "/private/offer-scan-archives/",
+            "/data/offers/",
+            "/generated/offer-search/",
+            "/generated/offer-feedback/",
+        }
+        rules = {
+            line.strip()
+            for line in (ROOT / ".gitignore").read_text(encoding="utf-8").splitlines()
+            if line.strip() and not line.lstrip().startswith("#")
+        }
+        self.assertTrue(ignored_roots.issubset(rules))
+
     def test_publish_preflight_accepts_safe_snapshot(self) -> None:
         snapshot = {
             "has_commits": True,

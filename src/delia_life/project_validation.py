@@ -61,6 +61,63 @@ def missing_priority_functional_coverage(career_project: dict[str, Any], policy:
     ]
 
 
+def invalid_sector_functional_coverage(policy: dict[str, Any]) -> list[str]:
+    query_families = set(policy.get("functional_query_families", {}))
+    covered_sectors = set(policy.get("priority_sector_coverage", {}))
+    configured = policy.get("sector_functional_coverage", {})
+    errors: list[str] = []
+    for sector_id, query_family_ids in (
+        configured.items() if isinstance(configured, dict) else []
+    ):
+        if sector_id not in covered_sectors:
+            errors.append(
+                f"offer search policy: sector-functional coverage uses unknown sector {sector_id}"
+            )
+        unknown_query_families = sorted(set(query_family_ids) - query_families)
+        if unknown_query_families:
+            errors.append(
+                "offer search policy: sector-functional coverage for "
+                f"{sector_id} uses unknown query families: "
+                + ", ".join(unknown_query_families)
+            )
+    return errors
+
+
+def invalid_transferability_guidance(
+    policy: dict[str, Any],
+    knowledge_entity_ids: set[str],
+) -> list[str]:
+    query_families = set(policy.get("functional_query_families", {}))
+    covered_sectors = set(policy.get("priority_sector_coverage", {}))
+    guidance = policy.get("semantic_matching", {}).get("transferability_guidance", [])
+    errors: list[str] = []
+    for item in guidance if isinstance(guidance, list) else []:
+        if not isinstance(item, dict):
+            continue
+        target_sector_id = str(item.get("target_sector_id") or "")
+        if target_sector_id not in covered_sectors:
+            errors.append(
+                f"offer search policy: transferability guidance uses unknown target sector {target_sector_id}"
+            )
+        unknown_query_families = sorted(
+            set(item.get("applicable_query_family_ids", [])) - query_families
+        )
+        if unknown_query_families:
+            errors.append(
+                "offer search policy: transferability guidance uses unknown query families: "
+                + ", ".join(unknown_query_families)
+            )
+        unknown_evidence_ids = sorted(
+            set(item.get("profile_evidence_ids", [])) - knowledge_entity_ids
+        )
+        if unknown_evidence_ids:
+            errors.append(
+                "offer search policy: transferability guidance uses unknown profile evidence: "
+                + ", ".join(unknown_evidence_ids)
+            )
+    return errors
+
+
 def invalid_recommendation_band_thresholds(policy: dict[str, Any]) -> list[str]:
     bands = policy.get("recommendation_bands", {})
     priority = bands.get("priority_minimum_score")
@@ -68,15 +125,6 @@ def invalid_recommendation_band_thresholds(policy: dict[str, Any]) -> list[str]:
     if isinstance(priority, (int, float)) and isinstance(possible, (int, float)) and possible > priority:
         return ["offer search policy: possible score threshold cannot exceed priority score threshold"]
     return []
-
-
-def invalid_offer_pool_limits(policy: dict[str, Any]) -> list[str]:
-    maximum = policy.get("candidate_pool_maximum")
-    result_limit = policy.get("result_limit")
-    errors: list[str] = []
-    if isinstance(result_limit, int) and isinstance(maximum, int) and result_limit > maximum:
-        errors.append("offer search policy: result limit cannot exceed candidate pool maximum")
-    return errors
 
 
 def invalid_offer_source_audit(policy: dict[str, Any], audit: dict[str, Any]) -> list[str]:
@@ -93,6 +141,53 @@ def invalid_offer_source_audit(policy: dict[str, Any], audit: dict[str, Any]) ->
         for domain in domains
     ] if isinstance(adapter_domains, dict) else []
     errors: list[str] = []
+    manual_source_domains = policy.get("manual_source_domains", {})
+    manual_core = (
+        [str(domain) for domain in manual_source_domains.get("core", [])]
+        if isinstance(manual_source_domains, dict)
+        else []
+    )
+    manual_complementary = (
+        [str(domain) for domain in manual_source_domains.get("complementary", [])]
+        if isinstance(manual_source_domains, dict)
+        else []
+    )
+    manual_domains = set(manual_core) | set(manual_complementary)
+    automated_domains = {
+        str(source.get("scan_domain", ""))
+        for source in audit.get("sources", [])
+        if isinstance(source, dict) and source.get("automated_collection", True)
+    }
+    audited_manual_domains = {
+        str(source.get("scan_domain", ""))
+        for source in audit.get("sources", [])
+        if isinstance(source, dict) and not source.get("automated_collection", True)
+    }
+    if manual_duplicates := sorted(set(manual_core) & set(manual_complementary)):
+        errors.append(
+            "offer source control: domains assigned to both manual priorities: "
+            + ", ".join(manual_duplicates)
+        )
+    if unknown_manual_domains := sorted(manual_domains - source_domains):
+        errors.append(
+            "offer source control: manual domains missing from offer search policy: "
+            + ", ".join(unknown_manual_domains)
+        )
+    if conflicting_modes := sorted(manual_domains & automated_domains):
+        errors.append(
+            "offer source control: domains assigned to automated and manual collection: "
+            + ", ".join(conflicting_modes)
+        )
+    if missing_manual_modes := sorted(audited_manual_domains - manual_domains):
+        errors.append(
+            "offer source control: audited manual domains missing from manual source control: "
+            + ", ".join(missing_manual_modes)
+        )
+    if unclassified_domains := sorted(source_domains - automated_domains - manual_domains):
+        errors.append(
+            "offer source control: declared domains without an automated or manual mode: "
+            + ", ".join(unclassified_domains)
+        )
     duplicates = sorted({domain for domain in audited_domains if domain and audited_domains.count(domain) > 1})
     if duplicates:
         errors.append(f"offer source audit: duplicate scan domains: {', '.join(duplicates)}")
@@ -107,7 +202,7 @@ def invalid_offer_source_audit(policy: dict[str, Any], audit: dict[str, Any]) ->
     for source in audit.get("sources", []):
         domain = str(source.get("scan_domain", ""))
         source_type = source.get("organization_type")
-        if source_type == "public_specialized_portal" and domain not in specialized_domains:
+        if source_type in {"private_specialized_portal", "public_specialized_portal"} and domain not in specialized_domains:
             errors.append(f"offer source audit: specialized portal not categorized as specialized: {domain}")
         elif source_type in {"private_employer", "public_employer"} and domain not in direct_domains:
             errors.append(f"offer source audit: employer portal not categorized as direct: {domain}")
@@ -188,8 +283,16 @@ def _validate_offer_search_coverage(state: ProjectValidationState) -> None:
     policy = state.loaded_single_contracts.get("offer-search-policy")
     audit = state.loaded_single_contracts.get("offer-source-audit")
     if policy is not None:
+        knowledge_entity_ids = {
+            str(document.get("id") or "")
+            for _, document in state.loaded_by_contract.get("knowledge-entity", [])
+            if str(document.get("id") or "")
+        }
         state.errors.extend(invalid_recommendation_band_thresholds(policy))
-        state.errors.extend(invalid_offer_pool_limits(policy))
+        state.errors.extend(invalid_sector_functional_coverage(policy))
+        state.errors.extend(
+            invalid_transferability_guidance(policy, knowledge_entity_ids)
+        )
         if audit is not None:
             state.errors.extend(invalid_offer_source_audit(policy, audit))
     for career_project in career_projects:

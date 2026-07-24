@@ -1,0 +1,201 @@
+{
+  "application": {
+    "applied_at": "2026-07-24T07:50:08+00:00",
+    "knowledge_path": "private/career-project/delia-next-role-2026.json"
+  },
+  "classification": "claim",
+  "confidence": 1.0,
+  "history": [
+    {
+      "at": "2026-07-24T07:50:08+00:00",
+      "from": "pending",
+      "note": "Validation explicite des quatre décisions dans Codex le 24 juillet 2026.",
+      "reviewer": "Laurent Sintes",
+      "to": "accepted"
+    }
+  ],
+  "id": "proposal-delia-target-job-roles-2026-07-24",
+  "proposed_value": {
+    "deprioritized": [
+      {
+        "id": "vendeuse-sans-responsabilite-elargie",
+        "label": "Vendeuse sans responsabilité élargie",
+        "title_markers": [
+          "vendeur",
+          "vendeuse",
+          "conseiller de vente",
+          "conseillère de vente",
+          "sales associate"
+        ]
+      }
+    ],
+    "minimum_responsibility_level": "autonome",
+    "priority": [
+      {
+        "id": "premiere-vendeuse",
+        "label": "Première vendeuse",
+        "title_markers": [
+          "premier vendeur",
+          "première vendeuse",
+          "first vendeur",
+          "first vendeuse"
+        ]
+      },
+      {
+        "id": "adjointe-responsable",
+        "label": "Adjointe responsable",
+        "title_markers": [
+          "adjoint responsable",
+          "adjointe responsable",
+          "assistant store manager"
+        ]
+      },
+      {
+        "id": "chargee-clientele-ou-compte",
+        "label": "Chargée de clientèle ou de compte",
+        "title_markers": [
+          "chargé de clientèle",
+          "chargée de clientèle",
+          "chargé de compte",
+          "chargée de compte",
+          "account manager"
+        ]
+      },
+      {
+        "id": "administration-des-ventes",
+        "label": "Administration des ventes",
+        "title_markers": [
+          "administration des ventes",
+          "gestionnaire adv",
+          "assistant adv",
+          "assistante adv"
+        ]
+      },
+      {
+        "id": "commerciale-sedentaire",
+        "label": "Commerciale sédentaire",
+        "title_markers": [
+          "commercial sédentaire",
+          "commerciale sédentaire",
+          "inside sales"
+        ]
+      },
+      {
+        "id": "commerciale-itinerante",
+        "label": "Commerciale itinérante",
+        "title_markers": [
+          "commercial itinérant",
+          "commerciale itinérante",
+          "commercial terrain"
+        ]
+      },
+      {
+        "id": "coordination-commerciale",
+        "label": "Coordination commerciale",
+        "title_markers": [
+          "coordinateur commercial",
+          "coordinatrice commerciale",
+          "coordination commerciale",
+          "sales coordinator"
+        ]
+      }
+    ]
+  },
+  "source": {
+    "evidence": "Déprioriser les postes de simple vendeuse et viser des fonctions d'un niveau de responsabilité supérieur.",
+    "id": "src-a24fabefcdee7c13",
+    "locator": "feedback-delia-recherche-offres-2026-07-24.txt#decision-2"
+  },
+  "status": "accepted",
+  "target": {
+    "entity_id": "delia-next-role-2026",
+    "entity_type": "career-project",
+    "field": "target_job_roles"
+  },
+  "validated_value": {
+    "deprioritized": [
+      {
+        "id": "vendeuse-sans-responsabilite-elargie",
+        "label": "Vendeuse sans responsabilité élargie",
+        "title_markers": [
+          "vendeur",
+          "vendeuse",
+          "conseiller de vente",
+          "conseillère de vente",
+          "sales associate"
+        ]
+      }
+    ],
+    "minimum_responsibility_level": "autonome",
+    "priority": [
+      {
+        "id": "premiere-vendeuse",
+        "label": "Première vendeuse",
+        "title_markers": [
+          "premier vendeur",
+          "première vendeuse",
+          "first vendeur",
+          "first vendeuse"
+        ]
+      },
+      {
+        "id": "adjointe-responsable",
+        "label": "Adjointe responsable",
+        "title_markers": [
+          "adjoint responsable",
+          "adjointe responsable",
+          "assistant store manager"
+        ]
+      },
+      {
+        "id": "chargee-clientele-ou-compte",
+        "label": "Chargée de clientèle ou de compte",
+        "title_markers": [
+          "chargé de clientèle",
+          "chargée de clientèle",
+          "chargé de compte",
+          "chargée de compte",
+          "account manager"
+        ]
+      },
+      {
+        "id": "administration-des-ventes",
+        "label": "Administration des ventes",
+        "title_markers": [
+          "administration des ventes",
+          "gestionnaire adv",
+          "assistant adv",
+          "assistante adv"
+        ]
+      },
+      {
+        "id": "commerciale-sedentaire",
+        "label": "Commerciale sédentaire",
+        "title_markers": [
+          "commercial sédentaire",
+          "commerciale sédentaire",
+          "inside sales"
+        ]
+      },
+      {
+        "id": "commerciale-itinerante",
+        "label": "Commerciale itinérante",
+        "title_markers": [
+          "commercial itinérant",
+          "commerciale itinérante",
+          "commercial terrain"
+        ]
+      },
+      {
+        "id": "coordination-commerciale",
+        "label": "Coordination commerciale",
+        "title_markers": [
+          "coordinateur commercial",
+          "coordinatrice commerciale",
+          "coordination commerciale",
+          "sales coordinator"
+        ]
+      }
+    ]
+  }
+}
